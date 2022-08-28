@@ -1,10 +1,8 @@
 ---
-layout: editorial
+description: Anotações do estudos para a prova da AWS
 ---
 
-# 01-aws-cloud-architect
-
-\[TOC]
+# 📕 Cloud Architect
 
 ***
 
@@ -17,7 +15,7 @@ layout: editorial
 
 ***
 
-### 0.1 - Tecnologias aws que podem vão cair na prova
+### Tecnologias aws que podem vão cair na prova
 
 * Computação
 * Gerenciamento de custos
@@ -34,7 +32,7 @@ layout: editorial
 
 ***
 
-### 0.2 - Serviços abordados
+### Serviços abordados
 
 * [x] Análises:
   * [x] Amazon Athena
@@ -113,7 +111,7 @@ layout: editorial
 
 ***
 
-### 0.4 - Curso
+### Curso
 
 * [Ultimate AWS Certified Solutions Architect Associate 2021](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/)
 
@@ -1466,7 +1464,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 * Permite trabalhar na AWS com Chef e puppet.
 * É um serviço Híbrido (AWS / on-primeses).
 * É uma alternativa ao SSM.
-* Como migrar minhas receitas (hef e puppet) para a AWS -> com opsWork.
+* Como migrar minhas receitas (helm e puppet) para a AWS -> com opsWork.
 * Com ele não é possível usar o auto-scale da AWS, pois quem vai cuidar disso é o OpsWork.
 
 ***

@@ -6,7 +6,7 @@
 * [02 - Cloud notes](02-cloud-notes/README.md)
   * [01 - AWS](02-cloud-notes/01-aws/README.md)
     * [00-aws-cloud-pactitioner](02-cloud-notes/01-aws/00-aws-cloud-pactitioner.md)
-    * [01-aws-cloud-architect](02-cloud-notes/01-aws/01-aws-cloud-architect.md)
+    * [📕 Cloud Architect](02-cloud-notes/01-aws/01-aws-cloud-architect.md)
     * [02-aws-advanced-architecting](02-cloud-notes/01-aws/02-aws-advanced-architecting.md)
 * [03 - DevSecOps notes](03-devsecops-notes/README.md)
   * [03-istio-service-mash](03-devsecops-notes/03-istio-service-mash.md)
