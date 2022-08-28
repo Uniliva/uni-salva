@@ -11,4 +11,4 @@
 * [03 - DevSecOps notes](03-devsecops-notes/README.md)
   * [01 - Kubernetes](03-devsecops-notes/01-kubernetes/conteudo.md)
   * [02 - Istio Service Mash](03-devsecops-notes/02-istio-service-mash/conteudo.md)
-  * [03 - ArgoCD](03-devsecops-notes/03-argocd/conteudo.md)
+  * [03 - ArgoCD](03-devsecops-notes/03-argoCD/conteudo.md)
