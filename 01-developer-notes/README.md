@@ -1,2 +1,4 @@
-# 01 - Developer notes
 
+Notas de desenvolvimento.
+
+> Notas de linguagems de desenvolvimento

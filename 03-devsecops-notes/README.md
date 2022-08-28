@@ -1,2 +1,3 @@
-# 03 - DevSecOps notes
+# Notas sobre DevOps
 
+> Notas de estudos sobre DevOps.
