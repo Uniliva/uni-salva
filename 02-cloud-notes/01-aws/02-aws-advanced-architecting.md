@@ -1,4 +1,4 @@
-# 📔 03 - Advanced  Architect&#x20;
+# 02-aws-advanced-architecting
 
 Advanced Architecting on AWS
 

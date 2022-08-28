@@ -2,9 +2,7 @@
 description: Anotações do estudos para a prova da AWS
 ---
 
-# 📔 02 - Cloud  Architect Associate
-
-***
+# 02 - Cloud  Architect Associate
 
 ## 0 - Domínios da prova
 
