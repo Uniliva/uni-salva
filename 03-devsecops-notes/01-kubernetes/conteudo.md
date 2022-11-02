@@ -1,10 +1,8 @@
-
-
 # Curso Kubernetes
 
 ---
 
-[toc]
+[TOC]
 
 ---
 
@@ -12,7 +10,7 @@
 
 ![image-20211118205347741](.images/image-20211118205347741.png)
 
-### Cluster 
+### Cluster
 
 > Um cluster é composto por:
 
@@ -28,7 +26,6 @@
 
 ![image-20211118205700816](.images/image-20211118205700816.png)
 
-
 - Master e nodes
 
 ![image-20211118205722849](.images/image-20211118205722849.png)
@@ -38,12 +35,12 @@
 ![image-20211118205740206](.images/image-20211118205740206.png)
 
 ### API
+
 - Gerencia os recursos do cluster (criar pod, deletera Replica Set, criar volume ..)
 - Para usar manipular os recusos do kuberntes, sempre vamos usar a api
 - Para usar a api usamos o kubctl.
 
 ![image-20211118205810711](.images/image-20211118205810711.png)
-
 
 ### Pods
 
@@ -55,17 +52,13 @@
 
 - Caso um pode falhe (ou seja todos os container estejam falhados), o kubernetes vai matá-lo e substituí-lo por outro, e não temos controle que qual ip sera atribuido a esse novo pod.
 
-
-
 ---
 
 ## Rolando kubernets local
 
 > Para rodar o kubernets localmente, usamos o minikube, para baixa-lo acesse:
->
+> 
 > link: https://minikube.sigs.k8s.io/docs/start/
-
-
 
 ### Instalação no Linux
 
@@ -73,7 +66,7 @@
 ## Minikube
 ## link: https://minikube.sigs.k8s.io/docs/start/
 
-### Install
+### Install minikube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
@@ -86,6 +79,48 @@ minikube kubectl -- get nodes
 ### Create alias dentro do .bashrc
 alias kubectl="minikube kubectl --"
 
+#-----------------------------------------------------------------------------------------------
+## Kind
+## link: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
+##  Usado para criar cluter kubernets
+
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.16.0/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+
+# Cria aum cluter
+kind create cluster
+# cria com nome
+kind create cluster --name uni-cluster
+
+
+# Listar os cluster
+kind get clusters
+
+# Setando o Kind como padrão no kubctl
+kubectl cluster-info --context  kind-kind
+
+# deleta um cluster
+kind delete cluster
+
+
+#-----------------------------------------------------------------------------------------------
+# Listando contextos possiveis
+cat ~/.kube/config 
+kubcetl config get-cluster
+
+# setar um contexto
+kubectl cluster-info --context <contexto>
+kubcetl config use-context <contexto>
+
+# Setando o Kind como cluster padrão no kubctl
+kubectl cluster-info --context kind-kind
+kubcetl config use-context kind-kind
+
+# Setando o minikube como cluster padrão no kubctl
+kubectl cluster-info --context  minikube
+
+#-----------------------------------------------------------------------------------------------
 ### KUBERNETES (KUBECTL)
 alias k="kubectl"
 alias ka="kubectl apply -f"
@@ -123,15 +158,11 @@ alias usede="docker context use default"
 minikube dashboard
 ```
 
-
-
 ---
 
 ### Comandos uteis
 
 > Segue alguns comandos uteis usados 
-
-
 
 ```shell
 # Recuperas os nodes criados
@@ -179,9 +210,13 @@ kubectl exec -it <pod> --container <container-name> -- bash
 
 # Para sair do container em uso
 crtl + D
+
+# Acessando api do kubenetes
+kubectl proxy --porta=8085
+
+# acesse no browser na porta definida
+localhost:8085/apis
 ```
-
-
 
 ---
 
@@ -195,7 +230,7 @@ crtl + D
 
 - Semelhante o abaixo
 
-````yaml
+```yaml
 apiVersion: v1  # define a versão da api do kubernetes
 kind: pod       # define o tipo de recurso criado 
 metadata:       # Meta dados que podesm ser adicionado ao pod
@@ -219,25 +254,23 @@ spec:               # epecificação do pod
           value: "user"
        ports: 
          - containerPort: 3306
-````
+```
 
 - Comandos
 
-````shell
+```shell
 # criado container
 kubectl apply -f <nome-doa-arquivo>.yaml
 
 # delete com arquivo deployment
 kubctl delete -f <file>
-````
+```
 
 ---
 
 ### Criando seviços (svc)
 
 > São abstrações para expor aplicações executando em um ou mais pods, que podem prover ips's fixos para comunicação, alem de DNS e balanciamento de carga.
-
-
 
 Podem ser dos tipos:
 
@@ -246,8 +279,6 @@ Podem ser dos tipos:
 - LoadBalancer
 
 ### Comandos
-
-
 
 ```shell
 # Criando um novo servide
@@ -269,11 +300,11 @@ kubectl delete svc <service--name>
 kubectl delete svc --all
 ```
 
-
-
 ### Cluster de ips
 
 > Serve para fazer a cominucação entre diferentes pods dentro de um mesmo cluster. Usa labels para redirecionar o tafrico para os pods.
+
+![Kubernetes - Cluster IP vs Node-Port - GeeksforGeeks](https://media.geeksforgeeks.org/wp-content/uploads/20220104122834/41.PNG)
 
 **ex:**
 
@@ -287,11 +318,13 @@ spec:
   selector:
     app: segundo-pod # seletor de pod
   ports:
-  - port: 80  # portra entrada
-    targetPort: 80 # porta para aonde vai en
+  - name: svc-pod-io
+    port: 80  # portra entrada - service
+    targetPort: 80 # porta do container / caso seja igual a port, não precisa informar
+    protocol: TCP
 ```
 
-> Neste exemplo, cria um cluster ip que gerarar um ip fixo para o pod com a seletor (label) **app: segundo-po**
+> Neste exemplo, cria um cluster ip que gerar um ip fixo para o pod com a seletor (label) **app: segundo-po**
 
 - Para ver detalhes do service use:
 
@@ -306,8 +339,6 @@ ex:
 ![image-20211120085314918](.images/image-20211120085314918.png)
 
 ![image-20211120085353313](.images/image-20211120085353313.png)
-
-
 
 ---
 
@@ -325,7 +356,7 @@ spec:
   selector:
     app: primeiro-pod
   ports:
-  - port: 80
+  - port: 80 # porta do meu service
     targetPort: 80 # porta do container / caso seja igual a port, não precisa informar
     nodePort: 30001 # porta de acesso externo tem que esta no range 30000 a 32767
 ```
@@ -342,39 +373,37 @@ ex:
 ![image-20211120094110671](.images/image-20211120094110671.png)
 
 - Para acessar o pod usando o nodePort dentro do cluster use: 
-
+  
   >  curl 10.106.182.107:80
 
 - Para acessa externamente - linux
-
-  - Se tiver no linux, para recuperar o im mapeado para o cluster
-
+  
+  - Se tiver no linux, para recuperar o ip mapeado para o cluster
+    
     ```shell
     kubectl get node -o wide
     ```
-
+    
     ex:
-
+    
     ![image-20211120093342399](.images/image-20211120093342399.png)
-
+    
     - Depois é so acessar http://192.168.49.2:30001/
-
+    
     ![image-20211120094146342](.images/image-20211120094146342.png)
 
 - Para acessa externamente - windows
-
+  
   > Use localhost:30001
-
-
 
 ---
 
 ### Loadbalance
 
-> Nada mais é do que um NodePort que permite a distribuição do trafico entres os podes de um container.
->
-> Ele é entregado com o serviço de Kuberbetes das nuvens, nele voce criar um arquivo e dis quais são os seletores e a partir dai o serviços de kubernets do provedor da nuvem gera um a instraestrutura de um loadbalance para que possamos acessa-los via web.
->
+> Nada mais é do que um NodePort que permite a distribuição do trafico entres os pods de um container.
+> 
+> Ele é entregado com o serviço de Kuberbetes das nuvens, nele voce criar um arquivo e diz quais são os seletores e a partir dai o serviços de kubernets do provedor da nuvem gera um a instraestrutura de um loadbalance para que possamos acessa-los via web.
+> 
 > - Por serem um Load Balancer, também são um NodePort e ClusterIP ao mesmo tempo.
 > - Utilizam automaticamente os balanceadores de carga de cloud providers.
 
@@ -412,17 +441,13 @@ kubectl apply -f <nome-arquivo>
 
 ![image-20211120095457188](.images/image-20211120095457188.png)
 
-> Repare que o EXTERNAL-IP esta vazio, pois executamos localmente, se fosse num provedor, seria preenciado com um ip para acesso web, repare tambem que foi gerado uma porta para acesso externo dentro da rede onde o cluster esta, semelhante ao NodePort.
-
-
-
-
+> Repare que o EXTERNAL-IP esta vazio, pois executamos localmente, se fosse num provedor, seria preenchiado com um ip para acesso web, repare também que foi gerado uma porta para acesso externo dentro da rede onde o cluster esta, semelhante ao NodePort.
 
 ----
 
 ### ConfigMap
 
-> Permite extrair as configuração expecificas para tornar um pod generico e reutilizavel, com ele é possivel reutilizar configurações e varis pods
+> Permite extrair as configuração especificas para tornar um pod genérico e reutilizável, com ele é possível reutilizar configurações e varios pods
 
 ```yaml
 apiVersion: v1
@@ -433,10 +458,10 @@ data:
   MYSQL_ROOT_PASSWORD: root
   MYSQL_DATABASE: test_db
   MYSQL_USER: user
-  MYSQL_PASSWORD: pass	
+  MYSQL_PASSWORD: pass    
 ```
 
-- Para implatar use
+- Para implantar use
 
 ```shell
 kubectl apply -f <nome-arquivo>
@@ -453,7 +478,7 @@ ex:
 ![image-20211120105736428](.images/image-20211120105736428.png)
 
 - Para descrever o configmap use:
-
+  
   ```shell
   kubectl describe configmap <nome-config-map>
   ```
@@ -509,14 +534,12 @@ spec:
         memory: "128Mi"
         cpu: "500m"
     ports: 
-      - containerPort: 3306	
+      - containerPort: 3306    
 ```
 
 ex:
 
 ![image-20211120110649603](.images/image-20211120110649603.png)
-
-
 
 ##### Pelo arquivo completo
 
@@ -544,13 +567,9 @@ spec:
       - containerPort: 3306
 ```
 
-
-
 ex: 
 
 ![image-20211120111517650](.images/image-20211120111517650.png)
-
-
 
 ---
 
@@ -564,12 +583,10 @@ ex:
 >   - ReplicasSets
 >   - Deployments
 > - recursos de armazenamento
->   -  Volumes
+>   - Volumes
 >   - Persistents Volumes
 >   - Persistent Volume Claim
 >   - Storage Classes
-
-
 
 ----
 
@@ -627,15 +644,11 @@ kubectl describe replicaset <nome>
 kubectl describe rs <nome>
 ```
 
-
-
 ---
 
 #### Deployments
 
 ![image-20211122060612288](.images/image-20211122060612288.png)
-
-
 
 ```yaml
 apiVersion: apps/v1
@@ -663,12 +676,10 @@ spec:
         - containerPort: 80
 ```
 
-
-
 - Ao executar, será criado um replicaset com tres pods, semelhante ao visto anteriores:
 
 ```shell
-kubectl apply -f <nome-arquivo>	
+kubectl apply -f <nome-arquivo>    
 ```
 
 ex:
@@ -683,17 +694,13 @@ kubectl get deployments
 kubectl describe deployments <nome>
 ```
 
-
-
 > A diferencia que o deployment, permite adicionar outros recurso em um só arquivo, alem de ter uns comandos para controle de versionamento.
-
-
 
 ##### Comandos
 
 ```shell
 # Aplicar deployment
-kubectl apply -f <nome-arquivo>	
+kubectl apply -f <nome-arquivo>    
 
 # Deletar deployment (deleta todos o recursos atrelados)
 kubectl delete deployment <nome do deployment>
@@ -713,16 +720,14 @@ kubectl rollout history deployment <nome-do-deployment>
 kubectl rollout undo deployment <nome-do-deploy> --to-revision=2
 ```
 
-
-
 > Dica linux - crie alias
->
+> 
 > ```shell
 > alias kubectl="minikube kubectl --"
 > alias k="minikube kubectl --"
 > funtion k-dploy-msg(){
-> 	echo "Adicionando ao deployment $1 a anotação : $2"
-> 	kubectl annotate deployment $1 kubernetes.io/change-cause=$2
+>     echo "Adicionando ao deployment $1 a anotação : $2"
+>     kubectl annotate deployment $1 kubernetes.io/change-cause=$2
 > }
 > 
 > alias k-hd="kubectl rollout history deployment "
@@ -731,47 +736,42 @@ kubectl rollout undo deployment <nome-do-deploy> --to-revision=2
 ##### Historico de versões
 
 > - Historico de alterações - mostra o historico de alerações
->
+> 
 > ```shell
 > kubectl rollout history deployment <nome-do-deployment>
 > ```
->
+> 
 > ![image-20211122063059510](.images/image-20211122063059510.png)
->
+> 
 > **obs:** Deve ser passadoa  flag --record no final do comando de **apply**
->
+> 
 > ```shell
 > kubectl apply -f <arquivo-deployment> --record
 > ```
->
+> 
 > ![image-20211122063130716](.images/image-20211122063130716.png)
->
+> 
 > - Altera mensagem de alteração
->
+> 
 > Quando fazemos o passo anterior, e vemos o historico, so vemos a linha do deplyment onde ouver a alteração, caso queiramos adicionar uma mensagem, mais amigavel, podemos após o **apply** dar o comando abaixo:
->
+> 
 > ```shell
-> kubectl annotate deployment <nome-do-deploy> kubernetes.io/change-cause="Messagem que equeremos"
+> kubectl annotate deployment <nome-do-deploy> kubernetes.io/change-cause="Messagem que queremos"
 > ```
->
+> 
 > ### ![image-20211122063143936](.images/image-20211122063143936.png)
 
 ##### Voltando uma versão (rollback)
 
->Realizando o passo anterior podemos voltar versões, (fazer um rollback) com o comando:
->
->```shell
->kubectl rollout undo deployment <nome-do-deploy> --to-revision=2
->```
->
-
-
+> Realizando o passo anterior podemos voltar versões, (fazer um rollback) com o comando:
+> 
+> ```shell
+> kubectl rollout undo deployment <nome-do-deploy> --to-revision=2
+> ```
 
 ---
 
 ### Recursos de armazenamentos
-
-
 
 link: https://kubernetes.io/docs/concepts/storage/volumes/
 
@@ -805,17 +805,13 @@ spec:
         type: DirectoryOrCreate
 ```
 
-
-
 > o **type** do volume pode ser:
->
+> 
 > - Directory - Quando o diretorio já estiver criado.
 > - DirectoryOrCreate - Quando o diretorio não existir, o kubernets cria.
 
-
-
 > Para executar isso localmente no linux, você estará usando o minikube, que é um container docker que roda o kubernetes, por isso é necessario criar a pasta do mapeamento do volume  (caso esteja usando o **type** do volume como **directory**) dentro do minikube , NÃO em sua maquina, para isso use os comandos abaixo:
->
+> 
 > ```shell
 > # logar no minikube
 > minikube ssh
@@ -825,10 +821,8 @@ spec:
 > mkdir bkp
 > 
 > # Sair do minikuve
-> crtl+d	
+> crtl+d    
 > ```
-
-
 
 ---
 
@@ -836,13 +830,9 @@ spec:
 
 ![image-20211123062417716](.images/image-20211123062417716.png)
 
-
-
 > A ideia de PV (persistence volume) é usar o mesmo conceito anterior, porem na nuvem, onde se criaria um volume e se linkaria esse volume com o pod, para isso é necessario criar um pv, que vai armazenar a conexão do volume criado na nuvem para ser usado no kubernetes
->
+> 
 > - Um PV é uma instância de armazenamento virtual que é incluída como um volume no cluster. O PV aponta para um dispositivo de armazenamento físico em sua conta na nuvem e resume a API que é usada para se comunicar com o dispositivo de armazenamento. Para montar um PV em um app, deve-se ter um PVC correspondente. Os PVs montados aparecem como uma pasta dentro do sistema de arquivos do contêiner.
-
-
 
 ##### Comandos
 
@@ -858,8 +848,6 @@ kubectl get pvc
 #listar persistence volume
 kubectl get pv
 ```
-
-
 
 - Criando um PV no google cloud
 
@@ -878,47 +866,43 @@ spec:
     storageClassName: standard
 ```
 
-
-
 - Tipos de volumes persistentes.
 
->Tipos de PersistentVolume são implementados como plugins. Atualmente o Kubernetes suporta os plugins abaixo:
->
->- [`awsElasticBlockStore`](https://kubernetes.io/docs/concepts/storage/volumes/#awselasticblockstore) - AWS Elastic Block Store (EBS)
->- [`azureDisk`](https://kubernetes.io/docs/concepts/storage/volumes/#azuredisk) - Azure Disk
->- [`azureFile`](https://kubernetes.io/docs/concepts/storage/volumes/#azurefile) - Azure File
->- [`cephfs`](https://kubernetes.io/docs/concepts/storage/volumes/#cephfs) - CephFS volume
->- [`cinder`](https://kubernetes.io/docs/concepts/storage/volumes/#cinder) - Cinder (OpenStack block storage) (**depreciado**)
->- [`csi`](https://kubernetes.io/docs/concepts/storage/volumes/#csi) - Container Storage Interface (CSI)
->- [`fc`](https://kubernetes.io/docs/concepts/storage/volumes/#fc) - Fibre Channel (FC) storage
->- [`flexVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#flexVolume) - FlexVolume
->- [`flocker`](https://kubernetes.io/docs/concepts/storage/volumes/#flocker) - Flocker storage
->- [`gcePersistentDisk`](https://kubernetes.io/docs/concepts/storage/volumes/#gcepersistentdisk) - GCE Persistent Disk
->- [`glusterfs`](https://kubernetes.io/docs/concepts/storage/volumes/#glusterfs) - Glusterfs volume
->- [`hostPath`](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) - HostPath volume (somente para teste de nó único; ISSO NÃO FUNCIONARÁ num cluster multi-nós; ao invés disso, considere a utilização de volume `local`.)
->- [`iscsi`](https://kubernetes.io/docs/concepts/storage/volumes/#iscsi) - iSCSI (SCSI over IP) storage
->- [`local`](https://kubernetes.io/docs/concepts/storage/volumes/#local) - storage local montados nos nós.
->- [`nfs`](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) - Network File System (NFS) storage
->- `photonPersistentDisk` - Controlador Photon para disco persistente. (Esse tipo de volume não funciona mais desde a removação do provedor de cloud correspondente.)
->- [`portworxVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#portworxvolume) - Volume Portworx
->- [`quobyte`](https://kubernetes.io/docs/concepts/storage/volumes/#quobyte) - Volume Quobyte
->- [`rbd`](https://kubernetes.io/docs/concepts/storage/volumes/#rbd) - Volume Rados Block Device (RBD)
->- [`scaleIO`](https://kubernetes.io/docs/concepts/storage/volumes/#scaleio) - Volume ScaleIO (**depreciado**)
->- [`storageos`](https://kubernetes.io/docs/concepts/storage/volumes/#storageos) - Volume StorageOS
->- [`vsphereVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#vspherevolume) - Volume vSphere VMDK
-
-
+> Tipos de PersistentVolume são implementados como plugins. Atualmente o Kubernetes suporta os plugins abaixo:
+> 
+> - [`awsElasticBlockStore`](https://kubernetes.io/docs/concepts/storage/volumes/#awselasticblockstore) - AWS Elastic Block Store (EBS)
+> - [`azureDisk`](https://kubernetes.io/docs/concepts/storage/volumes/#azuredisk) - Azure Disk
+> - [`azureFile`](https://kubernetes.io/docs/concepts/storage/volumes/#azurefile) - Azure File
+> - [`cephfs`](https://kubernetes.io/docs/concepts/storage/volumes/#cephfs) - CephFS volume
+> - [`cinder`](https://kubernetes.io/docs/concepts/storage/volumes/#cinder) - Cinder (OpenStack block storage) (**depreciado**)
+> - [`csi`](https://kubernetes.io/docs/concepts/storage/volumes/#csi) - Container Storage Interface (CSI)
+> - [`fc`](https://kubernetes.io/docs/concepts/storage/volumes/#fc) - Fibre Channel (FC) storage
+> - [`flexVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#flexVolume) - FlexVolume
+> - [`flocker`](https://kubernetes.io/docs/concepts/storage/volumes/#flocker) - Flocker storage
+> - [`gcePersistentDisk`](https://kubernetes.io/docs/concepts/storage/volumes/#gcepersistentdisk) - GCE Persistent Disk
+> - [`glusterfs`](https://kubernetes.io/docs/concepts/storage/volumes/#glusterfs) - Glusterfs volume
+> - [`hostPath`](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) - HostPath volume (somente para teste de nó único; ISSO NÃO FUNCIONARÁ num cluster multi-nós; ao invés disso, considere a utilização de volume `local`.)
+> - [`iscsi`](https://kubernetes.io/docs/concepts/storage/volumes/#iscsi) - iSCSI (SCSI over IP) storage
+> - [`local`](https://kubernetes.io/docs/concepts/storage/volumes/#local) - storage local montados nos nós.
+> - [`nfs`](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) - Network File System (NFS) storage
+> - `photonPersistentDisk` - Controlador Photon para disco persistente. (Esse tipo de volume não funciona mais desde a removação do provedor de cloud correspondente.)
+> - [`portworxVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#portworxvolume) - Volume Portworx
+> - [`quobyte`](https://kubernetes.io/docs/concepts/storage/volumes/#quobyte) - Volume Quobyte
+> - [`rbd`](https://kubernetes.io/docs/concepts/storage/volumes/#rbd) - Volume Rados Block Device (RBD)
+> - [`scaleIO`](https://kubernetes.io/docs/concepts/storage/volumes/#scaleio) - Volume ScaleIO (**depreciado**)
+> - [`storageos`](https://kubernetes.io/docs/concepts/storage/volumes/#storageos) - Volume StorageOS
+> - [`vsphereVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#vspherevolume) - Volume vSphere VMDK
 
 - Modos de acessos
 
 > Os modos de acesso são:
->
+> 
 > - ReadWriteOnce -- o volume pode ser montado como leitura-escrita por um nó único
 > - ReadOnlyMany -- o volume pode ser montado como somente-leitura por vários nós
 > - ReadWriteMany -- o volume pode ser montado como leitura-escrita por vários nós
->
+> 
 > Na linha de comando, os modos de acesso ficam abreviados:
->
+> 
 > - RWO - ReadWriteOnce
 > - ROX - ReadOnlyMany
 > - RWX - ReadWriteMany
@@ -930,8 +914,6 @@ spec:
 ![image-20211123063855580](.images/image-20211123063855580.png)
 
 > Uma PVC é a solicitação para provisionar armazenamento persistente com um tipo e configuração específicos. Para especificar o tipo de armazenamento persistente que você deseja
-
-
 
 - Criando um PVC no google cloud
 
@@ -949,11 +931,7 @@ spec:
     storageClassName: standard
 ```
 
-
-
 > para linkar um **pvc** a **pv**, como **pvc** e uma "requisição de armazenamento" usa-se as especificações, ou seja, as especificações do volume contidos no **pvc** devem ser igual ao contido no **pv**.
-
-
 
 - Criando um pod que aponta para um pvc
 
@@ -976,8 +954,6 @@ spec:
                     claimName: pvc-1
 ```
 
-
-
 ---
 
 #### Storage Classes
@@ -985,8 +961,6 @@ spec:
 ![image-20211124053008318](.images/image-20211124053008318.png)
 
 > A diferença da item anteriror e que com um storage classes a criação do disco na nuvem e do persistente volume é feita automaticamente.
-
-
 
 - Criando um storage class (sc) no google cloud
 
@@ -1001,8 +975,6 @@ parameters:
     fstype: ext4
     replication-type: none
 ```
-
-
 
 - Atrelando um storage class no PVC
 
@@ -1041,8 +1013,6 @@ spec:
                     claimName: pvc-2
 ```
 
-
-
 ##### Comandos
 
 ```shell
@@ -1058,19 +1028,13 @@ kubectl get pvc
 kubectl get pv
 ```
 
-
-
 ---
 
 #### Statefull Set
 
-
-
 ![StatefulSet | Kubernetes Engine Documentation | Google Cloud](.images/statefulset.png)
 
 > Bem similar a um Deployment, mas, ele é voltado para aplicações a Pods que devem manter o seu estado que eles são Stateful. Isso significa que quando um Pod reinicia ou falha por algum motivo dentro de um Stateful Set e volta a execução, o arquivo é mantido.
-
-
 
 - Criando pods usando o statefull set ao invéz de deployments
 
@@ -1117,23 +1081,16 @@ spec:
             claimName: sessao-pvc
 ```
 
-
-
 > vai criar a estrutura e vai manter os dados salvos no volumes atachados, use os comandos:
->
+> 
 > ```shell
 > # Para aplicar
 > kubectl apply -f <nome-file>
 > ```
->
-> 
-
-
 
 - Lembrando que para isso antes é necessario criar os pvc (volumes que serão usados)
 
 ```yaml
-
 # imagem-pvc.yml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -1161,8 +1118,6 @@ spec:
     - ReadWriteOnce
 ```
 
-
-
 > Salve em arquivos com os determinados nomes e de o comando abaixo
 
 ```shell
@@ -1179,14 +1134,12 @@ kubectl get pv
 kubectl get sc
 ```
 
-
-
 ---
 
 ### Recurso para healthcheck
 
 > o kubernetes consegue gerenciar por si proprio o pod, porem os container dentro ("a aplicação") ele precisa de ajuda pra gerenciar se esta vivo, par isso ele utiliza o **liveness e o readiness**.
->
+> 
 > - O Kubernetes nem sempre tem como saber se a aplicação está saudável
 > - Podemos criar critérios para definir se a aplicação está saudável através de probes
 > - Como criar LivenessProbes com o campo `livenessProbe`
@@ -1195,8 +1148,6 @@ kubectl get sc
 > - ReadinessProbes podem fazer a verificação em diferentes intervalos de tempo via HTTP
 > - LivenessProbes são para saber se a aplicação está saudável e/ou se deve ser reiniciada, enquanto ReadinessProbes são para saber se a aplicação já está pronta para receber requisições depois de iniciar
 > - Além do HTTP, também podemos fazer verificações via TCP
-
-
 
 link: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 
@@ -1210,17 +1161,13 @@ livenessProbe:
   path: /  # path aonde vamos bater com a requisição
   port: 80 # porta do container
  periodSeconds: 10 # de quanto em quanto tempo vamos validar em segundos
- failureThreshold: 3 # quandos erros vamos aceitar antes de reiniciar o container	
+ failureThreshold: 3 # quandos erros vamos aceitar antes de reiniciar o container    
  initialDelaySeconds: 20 # Delay inicial para que o container possa subir
 ```
 
 ex:
 
 ![image-20211126060259581](.images/image-20211126060259581.png)
-
-
-
-
 
 ----
 
@@ -1242,19 +1189,13 @@ EX:
 
 ![image-20211126061230975](.images/image-20211126061230975.png)
 
-
-
-
-
 ----
 
 ### Recurso de escalabilidade
 
 > Permite escalara os pods deacordo com a demanda
->
+> 
 > - HPA - Horizontal pod autpscale
-
-
 
 #### HPA - Horizontal Pod AutoScale
 
@@ -1273,8 +1214,6 @@ EX:
 ex:
 
 ![image-20211128085641444](.images/image-20211128085641444.png)
-
-
 
 - Criando um arquivo de configuração de HPA
 
@@ -1306,12 +1245,10 @@ spec:
 kubectl get hpa
 ```
 
-
-
 > **Obs:** Apenas isso não sera necessario pra que funcione, é  necessario configurar um servidor de metricas vai garadar as metricas de consumo. para isso usamos o arquivo abaixo:
->
+> 
 > - links: https://github.com/kubernetes-sigs/metrics-server
->
+> 
 > ```yaml
 > ---
 > apiVersion: rbac.authorization.k8s.io/v1
@@ -1463,19 +1400,12 @@ kubectl get hpa
 > - kind: ServiceAccount
 >   name: metrics-server
 >   namespace: kube-system
-> 
 > ```
->
-> 
-
-
 
 Links:
 
--  https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade/task/80509
+- https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade/task/80509
 - https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
-
-
 
 ---
 
@@ -1487,22 +1417,16 @@ Links:
 
 ![image-20211128091344881](.images/image-20211128091344881.png)
 
-
-
 > Nesse caso teremos que dar 5 `kubectl apply -f` para fazer deploy da nossa aplicação, ou seja realizar o controle manual do processo. Para resolver isso é que o HELM foi criado.
 
-
-
 ## Componetes
-
-
 
 ### Chart - exemplos
 
 > Pense em chart com um pacote de versão que contem todos os arquivos **.yaml** que compoem aquela versão.
->
+> 
 > ex:
->
+> 
 > ![image-20211128091657361](.images/image-20211128091657361.png)
 
 ![image-20211128091727836](.images/image-20211128091727836.png)
