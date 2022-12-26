@@ -63,6 +63,10 @@
 ### Instalação no Linux
 
 ```shell
+## Arquivo de configuração
+
+
+
 ## Minikube
 ## link: https://minikube.sigs.k8s.io/docs/start/
 
@@ -80,28 +84,7 @@ minikube kubectl -- get nodes
 alias kubectl="minikube kubectl --"
 
 #-----------------------------------------------------------------------------------------------
-## Kind
-## link: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
-##  Usado para criar cluter kubernets
-
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.16.0/kind-linux-amd64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
-
-# Cria aum cluter
-kind create cluster
-# cria com nome
-kind create cluster --name uni-cluster
-
-
-# Listar os cluster
-kind get clusters
-
-# Setando o Kind como padrão no kubctl
-kubectl cluster-info --context  kind-kind
-
-# deleta um cluster
-kind delete cluster
+## há a opç
 
 
 #-----------------------------------------------------------------------------------------------
@@ -119,6 +102,11 @@ kubcetl config use-context kind-kind
 
 # Setando o minikube como cluster padrão no kubctl
 kubectl cluster-info --context  minikube
+
+# Setar namespace padrão
+kubectl config set-context --current --namespace=<namespace>
+kubectl config set-context --current --namespace=ucontas-app
+
 
 #-----------------------------------------------------------------------------------------------
 ### KUBERNETES (KUBECTL)
@@ -216,6 +204,11 @@ kubectl proxy --porta=8085
 
 # acesse no browser na porta definida
 localhost:8085/apis
+
+
+## Logs
+kubectl logs -f --selector <label-key-value>  -n <namespace>
+#kubectl logs --selector app=ucontas-api  -n ucontas-app
 ```
 
 ---
