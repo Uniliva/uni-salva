@@ -1,4 +1,11 @@
-#### Instalando
+---
+title: "Kind"
+weight: 3
+---
+
+---
+
+### Instalando
 
 ```shell
 #-----------------------------------------------------------------------------------------------
@@ -52,6 +59,33 @@ kubectl config set-context --current --namespace=<namespace>
 - Crie o arquivo config.yaml - [kind – Configuration](https://kind.sigs.k8s.io/docs/user/configuration/))
 
 ```yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: foo
+  labels:
+    app: foo
+spec:
+  containers:
+  - name: foo
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=foo"
+    ports:
+    - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    nodePort: 30950
+    port: 5678
+  selector:
+    app: foo
 
 ```
 

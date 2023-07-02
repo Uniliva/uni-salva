@@ -3,7 +3,12 @@ archetype: "home"
 title: "Bem vindo"
 ---
 
+---
 
-## Create this Page
+{{% notice style="warning" %}}
+Em construção
+{{% /notice %}}
 
-You need to create a file for this page. You can either
+---
+> {{% icon icon="swatchbook" %}} Paginas:
+> {{% children sort="weight" %}}

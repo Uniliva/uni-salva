@@ -1,12 +1,13 @@
 ---
-title: "Cloud Notes"
-weight: 10
+title: "Gerenciadores de dependências"
+weight: 3
 ---
+
 
 ---
 
 {{% notice style="warning" %}}
-Notas de estudos relacionados a cloud computing.
+Em construção
 {{% /notice %}}
 
 ---

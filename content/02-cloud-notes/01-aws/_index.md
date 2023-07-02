@@ -1,12 +1,11 @@
 ---
-title: "Cloud Notes"
-weight: 10
+title: "AWS"
+weight: 1
 ---
-
 ---
 
 {{% notice style="warning" %}}
-Notas de estudos relacionados a cloud computing.
+Em construção
 {{% /notice %}}
 
 ---

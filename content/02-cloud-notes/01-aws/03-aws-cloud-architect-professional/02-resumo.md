@@ -1,3 +1,9 @@
+---
+title: "Resumão"
+weight: 2
+---
+
+
 ### AWS Accounts and Organizations
 
 #### AWS Organizations
@@ -589,7 +595,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 ---
 
-##  AWS Outposts
+###  AWS Outposts
 
 - Permite implementar o que se chama de cloud hibrida. 
 - Ou seja, permite executar a AWS nos servidores on-premises.

@@ -1,12 +1,13 @@
 ---
-title: "Cloud Notes"
-weight: 10
+title: "Linguagens de programação"
+weight: 4
 ---
+
 
 ---
 
 {{% notice style="warning" %}}
-Notas de estudos relacionados a cloud computing.
+Em construção
 {{% /notice %}}
 
 ---
