@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313"
+baseURL = "https://docs.uniii.com.br"
 canonifyURLs = true
 relativeURLs = false
 uglyURLs = true  # true -> basic/index.html -> basic.html
