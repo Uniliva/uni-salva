@@ -29,8 +29,10 @@ weight: 1
   > - Segurança
   > - Princípios de design sem servidor
   > - Armazenamento
+
 - Serviços abordados
-  > {{% expand  title="veja a lista completa" %}}
+
+> {{% expand  title="veja a lista completa" %}}
 - Análise:
   - Amazon Athena
   - AWS Data Exchange
@@ -209,7 +211,7 @@ weight: 1
   - Amazon S3
   - Amazon S3 Glacier
   - AWS Storage Gateway
-    {{% /expand %}}
+{{% /expand %}}
 
 ---
 
