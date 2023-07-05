@@ -111,9 +111,7 @@ Overlap de IPs só é permitidi com private link junto com o transit gateway.
 ![image-20211013163536690](assets/image-20211013163536690.png)
 
 - Disponibiliza um rack que pode ser colocado dentro do datacenter do cliente.
-
 - Funciona como uma AZ adicional da aws, não funciona se estiver disconectado da internet
-
 - Bom pois tera baixa latencia. ou por causa de complice do cliente
 
 - Serviços:
