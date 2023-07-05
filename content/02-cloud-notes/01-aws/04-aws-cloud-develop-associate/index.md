@@ -107,13 +107,13 @@ Armazenamento:
 
 ---
 
-# Computação:
+## Computação:
 
 
 
 ----
 
-## AWS Budget
+### AWS Budget
 
 {{% notice style="note" %}}
 Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-budget)
@@ -125,9 +125,9 @@ Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02
 
 ---
 
-# Gerenciamento e governança:
+## Gerenciamento e governança:
 
-## AWS CLI
+### AWS CLI
 
 {{% notice style="info" %}}
 
@@ -164,9 +164,9 @@ aws iam list-user
 
 
 
-# Segurança, identidade e conformidade:
+## Segurança, identidade e conformidade:
 
-## IAM
+### IAM
 
 - Escopo global, controle de acessos.
 
@@ -222,7 +222,7 @@ aws iam list-user
 
 [![Lógica da avaliação de política - AWS Identity and Access Management](https://docs.uniii.com.br/02-cloud-notes/01-aws/01-aws-cloud-architect-associate/assets/PolicyEvaluationHorizontal.png)](https://docs.uniii.com.br/02-cloud-notes/01-aws/01-aws-cloud-architect-associate.html#image-bb88ec8672b017a01d1b1d9da984a184)
 
-### MFA (multi factory atutenticator)
+#### MFA (multi factory atutenticator)
 
 - combinação de uma senha que você conhece com um dispositivo que é seu
 
@@ -231,12 +231,12 @@ aws iam list-user
 - Há uma opção de Hardware (ex: token Gemalto)
 ```
 
-### IAM Security Tools
+#### IAM Security Tools
 
 - **IAM Credencial Report (Account level)** -> Lista todas as contas de usuário e o status de cada uma.
 - **IAM Access Advisor** -> Mostras os serviços que o usuário tem acesso e a ultima vez que o mesmo acessou.
 
-### Responsabilidade compartilhada
+#### Responsabilidade compartilhada
 
 > a segurança na cloud é compartilhada e a AWS e nós temos responsabilidades para garantir a conformidade e segurança
 
