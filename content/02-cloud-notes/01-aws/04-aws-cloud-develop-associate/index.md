@@ -26,7 +26,7 @@ Leia sobre a [AWS Certified Developer - Associate. (DVA-C02)](https://aws.amazon
 
 
 Recursos e produtos da AWS no escopo
-
+{{% expand  title="veja a lista completa" %}}
 Análise:
 - [ ] Amazon Athena
 - [ ] Amazon Kinesis
@@ -103,12 +103,27 @@ Armazenamento:
 - [ ] Amazon Elastic File System (Amazon EFS)
 - [ ] Amazon S3
 - [ ] Amazon S3 Glacier
+{{% /expand %}}
+
+---
+
+# Computação:
+
+
+
+----
+
+## AWS Budget
+
+{{% notice style="note" %}}
+Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-budget)
+{{% /notice %}}
+
+
 
 
 
 ---
-
-
 
 # Gerenciamento e governança:
 
@@ -221,6 +236,8 @@ aws iam list-user
 - **IAM Credencial Report (Account level)** -> Lista todas as contas de usuário e o status de cada uma.
 - **IAM Access Advisor** -> Mostras os serviços que o usuário tem acesso e a ultima vez que o mesmo acessou.
 
+### Responsabilidade compartilhada
 
+> a segurança na cloud é compartilhada e a AWS e nós temos responsabilidades para garantir a conformidade e segurança
 
-AWS CLI
+![image-20230705054643236](assets/image-20230705054643236.png)
