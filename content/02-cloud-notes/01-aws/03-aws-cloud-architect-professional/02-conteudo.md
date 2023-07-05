@@ -1,37 +1,36 @@
-
 ---
 title: "Conteudo estudado"
 weight: 1
-
 ---
-
 
 ---
 
 ## Prova de certificação
-- Dominios
-|Dominío| percentual|
 
-|----|----|
-|Domínio 1: Soluções de design de complexidade organizacional |26%|
-|Domínio 2: Design de novas soluções |29%|
-|Domínio 3: Melhoria contínua de soluções existentes |25%|
-|Domínio 4: Acelerar a migração e a modernização da carga de trabalho |20%|
+- Dominios
+
+| Dominío                                                              | percentual |
+| -------------------------------------------------------------------- | ---------- |
+| Domínio 1: Soluções de design de complexidade organizacional         | 26%        |
+| Domínio 2: Design de novas soluções                                  | 29%        |
+| Domínio 3: Melhoria contínua de soluções existentes                  | 25%        |
+| Domínio 4: Acelerar a migração e a modernização da carga de trabalho | 20%        |
+
 - Tecnologias aws que podem vão cair na prova
-> - Computação
-> - Gerenciamento de custos
-> - Banco de dados
-> - Recuperação de desastres
-> - Alta disponibilidade
-> - Gerenciamento e governança
-> - Microsserviços e desacoplamento de componentes
-> - Migração e transferência de dados
-> - Redes, conectividade e entrega de conteúdo
-> - Segurança
-> - Princípios de design sem servidor
-> - Armazenamento
+  > - Computação
+  > - Gerenciamento de custos
+  > - Banco de dados
+  > - Recuperação de desastres
+  > - Alta disponibilidade
+  > - Gerenciamento e governança
+  > - Microsserviços e desacoplamento de componentes
+  > - Migração e transferência de dados
+  > - Redes, conectividade e entrega de conteúdo
+  > - Segurança
+  > - Princípios de design sem servidor
+  > - Armazenamento
 - Serviços abordados
-> {{% expand  title="veja a lista completa" %}}
+  > {{% expand  title="veja a lista completa" %}}
 - Análise:
   - Amazon Athena
   - AWS Data Exchange
@@ -210,12 +209,12 @@ weight: 1
   - Amazon S3
   - Amazon S3 Glacier
   - AWS Storage Gateway
-{{% /expand %}}
-
+    {{% /expand %}}
 
 ---
 
 ## Identidade e Federação
+
 ![image-20230131205355434](assets/image-20230131205355434.png)
 
 ---
@@ -247,7 +246,7 @@ weight: 1
   - Json que contem os campos effect, action, Resource, Conditions, Polices variables.
   - Deve sempre usar o conceito de menor privilégio.
   - **Access Advisor** - Permite ver as permissões e a ultima vez que foi usada.
-  - **Access Analize** 
+  - **Access Analize**
     - Permite analisar quais recursos são compartilhada com entidades externas, ex buckets.
     - Permite definir uma Zona de confiança com as contas ou as organizações que confia. O que estiver fora dessa Zona terá o acesso sinalizado
     - ![](assets/2023-01-30-05-29-39-image.png)
@@ -256,22 +255,22 @@ weight: 1
       - Dá sugestões sobre erros, alertas e segurança.
     - Além disso é possível gerar polices.
       - O AWS Access Analise, pode ler logs de do CloudTrail e gerar polices com permissões granuladas.
-    ![](assets/2023-01-30-05-35-13-image.png)
+        ![](assets/2023-01-30-05-35-13-image.png)
   - Tags e variáveis
     - Permite criar polices com recursos genericas.
-    ![](assets/2023-01-27-06-37-30-image.png)
+      ![](assets/2023-01-27-06-37-30-image.png)
 - **IAM Polices Conditions**
   - Permite adicionar condições nas políticas de acessos AWS.
-  ![](assets/2023-01-27-06-08-44-image.png)
+    ![](assets/2023-01-27-06-08-44-image.png)
   - Opções de operações que podem ser usadas nas condições.
-  ![](assets/2023-01-27-06-34-18-image.png)
+    ![](assets/2023-01-27-06-34-18-image.png)
 - **IAM Permission Boundaries** (limite de permissões)
   - Quando se criar usuário ou **Roles** e possível dar **permissão genéricas,** tipo de administrador , e setar um **limite** para essas permissões, exemplo o cara é administrado apenas nos recursos do S3.
   - Suportado apenas por usuários e roles (Não grupos).
   - SCP (Service control policies ).
-  ![](assets/2023-01-27-06-09-29-image.png)
-**Lógica da avaliação de política**
-![image-20230131195843146](assets/image-20230131195843146.png)
+    ![](assets/2023-01-27-06-09-29-image.png)
+    **Lógica da avaliação de política**
+    ![image-20230131195843146](assets/image-20230131195843146.png)
 
 #### MFA (multi factory atutenticator)
 
@@ -291,26 +290,25 @@ weight: 1
 
 ### STS
 
-
 #### Assume Role
 
 - Criamos as roles, definimos os **principal** que podem acessar essas roles.
 - Geramos credenciais, que geram um token que pode ser validos de 15 minutos a 12 horas.
-![](assets/2023-01-30-05-43-29-image.png)
+  ![](assets/2023-01-30-05-43-29-image.png)
 - Onde se usa o Assuming Role.
   - Para permitir acesso a usuários ou recurso, a uma conta aonde eles não tem acesso de forma temporária.
   - Para dar acesso ao usuário fora da sua organização. A usuários federados.
 - Permite revogar o acesso a role adicionando um novo bloco de statement ou usando o AWSRevokeOlderSessions.
 - Lembrando que quando assuminos uma Role, perdemos nossos acessos anteriores.
-![](assets/2023-01-30-05-52-41-image.png)
-![](assets/2023-01-30-05-51-50-image.png)
-![](assets/2023-01-30-05-54-56-image.png)
-![](assets/2023-01-30-05-57-49-image.png)
+  ![](assets/2023-01-30-05-52-41-image.png)
+  ![](assets/2023-01-30-05-51-50-image.png)
+  ![](assets/2023-01-30-05-54-56-image.png)
+  ![](assets/2023-01-30-05-57-49-image.png)
 
 #### Session Tags
 
 - Muito usado quando se tem usuários federados.
-![](assets/2023-01-30-05-59-58-image.png)
+  ![](assets/2023-01-30-05-59-58-image.png)
 
 #### API Importantes STS
 
@@ -319,7 +317,6 @@ weight: 1
 ---
 
 #### Identity Federation & Congnito
-
 
 #### Identity Federation
 
@@ -365,9 +362,10 @@ weight: 1
 
 Forma de se usar o ADSF (active directory na **AWS**)
 ![](assets/2023-01-31-05-52-47-image.png)
+
 - **AWS Managed Microsoft AD**
   - É possivel configurar o **AD em mais de uma VPC.**
-  - EC2 Windows 
+  - EC2 Windows
     - Nele pode se rodar aplicações que usam o AD, como o sharepoint.
   - Integrações
     - Pode se integrar com o **RDS para SQL, AWS Workspaces, QuickSight.**
@@ -375,7 +373,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Pode se usar integrado com o AD do on-premise.
   - Pode se adicionar outros DC (Domain controlers) para escalar
   - Tem backups automático.
-![](assets/2023-01-31-06-02-26-image.png)
+    ![](assets/2023-01-31-06-02-26-image.png)
 - **Conectando ao AD no on-premise**
   - Deve se estabelecer uma conexão via Direct connect or VPN Conection.
   - A relação de confiança pode ser feita de 3 formas:
@@ -387,24 +385,26 @@ Forma de se usar o ADSF (active directory na **AWS**)
       - AWS <-> On-premise
   - Relação de confianção não tem nada a ver com sincronização. Apenas indica que o AD é valido e confiável.
   - **Replicação não é suportada.**
-![](assets/2023-01-31-06-09-43-image.png)
+    ![](assets/2023-01-31-06-09-43-image.png)
 - Para se criar um **processo de replicação na nuvem** deve-se:
   - Instalar uma replica AD num EC2 e dai criar a **relação de confiança com o AWS AD**
-![](assets/2023-01-31-06-12-50-image.png)
+    ![](assets/2023-01-31-06-12-50-image.png)
 
 ---
+
 - **AD Connector**
   - Permite criar um **gateway para o AD no On-premise.**
-![](assets/2023-01-31-06-14-36-image.png)
+    ![](assets/2023-01-31-06-14-36-image.png)
 - **Simple AD**
   - Serviço básico de AD.  
-![](assets/2023-01-31-06-17-06-image.png)
+    ![](assets/2023-01-31-06-17-06-image.png)
 
 ---
 
 ### AWS Organizations
 
 ![](assets/2023-01-31-06-18-39-image.png)
+
 - Consolide múltiplas contas em uma única conta.
 - Permite consolidar a fatura de pagamento e custos. (consolidated Billing)
 - Unificar a parte de auditoria, monitoração e segurança numa única conta.
@@ -424,7 +424,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Remova a conta da organização antiga.
   - Envia um invite da nova organização.
   - Aceita o invite.
-![](assets/2023-01-31-06-44-23-image.png)
+    ![](assets/2023-01-31-06-44-23-image.png)
 
 ---
 
@@ -438,7 +438,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Devem ter permissões explicitas, e por padrão não permitem nada.
 - Caso de usos:
   - Restringir acesso a serviços em uma conta ou OU. ex: EMR.
-![image-20230131195742445](assets/image-20230131195742445.png)
+    ![image-20230131195742445](assets/image-20230131195742445.png)
 - Permite obrigar o usuário a inserir tags, nos recursos.
   - Exemplo caso queira que o restringir as tags usuário sue
   - ![image-20230131200305779](assets/image-20230131200305779.png)
@@ -452,14 +452,14 @@ Forma de se usar o ADSF (active directory na **AWS**)
 #### AI Services
 
 - A AWS usa seus dados para Melhorar a IA, caso queira desabilitar essa funcionalidade deve se criar uma police.
-![image-20230131201130472](assets/image-20230131201130472.png)
+  ![image-20230131201130472](assets/image-20230131201130472.png)
 
 ---
 
 #### Backup police
 
-- Permite criar regras de backup 
-![image-20230131201536580](assets/image-20230131201536580.png)
+- Permite criar regras de backup
+  ![image-20230131201536580](assets/image-20230131201536580.png)
 
 ---
 
@@ -472,8 +472,8 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Instancia Ec2 com o Windows.
 - Permite usar identity provider como o AD
 - Permite criar a estrutura de usuários dentro da AWS.
-![image-20230131202516255](assets/image-20230131202516255.png)
-![image-20230131202644744](assets/image-20230131202644744.png)
+  ![image-20230131202516255](assets/image-20230131202516255.png)
+  ![image-20230131202644744](assets/image-20230131202644744.png)
 
 ---
 
@@ -482,13 +482,14 @@ Forma de se usar o ADSF (active directory na **AWS**)
 ![image-20230309193510226](assets/image-20230309193510226.png)
 ![image-20230309192640760](assets/image-20230309192640760.png)
 ![image-20230309192736039](assets/image-20230309192736039.png)
+
 - É uma maneira fácil para você configurar e governar um ambiente seguro e compatível com as Múltiplas contas AWS com base nas melhores práticas.
 - **Landing Zone** - Conjunto de boas praticas recomendadas
   - Ambiente configurado e seguro, escalável como mutiplas que segue praticas recomendadas pela AWS.
   - O que o Control Tower tenta criar
 - Benefícios:
   - Automatizar seu ambiente em apenas alguns cliques.
-  - Permite aplicar política usando guardrails (regras de governança pre-configuradas).  Aplicado em nível de OU
+  - Permite aplicar política usando guardrails (regras de governança pre-configuradas). Aplicado em nível de OU
   - Sendo:
     - Preventivo, usando SCPs, desabilitando recursos, o bloqueando ações.
     - Detectivo, Usando AWS Config, para validar se as configuração da conta esta deacordo.
@@ -497,12 +498,12 @@ Forma de se usar o ADSF (active directory na **AWS**)
       - **Mandatário** - Obrigatórios, em geral relacionados a segurança ex: desabilitar acesso a determinado recurso.
       - **Fortimente recomendado** - Baseado em boas praticas ex: criptografar dados do EBS.
       - **Eletivos** - Eleitos pela empresa para algum propósito, exemplo padronização de nome do S3.
-  ![image-20230309193113465](assets/image-20230309193113465.png)
-  - Permite  detectar violações de políticas e corrigi-las automaticamente e podemos monitorar a conformidade através de um painel de controle interativo.
+        ![image-20230309193113465](assets/image-20230309193113465.png)
+  - Permite detectar violações de políticas e corrigi-las automaticamente e podemos monitorar a conformidade através de um painel de controle interativo.
 - Fabrica de contas
-  - Permite criar novas contas e  configurar como serão os recursos da conta, como VPC, Security Groups.
+  - Permite criar novas contas e configurar como serão os recursos da conta, como VPC, Security Groups.
   - Usa AWS Service Catalog para provisionar novas contas.
-  ![image-20230309193317976](assets/image-20230309193317976.png)
+    ![image-20230309193317976](assets/image-20230309193317976.png)
 - Como funciona automatização de novas contas
   ![image-20230309193740658](assets/image-20230309193740658.png)
 
@@ -511,6 +512,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 ### AWS Resource Access Manager (RAM)
 
 ![RAM](assets/image-20210907133859114.png)
+
 - Permite compartilhar e recursos entre contas duma mesma **AWS Organizations**.
 - Somente o dono do recurso compartilhado pode exclui-ló.
 - Evita duplicação de recursos na organização
@@ -533,7 +535,6 @@ Forma de se usar o ADSF (active directory na **AWS**)
 
 ---
 
-
 ---
 
 ## Segurança
@@ -541,6 +542,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 ### AWS CloudTrail
 
 ![cloud-trail](assets/image-20210906211912761.png)
+
 - Provem governança, **compliance** e **auditoria**, é o dedo duro da galera que fez merda.
 - Habilitado por default, tem custo zero.
 - Recebe informações do **SDK / console / cli / IAM User e IAM roles.**
@@ -548,7 +550,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Monitora todas as chamadas de **API** da conta.
 - Guarda os logs por 90 dias no **cloud trail**, caso queira guardar mais tempo e possível configurar
   no S3 (não vem habilitado por default).
-- Vem aplicado em todas as regiões por padrão. 
+- Vem aplicado em todas as regiões por padrão.
 - Pode ser habilitados em todas ou em apenas uma conta.
 - Tipo de eventos analisados:
   - **Eventos gerenciados.**
@@ -568,14 +570,14 @@ Forma de se usar o ADSF (active directory na **AWS**)
       - Limites de recursos (**soft** and **hard**).
       - Permite conectar ao **eventBridge** para notificação das anomalias.
     - ![insights](assets/image-20210906212303526.png)
-- Solution Architecture 
+- Solution Architecture
   - Desenho de possibilidades de integração ente Cloudtrail e S3.
-  ![image-20230202053730049](assets/image-20230202053730049.png)
+    ![image-20230202053730049](assets/image-20230202053730049.png)
   - Desenho com varias contas e logs de variar regiões
     ![image-20230202054026755](assets/image-20230202054026755.png)
   - Desenho de alertas via chamadas de APIS
     - Permite enviar alerta, para quando um instância for desligada, o removida.
-    ![image-20230202054303139](assets/image-20230202054303139.png)
+      ![image-20230202054303139](assets/image-20230202054303139.png)
   - Desenho de uso em uma organização
     ![image-20230202054456250](assets/image-20230202054456250.png)
 - Como reagir a eventos os mais rápido possível.
@@ -617,6 +619,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 #### Tipos de chaves
 
 ![image-20230202060448371](assets/image-20230202060448371.png)
+
 - **CMK** - Customer Master Keys.
 - **Gerenciadas pelo usuario - CMK**
   - Criado pelo usuário dentro do **KMS** ou **HSM **(**hardware security module** ), pode ser deletada ou alterada.
@@ -624,7 +627,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Também e possível rotacional manualmente, mas é recomendado para chaves **Assimétricas**.
   - Tem um custo de $1 por mês, e a cada chamada paga-se $0.003.
   - Pode ser dos tipos
-    - **Simétricas** (AES-256) 
+    - **Simétricas** (AES-256)
       - Todos serviços da AWS usam essa. Não se tem acesso a chave.
       - Precisa usar a API para usar a encriptação o decriptação.
     - **Assimétricas** (RSA & ECC Key Pairs)
@@ -642,20 +645,21 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - **Chaves do HSM**
   - Chaves criada usando o HSM (**hardware security module** )
   - Replicado em mais de uma AZ
-  ![cloudhsm](assets/image-20210907151911356.png)
-  ![hms-kms](assets/image-20210907152024180.png)
+    ![cloudhsm](assets/image-20210907151911356.png)
+    ![hms-kms](assets/image-20210907152024180.png)
 - KMS em multiplas regiões
   - Permite criptografar em uma região e descriptografar em outra.
   - O KMS não é Global e apenas Multi-Region com replicação. Cada KMS de cada região é gerenciado separadamente há apenas a replicação das chaves.
   - Usado para:
     - Disaster Recovery, Global data Management (DynamoDB Global Tabl)
-​    ![image-20230202061204254](assets/image-20230202061204254.png)
+      ​ ![image-20230202061204254](assets/image-20230202061204254.png)
 
 ---
 
 ### AWS SSM Parameter Store
 
 ![ssm-parameters](assets/image-20210907145157513.png)
+
 - Permite armazena configurações e segredos como parâmetros.
 - Tem criptografia opcional usando o **KMS**.
 - É Serverless, e fácil de usar com SDKs.
@@ -665,17 +669,18 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Da pra acessar o secret manager via parameter store.
   - Acessando assim: **/aws/reference/secretsmanager/secret_id_in_secrets_manager**
 - Tem integração com o **CloudFormation**.
-- Ate 10000 parâmetros com valor de ate 4KB  é de graça por conta e região.
-- Ate 100000 parâmetros com valor de ate 8KB  é cobrado $0.05 por parâmetro.
-![tiers](assets/image-20210907145612224.png)
+- Ate 10000 parâmetros com valor de ate 4KB é de graça por conta e região.
+- Ate 100000 parâmetros com valor de ate 8KB é cobrado $0.05 por parâmetro.
+  ![tiers](assets/image-20210907145612224.png)
 - É possível definir TTL para parâmetros (**advanced tier**), para força a atualização ou deleta. um caso de uso muito bom seria armazenar o token de acesso no **parameter store** e definir um TTL de 25 minutos, quando ele expirar dispara uma notificação via **CloudWatch Events** que gera um novo token e atualiza ao parâmetro.
-![ttl-ssm](assets/image-20210907150009873.png)
+  ![ttl-ssm](assets/image-20210907150009873.png)
 
 ---
 
 ### AWS Secrets Manager
 
 ![image-20230206061620483](assets/image-20230206061620483.png)
+
 - Usados para guardar segredos (principalmente de banco de dados).
 - Permite realizar a rotatividade dos segredos automaticamente.
   - Rotaciona automáticamente usando uma função Lambda.
@@ -701,7 +706,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Rotação de senha entre Secrets manager e SSM.
   - No Secrets é automatico
   - No SSM precisa criar e manter o event Bridge com a lambda.
-![image-20230206062741073](assets/image-20230206062741073.png)
+    ![image-20230206062741073](assets/image-20230206062741073.png)
 
 ---
 
@@ -721,12 +726,12 @@ Forma de se usar o ADSF (active directory na **AWS**)
 
 - Secure Sockets Layer - Usado pra criptografar conexões.
 - TSL - Transport Layer Security - versão mais recente do protocolo SSL.
-- CA - Certificate Authorities - emitem certificados de confiança 
+- CA - Certificate Authorities - emitem certificados de confiança
   - Comodo, Symantec, GoDaddy, Letsencrypt ...
 - Certificados SSL tem data de validade.
 - Funciona assim:
   - Quando dois host vão se conectar ele realizam o aperto de mão (handshake) usando criptografia assimétrica que é muito cara em termo de processamento. A partir dai é gerados chaves simétricas que serão usadas para as próximas interações, estas que tem um custo de validação mais barato que as assimétricas.
-![Tipos de Certificados SSL: Qual é o Mais Adequado Para o Seu Site?](assets/How-SSL-Certificates-Work-1.jpg)
+    ![Tipos de Certificados SSL: Qual é o Mais Adequado Para o Seu Site?](assets/How-SSL-Certificates-Work-1.jpg)
 
 ---
 
@@ -736,9 +741,9 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - **Ele requer que seja passado o hostname do servidor destinatário, para iniciar o processo de handshake.**
 - Assim ele acha o certificado adequado ou retorna um default.
 - Funciona apenas com **ALB e NLB** da nova geração e com o **CloudFront**.
-- Não funciona com o CLB. (antiga geração) 
-![image-20230206202222478](assets/image-20230206202222478.png)
-![What is SNI? | mlytics](assets/UZtj9r5EHYtUmJ0vc6mOEBadx-ZrYL2mtW2UcX7-F4pZ4RGbueactj0Q_8bO35oh8yQkbT8jSfwKOV69Y0WCHxkI203wNXSgUzPfbJKPsErnd8LfUdj71nJYSycbHN2v4ODGIaya=s0.png)
+- Não funciona com o CLB. (antiga geração)
+  ![image-20230206202222478](assets/image-20230206202222478.png)
+  ![What is SNI? | mlytics](assets/UZtj9r5EHYtUmJ0vc6mOEBadx-ZrYL2mtW2UcX7-F4pZ4RGbueactj0Q_8bO35oh8yQkbT8jSfwKOV69Y0WCHxkI203wNXSgUzPfbJKPsErnd8LfUdj71nJYSycbHN2v4ODGIaya=s0.png)
 
 ---
 
@@ -746,24 +751,25 @@ Forma de se usar o ADSF (active directory na **AWS**)
 
 ![Executing a Man-in-the-Middle Attack in just 15 Minutes - Hashed Out](assets/man-in-the-middle-attack.png)
 Como previnir:
+
 - Não use publique aplicações com http, apenas com https.
 - **Use DNS com o DNSSEC habilitado.**
-  - Route 53 permite usar o DNSSEC para registro de dominios e  para serviço de DNS usando o KMS.
-![InfoSec: Security of DNS](assets/dns_2en.png)
+  - Route 53 permite usar o DNSSEC para registro de dominios e para serviço de DNS usando o KMS.
+    ![InfoSec: Security of DNS](assets/dns_2en.png)
 
 ---
 
 ### AWS Certificate Manager
 
 - Serviço que permite provisionar, gerenciar e implantar facilmente certificados **SSL/TLS** para uso com os serviços da AWS e os recursos internos conectado.
-- Permite solicitar certificados e implanta-los em  **Elastic Load Balancers,** distribuições do **Amazon CloudFront** e APIs no **Amazon API Gateway. e APPSync**
+- Permite solicitar certificados e implanta-los em **Elastic Load Balancers,** distribuições do **Amazon CloudFront** e APIs no **Amazon API Gateway. e APPSync**
 - Permite criar certificados privados para recursos internos e centralizar o gerenciamento do ciclo de vida dos certificados
 - Permite criar certificados que serão validados no inicio e a partir dai o trafico fica sendo http, o que reduz o uso de CPU das instancias.
-![image-20230206204824008](assets/image-20230206204824008.png)
+  ![image-20230206204824008](assets/image-20230206204824008.png)
 - Serviço **regional**, assim caso tenha serviço global precisa gerar certificados para cada região.
   - Não é possivel usar em serviços globais.
   - **Nem é possivel copiar um certificado para outra região.**
-![image-20230206205322539](assets/image-20230206205322539.png)
+    ![image-20230206205322539](assets/image-20230206205322539.png)
 
 ---
 
@@ -772,30 +778,31 @@ Como previnir:
 - SSL on ALB
   - Forma mais comum de se fazer, o ALB usa o ACM pra validar o Certificados
   - A comunicação após o ALB e http, o que reduz o uso de CPU da maquina que não precisa ficar validando certificado.
-![image-20230207050311492](assets/image-20230207050311492.png)
+    ![image-20230207050311492](assets/image-20230207050311492.png)
 - SSL nos Web Services com instâncias EC2
   - Usa se um NLB e a comunicação ate a instância é feita usando https.
   - Porem isso é ruim, pois consome memória.
   - E cada EC2 precisa configurar o certificado em sua maquina.
   - Ele deve ser recuperado no boot do sistema de um parameter store usando script no user data.
-![image-20230207050747416](assets/image-20230207050747416.png)
+    ![image-20230207050747416](assets/image-20230207050747416.png)
 - Cloud HSM - SSL Offloading
   - Usa se um HSM para processar o SSL fora do EC2.
   - Como ele tem o SSL Acceleration o processo é mais rapido.
   - Suportado pelos Web server Nginx, Apache e IIS.
   - É bem seguro pois a chave nunca ira ser trafegada, tudo é feito dentro do HSM.
   - Para isso é necessário criar um usuário para criptografia no HSM. e amarzenar os dados desse usuário no secrets manager ou parameter store.
-![image-20230207051237227](assets/image-20230207051237227.png)
+    ![image-20230207051237227](assets/image-20230207051237227.png)
 
 ---
 
 ### DDOS e Web Security
 
 ![image-20230208042949083](assets/image-20230208042949083.png)
+
 - Como se proteger
-![image-20230208043243655](assets/image-20230208043243655.png)
+  ![image-20230208043243655](assets/image-20230208043243655.png)
 - Arquitetura usada contra ddos.
-![aws-shield](assets/image-20210907152708797.png)
+  ![aws-shield](assets/image-20210907152708797.png)
 
 ---
 
@@ -809,7 +816,7 @@ Como previnir:
 - Tem a versão aws shild **advanced** 24/7 premium com DRP (DDos response team) que:
   - Tem custo adicional $ **3000** por organização.
   - Pode ser usado em Route 53 / Cloud Front | Global Acelerator | Load Balance
-![aws-shield](assets/image-20210907152708797.png)
+    ![aws-shield](assets/image-20210907152708797.png)
 
 ---
 
@@ -839,7 +846,7 @@ Como previnir:
   - **Envia ate 5MB por segundo.**
   - **Pode enviar para o S3 com em intervalos de 5 minutos.**
   - **Pode enviar para kinesis data firehose - Neste caso o time se limita as quotas do kinisis**
-  ![image-20230208045204468](assets/image-20230208045204468.png)
+    ![image-20230208045204468](assets/image-20230208045204468.png)
 
 ---
 
@@ -848,14 +855,14 @@ Como previnir:
 - Regras prontas para ser aplicadas.
 - Existem mais de 190 ja cadastradas, mas pode se usar o marketplace para encontrar outras.
 - Baseadas em grupos de controles.
-![image-20230208044625325](assets/image-20230208044625325.png)
+  ![image-20230208044625325](assets/image-20230208044625325.png)
 
 ---
 
 ##### Soluções com WAF
 
 - Usando WAF pra acessa ALB apenas pelo Cloud Front. Usando o Secrets Manager para gerar novos valores para o header e atualiza-los via Lambda.
-![image-20230208045537986](assets/image-20230208045537986.png)
+  ![image-20230208045537986](assets/image-20230208045537986.png)
 
 ---
 
@@ -863,10 +870,10 @@ Como previnir:
 
 - Permite gerenciar regras de todas as contas AWS de forma centralizada.
 - Tem regras comuns de segurança.
-![image-20230208045823263](assets/image-20230208045823263.png)
+  ![image-20230208045823263](assets/image-20230208045823263.png)
 - Diferenças entre WAF e AWS Firewal manager e AWS Shield
   - WAF usado para proteção em nivel de aplicação (camada 7).
-  - AWS Shield usado para proteção  contras DDos ( camada 6 e 4 (rede e transporte)).
+  - AWS Shield usado para proteção contras DDos ( camada 6 e 4 (rede e transporte)).
   - AWS Firewal manager usado para centralizar regras, permite aplicar o WAF e SHIELD em varias contas.
 
 ---
@@ -875,16 +882,16 @@ Como previnir:
 
 - As vezes desejamos bloquear **IPs** por segurança.
 - O bloqueio deve ser feito no **NACL**, pois ele permite criar regras de Negação (**DENY**).
-- No caso do **Security Group** é mais complicado de fazer, pois ele parte da ideia de regras de deliberação de acesso (**ALLOW**). caso precisa-se teria que criar um grupo de IPs que podem acessar e permitia o acesso **SG** assim o resto seria bloqueado, mas como seriam muitos torna-se quase inviável. 
+- No caso do **Security Group** é mais complicado de fazer, pois ele parte da ideia de regras de deliberação de acesso (**ALLOW**). caso precisa-se teria que criar um grupo de IPs que podem acessar e permitia o acesso **SG** assim o resto seria bloqueado, mas como seriam muitos torna-se quase inviável.
 - Também é possível configurar um firewall num **EC2** para fazer esse bloqueio.
   ![ip-bloqueio](assets/image-20210911060135778.png)
   - Caso na sua estrutura esteja usando um **application load balance **(ALB), e possível bloquear usando a **NACL** e configurar o **Security Group** das instâncias EC2 para aceitar o trafico apenas do **application Load balance**.
-  ![alb-blocling-ip](assets/image-20210911060717080.png)
+    ![alb-blocling-ip](assets/image-20210911060717080.png)
   - Ou pode se instalar o **WAF** no **ALB**, onde se poderia criar regras de filtros de acesso.
-  ![waf](assets/image-20210911061131017.png)
+    ![waf](assets/image-20210911061131017.png)
   - Caso esteja usando um Network load balance, a unica forma de bloquear um ip seria usando o **NACL**. Pois o NLB não possui Security Group.
-  ![nlb-blocking-ip](assets/image-20210911060927094.png)
-- Caso esteja usando **CDN**, e possível usar o **WAF** na para bloquear o acesso. Antes mesmo  dele chegar na **VPC**, não sendo necessário usar as **NACL**
+    ![nlb-blocking-ip](assets/image-20210911060927094.png)
+- Caso esteja usando **CDN**, e possível usar o **WAF** na para bloquear o acesso. Antes mesmo dele chegar na **VPC**, não sendo necessário usar as **NACL**
   ![cdn-bloquin](assets/image-20210911061200043.png)
 
 ---
@@ -892,6 +899,7 @@ Como previnir:
 ### AWS Inspector
 
 ![image-20230208051418787](assets/image-20230208051418787.png)
+
 - Permite que você analise o comportamento de seus recursos da AWS e ajuda a identificar possíveis problemas de segurança.
 - **AWS Inspector** inspeciona instâncias EC2 contra ameaças comuns.
 - Tem um agente que pode ser instalado nas EC2 (SSM Agent).
@@ -911,6 +919,7 @@ Como previnir:
 ### AWS Config
 
 ![config](./assets/image-20210906213344276.png)
+
 - Ajuda a verificar o compliance da nossa conta de acordo com a linha do tempo.
 - Mostra quais são as modificações que foram feitas.
 - Pode usar tópicos para notificação.
@@ -924,11 +933,11 @@ Como previnir:
 - Contem varias regras (mais de 75), que servem para validar se um serviço esteja **compliance, possivel criar próprias regras.**
   - Para criar suas configuração é necessário criar uma lambda function que checa o que se que validar.
     - Ex: Deseja-se validar se as instâncias EC2 criadas são do tipo micro, que são as unicas permitidas, se criaria um Lamdba Function que valida e se definiria uma regra linkada a essa Lambda.
-  **Serviço pago $0.003 por regra habilitada**
+      **Serviço pago $0.003 por regra habilitada**
 - Permite ver as alterações feitas que não estão compliance, e quem fez a alteração.
 - Uso, pode adicionado uma regra que valida se há acesso **ssh** ao um **security group** e caso detecte é possível disparar uma ação ou uma notificação.
-![notify](./assets/image-20210906213444390.png)
-Perguntas que tem como resposta AWS Config:
+  ![notify](./assets/image-20210906213444390.png)
+  Perguntas que tem como resposta AWS Config:
 - Há algum security group configurado sem ssh?
 - My bucktes tem algum acesso publico.
 
@@ -944,24 +953,25 @@ Perguntas que tem como resposta AWS Config:
 - Logs gerenciados e produzidos por serviços AWS:
   - Logs de acessos dos Load balances -> podem ser exportados para o S3.
     - Access logs dos loads balances.
-  - Logs do CloudTrail -> podem ser  ser exportados para o S3 ou Cloud Watch.
+  - Logs do CloudTrail -> podem ser ser exportados para o S3 ou Cloud Watch.
     - Logs das chamadas de APIs da AWS.
-  - Logs de Fluxo VPC (VPC Flow Logs) ->  podem ser  ser exportados para o S3 ou Cloud Watch.
+  - Logs de Fluxo VPC (VPC Flow Logs) -> podem ser ser exportados para o S3 ou Cloud Watch.
     - Dados sobre trafico de IPs e Interfaces de redes.
-  - Logs de acessos Route 53  -> podem ser enviados para o Cloud Watch.
+  - Logs de acessos Route 53 -> podem ser enviados para o Cloud Watch.
     - Loga as informações que queries recebidas pelo Route 53.
-  - Logs de acessos do S3 ->  podem ser exportados para o S3.
-  - Logs de acessos do Cloud Front ->  podem ser exportados para o S3.
-  - Logs do AWS Config ->  podem ser exportados para o S3.
+  - Logs de acessos do S3 -> podem ser exportados para o S3.
+  - Logs de acessos do Cloud Front -> podem ser exportados para o S3.
+  - Logs do AWS Config -> podem ser exportados para o S3.
 
 ---
 
 ### AWS Guard Duty
 
 ![image-20230211200819545](./assets/image-20230211200819545.png)
+
 - Serviço de inteligência artificial para detectar anomalias na sua conta.
 - Tem free trial , após isso é gerado cobrança.
-- **É um serviço regional.** 
+- **É um serviço regional.**
 - Recebe dados do:
   - **Cloud Trail** - detecta chamadas incomuns e não autorizadas.
   - **VPC Flow** - detecta trafico incomum e IPs incomuns.
@@ -970,37 +980,39 @@ Perguntas que tem como resposta AWS Config:
 - Ler todos e através de algoritmos ele detecta coisas erradas.
 - É possível conectar ao **event Brigde** do **Cloud Watch** para notificar.
 - Pode se colocar uma conta da organização para ser a Adminstrador do GuardDuty ele teria permissão de gerenciar o guardDuty em todas as contas.
-![image-20230211201043035](./assets/image-20230211201043035.png)
+  ![image-20230211201043035](./assets/image-20230211201043035.png)
 
 ---
 
 ### IAM Advanced Policies
 
-
 #### Condicions
 
->  permite usar condições para liberar acesso.
+> permite usar condições para liberar acesso.
+
 - Pode se usar as condições:
   - **SourceIP** - Para dar acesso ou negar via IP ou range de IPs. (exemplo - Só permitir que acesse a AWS se estiver na rede da empresa)
     ![image-20230211201501809](./assets/image-20230211201501809.png)
   - **RequestedRegion** - Permite restrigir a região onde os recursos podem ser criados ou chamados.
-  ![image-20230211202114475](./assets/image-20230211202114475.png)
+    ![image-20230211202114475](./assets/image-20230211202114475.png)
   - **ResourceTag** - Permite liberar a execução ou uso de recurso que tenha a tag.
     - Exemplo, só permite a execução de instancias que tenha a tag de Project **DataAnalytics**
-    ![image-20230211202458218](./assets/image-20230211202458218.png)
+      ![image-20230211202458218](./assets/image-20230211202458218.png)
   - **MFA** - Permite usar para exclusão de dados
-    - Exemplo, pode se restrigir a exclusão de dados de um S3 ou para uma instancias EC2 apenas se o usuário tiver o MFA habilitado.  
+    - Exemplo, pode se restrigir a exclusão de dados de um S3 ou para uma instancias EC2 apenas se o usuário tiver o MFA habilitado.
 
 ---
 
 #### IAM for S3
 
 - Pode se aplicar regras para o bucket e para os objetos e há diferença.
-- Usa se o caracter * pra regras de objetos
-![image-20230211203540314](./assets/image-20230211203540314.png)
+- Usa se o caracter \* pra regras de objetos
+  ![image-20230211203540314](./assets/image-20230211203540314.png)
 
 ---
+
 Resource police restritas para a organização
+
 - Permite restrigir usado de polices apenas a menbros de uma organização![image-20230211203825071](./assets/image-20230211203825071.png)
 
 ---
@@ -1008,6 +1020,7 @@ Resource police restritas para a organização
 ### AWS Security HUB
 
 ![security-hub](./assets/image-20210907161531824.png)
+
 - Centraliza a gestão de segurança de múltiplas contas.
 - Agrega alertas de outros serviços visto anteriormente.
 - Usa o **AWS config** .
@@ -1015,16 +1028,16 @@ Resource police restritas para a organização
 
 ---
 
-###  Amazon Detective
+### Amazon Detective
 
 - Analisa e investiga a causa raiz de problemas de segurança, ou atividades suspeitas usando Marchine Learn e Grafos.
 - Criar visão unificadas para logs coletados facilitando ve-los.
 - Permite criar visualizações desses logs para detalhar problemas identificados.
 
-
 ---
 
 ## Compute & Load Balancing
+
 ![image-20230212210211474](assets/image-20230212210211474.png)
 
 ### EC2
@@ -1057,38 +1070,38 @@ Resource police restritas para a organização
     - **Cluster** - Todas ais instâncias ficam juntas, tem baixa latência, mas ficam numa única AZ. (alta performance, mas tem um alto risco).
       - Boa escolha quando se tem instâncias com rede otimizada (enhanced Networking).
       - Usados para jobs de processamento rápido de BigData e aplicação que precisam de baixa latência de rede
-    - **Spread** - (espalhadas) As instâncias ficar  espalhadas em servidores em diferentes AZ, com uma máximo de 7 instâncias por grupo por AZ. Usados em aplicações criticas.
+    - **Spread** - (espalhadas) As instâncias ficar espalhadas em servidores em diferentes AZ, com uma máximo de 7 instâncias por grupo por AZ. Usados em aplicações criticas.
       - Baixo risco que indisponibilidade.
     - **Partition** - Similar ao **Spread**, mas as instâncias ficam espalhadas em diferentes partições (conjunto de Racks) numa AZ. Pode escalar para centenas de instâncias por grupo, usadas com o Hadoop, Kafka, Cassandra.
       - Pode ter ate 7 partição por AZ, e centenas de instâncias.
       - As partições não compartilham o mesmo hack.
       - Se a partição falhar todas as maquinas são perdidas.
       - As instâncias podem compartilhar dados da partição vias EC2 Metadata.
-      ![AWS - Placement Groups](assets/placementgroups.jpeg)
+        ![AWS - Placement Groups](assets/placementgroups.jpeg)
 - É possível mover uma instância de um placement group. Para isso é necessário:
   - **Para a instância e usando o CLI mudar ela de placement group e depois inicia-la novamente.**
 - **Metricas**
   ![image-20230213202651772](assets/image-20230213202651772.png)
 - Instance recovery
-  - O CloudWatch monitora a instância, caso a instância e problema é possível recupera-la usando  uma alarme, criando uma nova com o Mesmo IP a mesa rede, os mesmos meta dados e o mesmo placement group.
+  - O CloudWatch monitora a instância, caso a instância e problema é possível recupera-la usando uma alarme, criando uma nova com o Mesmo IP a mesa rede, os mesmos meta dados e o mesmo placement group.
   - Alem disso é possível alerta vias SNS a equipe.
 
-------
+---
 
 #### Tipos de instâncias
 
 - https://aws.amazon.com/pt/ec2/instance-types/
-![Tipos de instancias](assets/image-20210819053521220.png)
-![image-20230213065140415](assets/image-20230213065140415.png)
+  ![Tipos de instancias](assets/image-20210819053521220.png)
+  ![image-20230213065140415](assets/image-20230213065140415.png)
 
-------
+---
 
 #### Precificação
 
 - Todas são pagas por **horas** ativas.
 - **on-demand**
   - Não necessário contrato, só rodar quando necessário.
-  - Recomendado para cargas de trabalho curtas, (dura 3 meses, ou  1 mês).
+  - Recomendado para cargas de trabalho curtas, (dura 3 meses, ou 1 mês).
 - **reserved Instances**
   - Se faz um contrato de **1 a 3 anos,** se reduz o custo em ate **75%.**
   - Recomendado para **longas cargas de trabalho**, exemplo banco de dados
@@ -1102,14 +1115,14 @@ Resource police restritas para a organização
     - **PURI** - partial up-front - Adiantado parcial - redução em ate **42% .**
     - **AURI** - All up-front - Tudo adiantado - redução em ate **43%.**
 - **spot instances**
-  - Usado para aplicação **Serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar ate 90% mais baratas. a desvantagens e que ela pode para a qualquer momento, quando quiser. 
+  - Usado para aplicação **Serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar ate 90% mais baratas. a desvantagens e que ela pode para a qualquer momento, quando quiser.
   - Não são recomendadas para aplicações que precisam de disponibilidades.
   - AWS pode interromper com uma notificação de 2 minutos.
     - **spot fleets**
-      - Conjuntos de **spot instance** de diferentes tipos de maquinas e opcionalmente pode haver instâncias on-demand pra chavear (pool de tipo da maquina e em diferentes regiões), a fim de ter maior economia para executar as carga de trabalho.  São configuradas para *manter* a capacidade alvo, iniciando instâncias de substituição após as Instâncias Spot na frota serem encerradas
+      - Conjuntos de **spot instance** de diferentes tipos de maquinas e opcionalmente pode haver instâncias on-demand pra chavear (pool de tipo da maquina e em diferentes regiões), a fim de ter maior economia para executar as carga de trabalho. São configuradas para _manter_ a capacidade alvo, iniciando instâncias de substituição após as Instâncias Spot na frota serem encerradas
       - Usados para aproveitar **spot instances com baixo custo**, pois o spot **fleets** pode automaticamente selecionar o conjunto mais barato para executar sua carga de trabalho.
       - Nele se define o preço máximo a pagar pelas instâncias spot e o AWS seleciona um conjunto de instância que esteja abaixo desse preço para executar a carga de trabalho.
-      ![image-20230213210748846](assets/image-20230213210748846.png)
+        ![image-20230213210748846](assets/image-20230213210748846.png)
       - Caso as instâncias estejam caras ele encerra e passa o processamento para instâncias sob demandas.
       - soft limits
         - Tem uma limitação de 10 mil instâncias por frota (Fleet) seja ec2 ou Spot.
@@ -1118,18 +1131,18 @@ Resource police restritas para a organização
         - Menor preço - bom para carga de trabalhos curtas
         - Diversificada - Distribuída, bom para carga de trabalho que precisa esta disponível e que tenha longo tempo de execução.
         - Capacidade otimizada - bom para cargas pesadas
-- **dedicate instance** 
+- **dedicate instance**
   - Aluga se uma instância que só será sua, outro usuários não terão acesso a hardware.
 - **dedicate host**
   - Aluga-se um servidor físico, para demandas de compliance principalmente.
   - Aluga-se por ate 3 anos.
   - Mas caro tipo de instância.
-- **Salving plan** 
+- **Salving plan**
   - Modelo de economia baseado no compromisso de uma quantidade de uso medido em horas num período de 1 ou 3 anos.
   - Economia de ate 66%, é flexível e não precisa se preocupar em gerenciar o custo por instância, apenas com a quantidade de horas usados nas cargas de trabalho
   - **EC2 Instance Savings plan** - Economia de ate 72 %, seleciona os tipos de instâncias e as regiões onde ela vai operar. Pode se alterar entre os tipos de instâncias selecionadas e os SO.
-  - **Compute Savings plan** -  Economia de ate 66 %, tem se maior flexibilidade na conversão do tipo de instância e na movimentação entre regiões. Alem de poder adicionar Lambdas e Spots.
-  - **SageMaker Savings plan** -  Economia de ate 64 %, para carga de trabalhos do SageMaker.
+  - **Compute Savings plan** - Economia de ate 66 %, tem se maior flexibilidade na conversão do tipo de instância e na movimentação entre regiões. Alem de poder adicionar Lambdas e Spots.
+  - **SageMaker Savings plan** - Economia de ate 64 %, para carga de trabalhos do SageMaker.
 - **Capacity Reservation**
   - Permite reserva instâncias por um período "**curto de tempo**", sem precisar se comprometer com um plano de 1 ou 3 anos.
   - Usando por exemplo para reservar maquinas para a **black friday.**
@@ -1137,7 +1150,7 @@ Resource police restritas para a organização
 
 ---
 
-#### HPC - Alta performance computacional 
+#### HPC - Alta performance computacional
 
 - Serviços que ajudam ter alta performance na AWS:
   - **Transferência de dados**
@@ -1148,8 +1161,8 @@ Resource police restritas para a organização
     - **Instâncias EC2**
       - Com CPU otimizada ou GPU otimizada.
       - spot instances / Spot Fleets para economia + auto scaling.
-    - **EC2 Placentament Groups** - Permite usar um conjunto de maquinas  (cluster) num mesmo **rack** ou região o que diminui a latência..
-      - **EC2 Enhanced Networking  SR-IOV** (Rede aprimorada para EC2) 
+    - **EC2 Placentament Groups** - Permite usar um conjunto de maquinas (cluster) num mesmo **rack** ou região o que diminui a latência..
+      - **EC2 Enhanced Networking SR-IOV** (Rede aprimorada para EC2)
         - Interface de rede para HPC.
         - Alta banda, Alto PPS (pacotes por segundos), baixa latência.
         - Opção 1: **Elastic Network Adapter** (ENA) aumenta a capacidade para 100Gbps.
@@ -1179,7 +1192,7 @@ Resource police restritas para a organização
   - **Escabilidade** - habilidade de escalar vertical e/ou horizontal.
   - **Elasticidade** - Capacidade de escalar dinamicamente, através de alarmes ou métricas, ou reduzir as instâncias com a diminuição do volume de acesso, ou uso.
   - **Agilidade** - Velocidade de se ter infraestrutura a toque de caixa.
-![Auto Scaling group](assets/image-20210819054218858.png)
+    ![Auto Scaling group](assets/image-20210819054218858.png)
 - **Composto pelo atributos**
   - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que seram criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
@@ -1198,21 +1211,22 @@ Resource police restritas para a organização
       - É possível agendar para uma determinado período.
     - **Preditive scaling police**
       - É possível usa **marchine learning** (analise do uso anteriores) para criar uma previsão de escalabilidade.
-- **Scaling cooldowns** - tempo que deve ser esperado após ser lançada uma instância para validar se as métricas delas estão valida, ou se  é preciso escalar.
+- **Scaling cooldowns** - tempo que deve ser esperado após ser lançada uma instância para validar se as métricas delas estão valida, ou se é preciso escalar.
 
 ---
+
 **Processos executados pelo auto scaling**
 ![image-20230213205639426](assets/image-20230213205639426.png)
 
 ---
 
-#### Para a prova
+### Para a prova
 
 - Existe uma política de encerramento no **auto scaling group:**
   - 1. Encontra a AZ com maior numero de instâncias.
   - 2 . Termina a que tiver o configuração de inicialização mais antiga.
 - Ciclo de vida de uma instancia com o ASG
-![Ciclo de vida de uma instancia](assets/image-20210819054243240.png)
+  ![Ciclo de vida de uma instancia](assets/image-20210819054243240.png)
 - Diferença entre Configuração de lançamento (Launch configuration) e templates de lançamento (Launch tempalte)
   - **Launch configuration** é legado, devem ser **recriado** toda vez que se alterar algum atributo
   - **Launch tempalte** é nova e:
@@ -1228,17 +1242,17 @@ Resource police restritas para a organização
 - Você deve prover e manter a infraestrutura (instâncias EC2). Ou usa o **Fargate** que abstrai esse gerenciamento.
 - Não te tem custo, só paga as maquinas usadas (EC2, EBS ...).
 - Para se subir container, primeiro é necessário configurar uma **ECS Task**, ele descreve com será construido o container, seria algo semelhante como um arquivo **docker-compose**. E na Task que se define as políticas de acesso a recursos que a aplicação vai usar alem de rede e grupo de segurança.
-- As Task podem ser disparadas pelo **Event Brigde**, isso dispara a execução do ECS. 
+- As Task podem ser disparadas pelo **Event Brigde**, isso dispara a execução do ECS.
 - Tem integração direta como o Application Load Balancer e o Network Load balancer.
 - Conceitos
   - ![image-20230214061221428](assets/image-20230214061221428.png)
   - ![image-20230214061618805](assets/image-20230214061618805.png)
-EC2 x Fargate
-![ecs](assets/image-20210903065745303.png)
-![ecs-ec2](assets/image-20210903070040856.png)
-![ecs-fargate](assets/image-20210903070257948.png)
-![fagate_ec2](assets/image-20210903074403137.png)
-![ec2-fargate](assets/image-20210903074442934.png)
+    EC2 x Fargate
+    ![ecs](assets/image-20210903065745303.png)
+    ![ecs-ec2](assets/image-20210903070040856.png)
+    ![ecs-fargate](assets/image-20210903070257948.png)
+    ![fagate_ec2](assets/image-20210903074403137.png)
+    ![ec2-fargate](assets/image-20210903074442934.png)
 
 ---
 
@@ -1252,9 +1266,9 @@ EC2 x Fargate
 - Usa o **ECR** para armazenar as imagens.
 - Tipos dos nodes
   - **Gerenciados pela AWS**
-  - **Gerenciado pelo cliente** 
+  - **Gerenciado pelo cliente**
   - **AWS Fargate**
-- Volumes 
+- Volumes
   - Quando se cria o node se espeficica o classe de armazenamendo.
   - Usa se o **CSI (Container storage interface)**
   - Suporta:
@@ -1266,7 +1280,7 @@ EC2 x Fargate
   - Pode se usar uma imagem da Amazon customizada do Kubernets (AMI), rodando localmente.
   - Pode se conectar o **EKS do On-primeses a AWS** usando EKS **conector**.
   - Usado quando se quer diminuirá a latência, ou por demanda regularizaria. exemplo os dados governamentais do Chile deve ficar no Chile, Roda em um datacenter conectado a AWS.
-![eks](assets/image-20210903074736202.png)
+    ![eks](assets/image-20210903074736202.png)
 
 ---
 
@@ -1275,7 +1289,7 @@ EC2 x Fargate
 - AWS Container registry, pode conter repositórios públicos e privados.
 - Tem um boa integração com ECS e EKS.
 - Acessos controlados pelo IAM.
-- Permite replicação em  varias regiões e em varias contas.
+- Permite replicação em varias regiões e em varias contas.
 - Scaneia as imagem para por seguranças, podendo ser manual ao a realizar um push.
   - **Base scanning -> CVE** , caso encontre algum erro ele notifica via EventBridge.
   - Scan profundo - Usa o **Amazon Inspector** para procurar vulnerabilidade caso encontre algum erro ele notifica via EventBridge.
@@ -1291,20 +1305,20 @@ EC2 x Fargate
 - **Serveless** (não tem servidor para se preocupar).
 - Se preocupe apenas com a aplicação não com a infraestrutura.
 - Necessário monitorar bem, pois toda a infraestrutura e liberada após o uso.
-- Provisiona servidores de acordo com as chamadas. 
+- Provisiona servidores de acordo com as chamadas.
 - Altamente disponível e totalmente tolerante a falha.
 - Tempo de execução de ate **15 minutos.**
 - Cobrado de 100 em 100 milissegundos de uso.
 - Faz escalonamento horizontal e pode ter **ate 999 execução simultâneas.**
 - Triggers
-  - API Gateway
+  - API Gateway.
   - Kinesis
   - DynamoDB Data Streams
   - S3 events
   - EventBridge
   - SNS, SQS
   - Cloud Watch Logs
-   - AWS Cognito
+  - AWS Cognito
 - Limitações
   - **Execução**
     - Alocação de memoria - 128MB - 10GB.
@@ -1324,7 +1338,7 @@ EC2 x Fargate
   - É possível executar Lambdas em ponto de presenças, para auxiliar itens relacionados ao CDN , Route 53 ....
     ![lambda@edge](assets/image-20210903204606738.png)
 
-----
+---
 
 ### AWS App Runner
 
@@ -1336,7 +1350,7 @@ EC2 x Fargate
 - Tem suporte a acesso a VPC.
 - Permite uso de banco de dados, cache e mensageria.
 - Semenhante a idea do heroku.
-![image-20230214194005966](assets/image-20230214194005966.png)
+  ![image-20230214194005966](assets/image-20230214194005966.png)
 
 ---
 
@@ -1358,28 +1372,28 @@ EC2 x Fargate
     - http, https e webSocket e http/2.
     - Usa target group para agrupar as instâncias.
     - Tem suporte a **routinhg** baseado em (**listeners**) sendo:
-      - **Path**  ex:(uni.com/post & uni.com/users).
+      - **Path** ex:(uni.com/post & uni.com/users).
       - **hostmane url** (curriculo.uni.com e fotos.uni.com).
       - **query string** (uni.com?id=123&order=123).
     - Usados bastante numa arquitetura de microserviços
-  ![image-20230215065448165](assets/image-20230215065448165.png)
+      ![image-20230215065448165](assets/image-20230215065448165.png)
   - **Gateway load balance** GWLB - (v2 - 2020)
     - Opera no level 3 (rede) - protocolo IP
     - Usado para balecear carga de soluções de terceiro
     - Usado para Firewall, fazer sistema de detecção e intrusão. Ou seja, usado quando se deseja escanear o trafico.
     - Utiliza o protocolo GENEVE no porto 6081.
-    ![image-20230215071036163](assets/image-20230215071036163.png)
+      ![image-20230215071036163](assets/image-20230215071036163.png)
   - **Network load balancer** NLB -(v2 - new generation - 2017)
     - tcp, tls (secure tcp) e udp.
     - **Tem uma latência menor que o ALB ~ 100ms vs (400 ms do ALB).**
     - Tem um IP estatico por AZ, é possível usar um Elastic IP.
-    ![Network load balancer](assets/image-20210819053951068.png)
+      ![Network load balancer](assets/image-20210819053951068.png)
     - Zonal DNS Name
-      - Como cada AZ tem um  IP estático, quando acionado DNS ele retorna todos os IPs de todas as AZ relacionado ao NLB.
+      - Como cada AZ tem um IP estático, quando acionado DNS ele retorna todos os IPs de todas as AZ relacionado ao NLB.
       - Caso precise retornar apenas um é só adicionar a Região mais AZ no DNS.
         - Caso de uso, vc tem duas aplicação instaladas em 3 AZ, e elas conversam entre si.
-        - Caso a APP A chame a B em diferente regiões você vai pagar pelo trafico de transferência de região. nesse caso pode se criar uma lógica para que a aplicação  A recupere o o IP da aplicação B da região onde ela esta assim não tendo que pagar pelo trafico Cross Region.
-      ![image-20230215070245743](assets/image-20230215070245743.png)
+        - Caso a APP A chame a B em diferente regiões você vai pagar pelo trafico de transferência de região. nesse caso pode se criar uma lógica para que a aplicação A recupere o o IP da aplicação B da região onde ela esta assim não tendo que pagar pelo trafico Cross Region.
+          ![image-20230215070245743](assets/image-20230215070245743.png)
 
 #### Target groups
 
@@ -1394,6 +1408,7 @@ EC2 x Fargate
 #### Stick session
 
 ![image-20230215071913741](assets/image-20230215071913741.png)
+
 - Permite que as requisições enviada as instâncias que já atenderam aquele cliente a fim de não perder os dados de sessão.
 - Tipos cookies que podem ser usados
   - **aplication-based cookies**
@@ -1413,17 +1428,17 @@ EC2 x Fargate
 ##### Cross-Zone load balance
 
 - Essa funcionalidade distribui o acesso igualmente pela quantidade de instâncias, independente de que zona ela esta, caso não habilitada será distribuído o trafico igualmente pela zonas de disponibilidade, e cada instância pode receber quantidade de trafico diferente.
-![Cross-Zone load balance](assets/image-20210819054020911.png)
+  ![Cross-Zone load balance](assets/image-20210819054020911.png)
 - Configurações de disponibilidade
-![Configurações de disponibilidade](assets/image-20210819054054427.png)
-**Request Routing Algoritimo**
+  ![Configurações de disponibilidade](assets/image-20210819054054427.png)
+  **Request Routing Algoritimo**
 - Least Outstanding Request
   - Redireciona para estância que tiver o menor numero de requisições pendentes. Ou seja para instância menos ocupada.
   - Funciona com ALB (HTTP) e CLB (HTTP).
 - Round Robin
   - Funciona com ALB e CLB.
   - Redireciona em sequencia 1, 2, 3, e reinicia pelo 1 , 2, 3 independente da quantidade de requisições pendente.
-- Flow Hash 
+- Flow Hash
   - Seleciona o Destino baseado no protocolo, o IP e a porta de origem e destino, e a numero sequencial do TCP.
   - Cada coneção UDP/TCP e roteado para um único destino durante toda a conexão.
   - Funciona com o NLB
@@ -1435,8 +1450,8 @@ EC2 x Fargate
 - **CLB** - apenas uma aplicação e apenas um certificado.
 - **ALB** - suporta múltiplos **listeners** (entenda como app diferente) e múltiplos certificados e usa **SNI** (server name indication) para isso.
 - **NLB** - suporta múltiplos **listeners** (entenda como app diferente) e múltiplos certificados usa **SNI** para isso.
-![LB SSL Certificates](assets/image-20210819054122152.png)
-![SNI](assets/image-20210819054148720.png)
+  ![LB SSL Certificates](assets/image-20210819054122152.png)
+  ![SNI](assets/image-20210819054148720.png)
 
 ##### Auto Scaling group ALG
 
@@ -1445,7 +1460,7 @@ EC2 x Fargate
   - **Escabilidade** - habilidade de escalar vertical e/ou horizontal.
   - **Elaticidades** - Capacidade de escalar dinamicamente, através de alarmes ou métricas, ou reduzir as instâncias com a diminuição do volume de acesso, ou uso.
   - **Agilidade** - Velocidade de se ter infraestrutura a toque de caixa.
-![Auto Scaling group](assets/image-20210819054218858-1676454365145-1.png)
+    ![Auto Scaling group](assets/image-20210819054218858-1676454365145-1.png)
 - **Composto pelo atributos**
   - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que seram criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
@@ -1460,15 +1475,15 @@ EC2 x Fargate
       - É possível agendar para uma determinado período.
     - **Preditive scaling police**
       - É possível usa **marchine learning** (analise do uso anteriores) para criar uma previsão de escalabilidade.
-- **Scaling cooldowns** - tempo que deve ser esperado após ser lançada uma instância para validar se as métricas delas estão valida, ou se  é preciso escalar.
+- **Scaling cooldowns** - tempo que deve ser esperado após ser lançada uma instância para validar se as métricas delas estão valida, ou se é preciso escalar.
 
-##### Para a prova
+### Para a prova
 
 - Existe uma política de encerramento no **auto scaling group:**
   - 1. Encontra a AZ com maior numero de instâncias.
   - 2 . Termina a que tiver o configuração de inicialização mais antiga.
 - Ciclo de vida de uma instancia com o ASG
-![Ciclo de vida de uma instancia](assets/image-20210819054243240-1676454365145-2.png)
+  ![Ciclo de vida de uma instancia](assets/image-20210819054243240-1676454365145-2.png)
 - Diferença entre Configuração de lançamento (Launch configuration) e templates de lançamento (Launch tempalte)
   - **Launch configuration** é legado, devem ser **recriado** toda vez que se alterar algum atributo
   - **Launch tempalte** é nova e:
@@ -1481,12 +1496,13 @@ EC2 x Fargate
 ### Amazon API Gateway
 
 ![api-gateway](assets/image-20210903212259138.png)
+
 - Serveless, usado para criar APIs Rest.
 - Possível conectar a serviços de login para validar token ou coisa do tipo.
 - Tipos de API
   - APIs RESTful - Para servidores Http ou Lambdas.
   - APIs WEBSOCKET - Para aplicações bidirecionais com webSocket.
-    - Usado pra chats, games ou aplicações que precisa manter conexão abertas.   
+    - Usado pra chats, games ou aplicações que precisa manter conexão abertas.
   - AWS Service - Para expor APIs de serviços AWS, (post a message on SQS, ou iniciar um step function, S3)
 - Recursos:
   - Versionamento de APIs.
@@ -1532,19 +1548,30 @@ EC2 x Fargate
   - Pode se usar OAuth / SAML ... para autorizar.
     ![custom-autorization](assets/image-20210904053330911.png)
 - **Cognito user pools**
-  - Solução AWS, para cadastro de usuário, através dele é possível da a um usuário qualquer acesso a recurso da AWS. 
+  - Solução AWS, para cadastro de usuário, através dele é possível da a um usuário qualquer acesso a recurso da AWS.
   - Ajuda apenas na autenticação não na autorização.
   - Fornece um padrão de autenticação.
   - Permite usar autenticação externas (de terceiros , Google, Facebook).
-  ![cognito](assets/image-20210904053801646.png)
-  ![cognito](assets/image-20210904053624684.png)
+    ![cognito](assets/image-20210904053801646.png)
+    ![cognito](assets/image-20210904053624684.png)
 
 #### Discução de arquiteturas com o API Gateway
 
 - Subindo arquivos em um bucket S3.
   - Pode se usar o API Gateway, porém a uma limitação de tamanho de 10 MB.
   - Solução ideal seria gerar um URL assinada e devolver via API Gateway. (não há limites de tamanho de arquivos)
-  ![image-20230216061952676](assets/image-20230216061952676.png)
+    ![image-20230216061952676](assets/image-20230216061952676.png)
+
+
+#### Comparando soluções com o API Gateway
+
+- EC2 com Elastic IP
+  - Em caso de falha na instância, se cria uma nova e atacha o Elastic IP.
+  - Funcional, barato, porem não é escalável devido ao fato de se ter apenas um IP.
+    ![image-20230217061653780](assets/image-20230217061653780.png)
+- Api Gateway + AWS Service
+  ![image-20230217062549339](assets/image-20230217062549339.png)
+
 
 ---
 
@@ -1555,10 +1582,10 @@ EC2 x Fargate
 - Permite recuperar os dados em tempo real usando WebSocket or MQTT on WebSocket
 - Para Aplicativos mobile:
   - Pode se usar para armazenar dados locais e para sincronizar dados.
-![image-20230216064917196](assets/image-20230216064917196.png)
+    ![image-20230216064917196](assets/image-20230216064917196.png)
 - Pode ser usado com o Cognito para recuperar autorização (permissões) baseados em grupos de usuários.
   - Exemplo tenho um blog onde configure o que meu usuários podem fazer, em vez de colocar no código posso colocar aqui e validar a ação de acordo como grupo que o cara pertence.
-![image-20230216065240574](assets/image-20230216065240574.png)
+    ![image-20230216065240574](assets/image-20230216065240574.png)
 
 ---
 
@@ -1569,16 +1596,16 @@ EC2 x Fargate
 - Gerencia Roteamento da aplicação para regiões de acordo com alguns critérios muito usado como recuperação de desastre, pois identifica falhas e redireciona o trafico para outros lugares .
 - Dentro do serviço também é possível comprar domínios com no **registro.br** .
 - Pode se setar TTL nos Records para controlar o tempo de vida. Ele é obrigatório para todos os tipos de records exceto para o tipo Alias
-![route-53](assets/image-20210820062829949.png)
+  ![route-53](assets/image-20210820062829949.png)
 
 #### Common Records
 
-- A Record  (IPV4) -> www.google.com -> 12.34.56.78
-- AAAA Record (IPV6) ->  www.google.com -> 2001::od:b8::7337
+- A Record (IPV4) -> www.google.com -> 12.34.56.78
+- AAAA Record (IPV6) -> www.google.com -> 2001::od:b8::7337
 - CNAME -> hostname to hostname -> www.search.google.com -> www.google.com
   - É pago
   - Não funciona para registro to tipo root ex: -> www.google.com -> www.search.google.com
-- ALIAS ->  hostname to aws resource -> www.exemplo.com -> (S3, RDS, ELB, CloudFront ...)
+- ALIAS -> hostname to aws resource -> www.exemplo.com -> (S3, RDS, ELB, CloudFront ...)
   - Na AWS é grátis.
   - Checa a saúde do recurso.
   - Funciona para registo to tipo root ex: -> www.google.com -> www.search.google.com
@@ -1586,6 +1613,7 @@ EC2 x Fargate
 #### Routing police
 
 São políticas de redirecionamento que é possível configurar no **route 53.**
+
 - **Simple routing police** (política de roteamento simples).
   - A se chamar um domínio ele devolve o IP do servidor.
   - Não tem health checks.
@@ -1609,9 +1637,9 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
   - Diferencia se do anterior, pois ele é usado para países enquanto esse seria para locais dentro do pais.
   - Usa o Bias para manipular a proximidade, com ele é possível dizer o quando quer redirecionar do traffico. Como se fosse uma preferência maior.
   - ![image-20230216203132009](assets/image-20230216203132009.png)
-  - Traffic Flow 
+  - Traffic Flow
     - Simplifica a criação de record grandes e com configurações complexas.
-    - Tem um editor visual para se montar árvores de roteamento. 
+    - Tem um editor visual para se montar árvores de roteamento.
     - Suporta versionamento.
 - **Multi Value routing police** (Política de rateamento de multi valores)
   - Usado para devolver vários retorno e se um dele falhar, se terá outras para redirecionar, se a necessidade de consultar o **DNS** novamente.
@@ -1621,30 +1649,31 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
 #### Health check
 
 Pode se configurar health checks para monitora a disponibilidade e a saúde da aplicação.
+
 - São pagos $ 0.50 para endpoints AWS - $ 0.70 para outros endpoints.
 - Há custos adicionais de outras features (String matching, https, latency measurament).
 - Pode se usar http, https, tcp para se configurar como será a verificação.
 - Disponibiliza 15 diferentes hosts para checagem (em varias regiões)
 - E possível passar dados customizados (text) no retorno do health check nos primeiros 5120 bytes e com isso configurar para passar ou falhar na verificação.
-![image-20230216204214129](assets/image-20230216204214129.png)
+  ![image-20230216204214129](assets/image-20230216204214129.png)
 - Para verificar a saúde de uma maquina numa subnet privado, pode se criar métricas que são envidas para o cloud Watch e dali é possível checa-las com o heath check.
 - ![image-20230216204713686](assets/image-20230216204713686.png)
 
 #### Hosted Zones
 
--  É um container de registros para definir como rotear o tráfego para um domínio e seus subdomínios.
+- É um container de registros para definir como rotear o tráfego para um domínio e seus subdomínios.
 - Podem ser
   - **Publicos** - contém records que especificam rotas para a internet.
   - **Privados** - contém records que especificam rotas internas vista apenas nas VPCs.
     - Tem
-![image-20230216203839092](assets/image-20230216203839092.png)
-![image-20230216204051519](assets/image-20230216204051519.png)
+      ![image-20230216203839092](assets/image-20230216203839092.png)
+      ![image-20230216204051519](assets/image-20230216204051519.png)
 
 #### Exemplo de uso para soluções resilientes
 
 ![image-20230216204823838](assets/image-20230216204823838.png)
 
-#### Hybrid DNS e Resolvers 
+#### Hybrid DNS e Resolvers
 
 - Hybrid DNS
   - Permite que se use Outros DNS em conjunto com o Route 53, O Route 53 fica como root DNS resolver e ele pode delegar a resolução de nomes para os outros Servidores de DNS.
@@ -1658,24 +1687,25 @@ Pode se configurar health checks para monitora a disponibilidade e a saúde da a
     - Inbound endpoint
       - Permite que a rede envie DNS Queries para o Route 53 Resolver.
       - Permite resolver DNS da AWS e de Recursos na Zona DNS Privada configurada na VPC.
-      ![image-20230217055352111](assets/image-20230217055352111.png)
+        ![image-20230217055352111](assets/image-20230217055352111.png)
     - Outbound endpoint
       - Permite que o Route 53 envie DNS queries para os DNS resolver que não seja do Route 53. (para o servidor de DNS no On-premises).
       - Usa Regras de resolução para encaminhar as queries de DNS.
-        - pode se configurar o target 
-      ![image-20230217055436932](assets/image-20230217055436932.png)
+        - pode se configurar o target
+          ![image-20230217055436932](assets/image-20230217055436932.png)
 
 ---
 
 ### AWS Global Accelerator
 
 Serviço que melhora a disponibilidade de um serviço usando os ponto de presença, melhora a disponibilidade em cerca de 60%.
+
 - 2 Anycast IP são criado para redirecionar o trafico para os pontos de presença.
 - É usado como proxy para as aplicações do AWS.
 - Recomendado para servidores http, com conteúdo não estático.
 - Funciona com Elastic IP, ALB, NLB, EC2 Instances
 - Suporta preservação do IP do cliente, exceto para NLBs e Elastic IPs
-![image-20230217055915316](assets/image-20230217055915316.png)
+  ![image-20230217055915316](assets/image-20230217055915316.png)
 - Diferença entre **CloudFront e Global Accelerator**
   - Ambos usam a rede **Global da AWS e pontos de presença.**
   - Ambos tem integração com **AWS Shield para proteção contra DDOS.**
@@ -1684,26 +1714,16 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     - Guarda o **conteúdo estático no ponto de presença**.
   - Global Accelerator
     - Melhora o desempenho de aplicações que usam **TCP e UDP. Tipo chats, games, VoiP** ....
-    - Mais adequado para aplicativos em **tempo real e serviços que exigem comunicação bidirecional**, como jogos online e aplicativos de negócios. 
+    - Mais adequado para aplicativos em **tempo real e serviços que exigem comunicação bidirecional**, como jogos online e aplicativos de negócios.
     - Faz proxy dos pacote entre os pontos de presenças em uma ou mais regiões.
     - Bom para aplicações que usam **IP estático.**
 
----
-
-### Comparison of Solutions Architecture
-
-- EC2 com Elastic IP
-  - Em caso de falha na instância, se cria uma nova e atacha o Elastic IP.
-  - Funcional, barato, porem não é escalável devido ao fato de se ter apenas um IP.
-  ![image-20230217061653780](assets/image-20230217061653780.png)
-- Api Gateway + AWS Service
-  ![image-20230217062549339](assets/image-20230217062549339.png)
 
 ---
 
-###  AWS Outposts
+### AWS Outposts
 
-- Permite implementar o que se chama de cloud hibrida. 
+- Permite implementar o que se chama de cloud hibrida.
 - Ou seja, permite executar a AWS nos servidores on-premises.
 - A AWS disponibiliza racks de servidores para executar no datacenter da empresa.
 - Agora a empresa é responsável pela segurança física do rack disponibilizados.
@@ -1714,7 +1734,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     - Ou por questão de governança.
 - Executa
   - EC2, EBS, S3, EKS, ECS, RDS, EMR
-![image-20230218125409314](assets/image-20230218125409314.png)
+    ![image-20230218125409314](assets/image-20230218125409314.png)
 
 ---
 
@@ -1737,15 +1757,15 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - EC2, EBS, RDS, Elastic Cache , Direct Connect.
 - Imagine que local zones seria datacenter onde a AWS disponibiliza racks Outposts com parceiros para oferecer esses serviços mais proximo ao cliente.
   - Exemplo, a única Region que temos na América do Sul e em São Paulo, caso esteja no Chile teria que se conectar aqui, ou poderia habilitar Zonas Locais no Chile através de um parceiro AWS e ela se conectaria a Region de São Paulo.
-![image-20230218130317935](assets/image-20230218130317935.png)
-
+    ![image-20230218130317935](assets/image-20230218130317935.png)
 
 ---
 
 ## Storage
+
 ![storage](assets/image-20210902070844946.png)
 
-------
+---
 
 ### EBS - Elastic block storage
 
@@ -1761,16 +1781,16 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Possível encriptar, dados em repouso em transporte e snapshots.
 - Volume pode ser aumentado ou reduzido.
 - O processo de encriptação é transparente ao usuário.
-- Para se encriptar um volume já criado sem encriptação e **necessário criar um snapshot** e depois criar uma copia desse snapshot e **marcar a opção de encriptação** e depois criar um volume a partir desse novo snapshot e conecta-lo na instância. 
+- Para se encriptar um volume já criado sem encriptação e **necessário criar um snapshot** e depois criar uma copia desse snapshot e **marcar a opção de encriptação** e depois criar um volume a partir desse novo snapshot e conecta-lo na instância.
 - É possível usar o **EBS** com RAID (apenas o Raid 0 e o Raid 1) sendo:
   - RAID 0 - os dados são dividos entre os discos (melhora o desempenho).
   - RAID 1 - os dados são espelhados entre os discos (tolerante a falha).
   - Precisa ser feito dentro do SO, não há ferramentas dentro do console para isso
 - Tipos
-![Tipos ebs](assets/image-20210819054333580.png)
-![tipos-ebs](assets/image-20210819054408303.png)
-**os tipos io1 / io2 permitem conectar o mesmo em mais de uma instância, isso é usado em aplicação de alta disponibilidade, ex Cassandra ...**
-![image-20230219071352401](assets/image-20230219071352401.png)
+  ![Tipos ebs](assets/image-20210819054333580.png)
+  ![tipos-ebs](assets/image-20210819054408303.png)
+  **os tipos io1 / io2 permitem conectar o mesmo em mais de uma instância, isso é usado em aplicação de alta disponibilidade, ex Cassandra ...**
+  ![image-20230219071352401](assets/image-20230219071352401.png)
 
 ##### Exemplo de restore snapshot
 
@@ -1783,7 +1803,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Automatiza a criação, retenção e deleção de snapshot EBS e AMIs.
 - Permite agendar backups, snapshots de outras regiões, e delete dados antigos.
 - Permite usar tags para identificar os recursos ao qual se aplicará ação. (EBS e ECS).
-- Não gerência snapshots/AMI criados fora do  DLM (Data Lifecycle Manager).
+- Não gerência snapshots/AMI criados fora do DLM (Data Lifecycle Manager).
 - Não pode ser usado para gerência armazenamento de instâncias, apenas EBS e AMI.
 - Qual a diferença dele para o AWS Backup.
   - O AWS Backup permeite gerenciar o Backups de todos os serviços incluindo o EBS num unico lugar.
@@ -1793,21 +1813,22 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 ### Instance store
 
-- O Instance Store são os volumes em bloco armazenados diretamente no **host físico**, dentro do servidor físico na AWS onde está rodando sua instância EC2. 
+- O Instance Store são os volumes em bloco armazenados diretamente no **host físico**, dentro do servidor físico na AWS onde está rodando sua instância EC2.
 - Diferente do EBS, que fica fora do servidor, mas ainda assim dentro do Datacenter.
-- Não permite o aumento ou redução do 
+- Não permite o aumento ou redução do
 - Algumas instâncias EC2 podem ter discos diretamente conectado ao servidor onde são virtualizadas.
 - Armazenamento com melhor I/O.
 - Dados guardo dentro da instância, e perdido ao se parar a instância
 - Excelente para guardar cache / dados temporários.
 - Existe um recurso de hibernação que preserva os dados.
-![image-20230219071547162](assets/image-20230219071547162.png)
+  ![image-20230219071547162](assets/image-20230219071547162.png)
 
-------
+---
 
 ### EFS - Elastic file system
 
 ![image-20230219074924856](assets/image-20230219074924856.png)
+
 - NFS (network file system) que pode ser montado num EC2. (usa o protocolo NFSv4.1)
 - Diferente do EBS que só pode sem usado em apenas uma **AZ**, o **EFS** pode ser montado e AZs diferentes
 - Pague por uso.
@@ -1875,7 +1896,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - Tambem é possivel realizar um backup da Single e restorar no Multi, seria mais rapido que usando o AWS DataSyng.
 - Não é possivel reduzir o tamanha de um file system, apenas aumentar, caso precisa o remcomendado e criar um novo e usar o AWS DataSync para copiar os dados.
 
-----
+---
 
 ### Amazon S3
 
@@ -1922,7 +1943,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - **Glacier Flexible Retrieval:**
   - Aqui cada arquivo é chamado de **Archive** e são armazenados em **vaults** que é a mesma coisa que buckets.
   - Formas de recuperar os arquivos
-    - **Expedited** - (1 a 5 minutos) - custa $10 
+    - **Expedited** - (1 a 5 minutos) - custa $10
     - **Standard** - (3 a 5 horas) - custa $0.05
     - **Bulk** - (5 a 12 horas) - free
   - A duração mínima de armazenamento é de 90 dias.
@@ -1931,14 +1952,15 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     - **Standard** - (12 horas) - custa $0.10
     - **Bulk** - (48 horas) - custa $ 0.025
   - A duração minima de armazenamento é de 180 dias.
-  E possivel usar o S3 - Intelligent - Tiering , mover os dados para os outro niveis de classe do s3
-![image-20230223070219643](assets/image-20230223070219643.png)
-![image-20230223070240725](assets/image-20230223070240725.png)
-Recomendação de leitura: [Analise as classes de armazenamento do Amazon S3, do padrão ao Glacier](https://searchaws.techtarget.com/tip/Analyze-Amazon-S3-storage-classes-from-Standard-to-Glacier)
+    E possivel usar o S3 - Intelligent - Tiering , mover os dados para os outro niveis de classe do s3
+    ![image-20230223070219643](assets/image-20230223070219643.png)
+    ![image-20230223070240725](assets/image-20230223070240725.png)
+    Recomendação de leitura: [Analise as classes de armazenamento do Amazon S3, do padrão ao Glacier](https://searchaws.techtarget.com/tip/Analyze-Amazon-S3-storage-classes-from-Standard-to-Glacier)
 
 #### S3 - Encryption
 
 ![Encryption](assets/image-20210819054838607-1676804591268-1.png)
+
 - É possivel criar uma **bucket police** para validar se um objeto foi **encriptadado**.
 - Caso o **bucket** tenha uma encriptação habilitado por default, e se **criptografe** o arquivo durante o upload, esse arquivo não será encriptado de novo pelo encriptação default.
 
@@ -1952,14 +1974,14 @@ Recomendação de leitura: [Analise as classes de armazenamento do Amazon S3, do
 - Pode ser feito usando contas diferentes.
 - Não replica regras do lifecycle manager.
 - Há dois tipos
-  - **SRR** - Same region replication 
+  - **SRR** - Same region replication
     - Usado para agrupamento de logs, replicação de dados entre ambientes (dev e hml).
   - **CRR** - Cross region replication
     - Usado para compliance, baixar a latência de acesso, replicação em diferentes contas.
   - **S3 RTC** - Replication Time Control
     - Garante que a maioria dos objetos do S3 seja replicado em segundo e que 99,99% seja replicado em no maximo 15 minutos.
     - Usado para complienve e Disatre Recovery.
-![Cross region replication](assets/image-20210819054942170.png)
+      ![Cross region replication](assets/image-20210819054942170.png)
 - Após habilitado só ira replicar novos objetos, **os antigos não serão replicados.**
 - Para deletar, se **deleta da origem** e é replicado a delação, mais isso é opcional, se não for **habilitado não será replicado o marcador de delete para o outro bucket.**
 
@@ -1970,6 +1992,7 @@ Recomendação de leitura: [Analise as classes de armazenamento do Amazon S3, do
 #### S3 - lifecycle management
 
 ![lifecycle management](assets/image-20210819055054870.png)
+
 - **Ações de transição** - Permite definir quando o objeto sera movido
 - **Ações de expiração** - Permite definir tempo de expiração dos objetos e regras para deletar
 - Também é possível definir regras por **prefixos** ou **tag** , para, por exemplo, mover apenas objetos de uma pasta X.
@@ -1981,16 +2004,19 @@ Recomendação de leitura: [Analise as classes de armazenamento do Amazon S3, do
 #### S3 - Security
 
 1. Forma de acesso ao bucket e aos objetos contido nele.
+
 - **Baseada em usuários** (user based) - diz-se que para ter acesso processar ter permissão via IAM Console
 - **Baseada em recurso** (Resource based)
-  - **Bucket Polices** 
+  - **Bucket Polices**
     - Regras de acesso ao bucket, permite outros recurso e outras contas a ter acesso.
     - Escrita em json.
   - **Object Access Control List (ACL)** - Define a lista de acesso de cada objeto armazenado (nível mais baixo).
   - **Bubcket Access Control List (ACL)** - Define a lista de acesso de cada **bucket** (menos comum de ser usado);
-De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police para ter acesso, senão tudo será negado.
-![AWS IAM Security Part 1: S3 Access Control Tools](https://www.msp360.com/resources/wp-content/uploads/2018/09/AWS-S3-access-control-tools.png)
+    De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police para ter acesso, senão tudo será negado.
+    ![AWS IAM Security Part 1: S3 Access Control Tools](https://www.msp360.com/resources/wp-content/uploads/2018/09/AWS-S3-access-control-tools.png)
+
 2. Para segurança e auditoria o **S3** disponibiliza:
+
 - S3 Access Logs, que pode ser armazenado em outro S3.
 - API que pode loggar essa informações no AWS CloudTrail.
 - Também é possível implementar o MFA para deletar de objetos específicos.
@@ -2006,23 +2032,22 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 - Permite usar SQL para melhorar a recuperação de dados por meio de filtros
 - É possível realizar filtros por linhas e colunas (consultas simples de SQL)
 - Usa menos banda de rede pois as queries seram executado do lado do S3 e só retornará o resultado.
-![select-s3](assets/image-20210901073640794.png)
+  ![select-s3](assets/image-20210901073640794.png)
 
 #### S3 - Storage Class Analysis
 
 - Analise as classes de armazenamento e mostra o uso.
-![image-20230219083635525](assets/image-20230219083635525.png)
+  ![image-20230219083635525](assets/image-20230219083635525.png)
 
 #### S3 - Storage Lens
 
 - Usado para analisar e entender e otimizar o uso do S3 na orgranização.
 - Mostra no dashboard dados de multipas regiões e multipas contas.
-![image-20230219083841776](assets/image-20230219083841776.png)
+  ![image-20230219083841776](assets/image-20230219083841776.png)
 - Permite configurar métrica customizadas
-![image-20230219084109555](assets/image-20230219084109555.png)
+  ![image-20230219084109555](assets/image-20230219084109555.png)
 
 #### S3 - Eventos
-
 
 ##### Access logs
 
@@ -2053,9 +2078,10 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 #### S3 - Security
 
 1. Forma de acesso ao bucket e aos objetos contido nele.
+
 - **Baseada em usuários** (user based) - diz-se que para ter acesso precisa ter permissão via IAM Console, ou seja toda chamada de API é validada junto ao IAM.
 - **Baseada em recurso** (Resource based)
-  - **Bucket Polices** 
+  - **Bucket Polices**
     - Regras de acesso ao bucket, permite outros recurso e outras contas a ter acesso.
     - Escrita em json.
     - Pode ser usada para dar acesso publico ao bucket.
@@ -2070,9 +2096,11 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
       - **MFA** - Permite usar para exclusão de dados
   - **Object Access Control List (ACL)** - Define a lista de acesso de cada objeto armazenado (nível mais baixo).
   - **Bubcket Access Control List (ACL)** - Define a lista de acesso de cada **bucket** (menos comum de ser usado);
-De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police para ter acesso, senão tudo será negado.
-![AWS IAM Security Part 1: S3 Access Control Tools](assets/AWS-S3-access-control-tools.png)
+    De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police para ter acesso, senão tudo será negado.
+    ![AWS IAM Security Part 1: S3 Access Control Tools](assets/AWS-S3-access-control-tools.png)
+
 2. Para segurança e auditoria o **S3** disponibiliza:
+
 - S3 Access Logs, que pode ser armazenado em outro S3.
 - API que pode loggar essa informações no AWS CloudTrail.
 - Também é possível implementar o MFA para deletar de objetos específicos.
@@ -2089,14 +2117,14 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
   - Para conseguir realizar uploads no bucket, precisa ter acesso a permissão (**kms:GenerateDataKey**) caso contrario não vai conseguir.
 - SSE-C - Criptografa os objetos do S3 usando a chave gerenciada pelo usuário, quando se usa por exemplo o Cloud HSM
 - Criptografia Client-Side - Quando o usuário criptografa os dados antes de enviar ao S#.
-![Encryption](assets/image-20210819054838607.png)
+  ![Encryption](assets/image-20210819054838607.png)
 - É possível criar uma bucket police para validar se um objeto foi criptografado com a condição **aws:secureTransport.**
 - Caso o bucket tenha uma encriptação habilitado por default, e se criptografe o arquivo durante o upload, esse arquivo não será encriptado de novo pelo encriptação default.
 - Criptografia em transito (SSL / TLS)
   - S3 expõe os endpoints:
     - http - sem criptografia. - Não recomendado
     - https - com criptografia em vôo.
-      - Obrigatório quando se usa  criptografia SSE-C.
+      - Obrigatório quando se usa criptografia SSE-C.
 
 ---
 
@@ -2108,7 +2136,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
   - Para Upload (complidado, use SDK)
 - Tem um tempo de expiração padrão de 3600 segundos, mas e possível alterar.
 - Permite gerar url assinadas tanto para get (download) quanto post (upload).
-![Presigned urls](assets/image-20210819055145289.png)
+  ![Presigned urls](assets/image-20210819055145289.png)
 
 ---
 
@@ -2131,7 +2159,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 
 - Permite criar uma acesso sem passar pela internet para buckets publico ou cross account.
 - Isso para instâncias que não tem acesso a internet.
-![image-20230207061400269](assets/image-20230207061400269.png)
+  ![image-20230207061400269](assets/image-20230207061400269.png)
 
 ---
 
@@ -2140,7 +2168,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 - **Vault Lock** -
   - Adota o **WORM (Write Once Read Many)**
   - Permite configurar para que arquivos nunca seja delatados ou alterados, usado em compliance.
-- **S3 Object Lock** 
+- **S3 Object Lock**
   - Semelhante ao anterior, mas permite configurar a retenção do objeto, por exemplo o arquivo não pode ser modificado por 30 dias, o a nota fiscal não pode ser apagada por 5 anos.
   - Adota o **WORM (Write Once Read Many)**
 
@@ -2152,7 +2180,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 - Permite restringir o acesso via VPC e configurar o acesso ao bucket via tags o nomes de buckets.
 - o S3 gera um novo pseudônimo de ponto de acesso. (DNS Name).
 - Na pratica, em vez de criar uma police com varias regras para cada usuário, cria se um access point onde quem tiver acesso acessa aquele S3.
-![image-20230208035923878](assets/image-20230208035923878.png)
+  ![image-20230208035923878](assets/image-20230208035923878.png)
 
 ---
 
@@ -2161,7 +2189,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 - Permite criar um access point global, que redireciona o trafico de acesso para o bucket na região mais proxima.
 - A ideia e se ter buckets replicados em cada região e através de um Access Point acessa-lo, assim diminuindo a latência.
 - Usado em cenários de faillover, (ativo-ativo ou ativo-passivo).
-![image-20230208040542497](assets/image-20230208040542497.png)
+  ![image-20230208040542497](assets/image-20230208040542497.png)
 
 ---
 
@@ -2172,7 +2200,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
   - Converter de xml para json.
   - Ocultar informações pessoais para ambientes não produtivos.
   - Adicionar marca d'agua em fotos e redimensionar o tamanho.
-![image-20230208041324542](assets/image-20230208041324542.png)
+    ![image-20230208041324542](assets/image-20230208041324542.png)
 
 ---
 
@@ -2185,6 +2213,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 ### AWS DataSync
 
 ![dataSync](assets/image-20210909071549775.png)
+
 - Usado para mover grades quantidade de dados do on-primises para AWS. e de AWS para AWS.
 - Permite sincronizar dados com S3 , FSx, EFS. A cada hora / dia/ semana (ou seja agendado.)
 - Usa os protocores **SMS** , **NFS** e outros para mover os dados do **NAS** (network attached storage) para AWS.
@@ -2195,16 +2224,16 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 ### AWS Transfer Family
 
 ![image-20230219094730037](assets/image-20230219094730037.png)
+
 - Usado pra transferir dados via FTP, FTPS, SFTP.
 - Pode se usar um DNS para o serviço, pois em endpoint public, o ip pode mudar.
 - ![image-20230219095015298](assets/image-20230219095015298.png)
 
 ---
 
-###  Storage Services Price Comparison
+### Storage Services Price Comparison
 
 ![image-20230219095338480](assets/image-20230219095338480.png)
-
 
 ---
 
@@ -2226,7 +2255,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 - **CloudFront Signed cookies** - são comumente usados para distribuir vários conteúdo privados com uma única URL.
 - Diferença entre CloudFront Signed URL e S3 Signed URL
   - ![image-20230219110601605](assets/image-20230219110601605.png)
-- É possível usar múltiplas origens no CDN,  baseando em padrão da URL.
+- É possível usar múltiplas origens no CDN, baseando em padrão da URL.
   ![multi-origin](assets/image-20210901201915548.png)
 - uso:
   - **S3**
@@ -2235,7 +2264,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
     - Protege com ataque de negação de serviço.
     - Pode se usar o **Origin Access Identity (OAI)** para que apenas CDN acesse o bucket e não redirecione para o bucket. Nesse caso o **bucket** pode continuar privado e acessando pelo CDN vai aparecer os arquivos, pois eles são acessado por um "usuário cdn" liberado.
       - A evolução do OAI e o OAC (Origins Access control)
-      ![OAI](https://d2908q01vomqb2.cloudfront.net/5b384ce32d8cdef02bc3a139d4cac0a22bb029e8/2018/06/27/4-v-2.png)
+        ![OAI](https://d2908q01vomqb2.cloudfront.net/5b384ce32d8cdef02bc3a139d4cac0a22bb029e8/2018/06/27/4-v-2.png)
   - **Origem customizada**
     - Como aplicação customizada / site estático
     - Servidor http num EC2
@@ -2264,6 +2293,7 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
 ### Edge Function
 
 ![What is Cloudfront? | When to use CDN in AWS? - YouTube](https://i.ytimg.com/vi/namCH3nzU8k/maxresdefault.jpg)
+
 - É possível executar Lambdas em ponto de presenças, para auxiliar itens relacionados ao CDN , Route 53 ....
 - Usado para:
   - Manipular as requisições.
@@ -2272,13 +2302,13 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
   - Para gerar html direto no ponto de presença.
   - Teste A/B.
 - Pode ser de tanto Lambdas@Edge e CloudFront Function
-![image-20230219113018202](assets/image-20230219113018202.png)
-![Introducing CloudFront Functions – Run Your Code at the Edge with Low  Latency at Any Scale | AWS News Blog](https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2021/04/08/cloudfront-functions-only-lambda-egde.png)
-![image-20230219111932005](assets/image-20230219111932005.png)
+  ![image-20230219113018202](assets/image-20230219113018202.png)
+  ![Introducing CloudFront Functions – Run Your Code at the Edge with Low  Latency at Any Scale | AWS News Blog](https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2021/04/08/cloudfront-functions-only-lambda-egde.png)
+  ![image-20230219111932005](assets/image-20230219111932005.png)
 - CloudFront Function
   - Leves escritas em javascript, para CDN de alta escalabilidade e sensível a latência.
   - Roda no pronto de presença, tem o processamento isolado
-  - Usado para **mudar dados de request e response.** 
+  - Usado para **mudar dados de request e response.**
   - **Não recomendado para chamar funcionalidade externas.**
   - Recomendado para pequenas alterações no request e response.
   - **Não tem acesso ao request body.**
@@ -2290,15 +2320,15 @@ De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police pa
   - Usado :
     - **Quando se tem um tempo maior de execução.**
     - Para chamar serviços **externos e ter acesso a rede.**
-Podem ser usado em conjunto
-![image-20230219112800163](assets/image-20230219112800163.png)
-Ou separados
-![image-20230219112844062](assets/image-20230219112844062.png)
-Usos:
-![image-20230219113236439](assets/image-20230219113236439.png)
-![image-20230219113438721](assets/image-20230219113438721.png)
+      Podem ser usado em conjunto
+      ![image-20230219112800163](assets/image-20230219112800163.png)
+      Ou separados
+      ![image-20230219112844062](assets/image-20230219112844062.png)
+      Usos:
+      ![image-20230219113236439](assets/image-20230219113236439.png)
+      ![image-20230219113438721](assets/image-20230219113438721.png)
 - Para reduzir latência da primeira requisição.
-![image-20230219113750792](assets/image-20230219113750792.png)
+  ![image-20230219113750792](assets/image-20230219113750792.png)
 
 ---
 
@@ -2309,8 +2339,8 @@ Usos:
 - Caso de uso:
   - Pode ser usado como cache do banco de dado, para aliviar o acesso ao RDS.
   - Pode ser usado para guarda dados de sessão do usuário, permitindo assim criar aplicações sem estado (aplication **stateless**)
-- **well architected** 
-![elastic-cache-well-arch](assets/image-20210905113428849.png)
+- **well architected**
+  ![elastic-cache-well-arch](assets/image-20210905113428849.png)
 
 #### Redis
 
@@ -2320,7 +2350,7 @@ Usos:
 - Permite encriptar os dados em:
   - Repouso com KMS.
   - Em transito com Redis AUTH.
-![redis](assets/image-20210820053524603.png)
+    ![redis](assets/image-20210820053524603.png)
 
 #### MenCached
 
@@ -2328,13 +2358,13 @@ Usos:
 - Não tem alta disponibilidade (replicação).
 - **Não persiste dados e não tem backups.**
 - Usa arquitetura de **multi-thread.**
-![mancached](assets/image-20210820053825076.png)
+  ![mancached](assets/image-20210820053825076.png)
 
 #### Comparação
 
 ![comparação](assets/image-20210820054422264.png)
 
-#### Para Prova
+### Para Prova
 
 - Caches no **ElastiCach**:
   - **Não suportam autenticação com IAM.**
@@ -2344,21 +2374,20 @@ Usos:
     - Usa se o Redis Auth, onde se cria uma token de acesso quando se cria o cluster.
     - Isso e algo a mais, pois a segurança mesmo deve ser feita usando **Security Groups.**
     - Permite usar **SSL** para os dados em transito.
-    ![redis-access](assets/image-20210820055640021.png)
+      ![redis-access](assets/image-20210820055640021.png)
   - **MemCached**
-    - Suporta autenticação baseada em  SASL.
+    - Suporta autenticação baseada em SASL.
     - Lazy load feature
-  ![lazy-load](assets/image-20210820055934511.png)
+      ![lazy-load](assets/image-20210820055934511.png)
 
 ---
 
-###  Handling Extreme Rates
+### Lidando com Taxas Extremas
 
 - limites dos serviços.
-![image-20230219115007181](assets/image-20230219115007181.png)
+  ![image-20230219115007181](assets/image-20230219115007181.png)
 
-
-----
+---
 
 ## Databases
 
@@ -2388,7 +2417,7 @@ Usos:
     vezes mais rápido, pois não valida se a informação é a mais recente.
   - **forte (strong)** -> valida se a informação é mais recente e para isso antes de
     retorna-la, valida em todas as replicas.
-- Quando criado pode se escolher entre provisionado e on-demand (paga por requisição feita) 
+- Quando criado pode se escolher entre provisionado e on-demand (paga por requisição feita)
   - Caso provisionado é preciso definir a:
     - Unidade de capacidade de leitura (**RCU** - Read Capacity Units), sendo cobrado ($0.00013) por RCU.
       - 1 RCU - 1 leitura consistente (**strong**) lendo ate 4KB por segundo.
@@ -2398,10 +2427,10 @@ Usos:
   - Há duas classes de tabelas, **Standard e Infrequent Access .**
 - Tipos de chaves - por ser um banco nosql a unica coisa que precisa ser definida na criação da tabela é a chave primaria e ela pode ser de dois tipos:
   - Unica - PK unica do tipo Hash - Unica e não se repete na tabela
-  - Composta - PK (Hash) + SK (Range)  - A PK pode se repetir mas em conjunto com a SK não se repete.
+  - Composta - PK (Hash) + SK (Range) - A PK pode se repetir mas em conjunto com a SK não se repete.
 - Indexes - Há dois tipos
   - LSI - Local Segundary Index - Se mantem a PK e se cria uma nova SK. (criado em tempo de criação)
-  -  GSI - Global Segundary Index - Se cria uma nova PK, podendo ser única ou composta pelas SK. (É criada após a criação da tabela)
+  - GSI - Global Segundary Index - Se cria uma nova PK, podendo ser única ou composta pelas SK. (É criada após a criação da tabela)
 - Soluções com o DynamoDB
   - Indexador de objetos
     ![image-20230220105121790](assets/image-20230220105121790.png)
@@ -2422,7 +2451,7 @@ Usos:
   - O kibana chama se **OpenSearch Dashboards.**
 - Solução de arquitetura com OpenSearch.
   - Buscador usando DynamoDB
-  ![image-20230220110750178](assets/image-20230220110750178.png)
+    ![image-20230220110750178](assets/image-20230220110750178.png)
 
 ---
 
@@ -2430,6 +2459,7 @@ Usos:
 
 ![image-20230220111311099](assets/image-20230220111311099.png)
 Serviço de banco de dados relacional da AWS.
+
 - Escala automaticamente em minutos.
 - Serviço totalmente gerenciado pela AWS.
   - Provisiona SO, faz os bkps e restores, monitora desempenho, faz manutenção.
@@ -2437,7 +2467,7 @@ Serviço de banco de dados relacional da AWS.
   - Não temos acesso ao **SSH** da maquina onde esta o banco.
 - Permite criptografia.
 - Segurança
-![image-20230220111829023](assets/image-20230220111829023.png)
+  ![image-20230220111829023](assets/image-20230220111829023.png)
 - Replica em mais de uma AZ, para segurança e recuperação de desastres (quando habilitado é gerado um DNS name e o chateamento em caso de falha é automático.).
 - Executado em uma VPC, se for acessar via Lambda lembre-se que deve estar na mesma VPC.
 - Permite replicas de leitura (**read replicas**) para melhorar a performance. Pode se criar replicas em outras regiões para diminuir a latência. Para se distribuir o acesso de leitura entre essas replicas usa-se o Route 53,onde pode se configurar uma política de peso para encaminhamento (Weighted Record Set)
@@ -2454,7 +2484,7 @@ Serviço de banco de dados relacional da AWS.
 - RDS para ORACLE
   ![image-20230220112048190](assets/image-20230220112048190.png)
 - **Pilares da well architecture**
-![well-arch](assets/image-20210905112316072.png)
+  ![well-arch](assets/image-20210905112316072.png)
 
 ---
 
@@ -2463,7 +2493,7 @@ Serviço de banco de dados relacional da AWS.
 - DB proprietário da AWS.
 - 5 vezes mais performatico que o **mysql.**
 - 3 vezes mais performatico que o **postgres**.
-- Serviço de escopo regional, porém é possível usar em multi regiões podendo criar uma instalação o global, mas o que  será uma **master** numa região e replicas de leituras nas outras.
+- Serviço de escopo regional, porém é possível usar em multi regiões podendo criar uma instalação o global, mas o que será uma **master** numa região e replicas de leituras nas outras.
 - **Faz replicação (6 copias) em 3 AZ.**
 - **Pode se adicionar ate 15 replica de leituras, para melhorar o uso.**
 - Tem a opção serveless, não se preocupando com gerenciamento.
@@ -2495,7 +2525,7 @@ Serviço de banco de dados relacional da AWS.
 - Bom para carga de trabalho que não são muito frequente.
 - Não e necessário planejar, pois ele auto escala para atender a demanda.
 - Pago por segundo de uso.
-![image-20230220114609406](assets/image-20230220114609406.png)
+  ![image-20230220114609406](assets/image-20230220114609406.png)
 
 ###### Multi Master
 
@@ -2513,11 +2543,11 @@ Serviço de banco de dados relacional da AWS.
 
 ###### Marchine Learning
 
-- Aurora permite usar **marchine learning** nos dados através de interação com os serviços **Amazon SageMaker** e  **Amazon comprehand**.
+- Aurora permite usar **marchine learning** nos dados através de interação com os serviços **Amazon SageMaker** e **Amazon comprehand**.
 - Não há necessidade de ter experiência em **marchine learning** para usar essa funcionalidade.
 - Caso de uso:
   - Deteção de fraude, propaganda localizada, recomendação de produtos.
-  ![aurora-ml](assets/image-20210819091225067.png)
+    ![aurora-ml](assets/image-20210819091225067.png)
 
 #### Backups
 
@@ -2531,9 +2561,10 @@ Serviço de banco de dados relacional da AWS.
 
 #### Storage auto scale
 
-Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcionalidade ele aumenta o tamanho da banco ao se aproximar de limite de uso do espaço.
-- Ajuda a aumentar o armazenamento  dinamicamente. Quando detetado que esta próximo do limite.
-- Necessário setar um *threshold* de limite máximo de alocação de armazenamento.
+Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionalidade ele aumenta o tamanho da banco ao se aproximar de limite de uso do espaço.
+
+- Ajuda a aumentar o armazenamento dinamicamente. Quando detetado que esta próximo do limite.
+- Necessário setar um _threshold_ de limite máximo de alocação de armazenamento.
 - Automaticamente modifica o armazenamento se:
   - Tiver menos que **10%** de armazenamento alocado.
 
@@ -2544,7 +2575,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - Na mesma **AZ** onde esta o banco..
   - Em outra **AZ**.
   - Em outra **Região**.
-- Após criado,  é realizado replicação dos dados de forma assíncrona **( por isso a consistência eventual)** 
+- Após criado, é realizado replicação dos dados de forma assíncrona **( por isso a consistência eventual)**
 
 ##### Caso de uso
 
@@ -2556,7 +2587,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Custo de rede (replicação).
   - Não há se a replica estiver na mesma região.
   - Caso seja em regiões diferentes há um custo adicional de transferência
-  ![price](assets/image-20210819064819009.png)
+    ![price](assets/image-20210819064819009.png)
 
 #### Multi AZ (disastre recover)
 
@@ -2582,34 +2613,35 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Para os bancos postgres, aurora e mysql, ha a opção de **IAM Autetication** que gera um token para se acessar o banco.
   - Centraliza os usuários, controla acesso via roles.
   - Todo o trafico seria feito usando SSL.
-  ![iam-autatication-rds](assets/image-20210819081821387.png)
+    ![iam-autatication-rds](assets/image-20210819081821387.png)
 
-
-------
+---
 
 ## Service Communication
 
 ### AWS Step Functions
 
 ![step-function](assets/image-20210911102112816.png)
+
 - Permite criar uma **workflow** para orquestrar **Lambdas functions**.
 - O Fluxo (flow) é representado o com **maquina de estado Json.**
 - Pode configurar para executar lambda sequencialmente, paralelas, com condições, e timeouts ..
 - O workflow pode ser executado por no máximo 1 ano, após isso é necessário aprovar por mais 1 ano.
 - Pode se integrar com:
-![image-20230220120258941](assets/image-20230220120258941.png)
+  ![image-20230220120258941](assets/image-20230220120258941.png)
 - Pode ser acionado via:
-![image-20230220120340225](assets/image-20230220120340225.png)
+  ![image-20230220120340225](assets/image-20230220120340225.png)
 - Tipos
-![image-20230220120628216](assets/image-20230220120628216.png)
+  ![image-20230220120628216](assets/image-20230220120628216.png)
 - Exemplo de arquitetura
-![image-20230220121021456](assets/image-20230220121021456.png)
+  ![image-20230220121021456](assets/image-20230220121021456.png)
 
-----
+---
 
 ### Amazon SQS
 
 ![SQS](assets/5e3f44ce52788a4fb8b8432e4441bf3f-SQS-diagram.svg)
+
 - Amazon Simple Queue Service.
 - Tem escopo regional. Gerenciado pela AWS.
 - Produtor -> **envia** > fila < **recupera** <- consumidor.
@@ -2619,16 +2651,16 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Não há limites de quantidade de mensagens na fila.
 - O consumidor deve deletar a mensagem, pois não há um delete após a leitura.
 - Mensagem de ate 254Kb de tamanho, é possível usar o S3 para guardar mensagem maiores.
-- Possível usar métrica da **SQS** para dispara o **Auto Scaling Group**  via CloudWatch metrics (**approximateNumerofMensages**).
+- Possível usar métrica da **SQS** para dispara o **Auto Scaling Group** via CloudWatch metrics (**approximateNumerofMensages**).
 - **Política de acesso**.
   - Permite definir uma politica de quem pode enviar mensagens e consumir da fila.
 - Pode ser consumida por um lambda com as mensagens em Batch.
 - **Encriptação**
   - Em transito vem habilitado por padrão (HTTPS).
-  - A do lado do servidor, vem desabilitada, e caso habilite pode selecionar um CMK (*Chave mestra do cliente*)..
+  - A do lado do servidor, vem desabilitada, e caso habilite pode selecionar um CMK (_Chave mestra do cliente_)..
 - **Message visibility timeout**
   - Quando uma mensagem é recuperado por um consumidor, ela fica invisível para os outros, esse tempo que invisibilidade é definido por esse campo.
-  - Caso seja necessário é possível mudar essa visibilidade via API do SDK. 
+  - Caso seja necessário é possível mudar essa visibilidade via API do SDK.
 - **Delay Queues** - Permite definir uma atraso na **disponibilização** da mensagem para **leitura**.
 - **Dead letter queue**
   - Fila onde pode ser enviada mensagens não processada, ou processadas com erro por varias vezes. Exemplo a mensagem foi processada 5 vezes sem sucesso, mova ela para **DLQ** para debbug futuro.
@@ -2640,7 +2672,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 #### SQS x SNS x Kinesis
 
 - Apesar se serem serviços de mensageira, há diferencia sobre o funcionamento deles.
-![SQS x SNS x Kinesis](assets/image-20210903062441530.png)
+  ![SQS x SNS x Kinesis](assets/image-20210903062441530.png)
 
 ---
 
@@ -2652,7 +2684,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - **Pode ser usado numa configuração de Multi-AZ para failover.**
 - Usado para migra soluções criadas nessa plataforma
 
-----
+---
 
 ### Amazon SNS
 
@@ -2662,7 +2694,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - O tópico da **push** na mensagem para os assinantes.
 - Usado quando se precisa notificar varios sistemas.
 - **Cada tópico pode ter mais 12 milhões de assinantes.**
-- **Limite de 100000 tópicos.  (soft Limit)**
+- **Limite de 100000 tópicos. (soft Limit)**
 - Não retém mensagens, após notificar o assinante é descartada.
 - **Assinantes (http, email, lambda, mobile, kinesis data firehose).**
 - Caso garantir a ordem de entrega use a SQS FIFO.
@@ -2672,24 +2704,23 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - Permite definir uma política de quem pode enviar mensagens para o tópico.
 - **Encriptação**
   - Em transito vem habilitado por padrão (HTTPS).
-  - A do lado do servidor, vem desabilitada, e caso habilite pode selecionar um CMK (*Chave mestra do cliente*).
+  - A do lado do servidor, vem desabilitada, e caso habilite pode selecionar um CMK (_Chave mestra do cliente_).
 - **SNS + SQS - Fan Out pattern**
-  - A ideia é usar um tópico SNS na frente de **N** fila para garantir que aquela mensagem possa se processado por **N** sistema, seja  para evitar perda de dados ou por causas de serviços que só permitem notificar um único tópico (ex: **S3 events**).
+  - A ideia é usar um tópico SNS na frente de **N** fila para garantir que aquela mensagem possa se processado por **N** sistema, seja para evitar perda de dados ou por causas de serviços que só permitem notificar um único tópico (ex: **S3 events**).
   - Pode usar em varias regiões.
-  ![fan out](assets/image-20210902211203812-1676968809224-3.png)
+    ![fan out](assets/image-20210902211203812-1676968809224-3.png)
   - **Message Filtering** - permite filtrar as mensagem e notificar os assinantes de acordo com os filtros.
     - Uma json policy para filtragem.
-  ![image-20230221054138361](assets/image-20230221054138361.png)
+      ![image-20230221054138361](assets/image-20230221054138361.png)
 - Tem integração com o Kinessis data firehose
-![image-20230221055222919](assets/image-20230221055222919.png)
+  ![image-20230221055222919](assets/image-20230221055222919.png)
 - **Retry**
   - Caso o subscrito do topico esteja fora há um processo de retry definido via policy.
   - Caso não seja um serviço AWS, tem que se configurar uma política de retry.
     ![image-20230221060719941](assets/image-20230221060719941.png)
   - Em ultimo caso pode se uma uma DLQ.
     - E adicionado junto a subscrição
-  ![image-20230221061229092](assets/image-20230221061229092.png)
-
+      ![image-20230221061229092](assets/image-20230221061229092.png)
 
 ---
 
@@ -2698,14 +2729,15 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 ### AWS Kinesis
 
 ![Amazon Kinesis ](assets/product-page-diagram_Amazon-Kinesis_Evolve-from-batch-to-real-time-Analytics.d7ed76be304a30be5720fd159469f157e7c09ede.png)
-- Facilita  coletar e processar e analisar fluxos (**steams**)  de dados em tempo real.
+
+- Facilita coletar e processar e analisar fluxos (**steams**) de dados em tempo real.
 - Opção ao **kafka** da AWS. Ou seja serviço de stream de dados em tempo real.
 - Bom para Logs, metricas e IOT. Bom para projetos de tempo real com bigdata (uso com SPARK, NiFi)
 - **Dados são sincronizados em 3 AZ.**
 - Tem um produtor > enviar um **record** > **kinesis data stream** > repassa o **record** > ao consumidores.
 - O ordenação dos dados pode ser feita passando a mesma chave de partição, pois assim os dados serão enviado para o mesmo **shard**.
   ![chave-partição](assets/image-20210903061639616.png)
-- Tipo de aplicação 
+- Tipo de aplicação
   - **Kinesis Data streams** - Captura, processa e armazena fluxos de dados.
   - **Kinesis Data Firehose** - Carrega dados para armazenamentos no AWS.
   - **Kiness Data Analytics** - Analisa fluxos de dados com SQL e Apache Flink.
@@ -2713,7 +2745,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 
 #### Kinesis Data streams
 
-- Captura, processa e armazena fluxos de dados. 
+- Captura, processa e armazena fluxos de dados.
 - Usado para ingestão de grande quantidade de dados com baixa latência.
   ![data-streams](assets/image-20210903054120413.png)
 - É cobrado por **shard** provisionados.
@@ -2721,10 +2753,10 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Tem um período de retenção de 1 (padrão) a **365** dia.
 - Multipos consumers pode ler do mesmo **Shard**.
 - Os dados não podem ser deletados (são imutáveis).
-- **Consumers** 
-  -  Kinesis client library (KCL, usado para leitura em paralelo, checkpoint e leitura coordenada) 
-  -  AWS SDK. Lambda
-- **Producer** 
+- **Consumers**
+  - Kinesis client library (KCL, usado para leitura em paralelo, checkpoint e leitura coordenada)
+  - AWS SDK. Lambda
+- **Producer**
   - Lambda, Kinesis data firehose, kinesis data analytics.
   - **AWS SDK , Kinesis Producer Libary (KPL - permite usar batch, compressão, retry)**
   - Kinesis Agent - Usado para monitorar logs, e enviá-los ao Kinesis Data Streams ou Kinesis Firehose.
@@ -2741,7 +2773,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 #### Kinesis Data Firehose
 
 - Carrega dados para armazenamentos no AWS (Como S3, ReadShift, OpenSearch e Splunk).
-![data-firehose](assets/image-20210903055128503.png)
+  ![data-firehose](assets/image-20210903055128503.png)
 - Serviço totalmente gerenciado pela AWS (Auto Scale, Serveless).
 - Pague apenas pelos dados processados.
 - Serviço próximo do **tempo real.**
@@ -2752,9 +2784,9 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
     - Ele automaticamente aumenta o tamanho do buffer ou o tempo de acordo com a demanda.
   - **Caso precise de algo em tempo real use o Lambda para realizar a operação.**
 - Exemplo do processo de entrega
-![image-20230221065515012](assets/image-20230221065515012.png)
+  ![image-20230221065515012](assets/image-20230221065515012.png)
 - Diferença entre Data Stream e o Firehose.
-![image-20230221070204566](assets/image-20230221070204566.png)
+  ![image-20230221070204566](assets/image-20230221070204566.png)
 
 ---
 
@@ -2779,17 +2811,18 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 #### Arquiteturas com Streams (Kinesis)
 
 - Pipeline em tempo real
-![image-20230221071407686](assets/image-20230221071407686.png)
+  ![image-20230221071407686](assets/image-20230221071407686.png)
 - Soluções em tempo real com melhor custo
-![image-20230221071638191](assets/image-20230221071638191.png)
+  ![image-20230221071638191](assets/image-20230221071638191.png)
 - Comparação com outras soluções
-![image-20230221072024210](assets/image-20230221072024210.png)
+  ![image-20230221072024210](assets/image-20230221072024210.png)
 
 ---
 
 ### MSK
 
 ![image-20230221072716148](assets/image-20230221072716148.png)
+
 - Kafka manager service, serviço de kafka da AWS.
 - Alternativa ao Kineses.
 - Dados são armazenados nos EBS, por quanto tempo o cliente quiser.
@@ -2801,7 +2834,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - AWS Glue.
   - Lambdas.
 - Diferença entre MSK e Kinesis
-![image-20230221072810544](assets/image-20230221072810544.png)
+  ![image-20230221072810544](assets/image-20230221072810544.png)
 
 ---
 
@@ -2812,7 +2845,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Há duas opções:
   - Rodar usando o fargate (Não há necessidade de um cluster).
   - Rodar usando um instância provisionada (EC2 e Spot) na VPC.
-  ![image-20230221174406433](assets/image-20230221174406433.png)
+    ![image-20230221174406433](assets/image-20230221174406433.png)
 - Caso de usos:
   - **Processamento de imagens em lote, Execução de jobs concorrents.**
 - **Pode se usar o EventBrigde para agendar a execução.**
@@ -2825,7 +2858,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   ![image-20230221174255199](assets/image-20230221174255199.png)
 - Soluções de arquitetura
   - Criação de Tumbmails
-  ![image-20230221173936781](assets/image-20230221173936781.png)
+    ![image-20230221173936781](assets/image-20230221173936781.png)
 
 ---
 
@@ -2840,12 +2873,12 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - **Usando em Single AZ.**
   - **Para se ter a melhor performance, devido não ter transferência de dados entre AZ.**
 - Usa EBS do tipo **HDFS (Hadoop FileSystem)** para arquivos temporários.
-- Caso precise de armazenamento de longo prazo, **pode se usar o S3 (EMRFS)**  que tem uma integração nativa.
+- Caso precise de armazenamento de longo prazo, **pode se usar o S3 (EMRFS)** que tem uma integração nativa.
 - Integrações:
   - **S3**
   - **DynamoDB**
 - Tipos de nodes e preços
-![image-20230221175637124](assets/image-20230221175637124.png)
+  ![image-20230221175637124](assets/image-20230221175637124.png)
 - Configuração das instâncias
   - **Uniforme Instance Group**
     - Seleciona um único tipo de instância (ou on demand ou spot) para rodar os tipos de nodes.
@@ -2856,7 +2889,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 
 ---
 
-### Running Jobs on AWS
+### Executando Jobs na AWS
 
 - As soluções são varias de variam de acordo com a demanda.
   - 1 - Bom para longas execuções, mas não escala, há necessidade de gerenciamento de infraestrutura.
@@ -2865,7 +2898,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - 4 - Bom para jobs longos um custo maior e é mais complexo de implementar.
   - 5 - Bom para jobs longos, não há necessidade de gerenciamento de infraestrutura.
   - 6 - Bom para execução de dados para BigData.
-![image-20230221180929791](assets/image-20230221180929791.png)
+    ![image-20230221180929791](assets/image-20230221180929791.png)
 
 ---
 
@@ -2877,17 +2910,17 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - **AWS ETL ** - O núcleo do programa ETL fornece geração de código Python ou Scala para limpeza, enriquecimento, remoção de duplicatas e outras tarefas complexas de transformação de dados.
   - **AWS Glue Data Catalog** - fornece armazenamento centralizado e uniforme de meta-dados para rastreamento, consulta e transformação de dados usando meta-dados salvos.
 - Permite extrair dados do **S3** ou **RBDMS** e transformar e enviar para o **RedShift**.
-![glue](assets/image-20210905124633707.png)
+  ![glue](assets/image-20210905124633707.png)
 - Pode ser usado com **Athena**, **Redshift**, **EMR** para se criar um catalogo de dados
   (dataSet) reutilizável (GLUE Data catalog).
-![glue-catalog](assets/image-20210905124749244.png)
+  ![glue-catalog](assets/image-20210905124749244.png)
 
 ---
 
 ### Redshift
 
 - Banco para Data warehouse.
-- Baseado no **Postgres**, mas não e usado para OLTP  (online transation processing) e sim para  OLAP (online analytical processing).
+- Baseado no **Postgres**, mas não e usado para OLTP (online transation processing) e sim para OLAP (online analytical processing).
 - Envia-se os dados em escala (de hora em hora) para data **warehouse**.
 - **10x** melhor que outros **OLAP**, e escala para PBs (Penta bytes) de dados.
 - Baseado em colunas e permite **execução massiva de consultas paralelas (MPP).**
@@ -2900,20 +2933,20 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - Pode ser feito de forma manual, ou automática pelo RedShift
 - Como é um cluster provisionado para executar a carga de trabalho, caso tenha consulta apenas exporadicas, o ideial seria usar o **Athena**. Pois esse é usando para consultas massivas e em grandes quantidades.
 - Os dados podem ser carregados do S3, Do **DynamoDB** ou de qualquer banco via **DMS** (data migration service) ou via **Kinesis firehose**.
-![data-importe](assets/image-20210905122049485.png)
+  ![data-importe](assets/image-20210905122049485.png)
 - Pode escalar de **1 nó ate 128** nós com cada nó tendo ate **16 TB** de espaço.
 - Há dois tipos de nós:
   - **Nó líder** - usado para o planejamento da queries e agregação dos resultados.
   - **Nó de computação** - Responsável por executar as queries e enviar o resultado ao líder.
 - Tem uma funcionado chamada **Sprectrum** que permite executar a queries direto no **S3**, sem precisar carregar os dados para o **RedShift**.
-![sprectrum](assets/image-20210905122151802.png)
+  ![sprectrum](assets/image-20210905122151802.png)
 - **Redshift Enhanced VPC Routing** - permite copiar e carregar dados através de uma VPC sem passar pela internet.
-- Não é multi **AZ**, cada nó fica numa **AZ**, por isso para ter recuperação de desastres é feito **Snapshots**. incrementais que são internamente armazenados no S3. 
+- Não é multi **AZ**, cada nó fica numa **AZ**, por isso para ter recuperação de desastres é feito **Snapshots**. incrementais que são internamente armazenados no S3.
   - Permite usar múltiplos Nodes com Multi-AZ mas para alguns tipos de Cluster apenas.
 - Os Snapshots são feitos automaticamente de a cada **8 horas** ou a cada **5GB** ou podem ser agendados. Mas é possível realizar manualmente.
   ![redshit](assets/image-20210905121920707.png)
 - Caso o snapshot seja cripografado, é necessário copiar a chave KMS para o novo cluster.
-![image-20230221182853451](assets/image-20230221182853451.png)
+  ![image-20230221182853451](assets/image-20230221182853451.png)
 
 #### Well architected
 
@@ -2929,7 +2962,7 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Armazenamento cresce de 10 GB em 10 GB.
 - Escala automaticamente para milhões de requisições por segundo.
 - Preço
-![image-20230221184504405](assets/image-20230221184504405.png)
+  ![image-20230221184504405](assets/image-20230221184504405.png)
 
 ---
 
@@ -2946,13 +2979,14 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Uso:
   - Dados de IOT,
   - Analise em tempo real.
-![image-20230221185322425](assets/image-20230221185322425.png)
+    ![image-20230221185322425](assets/image-20230221185322425.png)
 
 ---
 
 ### AWS Athena
 
 ![image-20230221185621707](assets/image-20230221185621707.png)
+
 - Serviço **Serverless**, que permite realizar analises em arquivos no S3.
 - Usa **SQL** para fazer queries nos arquivos.
 - Tem conetores **JDBC** e **ODBC** para conectar aplicativos de BI.
@@ -2963,18 +2997,19 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Ideal para queries rápidas ad hoc e se integrar com o AWS **QuickSight** para facilidade de visualização, ele também consegue lidar com análise complexa, inclusive grandes junções, funções de janela e arrays.
 - **Usa o [Presto](https://aws.amazon.com/pt/big-data/what-is-presto/) com suporte completo a SQL padrão.**
 - Permite executar querys em outros serviços de armazenamento (DBs) usando as Queries federadas através de uma lambda, depois pode se armazenar os dados no S3.
-![image-20230221190102755](assets/image-20230221190102755.png) 
+  ![image-20230221190102755](assets/image-20230221190102755.png)
 - **well architected**
-![athena-well-arch](assets/image-20210905115942523.png)
+  ![athena-well-arch](assets/image-20210905115942523.png)
 - Melhorando a performance
-![image-20230221185907561](assets/image-20230221185907561.png)
+  ![image-20230221185907561](assets/image-20230221185907561.png)
 
 ---
 
 ### AWS QuickSight
 
 ![Como o Amazon Quicksight funciona](assets/How QuickSight Works_without Q_final.026e51297c1fa18b850ce2ffc1575a9124bbad16.png)
-- Serviço de inteligência comercial (BI) promovido por **machine learning, escalável, sem servidor, incorporável, construído para a nuvem.** 
+
+- Serviço de inteligência comercial (BI) promovido por **machine learning, escalável, sem servidor, incorporável, construído para a nuvem.**
 - Permite que você crie e publique facilmente painéis interativos que incluem o **Insights de Machine Learning.**
 - **Pago por Sessão.**
 - Acesso pode ser feito via Usuários ou Grupos, que não precisam existir no IAM.
@@ -2982,26 +3017,24 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - **Permite configura o CLS (Column-level security) que bloqueia certa colunas para certos usuarios.**
 - Conecta se a :
   - Aurora, RDS, Athena, S3.
-  ![image-20230221191125886](assets/image-20230221191125886.png)
+    ![image-20230221191125886](assets/image-20230221191125886.png)
 
 ---
 
-### Pipelines para trabalhar com dados 
+### Pipelines para trabalhar com dados
 
-- Analise de dados 
-![image-20230221191437913](assets/image-20230221191437913.png)
+- Analise de dados
+  ![image-20230221191437913](assets/image-20230221191437913.png)
 - Ingestão de dados Big Data
-![image-20230221191554977](assets/image-20230221191554977.png)
+  ![image-20230221191554977](assets/image-20230221191554977.png)
 - Comparação de tecnologias
-![image-20230221191808657](assets/image-20230221191808657.png)
-
+  ![image-20230221191808657](assets/image-20230221191808657.png)
 
 ---
 
 ## Monitoring
 
 ### AWS CloudWatch
-
 
 #### Logs
 
@@ -3026,13 +3059,13 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
     - Pode levar ate 12 para exportar.
     - Não é automático, precisa configurar ou usar a API call CreatExportTask.
 - Subscrição de logs:
-![image-20230222054249909](assets/image-20230222054249909.png)
+  ![image-20230222054249909](assets/image-20230222054249909.png)
 - A possibilidade de agregar logs de varias regiões.
-![image-20230222054341446](assets/image-20230222054341446.png)
+  ![image-20230222054341446](assets/image-20230222054341446.png)
 - A maioria dos problema que se da aqui e por causa de permissões configuradas errado.
 - Permite aplicar filtros através de expressões regulares ou métricas ou IPs. E com isso dispara alarmes.
 - Por padrão nenhum log e enviado das instâncias EC2, caso queira ter os logs é necessária habilitar o **CloudWatch Agent** e isso fará que o **CloudWatch unified Agent** nas instâncias envie os logs.
-![unified-agente](assets/image-20210906093405257.png)
+  ![unified-agente](assets/image-20210906093405257.png)
 
 #### Metricas
 
@@ -3040,13 +3073,13 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
   - **Métricas** ->> thresholds ->> actions.
 - Criar alarmes de acordo com as métricas.
 - E com esses alarmes criar ações (posta numa fila do **SNS** ou acionar o **Auto Scale**)
-- Existem métricas **default com tempos pré definidos (a cada  5 minutos)**, mas se necessário e por um custo adicional é possível adicionar novas métricas detalhadas e alterar o tempo de coleta.
+- Existem métricas **default com tempos pré definidos (a cada 5 minutos)**, mas se necessário e por um custo adicional é possível adicionar novas métricas detalhadas e alterar o tempo de coleta.
 - o Free Tier disponibiliza ate **10 métricas detalhadas.**
-![cloud-metrics](assets/image-20210906081300936.png)
+  ![cloud-metrics](assets/image-20210906081300936.png)
 - Para criar uma métrica customizada, e só usar a API **putMetricaData** no sdk/cli.
   - Também é possível definir a resolução da métrica ( "tempo de coleta") sendo:
     - **Standard** - 1 minuto.
-    - **High Resolution**  - 1|5|10|30 segundos - mas tem um alto custo.
+    - **High Resolution** - 1|5|10|30 segundos - mas tem um alto custo.
   - Permite enviar métrica antigas (ate duas semanas) e métricas futuras ate 2 horas sem que o **Cloud Watch** reclame.
 
 #### Alarmes
@@ -3065,30 +3098,32 @@ Quando se cria um bando no RDS se passa quando  ele deve ter, com essa funcional
 - Neles é possível incluir gráficos de diferentes **contas AWS e regiões.**
 - É possível compartilhar um Dashboard com um terceiro via **cognito**.
 - Ate 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.
-**Synthetics Canary**
+  **Synthetics Canary**
 - Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o trafico.
 - Permite configurar scripts (nodeJs e Python) para monitorar APIs e URLs, WebSites.
   - Pode agendar a execução da de única vez ou de tempos em tempos.
   - Permite acessos a recursos do Google Chrome.
 - Serve para achar problemas antes de os clientes achem (teste de API).
 - Checa a latência e saúde, da para fazer teste armazenando dados e prints da UI.
-![image-20230222053053925](assets/image-20230222053053925.png)
+  ![image-20230222053053925](assets/image-20230222053053925.png)
 
 #### Eventos
 
 Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disparar alguns serviços AWS (regras que define ações).
+
 - Padrão de evento - intercepta eventos dos serviços AWS, tipo quando o status estiver pendente.
   - EC2 start, codeBuild Failure, S3
-- Permite criar crons e eventos agendados. 
+- Permite criar crons e eventos agendados.
 - Gera json de evento, que pode ser enviado para um target **SNS**, **SQS** ...
 
 #### **EventBridge** - (ponte de eventos)
 
 ![image-20230222055737522](assets/image-20230222055737522.png)
+
 - Permite criar uma canal que vai receber eventos (**event bus**) e criar regras para tratar esse eventos postados nesse canal.
 - Permite agendar eventos.
 - É possivel definir uma **estrutura para o evento** (schema , tipo avro), ou usar algum que já existe, com ele é possivel definir o formato do evento que vai ser diparado por um SDK.
-- A mesma coisa que o **Eventos**  com adicional de  que :
+- A mesma coisa que o **Eventos** com adicional de que :
   - Permite criar um **event bus (Partner)** para algums **SAAS** envie eventos a **AWS** (Datadog, zendesk).
   - Permite criar um event bus (Custom) para receber eventos da sua aplicação.
   - Permite arquivar os eventos para futuras analises.
@@ -3114,8 +3149,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Pode ser acessada via API.
 - Pode se agregar os eventos caso tenha uma organização.
 - Pode se usar o EventBridge para reagir aos eventos de manutenção, para notificação ou para tomar alguma ação.
-![image-20230222061145138](assets/image-20230222061145138.png)
-
+  ![image-20230222061145138](assets/image-20230222061145138.png)
 
 ---
 
@@ -3124,26 +3158,27 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 ### AWS Elastic Beanstalk
 
 ![image-20230312103936578](assets/image-20230312103936578.png)
+
 - Feito para o desenvolvedor, permite ter uma visão centralizada do ambiente de deployado.
-- Usados para aplicações web, ex: cria toda infraestrutura e só precisa passar o pacote que será usando. ex.  (war para o tomcat) .
-- b  Usa todos os componentes do AWS (ec2, S3 ..).
+- Usados para aplicações web, ex: cria toda infraestrutura e só precisa passar o pacote que será usando. ex. (war para o tomcat) .
+- b Usa todos os componentes do AWS (ec2, S3 ..).
 - Seria uma PAAS (semelhante ao Heroku).
 - O serviço do Beanstalk é gratis, o uso dele não é cobrado, apenas os **componentes usados serão cobrados.**
 - Solução para migrar aplicações, sem se preocupar com a infraestrutura.
 - É totalmente gerenciado pela AWS.
 - Usa como base o CouldFormation para criar os recursos.
 - **Componetes**
-  - **Aplicação**  - Aplicação em si.
-  - **Versão da aplicação** -  define a versão da aplicação.
+  - **Aplicação** - Aplicação em si.
+  - **Versão da aplicação** - define a versão da aplicação.
   - **Ambiente** - Ambiente onde a aplicação pode ser disponibiliza.
     - Single instânce - Boa para ambiente em dev
-    - Web tier   - usa uma balanciador de cargas.
+    - Web tier - usa uma balanciador de cargas.
     - Worker tier - usa filas.
-![beanstalk](assets/image-20210823060717977.png)
+      ![beanstalk](assets/image-20210823060717977.png)
 - Tipos de ambientes
-![image-20230222062708820](assets/image-20230222062708820.png)
+  ![image-20230222062708820](assets/image-20230222062708820.png)
 - Exemplo de arquitetura
-![image-20230222062858389](assets/image-20230222062858389.png)
+  ![image-20230222062858389](assets/image-20230222062858389.png)
 
 ---
 
@@ -3152,7 +3187,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Usado para realizar deploy de EC2, ECS, Lambda.
 - Pode deployar segundo as estratégias
   - **in-place** -> mata o antigo e coloca o novo (somente disponível para EC2).
-  - **blue / green** -> criar um novo recurso e roteia os dados em parte. 
+  - **blue / green** -> criar um novo recurso e roteia os dados em parte.
     - Este por usa vez usa o **Traffic Shifted** podendo ser:
       - **Canary** - divide o trafico entre as duas versões em percentagem ate chegar os 100% da novar versão.
       - **Linear** - divide o trafico entre as duas versões igualmente.
@@ -3161,31 +3196,32 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Usa o **AppSpec.yml** (definição da aplicação) + estratégia de deploy.
   - O Code deploy atualiza (in place) as instâncias de acordo com a estratégia de deploy.
   - Pode se configurar **Hooks para validade como foi o processo de deploy**
-  ![image-20230312110435714](assets/image-20230312110435714.png)
+    ![image-20230312110435714](assets/image-20230312110435714.png)
 - ASG
   - há dois tipos de deploy
-    - **in place** - Substitui parte dos das instância de acordo estratégia de deploy. 
+    - **in place** - Substitui parte dos das instância de acordo estratégia de deploy.
     - **blue - greem** - Criar um novo scale group com as novas instância e usa o ELB para controlar o trafico. Após um tempo o antigo ASG é removido.
 - Lambda
   - Code deploy criar uma nova versão do lambda.
   - Executa uma Lambda de teste (**Pre-Traffic)** para validar a nova versão.
   - Usa o **Traffic Shifting** para distribuir o trafico entre as versões deployadas.
   - Usa o Cloud Watch Alarms para fazer rollback caso necessário.
-  - Caso esteja OK, redireciona todo o trafico para a nova versão e executa uma lambda de teste  **(Post Traffic)** para validar se o trafico esta OK.
-  ![image-20230222065311164](assets/image-20230222065311164.png)
-  ![image-20230312110533059](assets/image-20230312110533059.png)
+  - Caso esteja OK, redireciona todo o trafico para a nova versão e executa uma lambda de teste **(Post Traffic)** para validar se o trafico esta OK.
+    ![image-20230222065311164](assets/image-20230222065311164.png)
+    ![image-20230312110533059](assets/image-20230312110533059.png)
   - **SAM Framework usa nativamente o code deploy.**
 - ECS
-![image-20230222065605029](assets/image-20230222065605029.png)
+  ![image-20230222065605029](assets/image-20230222065605029.png)
 - Após o traffic shifting dinalizado e estando OK, o tasks da versão anteriores são encerradas.
-![image-20230312110703556](assets/image-20230312110703556.png)
-![image-20230312110804503](assets/image-20230312110804503.png)
+  ![image-20230312110703556](assets/image-20230312110703556.png)
+  ![image-20230312110804503](assets/image-20230312110804503.png)
 
 ---
 
 ### AWS CloudFormation
 
 ![cloud-formation](assets/image-20210911100149772.png)
+
 - Permite criar qualquer recurso da AWS via código (95%).
 - Usado para criar infraestrutura como código (IAC).
 - Usa Yaml ou json para declarar os recursos.
@@ -3232,7 +3268,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Permite via Code Deploy realizar o deploy de Lambdas usando **Traffic Shifting.**
 - Usa o **CloudFormation** por debaixo dos panos.
 - Arquitetura com SAM.
-![image-20230222104901039](assets/image-20230222104901039.png)
+  ![image-20230222104901039](assets/image-20230222104901039.png)
 
 ---
 
@@ -3245,6 +3281,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 ### AWS Systems Manager
 
 ![ssm](assets/image-20210907151452111.png)
+
 - Permite criar grupos de recursos para facilitar a visualização de dados operacionais.
   - Pode se executar comandos (scripts nesse grupos).
 - Permite gerenciar **EC2 e on-premises em escala.**
@@ -3254,25 +3291,25 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Nesse caso não é necessário **SSH, Bastion Hosts e Chaves SSH.**
   - É Usado para conectar instâncias via **console AWS.**
   - Envia para o **CloudTrail dados das sessões.**
-![image-20230223053512425](assets/image-20230223053512425.png)
+    ![image-20230223053512425](assets/image-20230223053512425.png)
 - Trabalha com mac, Windows e Linux e não precisa de SSH.
 - Integrado com Cloud Watch metricas e dashboards. IAM e CloudTrail.
 - É de graça
 - Para usar é só instalar o **agente SSM na instância, ou VM.**
   - Necessário **criar uma role para que o agente tem acesso ao SSM.**
 - Patchs
-![image-20230223053242769](assets/image-20230223053242769.png)
+  ![image-20230223053242769](assets/image-20230223053242769.png)
 
 ---
 
 ### Cloud Map
 
 ![image-20230223054719268](assets/image-20230223054719268.png)
+
 - Serviço gerenciado pela AWS de **descoberta de serviços.**
 - Cria se um **map de serviços e recursos e se conecta o front end ao Cloud Map.**
 - Tem **healhcheck e é integrado com o Route53.**
 - Pode se usar SDK, API or DNS para realizar querys no Cloud Map
-
 
 ---
 
@@ -3309,7 +3346,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 ### Calculadora de preços da AWS
 
-- É uma ferramenta online gratuita que ajuda a estimar o custo mensal dos serviços da AWS. 
+- É uma ferramenta online gratuita que ajuda a estimar o custo mensal dos serviços da AWS.
 - Ela permite que os usuários calculem o custo de diferentes combinações de serviços da AWS com base em suas necessidades específicas.
 - útil para ajudar as empresas a planejar e gerenciar seus orçamentos de TI, bem como para avaliar diferentes cenários de implantação para seus aplicativos e serviços na nuvem da AWS.
 
@@ -3329,11 +3366,11 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Permite a configuração de email semanal com notificações.
 - Há dois tipos de planos
   - **Comum** - Faz checagem e recomendações comuns
-  - **Completo** -  Disponivel para planos de suportes Bussiness & Enteprise.
+  - **Completo** - Disponivel para planos de suportes Bussiness & Enteprise.
     - Da acesso programático via APIs
     - Permite seta alarmes quando encontrar limites de serviços.
 - Suports
-![image-20230223061608471](assets/image-20230223061608471.png)
+  ![image-20230223061608471](assets/image-20230223061608471.png)
 - Bom saber
   - Pode checar se o bucket S3 é publico. Mas não checa se os objetos dentro são publicos.
   - Pode checar os limites de serviços, porem para aumenta-los precisa abrir solicitação no AWS Suport center ou usar AWS Service Quotas.
@@ -3350,9 +3387,9 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 ### EC2 Launch Types & Savings Plan
 
-- Ver   Compute & Load Balancing > EC2 > Precificação
+- Ver Compute & Load Balancing > EC2 > Precificação
 
-------
+---
 
 ### S3 Storage Classes
 
@@ -3390,11 +3427,12 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Para cada conta que existir na organização deve haver um **Budget para ela e depois esse budget** pode se gerenciado pela conta centralizada.
 - Pode se ter dois tipos de OU, uma mais restritiva e outra não.
 - Caso uma conta dessa não restritiva **exceda o limites** definidos no Budget, pode se **mover-la para a OU mas restritiva** e pode-se enviar um e-mail para notificar os administradores da conta.
-![image-20230223071637464](assets/image-20230223071637464.png)
+  ![image-20230223071637464](assets/image-20230223071637464.png)
 
 #### Cost Explorer
 
 ![cost-explorer](assets/image-20210911104942473.png)
+
 - Serviço usado para **ver, entender e gerenciar os gastos** (com varias granularidade mês, ano , dia).
 - Permite que você explore **seus custos e uso da AWS** em um nível alto e detalhado de análise, e permite que você mergulhe mais fundo usando uma série de dimensões de filtragem (por exemplo, serviço da AWS, região, conta de membro, etc.)
 - Contem vários relatórios para analisar os gastos, e permite criar outros customizado.
@@ -3415,7 +3453,6 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Uso:
   - Analisa uso de RAM, e faz recomendações
 
-
 ---
 
 ## Migration
@@ -3423,23 +3460,24 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 ### Cloud Migrations - The 6R
 
 ![image-20230223203920041](assets/image-20230223203920041.png)
+
 - [6 estratégia para migra para a cloud.](https://aws.amazon.com/pt/blogs/enterprise-strategy/6-strategies-for-migrating-applications-to-the-cloud/)
-  - **Rehosting** -  “lift-and-shift.” 
-    - Apenas mova do on-premises para AWS (a aplicação inteiramente). 
+  - **Rehosting** - “lift-and-shift.”
+    - Apenas mova do on-premises para AWS (a aplicação inteiramente).
   - **Replatforming**  - “lift-tinker-and-shift.”
-    - Migra por exemplo de um banco on-premises para  o RDS.
+    - Migra por exemplo de um banco on-premises para o RDS.
     - Ou seja migra a plataforma, estava Weblogic muda para Tomcat.
     - Não muda o core da aplicação.
   - **Repurchasing** — "drop and shop"
     - Muda para um nova solução, ex muda de CRM para Salesforce.
-  - **Refactoring / Re-architecting** 
+  - **Refactoring / Re-architecting**
     - Reescreve a aplicação em uma nova arquitetura.
-    - Mas demorado, e mais caro, porém pode se tirar  o máximo da cloud.
+    - Mas demorado, e mais caro, porém pode se tirar o máximo da cloud.
     - Facilita novas features.
   - **Retire**   - Livrar-se
     - Livra se do que não se usa, ou que usa muito pouco.
   - **Retain**
-    - Deixa no on-premises e se conecta aos AWS. 
+    - Deixa no on-premises e se conecta aos AWS.
     - Se mantém, pois é muito complexo a migração o não vale o esforço.
 
 ---
@@ -3448,20 +3486,20 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 - Usado e **cloud híbrida.** Permite fazer uma **ponte entre os dados da nuvem e o ambiente local** (on-premises).
 - Conecta um dispositivo de software local a um armazenamento em nuvem para oferecer uma
-  integração perfeita e segura entre um ambiente de TI local e a  infraestrutura de armazenamento da AWS.
+  integração perfeita e segura entre um ambiente de TI local e a infraestrutura de armazenamento da AWS.
 - Você pode usar esse serviço para armazenar dados no AWS para
   armazenamento escalável e econômico que ajuda a manter a segurança dos dados.
 - Oferece **Gateways** de arquivo baseados em **arquivo (S3, EFS, FSx )**, volumes
   (armazenados em cache e armazenados) e soluções de armazenamento em fita.
 - Tipos de armazenamento que é possivel configurar:
   - **S3 File Gateway** - Usado para armazenar arquivos.
-  ![image-20230223205533718](assets/image-20230223205533718.png)
+    ![image-20230223205533718](assets/image-20230223205533718.png)
   - **FSx File Gateway** - Bom para cache de dados de arquivos muitos acessados.
-  ![image-20230223205704041](assets/image-20230223205704041.png)
+    ![image-20230223205704041](assets/image-20230223205704041.png)
   - **Volumes Gateway (EBS)** - Usados para armazenar dados de backups, ou volumes.
-  ![image-20230223205806554](assets/image-20230223205806554.png)
+    ![image-20230223205806554](assets/image-20230223205806554.png)
   - **Fitas (TAPE) Gateway (S3 Glacier) -** Usado onde há processos semelhantes fitas.
-  ![image-20230223205915002](assets/image-20230223205915002.png)
+    ![image-20230223205915002](assets/image-20230223205915002.png)
 - Pode se usar autenticação integrada com o Active directory.
 - AWS, também oferecer **hardware** para disponibilizar essas funcionalidade. Onde não há própria estrutura de virtualização para implementar o **AWS Gateway Storage.**
 - Uso:
@@ -3469,13 +3507,13 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Backup e Restauração.
   - Armazenamento.
   - Redução de latência e cache no ambiente on-premises.
-Arquitetura com Storage Gateway
+    Arquitetura com Storage Gateway
 - Usado para migrar dados do on-premises para AWS, ou para conectar aplicação migrada no modo Rehosting.
-![image-20230223210344227](assets/image-20230223210344227.png)
+  ![image-20230223210344227](assets/image-20230223210344227.png)
 - Usado como replica de leitura entre ambientes de on-premises
-![image-20230223210608224](assets/image-20230223210608224.png)
+  ![image-20230223210608224](assets/image-20230223210608224.png)
 - Para processo de backup, para economia
-![image-20230223210652331](assets/image-20230223210652331.png)
+  ![image-20230223210652331](assets/image-20230223210652331.png)
 
 ---
 
@@ -3487,16 +3525,16 @@ Arquitetura com Storage Gateway
 - Há um software chamado **OpsHub** que fornece uma interface gráfica para os dispositivos.
 - Há 3 tipos:
   - **Snowball edge** - Usado para transportar **TBs e PBs** de dados, semelhante a uma maleta.
-    - **Storage otimized** 
+    - **Storage otimized**
       - (**40vCpu 80Gb Memória**) - com 80 TBs compatível com S3.
-    - **Compute otimized** 
+    - **Compute otimized**
       - (**52vCpu 208Gb Memória**) com 42 TBs compatível com S3.
       - Caso necessário pode vir com **placa de vídeo.**
   - **SnowCone** - Dispositivo menor espaço, pesa cerca de 2,1 kg, com bateria opcional.
-    - HDD - **2 vCPUS, 4 Gb de memoria,  8TBs de espaço,**  USB tipo c.
+    - HDD - **2 vCPUS, 4 Gb de memoria, 8TBs de espaço,** USB tipo c.
     - SSD - **2 vCPUS, 4 Gb de memoria, 14 TB of SSD**
   - **SnowMobile** - Caminhão, usado para transporta dados acima de **10 PBs para AWS.**
-  ![snow-family](assets/image-20210902060123753.png)
+    ![snow-family](assets/image-20210902060123753.png)
 - Não é possível importar os dado do **Snowball** diretamente para o **Glacier**, primeiro se importaria para o S3 e com uma política de ciclo de vida se moveria para o **Glacier**.
 - Melhorando a transferência para os dispositivos.
 
@@ -3505,6 +3543,7 @@ Arquitetura com Storage Gateway
 ### AWS DMS
 
 ![aws-dms](assets/image-20210909064002076.png)
+
 - Serviço de **migração** de dados para a AWS.
 - Permite migrar dados para o **RDS** (a nuvem) de um **banco relacional on-primeses.**
 - Permite que o **banco fique ativo** durante a migração, pois usa os **logs para a migração**.
@@ -3515,7 +3554,7 @@ Arquitetura com Storage Gateway
   - **heterogéneas** - de um banco de um tipo (oracle) para outro de outro tipo (mysql)
     - Usa o **SCT (Schema conversion tool)** para migrar DB diferentes
 - Origem e destino
-![image-20230224054253994](assets/image-20230224054253994.png)
+  ![image-20230224054253994](assets/image-20230224054253994.png)
 - É bom saber sobre DMS
   - Trabalha com **VPC Peering, VPN, Direct Connect.**
   - modos:
@@ -3544,25 +3583,26 @@ Arquitetura com Storage Gateway
 - **Termos importante**
   - RPO - Recover point objective - está relacionado com a frequência de backup.
   - RTO - Recover time objective - está relacionado a tempo de recuperação de desastre.
-  ![rpo-rto](assets/image-20210909060015823.png)
+    ![rpo-rto](assets/image-20210909060015823.png)
 
 #### Estratégias de DR
 
 ![dr-estrategias](assets/image-20210909061054824.png)
+
 - **Backup e Restore**
-  ​    ![bkp-restore](assets/image-20210909061455821.png)
+  ​ ![bkp-restore](assets/image-20210909061455821.png)
   - A ideia aqui e realizar backups com uma certa frequência (RPO) e quando dá um problema se recuperar os dados do backup (RTO).
   - Tem uma alta tempo de recuperação (alto RTO).
   - Muito barato comparado as outras.
 - **Pilot Light**
-  ​    ![dr-pilot](assets/image-20210909062035023.png)
-  - A ideia aqui é usar versões pequenas das aplicação (apenas para Apps Core)  em outra regiões, e continuamente, sincronizar os dados entre elas. Caso ocorra um desastre seria só redirecionar os trafico para nova região e escalar a aplicação.
+  ​ ![dr-pilot](assets/image-20210909062035023.png)
+  - A ideia aqui é usar versões pequenas das aplicação (apenas para Apps Core) em outra regiões, e continuamente, sincronizar os dados entre elas. Caso ocorra um desastre seria só redirecionar os trafico para nova região e escalar a aplicação.
 - **Warm standby**
-  ​    ![dr-warm-standby](assets/image-20210909062340297.png)
+  ​ ![dr-warm-standby](assets/image-20210909062340297.png)
   - A ideia aqui seria ter toda a infraestrutura replicada só que em escala menor, caso haja um desastre, se redirecionaria o trafico e escalava as aplicações.
 - **hot site / multi site approach**
-![hot-site](assets/image-20210909062732217.png)
-![DR-muilt-site](assets/image-20210909062821953.png)
+  ![hot-site](assets/image-20210909062732217.png)
+  ![DR-muilt-site](assets/image-20210909062821953.png)
 - A ideia aqui e se ter as aplicações e recurso distribuídos entres as regiões, e os dados sincronizados assim se ocorrer um desastre o trafico seria redirecionado quase que instantaneamente.
 - Tem o menor tempo de recuperação (RTO), porém é uma solução mas cara.
 
@@ -3570,11 +3610,12 @@ Arquitetura com Storage Gateway
 
 ![dicas](assets/image-20210909063130084.png)
 
-----
+---
 
 ### AWS FIS - Fault Injection Simulator
 
 ![image-20230224062326078](assets/image-20230224062326078.png)
+
 - Permite **Injetar falhas** nas cargas de trabalho na AWS a fim de **validar a capacidade de resiliência** das soluções.
 - Baseado na engenharia do chaos, stressa as aplicações criando eventos disruptivos, permitindo que eles sejam **observados** e que se crie soluções para responde-los.
 - Ajuda descobrir novos **bugs e lacunas de performance.**
@@ -3607,8 +3648,8 @@ Arquitetura com Storage Gateway
 - Evolução do **SMS (Server Migration Service) e do CLoudEndure Migration**.
 - Usado para aplicação de **rehosting** (lift and Shift) - mover do on-premises para AWS.
 - Converter **recursos fisicos** ou virtuais em recursos da **cloud AWS.**
-- Pode migrar suas aplicações da infraestrutura física, do **VMware vSphere**, do **Microsoft Hyper-V**, do EC2, da  VPC e de outras nuvens para a AWS. 
-![image-20230224064237505](assets/image-20230224064237505.png)
+- Pode migrar suas aplicações da infraestrutura física, do **VMware vSphere**, do **Microsoft Hyper-V**, do EC2, da VPC e de outras nuvens para a AWS.
+  ![image-20230224064237505](assets/image-20230224064237505.png)
 
 ---
 
@@ -3616,7 +3657,7 @@ Arquitetura com Storage Gateway
 
 - Chamado anteriormente de **CloudEndure Disaster Recovery.**
 - Permite recuperar recursos físicos ou virtuais e servidores na cloud.
-![image-20230224064703416](assets/image-20230224064703416.png)
+  ![image-20230224064703416](assets/image-20230224064703416.png)
 
 ---
 
@@ -3629,9 +3670,10 @@ Arquitetura com Storage Gateway
 ### AWS Backup
 
 ![image-20230224065258211](assets/image-20230224065258211.png)
+
 - **Serviço de backup gerenciado pela AWS.**
 - Permite **centralizar** as **configurações** de backups.
-- Suporta **cross-regions  e cross-accounts backups.**
+- Suporta **cross-regions e cross-accounts backups.**
 - Pode ter **backups agendados** ou **sob demanda.**
 - Permite aplicar uma política de **tagueamento do backups.**
 - Permite criar uma **política de backup (período) e tempo de retenção de um backup.**
@@ -3639,11 +3681,12 @@ Arquitetura com Storage Gateway
   - Permite que os dados salvos não possam ser deletados implementa o **WORM(Write Once Read Many)**
   - Garante que não seja deletado por engano o por software mal.
 
-
-----
+---
 
 ## AWS VPC
+
 ![vpc](assets/image-20210907200230003.png)
+
 - Virtual private cloud (rede privada na nuvem).
 - Tem escopo **regional**.
 - Toda região tem um VPC default, configurada com **subnets** publicas, ou seja tem acesso via Internet.
@@ -3663,11 +3706,12 @@ Arquitetura com Storage Gateway
     - **true** na VPC default mas **false** para novas VPCs.
     - Habilita o DNS para instâncias e a criação de **hostname** para instâncias.
     - Public Dns
-  ![dns](assets/image-20210907212451775.png)
+      ![dns](assets/image-20210907212451775.png)
 
 ### CIDR
 
 ![cidr](assets/1By1Z1u0xilCm5OAtOqm3pg.png)
+
 - Classless inter-Domain Routing (Roteamento entre domínios sem classe).
 - Usado para repartir os endereços IPs e definir ranges de ips.
   - x.x.x.x/32 -> tem 1 IP
@@ -3691,6 +3735,7 @@ Arquitetura com Storage Gateway
 ### Internet Gateway
 
 ![image-20210907203053110](assets/image-20210907203053110.png)
+
 - Permite que uma **VPC** tenha acesso ao Internet.
 - Escala horizontalmente e tem alta disponibilidade.
 - Deve haver um **Internet Gateway** para uma **VPC**.
@@ -3700,6 +3745,7 @@ Arquitetura com Storage Gateway
 ### Route table
 
 ![AWS VPC - Internet Gateway, Route Tables, NACLs | 4sysops](assets/Public-and-private-route-table-diagram.png)
+
 - Serve para **direcionar** o trafico de rede para as **subnets**, permitindo assim que se tenha acesso a Internet ou não.
 - É boa pratica criar no mínimo duas tabelas de rotas por VPC:
   - Uma tabela de rotas publica que ter as **subnets** publicas, esta se liberar o trafico de qualquer lugar colocando como target o **Internet Gateway.**
@@ -3708,12 +3754,13 @@ Arquitetura com Storage Gateway
 ### NAT Gateway
 
 ![AWS — Difference between Internet Gateway and NAT Gateway | by Ashish Patel  | Awesome Cloud | Medium](assets/1gftv4LSqU_12kRqNwYISJw.png)
+
 - As instâncias das **subnets** privadas precisam acesso a Internet para atualizações, é com usa de NAT que fazemos isso.
 - Totalmente gerenciado pela AWS.
 - Pague por hora e banda usada.
 - São criado em uma **AZ** especifica e **Usam Elastic IP.** caso queira alta disponibilidade é recomendado criar e mais de uma **AZ**.
 - Não pode ser usado por instâncias da mesma sub-rede, apenas por outras.
-- Se criar um **NAT Gateway** numa **subnet** publica e apronta o trafico das subnets privadas para o NAT, que por sua vez via **route table** repassa ao **Internet Gateway**,  como nas **subnets** privadas só que pode acessar e que esta na mesma **VPC** se mantém a segurança.
+- Se criar um **NAT Gateway** numa **subnet** publica e apronta o trafico das subnets privadas para o NAT, que por sua vez via **route table** repassa ao **Internet Gateway**, como nas **subnets** privadas só que pode acessar e que esta na mesma **VPC** se mantém a segurança.
 - Há uma opção de usar uma i**nstancia EC2 como NAT Instance.**
   - Mas barato que o Nat Gateway, porém não é resiliente e toda manutenção deve ser feita por nós.
   - Deve se usar um **IP Elastico** junto a instância.
@@ -3722,6 +3769,7 @@ Arquitetura com Storage Gateway
 ### Secure Group
 
 ![sg](assets/image-20210907213210726.png)
+
 - **(Regras de acessos)** por padrão vem negando tudo.
 - Só permite acesso, não preciso negar.
 - É a primeira camada de segurança
@@ -3731,6 +3779,7 @@ Arquitetura com Storage Gateway
 ### NACL
 
 ![Learn AWS Network ACL and Security Groups in under 5 minutes | by João  Marcelo Souza | Medium](assets/1K-Se2-uV-Y91vkGW3K0-8w.png)
+
 - Network access control list, deve haver uma por **subnet**.
 - Deve dizer o que **é permitido e o que é negado**. Seguindo a ideia de procedência indo de **1 - 32766, sendo quanto menor no numero maior a procedência.**
 - É a segunda camada de segurança.
@@ -3744,21 +3793,22 @@ Arquitetura com Storage Gateway
   ![vpc-peering](assets/image-20210908191617520.png)
 - Caso precise que elas se "vejam" e necessário criar um **VPC Peering** com as duas.
   ![vpc-peering](assets/image-20210908191928744.png)
-- Para cada conjunto (A - B , B - C,  A - C) é necessário atualizar as tabelas de rotas, para que as instâncias possam se ver.
+- Para cada conjunto (A - B , B - C, A - C) é necessário atualizar as tabelas de rotas, para que as instâncias possam se ver.
 - Serviço **cross account** e **inter-regions**, ou seja é possível conectar VPCs de contas diferentes e em regiões diferentes.
 - Possível configurar **Security Groups** que considerem VPCs pareadas.
 - Caso haja um cenario onde haja 2 VPC com a mesma CIDR conectadas com a uma outra VPC **usa se Prefix para definir como vai ser o roteamento.**
   ![image-20230224201705981](assets/image-20230224201705981.png)
 - **Não suporta roteamento de borda, para NAT devices**
-![image-20230224202108774](assets/image-20230224202108774.png)
-![image-20230224202133515](assets/image-20230224202133515.png)
+  ![image-20230224202108774](assets/image-20230224202108774.png)
+  ![image-20230224202133515](assets/image-20230224202133515.png)
 
 ---
 
 ### VPC Endpoints
 
 ![image-20230227060707205](assets/image-20230227060707205.png)
-- Permite criar **endpoints para acesso de serviços internos da AWS.** 
+
+- Permite criar **endpoints para acesso de serviços internos da AWS.**
 - Escala **Horizontalmente** e tem **redundância**.
 - Usado quando queremos que uma rede privada tenha acesso a recursos AWS, mas sem que esse trafico saia para a internet.
 - Ele remove a necessidade de se ter uma **NAT Gateway** para acessar serviços da AWS.
@@ -3767,7 +3817,7 @@ Arquitetura com Storage Gateway
   - **Interface** - cria uma interface de rede (**ENI**) que fornece um IP para os serviços devem ser configurado o acesso **no Security Group.**
     - Quando criado cria se um **URL que será atachada ao ENI.**
     - Precisa habilidar as configurações na VPC **"Enable DNS Hostnames" e "Enable DNS Support"**, pois Serviço de DNS ira resolver o **Private Endpoint para rede privada.**
-    - Para todos exceto o DynamoDB. 
+    - Para todos exceto o DynamoDB.
     - As interfaces podem ser compartilhadas via **DX e VPN.**
   - **Gateway** - usa um Gateway para provisionar um destino e deve ser configurado na tabela de rotas (**Route Table**)
     - Somente para **S3 e Dynamo DB**.
@@ -3775,8 +3825,8 @@ Arquitetura com Storage Gateway
     - Não pode ser expandido para fora da VPC. Ous seja não pode ser compartilhado usando **(VPN, DX, TGW, Peering)** só funciona **dentro da VPC.**
     - Se deve criar um único por VPC. O DNS deve esta habilitado e com isso pode se usar hostname para o S3 ou DynamoDB
     - Criado em nivel de VPC, por isso que é necessário definir a entrada de acesso no rout table
-    ![image-20230227061041750](assets/image-20230227061041750.png)
-- Caso use  **VPC Endpoints** deve se atentar a usar as configurações de DNS, Outra coisa que pode gerar confusão e que a partir da hora que se usa o **VPC Endpoints** e necessário informar as região ao usar comandos do CLI, pois o **VPC Endpoints** tem escopo regional.
+      ![image-20230227061041750](assets/image-20230227061041750.png)
+- Caso use **VPC Endpoints** deve se atentar a usar as configurações de DNS, Outra coisa que pode gerar confusão e que a partir da hora que se usa o **VPC Endpoints** e necessário informar as região ao usar comandos do CLI, pois o **VPC Endpoints** tem escopo regional.
 - **VPC Endpoint Police**
   - Permite controlar os acesso a **serviços AWS.**
   - Não sobrescreve **política do S3 ou só IAM**, apenas adiciona a endpoint a definição de quem pode acessa-lo.
@@ -3787,20 +3837,22 @@ Arquitetura com Storage Gateway
 ### AWS PrivateLink - VPC Endpoint Services
 
 ![AWS PrivateLink - VPC Endpoint Services](assets/image-20210908203529744.png)
+
 - Permite compartilhar um **serviço de uma VPC com outra VPC** sem precisar que aquele serviço publico, ou sem precisar ligar as VPC com **VPC Peering.**
 - Forma mais segura e escalável de se **expor mais de 1000 serviços AWS.**
 - Sem a necessidade de **Peering, DX e VPN, NAT ou RouteTables.**
 - Faz uso do **VPC endpoints, por isso muitas vezes pode ser considerado o mesmo serviço.**
 - Usando com S3 e Direct Connect
-![image-20230227065519211](assets/image-20230227065519211.png)
+  ![image-20230227065519211](assets/image-20230227065519211.png)
 - Usando com VPC Peering
-![image-20230227065551394](assets/image-20230227065551394.png)
+  ![image-20230227065551394](assets/image-20230227065551394.png)
 
 ---
 
 ### VPC Flow Logs
 
 ![image-20230228061439898](assets/image-20230228061439898.png)
+
 - Permite capturar o trafico **IP dentro de uma VPC.**
 - Esta em **nivel de VPCs.**
 - Tipos:
@@ -3809,15 +3861,16 @@ Arquitetura com Storage Gateway
   - **ENI Flow Log** - Se aplica a uma interface de rede.
 - Podem ajudar a monitorar traficos de rede dentro da VPC, ajuda na **troubleshooting**.
 - Pode se usar o **Athena** ou **Cloud Watch Insights** para identificar anomalias.
-![image-20230228061544920](assets/image-20230228061544920.png)
+  ![image-20230228061544920](assets/image-20230228061544920.png)
 - Arquiteturas com FPC Flow Logs
-![image-20230228061742844](assets/image-20230228061742844.png)
+  ![image-20230228061742844](assets/image-20230228061742844.png)
 
 ---
 
 ### Bastion Hosts
 
 ![Bastion Hosts](assets/image-20210908200020997.png)
+
 - Maquina numa rede publica da onde é possível conectar a instâncias em uma rede privada via SSH.
 - Se conectar ao **Bastion Hosts** via SSH e a partir dele se conecta as instâncias na rede privada.
 - Outra solução é a **Session Manager** que permite acesso na WEB sem necessidade de SSH.
@@ -3827,24 +3880,26 @@ Arquitetura com Storage Gateway
 ### Virtual Private Gateway
 
 ![Virtual Private Gateway](assets/image-20210908200507774.png)
+
 - Permite ligar uma rede on-primise a AWS via VPN, para isso é necessario configurar um **Virtual** **Customer Gateway** do lado do on-primese e do lado da AWS cria se uma **Virtual Private Gateway**.
 
 ### AWS Direct Connect
 
 ![dx](assets/image-20210908201934794.png)
+
 - C**onexão dedicada, fibra** que vai do seu **datacenter** ate a AWS.
 - Demora cerca de **1 Mês** para ser implementado toda a infraestrutura.
-- Por padrão os dados em transito não são cartografados, pois já se esta numa rede privada, mas caso queira pode se usar  **um solução de IPSec com VPN.**
-- O **Direct Connect (DX)** é um recurso que permite a conexão dedicada  (vai de fibra ate o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
+- Por padrão os dados em transito não são cartografados, pois já se esta numa rede privada, mas caso queira pode se usar **um solução de IPSec com VPN.**
+- O **Direct Connect (DX)** é um recurso que permite a conexão dedicada (vai de fibra ate o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
 - Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um **DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).**
 - Caso se queira conectar mais de uma região deve se usar um **Direct Conect Gateway**
-![DX-GW](assets/image-20210908202014628.png)
+  ![DX-GW](assets/image-20210908202014628.png)
 - Alta disponibilidade
-![DX](assets/image-20210908202426476.png)
+  ![DX](assets/image-20210908202426476.png)
 - Direct Connect Gateway - Site Link
-![image-20230228061217204](assets/image-20230228061217204.png)
+  ![image-20230228061217204](assets/image-20230228061217204.png)
 - Tipos de DX
-![image-20230228060449937](assets/image-20230228060449937.png)
+  ![image-20230228060449937](assets/image-20230228060449937.png)
 
 #### Virtual Interface VIF
 
@@ -3864,16 +3919,17 @@ Arquitetura com Storage Gateway
 ### Transit Gateway
 
 ![AWS — Transit Gateway](assets/1ghrEMYcgoEfzawAHq54v_A.png)
+
 - **O AWS Transit Gateway** conecta VPCs e suas redes locais por meio de um **hub central**. Isso simplifica a rede e elimina os complexos relacionamentos de emparelhamento. Ele atua como um roteador de nuvem e cada nova conexão só é feita uma vez.
 - Permite instâncias na VPC acesse a NAT Gateway, NLBs, PrivateLink, e EFS e outras VPC conectadas ao **AWS Transit Gateway**.
-- Permite usar o **Direct Conect ao premises ou  VPN.**
+- Permite usar o **Direct Conect ao premises ou VPN.**
 - Transit Gateway é um recurso **regional e pode conectar milhares de VPCs na mesma região da AWS.**
 - Pode ser compartilhado com outras contas da AWS usando **RAM**.
 - Permite restringir quais VPC tem acesso a quais VPC usado Route Tables.
 - Suporta **IP Multicast** (Não suportado por nenhum outro serviço da AWS.)
 - **Casos de Uso**
   - Para implementar a topologia **Hub e Spoke (star).**
-  - Para conectar vários Amazon VPCs entre regiões (usando  **peering do Transit Gateway**).
+  - Para conectar vários Amazon VPCs entre regiões (usando **peering do Transit Gateway**).
   - Forneça aplicativos em todo o mundo - **o Transit Gateway** ajuda a criar aplicativos que abrangem milhares de Amazon VPCs. Tudo é mais fácil de implantar, gerenciar e solucionar problemas.
 - **Limitações**
   - Você pode se conectar a no máximo três **Transit Gateways** em uma única Conexão **Direct Connect** para conectividade híbrida.
@@ -3881,7 +3937,7 @@ Arquitetura com Storage Gateway
 - **Inter e Intra Region Peering**
   - Dentro de uma região é possivel ter dois **TGW** ( Transit Gateway) com finalidades diferentes e conecta-los usando i**ntra-Refion Peering Mesh.**
   - Mas caso queira conectar a outra região com um estrutura semelhante seria necessário criar um novo TGW e realizar o inter-Region Peeering Mesh.
-  ![image-20230227055738521](assets/image-20230227055738521.png)
+    ![image-20230227055738521](assets/image-20230227055738521.png)
 
 ---
 
@@ -3907,7 +3963,7 @@ Arquitetura com Storage Gateway
     - Conectar a**o Customer Gateway ao Virtual Private Gateway (VGW)**
 - Para alta disponibilidade se recomenda a existência no mínimos duas VPN configuradas.
 - Pode se usar o **Global Acelerator** para melhorar a velocidade.
-![image-20230228053747985](assets/image-20230228053747985.png)
+  ![image-20230228053747985](assets/image-20230228053747985.png)
 - Configuração da tabela de rotas
   - **Static Routing** - Insere manualmente as rotas em cada uma das tabelas de rotas.
   - **Dynamic Routing** - Usa se o protocolo **BGP** para realizar a configuração da tabela de rotas automaticamente compartilhando os IP Entre as tabelas de rotas.
@@ -3918,28 +3974,28 @@ Arquitetura com Storage Gateway
   - ![Link Aggregation Group (LAG) - AWS Direct Connect](assets/LAG_description.png)
 - Acessando a Internet **via cloud do on-premises**
   - **Nat Gateway** - não funciona pois ele não pode ser acessado de origem vinda de DX, VPN ou Peering.
-![image-20230228054209397](assets/image-20230228054209397.png)
-![image-20230228054410767](assets/image-20230228054410767.png)
-**Client VPN** - Permite configurar uma VPN para que os **usuários possam conectar via por exemplo (OpenVPN)**
+    ![image-20230228054209397](assets/image-20230228054209397.png)
+    ![image-20230228054410767](assets/image-20230228054410767.png)
+    **Client VPN** - Permite configurar uma VPN para que os **usuários possam conectar via por exemplo (OpenVPN)**
 
 #### CloudHub
 
 - Permite conectar mais de **10 Customer Gateway a cada Virtual Private Gateway.**
-![image-20230228054727767](assets/image-20230228054727767.png)
+  ![image-20230228054727767](assets/image-20230228054727767.png)
 
 ---
 
 ### AWS Network Firewall
 
 - Protege a VPC inteira
-![image-20230228062209390](assets/image-20230228062209390.png)
-![image-20230228062313794](assets/image-20230228062313794.png)
-![image-20230228062545252](assets/image-20230228062545252.png)
-
+  ![image-20230228062209390](assets/image-20230228062209390.png)
+  ![image-20230228062313794](assets/image-20230228062313794.png)
+  ![image-20230228062545252](assets/image-20230228062545252.png)
 
 ---
 
 ## Machine Learning
+
 ![image-20230303060442789](assets/image-20230303060442789.png)
 
 ---
@@ -3947,6 +4003,7 @@ Arquitetura com Storage Gateway
 ### Rekognition (reconhecimento)
 
 ![image-20230302070726050](assets/image-20230302070726050.png)
+
 - Permite buscar **pessoas, objetos, textos e cenas em imagens e videos usando ML.**
 - Pode se realizar reconhecimento e busca facial para verificação de usuário, e contagem de pessoas.
 - Posse criar um **banco de faces familiares ou usar de celebridades.**
@@ -3957,11 +4014,11 @@ Arquitetura com Storage Gateway
   - Reconhecimento de celebridades
   - Caminhos (Para analise de futebol)
   - Usado e medias sociais, e-commerce
-- As imagens ou vídeos são analisadas e e validado junto a um threshold de **nível de confiança** e pode se adicionar um passo opcional que seria a validação por humanos via **Augmented AI (A2I).**  
+- As imagens ou vídeos são analisadas e e validado junto a um threshold de **nível de confiança** e pode se adicionar um passo opcional que seria a validação por humanos via **Augmented AI (A2I).**
 
-----
+---
 
-### Transcribe 
+### Transcribe
 
 - Serviço de conversão de **áudio em texto.**
 - Usa processos de aprendizados profundo de maquina chamados de **Automatic Spreech Recognition (ASR)** para converter o discurso (áudio) em texto rapidamente.
@@ -3975,26 +4032,27 @@ Arquitetura com Storage Gateway
 - Serviço de conversão de **texto em áudio**. (oposto de Transcribe).
 - Permite criar **aplicação que falam.**
 - Permite usar Lexicon e SSML
-  - **Pronunciation Lexicon** -  permite customizar a pronúncia de palavras. Assim quando aparecer
+  - **Pronunciation Lexicon** - permite customizar a pronúncia de palavras. Assim quando aparecer
     - AWS -> Amazon Web Service
     - Uniliva -> Uniliva, aquele mineiro bunito dimais
   - **SSML - Speech Synthesis Markup Language** - gera áudio através de textos e documentos. Permite customizar para :
-    - Da ênfase em palavras especificas ou frases. 
+    - Da ênfase em palavras especificas ou frases.
     - Usar pronuncia fonética.
-    - **Incluir quebra de som ou  sussurros.**
+    - **Incluir quebra de som ou sussurros.**
 
 ---
 
 ### Translate
 
-- Serviço de tradução de línguas  da AWS.
+- Serviço de tradução de línguas da AWS.
 - Permite traduzir grandes volumes de **textos rapidamente, permite localizar o conteúdo e traduzi lo de acordo com a preferência do usuário.**
 
 ---
 
-###  Lex + Connect 
+### Lex + Connect
 
 ![image-20230302074306978](assets/image-20230302074306978.png)
+
 - Lex
   - Mesma tecnologia usada pela **Alexa**. Utiliza o **ASR (Automatic Spreech Recognition)** para converte o áudio em texto.
   - Entende **linguagem natural e converte-la em texto.**
@@ -4002,7 +4060,7 @@ Arquitetura com Storage Gateway
 - Connect
   - Permite receber chamadas, criar contatos baseados na nuvem, ou seja contatos virtuais (Virtual contact center).
   - **Solução de centro de contato,** pode ser integrados com outros CRM ou AWS. De forma que receba um chamada e crie um chamado ou redirecione para um atendente (semelhante a URA).
-  - Não tem pagamento UPfront **e 80% mais econômico que concorrentes.** 
+  - Não tem pagamento UPfront **e 80% mais econômico que concorrentes.**
 
 ---
 
@@ -4021,7 +4079,7 @@ Arquitetura com Storage Gateway
 
 ---
 
-###  Comprehend Medical 
+### Comprehend Medical
 
 - Usado para interpretar **textos clínicos** (receita do medico).
 - Pode se usar o **PHI (Protected Health Information)** usando NLP
@@ -4032,24 +4090,26 @@ Arquitetura com Storage Gateway
 ### SageMaker
 
 - Serviço gerenciado pela AWS, para criação de modelos de Machine Learning.
-- Nele há a possibilidade de se criar um modelo **,treina-lo  e aplica-lo e novos conjuntos de dados para predizer coisas.**
+- Nele há a possibilidade de se criar um modelo **,treina-lo e aplica-lo e novos conjuntos de dados para predizer coisas.**
 
 ---
 
 ### Forecast
 
 ![image-20230303055156926](assets/image-20230303055156926.png)
+
 - Serviço gerenciado pela AWS, que usa ML para realizar **previsões.**
 - Exemplos: **Prever vendas futuras** de carros e outros itens.
 - **50% mais acurado** quando olhando datas por si só.
 - Reduz o **tempo de previsão de meses para horas.**
-- Use cases:  **Planejamento de demanda de produtos, planejamento de Financeiro e de recurso**.
+- Use cases: **Planejamento de demanda de produtos, planejamento de Financeiro e de recurso**.
 
 ---
 
 ### Kendra
 
 ![image-20230303055457981](assets/image-20230303055457981.png)
+
 - Serviço gerenciado pela AWS, para **busca em documentos usando ML. (Document Search service)**
 - Permite extrair resposta de documentos (text, pdf, HTML, PowerPoint, Word, FAQs).
 - Pense que é um **buscador igual ao Google.**
@@ -4059,9 +4119,10 @@ Arquitetura com Storage Gateway
 ### Personalize
 
 ![image-20230303060020714](assets/image-20230303060020714.png)
+
 - Serviço gerenciado pela AWS, para criação de APP com **recomendações personalizadas** em tempo real.
 - Exemplo:
-  - **Recomendações personalizadas de produtos,** 
+  - **Recomendações personalizadas de produtos,**
   - Re/Ranking de produtos.
   - **Email de marketing direcionados e personalizados**.
 - Usado na Amazon para recomendar produtos de acordo com histórico de pesquisa e compras.
@@ -4071,13 +4132,14 @@ Arquitetura com Storage Gateway
 ### Textracs
 
 ![image-20230303060223380](assets/image-20230303060223380.png)
+
 - Automaticamente **extrai textos, escritos a mão de documentos ou de arquivos escaneados usando IA e ML.**
 - Extrai de tabelas, PDF, imagens.
-
 
 ---
 
 ## Outros Serviços
+
 - **CodeCommit**: armazene o código em repositórios controlados por versão. O código pode existir em múltiplos branches (ramificações).
 - **CodeBuild**: construa e teste o código sob demanda em suas pipelines de CICD.
 - **CodeDeploy**: faça o deploy do código em EC2, Lambda ou ECS.
@@ -4096,6 +4158,7 @@ Arquitetura com Storage Gateway
 ### CodeGuru
 
 ![image-20230303062953533](assets/image-20230303062953533.png)
+
 - Serviço de ML para automatizar code reviews de realizar recomendações de performance no código.
 - Provem duas funcionalidades:
   - **CodeGuru Review** - Realiza o review (analise) de conteúdo estático.
@@ -4121,21 +4184,21 @@ Arquitetura com Storage Gateway
 - **Consumers**
   - EC2 para processamento em **tempo real.**
   - **Rekognition** para identificação de pessoas
-![image-20230304054215911](assets/image-20230304054215911.png)
+    ![image-20230304054215911](assets/image-20230304054215911.png)
 
 ---
 
 ### WorkSpaces
 
-- Ambientes de trabalhos seguros e  gerenciados na nuvem(como fosse uma **VDI** na nuvem).
+- Ambientes de trabalhos seguros e gerenciados na nuvem(como fosse uma **VDI** na nuvem).
 - Bom para eliminar o gerencimento de VDI (Virtual Desktop Infrastructure).
 - **Paga-se por hora** ou pode se fazer uma assinatura mensal.
 - **IP Access Control Groups**
   - Similar security group para os WorkSpace, permite configurar um range de IPs que podem acessar.
 - Integrado com o AD da Microsoft.
-![image-20230304054644456](assets/image-20230304054644456.png)
-![image-20230304054812788](assets/image-20230304054812788.png)
-![image-20230304055058906](assets/image-20230304055058906.png)
+  ![image-20230304054644456](assets/image-20230304054644456.png)
+  ![image-20230304054812788](assets/image-20230304054812788.png)
+  ![image-20230304055058906](assets/image-20230304055058906.png)
 
 ---
 
@@ -4145,15 +4208,15 @@ Arquitetura com Storage Gateway
 - Entrega para qualquer computador se a necessidade de provisionar infraestrutura.
 - As aplicação são entregues em **browsers web.**
 - Ou seja, em vez de se o uma aplicação em 10 maquinas, pode se ter em uma única maquina e realizar stream dessa aplicação em vários computadores permitindo acessa-las via browser.
-![image-20230307053059477](assets/image-20230307053059477.png)
+  ![image-20230307053059477](assets/image-20230307053059477.png)
 
 ---
 
 ### Device Farm
 
-- Device Farm é um serviço de **testes de aplicativos móveis** na nuvem oferecido pela Amazon Web Services (AWS). 
-- Ele permite que desenvolvedores de aplicativos testem suas aplicações em uma ampla variedade de dispositivos móveis reais, como smartphones e tablets, sem precisar possuir cada um desses dispositivos fisicamente. 
-- O Device Farm automatiza testes em dispositivos móveis em paralelo, ajudando a detectar erros e problemas de desempenho em seus aplicativos antes de serem lançados no mercado. 
+- Device Farm é um serviço de **testes de aplicativos móveis** na nuvem oferecido pela Amazon Web Services (AWS).
+- Ele permite que desenvolvedores de aplicativos testem suas aplicações em uma ampla variedade de dispositivos móveis reais, como smartphones e tablets, sem precisar possuir cada um desses dispositivos fisicamente.
+- O Device Farm automatiza testes em dispositivos móveis em paralelo, ajudando a detectar erros e problemas de desempenho em seus aplicativos antes de serem lançados no mercado.
 - Além disso, o Device Farm também oferece **recursos de relatórios detalhados** que ajudam os desenvolvedores a entender melhor como suas aplicações estão sendo executadas em diferentes dispositivos.
 
 ---
@@ -4161,6 +4224,7 @@ Arquitetura com Storage Gateway
 ### Macie
 
 ![macie](assets/image-20210907161308569.png)
+
 - Usa **machine learning,** para detectar dados sensíveis (**PII - Personally identifiable information**).
 - Totalmente **serveless**.
 - Analisa os dados e notifica o **CloudWatch EventBridge** que notica via **SQS**, **SNS** ou
@@ -4171,8 +4235,9 @@ Arquitetura com Storage Gateway
 ### SES
 
 ![image-20230307054458395](assets/image-20230307054458395.png)
+
 - Amazon **Simple Email Service**. É um serviço de e-mail em nuvem.
-- Permite que empresas **enviem e-mail**s em grande escala para seus clientes ou usuários finais de forma rápida, confiável e escalável. 
+- Permite que empresas **enviem e-mail**s em grande escala para seus clientes ou usuários finais de forma rápida, confiável e escalável.
 - Podem enviar e-mails transacionais, como confirmações de pedidos, notificações de transações financeiras, lembretes de senha e outros e-mails importantes relacionados ao serviço.
 - Inclui recursos de monitoramento e relatórios detalhados, permitindo que as empresas avaliem a eficácia de suas campanhas de e-mail e monitorem a entrega de seus e-mails.
   - Conjunto de configuração. Permite customizar o envio e a analise do processo.
@@ -4186,9 +4251,10 @@ Arquitetura com Storage Gateway
 ### EC2 Imagem Builder
 
 ![image-20230307055200810](assets/image-20230307055200810.png)
+
 - Serviço de **criação e gerenciamento de imagens de máquinas virtuais (VMs - AMIs) ou Container image.**
 - Serviço gratuito (Pague apenas pelos recursos usados).
-- Permite que os usuários criem, **atualizem e gerenciem imagens personalizadas de VMs para uso em ambientes de nuvem.** 
+- Permite que os usuários criem, **atualizem e gerenciem imagens personalizadas de VMs para uso em ambientes de nuvem.**
 - Permite automatizar o processo de criação de imagens, **incluindo a instalação de software, a aplicação de patches de segurança e a configuração de configurações personalizadas.**
   - Criação semanal com atualizações de segurança, ou atualização de pacotes.
 - Pode ser integrado a outros serviços como o **S3 e o Systems Manager.**
@@ -4200,15 +4266,17 @@ Arquitetura com Storage Gateway
 ### IoT Core
 
 ![image-20230307060251713](assets/image-20230307060251713.png)
+
 - Serviço de **gerenciamento de dispositivos IoT (Internet das Coisas)** . Serviço **serveless**.
-- Fornece uma plataforma para **conectar, gerenciar e controlar dispositivos IoT**, permitindo que se colete e analisem dados de dispositivos em tempo real. 
+- Fornece uma plataforma para **conectar, gerenciar e controlar dispositivos IoT**, permitindo que se colete e analisem dados de dispositivos em tempo real.
 - Com o IoT Core, os dispositivos podem se comunicar de maneira segura e escalável, usando protocolos de comunicação padrão, como **MQTT e HTTPS.**
-- Fornece recursos para gerenciamento dispositivos, como **registro de dispositivos, autenticação e autorização, gerenciamento de certificados, monitoramento de saúde do dispositivo e aplicação de atualizações de firmware.** 
-- Pode ser integrado com outros serviços como o  **S3, o Amazon Kinesis e o AWS Lambda**, para realizar análises em tempo real e processamento de dados de dispositivos IoT.
-![image-20230307060344190](assets/image-20230307060344190.png)
-![image-20230307060408582](assets/image-20230307060408582.png)
+- Fornece recursos para gerenciamento dispositivos, como **registro de dispositivos, autenticação e autorização, gerenciamento de certificados, monitoramento de saúde do dispositivo e aplicação de atualizações de firmware.**
+- Pode ser integrado com outros serviços como o **S3, o Amazon Kinesis e o AWS Lambda**, para realizar análises em tempo real e processamento de dados de dispositivos IoT.
+  ![image-20230307060344190](assets/image-20230307060344190.png)
+  ![image-20230307060408582](assets/image-20230307060408582.png)
 
 ---
+
 Data Exchange
 Data Pipeline
 Lake Formation
@@ -4226,6 +4294,7 @@ CodeStar
 Amplify
 Pinpoint
 Internet das Coisas:
+
 - AWS IoT Analytics
 - AWS IoT Core
 - AWS IoT Device Defender
@@ -4235,6 +4304,6 @@ Internet das Coisas:
 - AWS IoT SiteWise
 - AWS IoT Things Graph
 - AWS IoT 1-Click
-Serviços de mídia:
+  Serviços de mídia:
 - Amazon Elastic Transcoder
 - Amazon Kinesis Video Streams
