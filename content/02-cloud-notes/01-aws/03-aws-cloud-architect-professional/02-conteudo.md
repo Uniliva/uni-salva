@@ -3790,6 +3790,20 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Esta no nível de instâncias. Pode ser entendido como firewall das instâncias EC2.
 - Eles têm estado, o que significa que todas as alterações aplicadas a uma regra de entrada são automaticamente aplicadas a uma regra de saída.
 
+
+
+> Porta que vc deve conhecer :
+> - 22 -> SSH
+> - 21 -> FTP
+> - 22 -> SFTP
+> - 80 -> HTTP — access unsecured websites
+> - 443 -> HTTPS — access secured websites
+> - 3389 ->  RDP (Remote Desktop Protocol for Windows instance) 
+
+
+
+
+
 ### NACL
 
 ![Learn AWS Network ACL and Security Groups in under 5 minutes | by João  Marcelo Souza | Medium](assets/1K-Se2-uV-Y91vkGW3K0-8w.png)

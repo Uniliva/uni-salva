@@ -110,7 +110,9 @@ Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02
 ### EC2
 
 > {{% notice style="note" %}}
-Veja aqui uma contextualização do [EC2](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ec2)
+Contextualização:
+ - O que é [EC2](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ec2)
+ - O que é [Security Group]https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#security-group)
  {{% /notice %}}
 
  - Key pair
@@ -124,6 +126,7 @@ Ao gerar o key pair atente-se ao:
   - .ppk - formato do putty (windows 7 e 8).
   {{% /notice %}}
 
+- Security Group
 
 
 #### Use data
