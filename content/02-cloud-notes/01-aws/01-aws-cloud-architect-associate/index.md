@@ -491,7 +491,7 @@ No caso do AWS, refere-se as multi AZs, que dão a segurança de que caso uma fi
   ![ENI - interface de rede elástica](assets/image-20210819053719805.png)
   ![Movendo ENI](assets/image-20210819053745468.png)
 
-##### Secure Group
+##### Security Group
 
 - Firewall virtual para sua instância para **controlar o tráfego** de entrada e saída.
 - Fica restrito a uma **VPC**.

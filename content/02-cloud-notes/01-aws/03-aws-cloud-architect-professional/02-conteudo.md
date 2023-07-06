@@ -211,7 +211,7 @@ weight: 1
   - Amazon S3
   - Amazon S3 Glacier
   - AWS Storage Gateway
-{{% /expand %}}
+  {{% /expand %}}
 
 ---
 
@@ -1092,9 +1092,21 @@ Resource police restritas para a organização
 
 #### Tipos de instâncias
 
-- https://aws.amazon.com/pt/ec2/instance-types/
-  ![Tipos de instancias](assets/image-20210819053521220.png)
-  ![image-20230213065140415](assets/image-20230213065140415.png)
+- Veja [tipos de instâncias](https://aws.amazon.com/pt/ec2/instance-types/)
+- Veja [informações extras sobre instâncias](https://instances.vantage.sh/)
+
+![Tipos de instancias](assets/image-20210819053521220.png)
+ ![image-20230213065140415](assets/image-20230213065140415.png)
+
+- Nomenclatura dos tipos de instâncias:
+
+  - exemplo: m5.2xlarge
+
+    - m -> classe da instância.
+    - 5 -> geração das maquinas.
+    - 2xlarge -> Tamanho das instâncias
+
+    
 
 ---
 
@@ -3768,7 +3780,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Deve se usar um **IP Elastico** junto a instância.
   - Para que funcione deve ser **desabilitado a Checagem de Sorce/Destination (EC2 settings).**
 
-### Secure Group
+### Security Group
 
 ![sg](assets/image-20210907213210726.png)
 

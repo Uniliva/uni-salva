@@ -99,9 +99,49 @@ Armazenamento:
 
 ### AWS Budget
 
-{{% notice style="note" %}}
+> {{% notice style="note" %}}
 Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-budget)
 {{% /notice %}}
+
+
+
+---
+
+### EC2
+
+> {{% notice style="note" %}}
+Veja aqui uma contextualização do [EC2](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ec2)
+ {{% /notice %}}
+
+ - Key pair
+> {{% notice style="info" %}}
+Ao gerar o key pair atente-se ao:
+- Tipo da chave:
+  -	RSA:  Usado em linux e Windows.
+  -	ED25519: Não suportado pelo Windows.
+- Formato
+  - .pem - formato aberto usado pelo openssh.
+  - .ppk - formato do putty (windows 7 e 8).
+  {{% /notice %}}
+
+
+
+#### Use data
+
+Usado para pre configurar um instancia Ec2. O exemplo abaixo instala o apache na instância.
+
+```shell
+## Considerando que AMI seja RedHat Based.
+#!/bin/bash
+yum update -y
+yum install -y httpd.x86_64
+systemctl start httpd.service
+systemctl enable httpd.service
+echo “Hello World from $(hostname -f)” > /var/www/html/index.html
+```
+
+
+
 
 ---
 
@@ -115,7 +155,7 @@ Pré requisitos:
 - Instalar o [AWS CLI install](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - Criar um **Access keys** para o usuario em IAM\Users\NOME_USER.
   - vá até a aba security credentials e depois **Access keys**.
-{{% /notice %}}
+  {{% /notice %}}
 - Para configurar o **awscli** use o comando:
 ```shell
 aws configure
