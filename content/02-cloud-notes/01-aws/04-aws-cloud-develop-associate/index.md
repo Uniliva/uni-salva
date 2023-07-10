@@ -19,34 +19,41 @@ Leia sobre a [AWS Certified Developer - Associate. (DVA-C02)](https://aws.amazon
 |Domínio 2: Segurança |26%|
 |Domínio 3: Implantação |24%|
 |Domínio 4: Solução de problemas e otimização |18%|
+
+
 Recursos e produtos da AWS no escopo
 {{% expand  title="veja a lista completa" %}}
 Análise:
 - [ ] Amazon Athena
 - [ ] Amazon Kinesis
 - [ ] Amazon OpenSearch Service
+
 Integração de aplicativos:
 - [ ] AWS AppSync
 - [ ] Amazon EventBridge (Amazon CloudWatch Events)
 - [ ] Amazon Simple Notification Service (Amazon SNS)
 - [ ] Amazon Simple Queue Service (Amazon SQS)
 - [ ] AWS Step Functions
+
 Computação:
 - [ ] Amazon EC2
 - [ ] AWS Elastic Beanstalk
 - [ ] AWS Lambda
 - [ ] AWS Serverless Application Model (AWS SAM)
+
 Contêineres:
 - [ ] AWS Copilot
 - [ ] Amazon Elastic Container Registry (Amazon ECR)
 - [ ] Amazon Elastic Container Service (Amazon ECS)
 - [ ] Amazon Elastic Kubernetes Services (Amazon EKS)
+
 Banco de dados:
 - [ ] Amazon Aurora
 - [ ] Amazon DynamoDB
 - [ ] Amazon ElastiCache
 - [ ] Amazon MemoryDB para Redis
 - [ ] Amazon RDS
+
 Ferramentas do desenvolvedor:
 - [ ] AWS Amplify
 - [ ] AWS Cloud9
@@ -59,6 +66,7 @@ Ferramentas do desenvolvedor:
 - [ ] AWS CodePipeline
 - [ ] AWS CodeStar
 - [ ] AWS X-Ray
+
 Gerenciamento e governança:
 - [ ] AWS AppConfig
 - [ ] AWS Cloud Development Kit (AWS CDK)
@@ -68,12 +76,14 @@ Gerenciamento e governança:
 - [ ] Amazon CloudWatch Logs
 - [ ] AWS Command Line Interface (AWS CLI)
 - [ ] AWS Systems Manager
+
 Redes e entrega de conteúdo:
 - [ ] Amazon API Gateway
 - [ ] Amazon CloudFront
 - [ ] Elastic Load Balancing
 - [ ] Amazon Route 53
 - [ ] Amazon VPC
+
 Segurança, identidade e conformidade:
 - [ ] AWS Certificate Manager (ACM)
 - [ ] AWS Certificate Manager Private Certificate Authority
@@ -83,6 +93,7 @@ Segurança, identidade e conformidade:
 - [ ] AWS Secrets Manager
 - [ ] AWS Security Token Service (AWS STS)
 - [ ] AWS WAF
+
 Armazenamento:
 - [ ] Amazon Elastic Block Store (Amazon EBS)
 - [ ] Amazon Elastic File System (Amazon EFS)
@@ -112,7 +123,7 @@ Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02
 > {{% notice style="note" %}}
 Contextualização:
  - O que é [EC2](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ec2)
- - O que é [Security Group]https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#security-group)
+ - O que é [Security Group](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#security-group)
  {{% /notice %}}
 
  - Key pair
@@ -142,6 +153,16 @@ systemctl start httpd.service
 systemctl enable httpd.service
 echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 ```
+
+---
+
+### ELB / ASG
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [ELB](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elastic-load-balancing)
+ - O que é um [ALG](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#auto-scaling-group-alg)
+ {{% /notice %}}
 
 
 
@@ -227,3 +248,20 @@ aws iam list-user
 
 > a segurança na cloud é compartilhada e a AWS e nós temos responsabilidades para garantir a conformidade e segurança
 ![image-20230705054643236](assets/image-20230705054643236.png)
+
+
+---
+## Armazenamento:
+
+> {{% notice style="note" %}}
+Contextualização:
+ - Armazenamento [guia completo AWS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#storage)
+ 
+ Veja direto o que é:
+ - [EBS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ebs---elastic-block-storage)
+ - [Instance store](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#instance-store)
+ - [EFS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#efs---elastic-file-system)
+ - [S3](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-s3)
+{{% /notice %}}
+
+

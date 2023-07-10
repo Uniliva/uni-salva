@@ -1055,7 +1055,7 @@ Resource police restritas para a organização
 - Quando parado os dados de memorias são perdidos e os dados no volume **EBS** e mantido ate a próxima inicialização
 - Caso queira manter os dados de memoria salvo quando para use a opção de **Hibernate** (hibernar), que mantém em memoria os dados.
 - Quando destruído a instância os dados de memoria e do **EBS** principal são destruídos, mas é possível adicionar um segundo EBS ou marcar para preservar o default.
-- **EC2 Nitro** - nova tecnologia de virtualização adotada pela AWS,
+- **EC2 Nitro** - nova tecnologia de virtualização adotada pela AWS.
   - Melhora o uso da rede.
   - Melhora o **IOPS** (Input/output operations per second) dos armazenamento **EBS**.
 - **EC2 Graviton**
@@ -1081,12 +1081,12 @@ Resource police restritas para a organização
       - As instâncias podem compartilhar dados da partição vias EC2 Metadata.
         ![AWS - Placement Groups](assets/placementgroups.jpeg)
 - É possível mover uma instância de um placement group. Para isso é necessário:
-  - **Para a instância e usando o CLI mudar ela de placement group e depois inicia-la novamente.**
+  - **Parar a instância e usando o CLI mudar ela de placement group e depois inicia-la novamente.**
 - **Metricas**
   ![image-20230213202651772](assets/image-20230213202651772.png)
 - Instance recovery
-  - O CloudWatch monitora a instância, caso a instância e problema é possível recupera-la usando uma alarme, criando uma nova com o Mesmo IP a mesa rede, os mesmos meta dados e o mesmo placement group.
-  - Alem disso é possível alerta vias SNS a equipe.
+  - O **CloudWatch** monitora a instância, caso a instância e problema é possível recupera-la usando uma alarme, criando uma nova com o mesmo IP na mesma rede, com os mesmos metadados e o mesmo **placement group**.
+  - Alem disso é possível alerta vias **SNS** a equipe.
 
 ---
 
@@ -1117,19 +1117,19 @@ Resource police restritas para a organização
   - Não necessário contrato, só rodar quando necessário.
   - Recomendado para cargas de trabalho curtas, (dura 3 meses, ou 1 mês).
 - **reserved Instances**
-  - Se faz um contrato de **1 a 3 anos,** se reduz o custo em ate **75%.**
-  - Recomendado para **longas cargas de trabalho**, exemplo banco de dados
+  - Se faz um contrato de **1 a 3 anos,** se reduz o custo em até **75%.**
+  - Recomendado para **longas cargas de trabalho**, exemplo banco de dados.
   - Pode ser compartilhado entre as contas de uma organização.
   - **Tipos de reservas**
-    - **reserved Instances** - onde se reserva um instância de um determinado tipo.
-    - **convertible reserved instance** - onde se reserva um instância e é possível alterar o tipo depois pode ter ate **54% de desconto**.
-    - **scheduled reserved instance** - exemplo - toda terça entre 20 a 22 horas
+    - **reserved instances** - onde se reserva um instância de um determinado tipo.
+    - **convertible reserved instance** - onde se reserva um instância e é possível alterar o tipo depois pode ter até **54% de desconto**.
+    - **scheduled reserved instance** - exemplo - toda terça entre 20 a 22 horas.
   - **Tipos de pagamento**
     - **NURI** - no upfront payments - Nenhum pagamento adiantado - redução em ate **32%.**
     - **PURI** - partial up-front - Adiantado parcial - redução em ate **42% .**
-    - **AURI** - All up-front - Tudo adiantado - redução em ate **43%.**
+    - **AURI** - all up-front - Tudo adiantado - redução em ate **43%.**
 - **spot instances**
-  - Usado para aplicação **Serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar ate 90% mais baratas. a desvantagens e que ela pode para a qualquer momento, quando quiser.
+  - Usado para aplicação **serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar ate 90% mais baratas. a desvantagens e que ela pode parar a qualquer momento, quando quiser.
   - Não são recomendadas para aplicações que precisam de disponibilidades.
   - AWS pode interromper com uma notificação de 2 minutos.
     - **spot fleets**
@@ -1146,21 +1146,21 @@ Resource police restritas para a organização
         - Diversificada - Distribuída, bom para carga de trabalho que precisa esta disponível e que tenha longo tempo de execução.
         - Capacidade otimizada - bom para cargas pesadas
 - **dedicate instance**
-  - Aluga se uma instância que só será sua, outro usuários não terão acesso a hardware.
+  - Alugar se uma instância que só será sua, outro usuários não terão acesso a hardware.
 - **dedicate host**
   - Aluga-se um servidor físico, para demandas de compliance principalmente.
   - Aluga-se por ate 3 anos.
   - Mas caro tipo de instância.
-- **Salving plan**
+- **salving plan**
   - Modelo de economia baseado no compromisso de uma quantidade de uso medido em horas num período de 1 ou 3 anos.
   - Economia de ate 66%, é flexível e não precisa se preocupar em gerenciar o custo por instância, apenas com a quantidade de horas usados nas cargas de trabalho
   - **EC2 Instance Savings plan** - Economia de ate 72 %, seleciona os tipos de instâncias e as regiões onde ela vai operar. Pode se alterar entre os tipos de instâncias selecionadas e os SO.
   - **Compute Savings plan** - Economia de ate 66 %, tem se maior flexibilidade na conversão do tipo de instância e na movimentação entre regiões. Alem de poder adicionar Lambdas e Spots.
   - **SageMaker Savings plan** - Economia de ate 64 %, para carga de trabalhos do SageMaker.
-- **Capacity Reservation**
+- **capacity reservation**
   - Permite reserva instâncias por um período "**curto de tempo**", sem precisar se comprometer com um plano de 1 ou 3 anos.
   - Usando por exemplo para reservar maquinas para a **black friday.**
-  - Pode ser combinado com o **Salving plan.**
+  - Pode ser combinado com o **salving plan.**
 
 ---
 
@@ -1395,7 +1395,7 @@ Resource police restritas para a organização
     - Opera no level 3 (rede) - protocolo IP
     - Usado para balecear carga de soluções de terceiro
     - Usado para Firewall, fazer sistema de detecção e intrusão. Ou seja, usado quando se deseja escanear o trafico.
-    - Utiliza o protocolo GENEVE no porto 6081.
+    - Utiliza o protocolo GENEVE no porta 6081.
       ![image-20230215071036163](assets/image-20230215071036163.png)
   - **Network load balancer** NLB -(v2 - new generation - 2017)
     - tcp, tls (secure tcp) e udp.
@@ -3417,7 +3417,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Usado para **gerenciamento de custo antes de uma demanda**, ou seja definir orçamento para determinada demanda.
 - Pode ser usado para **saber quanto se usou** daquele planejamento inicial.
 - Através das **tags** permite ver onde se está gastando seu dinheiro.
-- Pode gerar alarmes de gastos, enviar email, postar em tópicos **SNS** (ate 5 topicos) e configurar ações (Lambdas).
+- Pode gerar alarmes de gastos, enviar email, postar em tópicos **SNS** (até 5 topicos) e configurar ações (Lambdas).
 - Pode criar até **20.000 orçamentos. (soft Limit)**
 - **O 2 são de graça**, mas os demais se paga **0.02 $ por dia por Budget.**
 - Há 4 Tipos de Budget que podem ser criados:
@@ -3435,7 +3435,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - **Parar Instâncias do EC2 ou RDS.**
 - Podem ser executadas automaticamente, ou pode se ter um workflow de aprovação para execução.
 
-#### Centralized Buget Management
+#### Centralized Budget Management
 
 - Permite gerenciar os **Budget em um conta centralizada.**
 - Para cada conta que existir na organização deve haver um **Budget para ela e depois esse budget** pode se gerenciado pela conta centralizada.
