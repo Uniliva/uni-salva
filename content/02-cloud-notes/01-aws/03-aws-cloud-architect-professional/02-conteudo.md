@@ -2484,7 +2484,7 @@ Serviço de banco de dados relacional da AWS.
   ![image-20230220111829023](assets/image-20230220111829023.png)
 - Replica em mais de uma AZ, para segurança e recuperação de desastres (quando habilitado é gerado um DNS name e o chateamento em caso de falha é automático.).
 - Executado em uma VPC, se for acessar via Lambda lembre-se que deve estar na mesma VPC.
-- Permite replicas de leitura (**read replicas**) para melhorar a performance. Pode se criar replicas em outras regiões para diminuir a latência. Para se distribuir o acesso de leitura entre essas replicas usa-se o Route 53,onde pode se configurar uma política de peso para encaminhamento (Weighted Record Set)
+- Permite replicas de leitura (**read replicas**) para melhorar a performance. Pode se criar replicas em outras regiões para diminuir a latência. Para se distribuir o acesso de leitura entre essas replicas usa-se o Route 53, onde pode se configurar uma política de peso para encaminhamento (Weighted Record Set)
 - **Tipos**
   - **Postgres**
   - **Mysql**
@@ -2492,11 +2492,13 @@ Serviço de banco de dados relacional da AWS.
   - **Oracle**
   - **Aurora**
 - RDS para Lamba
-  - Caso use Lambda, como é serveless, pode se ter um problema de TooManyConnections.
-  - Para evitar isso usa-se o RDS Proxy, que fica responsável por gerenciar o pool de conexões, liberando sempre que se encerra uma lambda.
-  - ![image-20230220112418563](assets/image-20230220112418563.png)
+  - Caso use Lambda, como é serveless, pode se ter um problema de **TooManyConnections**.
+  - Para evitar isso usa-se o **RDS Proxy**, que fica responsável por gerenciar o pool de conexões, liberando sempre que se encerra uma lambda.
+
+![image-20230220112418563](assets/image-20230220112418563.png)
 - RDS para ORACLE
-  ![image-20230220112048190](assets/image-20230220112048190.png)
+
+![image-20230220112048190](assets/image-20230220112048190.png)
 - **Pilares da well architecture**
   ![well-arch](assets/image-20210905112316072.png)
 

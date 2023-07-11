@@ -166,6 +166,29 @@ Contextualização:
 
 
 
+---
+
+## Banco de dados:
+
+### RDS
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [RDS](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds)
+
+- Veja também:
+  - [backups](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#backups)
+  - [replicas de leituras](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#read-replicas)
+   - [Multi AZ disastre recover](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#multi-az-disastre-recover)
+ {{% /notice %}}
+
+- Para converte um instancia do **RDS** de Sigle AZ para **Multi AZ**, só é necessario alterar o banco e mudar nas configuraçõa. E isso não gera disponibilidade.
+### Aurora
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [Aurora](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aurora)
+ {{% /notice %}}
 
 ---
 
@@ -256,12 +279,11 @@ aws iam list-user
 > {{% notice style="note" %}}
 Contextualização:
  - Armazenamento [guia completo AWS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#storage)
- 
+
  Veja direto o que é:
  - [EBS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ebs---elastic-block-storage)
  - [Instance store](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#instance-store)
  - [EFS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#efs---elastic-file-system)
  - [S3](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-s3)
 {{% /notice %}}
-
 
