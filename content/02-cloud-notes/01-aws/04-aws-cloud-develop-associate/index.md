@@ -281,6 +281,22 @@ aws iam list-user
 
 ---
 
+### VPC
+
+{{% notice style="note" %}}
+Não cai muitas coisas sobre isso na prova da certificação develop, mas é importante conhecer os conceitos.
+
+![image-20230724075905032](assets/image-20230724075905032.png)
+
+> Leitura recomendada:
+
+ - [VPC para arquitetos](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-vpc)
+   {{% /notice %}}
+
+
+---
+
+
 ## Segurança, identidade e conformidade:
 
 
