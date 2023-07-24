@@ -1623,6 +1623,20 @@ Resource police restritas para a organização
   - Na AWS é grátis.
   - Checa a saúde do recurso.
   - Funciona para registo to tipo root ex: -> www.google.com -> www.search.google.com
+  - Não precisa setar TTL, pois que senta é o Route 53, no resource.
+  - Usado com ELB, Cloud Front, API gateway, Beanstalk, s3 web sites, vpc interface enpoints, global accelerator e Route 53 (na mesma zona).
+  - Não é possível setar para um DNS name de uma instância EC2.
+- NS -> Name Server - serve para apontar para outro DNS resolver.
+
+
+
+```shell
+# para verificar use o comando prar verificar os valores retornado pelos dns
+nslookup <url>
+dig <url> 
+```
+
+
 
 #### Routing police
 
@@ -1631,7 +1645,8 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
 - **Simple routing police** (política de roteamento simples).
   - A se chamar um domínio ele devolve o IP do servidor.
   - Não tem health checks.
-  - Se cria um recorde e pode se retornar vários valores e o **browser** decide qual é o melhor para ele.
+  - Se cria um recorde e pode se retornar um ou vários valores e o **browser** decide qual é o melhor para ele.
+  - Caso use alias só é possível retornar um item.
 - **Weighted routing police** (política de roteamento com pesos).
   - É dado um peso para cada servidor, que define a percentagem de requisição que será
     redirecionado de acordo com o peso.
@@ -1650,7 +1665,7 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
   - Redireciona o usuário para o recurso mais próximo da localização do mesmo.
   - Diferencia se do anterior, pois ele é usado para países enquanto esse seria para locais dentro do pais.
   - Usa o Bias para manipular a proximidade, com ele é possível dizer o quando quer redirecionar do traffico. Como se fosse uma preferência maior.
-  - ![image-20230216203132009](assets/image-20230216203132009.png)
+  ![image-20230216203132009](assets/image-20230216203132009.png)
   - Traffic Flow
     - Simplifica a criação de record grandes e com configurações complexas.
     - Tem um editor visual para se montar árvores de roteamento.
@@ -1659,6 +1674,13 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
   - Usado para devolver vários retorno e se um dele falhar, se terá outras para redirecionar, se a necessidade de consultar o **DNS** novamente.
   - Se cria vários **record** com o mesmo nome, com retornos diferentes cada um. Quanto o browser consulta é devolvido todos os retornos e o **browser** escolhe o que melhor lhe atende.
   - Pode retornar ate 8 record saudável e validados
+- **IP-based routing police** (Política de rateamento baseado no bloco de ips)
+  - Pode se criar um redirecionamento de acordo como bloco de IP que esta chamando (cidr).
+  - Usado para diminuir custos de rede.
+  - exemplo tudo que for da rede 10.10.10.0/24 vai para o target 1.2.3.4 e tudo que for da rede 19.14.15.0/24 vai para o target 2.8.6.9.
+
+
+![image-20230724070556948](assets/image-20230724070556948.png)
 
 #### Health check
 
@@ -1668,14 +1690,16 @@ Pode se configurar health checks para monitora a disponibilidade e a saúde da a
 - Há custos adicionais de outras features (String matching, https, latency measurament).
 - Pode se usar http, https, tcp para se configurar como será a verificação.
 - Disponibiliza 15 diferentes hosts para checagem (em varias regiões)
+- há o modelo de health check calculado, usado para validar o outros health checks e em cima de cada verificação se calcula um valor que diz se esta estável ou não.
 - E possível passar dados customizados (text) no retorno do health check nos primeiros 5120 bytes e com isso configurar para passar ou falhar na verificação.
   ![image-20230216204214129](assets/image-20230216204214129.png)
-- Para verificar a saúde de uma maquina numa subnet privado, pode se criar métricas que são envidas para o cloud Watch e dali é possível checa-las com o heath check.
-- ![image-20230216204713686](assets/image-20230216204713686.png)
+- Para verificar a saúde de uma maquina numa **subnet privado**, pode se criar métricas que são envidas para o cloudwatch e dali é possível checa-las com o health check.
+![image-20230216204713686](assets/image-20230216204713686.png)
 
 #### Hosted Zones
 
 - É um container de registros para definir como rotear o tráfego para um domínio e seus subdomínios.
+- Tem um custo de 0.50 por zona criada.
 - Podem ser
   - **Publicos** - contém records que especificam rotas para a internet.
   - **Privados** - contém records que especificam rotas internas vista apenas nas VPCs.

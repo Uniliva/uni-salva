@@ -36,7 +36,7 @@ Integração de aplicativos:
 - [ ] AWS Step Functions
 
 Computação:
-- [ ] Amazon EC2
+- [x] Amazon EC2
 - [ ] AWS Elastic Beanstalk
 - [ ] AWS Lambda
 - [ ] AWS Serverless Application Model (AWS SAM)
@@ -48,11 +48,11 @@ Contêineres:
 - [ ] Amazon Elastic Kubernetes Services (Amazon EKS)
 
 Banco de dados:
-- [ ] Amazon Aurora
-- [ ] Amazon DynamoDB
-- [ ] Amazon ElastiCache
-- [ ] Amazon MemoryDB para Redis
-- [ ] Amazon RDS
+- [x] Amazon Aurora
+- [x] Amazon DynamoDB
+- [x] Amazon ElastiCache
+- [x] Amazon MemoryDB para Redis
+- [x] Amazon RDS
 
 Ferramentas do desenvolvedor:
 - [ ] AWS Amplify
@@ -74,21 +74,21 @@ Gerenciamento e governança:
 - [ ] AWS CloudTrail
 - [ ] Amazon CloudWatch
 - [ ] Amazon CloudWatch Logs
-- [ ] AWS Command Line Interface (AWS CLI)
+- [x] AWS Command Line Interface (AWS CLI)
 - [ ] AWS Systems Manager
 
 Redes e entrega de conteúdo:
 - [ ] Amazon API Gateway
 - [ ] Amazon CloudFront
 - [ ] Elastic Load Balancing
-- [ ] Amazon Route 53
+- [x] Amazon Route 53
 - [ ] Amazon VPC
 
 Segurança, identidade e conformidade:
 - [ ] AWS Certificate Manager (ACM)
 - [ ] AWS Certificate Manager Private Certificate Authority
 - [ ] Amazon Cognito
-- [ ] AWS Identity and Access Management (IAM)
+- [x] AWS Identity and Access Management (IAM)
 - [ ] AWS Key Management Service (AWS KMS)
 - [ ] AWS Secrets Manager
 - [ ] AWS Security Token Service (AWS STS)
@@ -146,11 +146,12 @@ Usado para pre configurar um instancia Ec2. O exemplo abaixo instala o apache na
 
 ```shell
 ## Considerando que AMI seja RedHat Based.
+
 #!/bin/bash
 yum update -y
-yum install -y httpd.x86_64
-systemctl start httpd.service
-systemctl enable httpd.service
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
 echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 ```
 
@@ -177,18 +178,62 @@ Contextualização:
  - O que é [RDS](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds)
 
 - Veja também:
-  - [backups](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#backups)
-  - [replicas de leituras](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#read-replicas)
+  - [Backups](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#backups)
+  - [Replicas de leituras](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#read-replicas)
    - [Multi AZ disastre recover](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#multi-az-disastre-recover)
- {{% /notice %}}
+   {{% /notice %}}
 
 - Para converte um instancia do **RDS** de Sigle AZ para **Multi AZ**, só é necessario alterar o banco e mudar nas configuraçõa. E isso não gera disponibilidade.
+
+---
+
 ### Aurora
 
 > {{% notice style="note" %}}
 Contextualização:
  - O que é [Aurora](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aurora)
  {{% /notice %}}
+
+---
+
+### ElastiCache
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [ElastiCache](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elasticache)
+ {{% /notice %}}
+
+ - Estrategias de cache
+   - **Lazy loading / Cache aside / Lazy population**
+     - Tenta recuperar do cache, se não encontrar consulta no banco e salva no cache.
+     - Vantagens:
+       - Os dados em cache serão apenas os usados o que reduz aramazenamento em cache.
+     - Desvantagens
+       - Os dados em cache pode esta desatualizados, pois só serão consultados com não estiverem mais em cache.
+       - Demora mais para responder pois precisa buscar no banco (Read Penalty).
+   - **Write Through**
+     - Adiciona ou  atualiza o cache ao se atualizar o banco de dados.
+     - Vantagens:
+       - Os dados em cache estaram sempre atualizados.
+       - Não há demora na busca do cache pois todo dados sera adicionado ao cache (write Penalty).
+     - Desvantagens
+       - Caso os dados do cache seja perdido, perde as vantagem disso, sendo necessario implementar o **lazy load**.
+       - Todos os itens estaram em cache, sendo que talvez não seja necessário.
+   - **TTL**
+     - Termite setar um tempo de expiração do dado em cache.
+     - Util para limpar dados antigos não usado, ou para força o **lazy load**.
+
+---
+
+### MemoryDB
+
+- Serviço de banco de dados em memória.
+- Compativel com o REDIS.
+- Ultra performatico com mais de 160 milhões de request por segundo.
+- Tem dados gravados via logs de transação em Multi AZ.
+- Pode escalar de 10 GBs ate 100 TBs de armazenamento.
+- Usado em Web e mobile apps, gamming online e streaming de midia.
+
 
 ---
 
@@ -213,6 +258,26 @@ aws configure
 # use o comando para testa e listar o usuarios
 aws iam list-user
 ```
+
+---
+
+## Redes e entrega de conteúdo:
+
+### Route 53
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [Route 53](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-route-53)
+   {{% /notice %}}
+
+
+
+- Terminologia
+
+![image-20230724061118595](assets/image-20230724061118595.png)
+
+
 
 ---
 
