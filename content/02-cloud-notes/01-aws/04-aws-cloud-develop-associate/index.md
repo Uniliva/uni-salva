@@ -140,6 +140,8 @@ Ao gerar o key pair atente-se ao:
 - Security Group
 
 
+
+
 #### Use data
 
 Usado para pre configurar um instancia Ec2. O exemplo abaixo instala o apache na instância.
@@ -154,6 +156,33 @@ systemctl start httpd
 systemctl enable httpd
 echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 ```
+
+#### IMDS - EC2 instance metadata
+
+- Informações sobre a instância.
+- Permite que instancias vejam informações sobre elas mesmas, sem a necessidade de ter um IAM Role.
+- Pode ser acessado via **URL**: http://169.254.169.254/latest/meta-data.
+  - Permite acessar tanto o user data (script de inicialização) quanto o meta data.
+- Ha duas versões
+  - **IMDSv1** 
+    - Acessa diretamente a **URL**: http://169.254.169.254/latest/meta-data.
+  - **IMDSv2** -
+    - Mais seguro pois agora o acesso é feito em dois passos
+    - Recuperar o token de sessão.
+    - ```shell
+      TOKEN=`curl -X PUT "http://169.254.169.154/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-secondas:21060"`
+      ```
+    - Recuperar os dados passando o token via heardes:
+    - ```shell
+      curl http://169.254.169.254/latest/metadata -H "X-aws-ec2-metadata-token: $TOKEN" 
+      ```
+- Quando se configura credencias para a instancia ela usa o **IMDS** para recuperar-las usando a chamada
+```shell
+  curl  -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/metadata/identity-credentials/ec2/security-credentials/ec2-instance
+```
+
+  
+
 
 ---
 
@@ -239,25 +268,90 @@ Contextualização:
 
 ## Gerenciamento e governança:
 
+### SDK
+
+- O AWS CLI usa a SDK do Python (boto3).
+- Caso não sete uma região de default é a us-east-1.
+
 
 ### AWS CLI
 
 {{% notice style="info" %}}
 Pré requisitos:
 - Instalar o [AWS CLI install](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-- Criar um **Access keys** para o usuario em IAM\Users\NOME_USER.
+- Criar um **Access keys** para o usuário em IAM\Users\NOME_USER.
   - vá até a aba security credentials e depois **Access keys**.
   {{% /notice %}}
 - Para configurar o **awscli** use o comando:
 ```shell
 aws configure
 # preencha os itens com os dados do access key.
+
+# serve para configurar novos profiles (outra conta)
+aws configure --profile <nome_novo_profile>
+
 ```
-- Após isso o **awscli** já estara configurado.
+- Após isso o **awscli** já estará configurado.
 ```shell
-# use o comando para testa e listar o usuarios
+# use o comando para testa e listar o usuários
 aws iam list-user
+
+# use o comando para testa e listar o usuários pra um profile e
+aws iam list-user --profile <nome_profile>
 ```
+
+
+#### MFA com CLI
+
+- Primeiro é necessário ter o um dispositivo configurado no usuário que se deseja usar.
+- Para usar MFA é necessário criar uma sessão temporária, usando a API **STS GetSessionToken**.
+```shell
+aws sts get-session-token --serial-number <arn-do-dispositivo-mfa> --token-code <codigo-mfa> --duration-seconds 3600
+```
+- Isso vai retornar credenciais temporárias.
+- Após isso é necessário configurar um profile com esses dados.
+  - Necessário adicionar o token de sessão manualmente no arquivo de configuração.
+  - Recomendo criar um script que recebe o token e atualiza o profile.
+
+---
+
+### AWS Limits (Quotas)
+
+- **API Rate Limits**
+  - Descreve quantas chamadas se pode fazer nas APIs.
+  - exemplos: 
+    - a API describeInstances do ec2 é de 100 chamadas por segundo. 
+    - a API getObjects do s3  é de 55000 por segundo por prefix.
+  - Para erros intermitentes é recomendado implementar o **exponential backoff**.
+  - Para erros consistente (limite ultrapassado sempre) recomenda-se solicitar um aumento no limite no **throttling**.
+
+- **Service Quotas** - Limites de serviços
+  - Descreve os limites dos serviços.
+  - Pode se usar a API de contas para aumentar os limites ou abir um abir um ticket junto a AWS.
+
+
+#### Exponential Backoff
+- Aplica-se a todos o serviços AWS.
+- Se estiver recebendo o erro **ThrottlingException** de forma intermitente.
+- É um mecanismo de retry que já vem configurado nas chamadas de API via SDK.
+- Mas caso use CLI, deve implementar caso necessário.
+- Quais tipo de erros deve se usar o retry? apenas com erros **5xx** e **throttling**.
+
+![image-20230725064736484](assets/image-20230725064736484.png)
+
+
+---
+
+### Credentials Provider chain
+
+Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
+
+- CLI
+![image-20230725065043214](assets/image-20230725065043214.png)
+
+- SDK
+![image-20230725065206292](assets/image-20230725065206292.png)
+
 
 ---
 
