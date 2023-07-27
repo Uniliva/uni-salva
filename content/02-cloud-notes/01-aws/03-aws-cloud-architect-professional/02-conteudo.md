@@ -1962,6 +1962,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - **Glacier Vault Lock -** Permite configurar para que arquivos nunca seja deletados, usado em complience.
 - **S3 Object Lock** - Semelhante ao anterior, mas permite configurar a retenção do objeto, por exemplo o arquivo não pode ser modificado por 30 dias, o a nota fiscal não pode ser apagada por 5 anos
 - S3 events integra apenas com SNS, SQS e Lambda.
+- Contém metadados e tags, porém não é possível buscar objetos por eles, caso preciso é necessário colocar esses metadados no DynamoDB e usa-lo para criar filtros.
 
 #### Precificação
 
@@ -1995,12 +1996,24 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     ![image-20230223070240725](assets/image-20230223070240725.png)
     Recomendação de leitura: [Analise as classes de armazenamento do Amazon S3, do padrão ao Glacier](https://searchaws.techtarget.com/tip/Analyze-Amazon-S3-storage-classes-from-Standard-to-Glacier)
 
-#### S3 - Encryption
+#### S3 - Encryption for Objects
 
-![Encryption](assets/image-20210819054838607-1676804591268-1.png)
-
-- É possivel criar uma **bucket police** para validar se um objeto foi **encriptadado**.
-- Caso o **bucket** tenha uma encriptação habilitado por default, e se **criptografe** o arquivo durante o upload, esse arquivo não será encriptado de novo pelo encriptação default.
+- **SSE-S3** - Criptografa os objetos do S3 usando chave gerenciada pela AWS (AES-256).
+  - Usada para todos os dados no Glacier.
+- SSE-KMS - Criptografa os objetos do S3 usando chaves criadas no KMS.
+  - As chamadas de uso do KMS é logado no cloudtrail.
+  - **Caso esteja usando essa criptografia, se o bucket for publico, o usuário não vai conseguir ver os objetos**, pois ele não vai ter acesso a chave.
+  - Para conseguir realizar uploads no bucket, precisa ter acesso a permissão (**kms:GenerateDataKey**) caso contrario não vai conseguir.
+- SSE-C - Criptografa os objetos do S3 usando a chave gerenciada pelo usuário, quando se usa por exemplo o Cloud HSM.
+- Criptografia Client-Side - Quando o usuário criptografa os dados antes de enviar ao S3.
+  ![Encryption](assets/image-20210819054838607.png)
+- É possível criar uma bucket police para validar se um objeto foi criptografado com a condição **aws:secureTransport.**
+- Caso o bucket tenha uma encriptação habilitado por default, e se criptografe o arquivo durante o upload, esse arquivo não será encriptado de novo pelo encriptação default.
+- Criptografia em transito (SSL / TLS)
+  - S3 expõe os endpoints:
+    - http - sem criptografia. - Não recomendado
+    - https - com criptografia em vôo.
+      - Obrigatório quando se usa criptografia SSE-C.
 
 #### S3 - Data consistency
 
@@ -2043,21 +2056,32 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 1. Forma de acesso ao bucket e aos objetos contido nele.
 
-- **Baseada em usuários** (user based) - diz-se que para ter acesso processar ter permissão via IAM Console
+- **Baseada em usuários** (user based) - diz-se que para ter acesso precisa ter permissão via IAM Console, ou seja toda chamada de API é validada junto ao IAM.
 - **Baseada em recurso** (Resource based)
   - **Bucket Polices**
     - Regras de acesso ao bucket, permite outros recurso e outras contas a ter acesso.
     - Escrita em json.
+    - Pode ser usada para dar acesso publico ao bucket.
+    - Pode ser usada para foçar o uso de criptografia,
+    - Pode ser usada para dar acesso a cross account.
+    - Pode se usar as condições:
+      - **SourceIP** - Para validar se o IP é publico ou elástico
+      - **VpcSourceIp** - Para validar se o IP é privado (isso considerando um VPC endpoint)
+      - **Source VPC** ou **Source VPC Endpoint** - permite trabalhar com VPC endpoints
+        - Permite filtrar o acesso para apenas aqueles que usaram um determinado VPC endpoint ou range de IPs.
+      - **ClouldFront Origin Identity** - Permite que apenas o cloudFront acesso a bucket.
+      - **MFA** - Permite usar para exclusão de dados
   - **Object Access Control List (ACL)** - Define a lista de acesso de cada objeto armazenado (nível mais baixo).
-  - **Bubcket Access Control List (ACL)** - Define a lista de acesso de cada **bucket** (menos comum de ser usado);
+  - **Bucket Access Control List (ACL)** - Define a lista de acesso de cada **bucket** (menos comum de ser usado);
     De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police para ter acesso, senão tudo será negado.
-    ![AWS IAM Security Part 1: S3 Access Control Tools](https://www.msp360.com/resources/wp-content/uploads/2018/09/AWS-S3-access-control-tools.png)
+    ![AWS IAM Security Part 1: S3 Access Control Tools](assets/AWS-S3-access-control-tools.png)
 
 2. Para segurança e auditoria o **S3** disponibiliza:
 
 - S3 Access Logs, que pode ser armazenado em outro S3.
 - API que pode loggar essa informações no AWS CloudTrail.
 - Também é possível implementar o MFA para deletar de objetos específicos.
+
 
 #### S3 - Access logs
 
@@ -2079,7 +2103,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 #### S3 - Storage Lens
 
-- Usado para analisar e entender e otimizar o uso do S3 na orgranização.
+- Usado para analisar e entender e otimizar o uso do S3 na organização.
 - Mostra no dashboard dados de multipas regiões e multipas contas.
   ![image-20230219083841776](assets/image-20230219083841776.png)
 - Permite configurar métrica customizadas
@@ -2099,6 +2123,8 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Envia notificação de ações ou eventos ocorridos no bucket. ex: criação de objetos, delete etc...
 - Podem ser enviados para o SNS, SQS, Lambda.
+  - Para isso é necessario criar uma resource police que permite ao enviar ao SNS, SQS ou lambda.
+  - A police deve ser atachada o SNS, SQS, ou a Lambda.
 - São enviados em geral em segundos, mas podem demorar minutos.
 - **Como o versionamento, em situações raras onde duas pessoal estão editando ao mesmo tempo, pode ser receber ao invés de dois eventos apenas um.**
 
@@ -2109,60 +2135,10 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 ##### EventBridge
 
 - **Necessita que o log em nivel de objeto esteja habilitado, para funcionar.**
-- Pode acionar um Lambda, SNS, SQS etc.
+- Pode acionar um Lambda, SNS, SQS e outros, diferente do eventos notifications do S3 que só permite nos 3 primeiros.
 
----
+![image-20230726193905599](assets/image-20230726193905599.png)
 
-#### S3 - Security
-
-1. Forma de acesso ao bucket e aos objetos contido nele.
-
-- **Baseada em usuários** (user based) - diz-se que para ter acesso precisa ter permissão via IAM Console, ou seja toda chamada de API é validada junto ao IAM.
-- **Baseada em recurso** (Resource based)
-  - **Bucket Polices**
-    - Regras de acesso ao bucket, permite outros recurso e outras contas a ter acesso.
-    - Escrita em json.
-    - Pode ser usada para dar acesso publico ao bucket.
-    - Pode ser usada para foçar o uso de criptografia,
-    - Pode ser usada para dar acesso a cross account.
-    - Pode se usar as condições:
-      - **SourceIP** - Para validar se o IP é publico ou elástico
-      - **VpcSourceIp** - Para validar se o IP é privado (isso considerando um VPC endpoint)
-      - **Source VPC** ou **Source VPC Endpoint** - permite trabalhar com VPC endpoints
-        - Permite filtrar o acesso para apenas aqueles que usaram um determinado VPC endpoint ou range de IPs.
-      - **ClouldFront Origin Identity** - Permite que apenas o cloudFront acesso a bucket.
-      - **MFA** - Permite usar para exclusão de dados
-  - **Object Access Control List (ACL)** - Define a lista de acesso de cada objeto armazenado (nível mais baixo).
-  - **Bubcket Access Control List (ACL)** - Define a lista de acesso de cada **bucket** (menos comum de ser usado);
-    De forma geral se deve ter acesso concedido via IAM **OU** via Resouce police para ter acesso, senão tudo será negado.
-    ![AWS IAM Security Part 1: S3 Access Control Tools](assets/AWS-S3-access-control-tools.png)
-
-2. Para segurança e auditoria o **S3** disponibiliza:
-
-- S3 Access Logs, que pode ser armazenado em outro S3.
-- API que pode loggar essa informações no AWS CloudTrail.
-- Também é possível implementar o MFA para deletar de objetos específicos.
-
----
-
-#### S3 Encryption for Objects
-
-- **SSE-S3** - Criptografa os objetos do S3 usando chave gerenciada pela AWS (AES-256).
-  - Usada para todos os dados no Glacier
-- SSE-KMS - Criptografa os objetos do S3 usando chaves criadas no KMS.
-  - As chamadas de uso do KMS é logado no cloudtrail.
-  - **Caso esteja usando essa criptografia, se o bucket for publico, o usuário não vai conseguir ver os objetos**, pois ele não vai ter acesso a chave.
-  - Para conseguir realizar uploads no bucket, precisa ter acesso a permissão (**kms:GenerateDataKey**) caso contrario não vai conseguir.
-- SSE-C - Criptografa os objetos do S3 usando a chave gerenciada pelo usuário, quando se usa por exemplo o Cloud HSM
-- Criptografia Client-Side - Quando o usuário criptografa os dados antes de enviar ao S#.
-  ![Encryption](assets/image-20210819054838607.png)
-- É possível criar uma bucket police para validar se um objeto foi criptografado com a condição **aws:secureTransport.**
-- Caso o bucket tenha uma encriptação habilitado por default, e se criptografe o arquivo durante o upload, esse arquivo não será encriptado de novo pelo encriptação default.
-- Criptografia em transito (SSL / TLS)
-  - S3 expõe os endpoints:
-    - http - sem criptografia. - Não recomendado
-    - https - com criptografia em vôo.
-      - Obrigatório quando se usa criptografia SSE-C.
 
 ---
 
@@ -2170,8 +2146,8 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Gera uma url da acesso temporário a um recurso no S3.
 - Pode se usar o CLI ou o SDK para gerar urls.
-  - Para Download (fácil, use CLI)
-  - Para Upload (complidado, use SDK)
+  - Para **download** (fácil, use CLI)
+  - Para **upload** (complidado, use SDK)
 - Tem um tempo de expiração padrão de 3600 segundos, mas e possível alterar.
 - Permite gerar url assinadas tanto para get (download) quanto post (upload).
   ![Presigned urls](assets/image-20210819055145289.png)
@@ -2182,8 +2158,8 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Impede que o usuário deleta permanentemente um objeto versionado no S3.
 - Deve ser habilitado pelo dono do bucket (root account).
-- Só pode ser habilitado via CLI com o profile de root account.
-- Para usar essa funcionalidade é necessário ter o S3 - Versioning habilitado.
+- Só pode ser habilitado via CLI com o profile de **root account**.
+- Para usar essa funcionalidade é necessário ter o **S3 - Versioning** habilitado.
 - Será usado quando:
   - For deletar um arquivo permanentemente.
   - For desabilitar o versionamento.
@@ -2225,7 +2201,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 ##### S3 Multi-Region Access Points
 
 - Permite criar um access point global, que redireciona o trafico de acesso para o bucket na região mais proxima.
-- A ideia e se ter buckets replicados em cada região e através de um Access Point acessa-lo, assim diminuindo a latência.
+- A ideia é se ter buckets replicados em cada região e através de um Access Point acessa-lo, assim diminuindo a latência.
 - Usado em cenários de faillover, (ativo-ativo ou ativo-passivo).
   ![image-20230208040542497](assets/image-20230208040542497.png)
 
