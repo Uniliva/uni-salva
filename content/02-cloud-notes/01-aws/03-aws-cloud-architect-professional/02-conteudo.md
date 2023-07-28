@@ -2000,14 +2000,16 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - **SSE-S3** - Criptografa os objetos do S3 usando chave gerenciada pela AWS (AES-256).
   - Usada para todos os dados no Glacier.
+  - Usa o header "**X-amz-server-side-encryption**": "**AES256**".
 - SSE-KMS - Criptografa os objetos do S3 usando chaves criadas no KMS.
   - As chamadas de uso do KMS é logado no cloudtrail.
+  - Usa o header "**X-amz-server-side-encryption**": "**aws:kms**".
   - **Caso esteja usando essa criptografia, se o bucket for publico, o usuário não vai conseguir ver os objetos**, pois ele não vai ter acesso a chave.
   - Para conseguir realizar uploads no bucket, precisa ter acesso a permissão (**kms:GenerateDataKey**) caso contrario não vai conseguir.
 - SSE-C - Criptografa os objetos do S3 usando a chave gerenciada pelo usuário, quando se usa por exemplo o Cloud HSM.
 - Criptografia Client-Side - Quando o usuário criptografa os dados antes de enviar ao S3.
   ![Encryption](assets/image-20210819054838607.png)
-- É possível criar uma bucket police para validar se um objeto foi criptografado com a condição **aws:secureTransport.**
+- É possível criar uma bucket police para forçar o uso do SSL nas requisições com a condição **aws:secureTransport**.
 - Caso o bucket tenha uma encriptação habilitado por default, e se criptografe o arquivo durante o upload, esse arquivo não será encriptado de novo pelo encriptação default.
 - Criptografia em transito (SSL / TLS)
   - S3 expõe os endpoints:
@@ -2149,6 +2151,8 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - Para **download** (fácil, use CLI)
   - Para **upload** (complidado, use SDK)
 - Tem um tempo de expiração padrão de 3600 segundos, mas e possível alterar.
+  - S3 consoler - pode ter de 1 minuto a 12 horas (720 minutos)
+  - AWS ClI - pode ter até 604800 (168 horas)
 - Permite gerar url assinadas tanto para get (download) quanto post (upload).
   ![Presigned urls](assets/image-20210819055145289.png)
 

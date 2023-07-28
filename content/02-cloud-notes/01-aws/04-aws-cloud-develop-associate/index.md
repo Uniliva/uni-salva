@@ -470,3 +470,23 @@ Contextualização:
 
 Uma questão comum quanto ao S3 é como melhorar o tempo de busca de arquivos, a arquitetura que melhora resolve esse problema seria criar um index no DynamoDB com os metadados e tags do arquivos e realizar as busca no DynamoDB e apenas recuperar os arquivos no S3.
 {{% /notice %}}
+
+
+ S3 - Encryption para prova
+
+- **SSE-S3** - Criptografa os objetos do S3 usando chave gerenciada pela AWS (AES-256).
+  - Usa o header "**X-amz-server-side-encryption**": "**AES256**".
+- SSE-KMS - Criptografa os objetos do S3 usando chaves criadas no KMS.
+  - As chamadas de uso do KMS é logado no cloudtrail.
+  - Usa o header "**X-amz-server-side-encryption**": "**aws:kms**".
+  - Usa a api **GenerateDataKey** para criptografar.
+  - Tem limitação (quotas), pode não ser uma boa ideia usar se tiver muitas requisições, pois a cada chamada será consumido parte da cota, aumentando assim o custo, sendo melhor usar a **SSE-S3**
+  - **Caso esteja usando essa criptografia, se o bucket for publico, o usuário não vai conseguir ver os objetos**, pois ele não vai ter acesso a chave.
+  - Para conseguir realizar uploads no bucket, precisa ter acesso a permissão (**kms:GenerateDataKey**) caso contrario não vai conseguir.
+- SSE-C - Criptografa os objetos do S3 usando a chave gerenciada pelo usuário, quando se usa por exemplo o Cloud HSM.
+- Criptografia Client-Side - Quando o usuário criptografa os dados antes de enviar ao S3.
+- É possível criar uma bucket police para forçar o uso do SSL nas requisições com a condição **aws:secureTransport**.
+- também é possível criar polices para bloquear uploads de arquivos que não tenha um tipo de criptografia, usando uma police que bloqueia com as condições **s3:x-amz-server-side-encryption** ou **s3:x-amz-server-side-encryption-customer-algorithm**.
+
+![image-20230728061932567](assets/image-20230728061932567.png)
+
