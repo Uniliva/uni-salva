@@ -357,6 +357,49 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
 
 ## Redes e entrega de conteúdo:
 
+### CloudFront
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [CloudFront](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-cloudfront)
+{{% /notice %}}
+
+
+
+Para que o CloudFront possa armazenar o cache ele gera a **cache key** que:
+
+- Por default é formada o hostname + path do recurso.
+- Mas é possível adicionar outros itens na formação dessa chave, sendo:
+  - **HTTP Headers** - nome, whitelist
+  - **Cookies** -   nome, whitelist, include all except , all
+  - **Queries strings** -   nome, whitelist, include all except , all
+
+- Todos os itens adicionado a chave são enviados automaticamente para a origem caso não encontre no cache.
+- Mas é possível adicionar esses itens apenas na origem.
+  - Cache policy vs Origin Request policy
+  ![image-20230731061417341](assets/image-20230731061417341.png)
+
+- Tem uma tela que permite invalidar o cache.
+
+**Classes de cobrança**
+
+- **all - all regions** - engloba todas as edge locations e tem melhor performance.
+- **200 - most regions** - exclui as regiões mas caras
+- **100** - as regiões mais baratas 
+
+
+
+![image-20230731064707171](assets/image-20230731064707171.png)
+
+
+
+**Logs em tempo real**
+
+![image-20230731065011189](assets/image-20230731065011189.png)
+
+---
+
 ### Route 53
 
 {{% notice style="note" %}}

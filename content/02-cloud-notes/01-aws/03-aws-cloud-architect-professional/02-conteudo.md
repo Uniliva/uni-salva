@@ -2281,7 +2281,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     - Facilita o upload de arquivos
     - Protege com ataque de negação de serviço.
     - Pode se usar o **Origin Access Identity (OAI)** para que apenas CDN acesse o bucket e não redirecione para o bucket. Nesse caso o **bucket** pode continuar privado e acessando pelo CDN vai aparecer os arquivos, pois eles são acessado por um "usuário cdn" liberado.
-      - A evolução do OAI e o OAC (Origins Access control)
+      - A evolução do OAI e o **OAC (Origins Access control)**
         ![OAI](https://d2908q01vomqb2.cloudfront.net/5b384ce32d8cdef02bc3a139d4cac0a22bb029e8/2018/06/27/4-v-2.png)
   - **Origem customizada**
     - Como aplicação customizada / site estático
@@ -2347,6 +2347,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
       ![image-20230219113438721](assets/image-20230219113438721.png)
 - Para reduzir latência da primeira requisição.
   ![image-20230219113750792](assets/image-20230219113750792.png)
+
 
 ---
 
