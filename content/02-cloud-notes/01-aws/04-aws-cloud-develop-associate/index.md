@@ -198,6 +198,107 @@ Contextualização:
 
 ---
 
+## Contêineres:
+
+### Amazon ECS
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [ECS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-ecs)
+   {{% /notice %}}
+
+
+
+- Usa o **EFS** como volumes (ele é serveless), funciona tanto para EC2 e Fargate.
+
+- Tasks rodando na mesma AZ compartilham o mesmo sistema de arquivo EFS.
+
+- Como soluções de arquitetura há:
+
+  - Capacidade de ser acionada pelo EventBridge para executar um processamento de imagem por exemplo
+
+    ![image-20230801070232324](assets/image-20230801070232324.png)
+
+  - Possibilidade de usar o EventBridge para executar a cada hora (agendado).
+
+  - Possibilidade de usar uma fila SQS com entrada de dados
+
+
+
+#### IAM Roles for ECS
+
+Há dois tipos:
+
+- EC2 instance profile
+- ECS Tasks Role
+
+![image-20230801060747822](assets/image-20230801060747822.png)
+
+
+
+#### ECS Service Auto Scaling (tasks scaling)
+
+Pode escalar usando 3 métricas:
+
+- Via média uso de CPU.
+- Via média de uso de memória.
+- Via quantidade de requisição por target (métrica do ALB)
+
+Pode escalar por
+
+- **Target Tracking** - escala baseado numa métrica do CloudWatch.
+- **Step Scaling** - escala baseado em um alarme do CloudWatch.
+- **Scheduled Scaling** - escala usando um data e hora especifica.
+
+
+
+### EC2 Launch type - Auto Scaling (server scaling)
+
+![image-20230801064002809](assets/image-20230801064002809.png)
+
+- Serve para escalar o servidor que roda as intancias
+- Pode usar o Auto Scaling group baseando-se em:
+  - Uso do CPU
+  - Adição programanda, por eventos tipo horário comercial e noite.
+- Pode usar o **ECS Cluster Capacity Provider**
+  - Provisiona novas instâncias automaticamente para atender a demanda de tasks ECS.
+  - Usa um Auto Scaling Group e adiciona novas instâncias quando considerando RAM e CPU usados.
+
+
+
+#### Rolling Updates
+
+- Define-se o **minimum  healthy porcent** e o **maximum percent** que são a quantidade de tasks da versão anterior que se quer manter e a quantidade de tasks que se pode haver.
+
+![image-20230801065950959](assets/image-20230801065950959.png)
+
+![image-20230801070008268](assets/image-20230801070008268.png)
+
+![image-20230801070042188](assets/image-20230801070042188.png)
+
+---
+
+
+### Amazon EKS
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [EKS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-eks)
+   {{% /notice %}}
+
+
+### Amazon ECR
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [ECR](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-ecr)
+   {{% /notice %}}
+
+
+
+
+---
+
 ## Banco de dados:
 
 ### RDS
