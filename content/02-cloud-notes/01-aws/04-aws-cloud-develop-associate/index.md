@@ -209,6 +209,8 @@ Contextualização:
 
 
 
+
+
 - Usa o **EFS** como volumes (ele é serveless), funciona tanto para EC2 e Fargate.
 
 - Tasks rodando na mesma AZ compartilham o mesmo sistema de arquivo EFS.
@@ -276,6 +278,33 @@ Pode escalar por
 
 ![image-20230801070042188](assets/image-20230801070042188.png)
 
+Tasks definitions
+
+- Define como sera o contêiner docker.
+- As informações primordiais são:
+  - Imagem do contêiner.
+  - Mapeamento de porta (contêiner e host).
+  - Variávies de ambiente.
+    - Pode sem **hardcode**, ou referencias de **parameter** stores os **secrets**.
+    - Pode ser carregadas em **bulk** do S3 (arquivos de configurações completos)
+  - CPU e Memórias.
+  - Configuração de rede
+  - IAM Role
+    - Se adiciona na **task definition** para dar acessos aos recursos
+  - Configurações de Logs
+- Como funciona no load balancer:
+  - Para **EC2 launch types**
+    - Cria se uma porta randômica para cada contêiner através da opção **Dynamic Host Port Mapping** na definição da task.
+    - O ALB procura as portas na instância.
+    - Deve se permitir trafego no **Security Group do EC2** de qualquer porta vindo do **Security Group do ALB.**
+  - Para **Fargate**
+    - Cada contêiner vai ganhar seu próprio IP (ENI), assim pode se manter a mesma porta para todos.
+    - Na **task** só se define qual vai ser a porta do contêiner.
+    - No **Security Group da ENI EC2** se permite a porta definida vinda do **Security Group do ALB**.
+    - No **Security Group do ALB** se permite a porta definida da WEB,
+
+
+
 ---
 
 
@@ -337,18 +366,18 @@ Contextualização:
    - **Lazy loading / Cache aside / Lazy population**
      - Tenta recuperar do cache, se não encontrar consulta no banco e salva no cache.
      - Vantagens:
-       - Os dados em cache serão apenas os usados o que reduz aramazenamento em cache.
+       - Os dados em cache serão apenas os usados o que reduz armazenamento em cache.
      - Desvantagens
        - Os dados em cache pode esta desatualizados, pois só serão consultados com não estiverem mais em cache.
        - Demora mais para responder pois precisa buscar no banco (Read Penalty).
    - **Write Through**
      - Adiciona ou  atualiza o cache ao se atualizar o banco de dados.
      - Vantagens:
-       - Os dados em cache estaram sempre atualizados.
+       - Os dados em cache estarão sempre atualizados.
        - Não há demora na busca do cache pois todo dados sera adicionado ao cache (write Penalty).
      - Desvantagens
-       - Caso os dados do cache seja perdido, perde as vantagem disso, sendo necessario implementar o **lazy load**.
-       - Todos os itens estaram em cache, sendo que talvez não seja necessário.
+       - Caso os dados do cache seja perdido, perde as vantagem disso, sendo necessário implementar o **lazy load**.
+       - Todos os itens estarão em cache, sendo que talvez não seja necessário.
    - **TTL**
      - Termite setar um tempo de expiração do dado em cache.
      - Util para limpar dados antigos não usado, ou para força o **lazy load**.
@@ -358,11 +387,11 @@ Contextualização:
 ### MemoryDB
 
 - Serviço de banco de dados em memória.
-- Compativel com o REDIS.
-- Ultra performatico com mais de 160 milhões de request por segundo.
+- Compatível com o REDIS.
+- Ultra performático com mais de 160 milhões de request por segundo.
 - Tem dados gravados via logs de transação em Multi AZ.
 - Pode escalar de 10 GBs ate 100 TBs de armazenamento.
-- Usado em Web e mobile apps, gamming online e streaming de midia.
+- Usado em Web e mobile apps, gaming online e streaming de mídia.
 
 
 ---
