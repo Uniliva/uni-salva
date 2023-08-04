@@ -1308,6 +1308,8 @@ Resource police restritas para a organização
   - **Base scanning -> CVE** , caso encontre algum erro ele notifica via EventBridge.
   - Scan profundo - Usa o **Amazon Inspector** para procurar vulnerabilidade caso encontre algum erro ele notifica via EventBridge.
 
+
+
 ---
 
 ### AWS Lambda

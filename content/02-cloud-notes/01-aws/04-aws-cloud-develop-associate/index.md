@@ -200,6 +200,19 @@ Contextualização:
 
 ## Contêineres:
 
+### AWS CoPilot
+
+![image-20230804061517407](assets/image-20230804061517407.png)
+
+- CLI para build, release and operate aplicações conteinerizadas.
+- Veja aqui o [Getting started](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-aws-copilot-cli.html).
+- Usa se Yaml para descrever a arquitetura da aplicação.
+- Roda as aplicações no AppRunner, ECS e Fargate.
+- Abstrai a complicações de infraestrutura, provisionando automaticamente, permitindo que se foque a criação da aplicação.
+- Permite automatizar deploys com um comando usando CodePipeline.
+- Permite deployar em vários ambientes, além de acesso a logs, troubleshooting e health checks.
+
+
 ### Amazon ECS
 
 > {{% notice style="note" %}}
@@ -209,20 +222,11 @@ Contextualização:
 
 
 
-
-
-- Usa o **EFS** como volumes (ele é serveless), funciona tanto para EC2 e Fargate.
-
-- Tasks rodando na mesma AZ compartilham o mesmo sistema de arquivo EFS.
-
+- Usa o **EFS** como volumes (ele é serverless), funciona tanto para EC2 e Fargate.
 - Como soluções de arquitetura há:
-
   - Capacidade de ser acionada pelo EventBridge para executar um processamento de imagem por exemplo
-
     ![image-20230801070232324](assets/image-20230801070232324.png)
-
   - Possibilidade de usar o EventBridge para executar a cada hora (agendado).
-
   - Possibilidade de usar uma fila SQS com entrada de dados
 
 
@@ -230,7 +234,6 @@ Contextualização:
 #### IAM Roles for ECS
 
 Há dois tipos:
-
 - EC2 instance profile
 - ECS Tasks Role
 
@@ -241,27 +244,53 @@ Há dois tipos:
 #### ECS Service Auto Scaling (tasks scaling)
 
 Pode escalar usando 3 métricas:
-
 - Via média uso de CPU.
 - Via média de uso de memória.
 - Via quantidade de requisição por target (métrica do ALB)
 
 Pode escalar por
-
 - **Target Tracking** - escala baseado numa métrica do CloudWatch.
 - **Step Scaling** - escala baseado em um alarme do CloudWatch.
 - **Scheduled Scaling** - escala usando um data e hora especifica.
 
 
+#### ECS Tasks definitions
+- Semelhante ao docker compose ou deployment (EKS), ou seja serve para definir como vai ser ciado o contêiner.
+- Tasks rodando na mesma AZ compartilham o mesmo sistema de arquivo EFS.
+- Numa Tasks é possível adicionar vários containers, como aqueles sidecars
+- Caso esteja rodando com o Launch type EC2, pode se definir uma **task placement strategy** e uma **task placement constraints** para definir onde o **ECS** deve alocar os novos containers (tasks) criados. Funciona assim:
+  - Se identifica a instância que atenda os requisitos de memoria e CPU e Portas definidos na **task definitions**.
+  - Valida se a instância esta aderente as restrições de alocamento definidas na **task placement constraints**.
+  - Valida se a instancia esta aderente as estrategias de alocamento definidas na **task placement strategy**.
+  - Aloca na instância selecionada.
+- As **task placement strategy** são
+  - **BinPack** 
+    - Alocará de acordo com memoria ou CPU.
+    - Priorizando minimizar os custos.
+    ![image-20230804055238263](assets/image-20230804055238263.png)
+  - **Random**
+    - Seleciona o instância para aloca randomicamente.
+    ![image-20230804055224374](assets/image-20230804055224374.png)
+  - **Spread**
+    - Espalha de acordo com o valor passado, como instanceID, attribute:ec2.availability-zone
+    - Esse prioriza a disponibilidade.
+    ![image-20230804055118989](assets/image-20230804055118989.png)
+- Pode se combinar as **task placement strategy**
+![image-20230804055506695](assets/image-20230804055506695.png)
+- Já as **task placement constraints** pode ser definidas para limitar o alocamento. Podendo ser:
+  - **distinctInstance** - Obriga que o alocamento seja feito é instâncias deferentes.
+  - **memberOf** - Obriga que se atenda a expressão que pode ser uma **cluster query language**
+  ![image-20230804055847335](assets/image-20230804055847335.png)
 
-### EC2 Launch type - Auto Scaling (server scaling)
+
+#### EC2 Launch type - Auto Scaling (server scaling)
 
 ![image-20230801064002809](assets/image-20230801064002809.png)
 
-- Serve para escalar o servidor que roda as intancias
+- Serve para escalar o servidor que roda as instancias
 - Pode usar o Auto Scaling group baseando-se em:
   - Uso do CPU
-  - Adição programanda, por eventos tipo horário comercial e noite.
+  - Adição programada, por eventos tipo horário comercial e noite.
 - Pode usar o **ECS Cluster Capacity Provider**
   - Provisiona novas instâncias automaticamente para atender a demanda de tasks ECS.
   - Usa um Auto Scaling Group e adiciona novas instâncias quando considerando RAM e CPU usados.
@@ -271,20 +300,16 @@ Pode escalar por
 #### Rolling Updates
 
 - Define-se o **minimum  healthy porcent** e o **maximum percent** que são a quantidade de tasks da versão anterior que se quer manter e a quantidade de tasks que se pode haver.
-
 ![image-20230801065950959](assets/image-20230801065950959.png)
-
 ![image-20230801070008268](assets/image-20230801070008268.png)
-
 ![image-20230801070042188](assets/image-20230801070042188.png)
 
 Tasks definitions
-
 - Define como sera o contêiner docker.
 - As informações primordiais são:
   - Imagem do contêiner.
   - Mapeamento de porta (contêiner e host).
-  - Variávies de ambiente.
+  - Variáveis de ambiente.
     - Pode sem **hardcode**, ou referencias de **parameter** stores os **secrets**.
     - Pode ser carregadas em **bulk** do S3 (arquivos de configurações completos)
   - CPU e Memórias.
