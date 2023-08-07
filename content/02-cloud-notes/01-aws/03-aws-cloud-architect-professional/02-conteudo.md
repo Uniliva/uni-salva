@@ -3184,7 +3184,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 - Feito para o desenvolvedor, permite ter uma visão centralizada do ambiente de deployado.
 - Usados para aplicações web, ex: cria toda infraestrutura e só precisa passar o pacote que será usando. ex. (war para o tomcat) .
-- b Usa todos os componentes do AWS (ec2, S3 ..).
+- Usa todos os componentes do AWS (ec2, S3 ..).
 - Seria uma PAAS (semelhante ao Heroku).
 - O serviço do Beanstalk é gratis, o uso dele não é cobrado, apenas os **componentes usados serão cobrados.**
 - Solução para migrar aplicações, sem se preocupar com a infraestrutura.
@@ -3194,12 +3194,17 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - **Aplicação** - Aplicação em si.
   - **Versão da aplicação** - define a versão da aplicação.
   - **Ambiente** - Ambiente onde a aplicação pode ser disponibiliza.
-    - Single instânce - Boa para ambiente em dev
-    - Web tier - usa uma balanciador de cargas.
-    - Worker tier - usa filas.
-      ![beanstalk](assets/image-20210823060717977.png)
-- Tipos de ambientes
-  ![image-20230222062708820](assets/image-20230222062708820.png)
+    - Há dois tier de aplicações
+      - **Web tier** - usa uma balanciador de cargas.
+      - **Worker tier** - usa filas, e workes para processar a carga de trabalho.
+    - Há duas formas de deploy
+      - **Single instânce** - Boa para ambiente em dev
+      - **hige Availibity** - Boa para ambientes de produção
+![beanstalk](assets/image-20210823060717977.png)
+- Tipos de tier
+![image-20230807075302611](assets/image-20230807075302611.png)
+- Forma de deploy
+![image-20230807075325181](assets/image-20230807075325181.png)
 - Exemplo de arquitetura
   ![image-20230222062858389](assets/image-20230222062858389.png)
 

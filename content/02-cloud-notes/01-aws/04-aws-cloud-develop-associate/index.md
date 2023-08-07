@@ -37,15 +37,15 @@ Integração de aplicativos:
 
 Computação:
 - [x] Amazon EC2
-- [ ] AWS Elastic Beanstalk
+- [x] AWS Elastic Beanstalk
 - [ ] AWS Lambda
 - [ ] AWS Serverless Application Model (AWS SAM)
 
 Contêineres:
-- [ ] AWS Copilot
-- [ ] Amazon Elastic Container Registry (Amazon ECR)
-- [ ] Amazon Elastic Container Service (Amazon ECS)
-- [ ] Amazon Elastic Kubernetes Services (Amazon EKS)
+- [x] AWS Copilot
+- [x] Amazon Elastic Container Registry (Amazon ECR)
+- [x] Amazon Elastic Container Service (Amazon ECS)
+- [x] Amazon Elastic Kubernetes Services (Amazon EKS)
 
 Banco de dados:
 - [x] Amazon Aurora
@@ -186,7 +186,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 
 ---
 
-### ELB / ASG
+#### ELB / ASG
 
 > {{% notice style="note" %}}
 Contextualização:
@@ -198,6 +198,57 @@ Contextualização:
 
 ---
 
+### Beanstalk
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [Beanstalk](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-elastic-beanstalk
+)
+ {{% /notice %}}
+
+#### Beanstalk - Avançado
+- Dentre os formas de deploy (sigle instance e high availability) há a opção de usar instâncias spot.
+
+- Os passos para usar o beanstalk são:
+  - Configure a ambiente (plataforma (java, node ..) e recursos usados).
+  - Configure os acesso do serviços (roles iam).
+  - Configure rede, e banco de dados e tags. Opcional.
+  - Configure trafego e politica de escalabilidade. Opcional.
+  - Configure updates e monitoramento. Opcional.
+  
+- As opções de deploys para updates são:
+![image-20230807090025037](assets/image-20230807090025037.png)
+  - **All at once** - Tudo de uma vez.
+    - É mais rápido, mas a instancia fica indisponível por algum tempo.
+    - Bom para ambientes de dev e hom.  
+    ![image-20230807084407578](assets/image-20230807084407578.png)
+  - **Rolling** - Cria uma nova versão (chamada de **bucket**)  derrubando parte das instancias já existentes e redireciona o trafego quando a nova versão estiver de pé.
+  
+    - Não ha custo adicional.
+    - Demora mais tempo para deployar.
+  ![image-20230807084505741](assets/image-20230807084505741.png)
+  - **Rolling com batches adicionais** - Igual ao anterior, mas faz o redirecionamento em partes, mantendo a convivência entre a nova e a versão antigo por algum tempo.
+    - Diferente o anterior que seleciona parte das aplicações e derruba pra subir novas essa cria novas e convive com elas por um tempo.
+    - Tem um custo adicional. Pois adiciona novas instância
+    - Bom para ambientes produtivos. Pois se mantém a capacidade da aplicação sem comprometer o uso.
+    ![image-20230807084827320](assets/image-20230807084827320.png)
+  - **Immutable** - realiza o deploy das instâncias em novo ASG, e quanto esse estiver disponível, se move as instâncias para o ASG antigo e termina as instâncias anteriores.
+    - Tem Zero Downtime. Pois cria um ASG temporário.
+    - Tem um custo alto pois duplica a quantidade de instância.
+    - Mas rápido que o **Rolling**.
+    - Bom para produção
+    ![image-20230807085227077](assets/image-20230807085227077.png)
+  - **Blue/green** - Cria se um novo ambiente, e redireciona (Route 53) quando estiver tudo ok.
+    - Tem Zero Downtime.
+    - Não é uma feature do **beanstalk** é mais um conceito que pode aplicado. Pois o redirect tem que ser feito manualmente.
+    ![image-20230807085546086](assets/image-20230807085546086.png)
+  - **Traffic Splitting**  envia uma porcentagem de trafego para grupo de instâncias.
+  - Usado para teste canário.
+    - Duplica a quantidade de instâncias,
+    - Tem um custo extra.
+    - Facilita rollback e teste.
+    ![image-20230807085801497](assets/image-20230807085801497.png)
+---
 ## Contêineres:
 
 ### AWS CoPilot
