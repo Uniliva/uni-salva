@@ -207,23 +207,32 @@ Contextualização:
  {{% /notice %}}
 
 #### Beanstalk - Avançado
-- Dentre os formas de deploy (sigle instance e high availability) há a opção de usar instâncias spot.
 
+- Usa o **CloudFormation** para provisionar qualquer recursos na AWS.
+
+- Dentre os formas de deploy (sigle instance e high availability) há a opção de usar instâncias spot.
 - Os passos para usar o beanstalk são:
   - Configure a ambiente (plataforma (java, node ..) e recursos usados).
   - Configure os acesso do serviços (roles iam).
   - Configure rede, e banco de dados e tags. Opcional.
   - Configure trafego e politica de escalabilidade. Opcional.
   - Configure updates e monitoramento. Opcional.
-  
+- Tem uma funcionalidade de **swap envoriment** onde se pode redirecionar o DNS de um ambiente para outro.
+  - O uso disso se faz numa implantação em prod, onde se cria um clone do ambiente atual e atualiza e testa no clone e após isso se troca esse pelo o de prod.
+- Tem também um CLI chamado de **eb cli** que facilita o uso de CLI para automatizar pipelines.
+- Dentro da aplicação que devemos deployar pode haver uma pasta **.ebextensions** na raiz e :
+  - Tem o formato yml/json e a extensão do arquivo deve ser **.config**.
+  - Permite altera configurações padrões usando **option_settings**
+  - Permite adicionar recursos com RDS, ElastiCache, DynamoDb ....
+  - Todos os recursos adicionado via **ebextensions** são deletado quando o ambiente é deletado.
 - As opções de deploys para updates são:
-![image-20230807090025037](assets/image-20230807090025037.png)
+  ![image-20230807090025037](assets/image-20230807090025037.png)
   - **All at once** - Tudo de uma vez.
     - É mais rápido, mas a instancia fica indisponível por algum tempo.
     - Bom para ambientes de dev e hom.  
     ![image-20230807084407578](assets/image-20230807084407578.png)
   - **Rolling** - Cria uma nova versão (chamada de **bucket**)  derrubando parte das instancias já existentes e redireciona o trafego quando a nova versão estiver de pé.
-  
+
     - Não ha custo adicional.
     - Demora mais tempo para deployar.
   ![image-20230807084505741](assets/image-20230807084505741.png)
@@ -248,6 +257,43 @@ Contextualização:
     - Tem um custo extra.
     - Facilita rollback e teste.
     ![image-20230807085801497](assets/image-20230807085801497.png)
+
+---
+
+#### Ciclo de vida (lifecycle police)
+
+- Pode armazenar mais de 1000 versões de aplicações. Deve se remover de tempos em tempos versões antiga. 
+- Para isso uso o Ciclo de vida que pode ser:
+  - Baseado em tempo (versões antiga)
+  - Baseado em espaço usado (quando se esta ocupando muito espaço com versões antigas)
+- Oferece a opção de armazenar as versões no S3 para não haver perda de dados.
+
+---
+
+#### Beanstalk clonning
+
+- Permite clonar um ambiente, mantendo as mesmas configurações.
+- Útil para testar uma nova versão da aplicação. Ou atualização de versão da plataforma.
+- Todos os recursos da nova versão são preservados.
+  - Apenas no caso de Banco de dados que os dados não são clonados apenas as configurações.
+- Usado em conjunto a a funcionalidade de **swap**, onde se cria um clone, implanta a nova versão e depois dela ok, se troca o DNS para apontar para a nova versão.
+
+
+
+---
+
+#### Migrations
+
+- Após criar um ambiente, não se pode mudar o tipo do **load balancer** apenas as configurações, caso precise mudar sera necessário realizar uma migração.
+  - Para isso:
+    - Crie um novo ambiente com as mesmas configurações, exceto o ELB. (ou seja não pode ser um clone).
+    - Deploy a aplicação no novo ambiente.
+    - Use o Swap ou o Route 53 para redirecionar o trafego da aplicação.
+    - Mate o ambiente anterior.
+- Apesar de poder provisionar o RDS via Beanstalk, não é recomendado para ambiente produtivo. Nesse caso o ideal é ter o banco separado.
+
+![image-20230808083912269](assets/image-20230808083912269.png)
+
 ---
 ## Contêineres:
 
@@ -711,7 +757,7 @@ Contextualização:
 {{% /notice %}}
 
 
-## S3 
+### S3 
 
 > {{% notice style="note" %}}
 Contextualização:
