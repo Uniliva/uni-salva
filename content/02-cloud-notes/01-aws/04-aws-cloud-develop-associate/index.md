@@ -70,7 +70,7 @@ Ferramentas do desenvolvedor:
 Gerenciamento e governança:
 - [ ] AWS AppConfig
 - [ ] AWS Cloud Development Kit (AWS CDK)
-- [ ] AWS CloudFormation
+- [X] AWS CloudFormation
 - [ ] AWS CloudTrail
 - [ ] Amazon CloudWatch
 - [ ] Amazon CloudWatch Logs
@@ -328,7 +328,7 @@ Contextualização:
 
 
 
-#### IAM Roles for ECS
+##### IAM Roles for ECS
 
 Há dois tipos:
 - EC2 instance profile
@@ -338,7 +338,7 @@ Há dois tipos:
 
 
 
-#### ECS Service Auto Scaling (tasks scaling)
+### ECS Service Auto Scaling (tasks scaling)
 
 Pode escalar usando 3 métricas:
 - Via média uso de CPU.
@@ -519,6 +519,32 @@ Contextualização:
 ---
 
 ## Gerenciamento e governança:
+
+### CloudFormation
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [CloudFormation](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-cloudformation)
+{{% /notice %}}
+
+#### Extra
+- O CF trabalha com templates é composto por:
+  - **Format version**: A versão do formato define a capacidade de um modelo
+  - **Description**: Quaisquer comentários sobre o seu modelo podem ser especificados na descrição.
+  - **Resources**: Recursos (AWS) que se quer criar. - Mandatório
+  - **Parameters**: São inputs dinâmicos que pode se passar para o template.
+  - **Mappings**: Permite fazer o mapeamento de variáveis estáticas no template.
+  - **Outputs**: Referencias de recursos que serão criados.
+  - **Conditions**: Lista de condições para criação de recursos.
+  - **Metadata**: Os metadados podem ser usados ​​no modelo para fornecer mais informações usando objetos JSON ou YAML.
+- Há também os templates helpers que são:
+  - Referencias
+  - Funções
+- Pode se usar o AWS CLI para deployar um template do CloudFormation.
+
+
+
 
 ### SDK
 
