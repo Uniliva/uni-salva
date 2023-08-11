@@ -529,22 +529,109 @@ Contextualização:
 {{% /notice %}}
 
 #### Extra
+
+- Pode se usar o AWS CLI para deployar um template do CloudFormation.
 - O CF trabalha com templates é composto por:
   - **Format version**: A versão do formato define a capacidade de um modelo
   - **Description**: Quaisquer comentários sobre o seu modelo podem ser especificados na descrição.
   - **Resources**: Recursos (AWS) que se quer criar. - Mandatório
+    - Há mais de 224 tipos de recursos diferentes. [Veja todos ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
   - **Parameters**: São inputs dinâmicos que pode se passar para o template.
+    - São usados para permitir o reuso dos templates.
+    - Usa se a função **fn::Ref** para referenciar um parâmetro em qualquer lugar no template.
+    - Em **YML** usa se o **!Ref** para representar a função **fn::Ref**.
+    ![image-20230810194424083](assets/image-20230810194424083.png)
+    - há também os Pseudos Parâmetros que são oferecido pela AWS.
+    ![image-20230810195039529](assets/image-20230810195039529.png)
   - **Mappings**: Permite fazer o mapeamento de variáveis estáticas no template.
+    - São valores hardcoded usados delimitar as escolhas. Ex: ambiente: dev, hml. prod.
+    ![image-20230810195353883](assets/image-20230810195353883.png)
+    - Para acessar usa se a função **fn::FindInMap** que no YML é **!FindInMap[MapName, TopLevelKey, SecondLevelKey]**.
+    ![image-20230810195742359](assets/image-20230810195742359.png)
   - **Outputs**: Referencias de recursos que serão criados.
+    - Permite exporta valores para serem usados em outras stack. Por exemplo, tem um stack do CF que cria uma VPC, pode se exportar o VPC ID e Subnets IDs para que possam ser usando em outra stack que cria os security groups.
+    - Não é possível deletar uma stack, quem tem o output usado em outra stack. Ou seja não pode deletar pois há uma dependência.
+    ![image-20230810200306843](assets/image-20230810200306843.png)
+    - O campo export é opcional, e usado para renomear o item exportado.
+    - Para importar use a função **fn::ImportValue** que no YML é **!ImportValue**.    
+    ![image-20230810200607679](assets/image-20230810200607679.png)
   - **Conditions**: Lista de condições para criação de recursos.
+    - Usado para limitar a criação de recursos seja por ambiente (dev. hml, prod), por região (us-east-1) , ou parâmetro, etc.
+    ![image-20230810200933533](assets/image-20230810200933533.png)
+    - Pode ser aplicadas a recursos , outputs etc..
+    ![image-20230810201241352](assets/image-20230810201241352.png)
+    - Pode se usar as funções logicas:
+      - **fn::And** -> YML **!And**
+      - **fn::Equals** -> YML **!Equals**
+      - **fn::If** -> YML **!If**
+      - **fn::Not** -> YML **!Not**
+      - **fn::Or** -> YML **!Or**
   - **Metadata**: Os metadados podem ser usados ​​no modelo para fornecer mais informações usando objetos JSON ou YAML.
-- Há também os templates helpers que são:
-  - Referencias
-  - Funções
-- Pode se usar o AWS CLI para deployar um template do CloudFormation.
+- Há também as Funções intrisicas
+    - **fn::GetAtt** (**!GetAtt** no YML) - usada para recuperar o valor de um atributo de um recurso criado. Uso:  !GetAtt [nome recurso].[nome atributo]
+    - **fn::Ref** (**!Ref** no YML) - usada para referenciar o valor de parâmetros ou o id do recursos no template.
+    - **fn::FindInMap** (**!FindInMap** no YML) - usada para acessar valores num mapa.
+    - **fn::ImportValue** (**!ImportValue** no YML) - usada para importar outputs de outras stacks.
+    - **fn::Join** (**!Join** no YML) - usada para juntar com um delimitador. Uso !Join [ delimitador, [valores separados por virgula]].
+    - **fn::Sub** (**!Join** no YML) - usada para substituir variáveis por por texto. Uso !Sub 'nome variável'.
+    - Condicionais - usada para avaliar condições.
+      - **fn::And** -> YML **!And**
+      - **fn::Equals** -> YML **!Equals**
+      - **fn::If** -> YML **!If**
+      - **fn::Not** -> YML **!Not**
+      - **fn::Or** -> YML **!Or**
+- Processo de rollback
+  - A Criação da stack falhou:
+    - Será feito o rollback automático o ela será deletada.
+    - É possível desabilitar o delete no rollback para realização de troubleshoot.
+  - A Atualização da stack falhou:
+    - Será feito o rollback automático, mas da pra ser ver os eventos do ocorrido.
+    - Pode se habilitar os logs pra saber mais detalhes.
+  - Na criação da stack tem as duas opções, realizar o rollback ou manter os recursos problemáticos.
+   ![image-20230810203106959](assets/image-20230810203106959.png)
 
 
+- É possível habilitar a notificação das ações da stack via tópico SNS.
+![image-20230810203717530](assets/image-20230810203717530.png)
 
+- Tem o **CF Drift** que mostra qual foi a alteração que o recurso criado pela Stack sofreu.
+  - Para usa-lo vá até a Stack e em opções use o **detect Drift**
+
+- A Stack police serve para limitar as ações que uma Stack pode fazer, como por exemplos, quais recursos que pode criar ou atualizar.
+  - Pode ser usada por organizações para evitar a criação de recurso ou atualização de recursos.
+  - Ou para evitar atualizações acidentais, como por exemplo remoção de recurso do banco de dados de produção.
+
+---
+
+#### Tópicos avançados
+
+- **StackSets**
+  - Permite criar, deletar, atualizar stacks em múltiplas contas e regiões com uma única operação.
+  - Administradores de contas podem criar StackSets.
+  - Contas de confiança (Trusted accounts) também podem criar, atualizar e atualizar stacks de um StackSet.
+  - Se atualizar um StackSet todas as contas sera atualizado.
+
+- **ChangeSets**
+  - Usados para verificar qual alterações serão aplicadas.
+  - Não diz se a atualização será um sucesso, apenas mostra quais são as alterações.
+  ![image-20230810204031080](assets/image-20230810204031080.png)
+
+- **Nested Stacks**
+  - Permite criar stack usando outras stack (stack aninhadas).
+  - Usado quando se que aproveitar uma stack já pronta. 
+  - Exemplo a stack que cria ALB, pode ser usada em vários lugares, só alterando os parâmetros. Ela pode usar uma stack que cria o Security Groups.
+  ![](assets/cfn-console-nested-stacks.png)
+  - Qual a diferença entre **cross** e **Nested Stacks**
+    - Cross Stack
+      - Usada para stack com diferente ciclos de vida.
+      - Usa **Output** export e a **fn::ImportValues**.
+      - Exemplo se cria uma VPC numa stack e o VPC ID sera usado por varias outras Stacks.
+    - Nested Stack
+      - Usado para componentes que sera reutilizados.
+      - Exemplo: Stack de configurações de um ALB.
+      - Não é uma stack compartilhada, as stack compõem um stack maior.
+    
+    ![image-20230810205136667](assets/image-20230810205136667.png)
 
 ### SDK
 
