@@ -31,8 +31,8 @@ Análise:
 Integração de aplicativos:
 - [ ] AWS AppSync
 - [ ] Amazon EventBridge (Amazon CloudWatch Events)
-- [ ] Amazon Simple Notification Service (Amazon SNS)
-- [ ] Amazon Simple Queue Service (Amazon SQS)
+- [ ] Amazon SNS
+- [ ] Amazon SQS
 - [ ] AWS Step Functions
 
 Computação:
@@ -102,6 +102,69 @@ Armazenamento:
 {{% /expand %}}
 
 ---
+
+## Integração de aplicativos:
+
+{{% notice style="tip" %}}
+
+Tempos os seguintes serviços AWS usados para integração de aplicações:
+- SQS -> para um modelo de filas.
+- SNS -> para um modelo de pub/sub.
+- Kinesis -> para um modelo de processamento em tempo real.
+ {{% /notice %}}
+
+### Amazon SQS
+
+{{% notice style="note" %}}
+Contextualização:
+ - O que é [SQS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-sqs)
+ {{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- Usado para desacoplar aplicações.
+- Tem baixa latência (<10 ms)
+- Permite mensagem duplicadas (ou seja, não valida o conteúdo da mensagem).
+- Para o processamento de mensagem duplicados, usa se o **Message visibility timeout** para tornar a mensagem invisível aos demais consumer.
+- Para produzir mensagem usa se o SDK com a API (sendMessage).
+- Há dois tipos de filas SQS
+  - **Standard**
+    - Tem Throughput ilimitado, e quantidade de mensagem na fila ilimitado.
+    - Entrega a mensagem ao menos uma vez para os consumers
+    - Ordenas as mensagens buscando o melhor esforço.
+  - **FIFO** 
+    - Tem throughput de 300 msg/s  e 3000 msg/s usando batch.
+    - Não tem mensagens duplicadas. Pois tem uma funcionalidade que permite remove-las.
+    - Ordena por ordem de chegada.
+    - Entrega apenas uma vez a mensagem.
+- Conceitos para desenvolvedores:
+  - **Long Polling** - Capacidade opcional de ficar esperando, caso não haja mensagens na fila, ate uma mensagem chegar.
+    - Reduz a quantidade de chamadas de API a fila, aumentado a eficiência e latência da aplicação.
+    - Pode se configurar de 1 segundo a 20 (ideal) segundos de tempo.
+    - É recomendado o uso ao invés do polling normal (short polling).
+    - Pode ser configurado Queue level ou via API level usando **(ReceiveMessageWaitTimeSeconds)**.
+  - **Extended Cliente** - Capacidade de enviar mensagem acima de 256kb usando o S3 para salvar a mensagem e se posta apenas os metadados na fila.
+    - Usados para enviar videos para processamento,
+  - Nomes das APIs
+    - **CreateQueue** com (MessageRetentionPeriod), DeleteQueue
+    - **PurgeQueue** - permite deletar todas as mensagens de uma fila.
+    - **SendMessage** com (DelaySeconds), ReceiveMessage, DeleteMessage.
+    - **MaxNumberOfMessages** - Permite definir a quantidade de mensagem que podem ser consumida por vez. (default 1 , max 10).
+    - **ReceiveMessageWaitTimeSeconds** - Permite configurar o Long Polling.
+    - **ChangeMessageVisibility** - Permite mudar o tempo de visibilidade da mensagem.
+  - Há também API batch para enviar, deletar e mudar a visibilidade, o que reduz o custo diminuindo a quantidade de chamada ao SQS.
+  - **FIFO** conceitos avançados
+    - **de-duplication** - funcionalidade que permite recusar mensagens que estão duplicadas.
+      - O tempo em que ignora uma nova mensagem com o mesmo id e de 5 minutos. A partir desse período não considera a nova mensagem como duplicata. 
+      - Há dois métodos de de-duplication:
+        - Baseado no conteúdo: Gerar um hash sha-256 do body para comparação.
+          - Ao se criar a fila, pode setar se ele vai considerar esse método. Caso seleciona o método via ID sera opcional.
+        - Baseado no ID: Se passa um id de de-duplication ao postar a mensagem.
+    - **Message group** - permite agrupar mensagem por um MessageGroupId.
+      - Utils quando se que usar a fila para mais de um processo, assim pode se configurar um consumer para considerar apenas as mensagens do grupo.
+      - Porém a ordem só é garantida dentro do grupo.      
+      ![image-20230812090743500](assets/image-20230812090743500.png)
+
+
 
 ## Computação:
 
@@ -552,7 +615,7 @@ Contextualização:
     - Permite exporta valores para serem usados em outras stack. Por exemplo, tem um stack do CF que cria uma VPC, pode se exportar o VPC ID e Subnets IDs para que possam ser usando em outra stack que cria os security groups.
     - Não é possível deletar uma stack, quem tem o output usado em outra stack. Ou seja não pode deletar pois há uma dependência.
     ![image-20230810200306843](assets/image-20230810200306843.png)
-    - O campo export é opcional, e usado para renomear o item exportado.
+    - O campo export é opcional, e usado para renomear o item exportado, pois o nome deve ser único na região.
     - Para importar use a função **fn::ImportValue** que no YML é **!ImportValue**.    
     ![image-20230810200607679](assets/image-20230810200607679.png)
   - **Conditions**: Lista de condições para criação de recursos.

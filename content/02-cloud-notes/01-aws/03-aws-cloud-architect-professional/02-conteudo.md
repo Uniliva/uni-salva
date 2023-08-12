@@ -2669,25 +2669,35 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Tem escopo regional. Gerenciado pela AWS.
 - Produtor -> **envia** > fila < **recupera** <- consumidor.
 - O consumidor da um **pull** na fila para recupera a mensagem.
+  - Pode receber até 10 mensagem por vez.
+  - O consumidor deve deletar a mensagem, pois não há um delete após a leitura.
 - Auto escalável vai de 1 mensagem por segundo a 10000 por segundo.
-- Retém as mensagem de 1 a 14 dias.
+- Retém as mensagem de 4 (mínimo) a 14 (máximo) dias.
 - Não há limites de quantidade de mensagens na fila.
-- O consumidor deve deletar a mensagem, pois não há um delete após a leitura.
 - Mensagem de ate 254Kb de tamanho, é possível usar o S3 para guardar mensagem maiores.
 - Possível usar métrica da **SQS** para dispara o **Auto Scaling Group** via CloudWatch metrics (**approximateNumerofMensages**).
+  - Isso serve para escalar os consumidores.
 - **Política de acesso**.
+![image-20230812075815579](assets/image-20230812075815579.png)
   - Permite definir uma politica de quem pode enviar mensagens e consumir da fila.
+  - Usada para dar acesso de cosumer cross account.
+  - Pode ser usada para permitir um producer ser os eventos do S3.
 - Pode ser consumida por um lambda com as mensagens em Batch.
 - **Encriptação**
   - Em transito vem habilitado por padrão (HTTPS).
-  - A do lado do servidor, vem desabilitada, e caso habilite pode selecionar um CMK (_Chave mestra do cliente_)..
+  - Do lado do servidor, usa a SQS Key (SSE-SQS), mas é possivel usar uma chave criada no KMS (SSEKMS).
 - **Message visibility timeout**
   - Quando uma mensagem é recuperado por um consumidor, ela fica invisível para os outros, esse tempo que invisibilidade é definido por esse campo.
-  - Caso seja necessário é possível mudar essa visibilidade via API do SDK.
+  - O valor default e 30 segundos.
+  - Caso seja necessário (por ainda esta em processamento) é possível mudar essa visibilidade via API (**ChangeMensageVisibility**) do SDK.
 - **Delay Queues** - Permite definir uma atraso na **disponibilização** da mensagem para **leitura**.
+  - Default é 0 segundos. Mas na criação da fila pode se definir um novo default para a fila.
 - **Dead letter queue**
   - Fila onde pode ser enviada mensagens não processada, ou processadas com erro por varias vezes. Exemplo a mensagem foi processada 5 vezes sem sucesso, mova ela para **DLQ** para debbug futuro.
-  - Possui uma funcionalidade chamada **Redrive to source** que permite reenviar as mensagem contida em uma DLD para a fila de processamento. É usada quando de descobriu o motivo do não processamento e ajustou o código e deseja tentar processar as mensagens na DLQ.
+  - Para que seja enviada para a DLQ é necessário setar o threshold **maximumReceives**, que define quantas vezes a mensagem sera disponibilizada para processamento. Quando atigir esse threshold ela sera movida para a DLQ.
+  - Usado para debug de problemas, onde se pode colocar uma alarme que notifica a ocorrencia de problemas.
+  - Um DLQ deve respeitar o tipo da fila, ou seja se for uma fila FIFO o DLQ deve ser uma fila FIFO.
+  - Possui uma funcionalidade chamada **Redrive to source** que permite reenviar as mensagem contida em uma DLQ para a fila de processamento. É usada quando de descobriu o motivo do não processamento e ajustou o código e deseja tentar processar as mensagens na DLQ.
 - **Request-Response System**
   - Ao postar na fila, é informado um correlationID e a fila de retorno da reposta. Assim que for processar a mensagem devolver o resultado na fila de retorno.
   - ![request-response-system](assets/image-20210902210040788.png)
@@ -3200,7 +3210,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
     - Há duas formas de deploy
       - **Single instânce** - Boa para ambiente em dev
       - **hige Availibity** - Boa para ambientes de produção
-![beanstalk](assets/image-20210823060717977.png)
+      ![beanstalk](assets/image-20210823060717977.png)
 - Tipos de tier
 ![image-20230807075302611](assets/image-20230807075302611.png)
 - Forma de deploy
