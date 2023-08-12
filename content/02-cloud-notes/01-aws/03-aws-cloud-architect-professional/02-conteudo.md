@@ -3075,7 +3075,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 #### Logs
 
 - Coleta métricas e **logs** de tudo no AWS. Também é possível enviar logs através do:
-  - SDK, Cloud Watch Logs Agent. Cloud Watch Unified Agent.
+  - SDK, Cloud Watch Logs Agent, Cloud Watch Unified Agent.
   - Elastick Beanstalk, ECS, Lambda, VPC Flow Logs, API Gateway, CloudTrail
   - Cloud Watch Logs Agent só pode ser instalado no EC2
   - Route53 - Logs de queries DNS
@@ -3092,16 +3092,22 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - OpenSearch
   - S3 (export)
     - Só pode criptografar os logs com **AES-256 (SSE-S3), não pode SS3-KMS.**
-    - Pode levar ate 12 para exportar.
-    - Não é automático, precisa configurar ou usar a API call CreatExportTask.
+    - Pode levar ate 12 horas para exportar.
+    - Não é automático, precisa configurar ou usar a API call **CreatExportTask**.
 - Subscrição de logs:
   ![image-20230222054249909](assets/image-20230222054249909.png)
 - A possibilidade de agregar logs de varias regiões.
   ![image-20230222054341446](assets/image-20230222054341446.png)
+
+
+
 - A maioria dos problema que se da aqui e por causa de permissões configuradas errado.
 - Permite aplicar filtros através de expressões regulares ou métricas ou IPs. E com isso dispara alarmes.
 - Por padrão nenhum log e enviado das instâncias EC2, caso queira ter os logs é necessária habilitar o **CloudWatch Agent** e isso fará que o **CloudWatch unified Agent** nas instâncias envie os logs.
-  ![unified-agente](assets/image-20210906093405257.png)
+  - Para isso precisa ter uma police que der permissão para enviar logs.
+![unified-agente](assets/image-20210906093405257.png)
+
+---
 
 #### Metricas
 
@@ -3117,6 +3123,9 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
     - **Standard** - 1 minuto.
     - **High Resolution** - 1|5|10|30 segundos - mas tem um alto custo.
   - Permite enviar métrica antigas (ate duas semanas) e métricas futuras ate 2 horas sem que o **Cloud Watch** reclame.
+- O uso de memória não é monitorada por default, caso queira e preciso usar métricas customizada.
+
+---
 
 #### Alarmes
 
@@ -3125,7 +3134,10 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - OK , INSUFICIENTE_DATA, ALARM.
 - Os alarmes podem ser disparados através de métricas e filtros.
 - Muito usado em conjunto com Ec2, para auto scale e monitorar saude.
+- Tem os 3 targets EC2, EC2 Auto Scaling, SNS (permite enviar para os outros).
 - Pode enviar dados para o **eventBrigde** para conectar ao outros serviços.
+
+---
 
 #### Dashboards
 
@@ -3133,15 +3145,17 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Os Dashboards são **globais**.
 - Neles é possível incluir gráficos de diferentes **contas AWS e regiões.**
 - É possível compartilhar um Dashboard com um terceiro via **cognito**.
-- Ate 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.
+- Ate 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.  
   **Synthetics Canary**
-- Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o trafico.
-- Permite configurar scripts (nodeJs e Python) para monitorar APIs e URLs, WebSites.
-  - Pode agendar a execução da de única vez ou de tempos em tempos.
-  - Permite acessos a recursos do Google Chrome.
-- Serve para achar problemas antes de os clientes achem (teste de API).
-- Checa a latência e saúde, da para fazer teste armazenando dados e prints da UI.
+  - Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o trafico.
+  - Permite configurar scripts (nodeJs e Python) para monitorar APIs e URLs, WebSites.
+    - Pode agendar a execução da de única vez ou de tempos em tempos.
+    - Permite acessos a recursos do Google Chrome.
+  - Serve para achar problemas antes de os clientes achem (teste de API).
+  - Checa a latência e saúde, da para fazer teste armazenando dados e prints da UI.
   ![image-20230222053053925](assets/image-20230222053053925.png)
+
+---
 
 #### Eventos
 
@@ -3151,6 +3165,8 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - EC2 start, codeBuild Failure, S3
 - Permite criar crons e eventos agendados.
 - Gera json de evento, que pode ser enviado para um target **SNS**, **SQS** ...
+
+---
 
 #### **EventBridge** - (ponte de eventos)
 

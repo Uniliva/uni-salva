@@ -43,9 +43,9 @@ Computação:
 
 Contêineres:
 - [x] AWS Copilot
-- [x] Amazon Elastic Container Registry (Amazon ECR)
-- [x] Amazon Elastic Container Service (Amazon ECS)
-- [x] Amazon Elastic Kubernetes Services (Amazon EKS)
+- [x] Amazon ECR
+- [x] Amazon ECS
+- [x] Amazon EKS
 
 Banco de dados:
 - [x] Amazon Aurora
@@ -74,7 +74,7 @@ Gerenciamento e governança:
 - [ ] AWS CloudTrail
 - [ ] Amazon CloudWatch
 - [ ] Amazon CloudWatch Logs
-- [x] AWS Command Line Interface (AWS CLI)
+- [x] AWS CLI
 - [ ] AWS Systems Manager
 
 Redes e entrega de conteúdo:
@@ -88,17 +88,17 @@ Segurança, identidade e conformidade:
 - [ ] AWS Certificate Manager (ACM)
 - [ ] AWS Certificate Manager Private Certificate Authority
 - [ ] Amazon Cognito
-- [x] AWS Identity and Access Management (IAM)
-- [ ] AWS Key Management Service (AWS KMS)
+- [x] AWS IAM
+- [ ] AWS KMS
 - [ ] AWS Secrets Manager
 - [ ] AWS Security Token Service (AWS STS)
 - [ ] AWS WAF
 
 Armazenamento:
-- [ ] Amazon Elastic Block Store (Amazon EBS)
-- [ ] Amazon Elastic File System (Amazon EFS)
-- [ ] Amazon S3
-- [ ] Amazon S3 Glacier
+- [x] Amazon EBS
+- [x] Amazon EFS
+- [x] Amazon S3
+- [x] Amazon S3 Glacier
 {{% /expand %}}
 
 ---
@@ -254,7 +254,7 @@ Contextualização:
     - ​	Usado para aumentar a capacidade de stream, ou seja usado para quebrar um shard e outro novos, a fim de aliviar a carga.
     - o shard antigo vai ser deletado quando os dados expirarem e os dados novos serão divididos entre os novos.
   - **Shard Merging**
-![image-20230812125719941](assets/image-20230812125719941.png)
+    ![image-20230812125719941](assets/image-20230812125719941.png)
     - O contrario do splitting
     - o shard antigo vai ser deletado quando os dados expirarem e os dados novos serão enviados para o novo.
 
@@ -795,6 +795,45 @@ Contextualização:
 - O AWS CLI usa a SDK do Python (boto3).
 - Caso não sete uma região de default é a us-east-1.
 
+---
+
+### Amazon CloudWatch
+
+
+{{% notice style="note" %}}
+Contextualização:
+ - O que é [CloudWatch](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-cloudwatch)
+ {{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- métricas
+  - Métricas pertencem a un **namespaces** e contem **dimensões** (atributos, exemplo: ambiente, id da instancia ...).
+    - Pode se ter ate 30 dimensões diferente para cada métrica.
+  - Para criar uma métrica customizadas use a API **PutMetricData** passando os atribuídos (dimensões).
+  - Para configurar o tempo de resolução (período de coleta) usa a API **StorageResolution** podendo ser:
+    - Standard -> 1 Minutos.
+    - High Resolution -> 1|5|10|30 segundos - tem um alto custo.
+  - Pode se enviar métricas de ate 2 semanas atrás ou 2 horas no futuro. Sem que haja rejeição do cloudWatch.
+- Logs
+  - Tem o **CloudWatch Logs Insights** - que permite realizar queries nos logs.
+    - Pode se realizar filtros baseados em condições, calcular e realizar agregações estáticas, ordenar por eventos, limitar números de linhas retornadas.
+    - Permite buscar em múltiplos logs grupos.
+  - Pode se criar **métricas** customizadas em cima dos filtros do logs (Metric Filter).
+    - Podem ser usadas para disparar alarmes.
+    - Só geram dados com logs gerados a partir da hora que foi configurada.    
+    ![image-20230812201334076](assets/image-20230812201334076.png)
+- Alarmes
+  - Permite criar alarmes compostos, que são agrupamentos de mais de um alarmes usando as condições AND ou OR.
+  - Pode se testar se um alarme esta funcionado usando CLI.
+- EventBridge
+  - Para da acesso aos event buses é necessário ter um police.  
+  ![image-20230812205210746](assets/image-20230812205210746.png)  
+  - É possível definir uma estrutura para o evento (schema , tipo Avro), ou usar algum que já existe, com ele é possível definir o formato do evento que vai ser disparado por um SDK.
+  - Fluxo
+    - Se cria o event Bus que vai receber os eventos e vai encaminhar para um recurso ou um event Role.
+    - Se cria um event role que vai configurar como vai funcionar a entrada de dados de um event bus.
+
+---
 
 ### AWS CLI
 
