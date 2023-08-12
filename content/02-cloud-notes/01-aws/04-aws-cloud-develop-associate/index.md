@@ -25,7 +25,6 @@ Recursos e produtos da AWS no escopo
 {{% expand  title="veja a lista completa" %}}
 Análise:
 - [ ] Amazon Athena
-- [ ] Amazon Kinesis
 - [ ] Amazon OpenSearch Service
 
 Integração de aplicativos:
@@ -33,6 +32,7 @@ Integração de aplicativos:
 - [ ] Amazon EventBridge (Amazon CloudWatch Events)
 - [ ] Amazon SNS
 - [ ] Amazon SQS
+- [ ] Amazon Kinesis
 - [ ] AWS Step Functions
 
 Computação:
@@ -113,6 +113,8 @@ Tempos os seguintes serviços AWS usados para integração de aplicações:
 - Kinesis -> para um modelo de processamento em tempo real.
  {{% /notice %}}
 
+---
+
 ### Amazon SQS
 
 {{% notice style="note" %}}
@@ -166,6 +168,98 @@ Contextualização:
 
 
 
+---
+
+### SNS 
+
+{{% notice style="note" %}}
+Contextualização:
+ - O que é [SNS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-sns)
+ {{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- Há dois tipos de tópicos SNS:
+  - **Standard**
+    - Notifica a mensagem apenas uma vez para os subscritos. Depois a mensagem e deletada automaticamente.
+    - Ordenas as mensagens buscando o melhor esforço.
+  - **FIFO** 
+    - Tem throughput de 300 msg/s  e 3000 msg/s usando batch.
+    - Não tem mensagens duplicadas. Pois tem uma funcionalidade que permite remove-las.
+    - Ordena por ordem de chegada.
+    - Notifica apenas uma vez a mensagem.
+    - Notifica apenas para **SQS FIFO**.
+
+
+---
+
+### Kinesis
+
+{{% notice style="tip" %}}
+- Usado para coletar, processar, analisar e distribuir dados em tempo real.
+- Composto pelas aplicações
+  - **Kinesis Data streams** - Captura, processa e armazena fluxos de dados.
+  - **Kinesis Data Firehose** - Carrega dados para armazenamentos no AWS.
+  - **Kinesis Data Analytics** - Analisa fluxos de dados com SQL e Apache Flink.
+  - **Kinesis vídeo streams** - Capture, processa e guardar fluxo de dados de vídeos.
+   {{% /notice %}}
+
+{{% notice style="note" %}}
+Contextualização:
+
+ - O que é [Kinesis](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-kinesis)
+ {{% /notice %}}
+
+#### Visão extra - desenvolvedor
+
+- Usado para ingestão de log, métricas, website ClickStreams, telemetria IOT.
+
+- Kinesis Producer
+  - Record é composto por:
+    - chave de partição (gerada ao enviar para o kinesis), Blob data (ate 1MB).
+    - Usa um hash chave de partição para definir em que shard vai armazenar.
+    - Por isso que deve se definir uma boa chave de partição, de forma a espalhar os dado nos shards evitando sub utilização.
+  - Pode ser produzidos por SDK (low level), KPL (high level por oferecer compressão e batch) e kinesis agent para logs de aplicação.
+  - Usa a API **PutRecord**.
+  - Recomenda usar KPL com Batch, para diminuir custos e aumentar o throughput.
+  - Pode lançar a exception **ProvisionedThroughputExceeded** caso envie mais do que é capaz de aceitar. exemplo se tem apenas um shard (pois usou um PK bem restrita) e tenta enviar 2 MB/s sabendo que so aceita 1 MB/s.
+    - Soluções:
+      - Usar chaves de partições que seja bem distribuídas.
+      - Implementar exponential backoff.
+      - Aumentar a quantidade de shards.
+  
+- Kinesis Consumer
+  - há dois modos de uso:
+    - **Shared (Classic) Fan-out**
+      - 2 MB/s considerando todos os consumers.
+      - Usa a API **GetRecords**.
+      - O consumer busca os dados (pull mode).
+      - Tem limite de 5 chamadas de APIs por shard por segundos.
+    - **Enhanced Fan-out**
+      - 2 MB/s por consumer por shard.
+      - Usa a API **SubscribeToShard**.
+      - O shard envia os dados para o consumer (push mode).
+      - Latência e muito baixa 70 ms.
+
+- KCL - Kinesis client library
+![image-20230812124931088](assets/image-20230812124931088.png)
+  - Facilita o consumo dos dados. É uma lib java.
+  - Cada shard pode ser lido apenas por uma instância KCL. 
+    - exemplo: 4 shards -> pode se ter no máximo 4 instancias do KCL
+    - Isso significa que o auto scale esta relacionado a quantidade de shard que se tem provisionados.
+  - Usa o DynamoDB para guardar o progresso, por isso precisa configurar acessos no IAM. Isso porque pode haver mais de um KCL executando e para que não haja colisão o track é feito usando o DynamoDB.
+
+- Kineses Operations
+  - **Shard Splitting  **
+    ![image-20230812125436219](assets/image-20230812125436219.png)
+    - ​	Usado para aumentar a capacidade de stream, ou seja usado para quebrar um shard e outro novos, a fim de aliviar a carga.
+    - o shard antigo vai ser deletado quando os dados expirarem e os dados novos serão divididos entre os novos.
+  - **Shard Merging**
+![image-20230812125719941](assets/image-20230812125719941.png)
+    - O contrario do splitting
+    - o shard antigo vai ser deletado quando os dados expirarem e os dados novos serão enviados para o novo.
+
+
+---
 ## Computação:
 
 

@@ -2678,7 +2678,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Possível usar métrica da **SQS** para dispara o **Auto Scaling Group** via CloudWatch metrics (**approximateNumerofMensages**).
   - Isso serve para escalar os consumidores.
 - **Política de acesso**.
-![image-20230812075815579](assets/image-20230812075815579.png)
+  ![image-20230812075815579](assets/image-20230812075815579.png)
   - Permite definir uma politica de quem pode enviar mensagens e consumir da fila.
   - Usada para dar acesso de cosumer cross account.
   - Pode ser usada para permitir um producer ser os eventos do S3.
@@ -2735,9 +2735,10 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - Usado para Deduplicação de mensagem
 - **Politica de acesso**.
   - Permite definir uma política de quem pode enviar mensagens para o tópico.
+  - Semelhande a do SQS.
 - **Encriptação**
   - Em transito vem habilitado por padrão (HTTPS).
-  - A do lado do servidor, vem desabilitada, e caso habilite pode selecionar um CMK (_Chave mestra do cliente_).
+  - Do lado do servidor, usa a SQS Key (SSE-SQS), mas é possivel usar uma chave criada no KMS (SSEKMS).
 - **SNS + SQS - Fan Out pattern**
   - A ideia é usar um tópico SNS na frente de **N** fila para garantir que aquela mensagem possa se processado por **N** sistema, seja para evitar perda de dados ou por causas de serviços que só permitem notificar um único tópico (ex: **S3 events**).
   - Pode usar em varias regiões.
@@ -2768,7 +2769,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Bom para Logs, metricas e IOT. Bom para projetos de tempo real com bigdata (uso com SPARK, NiFi)
 - **Dados são sincronizados em 3 AZ.**
 - Tem um produtor > enviar um **record** > **kinesis data stream** > repassa o **record** > ao consumidores.
-- O ordenação dos dados pode ser feita passando a mesma chave de partição, pois assim os dados serão enviado para o mesmo **shard**.
+- A ordenação dos dados pode ser feita passando a mesma chave de partição, pois assim os dados serão enviado para o mesmo **shard**.
   ![chave-partição](assets/image-20210903061639616.png)
 - Tipo de aplicação
   - **Kinesis Data streams** - Captura, processa e armazena fluxos de dados.
@@ -2796,7 +2797,9 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Pode ser usado como **Streaming ETL** que permitem que você limpe, aprimore, organize e transforme dados brutos antes de carregar seu data lake ou data warehouse em tempo real.
 - Modos de operação
   - **Sobe demanda** - Não é necessário planejar. o Kinesis escala de acordo com a demanda.
+    - Se pagar shard provisionado por hora.
   - **Provisionado** - Se define a quantidade de shards e gerencia para atender a demanda.
+    - Nesse se paga por hora de stream e por I/O por GB.
 - O **Shards** podem ser consumidos em modo **batch** ou **mensagem por mensagem**.
 - Limites
   - ![image-20230221064945510](assets/image-20230221064945510.png)
@@ -2806,7 +2809,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 #### Kinesis Data Firehose
 
 - Carrega dados para armazenamentos no AWS (Como S3, ReadShift, OpenSearch e Splunk).
-  ![data-firehose](assets/image-20210903055128503.png)
+  ![image-20230812130828759](assets/image-20230812130828759.png)
 - Serviço totalmente gerenciado pela AWS (Auto Scale, Serveless).
 - Pague apenas pelos dados processados.
 - Serviço próximo do **tempo real.**
