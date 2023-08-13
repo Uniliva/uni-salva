@@ -556,7 +556,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Pode ser habilitados em todas ou em apenas uma conta.
 - Tipo de eventos analisados:
   - **Eventos gerenciados.**
-    - **Operações usados** em recursos:
+    - **Operações feitas** em recursos:
       - Criar rules, criar S3 / EC2, alteração de recurso.
       - Separa os eventos de leitura e escrita.
       - **Analise manual do problemas**
@@ -588,16 +588,16 @@ Forma de se usar o ADSF (active directory na **AWS**)
       - Pode triggar eventos a partir de qualquer chamada de API no CloudTrail.
       - Métodos mais rápido de reação.
     - CloudWatch Logs
-      - Envia-se em stream para o CloudWatch e se cria filtros para analisar e detecctar anomalias.
+      - Envia-se em stream para o CloudWatch e se cria filtros para analisar e detectar anomalias.
     - Envio para o S3
       - O CloudTrail envia para o S3 em 5 minutos.
-      - Pode ser analisar os logs e disparar ações, alem de armazenar os logs.
+      - Pode ser analisar os logs e disparar ações, além de armazenar os logs.
 
 ---
 
 ### AWS KMS
 
-- Serviço de encriptação da AWS - Key Managemente Service.
+- Serviço de encriptação da AWS - Key Management Service.
 - Não é possível baixar as chaves.
 - Gerencia chaves de criptografia.
 - Serviços com **a opção de se encriptar** dados:

@@ -29,10 +29,10 @@ Análise:
 
 Integração de aplicativos:
 - [ ] AWS AppSync
-- [ ] Amazon EventBridge (Amazon CloudWatch Events)
-- [ ] Amazon SNS
-- [ ] Amazon SQS
-- [ ] Amazon Kinesis
+- [x] Amazon EventBridge (Amazon CloudWatch Events)
+- [x] Amazon SNS
+- [x] Amazon SQS
+- [x] Amazon Kinesis
 - [ ] AWS Step Functions
 
 Computação:
@@ -71,9 +71,9 @@ Gerenciamento e governança:
 - [ ] AWS AppConfig
 - [ ] AWS Cloud Development Kit (AWS CDK)
 - [X] AWS CloudFormation
-- [ ] AWS CloudTrail
-- [ ] Amazon CloudWatch
-- [ ] Amazon CloudWatch Logs
+- [x] AWS CloudTrail
+- [x] Amazon CloudWatch
+- [x] Amazon CloudWatch Logs
 - [x] AWS CLI
 - [ ] AWS Systems Manager
 
@@ -606,7 +606,6 @@ Contextualização:
 
 
 ---
-
 ## Banco de dados:
 
 ### RDS
@@ -674,7 +673,78 @@ Contextualização:
 
 
 ---
+## Ferramentas do desenvolvedor:
 
+### X-Ray
+
+- Permite analisar a aplicação visualmente, serviço de tracing distribuído da AWS.
+- Facilita troubleshooting de performance.
+- Ajuda a entender as dependências de serviços da aplicação (desenha o fluxo).
+- Mostra quais serviços estão com erros e o percentual das requisições que estão sendo afetadas.
+- Integra se com:
+  - EC2 (on-premises), ECS, Lambda, BeanStalk, API Gateway, ELB.
+  - Como configurar no beanStalk:
+    - Pode se habilita através da extensões ou ao criar habilitando a flag em serviços.
+    - Precisa que a role atribuída tenha acesso ao X-Ray.
+  - Como configurar no ECS: 
+    - Usa porta 2000 e protocolo UDP, 
+    - Usa a variável de ambiente AWS_XRAY_DAEMON_ADDRESS para inciar o url do daemon.
+    - Há 2 formas de se fazer:
+      - Habilitando o daemon na instância do cluster.
+      - Habilitando um contêiner que será um **side car** com o daemon.
+      - Caso Fargate, usa o modelo **side car**.      
+      ![image-20230813080418098](assets/image-20230813080418098.png)
+- **Tracer**
+  - Pode se habilitar para cada request ou por um percentual delas.
+  - Fornecem informações extras do caminho do request.
+- **Security**
+  - Usa IAM para autorização.
+  - Guarda os dados em repouso encriptado.
+
+- Conceitos 
+  - **Segment** - Representa uma aplicação, cada uma tem um.
+  - **SubSegments** - Pode se querer granularizar uma aplicação, caso a api tenha dois endpoint pode se criar uma para cada.
+  - **Trace** - Segmentos coletados junto do começo ao fim em um request por exemplo.
+  - **Sampling** - Em vez de coletar todas a interações se coleta apenas algumas amostras (reduz os custos).
+    - Por padrão envia a primeira requisição a cada segundo e 5% das demais requisições naquele segundo.
+      - **reservoir** - é como chamada a o percentual de dados coletados na primeira interação.
+      - **rate** - é como é chamado a requisições adicionais.
+    - Pode se definir os valores do  **reservoir** e **rate** em uma **regra se sampling** para coletar mais ou menos dados. (Não precisa reiniciar a aplicação para isso)    
+    ![image-20230813074728747](assets/image-20230813074728747.png)
+  - **Annotations** - Mapa de chave e valor usados para indexar os traces e para realizar filtros.
+  - **Metadata** - Informações adicionais, que não são indexadas e não são usadas para filtros.
+
+- **API**
+  - APIs que o daemon precisa para escrever os traces.  
+  ![image-20230813075251286](assets/image-20230813075251286.png)  
+  - APIs que o daemon precisa para ler os traces.  
+  ![image-20230813075450709](assets/image-20230813075450709.png)
+
+
+- **Como usar**
+![image-20230813071856713](assets/image-20230813071856713.png)
+  - Em aplicações: (Importa o SDK).
+    - Se ajusta o código da aplicação para usar o SDK X-Ray.
+    - Após isso o SDK ira capturar as interações (request https, para o banco de dados, para filas ...).
+  - Em instâncias: (Habilita a integração via daemon).
+    - Se instala o daemon do X-Ray (EC2 / Lambda), ele trabalha em baixo nível coletando pacotes UDP (Linux/ Mac/ Windows).
+    - Cada aplicação deve ter permissões IAM para escrever no X-Ray.
+    - Pode enviar traces cross account, para isso a IAM Role deve ser configurada.
+
+- Problemas com X-Ray
+  - Não funciona o EC2
+    - Valide as IAM Roles, se est~ao com as permissões corretas.
+    - Valide se o daemon esta rodando na instância.
+  - Não funciona no Lambda
+    - Valide se a IAM Execution Role esta com a permissão (AWSX-RayWriteOnlyAccess).
+    - Valide se o X_Ray foi adicionado ao código lambda.
+    - Valide se esta habilitado o **Lambda X-Ray Active Trancing**.
+
+#### Distro for Open Telemetry
+![image-20230813081055810](assets/image-20230813081055810.png)
+![image-20230813081129324](assets/image-20230813081129324.png)
+
+---
 ## Gerenciamento e governança:
 
 ### CloudFormation
@@ -790,6 +860,20 @@ Contextualização:
     
     ![image-20230810205136667](assets/image-20230810205136667.png)
 
+---
+
+###  AWS CloudTrail
+
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [CloudTrail](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-cloudtrail)
+{{% /notice %}}
+
+
+---
+
 ### SDK
 
 - O AWS CLI usa a SDK do Python (boto3).
@@ -834,6 +918,7 @@ Contextualização:
     - Se cria um event role que vai configurar como vai funcionar a entrada de dados de um event bus.
 
 ---
+
 
 ### AWS CLI
 
@@ -915,7 +1000,6 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
 
 
 ---
-
 ## Redes e entrega de conteúdo:
 
 ### CloudFront
@@ -993,8 +1077,6 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 
 
 ---
-
-
 ## Segurança, identidade e conformidade:
 
 
