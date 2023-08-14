@@ -1344,7 +1344,7 @@ Resource police restritas para a organização
       - 6vCPU - 10,240 MB de RAM
     - Tempo de execução - ate 15 minutos.
     - Variáveis de ambiente - ate 4KB.
-    - Espaço em disco (no container do Lambda) - 10 MB.
+    - Espaço em disco (no container do Lambda /tmp) - 10 MB.
     - Execuções simultâneas da mesma Lambda - 1000 (Pode ser alterado com solicitação).
     - Tamanho do paylod 6MB (Sync) / 256 KB (async)
   - **Deploy**
@@ -2437,23 +2437,30 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - DynamoDB Streams permite conectar ao Kinesis para enviar os dados para armazenamento em outros lugares ou para processamento posterior
 - ![image-20230220104955096](assets/image-20230220104955096.png)
 - Suporta ACID (Transações sobre múltiplas tabelas)
-- Consistências
-  - **eventual (eventually)** -> Pega de qualquer a informação uma das replicas é 5
+- Consistências na leitura.
+  - **eventual (eventually)** -> Pega a informação de qualquer  uma das replicas é 5
     vezes mais rápido, pois não valida se a informação é a mais recente.
   - **forte (strong)** -> valida se a informação é mais recente e para isso antes de
     retorna-la, valida em todas as replicas.
+    - Para usar seta o parameter **ConsistentRead** como true na APIs (GetItem, BatchGetItem, Query, Scan).
 - Quando criado pode se escolher entre provisionado e on-demand (paga por requisição feita)
   - Caso provisionado é preciso definir a:
     - Unidade de capacidade de leitura (**RCU** - Read Capacity Units), sendo cobrado ($0.00013) por RCU.
       - 1 RCU - 1 leitura consistente (**strong**) lendo ate 4KB por segundo.
-      - 1 RCU - 2 Leitura Eventual (eventually) lendo ate 4KB por segundo.
+      - 1 RCU - 2 Leitura Eventual (eventually) lendo ate 4KB por segundo.      
+      ![image-20230814194037758](assets/image-20230814194037758.png)
     - Unidade de capacidade de escrita (**WCU** - Write Capacity Units), sendo cobrado ($0.00065) por WCU.
-      - 1 WCU - 1 escrita de ate 1KB
+      - 1 WCU - 1 escrita de ate 1KB      
+      ![image-20230814194136079](assets/image-20230814194136079.png)    
+  - on-demand
+    - Read Request Units (RRU) -> igual ao RCU.
+    - Write Request Units (WRU) -> igual ao WCU.
+    - 2.5x mais cara que o modo provisionado.
   - Há duas classes de tabelas, **Standard e Infrequent Access .**
 - Tipos de chaves - por ser um banco nosql a unica coisa que precisa ser definida na criação da tabela é a chave primaria e ela pode ser de dois tipos:
-  - Unica - PK unica do tipo Hash - Unica e não se repete na tabela
-  - Composta - PK (Hash) + SK (Range) - A PK pode se repetir mas em conjunto com a SK não se repete.
-- Indexes - Há dois tipos
+  - **Unica** - PK unica do tipo Hash - Unica e não se repete na tabela
+  - **Composta** - PK (Hash) + SK (Range) - A PK pode se repetir mas em conjunto com a SK não se repete.
+- **Indexes** - Há dois tipos
   - LSI - Local Segundary Index - Se mantem a PK e se cria uma nova SK. (criado em tempo de criação)
   - GSI - Global Segundary Index - Se cria uma nova PK, podendo ser única ou composta pelas SK. (É criada após a criação da tabela)
 - Soluções com o DynamoDB
@@ -3109,7 +3116,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Permite aplicar filtros através de expressões regulares ou métricas ou IPs. E com isso dispara alarmes.
 - Por padrão nenhum log e enviado das instâncias EC2, caso queira ter os logs é necessária habilitar o **CloudWatch Agent** e isso fará que o **CloudWatch unified Agent** nas instâncias envie os logs.
   - Para isso precisa ter uma police que der permissão para enviar logs.
-![unified-agente](assets/image-20210906093405257.png)
+  ![unified-agente](assets/image-20210906093405257.png)
 
 ---
 

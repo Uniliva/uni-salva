@@ -38,7 +38,7 @@ Integração de aplicativos:
 Computação:
 - [x] Amazon EC2
 - [x] AWS Elastic Beanstalk
-- [ ] AWS Lambda
+- [x] AWS Lambda
 - [ ] AWS Serverless Application Model (AWS SAM)
 
 Contêineres:
@@ -474,6 +474,8 @@ Contextualização:
   - O S3 deve usar versionamento, para poder disparar o CloudFormation.
   - Caso use para implantar em cross account é necessário ter um Bucket police para permitir acesso ao CloudFormation de cada conta.
 
+- 
+
 - **Lambda Trigger**
   - Na integração com ELB, os dados do request são transformado em Json e repassados a Lambda.
     - O ALB suporta o Multi Header values (necessário habilitar no target group), isto é quando se passa **query string parameters** com múltiplos valores eles são convertido para um objeto json como um array.  
@@ -630,6 +632,23 @@ Contextualização:
     ![image-20230814071802676](assets/image-20230814071802676.png)
   - Pode se usar o **Code Deploy** para realizar o traffic shift (roteamento do trafego).  
   ![image-20230814072828143](assets/image-20230814072828143.png)
+
+- **Lambda URL**
+  - Permite criar um endpoint dedicado para o Lambda. Suporta IPV4 e IPV6.
+  - Gerada um URL única para a Lambda, que pode apontar para um alias ou $Latest.
+    - Não é possível apontar para versões diretamente.
+  - Suporta CORS e politica baseada em recurso. (especificando CIDR ou IAM principal).
+  - Pode ser configurada via Console ou API.
+  - Tipo autenticação:
+    - Auth Type None -> valida apenas politica Baseada em recurso. Dando acesso a todos.
+    - Auth Type AWS_IAM -> valida o principal e a politica baseada em recurso.
+      - O principal deve terá a permissão **lambda:InvokeFunctionUrl**.
+    
+    ![image-20230814183601019](assets/image-20230814183601019.png)
+
+- **Lambda boas praticas**
+
+![image-20230814184239369](assets/image-20230814184239369.png)
 
 ---
 ## Contêineres:
@@ -813,6 +832,56 @@ Contextualização:
 
 ---
 
+### DynamoDB
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [DynamoDB](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#dynamodb)
+ {{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- Pode se alterar o modo de **provisionado** ou **sob demanda** a cada 24 horas.
+- Tipos de dados aceitos nos atributos:
+  - Tipo escalares -> String, number, Binary, Boolean, Null.
+  - Documentos -> Map, List.
+  - Conjuntos -> String Set, Number Set, Binary Set
+- Caso provisione os WCU e RCU, e exceda pode se usar temporariamente o **Burst Capacity**, que permite ter um Throughput extra.
+  - Mas se excede-lo receberá um exception do tipo **ProvisionedThroughputExceededException**.
+- Tem uma funcionalidade de auto scale que reconfigura os valores de WCU e RCU de acordo com o uso.
+- Operações
+  - ![Alt text](image.png)
+    - PutItem -> cria novo item.
+    - UpdateItem -> Atualiza atribuídos de um item ja existente.
+    - Conditional Writes -> Adiciona/ Deleta / Atualiza de acordo com uma condição.
+      - Bom para quando a itens concorrentes.
+  - **Read**
+    - GetItem -> recuperar um item através das PK ou PK + SK.
+      - Pode se definir o **ProjectExpression** para retornar apenas alguns atribuídos.
+    - Query -> retorna o item de acordo com uma **KeyConditionExpression**.
+      - A PK deve ter o operador (=).
+      - A SK é opcional, e pode ter os operadores (=, >,<, Between, Begin with).
+      - Pode se adicionar um expressão de filtro (**FilterExpression**) usando os atribuídos não chaves, e será executa após a execução da query.
+      - Pode se usar a tabela ou os indexes (LSI e GSI) para a query.
+    - Scan -> lê toda a tabela. Consome muito WCU.
+  - **Delete**
+    - DeleteItem - remove um item com base na PK.
+      - Permite adicionar uma condição.
+    - DeleteTable -> serve para deletar a tabela e todos os itens.
+  - **Batch**
+    - Usado para melhorar a performance das operações (executar um conjunto de ações juntas).
+    - Caso parte falhe retorna os itens (**UnprocessedItems**) que falharam para uma retentativa futura.
+    - BatchWriteItem -> escreve em lotes.
+      - Permite inserir ou deletar 25 itens em uma única chamada.
+      - Permite escrever até 16 MB de dados, e ate 400 KB de dados por item.
+      - Não da pra atualizar os itens com isso.
+    - BatchGetItem -> busca em lotes.
+      - retorna de uma ou mais tabelas.
+      - Retorna ate 100 itens ou 16 MB de dados.
+      - São recuperados em paralelos o que diminui a latência.
+  - **PartQL** - Permite executar queries semelhante ao SQL (insert, select, update).
+    - Não permite realização de JOINs.
+
+---
 ### ElastiCache
 
 > {{% notice style="note" %}}
