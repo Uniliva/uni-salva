@@ -465,9 +465,14 @@ Contextualização:
 - Linguagem suportadas
   - Node / Python/ java / c# / Ruby / Golang
   - Caso seja diferentes dessa pode rodar usando **custom Runtime API** (open source project).
-  
+
+- As dependências devem ser enviadas juntos com o condigo da Lambda. Respeitando a limitações do tamanho do pacote. 
 - Suporta também **Lambda Contêiner Image**
   - Criadas usando o Lambda Runtime API.
+
+- Para atualizar uma Lambda usando o **CloudFormation** deve se realizar o upload o pacote zipado para o S3 e referencia-lo no CloudFormation.
+  - O S3 deve usar versionamento, para poder disparar o CloudFormation.
+  - Caso use para implantar em cross account é necessário ter um Bucket police para permitir acesso ao CloudFormation de cada conta.
 
 - **Lambda Trigger**
   - Na integração com ELB, os dados do request são transformado em Json e repassados a Lambda.
@@ -557,6 +562,74 @@ Contextualização:
   - Usa X-Ray - para guardar o traces (necessário ativar, vem desabilitado default), precisar usar X-ray SDK para marcar os traces.
 
 
+- **Lambda VPC**
+  - Por padrão as lambdas rodam um uma VPC gerenciada pela AWS a parte, ou seja não na sua VPC. 
+  - Com isso é possível acessar a internet e recursos reginais como DynamoDB e S3.
+  - Assim não da para acessar os recursos que são criados na VPC criada na sua conta.
+    - Para resolver isso é necessário realizar a implantação da lambda em sua VPC informando o VPC ID, as subnets e grupos de segurança.
+    - O o Lambda criar uma ENI nas subnets para conectar a VPC. Precisa ter permissão para criar ENI (API CreateNetworkInterface) ou via role **AWSLambdaENIExecutionRole**.
+    - Também é necessário um role de acesso chamada **AWSLambdaVPCAccessExecutionRole**.    
+    ![image-20230814053259347](assets/image-20230814053259347.png)
+  - Lambdas configuradas para rodar em uma VPC em uma subnet publica **não terá acesso a internet ou tera um IP publico.**
+  - Para ter acesso deve se rodar a Lambda em uma subnet privada e usar o NAT Gateway | instance para acessar a internet.  
+  ![image-20230814053746136](assets/image-20230814053746136.png)
+
+- **Lambda performance**
+  - CPU esta relacionado a Memória, aumentado memoria aumenta CPU.
+  - Deve executar entre 5 segundos e 15 minutos (timeout).
+  - Tem o Contexto de execução que:
+    - Inicia as dependências de uma Lambda (conexões com banco). É uma péssima ideia iniciar uma conexão com banco de dado na função, pois isso consome do tempo de execução.  
+    - Para usar é só chamar fora do handle da função.
+    ![image-20230814055326413](assets/image-20230814055326413.png)    
+    - É mantido por um tempo, é pode ser reutilizado por outras execuções (reduzindo tempo de inicialização).
+    - Tem acesso ao diretório /tmp, para gravação de arquivos temporários. Será compartilhado com as outra execuções.
+      - Para guardar aquivos grandes, que não precisam ser baixados a toda execução.
+      - Tem até ate 10 GB de espaço.
+      - Caso precise encriptar dados use o KMS.
+    - Caso precise de armazenamento permanente use o S3.
+
+- **Lambda Layers**
+  - Permite criar runtime customizadas.
+  - Pode se ter ate 5 layers por função de ate 250 MB.
+  - Permite externalizar dependências para reuso. Evitando assim perda de tempo com uploads de novas versões.  
+  ![image-20230814060607313](assets/image-20230814060607313.png)
+  
+- **Lambda File System Mounting**
+  - Pode acessar o EFS se estiver rodando na VPC da sua conta.
+  - Usa se **EFS Access Point** para isso.  
+  ![image-20230814061525148](assets/image-20230814061525148.png)  
+  - Cada Lambda executando será uma conexão no EFS.
+  - Comparativo  
+    ![image-20230814061203377](assets/image-20230814061203377.png)
+
+- **Lambda Concurrency an Throttling**
+  - Pode ter ate 1000 execuções concorrentes para toda conta - (soft Limit).
+  - Pode se configurar a quantidade de concorrência que se quer ter via **reserved concurrency**.
+  - Caso a quantidade de invocação passe o limite configurado ocorre o throttling.
+  - É recomendado que se defina os limites, pois caso não defina, uma lambda pode causar o throttle em todas as outras dentro da conta.
+  - No caso de invocações assíncronas:
+    - Caso ocorra o throttling ela vai devolver para a fila interna e tenta reprocessar ao longo de 6 horas com um back off exponencial.
+
+- **Lambda Container Image**
+  - Permite executar contêiner criados com base na **Lambda Runtime API** de ate 10 GB de tamanho.
+  - A vantagem é que a imagem vai esta com todas as dependências.  
+  ![image-20230814071004237](assets/image-20230814071004237.png)
+  - Boas praticas:
+    - Use sempre imagem Base AWS-provided.
+    - Use multi-Stage build para diminuir o tamanho da aplicação.
+    - Use o ECR para armazenar os Layer da imagem.
+
+- **Lambda Version e Aliases**
+  - Após o desenvolvimento é possível publicar a Lambda, criando assim uma versão.
+    - Cada versão tem seu próprio ARN e é imutável.
+    - O $Latest representa a ultima versão.
+  - Pode ser criar Alias para essa versões.
+    - Pode se criar alias por ambiente.
+    - Usados para canário deploy, onde se pode adicionar uma segunda versão e colocar pesos no roteamento do trafico a fim de testar a nova versão.
+    - Não pode referenciar outros alias, apenas versões.  
+    ![image-20230814071802676](assets/image-20230814071802676.png)
+  - Pode se usar o **Code Deploy** para realizar o traffic shift (roteamento do trafego).  
+  ![image-20230814072828143](assets/image-20230814072828143.png)
 
 ---
 ## Contêineres:
