@@ -4,6 +4,8 @@
         "alocamento",
         "deployar",
         "Fargate",
-        "granularizar"
+        "granularizar",
+        "retentativas",
+        "Trigga"
     ]
 }

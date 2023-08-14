@@ -1331,6 +1331,7 @@ Resource police restritas para a organização
   - Kinesis
   - DynamoDB Data Streams
   - S3 events
+  - CloudFront
   - EventBridge
   - SNS, SQS
   - Cloud Watch Logs
@@ -1352,7 +1353,10 @@ Resource police restritas para a organização
     - Tamanho da imagem - 10 GB
 - Lambdas@Edge
   - É possível executar Lambdas em ponto de presenças, para auxiliar itens relacionados ao CDN , Route 53 ....
+  - Bom para diminuir a latência.
     ![lambda@edge](assets/image-20210903204606738.png)
+- CloudFront Functions
+  - Saiba mais em [Edge Funtions](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#edge-function)
 
 ---
 

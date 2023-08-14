@@ -452,6 +452,113 @@ Contextualização:
 ![image-20230808083912269](assets/image-20230808083912269.png)
 
 ---
+
+### Lambda
+
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [Lambda](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-Lambda)
+ {{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- Linguagem suportadas
+  - Node / Python/ java / c# / Ruby / Golang
+  - Caso seja diferentes dessa pode rodar usando **custom Runtime API** (open source project).
+  
+- Suporta também **Lambda Contêiner Image**
+  - Criadas usando o Lambda Runtime API.
+
+- **Lambda Trigger**
+  - Na integração com ELB, os dados do request são transformado em Json e repassados a Lambda.
+    - O ALB suporta o Multi Header values (necessário habilitar no target group), isto é quando se passa **query string parameters** com múltiplos valores eles são convertido para um objeto json como um array.  
+    ![image-20230813111039675](assets/image-20230813111039675.png)
+
+  - Há dois modos de operação:
+    - Síncrono -> Você chama e esperar pela resposta. (as filas e o stream entram aqui, pois existe o event source mapping que realiza a chamada síncrona da Lambda)  
+    - Assíncrono -> um evento dispara a Lambda, nesse caso a Lambda executa baseados no evento, ou em uma fila.    
+      ![image-20230813112808083](assets/image-20230813112808083.png)    
+      - Caso ocorram erros haverá retry sendo:
+        - 3 retry no total.
+        - 1 minuto após 1ª chamada, depois aguarda 2 minutos.
+        - Deve se garantir que o processamento é idempotente, em casos de retry.
+        - Isso é para evitar duplicar logs e criar loop infinito de retentativas na Lambda.
+        - Pode se definir uma DLQ (SNS ou SQS) para notificar sobre falhas (precisa de permissão IAM).
+
+  - Integrações com CW Events  / EventBridge 
+      - **Via CRON**
+        - A cada x tempo dispara a Lambda
+      - **Via EventBridge Role** (baseado em um padrão de evento, ex: exclusão de EC2)
+        - Trigga quando status sofre mudança.
+
+  - **Event Source Mapping** - Lambda Trigger  
+    - Responsável por realizar o polling de dados do **Kinesis Data Stream, SQS, DynamoDB Stream** e invocar a Lambda. Em outra palavras é um processo que realiza o polling dos itens e monta os batches para o Lambda processar.
+    - há dois tipos:
+      - **Stream**
+        - Usado com Kinesis e DynamoDB.
+        - cria-se um iterador para cadas shard, e processa os itens em ordem. Inicia do inicio ou a partir de um período.
+        - Se ocorrer um erro todo batch é reprocessado.
+        - Permite informar uma DLQ para caso de erros.
+        ![image-20230813204251222](assets/image-20230813204251222.png)
+        - Escalonamento 
+          - Uma Lambda por shard 
+          - Caso use paralelizado, processa 10 batches por shard simultaneamente.
+      - **Queue**
+        - Usado para SQS e SQS FIFO.
+        - Pode se configurar o tamanho do batch.
+        - Se configurar a DLQ na Fila, com uma politica de tentativa de erros. Pois DLQ no Lambda é só para chamadas assíncronas, e nesse caso são chamadas síncronas.    
+        ![image-20230813204547891](assets/image-20230813204547891.png)
+        - O Lambda suporta processamento em ordem FIFO, escalando de acordo com o numero de groups ativos. - Escalonamento 
+          - Para SQS Standard
+            - Pode escalar até 60 instância por minuto.
+            - Pode processar ate 1000 batches de mensagens simultaneamente.
+          - Para SQS FIFO
+            - Processa a mensagem em ordem desde que estejam no mesmo GrupoID.
+            - Scala de acordo com numero de grupo de mensagem ativos.
+
+  - **Event e Context Object**  
+    ![image-20230813211306459](assets/image-20230813211306459.png)  
+    - Quando uma Lambda é aciona ela recebe dois tipos de dados no formato Json, que são:
+      - **Event Object**
+        - Contém os dados para que a função processe.
+        - Contém os dados de quem acionou (todas as informações necessárias)
+        - É convertido em um objeto de acordo com o tipo da Lambda (python, java, node) e fica disponível para uso.
+      - **Context Object**
+        - Contém informações sobre o contexto de execução da Lambda, com memoria_limit_in_mb, function_name, aws_request_id.
+
+- **Lambda destination**
+  - Após o processamento da Lambda pode se configurá-la para enviar o resultado para outros serviços AWS.
+  - Podendo ser: 
+    - Para invocações **assíncronas**: 
+      - Pode enviar o resultado em caso de sucesso ou falha para SQS, SNS, Lambda, EventBridge.
+      - Recomendado usar ao invés de DLQ, por ser uma solução mais direta. (não requer um solução para o processamento da DLQ).
+    - Para **event source mapping** do tipo stream.
+      - Para batch descartados: SQS, SNS
+
+- **Lambda polices**
+  - **Lambda Execution Role**
+    - IAM Role que da acesso ao recursos para leitura e escritas.
+      - AWSLambdaBasicExecutionRole -> permiti fazer upload de logs para CloudWatch.
+      - AWSLambdaKinesisExecutionRole -> permite ler do Kinesis,
+      - AWSLambdaDynamoDBExecutionRole -> Permite ler de streams do DynamoDB.
+      - AWSLambdaSQSQueueExecutionRole -> permite ler do SQS.
+      - AWSLambdaVPCAccessExecutionRole -> permite implantar funções Lambda dentro de nosso VPC.
+      - AWSLambdaXrayDaemonWriteAccess -> permite carregar dados de rastreamento para o X-Ray.
+      - Recomendado criar uma por Lambda. 
+      - Usada quando a lambda realize o pulling das mensagem via **event source mapping**.
+  - **Resource Based police**
+  - Para que outros serviços consigam chamar uma Lambda deve se criar uma **Resource Based police**
+    - Similar a S3 Police. Onde se define quem pode invocar a Lambda.
+    - Usado onde um recurso aciona a lambda.
+
+- **Lambda Logging & Monitoring**
+  - Usa CW Logs - para logar a execução (precisa da role AWSLambdaBasicExecutionRole ).
+  - Usa CW Metrics - para guardar métricas (invocações, duração, execuções concorrentes, erros, rates, throttles).
+  - Usa X-Ray - para guardar o traces (necessário ativar, vem desabilitado default), precisar usar X-ray SDK para marcar os traces.
+
+
+
+---
 ## Contêineres:
 
 ### AWS CoPilot
@@ -737,7 +844,7 @@ Contextualização:
     - Valide se o daemon esta rodando na instância.
   - Não funciona no Lambda
     - Valide se a IAM Execution Role esta com a permissão (AWSX-RayWriteOnlyAccess).
-    - Valide se o X_Ray foi adicionado ao código lambda.
+    - Valide se o X_Ray foi adicionado ao código Lambda.
     - Valide se esta habilitado o **Lambda X-Ray Active Trancing**.
 
 #### Distro for Open Telemetry
