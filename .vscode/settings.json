@@ -8,5 +8,8 @@
         "retentativa",
         "retentativas",
         "Trigga"
+    ],
+    "cSpell.enableFiletypes": [
+        "markdown"
     ]
 }

@@ -841,19 +841,26 @@ Contextualização:
 
 #### Visão extra - desenvolvedor
 - Pode se alterar o modo de **provisionado** ou **sob demanda** a cada 24 horas.
+
 - Tipos de dados aceitos nos atributos:
   - Tipo escalares -> String, number, Binary, Boolean, Null.
   - Documentos -> Map, List.
   - Conjuntos -> String Set, Number Set, Binary Set
+  
 - Caso provisione os WCU e RCU, e exceda pode se usar temporariamente o **Burst Capacity**, que permite ter um Throughput extra.
   - Mas se excede-lo receberá um exception do tipo **ProvisionedThroughputExceededException**.
+  
 - Tem uma funcionalidade de auto scale que reconfigura os valores de WCU e RCU de acordo com o uso.
+
 - Operações
-  - ![Alt text](image.png)
+  - **Write**
     - PutItem -> cria novo item.
     - UpdateItem -> Atualiza atribuídos de um item ja existente.
-    - Conditional Writes -> Adiciona/ Deleta / Atualiza de acordo com uma condição.
-      - Bom para quando a itens concorrentes.
+    - Conditional expression for Writes -> Adiciona / Deleta / Atualiza de acordo com uma condição.
+      - Bom para quando a itens concorrentes. Pois tem uma funcionalidade chamada de **Optimistic Locking** que evita que atualizações / delete enquanto esta sendo atualizado ou deletado.
+        - Cada item tem um atributo para validação como se fosse uma versão.
+      
+      ![image-20230815201126518](assets/image-20230815201126518.png)
   - **Read**
     - GetItem -> recuperar um item através das PK ou PK + SK.
       - Pode se definir o **ProjectExpression** para retornar apenas alguns atribuídos.
@@ -878,8 +885,33 @@ Contextualização:
       - retorna de uma ou mais tabelas.
       - Retorna ate 100 itens ou 16 MB de dados.
       - São recuperados em paralelos o que diminui a latência.
-  - **PartQL** - Permite executar queries semelhante ao SQL (insert, select, update).
+  - **PartQL** - Permite executar queries semelhante ao SQL (insert, select, update, delete).
     - Não permite realização de JOINs.
+  
+- **DynamoDB Streams** - Stream das alterações que ocorrem no banco de dados.
+  ![image-20230815204431459](assets/image-20230815204431459.png)
+  - Retém os dados por 24 horas. Feito de Shards como o Kineses.
+  - Faz o Stream dos dados para Lambda, Kinesis Data Streams, KCL (Kinesis Client Library Applications.).
+  - Uma vez habilitado só vai enviar os dados a partir daquele momento, não enviando o histórico.
+  - Pode se escolher o que se vai postar no stream
+    - key_only - Somente os nomes dos atributos modificados.
+    - new_image - O item inteiro modificado.
+    - old_image - o item inteiro antes da modificação.
+    - new_and_old_images - O item antes e depois da modificação.
+
+- **DynamoDB CLI** - Bom saber sobre a API do dynamoDB no AWS CLI.
+  - **--projection-expression** - permite especificar os atribuídos que se que recuperar.
+  - **--filter-expression** - permite filtrar os atribuídos depois que se recuperou.
+  - **--page-size** - Quantidade de itens na lista recuperada. Default 1000 itens.
+  - **--max-items** - Numero máximo de itens recuperado no CLI, retorna o **Next Token** (identificação dos proximo bloco de itens)
+  - **--start-token** - Permite especificar o **Next Token** para se recuperar os próximos itens.
+
+- **DynamoDB Transactions**
+  - Serve para criar transações no dynamo (em uma ou mais tabelas), ou seja tudo é inserido ou nada.
+  - Serve para situações onde se depende que todos os itens sejam salvos (quando as informações estão quebradas em tabelas).
+  - Usados para ACID com Leituras e Escritas e consome 2 WCUcaso escrita ou 2 RCU para leitura.  
+  ![image-20230815211858410](assets/image-20230815211858410.png)
+
 
 ---
 ### ElastiCache

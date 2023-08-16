@@ -2426,7 +2426,9 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Tamanho máximo de objeto (registro aceito 400 KB), para objetos maiores se armazena no S3 e guarda a referencia no DynamoDB.
 - Escala horizontalmente automaticamente de acordo com numero de requisição.
 - Permite usar o DAX (DynamoDB Accelarator) para melhorar o IO para milissegundos.
-  - Cachea registo muito acessado, por 5 minutos (TTL)
+  - Cachea em memoria registos muito acessado, por 5 minutos (TTL).
+  - Resolve o problema de Hot key, ou seja registros muitos acessados (muitas leituras).
+  - Pode se ter até 11 nodes de cache.
 - Replica em 3 AZ (Zona de disponibilidade).
 - Tem um scopo regional.
 - Responde em milissegundos.
@@ -2436,7 +2438,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Dispara eventos para o **Event Bridge** via **DynamoDB Streams.**
 - DynamoDB Streams permite conectar ao Kinesis para enviar os dados para armazenamento em outros lugares ou para processamento posterior
 - ![image-20230220104955096](assets/image-20230220104955096.png)
-- Suporta ACID (Transações sobre múltiplas tabelas)
+- Suporta ACID (Transações sobre múltiplas tabelas) via **DynamoDB Transactions**.
 - Consistências na leitura.
   - **eventual (eventually)** -> Pega a informação de qualquer  uma das replicas é 5
     vezes mais rápido, pois não valida se a informação é a mais recente.
@@ -2462,7 +2464,16 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - **Composta** - PK (Hash) + SK (Range) - A PK pode se repetir mas em conjunto com a SK não se repete.
 - **Indexes** - Há dois tipos
   - LSI - Local Segundary Index - Se mantem a PK e se cria uma nova SK. (criado em tempo de criação)
+    - Pode se ter até 5 por tabela.
+    - Pode se definir os atribuitos que vão ficar na tabela, se não definidos ficam todos.
   - GSI - Global Segundary Index - Se cria uma nova PK, podendo ser única ou composta pelas SK. (É criada após a criação da tabela)
+    - Pode se definir os atribuitos que vão ficar na tabela, se não definidos ficam todos.
+    - Se houver throttle no GSI (numa leitura intensa por exemplo) na tabela também haverá.
+    - Pode se definir os WCU e RCU proprios. Por default copia o que esta na tabela.
+- TTL
+  - Permite definir um periodo para deletar os itens.
+  - Não consome nenhum WCU. (Não tem custo). 
+  - Tem o formato **unix epoch timestamp**
 - Soluções com o DynamoDB
   - Indexador de objetos
     ![image-20230220105121790](assets/image-20230220105121790.png)
