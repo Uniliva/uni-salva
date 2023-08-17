@@ -1534,10 +1534,10 @@ Resource police restritas para a organização
   - Permite criar vários estágios de deploy e através dele é possível fazer rollback.
   - Alem de controlar o direcionamento do trafico.
 - **LOGs**
-  - Possivel enviar os logs para o Cloud Watch com os niveis ERRO e INFO
+  - Possivel enviar os logs para o **Cloud Watch** com os niveis ERRO e INFO
   - Pode logar o request e response completos.
   - Pode enviar os logs de acessos de forma customizada
-  - Pode ser enviados diretamente para o Kinesis Data FireWhose como alternativa.
+  - Pode ser enviados diretamente para o **Kinesis Data FireWhose** como alternativa.
   - Metricas
     - São envidas com base nos stages, há possibilidade de envio de métricas detalhadas.
   - X-Ray
@@ -1551,7 +1551,7 @@ Resource police restritas para a organização
   - Permite o uso de caching para reduzir a quantidade de chamadas ao Backend.
   - Por padrão tem um **TTL de 300 segundo, mas pode ser configurado ate 0 a 3600 segundos.**
   - Definidos por Stages, mas é possível aplicar para cada métodos (endpoint).
-  - O cliente pode invalidar o cache enviando o header **Cache-Control:max-age=0**.
+  - O cliente pode invalidar o cache enviando o header **Cache-Control:max-age=0** (precisa de uma IAM que autorize).
   - Pode ser criptografado.
   - **Tem um tamanho que varia de 0.5GB a 237GB.**
 - **Plano de uso**
@@ -1560,13 +1560,17 @@ Resource police restritas para a organização
   - API Keys
     - Identifica um cliente no API Gateway, usado para aplicar as configurações acima.
 - **IAM Permissions**
+  - Há duas coisa pra se ter acesso:
+    - Autenticação -> Diz que o usuário está logado. -> feito com IAM.
+    - Autorization -> diz que o usuário tem permissão. -> feito com IAM Policy.
   - O API Gateway usa uma política para verificar quem tem acesso as APIs para "usuarios" da sua organização AWS, as credencias são enviadas no Header com **Sig 4**.
     ![iam-police](assets/image-20210904052941839.png)
 - **Lamdba Authorizer**
   - Conhecido como autorizador customizado, Se cria uma **lambda** para validar um Token e essa validação e cacheada por uma hora.
-  - Paga pelo quantidade de lambda infocado.
+  - Paga pelo quantidade de Lambda infocado.
   - Pode se usar OAuth / SAML ... para autorizar.
     ![custom-autorization](assets/image-20210904053330911.png)
+  - ![image-20230817062624679](assets/image-20230817062624679.png)
 - **Cognito user pools**
   - Solução AWS, para cadastro de usuário, através dele é possível da a um usuário qualquer acesso a recurso da AWS.
   - Ajuda apenas na autenticação não na autorização.

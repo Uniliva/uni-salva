@@ -1315,6 +1315,39 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
       ![image-20230816210946923](assets/image-20230816210946923.png)
     - **HTTP_PROXY** -> Não há mapeamento, a requisição é passada ao backend. O retorno só redirecionado.
       - Permite adicionar **headers** tando no request repassado ao backend.
+- **Usage Plans e API Keys**
+  - Há uma limitação de 10000 RPS (request por segundo para toda as APIs da conta) - soft limit. Para evitar o consumo total recomenta o uso de Usage Plans.
+  - Permite contabilizar o uso da API pelos clientes, podendo estabelecer cotas de uso (throttle limites).
+  - Usa se o API Key para linkar a aplicação chamadora com o plano de uso.
+  - pode se aplicados a stage e métodos.
+  - Como configurar
+    - Cria se ou importa a API key das aplicações consumidoras.
+    - Cria se o Plano de uso con throttle e cotas de uso,
+    - Associa a API Key ao Plano de uso.
+    - O cliente deve passar o header **x-api-key** na requisição.
+- **Métricas coletadas**
+  - **cacheHitCount** e **CacheMissCount** - dados de eficiência do cache.
+  - **Count** - Total de requests.
+  - **IntegrationLatency** - Latência da integração com o Backend.
+  - **Latency** - Tempo desde o recebimento da request até o retorno para o cliente (validação autorização e cache e integração com o backend).
+  - **4xxError** - erro do lado do cliente.
+  - **5xxErros** - Erros do lado do servidor.
+- Diferença entre HTTP APi e REST API
+![image-20230817063033512](assets/image-20230817063033512.png)
+
+- **WebSocket**
+  - Para aplicações bidirecionais com webSocket.
+  - Usado pra chats, games ou aplicações que precisa manter conexão abertas.
+  - Armazena o ConnectionId no DynamoDB que será usado para futuras interações  
+  ![image-20230817063740110](assets/image-20230817063740110.png)  
+  - exemplo  
+  ![image-20230817063810397](assets/image-20230817063810397.png)  
+  - Como funciona o retorno da comunicação.
+    - Tem se um callback, onde pode ser enviadas mensagens de respostas.
+    - Aceita as operações Get, Post, Delete.  
+  ![image-20230817063923162](assets/image-20230817063923162.png)  
+  - Roteamento das requisições  
+  ![image-20230817064204981](assets/image-20230817064204981.png)
 
 ---
 ### CloudFront
