@@ -78,7 +78,7 @@ Gerenciamento e governança:
 - [ ] AWS Systems Manager
 
 Redes e entrega de conteúdo:
-- [ ] Amazon API Gateway
+- [x] Amazon API Gateway
 - [ ] Amazon CloudFront
 - [ ] Elastic Load Balancing
 - [x] Amazon Route 53
@@ -1283,6 +1283,40 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
 ---
 ## Redes e entrega de conteúdo:
 
+### API Gateway
+
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [API Gateway](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-api-gateway)
+{{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- Permite importa e exporta APIs do  formato Swagger / Open API.
+- Se integra com:
+  - Lambda, Http, AWS Service (para usar Authentication)
+- **Stage Variables**
+  - Stage são pode ser considerados ambientes de implantação.
+  - Eles pode ter variáveis de ambiente que são usada para configurar o redirecionamento do Gateway.
+  - Além de outras configurações, como timeout, logs, histórico de deploy, entre outras.
+  - Caso sejam lambda eles são passados como "context".
+  - Para acessar usa-se **${stageVariable.nomeVariavel}**.
+  - **Integration type**
+    - **Mock** -> retorna um valor mockado sempre, sem repassar para o backend.
+    - **Http / AWS** (Lambda e Service) -> tem que configurar o request e o response.
+      - Configura os dados enviado usando **Mapeamento via templates** para request e o response.
+        - Isso permite modificar query parameters, body, e headers.
+        - Usa Velocity Template Language (VTL)
+        - Permite filtrar e modificar o response.
+        - Permite converter json para XML (soap) ou vise e versa.
+    - **AWS_PROXY** -> Lambda Proxy - os dados do request são enviado ao Lambda e ela fica responsável por tratar o request e o response.
+      - Não há mapeamento do body, headers ....      
+      ![image-20230816210946923](assets/image-20230816210946923.png)
+    - **HTTP_PROXY** -> Não há mapeamento, a requisição é passada ao backend. O retorno só redirecionado.
+      - Permite adicionar **headers** tando no request repassado ao backend.
+
+---
 ### CloudFront
 
 {{% notice style="note" %}}
