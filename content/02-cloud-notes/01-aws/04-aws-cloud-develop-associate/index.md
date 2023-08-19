@@ -58,11 +58,11 @@ Ferramentas do desenvolvedor:
 - [ ] AWS Amplify
 - [ ] AWS Cloud9
 - [ ] AWS CloudShell
-- [ ] AWS CodeArtifact
+- [x] AWS CodeArtifact
 - [x] AWS CodeBuild
 - [x] AWS CodeCommit
 - [x] AWS CodeDeploy
-- [ ] Amazon CodeGuru
+- [x] Amazon CodeGuru
 - [x] AWS CodePipeline
 - [ ] AWS CodeStar
 - [x] AWS X-Ray
@@ -956,6 +956,28 @@ Contextualização:
 ---
 ## Ferramentas do desenvolvedor:
 
+### AWS CodeArtifact
+- Gerenciador de artefatos - como o Frog ou o maven ou npmjs.
+- Permite armazenar os artefatos gerados (libs (dependências) e aplicações).
+- Tem boa integração com quase todas as ferramentas de dependências (maven, pip, npm, etc). 
+- Fica em nivel de VPC. Não guarda todas as dependências apenas as suas, as que já são livres ele apenas realiza um proxy buscando do repo original (por exemplo do Maven Central).
+- Cachea as dependências mais usadas
+- Contém dominios e dentro há repositórios.
+![image-20230819072751625](assets/image-20230819072751625.png)
+
+- Pode gerar eventos, que pode ser escutados para validar pacotes, ou para triggar o codeStar (codePipeline).
+- Usa Resouce Police para dar acesso (a outras contas). e quando se da acesso não tem como granularizar, ou seja o acesso e dado a todos os repositórios.
+- Um repositório pode apontar para outros repositórios (**upstream repository**).
+  - Permite ter apenas um URL para varios repos.
+  - Pode se ter ate 10 **upstream repository**
+  - E Apenas uma conexão externa (link para um repo publico como o maven) por repo.  
+  ![image-20230819073621158](assets/image-20230819073621158.png)
+- Dominios
+
+![image-20230819074022929](assets/image-20230819074022929.png)
+
+---
+
 ### AWS CodeCommit
 - Controlador de versão (git). Repositórios privado na conta AWS.
 - Autenticação (semelhante ao do github) ->  SSH Key e HTTPS
@@ -996,11 +1018,16 @@ Contextualização:
 ---
 
 ### AWS CodeDeploy
+- Precisa de uma IAM Role para acessar os recursos EC2/ Lambda/ S3.
 - Automatiza o processo de deploy. Pode deployar nos targets:
   - EC2 e Servidores on-premises
-    - Necessita ter instalado o **CodeDeploy Agent**.
+    - Necessita ter instalado o **CodeDeploy Agent** (pode ser instalando via SSM ou manual).
     - Permite deploys usando estratégias Blue/Green ou in-place.
-    - Devem ter permissões para acessar recurso da AWS como o **codeDeploy** e o **S3** onde fica a aplicação.
+    - Devem ter permissões para acessar recurso o **S3** onde fica a aplicação.
+    - Cria se um **deployment group**:
+      - Que vai conter as instâncias (aws ou on-premises) ou Auto Scale Group que são onde se realizar o deploy.
+      - Vai conter estratégias podendo ser Blue/Green ou in-place.
+      - Para adicionar uma instância no **deployment group** usa-se tags.
   - Lambda
     - Usa a estratégias de **Traffic Shift** para deploy.
     - É integrado com o SAM Framework.
@@ -1010,6 +1037,10 @@ Contextualização:
 - Permite controlar a granularidade dos deploy (estratégias de deploy). 
   - in-place / Metade / blue Green.
 - Usa o arquivo chamado **appspec.yml**, o passo a passo do deploy.
+- Erros comuns
+  - **InvalidSignatueException** - Ocorre quando a hora do cloudDeploy esta diferente da hora da instância.
+- Acesse os logs do processo de deploy na instância em **/opt/codedeploy-agent/deployment-root/deploymnent-logs**
+- 
 ---
 
 ### AWS CodePipeline
@@ -1057,10 +1088,36 @@ Contextualização:
 
 - Pode o **codePipelinese** com o **cloudFormation** para se criar toda a infraestrutura.
   - Exemplos:  criar uma Task e Service do ECS / criar lambdas em diversas contras.
-![image-20230818212324169](assets/image-20230818212324169.png)
+  ![image-20230818212324169](assets/image-20230818212324169.png)
 
 
 ---
+
+### Amazon CodeGuru
+
+> {{% notice style="note" %}}
+Contextualização:
+ - Armazenamento [CodeGuru](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#codeguru)
+{{% /notice %}}
+
+- Suporta Java e Python.
+- Foi treinado com milhoes de reopositorios open-source e Amazon,
+- Integrado com Github, Bitbucket e CodeCommit.
+---
+
+### AWS CodeStar
+- Permite uma visualização integrada dos serviços:
+  - CodeCommit. codeBuild, codeDeploy, CloudFormation, CodePipeline, CloudWatch, etc.
+  - Permite fazer integrações com ferramentas de terceiros, como o Github, BitBucket, etc.
+- Permite criar pipelines rapidamentes para projetos com EC2, Lambda, BeanStalk.
+- Suporta C#, Go, Html 5, Java, Node.js. Python, Ruby.
+- Tem integração com o Jira / Github Issues, para issues tranking.
+- Pode se usar em conjunto com o Cloud9 IDE.
+- Free, se paga pelos recursos provisionado.
+- Precisa de uma IAM Role para acessar os recursos da AWS.
+
+---
+
 ### X-Ray
 
 - Permite analisar a aplicação visualmente, serviço de tracing distribuído da AWS.
