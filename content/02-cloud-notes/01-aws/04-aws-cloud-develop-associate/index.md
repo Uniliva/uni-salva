@@ -39,7 +39,7 @@ Computação:
 - [x] Amazon EC2
 - [x] AWS Elastic Beanstalk
 - [x] AWS Lambda
-- [ ] AWS Serverless Application Model (AWS SAM)
+- [x] AWS Serverless Application Model (AWS SAM)
 
 Contêineres:
 - [x] AWS Copilot
@@ -64,7 +64,7 @@ Ferramentas do desenvolvedor:
 - [x] AWS CodeDeploy
 - [x] Amazon CodeGuru
 - [x] AWS CodePipeline
-- [ ] AWS CodeStar
+- [x] AWS CodeStar
 - [x] AWS X-Ray
 
 Gerenciamento e governança:
@@ -651,6 +651,71 @@ Contextualização:
 ![image-20230814184239369](assets/image-20230814184239369.png)
 
 ---
+
+### AWS Serverless Application Model (SAM)
+
+> {{% notice style="note" %}}
+Contextualização:
+ - [SAM](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#sam---serveless-aplication-model)
+{{% /notice %}}
+
+#### Visão extra - desenvolvedor
+
+- Construido em cima do CloudFormation.
+- o Arquivo YML (a **receita**) chamado **template.yaml**, que depois é transformado em um template do **CloudFormation**.
+  - Requer a definição das sessões de **Transform** e do **Resources**.
+  - Veja um [exemplo](https://github.com/Uniliva/uni-salva/blob/main/content/02-cloud-notes/01-aws/04-aws-cloud-develop-associate/exemplos-codigos/sam/template.yaml)
+  
+- Comandos:
+
+```shell
+# Inicia um projeto
+sam init
+
+# realiza o build
+sam build  <options>
+
+# empacota a aplicação para cloudFormation
+sam package aws cloudformation package  --s3-bucket <bucket-name> --template-file template.yaml --output-template-file gen/template-generated.yaml
+
+## é equivalente a: 
+aws cloudformation package  --s3-bucket <bucket-name> --template-file template.yaml --output-template-file gen/template-generated.yaml
+
+# Realiza o deploy
+sam deploy  <options>
+
+## é equivalente a: 
+aws cloudformation deploy --template-file gen/template-generated.yaml --stack-name <stack name>  --capabilities CAPABILITY_IAM
+
+## Deploy configuravel via perguntas - realiza perguntas e executa o empacotamento e o deploy num comando só
+sam deploy --guided
+```
+
+- Processo de uso:
+![image-20230819090343445](assets/image-20230819090343445.png)
+- As Polices criados pelo SAM, são baseados em templates configurados pela AWS.
+![image-20230819094903580](assets/image-20230819094903580.png)
+- Ao se criar uma Lambda, há uma opção de usar um projeto já pronto a partir de um exemplo do SAM Aplication Repository (SAR).
+- Como configurar o SAM com o **CodeDeploy** para realizar o **Traffic Shifting**
+![image-20230819095243368](assets/image-20230819095243368.png)
+- Como executar SAM Localmente para testes.
+
+  - Lambda
+    - Usa o comando **sam local invoke**.
+    - Pode se usar o **--profile=<nome>** caso a Lambda se conecte a AWS.
+    - Pode se gerar eventos para a lambda usando o comando **sam local generate-event**.
+    ![image-20230819101004809](assets/image-20230819101004809.png)
+  - API Gateway
+    - Usa o comando **sam local start-api**.
+    - Pode se usar o **--profile=<nome>** caso a Lambda se conecte a AWS.
+    ![image-20230819101018954](assets/image-20230819101018954.png)
+
+- SAM Aplication Repository (SAR).
+  - Permite deployar aplicações que pode ser reutilizadas em outras contas.  
+  ![image-20230819101458761](assets/image-20230819101458761.png)
+
+---
+
 ## Contêineres:
 
 ### AWS CoPilot
@@ -1018,7 +1083,14 @@ Contextualização:
 ---
 
 ### AWS CodeDeploy
+
+> {{% notice style="note" %}}
+Contextualização:
+ - entenda o [CodeDeploy](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#code-deploy)
+{{% /notice %}}
+
 - Precisa de uma IAM Role para acessar os recursos EC2/ Lambda/ S3.
+- Não realiza deploy no S3, para isso usa o CodeBuild.
 - Automatiza o processo de deploy. Pode deployar nos targets:
   - EC2 e Servidores on-premises
     - Necessita ter instalado o **CodeDeploy Agent** (pode ser instalando via SSM ou manual).

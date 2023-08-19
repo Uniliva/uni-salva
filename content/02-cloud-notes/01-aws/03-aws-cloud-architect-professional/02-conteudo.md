@@ -3348,7 +3348,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Com ele pode se criar:
   - Lambdas, DynamoDB Tables, Api Gateway.
 - Permite roda os itens acima localmente, o que facilita durante a fase de desenvolvimento.
-- Permite via Code Deploy realizar o deploy de Lambdas usando **Traffic Shifting.**
+- Permite via **CodeDeploy** realizar o deploy de Lambdas usando **Traffic Shifting.**
 - Usa o **CloudFormation** por debaixo dos panos.
 - Arquitetura com SAM.
   ![image-20230222104901039](assets/image-20230222104901039.png)

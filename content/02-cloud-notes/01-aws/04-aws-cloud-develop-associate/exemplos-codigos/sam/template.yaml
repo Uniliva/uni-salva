@@ -1,14 +1,14 @@
 # SAM FILE
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
+AWSTemplateFormatVersion: '2010-09-09'  # versão do CloudFormation
+Transform: 'AWS::Serverless-2016-10-31' # Versão odo template SAM usado na Traformação para o CF.
 Description: A starter AWS Lambda function.
 Resources:
   helloworldpython3:
-    Type: 'AWS::Serverless::Function'
+    Type: 'AWS::Serverless::Function' # Tipo especifico de recurso SAM (tem todos os itens serveless).
     Properties:
-      Handler: app.lambda_handler
+      Handler: app.lambda_handler # Função inicial do lamdba
       Runtime: python3.9
-      CodeUri: src/
+      CodeUri: src/  # indica onde esta o codigo na pasta local
       Description: A starter AWS Lambda function.
       MemorySize: 128
       Timeout: 3
@@ -16,13 +16,13 @@ Resources:
         Variables:
           TABLE_NAME: !Ref Table
           REGION_NAME: !Ref AWS::Region
-      Events:
-        HelloWorldSAMAPI:
+      Events:  ## Permite adicionar integrações
+        HelloWorldSAMAPI: ## Criando API gateway
           Type: Api
           Properties:
             Path: /hello
             Method: GET
-      Policies:
+      Policies:  # Usado para criar polices
         - DynamoDBCrudPolicy:
             TableName: !Ref Table  
 
