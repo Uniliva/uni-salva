@@ -59,13 +59,13 @@ Ferramentas do desenvolvedor:
 - [ ] AWS Cloud9
 - [ ] AWS CloudShell
 - [ ] AWS CodeArtifact
-- [ ] AWS CodeBuild
-- [ ] AWS CodeCommit
-- [ ] AWS CodeDeploy
+- [x] AWS CodeBuild
+- [x] AWS CodeCommit
+- [x] AWS CodeDeploy
 - [ ] Amazon CodeGuru
-- [ ] AWS CodePipeline
+- [x] AWS CodePipeline
 - [ ] AWS CodeStar
-- [ ] AWS X-Ray
+- [x] AWS X-Ray
 
 Gerenciamento e governança:
 - [ ] AWS AppConfig
@@ -956,6 +956,111 @@ Contextualização:
 ---
 ## Ferramentas do desenvolvedor:
 
+### AWS CodeCommit
+- Controlador de versão (git). Repositórios privado na conta AWS.
+- Autenticação (semelhante ao do github) ->  SSH Key e HTTPS
+- Autorização -> IAM Polices
+- Encriptação dos dados
+  - KMS quando em repouso.
+  - TLS quando em transito.
+- Cross Account
+  - Não se compartilha SSH keys.
+  - Se cria uma IAM Role usando a API AssumeRole do STS .
+  ![image-20230818193717335](assets/image-20230818193717335.png)
+
+- Pode se criar regras de notificações para notificar sobre eventos nos repositórios.
+  - Tem como target o SNS e o Slack Chat.
+- Pode se criar Triggers para disparar ações.
+  - Tem como targets o SNS e o Lambda.
+
+---
+
+### AWS CodeBuild
+
+![image-20230818210428355](assets/image-20230818210428355.png)
+- Usa por detrás o docker para criar o ambiente (ubuntu, Amazon Linux, ... ) e execução do build.
+- Permite configurar um timeout de ate 8 horas, utils para evitar que o build fique executando para sempre.
+- Permite configurar instância (CPU e RAM) que será executado, além de certificados usados.
+- Precisa ter uma IAM Role para acesso ao recursos.
+- Os logs de execução pode ser armazenados no **S3 e CW**.
+- Pode se usar o **CW Metric**s para estatísticas de build.
+- Pode se usar o **EventBridge** para notificações.
+- Pode ser usado sem a necessidade de de usar o **CodePipeline**.
+- Realiza o cache de dados reusáveis no S3 para usos futuros.
+- Tem um arquivo chamado **buildspec.yml** onde se script de build/test.
+![image-20230818210615205](assets/image-20230818210615205.png)
+- Usando o **codeAgent** pode se executar ele localmente.
+  - Isso também pode ser usado caso queira usar instâncias gerenciadas por voce para executar o build.
+- Por padrão ele roda fora da VPC, mas caso precise acessar algum recurso (RDS, ElastiCache, etc) na sua VPC, pose ser configura-lo para executar em sua VPC.
+
+---
+
+### AWS CodeDeploy
+- Automatiza o processo de deploy. Pode deployar nos targets:
+  - EC2 e Servidores on-premises
+    - Necessita ter instalado o **CodeDeploy Agent**.
+    - Permite deploys usando estratégias Blue/Green ou in-place.
+    - Devem ter permissões para acessar recurso da AWS como o **codeDeploy** e o **S3** onde fica a aplicação.
+  - Lambda
+    - Usa a estratégias de **Traffic Shift** para deploy.
+    - É integrado com o SAM Framework.
+  -  ECS
+    - Usa somente a estratégias de **Blue/Green** para deploy.
+- Permite realizar rollback, caso erro ou via alarmes do **CW**.
+- Permite controlar a granularidade dos deploy (estratégias de deploy). 
+  - in-place / Metade / blue Green.
+- Usa o arquivo chamado **appspec.yml**, o passo a passo do deploy.
+---
+
+### AWS CodePipeline
+
+- Fornece um workflow visual do CICD.
+- Pode se ter os componentes:
+  - **Source** - Repositório git que fornece o código da aplicação (CodeCommit / GitHub / S3 / ECR).
+  - **Build** - Realiza o Build da aplicação (CodeBuild / Jenkins / TeamCity).
+  - **Test** - Executa os teste da aplicação (CodeBuild, Device Farm , outras ferramentas de terceiros).
+  - **Deploy** - Realiza a implantação da aplicação (DoceDeploy, BeanStalk, CloudFormation, ECS, S3).
+  - **Invoke** - Permite invocar Lambdas ou Step Functions.
+- É composto por estágios.
+  - Estágios podem ter múltiplos **action group** que podem ter **provider** (executores de ações).
+    - Os **action grupos** podem executar em sequencial ou paralelo.
+    - Por exemplo pode se adicionar um **action group** que tem um **provider** que coleta da aprovação manual.
+    - Por exemplo pode se adicionar um **action group** que tem um **provider** realiza o deploy no BeanStalk.
+  - Os estágios são:
+    - **Source** -> Armazena o código - CodeCommit.
+      - Obrigatório.
+      - Pode se usar o CW Events para dispara a esteira ao detectar mudanças no código.
+      - Pode se usar ua outra configuração que da um pull no repo de tempos em tempos para buscar por mudanças.
+    - **Build** -> Executas os estágios que contém o Build/Test. - CodeBuild
+      - Opcional
+      - Usa o saída do estágio anterior para disparar.
+    - **Deploy** -> Executas os estágios que contém o Deploy/Invoke - CodeDeploy
+      - Opcional
+      - Usa o saída do estágio anterior para disparar.
+  - Os artefatos gerados são armazenados no **S3** e fica disponíveis para os estágios..
+  ![image-20230818201114814](assets/image-20230818201114814.png)
+
+- Pode se usar eventos (EventBridge) para notificar o andamento da Pipeline, podendo executar ações.
+- Caso de erro a pipe vai parar, e se pode ver os logs de erros no console.
+- Usa IAM Role (AWSCodePipelineServiceRole-*) para para acessar os recursos.
+- Para disparar a pipeline temos as opções:
+  - **Eventos**
+    - Usado muito com o **codeCommit**, onde este gera um evento no **eventBridge** que trigga a **Pipeline** via uma **event Role**.
+    - No caso do **GitHub** usa se o **CodeStar Source Connection** para trigga a **Pipeline**.
+  - **Webhooks**
+    - Forma antiga de se triggar, nela se disponibiliza um endpoint que será estimulado e isso dispara a **Pipeline**.
+  - **Polling**
+    - O code Pipeline regulamente o **Source** em busca de alterações, caso encontre dispara a **Pipeline**.
+    - Não é eficiente, pois fica fazendo pulling.
+- Como funciona a aprovação manual
+  ![image-20230818204829999](assets/image-20230818204829999.png)
+
+- Pode o **codePipelinese** com o **cloudFormation** para se criar toda a infraestrutura.
+  - Exemplos:  criar uma Task e Service do ECS / criar lambdas em diversas contras.
+![image-20230818212324169](assets/image-20230818212324169.png)
+
+
+---
 ### X-Ray
 
 - Permite analisar a aplicação visualmente, serviço de tracing distribuído da AWS.
@@ -1345,7 +1450,7 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
   - Como funciona o retorno da comunicação.
     - Tem se um callback, onde pode ser enviadas mensagens de respostas.
     - Aceita as operações Get, Post, Delete.  
-  ![image-20230817063923162](assets/image-20230817063923162.png)  
+    ![image-20230817063923162](assets/image-20230817063923162.png)  
   - Roteamento das requisições  
   ![image-20230817064204981](assets/image-20230817064204981.png)
 
