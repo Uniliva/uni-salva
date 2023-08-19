@@ -1601,12 +1601,12 @@ Resource police restritas para a organização
 
 ### AppSync
 
-- Gerenciado pela AWS, Usa GraphQL.
-- Pode recuperar dados de varios lugares (configurados previamente) como Banco de dados, Dynamo e APIs.
-- Permite recuperar os dados em tempo real usando WebSocket or MQTT on WebSocket
+- Gerenciado pela AWS, Usa **GraphQL**.
+- Pode recuperar dados de **varios lugares** (configurados previamente) como Banco de dados, DynamoDB e APIs.
+- Permite recuperar os dados em **tempo real** usando **WebSocket or MQTT on WebSocket**
 - Para Aplicativos mobile:
   - Pode se usar para armazenar dados locais e para sincronizar dados.
-    ![image-20230216064917196](assets/image-20230216064917196.png)
+    ![image-20230819135735921](assets/image-20230819135735921.png)
 - Pode ser usado com o Cognito para recuperar autorização (permissões) baseados em grupos de usuários.
   - Exemplo tenho um blog onde configure o que meu usuários podem fazer, em vez de colocar no código posso colocar aqui e validar a ação de acordo como grupo que o cara pertence.
     ![image-20230216065240574](assets/image-20230216065240574.png)
@@ -2682,6 +2682,9 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   ![image-20230220120340225](assets/image-20230220120340225.png)
 - Tipos
   ![image-20230220120628216](assets/image-20230220120628216.png)
+
+![image-20230819135158308](assets/image-20230819135158308.png)
+
 - Exemplo de arquitetura
   ![image-20230220121021456](assets/image-20230220121021456.png)
 

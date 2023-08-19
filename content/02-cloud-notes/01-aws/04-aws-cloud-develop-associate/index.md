@@ -33,7 +33,7 @@ Integração de aplicativos:
 - [x] Amazon SNS
 - [x] Amazon SQS
 - [x] Amazon Kinesis
-- [ ] AWS Step Functions
+- [x] AWS Step Functions
 
 Computação:
 - [x] Amazon EC2
@@ -56,7 +56,7 @@ Banco de dados:
 
 Ferramentas do desenvolvedor:
 - [ ] AWS Amplify
-- [ ] AWS Cloud9
+- [x] AWS Cloud9
 - [ ] AWS CloudShell
 - [x] AWS CodeArtifact
 - [x] AWS CodeBuild
@@ -112,6 +112,34 @@ Tempos os seguintes serviços AWS usados para integração de aplicações:
 - SNS -> para um modelo de pub/sub.
 - Kinesis -> para um modelo de processamento em tempo real.
  {{% /notice %}}
+
+---
+### AWS Amplify
+
+![img](assets/image.png)
+- **Amplify Studio** - Permite criar Mobile e Web Applications.
+  - Com ele se cria tanto o backend quanto o frontend.
+  - Seria como um **beanstalk** para aplicações mobile e web.
+  - Usa o CloudFormation para criar os recursos (banco, filas, S3).
+  - Usa o AppSync para criar as API GraphQl.
+- **Amplify CLI** - Permite configurar o backend com um cli guiado (respondendo perguntas).
+- **Amplify Libraries** - Libs para conectar sua app a serviçso AWS.
+- **Amplify Hosting** - Permite hospedar as aplicações.
+  - Configura como vai ser a implantação.
+  ![image-20230819141211274](assets/image-20230819141211274.png)
+- Features importantes
+![image-20230819141105413](assets/image-20230819141105413.png)
+- Testes E2E
+![image-20230819141334433](assets/image-20230819141334433.png)
+
+---
+
+### AWS AppSync
+
+> {{% notice style="note" %}}
+Contextualização:
+ - O que é [AppSync](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#appsync)
+{{% /notice %}}
 
 ---
 
@@ -258,6 +286,56 @@ Contextualização:
     - O contrario do splitting
     - o shard antigo vai ser deletado quando os dados expirarem e os dados novos serão enviados para o novo.
 
+
+---
+
+### AWS Step Functions
+
+{{% notice style="note" %}}
+Contextualização:
+
+ - O que é [Step Functions](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-step-functions)
+ {{% /notice %}}
+
+- Escrito em json.
+
+- usado para orquestrar chamada de serviços.
+
+- Cada etapa é chamado de task.
+  - Tem que ter uma entrada e uma saida.
+  
+- Tem os tipos:
+  - **Choice State** - Testa uma condição para enviar para uma branch (ramificação).
+  - **Fail or Succced State** - Execução parada por erro ou sucesso.
+  - **Pass State** - Recebe os dados e repassa sem realizar nenhum processamento.
+  - **Wait State** - Espera por uma quantidade de tempo.
+  - **Map State** - Permite criar um loop.
+  - **Parallel State** - Para processos em paralelo.
+  
+- Erro handling
+  - Quem  deve tratar deve ser o Step Function. Isso pois a aplicação deve ter codigos simples.
+  - Pode se usar dois tipos de handles:
+    - **retry** - realiza uma retentativa de executar a task que falhou.
+      - Se configura os tipos de erros e a quantidade de retry com exponetial Backoff.
+      ![image-20230819133020147](assets/image-20230819133020147.png)
+      - Caso atinga a quantidade maxima de tentativas o **catch** é acionado.
+    - **cacth** - Pode se adicionar um fluxo alternativo ou uma notificação via eventos.
+      ![image-20230819133240150](assets/image-20230819133240150.png)    
+      - Passa se o dados do erros adiante com o **ResultPath**    
+      ![image-20230819133353281](assets/image-20230819133353281.png)    
+    - Tipos de codigos de erros
+      - States.ALL -> Pega todos tipo de erros.
+      - States.Timeout -> Pega os timeouts.
+      - States.TaskFailed -> Pega falhas de execução.
+      - States.Permitions -> Pegas erros de falha de permissão de execução.
+  - Tem uma funcionalidade chamada **wait for task token** que funciona como se fosse um callback para dar prosseguimento a execução.
+    - Usado quando se aciona um sistema externo (que não seja um lambda.).  
+    ![image-20230819134054736](assets/image-20230819134054736.png)  
+  - Tem a funcionalidade chamada de **Activity Task** para aplicações externas.
+    - Aqui se roda um **Activity worker** no EC2, Lambda, ou mobile devise, ele realiza poll de tempos em tempos via a API **GetActivityTask** no Step Function em busca de itens a serem processados.
+    - Após finalizar o processamento do item encontrado ele aciona o Step Function via as APIs **SendTaskSuccess** ou **SendTaskFailure** com o output do processamento.  
+    - Deve se configurar um timeout, para não ficar esperando para sempre após uma task ser liberada para processamento.
+    ![image-20230819134647312](assets/image-20230819134647312.png)
 
 ---
 ## Computação:
