@@ -69,7 +69,7 @@ Ferramentas do desenvolvedor:
 
 Gerenciamento e governança:
 - [ ] AWS AppConfig
-- [ ] AWS Cloud Development Kit (AWS CDK)
+- [x] AWS Cloud Development Kit (AWS CDK)
 - [X] AWS CloudFormation
 - [x] AWS CloudTrail
 - [x] Amazon CloudWatch
@@ -79,15 +79,15 @@ Gerenciamento e governança:
 
 Redes e entrega de conteúdo:
 - [x] Amazon API Gateway
-- [ ] Amazon CloudFront
-- [ ] Elastic Load Balancing
+- [x] Amazon CloudFront
+- [x] Elastic Load Balancing
 - [x] Amazon Route 53
-- [ ] Amazon VPC
+- [x] Amazon VPC
 
 Segurança, identidade e conformidade:
 - [ ] AWS Certificate Manager (ACM)
 - [ ] AWS Certificate Manager Private Certificate Authority
-- [ ] Amazon Cognito
+- [x] Amazon Cognito
 - [x] AWS IAM
 - [ ] AWS KMS
 - [ ] AWS Secrets Manager
@@ -1387,12 +1387,43 @@ Contextualização:
 {{% /notice %}}
 
 
----
 
+---
 ### SDK
 
 - O AWS CLI usa a SDK do Python (boto3).
 - Caso não sete uma região de default é a us-east-1.
+
+---
+
+### AWS CDK
+
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [CDK](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#cdk)
+{{% /notice %}}
+
+- Permite definir a infra estrutura em uma linguagem de programação.
+  - Em: Java | Python | JavaScript / TypScript | .Net.
+- Contém a maioria dos recursos da AWS como **construtores**, onde se chama alterando apenas os campos variaveis. 
+- Caso não encontre o recurso no construtores da AWS, pode se achar no **Constructor Hub**, onde empresas disponibilizam como se fosse **libs** com outras construções para os recursos.
+- O código é compilado para um template do CloudFormation.
+- Bom pois como o CDK se pode validar o template programaticamente.
+- Diferentimento do SAM, que é focado apenas em aplicações Serverless. Com o CDK pode se criar qualquer recurso.
+- Os contrutores são divididos em nivels:
+  - **Nivel 1**: **CFN Resource** - Construtor simples, deve informar todos os atribuitos.
+  - **Nivel 2**:  Construtor de alto nivel, não precisa informar todos os atribuitos para criar um recurso.
+  - **Nivel 3**: Construtores que permite criar mais de um recurso que estão interligados (isso para arquiteturas padrões), ex: lambda que pode conter um api gateway como trigger.
+- Principais comandos:
+  ![image-20230819104243582](assets/image-20230819104243582.png)
+  - Entenda o bootstrapping  
+  ![image-20230819104504372](assets/image-20230819104504372.png)
+
+- Para testar usa se o **CDK Assertion Module**.
+
+![image-20230819104642772](assets/image-20230819104642772.png)
 
 ---
 
@@ -1661,6 +1692,57 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 ---
 ## Segurança, identidade e conformidade:
 
+### Amazon Cognito
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - da uma lida em [Identity Federation & Congnito](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#identity-federation--congnito)
+{{% /notice %}}
+
+- Permite que usuarios de fora da AWS possa ter acesso a recurso da AWS.
+- Ha dois produtos disponiveis:
+- Suporta muitos usuários.
+- **Cognito user pools** (CUP)
+  - Solução AWS, banco de dados para cadastro de usuário para mobile ou web app.
+  - Ajuda apenas na autenticação não na autorização.
+  - Integrado com **API Gateway** e **Load Balancer**, para autenticação.
+  - Permite a criação de login simples (email ( ou user) e senha).
+  - Fornece reset de senha e validação de email e telefone.
+  - Fornece MFA. 
+    - Pode ser usado com autenticação adaptativa, onde se caso se suspeite da tentativa (pela localização, IP ou dispositivo) de login se solicita o MFA.
+  - Permite usar autenticação externas (de terceiros , Google, Facebook).
+  - Gerar JWT para logins.  
+  ![image-20230819113213870](assets/image-20230819113213870.png)  
+  - Permite usar SES para enviar emails.
+  - Tem um UI propria para cadastro e reset de senha. 
+    - É possivel customizá-la.
+    - E possivel fornece sua própria interface de login.
+  - Pode se usar um domínio customizado para a API / URL de login.  
+    - Para isso é necessário criar um Certificado no ACM.
+  - Tem a opção de realizar um callback em caso de login sucesso.
+    ![image-20230819111427615](assets/image-20230819111427615.png)
+  - Tem a capacidade de triggar uma Lambda para realizar ações como validação, migração ou autenticação.
+  
+  ![image-20230819112618602](assets/image-20230819112618602.png)
+- **Cognito identity pools** (Identidade Federada)
+  - Provem acesso temporário a recursos da AWS. Usa o STS para gerar credenciais tempórarias.
+  - Permite usar autenticação externas (de terceiros , Google, Facebook).
+  - Permite usar provider como OpenID e SAML.
+  - Permite usuários anônimos (usuários não autenticados).
+  - Usa IAM Police para configurar quais acesso o usuário terá.
+  
+  ![image-20230819114641872](assets/image-20230819114641872.png)
+  
+  - Diferença entre ele o o **Cognito Users Pools**.
+    - No **CUP** todos os usuários ficam armazenados no banco interno.
+    - O **CUP** se integra o outro providers via federação, ou seja, serve apenas para recuperar os dados para salvar na base de dados.
+  
+  ![image-20230819114818298](assets/image-20230819114818298.png)
+  
+  ![image-20230819115605419](assets/image-20230819115605419.png)
+
+---
 
 ### IAM
 
