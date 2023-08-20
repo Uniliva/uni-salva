@@ -300,7 +300,7 @@ weight: 1
 - Onde se usa o Assuming Role.
   - Para permitir acesso a usuários ou recurso, a uma conta aonde eles não tem acesso de forma temporária.
   - Para dar acesso ao usuário fora da sua organização. A usuários federados.
-- Permite revogar o acesso a role adicionando um novo bloco de statement ou usando o AWSRevokeOlderSessions.
+- Permite revogar o acesso a role adicionando um novo bloco de statement ou usando o **AWSRevokeOlderSessions**.
 - Lembrando que quando assuminos uma Role, perdemos nossos acessos anteriores.
   ![](assets/2023-01-30-05-52-41-image.png)
   ![](assets/2023-01-30-05-51-50-image.png)
@@ -314,7 +314,7 @@ weight: 1
 
 #### API Importantes STS
 
-![](assets/2023-01-30-06-02-05-image.png)
+![image-20230819201623066](assets/image-20230819201623066.png)
 
 ---
 
@@ -615,7 +615,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Ela não tem acesso ao hardware após provisionar, caso perder os acesso não tem como recuperar.
 - O hardware é resistente a alteração e é homologado (FIPS 140-2 Level 3 Compliance)
 - Suporta criptografia simetrica e assimetrica.
-- RedShift suporta encriptação via HSM.
+- **RedShift** suporta encriptação via HSM.
 - Pode se ter varios Cloud HSM espalhado por varias AZs para aumentar a disponibilidade.
 
 #### Tipos de chaves
@@ -624,10 +624,10 @@ Forma de se usar o ADSF (active directory na **AWS**)
 
 - **CMK** - Customer Master Keys.
 - **Gerenciadas pelo usuario - CMK**
-  - Criado pelo usuário dentro do **KMS** ou **HSM **(**hardware security module** ), pode ser deletada ou alterada.
+  - Criado pelo usuário dentro do **KMS** ou **HSM** (**hardware security module** ), pode ser deletada ou alterada.
   - Pode se habilitar a rotação de chave a cada 1 ano.
   - Também e possível rotacional manualmente, mas é recomendado para chaves **Assimétricas**.
-  - Tem um custo de $1 por mês, e a cada chamada paga-se $0.003.
+  - Tem um custo de $1 por mês, e $0.003 a cada (1000 calls).
   - Pode ser dos tipos
     - **Simétricas** (AES-256)
       - Todos serviços da AWS usam essa. Não se tem acesso a chave.
@@ -635,23 +635,28 @@ Forma de se usar o ADSF (active directory na **AWS**)
     - **Assimétricas** (RSA & ECC Key Pairs)
       - Tem duas chaves uma publica (encrypt) e outra Privada (decrypt).
       - A publica pode ser baixada, nas não se tem acesso a privada.
-      - Caso de uso. Encriptar dados fora da AWS, onde não se pode chamar a API do KMS.
+      - Caso de usos. 
+        - Encriptar dados fora da AWS, onde não se pode chamar a API do KMS.
+        - Realizar assinatura de objetos.
 - **Gerenciadas pela AWS - CMK**
   - Chaves criadas e gerenciada pela AWS, não temos acesso.
   - Tem rotação automatica de chaves a cada ano.
   - Não tem custo
   - São as usadas nos serviços.
     - EBS, S3, RedShift, RDS, EFS.
+  - tem os nomes aws/rds, aws/ebs, aws/service-name.
 - **Chaves proprias da AWS**
-  - Criada pela AWS, para recurso da AWS, Não temos acesso nem de visualização
+  - Criada pela AWS, para recurso da AWS, Não temos acesso nem de visualização.
+  - SSE-S3, SSE-SQS, SSE-DDB.
+  - São ee graça.
 - **Chaves do HSM**
-  - Chaves criada usando o HSM (**hardware security module** )
-  - Replicado em mais de uma AZ
+  - Chaves criada usando o HSM (**hardware security module** ).
+  - Replicado em mais de uma AZ.
     ![cloudhsm](assets/image-20210907151911356.png)
     ![hms-kms](assets/image-20210907152024180.png)
 - KMS em multiplas regiões
   - Permite criptografar em uma região e descriptografar em outra.
-  - O KMS não é Global e apenas Multi-Region com replicação. Cada KMS de cada região é gerenciado separadamente há apenas a replicação das chaves.
+  - O KMS não é **Global** e apenas **Multi-Region com replicação**. Cada KMS de cada região é gerenciado separadamente há apenas a replicação das chaves.
   - Usado para:
     - Disaster Recovery, Global data Management (DynamoDB Global Tabl)
       ​ ![image-20230202061204254](assets/image-20230202061204254.png)
@@ -692,7 +697,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Os segredos ficam criptografados.
 - Controla o acesso usando política baseada em recurso (Resource-based police).
 - Suportado nativamente por diversos serviços AWS.
-- Compartilhando secrets manager entre contas.
+- Compartilhando secrets manager entre contas. (via )
   ![image-20230206062018809](assets/image-20230206062018809.png)
 - Diferenças entre secret manager e parameter store.
   - Secrets manager
@@ -2491,7 +2496,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Usado para buscas de qualquer campo, muito usado em conjunto com aplicações big data.
 - Fork do projeto ElastichSearch, que mudou de licença, por isso a AWS criou o seu proprio.
-- Pode se disponibilizar um cluster com varias instâncias. (Ou seja não roda em serverless)
+- Pode se disponibilizar um cluster com varias instâncias. Ou seja pode se usar no modo serverless.
 - Tem integrações com **Kinesis Data FireHose**, AWS IoT, **Cloud Watch Logs**.
 - Seria o ELK stack da AWS.
 - Foi subsistuto do ElasticSearch
@@ -2499,6 +2504,8 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Solução de arquitetura com OpenSearch.
   - Buscador usando DynamoDB
     ![image-20230220110750178](assets/image-20230220110750178.png)
+  - Dados vindo do kinesis  
+  ![image-20230820102813438](assets/image-20230820102813438.png)
 
 ---
 

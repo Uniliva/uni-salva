@@ -34,6 +34,7 @@ Integração de aplicativos:
 - [x] Amazon SQS
 - [x] Amazon Kinesis
 - [x] AWS Step Functions
+- [x] AWS MSK
 
 Computação:
 - [x] Amazon EC2
@@ -55,9 +56,9 @@ Banco de dados:
 - [x] Amazon RDS
 
 Ferramentas do desenvolvedor:
-- [ ] AWS Amplify
+- [x] AWS Amplify
 - [x] AWS Cloud9
-- [ ] AWS CloudShell
+- [x] AWS CloudShell
 - [x] AWS CodeArtifact
 - [x] AWS CodeBuild
 - [x] AWS CodeCommit
@@ -75,7 +76,7 @@ Gerenciamento e governança:
 - [x] Amazon CloudWatch
 - [x] Amazon CloudWatch Logs
 - [x] AWS CLI
-- [ ] AWS Systems Manager
+- [x] AWS Systems Manager
 
 Redes e entrega de conteúdo:
 - [x] Amazon API Gateway
@@ -85,13 +86,13 @@ Redes e entrega de conteúdo:
 - [x] Amazon VPC
 
 Segurança, identidade e conformidade:
-- [ ] AWS Certificate Manager (ACM)
+- [x] AWS Certificate Manager (ACM)
 - [ ] AWS Certificate Manager Private Certificate Authority
 - [x] Amazon Cognito
 - [x] AWS IAM
-- [ ] AWS KMS
-- [ ] AWS Secrets Manager
-- [ ] AWS Security Token Service (AWS STS)
+- [x] AWS KMS
+- [x] AWS Secrets Manager
+- [x] AWS Security Token Service (AWS STS)
 - [ ] AWS WAF
 
 Armazenamento:
@@ -100,6 +101,28 @@ Armazenamento:
 - [x] Amazon S3
 - [x] Amazon S3 Glacier
 {{% /expand %}}
+
+---
+
+## Análise:
+
+### AWS Athena
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [AWS Athena](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-athena)
+{{% /notice %}}
+
+
+
+### Amazon OpenSearch Service
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [OpenSearch](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-opensearch)
+{{% /notice %}}
 
 ---
 
@@ -289,6 +312,15 @@ Contextualização:
 
 ---
 
+### AWS MSK
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [MSK](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#msk)
+{{% /notice %}}
+
+---
 ### AWS Step Functions
 
 {{% notice style="note" %}}
@@ -1157,6 +1189,7 @@ Contextualização:
 - Usando o **codeAgent** pode se executar ele localmente.
   - Isso também pode ser usado caso queira usar instâncias gerenciadas por voce para executar o build.
 - Por padrão ele roda fora da VPC, mas caso precise acessar algum recurso (RDS, ElastiCache, etc) na sua VPC, pose ser configura-lo para executar em sua VPC.
+  - Pode se usar o **Paramtes Store** ou **Secrets Manager** para armazenar as variáveis de ambiente que contém segredos.
 
 ---
 
@@ -1540,6 +1573,11 @@ Contextualização:
   - Fluxo
     - Se cria o event Bus que vai receber os eventos e vai encaminhar para um recurso ou um event Role.
     - Se cria um event role que vai configurar como vai funcionar a entrada de dados de um event bus.
+- Criptografia
+  - Pode se criptografar os logs (log group) usando KMS, apenas via API usando:
+  - **associate-kms-key** - se o log group já existir.
+  - **create-log-group** - caso o log group não exista.
+  - Necessario adicionar **IAM Police** para que o **Cloud Watch** possa acessar o **KMS**.
 
 ---
 
@@ -1622,6 +1660,16 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
 - SDK
 ![image-20230725065206292](assets/image-20230725065206292.png)
 
+
+---
+
+### AWS Systems Manager
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [Systems Manager](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-systems-manager)
+{{% /notice %}}
 
 ---
 ## Redes e entrega de conteúdo:
@@ -1770,6 +1818,26 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 ---
 ## Segurança, identidade e conformidade:
 
+{{% notice style="note" %}}
+> Leitura recomendada:
+ - [RDS Security](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds-security)
+
+
+ - [SSL encryptation, SNI e MITM](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ssl-encryptation-sni-e-mitm)
+{{% /notice %}}
+
+---
+
+### AWS Certificate Manager
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [AWS Certificate Manager](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-certificate-manager)
+{{% /notice %}}
+
+---
+
 ### Amazon Cognito
 
 {{% notice style="note" %}}
@@ -1877,6 +1945,121 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 
 
 ---
+
+
+### KMS
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [KMS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-kms)
+{{% /notice %}}
+
+#### Visão extra - desenvolvedor
+- Todas as chamadas são logadas no CloudTrail.
+
+- Copiando snapshot criptografado entre regiões. 
+  ![image-20230820083428692](assets/image-20230820083428692.png)
+
+- Tem uma IAM police semelhante ao S3. A unica diferença é que se pode tem uma condição IAM, onde se informa qual conta vai chamar e via qual serviço.
+
+- Como funciona:
+  ![image-20230820085154740](assets/image-20230820085154740.png)
+  
+- Isso para dados com tamanho ate 4KB. Para maiores deve se usa o **Envelope Encrytion** que seria a API **GenarateDataKey**.
+  - Nesse a computação para criptografar e descritografar é feita do lado do cliente. 
+  - Para criptografar:  
+  ![image-20230820085535921](assets/image-20230820085535921.png)  
+  - Para Descriptografar  
+  ![image-20230820085703643](assets/image-20230820085703643.png)
+  - Por se complexo, geralmente usa-se o SDK para realizar essas operações.
+    - Este tem uma funcionalidade de cache do Data Key. Usado para diminuir a quantidade de chamada aos KMS.
+  
+- APIs do KMS
+  - **Encrypt** -> usada para criptografar objetos de ate 4KB direto no KMS.
+  - **GenerateDataKey** -> Usada para gerar uma **Data Key Simétrica** unica (DEK), que vai ser usada pra criptografar objetos maiores que 4kb.
+    - Retorna a **Data Key Simétrica** e texto
+    - **E** ele criptografado com a chave que foi chamada na API.
+  
+ - **GenerateDataKeyWithoutPlaintext** -> Semelhante a anterior, a unica diferença e que não retorna a **Data Key Simétrica** e texto, sendo necessário descriptografar depois
+   - É mais demorado, pois precisa fazer duas operações.
+   
+ - **Decypt** -> usada para descriptografar objetos de até 4KB direto no KMS (usado para descriptografar a **Data Key Simétrica** caso use a API **GenerateDataKeyWithoutPlaintext** ).
+
+ - **GenerateRandom** -> gerar uma Byte String randômica.
+
+- Limites do KMS  
+  ![image-20230820091745673](assets/image-20230820091745673.png)  
+  - Cotas
+    - É um soft limit, pode se aumentar através da API e aumento de contas ou através do AWS Support.
+    - Para chamadas de criptografia, é compartilhado a mesma cota.
+      - Para resolver isso use a API **GenerateDataKey** via SDK, pois ela cachea o DEK por um tempo.
+    - Caso exceda as cotas vai tomar um erro do tipo **ThrottlingException**.
+      - Use **Exponetional Backoff** para resolver o problema.
+
+- S3 Bucket Key
+  - Usado para reduzir a chamada ao KMS. Quando não se usa uma chame que não é proprietaria da AWS.
+  ![image-20230820093145303](assets/image-20230820093145303.png)
+
+
+---
+
+### AWS STS
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [STS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#sts)
+{{% /notice %}}
+
+- Permite acesso temporário aos recursos de 15 minutos a até 1 hora.
+
+- Para adicionar MFA precisa adicionar a **IAM police** uma **IAM condition** chamada aws:MultiFactorAuthPresent:true
+  - A API **GetSessionToken** vai retorna o Access ID, Secret Key e o Session Token. 
+
+
+
+
+---
+
+### AWS SSM Parameter Store
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [AWS SSM Parameter Store](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-ssm-parameter-store)
+{{% /notice %}}
+
+- Apis
+  - **GetParameters** - Retorna os parametros de acordo o o nome passado na flag --names (pode ser mais de um). 
+    - Pode se usar a flag **--with-decription** para retonar o valor parametros com valor criptografado.
+  - **GetParametersByPath** - Retorna os todos os parametros contidos no path passado na flag --path. 
+    - Pode se usar a flag **--with-decription** para retonar o valor parametros com valor criptografado.
+    - Pode se usar o flag **--recursive** para retonar recursivamente os parametro dentro do path.
+- Caso use a flag **--with-decription** é necesssario ter a permissão do KMS de **Decypt**.
+
+---
+### AWS Secrets Manager
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [Secrets Manager](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-secrets-manager)
+{{% /notice %}}
+
+- Quando criar banco de dados RDS e Aurora via CloudFormation pode se usar a opção **ManageMasterUserPasseorg** que vai criar os segregos do banco automaticamente com até esquema de rotação.
+
+---
+
+### AWS Nitro Enclaves
+
+![image-20230820101445359](assets/image-20230820101445359.png)
+
+![image-20230820101512328](assets/image-20230820101512328.png)
+
+
+
+---
 ## Armazenamento:
 
 > {{% notice style="note" %}}
@@ -1888,6 +2071,10 @@ Contextualização:
  - [Instance store](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#instance-store)
  - [EFS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#efs---elastic-file-system)
 {{% /notice %}}
+
+
+
+---
 
 
 ### S3 
@@ -1918,3 +2105,35 @@ Uma questão comum quanto ao S3 é como melhorar o tempo de busca de arquivos, a
 
 ![image-20230728061932567](assets/image-20230728061932567.png)
 
+
+## Outros serviços
+
+### Macie
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [Macie](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#macie)
+{{% /notice %}}
+
+---
+
+### SES
+
+{{% notice style="note" %}}
+> Contextualização:
+
+ - O que é [SES](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ses)
+{{% /notice %}}
+
+---
+
+### App Config
+- Permite configurar, validar e deployar configurações dinamicas.
+- A ideia e tera as configuração da aplicação fora do codigo, evitando que se precise muda-la, ou reemplanta-la.
+- Usado para feature flags, application tuning, lista de bloqueio ...
+- Usado com aplicação que rodam no EC2, Lambda, EKS, ECS.
+- As configuraçãoes podem ser armazenadas no S3, SSM documentos, ou paramter store.
+- Usa Json Schema ou Lambda para as validações
+
+![image-20230820105147366](assets/image-20230820105147366.png)
