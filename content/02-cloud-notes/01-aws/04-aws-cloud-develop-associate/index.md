@@ -24,11 +24,11 @@ Leia sobre a [AWS Certified Developer - Associate. (DVA-C02)](https://aws.amazon
 Recursos e produtos da AWS no escopo
 {{% expand  title="veja a lista completa" %}}
 Análise:
-- [ ] Amazon Athena
-- [ ] Amazon OpenSearch Service
+- [x] Amazon Athena
+- [x] Amazon OpenSearch Service
 
 Integração de aplicativos:
-- [ ] AWS AppSync
+- [x] AWS AppSync
 - [x] Amazon EventBridge (Amazon CloudWatch Events)
 - [x] Amazon SNS
 - [x] Amazon SQS
@@ -106,6 +106,8 @@ Armazenamento:
 
 ## Análise:
 
+> Serviços AWS usado para análise de dados.
+
 ### AWS Athena
 
 {{% notice style="note" %}}
@@ -115,6 +117,7 @@ Armazenamento:
 {{% /notice %}}
 
 
+---
 
 ### Amazon OpenSearch Service
 
@@ -160,7 +163,7 @@ Tempos os seguintes serviços AWS usados para integração de aplicações:
 ### AWS AppSync
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [AppSync](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#appsync)
 {{% /notice %}}
 
@@ -169,28 +172,28 @@ Contextualização:
 ### Amazon SQS
 
 {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [SQS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-sqs)
  {{% /notice %}}
 
 #### Visão extra - desenvolvedor
 - Usado para desacoplar aplicações.
-- Tem baixa latência (<10 ms)
+- Tem baixa latência (<10 ms).
 - Permite mensagem duplicadas (ou seja, não valida o conteúdo da mensagem).
 - Para o processamento de mensagem duplicados, usa se o **Message visibility timeout** para tornar a mensagem invisível aos demais consumer.
 - Para produzir mensagem usa se o SDK com a API (sendMessage).
 - Há dois tipos de filas SQS
   - **Standard**
     - Tem Throughput ilimitado, e quantidade de mensagem na fila ilimitado.
-    - Entrega a mensagem ao menos uma vez para os consumers
-    - Ordenas as mensagens buscando o melhor esforço.
+    - Entrega a mensagem ao menos uma vez para os consumers.
+    - Ordena as mensagens buscando o melhor esforço.
   - **FIFO** 
     - Tem throughput de 300 msg/s  e 3000 msg/s usando batch.
     - Não tem mensagens duplicadas. Pois tem uma funcionalidade que permite remove-las.
     - Ordena por ordem de chegada.
     - Entrega apenas uma vez a mensagem.
 - Conceitos para desenvolvedores:
-  - **Long Polling** - Capacidade opcional de ficar esperando, caso não haja mensagens na fila, ate uma mensagem chegar.
+  - **Long Polling** - Capacidade opcional de ficar esperando, caso não haja mensagens na fila, até uma mensagem chegar.
     - Reduz a quantidade de chamadas de API a fila, aumentado a eficiência e latência da aplicação.
     - Pode se configurar de 1 segundo a 20 (ideal) segundos de tempo.
     - É recomendado o uso ao invés do polling normal (short polling).
@@ -198,19 +201,19 @@ Contextualização:
   - **Extended Cliente** - Capacidade de enviar mensagem acima de 256kb usando o S3 para salvar a mensagem e se posta apenas os metadados na fila.
     - Usados para enviar videos para processamento,
   - Nomes das APIs
-    - **CreateQueue** com (MessageRetentionPeriod), DeleteQueue
-    - **PurgeQueue** - permite deletar todas as mensagens de uma fila.
+    - **CreateQueue** com (MessageRetentionPeriod), **DeleteQueue**.
+    - **PurgeQueue** permite deletar todas as mensagens de uma fila.
     - **SendMessage** com (DelaySeconds), ReceiveMessage, DeleteMessage.
     - **MaxNumberOfMessages** - Permite definir a quantidade de mensagem que podem ser consumida por vez. (default 1 , max 10).
     - **ReceiveMessageWaitTimeSeconds** - Permite configurar o Long Polling.
     - **ChangeMessageVisibility** - Permite mudar o tempo de visibilidade da mensagem.
   - Há também API batch para enviar, deletar e mudar a visibilidade, o que reduz o custo diminuindo a quantidade de chamada ao SQS.
-  - **FIFO** conceitos avançados
+  - **FIFO** conceitos avançados:
     - **de-duplication** - funcionalidade que permite recusar mensagens que estão duplicadas.
       - O tempo em que ignora uma nova mensagem com o mesmo id e de 5 minutos. A partir desse período não considera a nova mensagem como duplicata. 
       - Há dois métodos de de-duplication:
         - Baseado no conteúdo: Gerar um hash sha-256 do body para comparação.
-          - Ao se criar a fila, pode setar se ele vai considerar esse método. Caso seleciona o método via ID sera opcional.
+          - Ao se criar a fila, pode setar se ele vai considerar esse método. Caso seleciona o método via ID será opcional.
         - Baseado no ID: Se passa um id de de-duplication ao postar a mensagem.
     - **Message group** - permite agrupar mensagem por um MessageGroupId.
       - Utils quando se que usar a fila para mais de um processo, assim pode se configurar um consumer para considerar apenas as mensagens do grupo.
@@ -224,7 +227,7 @@ Contextualização:
 ### SNS 
 
 {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [SNS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-sns)
  {{% /notice %}}
 
@@ -240,7 +243,6 @@ Contextualização:
     - Notifica apenas uma vez a mensagem.
     - Notifica apenas para **SQS FIFO**.
 
-
 ---
 
 ### Kinesis
@@ -255,7 +257,7 @@ Contextualização:
    {{% /notice %}}
 
 {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
 
  - O que é [Kinesis](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-kinesis)
  {{% /notice %}}
@@ -264,7 +266,7 @@ Contextualização:
 
 - Usado para ingestão de log, métricas, website ClickStreams, telemetria IOT.
 
-- Kinesis Producer
+- **Kinesis Producer**
   - Record é composto por:
     - chave de partição (gerada ao enviar para o kinesis), Blob data (ate 1MB).
     - Usa um hash chave de partição para definir em que shard vai armazenar.
@@ -278,7 +280,7 @@ Contextualização:
       - Implementar exponential backoff.
       - Aumentar a quantidade de shards.
   
-- Kinesis Consumer
+- **Kinesis Consumer**
   - há dois modos de uso:
     - **Shared (Classic) Fan-out**
       - 2 MB/s considerando todos os consumers.
@@ -291,7 +293,7 @@ Contextualização:
       - O shard envia os dados para o consumer (push mode).
       - Latência e muito baixa 70 ms.
 
-- KCL - Kinesis client library
+- **KCL - Kinesis client library**
 ![image-20230812124931088](assets/image-20230812124931088.png)
   - Facilita o consumo dos dados. É uma lib java.
   - Cada shard pode ser lido apenas por uma instância KCL. 
@@ -299,8 +301,8 @@ Contextualização:
     - Isso significa que o auto scale esta relacionado a quantidade de shard que se tem provisionados.
   - Usa o DynamoDB para guardar o progresso, por isso precisa configurar acessos no IAM. Isso porque pode haver mais de um KCL executando e para que não haja colisão o track é feito usando o DynamoDB.
 
-- Kineses Operations
-  - **Shard Splitting  **
+- **Kinesis Operations**
+  - **Shard Splitting**
     ![image-20230812125436219](assets/image-20230812125436219.png)
     - ​	Usado para aumentar a capacidade de stream, ou seja usado para quebrar um shard e outro novos, a fim de aliviar a carga.
     - o shard antigo vai ser deletado quando os dados expirarem e os dados novos serão divididos entre os novos.
@@ -324,17 +326,15 @@ Contextualização:
 ### AWS Step Functions
 
 {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
 
  - O que é [Step Functions](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-step-functions)
  {{% /notice %}}
 
 - Escrito em json.
-
 - usado para orquestrar chamada de serviços.
-
 - Cada etapa é chamado de task.
-  - Tem que ter uma entrada e uma saida.
+  - Tem que ter uma entrada e uma saída.
   
 - Tem os tipos:
   - **Choice State** - Testa uma condição para enviar para uma branch (ramificação).
@@ -345,26 +345,26 @@ Contextualização:
   - **Parallel State** - Para processos em paralelo.
   
 - Erro handling
-  - Quem  deve tratar deve ser o Step Function. Isso pois a aplicação deve ter codigos simples.
+  - Quem deve tratar deve ser o Step Function. Isso pois a aplicação deve ter códigos simples.
   - Pode se usar dois tipos de handles:
     - **retry** - realiza uma retentativa de executar a task que falhou.
       - Se configura os tipos de erros e a quantidade de retry com exponetial Backoff.
       ![image-20230819133020147](assets/image-20230819133020147.png)
-      - Caso atinga a quantidade maxima de tentativas o **catch** é acionado.
-    - **cacth** - Pode se adicionar um fluxo alternativo ou uma notificação via eventos.
+      - Caso atinga a quantidade máxima de tentativas o **catch** é acionado.
+    - **catch** - Pode se adicionar um fluxo alternativo ou uma notificação via eventos.
       ![image-20230819133240150](assets/image-20230819133240150.png)    
       - Passa se o dados do erros adiante com o **ResultPath**    
       ![image-20230819133353281](assets/image-20230819133353281.png)    
-    - Tipos de codigos de erros
+    - Tipos de códigos de erros
       - States.ALL -> Pega todos tipo de erros.
       - States.Timeout -> Pega os timeouts.
       - States.TaskFailed -> Pega falhas de execução.
       - States.Permitions -> Pegas erros de falha de permissão de execução.
   - Tem uma funcionalidade chamada **wait for task token** que funciona como se fosse um callback para dar prosseguimento a execução.
-    - Usado quando se aciona um sistema externo (que não seja um lambda.).  
+    - Usado quando se aciona um sistema externo (que não seja um Lambda.).  
     ![image-20230819134054736](assets/image-20230819134054736.png)  
   - Tem a funcionalidade chamada de **Activity Task** para aplicações externas.
-    - Aqui se roda um **Activity worker** no EC2, Lambda, ou mobile devise, ele realiza poll de tempos em tempos via a API **GetActivityTask** no Step Function em busca de itens a serem processados.
+    - Aqui se roda um **Activity worker** no EC2, Lambda, ou mobile device, ele realiza poll de tempos em tempos via a API **GetActivityTask** no Step Function em busca de itens a serem processados.
     - Após finalizar o processamento do item encontrado ele aciona o Step Function via as APIs **SendTaskSuccess** ou **SendTaskFailure** com o output do processamento.  
     - Deve se configurar um timeout, para não ficar esperando para sempre após uma task ser liberada para processamento.
     ![image-20230819134647312](assets/image-20230819134647312.png)
@@ -378,7 +378,7 @@ Contextualização:
 ### AWS Budget
 
 > {{% notice style="note" %}}
-Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-budget)
+Veja aqui tudo que se precisa saber sobre [Budgets](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-budget)
 {{% /notice %}}
 
 
@@ -388,7 +388,7 @@ Veja aqui tudo que vc precisa saber sobre [Budgets](https://docs.uniii.com.br/02
 ### EC2
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [EC2](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ec2)
  - O que é [Security Group](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#security-group)
  {{% /notice %}}
@@ -456,7 +456,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 #### ELB / ASG
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [ELB](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elastic-load-balancing)
  - O que é um [ALG](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#auto-scaling-group-alg)
  {{% /notice %}}
@@ -468,7 +468,7 @@ Contextualização:
 ### Beanstalk
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [Beanstalk](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-elastic-beanstalk
 )
  {{% /notice %}}
@@ -567,7 +567,7 @@ Contextualização:
 
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [Lambda](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-Lambda)
  {{% /notice %}}
 
@@ -765,7 +765,7 @@ Contextualização:
 ### AWS Serverless Application Model (SAM)
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - [SAM](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#sam---serveless-aplication-model)
 {{% /notice %}}
 
@@ -844,7 +844,7 @@ sam deploy --guided
 ### Amazon ECS
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [ECS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-ecs)
    {{% /notice %}}
 
@@ -964,7 +964,7 @@ Tasks definitions
 ### Amazon EKS
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [EKS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-eks)
    {{% /notice %}}
 
@@ -972,7 +972,7 @@ Contextualização:
 ### Amazon ECR
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [ECR](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-ecr)
    {{% /notice %}}
 
@@ -985,7 +985,7 @@ Contextualização:
 ### RDS
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [RDS](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds)
 
 - Veja também:
@@ -1001,7 +1001,7 @@ Contextualização:
 ### Aurora
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [Aurora](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aurora)
  {{% /notice %}}
 
@@ -1010,7 +1010,7 @@ Contextualização:
 ### DynamoDB
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [DynamoDB](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#dynamodb)
  {{% /notice %}}
 
@@ -1092,7 +1092,7 @@ Contextualização:
 ### ElastiCache
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [ElastiCache](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elasticache)
  {{% /notice %}}
 
@@ -1196,7 +1196,7 @@ Contextualização:
 ### AWS CodeDeploy
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - entenda o [CodeDeploy](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#code-deploy)
 {{% /notice %}}
 
@@ -1279,7 +1279,7 @@ Contextualização:
 ### Amazon CodeGuru
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - Armazenamento [CodeGuru](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#codeguru)
 {{% /notice %}}
 
@@ -1542,7 +1542,7 @@ Contextualização:
 
 
 {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - O que é [CloudWatch](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-cloudwatch)
  {{% /notice %}}
 
@@ -2063,7 +2063,7 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 ## Armazenamento:
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - Armazenamento [guia completo AWS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#storage)
 
  Veja direto o que é:
@@ -2080,7 +2080,7 @@ Contextualização:
 ### S3 
 
 > {{% notice style="note" %}}
-Contextualização:
+> Contextualização:
  - [S3](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-s3)
 
 Uma questão comum quanto ao S3 é como melhorar o tempo de busca de arquivos, a arquitetura que melhora resolve esse problema seria criar um index no DynamoDB com os metadados e tags do arquivos e realizar as busca no DynamoDB e apenas recuperar os arquivos no S3.

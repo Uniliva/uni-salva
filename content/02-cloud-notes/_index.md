@@ -4,11 +4,5 @@ weight: 10
 ---
 
 ---
-
-{{% notice style="warning" %}}
-Notas de estudos relacionados a cloud computing.
-{{% /notice %}}
-
----
 > {{% icon icon="swatchbook" %}} Paginas:
 > {{% children sort="weight" %}}

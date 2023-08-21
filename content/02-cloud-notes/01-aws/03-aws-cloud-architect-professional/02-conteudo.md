@@ -703,7 +703,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Secrets manager
     - É mais caro.
     - Rotaciona automaticamente as credenciais.
-      - Ou seja, quando se cria um segredo para bancos ela gerar uma lambda de alteração de seja automático para alterar a senhas nos banco de dados.
+      - Ou seja, quando se cria um segredo para bancos ela gerar uma Lambda de alteração de seja automático para alterar a senhas nos banco de dados.
     - Uso de criptografia obrigatório.
   - Parameter store
     - É uma API simples.
@@ -938,7 +938,7 @@ Como previnir:
   - Ex: Caso seu security group esteja liberado para determinado range não permitido. ele detecta e executa um Automação que remove o range e notifica via SNS ou EventBrigde.
 - **Serviço regional,** mas nas analise é possível **adicionar serviços globais.**
 - Contem varias regras (mais de 75), que servem para validar se um serviço esteja **compliance, possivel criar próprias regras.**
-  - Para criar suas configuração é necessário criar uma lambda function que checa o que se que validar.
+  - Para criar suas configuração é necessário criar uma Lambda function que checa o que se que validar.
     - Ex: Deseja-se validar se as instâncias EC2 criadas são do tipo micro, que são as unicas permitidas, se criaria um Lamdba Function que valida e se definiria uma regra linkada a essa Lambda.
       **Serviço pago $0.003 por regra habilitada**
 - Permite ver as alterações feitas que não estão compliance, e quem fez a alteração.
@@ -1353,8 +1353,8 @@ Resource police restritas para a organização
     - Execuções simultâneas da mesma Lambda - 1000 (Pode ser alterado com solicitação).
     - Tamanho do paylod 6MB (Sync) / 256 KB (async)
   - **Deploy**
-    - Tamanho do pacote zippado com a função lambda - 50MB.
-    - Tamanho do pacote com a função lambda - 250MB.
+    - Tamanho do pacote zippado com a função Lambda - 50MB.
+    - Tamanho do pacote com a função Lambda - 250MB.
     - Tamanho da imagem - 10 GB
 - Lambdas@Edge
   - É possível executar Lambdas em ponto de presenças, para auxiliar itens relacionados ao CDN , Route 53 ....
@@ -2496,10 +2496,10 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Usado para buscas de qualquer campo, muito usado em conjunto com aplicações big data.
 - Fork do projeto ElastichSearch, que mudou de licença, por isso a AWS criou o seu proprio.
-- Pode se disponibilizar um cluster com varias instâncias. Ou seja pode se usar no modo serverless.
+- Pode se disponibilizar um cluster com varias instâncias. Ou pode se usar no modo serverless.
 - Tem integrações com **Kinesis Data FireHose**, AWS IoT, **Cloud Watch Logs**.
 - Seria o ELK stack da AWS.
-- Foi subsistuto do ElasticSearch
+- É subsistuto do ElasticSearch
   - O kibana chama se **OpenSearch Dashboards.**
 - Solução de arquitetura com OpenSearch.
   - Buscador usando DynamoDB
@@ -2681,7 +2681,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 
 - Permite criar uma **workflow** para orquestrar **Lambdas functions**.
 - O Fluxo (flow) é representado o com **maquina de estado Json.**
-- Pode configurar para executar lambda sequencialmente, paralelas, com condições, e timeouts ..
+- Pode configurar para executar Lambda sequencialmente, paralelas, com condições, e timeouts ..
 - O workflow pode ser executado por no máximo 1 ano, após isso é necessário aprovar por mais 1 ano.
 - Pode se integrar com:
   ![image-20230220120258941](assets/image-20230220120258941.png)
@@ -2718,10 +2718,10 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - Permite definir uma politica de quem pode enviar mensagens e consumir da fila.
   - Usada para dar acesso de cosumer cross account.
   - Pode ser usada para permitir um producer ser os eventos do S3.
-- Pode ser consumida por um lambda com as mensagens em Batch.
+- Pode ser consumida por um Lambda com as mensagens em Batch.
 - **Encriptação**
   - Em transito vem habilitado por padrão (HTTPS).
-  - Do lado do servidor, usa a SQS Key (SSE-SQS), mas é possivel usar uma chave criada no KMS (SSEKMS).
+  - Do lado do servidor, usa a SQS Key (SSE-SQS), mas é possivel usar uma chave criada no KMS (SSE-KMS).
 - **Message visibility timeout**
   - Quando uma mensagem é recuperado por um consumidor, ela fica invisível para os outros, esse tempo que invisibilidade é definido por esse campo.
   - O valor default e 30 segundos.
@@ -2729,10 +2729,10 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - **Delay Queues** - Permite definir uma atraso na **disponibilização** da mensagem para **leitura**.
   - Default é 0 segundos. Mas na criação da fila pode se definir um novo default para a fila.
 - **Dead letter queue**
-  - Fila onde pode ser enviada mensagens não processada, ou processadas com erro por varias vezes. Exemplo a mensagem foi processada 5 vezes sem sucesso, mova ela para **DLQ** para debbug futuro.
-  - Para que seja enviada para a DLQ é necessário setar o threshold **maximumReceives**, que define quantas vezes a mensagem sera disponibilizada para processamento. Quando atigir esse threshold ela sera movida para a DLQ.
-  - Usado para debug de problemas, onde se pode colocar uma alarme que notifica a ocorrencia de problemas.
-  - Um DLQ deve respeitar o tipo da fila, ou seja se for uma fila FIFO o DLQ deve ser uma fila FIFO.
+  - Fila onde pode ser enviada mensagens não processada, ou processadas com erro por varias vezes. Exemplo a mensagem foi processada 5 vezes sem sucesso, mova ela para **DLQ** para debug futuro.
+  - Para que seja enviada para a DLQ é necessário setar o threshold **maximumReceives**, que define quantas vezes a mensagem será disponibilizada para processamento. Quando atigir esse threshold ela será movida para a DLQ.
+  - Usado para debug de problemas, onde se pode colocar uma alarme que notifica a ocorrência de problemas.
+  - Uma DLQ deve respeitar o tipo da fila, ou seja se for uma fila FIFO a DLQ deve ser uma fila FIFO.
   - Possui uma funcionalidade chamada **Redrive to source** que permite reenviar as mensagem contida em uma DLQ para a fila de processamento. É usada quando de descobriu o motivo do não processamento e ajustou o código e deseja tentar processar as mensagens na DLQ.
 - **Request-Response System**
   - Ao postar na fila, é informado um correlationID e a fila de retorno da reposta. Assim que for processar a mensagem devolver o resultado na fila de retorno.
@@ -2740,7 +2740,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 
 #### SQS x SNS x Kinesis
 
-- Apesar se serem serviços de mensageira, há diferencia sobre o funcionamento deles.
+- Apesar se serem serviços de mensageira, há diferenças sobre o funcionamento deles.
   ![SQS x SNS x Kinesis](assets/image-20210903062441530.png)
 
 ---
@@ -2774,7 +2774,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - Semelhande a do SQS.
 - **Encriptação**
   - Em transito vem habilitado por padrão (HTTPS).
-  - Do lado do servidor, usa a SQS Key (SSE-SQS), mas é possivel usar uma chave criada no KMS (SSEKMS).
+  - Do lado do servidor, usa a SQS Key (SSE-SNS), mas é possivel usar uma chave criada no KMS (SSE-KMS).
 - **SNS + SQS - Fan Out pattern**
   - A ideia é usar um tópico SNS na frente de **N** fila para garantir que aquela mensagem possa se processado por **N** sistema, seja para evitar perda de dados ou por causas de serviços que só permitem notificar um único tópico (ex: **S3 events**).
   - Pode usar em varias regiões.
@@ -2782,10 +2782,10 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - **Message Filtering** - permite filtrar as mensagem e notificar os assinantes de acordo com os filtros.
     - Uma json policy para filtragem.
       ![image-20230221054138361](assets/image-20230221054138361.png)
-- Tem integração com o Kinessis data firehose
+- Tem integração com o **Kinessis data firehose.**
   ![image-20230221055222919](assets/image-20230221055222919.png)
 - **Retry**
-  - Caso o subscrito do topico esteja fora há um processo de retry definido via policy.
+  - Caso o subscrito do tópico esteja fora há um processo de retry definido via policy.
   - Caso não seja um serviço AWS, tem que se configurar uma política de retry.
     ![image-20230221060719941](assets/image-20230221060719941.png)
   - Em ultimo caso pode se uma uma DLQ.
@@ -2802,7 +2802,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 
 - Facilita coletar e processar e analisar fluxos (**steams**) de dados em tempo real.
 - Opção ao **kafka** da AWS. Ou seja serviço de stream de dados em tempo real.
-- Bom para Logs, metricas e IOT. Bom para projetos de tempo real com bigdata (uso com SPARK, NiFi)
+- Bom para Logs, metricas e IOT. Bom para projetos de tempo real com bigdata (uso com SPARK, NiFi).
 - **Dados são sincronizados em 3 AZ.**
 - Tem um produtor > enviar um **record** > **kinesis data stream** > repassa o **record** > ao consumidores.
 - A ordenação dos dados pode ser feita passando a mesma chave de partição, pois assim os dados serão enviado para o mesmo **shard**.
@@ -2870,7 +2870,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Totalmente gerenciado pela AWS.
 - Pagos por **volume** de dados consumidos.
 - Permite criar fluxo consulta em tempo real.
-- Permite usar lambda para pre-processar os dados.
+- Permite usar Lambda para pre-processar os dados.
 - Tem um Schema discovery.
 - Usa o IAM para acessar o origem e o destino dos dados processado.
 - Uso:
@@ -3299,7 +3299,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Executa uma Lambda de teste (**Pre-Traffic)** para validar a nova versão.
   - Usa o **Traffic Shifting** para distribuir o trafico entre as versões deployadas.
   - Usa o Cloud Watch Alarms para fazer rollback caso necessário.
-  - Caso esteja OK, redireciona todo o trafico para a nova versão e executa uma lambda de teste **(Post Traffic)** para validar se o trafico esta OK.
+  - Caso esteja OK, redireciona todo o trafico para a nova versão e executa uma Lambda de teste **(Post Traffic)** para validar se o trafico esta OK.
     ![image-20230222065311164](assets/image-20230222065311164.png)
     ![image-20230312110533059](assets/image-20230312110533059.png)
   - **SAM Framework usa nativamente o code deploy.**

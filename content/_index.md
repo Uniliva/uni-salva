@@ -4,10 +4,7 @@ title: "Bem vindo"
 ---
 
 ---
-
-{{% notice style="warning" %}}
-Em construção
-{{% /notice %}}
+Bem vindo a minha pagina de anotações, aqui com minhas unilises (erros de português) deixo minhas observações sobre os temas que estudo.
 
 ---
 > {{% icon icon="swatchbook" %}} Paginas:
