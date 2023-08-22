@@ -162,7 +162,7 @@ Tempos os seguintes serviços AWS usados para integração de aplicações:
 
 ### AWS AppSync
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [AppSync](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#appsync)
 {{% /notice %}}
@@ -377,7 +377,7 @@ Tempos os seguintes serviços AWS usados para integração de aplicações:
 
 ### AWS Budget
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 Veja aqui tudo que se precisa saber sobre [Budgets](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-budget)
 {{% /notice %}}
 
@@ -387,14 +387,16 @@ Veja aqui tudo que se precisa saber sobre [Budgets](https://docs.uniii.com.br/02
 
 ### EC2
 
-> {{% notice style="note" %}}
+{{% notice style="note" %}}
 > Contextualização:
  - O que é [EC2](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#ec2)
  - O que é [Security Group](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#security-group)
  {{% /notice %}}
 
  - Key pair
-> {{% notice style="info" %}}
+
+
+{{% notice style="info" %}}
 Ao gerar o key pair atente-se ao:
 - Tipo da chave:
   -	RSA:  Usado em linux e Windows.
@@ -403,10 +405,6 @@ Ao gerar o key pair atente-se ao:
   - .pem - formato aberto usado pelo openssh.
   - .ppk - formato do putty (windows 7 e 8).
   {{% /notice %}}
-
-- Security Group
-
-
 
 
 #### Use data
@@ -429,18 +427,18 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 - Informações sobre a instância.
 - Permite que instancias vejam informações sobre elas mesmas, sem a necessidade de ter um IAM Role.
 - Pode ser acessado via **URL**: http://169.254.169.254/latest/meta-data.
-  - Permite acessar tanto o user data (script de inicialização) quanto o meta data.
+  - Permite acessar tanto o user data (script de inicialização) quanto o meta data.Só permite acesso, não preciso negar.
 - Ha duas versões
   - **IMDSv1** 
     - Acessa diretamente a **URL**: http://169.254.169.254/latest/meta-data.
   - **IMDSv2** -
     - Mais seguro pois agora o acesso é feito em dois passos
     - Recuperar o token de sessão.
-    - ```shell
-      TOKEN=`curl -X PUT "http://169.254.169.154/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-secondas:21060"`
-      ```
+    ```shell
+    TOKEN=`curl -X PUT "http://169.254.169.154/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-secondas:21060"`
+    ```
     - Recuperar os dados passando o token via heardes:
-    - ```shell
+    ```shell
       curl http://169.254.169.254/latest/metadata -H "X-aws-ec2-metadata-token: $TOKEN" 
       ```
 - Quando se configura credencias para a instancia ela usa o **IMDS** para recuperar-las usando a chamada
@@ -455,7 +453,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 
 #### ELB / ASG
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [ELB](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elastic-load-balancing)
  - O que é um [ALG](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#auto-scaling-group-alg)
@@ -467,7 +465,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 
 ### Beanstalk
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [Beanstalk](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-elastic-beanstalk
 )
@@ -476,7 +474,6 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 #### Beanstalk - Avançado
 
 - Usa o **CloudFormation** para provisionar qualquer recursos na AWS.
-
 - Dentre os formas de deploy (sigle instance e high availability) há a opção de usar instâncias spot.
 - Os passos para usar o beanstalk são:
   - Configure a ambiente (plataforma (java, node ..) e recursos usados).
@@ -500,19 +497,19 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
     ![image-20230807084407578](assets/image-20230807084407578.png)
   - **Rolling** - Cria uma nova versão (chamada de **bucket**)  derrubando parte das instancias já existentes e redireciona o trafego quando a nova versão estiver de pé.
 
-    - Não ha custo adicional.
+    - Não há custo adicional.
     - Demora mais tempo para deployar.
   ![image-20230807084505741](assets/image-20230807084505741.png)
   - **Rolling com batches adicionais** - Igual ao anterior, mas faz o redirecionamento em partes, mantendo a convivência entre a nova e a versão antigo por algum tempo.
     - Diferente o anterior que seleciona parte das aplicações e derruba pra subir novas essa cria novas e convive com elas por um tempo.
-    - Tem um custo adicional. Pois adiciona novas instância
+    - Tem um custo adicional. Pois adiciona novas instâncias.
     - Bom para ambientes produtivos. Pois se mantém a capacidade da aplicação sem comprometer o uso.
     ![image-20230807084827320](assets/image-20230807084827320.png)
   - **Immutable** - realiza o deploy das instâncias em novo ASG, e quanto esse estiver disponível, se move as instâncias para o ASG antigo e termina as instâncias anteriores.
     - Tem Zero Downtime. Pois cria um ASG temporário.
     - Tem um custo alto pois duplica a quantidade de instância.
     - Mas rápido que o **Rolling**.
-    - Bom para produção
+    - Bom para produção.
     ![image-20230807085227077](assets/image-20230807085227077.png)
   - **Blue/green** - Cria se um novo ambiente, e redireciona (Route 53) quando estiver tudo ok.
     - Tem Zero Downtime.
@@ -566,34 +563,29 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 ### Lambda
 
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
- - O que é [Lambda](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-Lambda)
+ - O que é [Lambda](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-lambda)
  {{% /notice %}}
 
 #### Visão extra - desenvolvedor
-- Linguagem suportadas
-  - Node / Python/ java / c# / Ruby / Golang
+- Linguagem suportadas:
+  - Node / Python/ java / c# / Ruby / Golang.
   - Caso seja diferentes dessa pode rodar usando **custom Runtime API** (open source project).
-
 - As dependências devem ser enviadas juntos com o condigo da Lambda. Respeitando a limitações do tamanho do pacote. 
-- Suporta também **Lambda Contêiner Image**
+- Suporta também **Lambda Contêiner Image**.
   - Criadas usando o Lambda Runtime API.
-
 - Para atualizar uma Lambda usando o **CloudFormation** deve se realizar o upload o pacote zipado para o S3 e referencia-lo no CloudFormation.
   - O S3 deve usar versionamento, para poder disparar o CloudFormation.
   - Caso use para implantar em cross account é necessário ter um Bucket police para permitir acesso ao CloudFormation de cada conta.
-
-- 
-
 - **Lambda Trigger**
   - Na integração com ELB, os dados do request são transformado em Json e repassados a Lambda.
     - O ALB suporta o Multi Header values (necessário habilitar no target group), isto é quando se passa **query string parameters** com múltiplos valores eles são convertido para um objeto json como um array.  
     ![image-20230813111039675](assets/image-20230813111039675.png)
 
   - Há dois modos de operação:
-    - Síncrono -> Você chama e esperar pela resposta. (as filas e o stream entram aqui, pois existe o event source mapping que realiza a chamada síncrona da Lambda)  
-    - Assíncrono -> um evento dispara a Lambda, nesse caso a Lambda executa baseados no evento, ou em uma fila.    
+    - Síncrono -> Você chama e esperar pela resposta. (as filas e o stream entram aqui, pois existe o **event source mapping** que realiza a chamada síncrona da Lambda).
+    - Assíncrono -> um evento dispara a Lambda, nesse caso a Lambda executa baseados no evento.    
       ![image-20230813112808083](assets/image-20230813112808083.png)    
       - Caso ocorram erros haverá retry sendo:
         - 3 retry no total.
@@ -604,7 +596,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 
   - Integrações com CW Events  / EventBridge 
       - **Via CRON**
-        - A cada x tempo dispara a Lambda
+        - A cada **x** tempo dispara a Lambda.
       - **Via EventBridge Role** (baseado em um padrão de evento, ex: exclusão de EC2)
         - Trigga quando status sofre mudança.
 
@@ -764,7 +756,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 
 ### AWS Serverless Application Model (SAM)
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - [SAM](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#sam---serveless-aplication-model)
 {{% /notice %}}
@@ -843,7 +835,7 @@ sam deploy --guided
 
 ### Amazon ECS
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [ECS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-ecs)
    {{% /notice %}}
@@ -963,7 +955,7 @@ Tasks definitions
 
 ### Amazon EKS
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [EKS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-eks)
    {{% /notice %}}
@@ -971,7 +963,7 @@ Tasks definitions
 
 ### Amazon ECR
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [ECR](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-ecr)
    {{% /notice %}}
@@ -984,7 +976,7 @@ Tasks definitions
 
 ### RDS
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [RDS](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds)
 
@@ -1000,7 +992,7 @@ Tasks definitions
 
 ### Aurora
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [Aurora](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aurora)
  {{% /notice %}}
@@ -1009,7 +1001,7 @@ Tasks definitions
 
 ### DynamoDB
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [DynamoDB](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#dynamodb)
  {{% /notice %}}
@@ -1091,7 +1083,7 @@ Tasks definitions
 ---
 ### ElastiCache
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - O que é [ElastiCache](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elasticache)
  {{% /notice %}}
@@ -1195,7 +1187,7 @@ Tasks definitions
 
 ### AWS CodeDeploy
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - entenda o [CodeDeploy](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#code-deploy)
 {{% /notice %}}
@@ -1278,7 +1270,7 @@ Tasks definitions
 
 ### Amazon CodeGuru
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - Armazenamento [CodeGuru](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#codeguru)
 {{% /notice %}}
@@ -2062,7 +2054,7 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 ---
 ## Armazenamento:
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - Armazenamento [guia completo AWS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#storage)
 
@@ -2079,7 +2071,7 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 
 ### S3 
 
-> {{% notice style="note" %}}
+ {{% notice style="note" %}}
 > Contextualização:
  - [S3](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-s3)
 

@@ -583,7 +583,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Desenho de uso em uma organização
     ![image-20230202054456250](assets/image-20230202054456250.png)
 - Como reagir a eventos os mais rápido possível.
-  - Os eventos no CloudTrail podem levar ate 15 minutos para ser disparados, nesse cenário uma maneira de reagir aos eventos o mais rápido seria:
+  - Os eventos no CloudTrail podem levar até 15 minutos para ser disparados, nesse cenário uma maneira de reagir aos eventos o mais rápido seria:
     - EventBridge
       - Pode triggar eventos a partir de qualquer chamada de API no CloudTrail.
       - Métodos mais rápido de reação.
@@ -676,8 +676,8 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Da pra acessar o secret manager via parameter store.
   - Acessando assim: **/aws/reference/secretsmanager/secret_id_in_secrets_manager**
 - Tem integração com o **CloudFormation**.
-- Ate 10000 parâmetros com valor de ate 4KB é de graça por conta e região.
-- Ate 100000 parâmetros com valor de ate 8KB é cobrado $0.05 por parâmetro.
+- até 10000 parâmetros com valor de até 4KB é de graça por conta e região.
+- até 100000 parâmetros com valor de até 8KB é cobrado $0.05 por parâmetro.
   ![tiers](assets/image-20210907145612224.png)
 - É possível definir TTL para parâmetros (**advanced tier**), para força a atualização ou deleta. um caso de uso muito bom seria armazenar o token de acesso no **parameter store** e definir um TTL de 25 minutos, quando ele expirar dispara uma notificação via **CloudWatch Events** que gera um novo token e atualiza ao parâmetro.
   ![ttl-ssm](assets/image-20210907150009873.png)
@@ -787,7 +787,7 @@ Como previnir:
   - A comunicação após o ALB e http, o que reduz o uso de CPU da maquina que não precisa ficar validando certificado.
     ![image-20230207050311492](assets/image-20230207050311492.png)
 - SSL nos Web Services com instâncias EC2
-  - Usa se um NLB e a comunicação ate a instância é feita usando https.
+  - Usa se um NLB e a comunicação até a instância é feita usando https.
   - Porem isso é ruim, pois consome memória.
   - E cada EC2 precisa configurar o certificado em sua maquina.
   - Ele deve ser recuperado no boot do sistema de um parameter store usando script no user data.
@@ -796,7 +796,7 @@ Como previnir:
   - Usa se um HSM para processar o SSL fora do EC2.
   - Como ele tem o SSL Acceleration o processo é mais rapido.
   - Suportado pelos Web server Nginx, Apache e IIS.
-  - É bem seguro pois a chave nunca ira ser trafegada, tudo é feito dentro do HSM.
+  - É bem seguro pois a chave nunca irá ser trafegada, tudo é feito dentro do HSM.
   - Para isso é necessário criar um usuário para criptografia no HSM. e amarzenar os dados desse usuário no secrets manager ou parameter store.
     ![image-20230207051237227](assets/image-20230207051237227.png)
 
@@ -850,7 +850,7 @@ Como previnir:
   - **Captcha para validar do lado do cliente.**
 - Logs do WAF
   - Envia os logs para o CloudWatch logs
-  - **Envia ate 5MB por segundo.**
+  - **Envia até 5MB por segundo.**
   - **Pode enviar para o S3 com em intervalos de 5 minutos.**
   - **Pode enviar para kinesis data firehose - Neste caso o time se limita as quotas do kinisis**
     ![image-20230208045204468](assets/image-20230208045204468.png)
@@ -1057,7 +1057,7 @@ Resource police restritas para a organização
   - **hardware** (EC2 Instance Store)
 - Tem que ter uma rede conectada.
 - Tem que um firewall (**Security group**).
-- Quando parado os dados de memorias são perdidos e os dados no volume **EBS** e mantido ate a próxima inicialização
+- Quando parado os dados de memorias são perdidos e os dados no volume **EBS** e mantido até a próxima inicialização
 - Caso queira manter os dados de memoria salvo quando para use a opção de **Hibernate** (hibernar), que mantém em memoria os dados.
 - Quando destruído a instância os dados de memoria e do **EBS** principal são destruídos, mas é possível adicionar um segundo EBS ou marcar para preservar o default.
 - **EC2 Nitro** - nova tecnologia de virtualização adotada pela AWS.
@@ -1077,10 +1077,10 @@ Resource police restritas para a organização
     - **Cluster** - Todas ais instâncias ficam juntas, tem baixa latência, mas ficam numa única AZ. (alta performance, mas tem um alto risco).
       - Boa escolha quando se tem instâncias com rede otimizada (enhanced Networking).
       - Usados para jobs de processamento rápido de BigData e aplicação que precisam de baixa latência de rede
-    - **Spread** - (espalhadas) As instâncias ficar espalhadas em servidores em diferentes AZ, com uma máximo de 7 instâncias por grupo por AZ. Usados em aplicações criticas.
+    - **Spread** - (espalhadas) As instâncias ficar espalhadas em servidores em diferentes AZ, com no máximo de 7 instâncias por grupo por AZ. Usados em aplicações criticas.
       - Baixo risco que indisponibilidade.
     - **Partition** - Similar ao **Spread**, mas as instâncias ficam espalhadas em diferentes partições (conjunto de Racks) numa AZ. Pode escalar para centenas de instâncias por grupo, usadas com o Hadoop, Kafka, Cassandra.
-      - Pode ter ate 7 partição por AZ, e centenas de instâncias.
+      - Pode ter até 7 partição por AZ, e centenas de instâncias.
       - As partições não compartilham o mesmo hack.
       - Se a partição falhar todas as maquinas são perdidas.
       - As instâncias podem compartilhar dados da partição vias EC2 Metadata.
@@ -1091,7 +1091,7 @@ Resource police restritas para a organização
   ![image-20230213202651772](assets/image-20230213202651772.png)
 - Instance recovery
   - O **CloudWatch** monitora a instância, caso a instância e problema é possível recupera-la usando uma alarme, criando uma nova com o mesmo IP na mesma rede, com os mesmos metadados e o mesmo **placement group**.
-  - Alem disso é possível alerta vias **SNS** a equipe.
+  - Além disso é possível alerta vias **SNS** a equipe.
 
 ---
 
@@ -1127,14 +1127,14 @@ Resource police restritas para a organização
   - Pode ser compartilhado entre as contas de uma organização.
   - **Tipos de reservas**
     - **reserved instances** - onde se reserva um instância de um determinado tipo.
-    - **convertible reserved instance** - onde se reserva um instância e é possível alterar o tipo depois pode ter até **54% de desconto**.
+    - **convertible reserved instance** - onde se reserva um instância e é possível alterar o tipo depois, e pode ter até **54% de desconto**.
     - **scheduled reserved instance** - exemplo - toda terça entre 20 a 22 horas.
   - **Tipos de pagamento**
-    - **NURI** - no upfront payments - Nenhum pagamento adiantado - redução em ate **32%.**
-    - **PURI** - partial up-front - Adiantado parcial - redução em ate **42% .**
-    - **AURI** - all up-front - Tudo adiantado - redução em ate **43%.**
+    - **NURI** - no upfront payments - Nenhum pagamento adiantado - redução em até **32%.**
+    - **PURI** - partial up-front - Adiantado parcial - redução em até **42% .**
+    - **AURI** - all up-front - Tudo adiantado - redução em até **43%.**
 - **spot instances**
-  - Usado para aplicação **serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar ate 90% mais baratas. a desvantagens e que ela pode parar a qualquer momento, quando quiser.
+  - Usado para aplicação **serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar até 90% mais baratas. a desvantagens e que ela pode parar a qualquer momento, quando quiser.
   - Não são recomendadas para aplicações que precisam de disponibilidades.
   - AWS pode interromper com uma notificação de 2 minutos.
     - **spot fleets**
@@ -1148,20 +1148,20 @@ Resource police restritas para a organização
         - Tem uma limitação de 1000,000 instâncias por região.
       - Estratégia de alocação de instâncias
         - Menor preço - bom para carga de trabalhos curtas
-        - Diversificada - Distribuída, bom para carga de trabalho que precisa esta disponível e que tenha longo tempo de execução.
+        - Diversificada - Distribuída, bom para carga de trabalho que precisa está disponível e que tenha longo tempo de execução.
         - Capacidade otimizada - bom para cargas pesadas
 - **dedicate instance**
   - Alugar se uma instância que só será sua, outro usuários não terão acesso a hardware.
 - **dedicate host**
   - Aluga-se um servidor físico, para demandas de compliance principalmente.
-  - Aluga-se por ate 3 anos.
+  - Aluga-se por até 3 anos.
   - Mas caro tipo de instância.
 - **salving plan**
   - Modelo de economia baseado no compromisso de uma quantidade de uso medido em horas num período de 1 ou 3 anos.
-  - Economia de ate 66%, é flexível e não precisa se preocupar em gerenciar o custo por instância, apenas com a quantidade de horas usados nas cargas de trabalho
-  - **EC2 Instance Savings plan** - Economia de ate 72 %, seleciona os tipos de instâncias e as regiões onde ela vai operar. Pode se alterar entre os tipos de instâncias selecionadas e os SO.
-  - **Compute Savings plan** - Economia de ate 66 %, tem se maior flexibilidade na conversão do tipo de instância e na movimentação entre regiões. Alem de poder adicionar Lambdas e Spots.
-  - **SageMaker Savings plan** - Economia de ate 64 %, para carga de trabalhos do SageMaker.
+  - Economia de até 66%, é flexível e não precisa se preocupar em gerenciar o custo por instância, apenas com a quantidade de horas usados nas cargas de trabalho
+  - **EC2 Instance Savings plan** - Economia de até 72 %, seleciona os tipos de instâncias e as regiões onde ela vai operar. Pode se alterar entre os tipos de instâncias selecionadas e os SO.
+  - **Compute Savings plan** - Economia de até 66 %, tem se maior flexibilidade na conversão do tipo de instância e na movimentação entre regiões. Além de poder adicionar Lambdas e Spots.
+  - **SageMaker Savings plan** - Economia de até 64 %, para carga de trabalhos do SageMaker.
 - **capacity reservation**
   - Permite reserva instâncias por um período "**curto de tempo**", sem precisar se comprometer com um plano de 1 ou 3 anos.
   - Usando por exemplo para reservar maquinas para a **black friday.**
@@ -1191,7 +1191,7 @@ Resource police restritas para a organização
         - Melhora a ENA para Alta HPC, apenas para linux.
   - **Armazenamento**
     - **Ligado na instância**
-      - **EBS** - Escala ate 256,000 IOPS with io2 Block express.
+      - **EBS** - Escala até 256,000 IOPS with io2 Block express.
       - **Instance store** - escala para milhões de IOPS, mas é perdido quando a instância desliga.
     - Na rede
       - **S3** - Armazenamento de objetos.
@@ -1215,19 +1215,19 @@ Resource police restritas para a organização
 - **Composto pelo atributos**
   - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que seram criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
-  - Rede onde ira criar as instâncias.
+  - Rede onde irá criar as instâncias.
   - Informações sobre o **Load balance** onde esta linkado.
-  - Política de escalabilidade, que define quando ira escalar para cima ou para baixo.
+  - Política de escalabilidade, que define quando irá escalar.
 - **Scaling polices**
-  - Política de escalabilidade, que define quando ira escalar para cima ou para baixo.
+  - Política de escalabilidade, que define quando irá escalar.
     - **Dynamic scaling police**
       - É possível usar métricas geradas pelo **CloudWatch** para definir as políticas (como media de consumo de CPU, ou quantidade de requisição).
-      - Metricas boas para auto scaling>
+      - Metricas boas para auto scaling:
         - CPUUtilização , RequestCountPerTarget
         - Average Networtk In | Out - para aplicação que usam rede para transferência ....
         - Custom metricas
     - **Sheduled scaling police**
-      - É possível agendar para uma determinado período.
+      - É possível agendar para uma determinado período (horário comercial).
     - **Preditive scaling police**
       - É possível usa **marchine learning** (analise do uso anteriores) para criar uma previsão de escalabilidade.
 - **Scaling cooldowns** - tempo que deve ser esperado após ser lançada uma instância para validar se as métricas delas estão valida, ou se é preciso escalar.
@@ -1242,7 +1242,7 @@ Resource police restritas para a organização
 ### Para a prova
 
 - Existe uma política de encerramento no **auto scaling group:**
-  - 1. Encontra a AZ com maior numero de instâncias.
+  - 1 . Encontra a AZ com maior numero de instâncias.
   - 2 . Termina a que tiver o configuração de inicialização mais antiga.
 - Ciclo de vida de uma instancia com o ASG
   ![Ciclo de vida de uma instancia](assets/image-20210819054243240.png)
@@ -1320,7 +1320,7 @@ Resource police restritas para a organização
 ### AWS Lambda
 
 - Trabalha com eventos.
-- Tem de **128 MB** ate **10 GB** de memoria que pode ser usado.
+- Tem de **128 MB** até **10 GB** de memória que pode ser usado.
 - Tem escopo regional.
 - Pague por **milissegundo** usado para executar o código.
 - **Serveless** (não tem servidor para se preocupar).
@@ -1328,7 +1328,7 @@ Resource police restritas para a organização
 - Necessário monitorar bem, pois toda a infraestrutura e liberada após o uso.
 - Provisiona servidores de acordo com as chamadas.
 - Altamente disponível e totalmente tolerante a falha.
-- Tempo de execução de ate **15 minutos.**
+- Tempo de execução de até **15 minutos.**
 - Cobrado de 100 em 100 milissegundos de uso.
 - Faz escalonamento horizontal e pode ter **ate 999 execução simultâneas.**
 - Triggers
@@ -1343,12 +1343,12 @@ Resource police restritas para a organização
   - AWS Cognito
 - Limitações
   - **Execução**
-    - Alocação de memoria - 128MB - 10GB.
-    - CPU - Linkado a memoria ram (Não é possivel alterar)
+    - Alocação de memória - 128MB - 10GB.
+    - CPU - Linkado a memória ram (Não é possivel alterar)
       - 2vCPU - 1,719 MB de RAM
       - 6vCPU - 10,240 MB de RAM
-    - Tempo de execução - ate 15 minutos.
-    - Variáveis de ambiente - ate 4KB.
+    - Tempo de execução - até 15 minutos.
+    - Variáveis de ambiente - até 4KB.
     - Espaço em disco (no container do Lambda /tmp) - 10 MB.
     - Execuções simultâneas da mesma Lambda - 1000 (Pode ser alterado com solicitação).
     - Tamanho do paylod 6MB (Sync) / 256 KB (async)
@@ -1423,10 +1423,10 @@ Resource police restritas para a organização
 #### Target groups
 
 - Agrupa as "maquinas" para onde o trafico será redirecionado.
-- Essas "Maquinas" podem ser instâncias **EC2, servidores on-premisses linkados via IP e lambdas.**
+- Essas "Maquinas" podem ser instâncias **EC2, servidores on-premisses linkados via IP e Lambdas.**
 - Agrupa
   - As instâncias EC2.
-  - As Tasks do ECS
+  - As Tasks do ECS.
   - Lambdas Funtions - a requisição é traduzida para um evento.
 - É responsável por checar a saúde das instâncias.
 
@@ -1457,10 +1457,10 @@ Resource police restritas para a organização
 - Configurações de disponibilidade
   ![Configurações de disponibilidade](assets/image-20210819054054427.png)
   **Request Routing Algoritimo**
-- Least Outstanding Request
+- Least Outstanding Request - Solicitação menos pendente
   - Redireciona para estância que tiver o menor numero de requisições pendentes. Ou seja para instância menos ocupada.
   - Funciona com ALB (HTTP) e CLB (HTTP).
-- Round Robin
+- Round Robin - Sequência circular
   - Funciona com ALB e CLB.
   - Redireciona em sequencia 1, 2, 3, e reinicia pelo 1 , 2, 3 independente da quantidade de requisições pendente.
 - Flow Hash
@@ -1489,11 +1489,11 @@ Resource police restritas para a organização
 - **Composto pelo atributos**
   - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que seram criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
-  - Rede onde ira criar as instâncias.
+  - Rede onde irá criar as instâncias.
   - Informações sobre o **Load balance** onde esta linkado.
-  - Política de escalabilidade, que define quando ira escalar para cima ou para baixo.
+  - Política de escalabilidade, que define quando irá escalar para cima ou para baixo.
 - **Scaling polices**
-  - Política de escalabilidade, que define quando ira escalar para cima ou para baixo.
+  - Política de escalabilidade, que define quando irá escalar para cima ou para baixo.
     - **Dynamic scaling police**
       - É possível usar métricas geradas pelo **CloudWatch** para definir as políticas (como media de consume de CPU, ou quantidade de requisição).
     - **Sheduled scaling police**
@@ -1537,7 +1537,7 @@ Resource police restritas para a organização
   - Tamanho do payload de no **máximo 10 MB.**
 - Deployment stages
   - Permite criar vários estágios de deploy e através dele é possível fazer rollback.
-  - Alem de controlar o direcionamento do trafico.
+  - Além de controlar o direcionamento do trafico.
 - **LOGs**
   - Possivel enviar os logs para o **Cloud Watch** com os niveis ERRO e INFO
   - Pode logar o request e response completos.
@@ -1547,14 +1547,14 @@ Resource police restritas para a organização
     - São envidas com base nos stages, há possibilidade de envio de métricas detalhadas.
   - X-Ray
     - Pode se habilitar o tracing para recuperar informações sobre as requisições.
-    - Pode se cria um desenho da requisição ate o destinario.
+    - Pode se cria um desenho da requisição até o destinario.
 - **Tipos de endpoints**
   - **Edge-Optimized (default)** - Para clientes Globais (melhora a latencia).
   - **Regional** - Para apenas uma região.
   - **Private** - Acesso apenas pela maquinas dentro de uma VPC.
 - **Caching**
   - Permite o uso de caching para reduzir a quantidade de chamadas ao Backend.
-  - Por padrão tem um **TTL de 300 segundo, mas pode ser configurado ate 0 a 3600 segundos.**
+  - Por padrão tem um **TTL de 300 segundo, mas pode ser configurado até 0 a 3600 segundos.**
   - Definidos por Stages, mas é possível aplicar para cada métodos (endpoint).
   - O cliente pode invalidar o cache enviando o header **Cache-Control:max-age=0** (precisa de uma IAM que autorize).
   - Pode ser criptografado.
@@ -1688,7 +1688,7 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
 - **Multi Value routing police** (Política de rateamento de multi valores)
   - Usado para devolver vários retorno e se um dele falhar, se terá outras para redirecionar, se a necessidade de consultar o **DNS** novamente.
   - Se cria vários **record** com o mesmo nome, com retornos diferentes cada um. Quanto o browser consulta é devolvido todos os retornos e o **browser** escolhe o que melhor lhe atende.
-  - Pode retornar ate 8 record saudável e validados
+  - Pode retornar até 8 record saudável e validados
 - **IP-based routing police** (Política de rateamento baseado no bloco de ips)
   - Pode se criar um redirecionamento de acordo como bloco de IP que esta chamando (cidr).
   - Usado para diminuir custos de rede.
@@ -1735,7 +1735,7 @@ Pode se configurar health checks para monitora a disponibilidade e a saúde da a
   - O Resolver endpoint é um ponto de extremidade em sua Virtual Private Cloud (VPC) da AWS que permite que os recursos em sua VPC resolvam nomes de domínio em outros VPCs.
   - Podem ser associados a uma ou mais VPC na mesma região.
   - Pode se criar em duas AZ para ter alta disponibilidade.
-  - Cada endpoint suporta ate 10000 queries por segundos por IP.
+  - Cada endpoint suporta até 10000 queries por segundos por IP.
   - São divididos em :
     - Inbound endpoint
       - Permite que a rede envie DNS Queries para o Route 53 Resolver.
@@ -1891,13 +1891,13 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Pode ser encriptado usando KMS.
 - Pode se usar o AWS Access Point para restringir o acesso aos usuários.
   - ![image-20230219075953769](assets/image-20230219075953769.png)
-- Suporta milhares de clientes, e pode ter ate 10gb+ de thoughput .
+- Suporta milhares de clientes, e pode ter até 10gb+ de thoughput .
 - Permite realizar a replicação cross region.
 - O tipo de performance pode ser definido na criação podendo ser:
   - **General purpose (default)** - (web server - cms, etc...)
   - **Max I/O** - Big data, processamento de vídeo.
 - **Throughput mode**
-  - **Bursting** - Inicia com 1 TB = 50MiB/s e pode ter um bust de ate 100MiB/s;
+  - **Bursting** - Inicia com 1 TB = 50MiB/s e pode ter um bust de até 100MiB/s;
   - **Provisioned** - Possível definir um nível.
   - **Elastic ** - Escala de acordo com carga de trabalho.
 - **Storages Ties** (lifecycle management feature - Move os arquivos após 30 dias)
@@ -1920,7 +1920,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     - Usado em marchine learning e Computação de alta performace (HPC)
     - Usado para sistema de arquivos distribuidos, para computação de alta performace e escala.
     - Permite ler e escrever no S3 através dele.
-      - **Possivel usar uma funcionalidade de carregamento preguiço, que so ira carregar os dados do S3, quando for solicitados evitando gasto carregando milhares de dados.**
+      - **Possivel usar uma funcionalidade de carregamento preguiço, que so irá carregar os dados do S3, quando for solicitados evitando gasto carregando milhares de dados.**
     - Tipos de sistemas de arquivos
       - **Scratch File System**
         - Usado para armazenamento temporario, e não há replicação.
@@ -1959,7 +1959,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Repica os dado em **3 AZ.**
 - Tem uma durabilidade de **99,999... (11 noves).**
 - E possível definir as permissões de acesso.
-- É possível subir qualquer arquivo de ate **0 bytes ate 5 terasbytes de tamanho.**
+- É possível subir qualquer arquivo de até **0 bytes até 5 terasbytes de tamanho.**
 - **Multi Part** é o processo de subir um arquivo em vários pedaços menores paralelamente.
 - **O upload de Multi Part** também é recomendado assim que o arquivo tiver mais de **100 MB**
   - E possivel remover partes de imcompletas via **lifecycle police**, no caso de uploads cancelados.
@@ -2050,7 +2050,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
     - Garante que a maioria dos objetos do S3 seja replicado em segundo e que 99,99% seja replicado em no maximo 15 minutos.
     - Usado para complienve e Disatre Recovery.
       ![Cross region replication](assets/image-20210819054942170.png)
-- Após habilitado só ira replicar novos objetos, **os antigos não serão replicados.**
+- Após habilitado só irá replicar novos objetos, **os antigos não serão replicados.**
 - Para deletar, se **deleta da origem** e é replicado a delação, mais isso é opcional, se não for **habilitado não será replicado o marcador de delete para o outro bucket.**
 
 #### S3 - Versioning
@@ -2331,7 +2331,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Usado para:
   - Manipular as requisições.
   - Implementar filtros.
-  - Adicionar Autenticação e autorização.
+  - Adicionar autenticação e autorização.
   - Para gerar html direto no ponto de presença.
   - Teste A/B.
 - Pode ser de tanto Lambdas@Edge e CloudFront Function
@@ -2346,7 +2346,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - Recomendado para pequenas alterações no request e response.
   - **Não tem acesso ao request body.**
 - Lambdas@Edge
-  - Podem ser escritas em NodeJs ou Pytohn.
+  - Podem ser escritas em NodeJs ou Python.
   - Escala em 1000 por request por segundo.
   - Roda no ponte de presença da região (Reginal Edge Cache).
   - **Usado para mudar dados de request e response.**
@@ -2457,11 +2457,11 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Quando criado pode se escolher entre provisionado e on-demand (paga por requisição feita)
   - Caso provisionado é preciso definir a:
     - Unidade de capacidade de leitura (**RCU** - Read Capacity Units), sendo cobrado ($0.00013) por RCU.
-      - 1 RCU - 1 leitura consistente (**strong**) lendo ate 4KB por segundo.
-      - 1 RCU - 2 Leitura Eventual (eventually) lendo ate 4KB por segundo.      
+      - 1 RCU - 1 leitura consistente (**strong**) lendo até 4KB por segundo.
+      - 1 RCU - 2 Leitura Eventual (eventually) lendo até 4KB por segundo.      
       ![image-20230814194037758](assets/image-20230814194037758.png)
     - Unidade de capacidade de escrita (**WCU** - Write Capacity Units), sendo cobrado ($0.00065) por WCU.
-      - 1 WCU - 1 escrita de ate 1KB      
+      - 1 WCU - 1 escrita de até 1KB      
       ![image-20230814194136079](assets/image-20230814194136079.png)    
   - on-demand
     - Read Request Units (RRU) -> igual ao RCU.
@@ -2551,9 +2551,9 @@ Serviço de banco de dados relacional da AWS.
 - 3 vezes mais performatico que o **postgres**.
 - Serviço de escopo regional, porém é possível usar em multi regiões podendo criar uma instalação o global, mas o que será uma **master** numa região e replicas de leituras nas outras.
 - **Faz replicação (6 copias) em 3 AZ.**
-- **Pode se adicionar ate 15 replica de leituras, para melhorar o uso.**
+- **Pode se adicionar até 15 replica de leituras, para melhorar o uso.**
 - Tem a opção serveless, não se preocupando com gerenciamento.
-- **Cresce de 10GB em 10GB podendo chegar ate 128TB de dados.**
+- **Cresce de 10GB em 10GB podendo chegar até 128TB de dados.**
 - Tem uma funcionalidade chamada encaminhamento de escrita, que permite que uma replica de leitura receba uma requisição de escrita e encaminhe para o node de escrita, e via replicação o dado e inserido ou atualizado na replica de leitura.
 - 20% mais barato que o RDS comum.
 - ![aurora](assets/image-20210819082549024.png)
@@ -2710,7 +2710,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Auto escalável vai de 1 mensagem por segundo a 10000 por segundo.
 - Retém as mensagem de 4 (mínimo) a 14 (máximo) dias.
 - Não há limites de quantidade de mensagens na fila.
-- Mensagem de ate 254Kb de tamanho, é possível usar o S3 para guardar mensagem maiores.
+- Mensagem de até 254Kb de tamanho, é possível usar o S3 para guardar mensagem maiores.
 - Possível usar métrica da **SQS** para dispara o **Auto Scaling Group** via CloudWatch metrics (**approximateNumerofMensages**).
   - Isso serve para escalar os consumidores.
 - **Política de acesso**.
@@ -3006,7 +3006,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Como é um cluster provisionado para executar a carga de trabalho, caso tenha consulta apenas exporadicas, o ideial seria usar o **Athena**. Pois esse é usando para consultas massivas e em grandes quantidades.
 - Os dados podem ser carregados do S3, Do **DynamoDB** ou de qualquer banco via **DMS** (data migration service) ou via **Kinesis firehose**.
   ![data-importe](assets/image-20210905122049485.png)
-- Pode escalar de **1 nó ate 128** nós com cada nó tendo ate **16 TB** de espaço.
+- Pode escalar de **1 nó até 128** nós com cada nó tendo até **16 TB** de espaço.
 - Há dois tipos de nós:
   - **Nó líder** - usado para o planejamento da queries e agregação dos resultados.
   - **Nó de computação** - Responsável por executar as queries e enviar o resultado ao líder.
@@ -3128,7 +3128,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
   - OpenSearch
   - S3 (export)
     - Só pode criptografar os logs com **AES-256 (SSE-S3), não pode SS3-KMS.**
-    - Pode levar ate 12 horas para exportar.
+    - Pode levar até 12 horas para exportar.
     - Não é automático, precisa configurar ou usar a API call **CreatExportTask**.
 - Subscrição de logs:
   ![image-20230222054249909](assets/image-20230222054249909.png)
@@ -3152,13 +3152,13 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Criar alarmes de acordo com as métricas.
 - E com esses alarmes criar ações (posta numa fila do **SNS** ou acionar o **Auto Scale**)
 - Existem métricas **default com tempos pré definidos (a cada 5 minutos)**, mas se necessário e por um custo adicional é possível adicionar novas métricas detalhadas e alterar o tempo de coleta.
-- o Free Tier disponibiliza ate **10 métricas detalhadas.**
+- o Free Tier disponibiliza até **10 métricas detalhadas.**
   ![cloud-metrics](assets/image-20210906081300936.png)
 - Para criar uma métrica customizada, e só usar a API **putMetricaData** no sdk/cli.
   - Também é possível definir a resolução da métrica ( "tempo de coleta") sendo:
     - **Standard** - 1 minuto.
     - **High Resolution** - 1|5|10|30 segundos - mas tem um alto custo.
-  - Permite enviar métrica antigas (ate duas semanas) e métricas futuras ate 2 horas sem que o **Cloud Watch** reclame.
+  - Permite enviar métrica antigas (ate duas semanas) e métricas futuras até 2 horas sem que o **Cloud Watch** reclame.
 - O uso de memória não é monitorada por default, caso queira e preciso usar métricas customizada.
 
 ---
@@ -3181,7 +3181,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Os Dashboards são **globais**.
 - Neles é possível incluir gráficos de diferentes **contas AWS e regiões.**
 - É possível compartilhar um Dashboard com um terceiro via **cognito**.
-- Ate 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.  
+- até 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.  
   **Synthetics Canary**
   - Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o trafico.
   - Permite configurar scripts (nodeJs e Python) para monitorar APIs e URLs, WebSites.
@@ -3216,7 +3216,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Permite criar um event bus (Custom) para receber eventos da sua aplicação.
   - Permite arquivar os eventos para futuras analises.
 - Para acessar esse **Buses precisar ter uma política baseada em recurso.**
-  - Permitindo ate a agregação desses eventos em uma **única conta.**
+  - Permitindo até a agregação desses eventos em uma **única conta.**
 - Vai substituir os eventos.
 
 ---
@@ -3282,7 +3282,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - **in-place** -> mata o antigo e coloca o novo (somente disponível para EC2).
   - **blue / green** -> criar um novo recurso e roteia os dados em parte.
     - Este por usa vez usa o **Traffic Shifted** podendo ser:
-      - **Canary** - divide o trafico entre as duas versões em percentagem ate chegar os 100% da novar versão.
+      - **Canary** - divide o trafico entre as duas versões em percentagem até chegar os 100% da novar versão.
       - **Linear** - divide o trafico entre as duas versões igualmente.
       - **All-at-once** - envia todo o trafico um para uma ou para outra.
 - EC2
@@ -3542,7 +3542,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Ajuda a **reduzir custos** recomendando os recursos ideias para as cargas de trabalhos executadas.
 - Ajuda na configuração desses recursos de forma a **reduzir o desperdício e o custo.**
 - Suporta **EC2, ASG, EBS, Lambdas.**
-- Reduz ate **25 % dos custos** e as recomendações podem ser enviadas para o S3.
+- Reduz até **25 % dos custos** e as recomendações podem ser enviadas para o S3.
 - Uso:
   - Analisa uso de RAM, e faz recomendações
 
@@ -3783,8 +3783,8 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Virtual private cloud (rede privada na nuvem).
 - Tem escopo **regional**.
 - Toda região tem um VPC default, configurada com **subnets** publicas, ou seja tem acesso via Internet.
-- Pode haver ate **5 VPCs por região (soft Limit).**
-- Cada **VPC** pode ter ate **5 CIDRs sendo:**
+- Pode haver até **5 VPCs por região (soft Limit).**
+- Cada **VPC** pode ter até **5 CIDRs sendo:**
   - No mínimo /28 com **16 IPs.**
   - No máximo /16 com **65536 IPS.**
 - Como VPC é privado só são permitidos os ranges:
@@ -3866,8 +3866,8 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - **(Regras de acessos)** por padrão vem negando tudo.
 - Só permite acesso, não preciso negar.
 - É a primeira camada de segurança
-- Esta no nível de instâncias. Pode ser entendido como firewall das instâncias EC2.
-- Eles têm estado, o que significa que todas as alterações aplicadas a uma regra de entrada são automaticamente aplicadas a uma regra de saída.
+- Está no nível de instâncias. Pode ser entendido como firewall das instâncias EC2.
+- Eles têm estado (**statefull**), o que significa que todas as alterações aplicadas a uma regra de entrada são automaticamente aplicadas a uma regra de saída.
 
 
 
@@ -3891,7 +3891,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Deve dizer o que **é permitido e o que é negado**. Seguindo a ideia de procedência indo de **1 - 32766, sendo quanto menor no numero maior a procedência.**
 - É a segunda camada de segurança.
 - Esta no nível de Subnets. Pode ser entendido como firewall de **subnet**.
-- Eles não têm estado, o que significa que qualquer alteração aplicada a uma regra de entrada não é aplicada automaticamente a uma regra de saída.
+- Eles não têm estado (stateless), o que significa que qualquer alteração aplicada a uma regra de entrada não é aplicada automaticamente a uma regra de saída.
 
 ### VPC Peering
 
@@ -3923,7 +3923,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Tipos:
   - **Interface** - cria uma interface de rede (**ENI**) que fornece um IP para os serviços devem ser configurado o acesso **no Security Group.**
     - Quando criado cria se um **URL que será atachada ao ENI.**
-    - Precisa habilidar as configurações na VPC **"Enable DNS Hostnames" e "Enable DNS Support"**, pois Serviço de DNS ira resolver o **Private Endpoint para rede privada.**
+    - Precisa habilidar as configurações na VPC **"Enable DNS Hostnames" e "Enable DNS Support"**, pois Serviço de DNS irá resolver o **Private Endpoint para rede privada.**
     - Para todos exceto o DynamoDB.
     - As interfaces podem ser compartilhadas via **DX e VPN.**
   - **Gateway** - usa um Gateway para provisionar um destino e deve ser configurado na tabela de rotas (**Route Table**)
@@ -3994,10 +3994,10 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 ![dx](assets/image-20210908201934794.png)
 
-- C**onexão dedicada, fibra** que vai do seu **datacenter** ate a AWS.
+- C**onexão dedicada, fibra** que vai do seu **datacenter** até a AWS.
 - Demora cerca de **1 Mês** para ser implementado toda a infraestrutura.
 - Por padrão os dados em transito não são cartografados, pois já se esta numa rede privada, mas caso queira pode se usar **um solução de IPSec com VPN.**
-- O **Direct Connect (DX)** é um recurso que permite a conexão dedicada (vai de fibra ate o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
+- O **Direct Connect (DX)** é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
 - Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um **DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).**
 - Caso se queira conectar mais de uma região deve se usar um **Direct Conect Gateway**
   ![DX-GW](assets/image-20210908202014628.png)
@@ -4190,7 +4190,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 - Usado para interpretar **textos clínicos** (receita do medico).
 - Pode se usar o **PHI (Protected Health Information)** usando NLP
-- Permite ler receitas e anotações medicas e armazenar esses dados no S3 **e usando outras tecnologias converter essa anotações em documentos ou ate mesmo áudio.**
+- Permite ler receitas e anotações medicas e armazenar esses dados no S3 **e usando outras tecnologias converter essa anotações em documentos ou até mesmo áudio.**
 
 ---
 
