@@ -327,7 +327,7 @@ weight: 1
 - Caso de usos:
   - A empresa usa seu próprio sistema de identificação. (ex: AD da microsoft).
   - Há uma aplicação Web que precisa acessar recurso da AWS.
-- Há varias formas de implementar:
+- Há várias formas de implementar:
   - **SAML 2.0**
     - Sigla pra Security Assertion Markup Language 2.0
     - Padrão aberto, que é compatível com vários providers como o AD da microsoft.
@@ -575,7 +575,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - Solution Architecture
   - Desenho de possibilidades de integração ente Cloudtrail e S3.
     ![image-20230202053730049](assets/image-20230202053730049.png)
-  - Desenho com varias contas e logs de variar regiões
+  - Desenho com várias contas e logs de variar regiões
     ![image-20230202054026755](assets/image-20230202054026755.png)
   - Desenho de alertas via chamadas de APIS
     - Permite enviar alerta, para quando um instância for desligada, o removida.
@@ -616,7 +616,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - O hardware é resistente a alteração e é homologado (FIPS 140-2 Level 3 Compliance)
 - Suporta criptografia simetrica e assimetrica.
 - **RedShift** suporta encriptação via HSM.
-- Pode se ter varios Cloud HSM espalhado por varias AZs para aumentar a disponibilidade.
+- Pode se ter varios Cloud HSM espalhado por várias AZs para aumentar a disponibilidade.
 
 #### Tipos de chaves
 
@@ -881,7 +881,7 @@ Como previnir:
 - Diferenças entre WAF e AWS Firewal manager e AWS Shield
   - WAF usado para proteção em nivel de aplicação (camada 7).
   - AWS Shield usado para proteção contras DDos ( camada 6 e 4 (rede e transporte)).
-  - AWS Firewal manager usado para centralizar regras, permite aplicar o WAF e SHIELD em varias contas.
+  - AWS Firewal manager usado para centralizar regras, permite aplicar o WAF e SHIELD em várias contas.
 
 ---
 
@@ -937,7 +937,7 @@ Como previnir:
 - Possui integração com o **SSM Automation** que permite executar **correções automáticas** ao detectar anomalias.
   - Ex: Caso seu security group esteja liberado para determinado range não permitido. ele detecta e executa um Automação que remove o range e notifica via SNS ou EventBrigde.
 - **Serviço regional,** mas nas analise é possível **adicionar serviços globais.**
-- Contem varias regras (mais de 75), que servem para validar se um serviço esteja **compliance, possivel criar próprias regras.**
+- Contem várias regras (mais de 75), que servem para validar se um serviço esteja **compliance, possivel criar próprias regras.**
   - Para criar suas configuração é necessário criar uma Lambda function que checa o que se que validar.
     - Ex: Deseja-se validar se as instâncias EC2 criadas são do tipo micro, que são as unicas permitidas, se criaria um Lamdba Function que valida e se definiria uma regra linkada a essa Lambda.
       **Serviço pago $0.003 por regra habilitada**
@@ -1069,7 +1069,7 @@ Resource police restritas para a organização
   - Suporta muitos OS (Linux, AML 2)
   - Não disponível para Windows.
 - **EC2 vCPU**
-  - Uma CPU, seria um core de um processador, pode conter varias threads.
+  - Uma CPU, seria um core de um processador, pode conter várias threads.
   - Uma vCPU seria cada uma dessas threads.
   - É possível especificar qual a configuração de vCPU você precisa, por exemplo para uma aplicação node que é single thead pode se definir 1 vCPU.
 - **Placement Groups** - Grupos de Posicionamento
@@ -1308,7 +1308,7 @@ Resource police restritas para a organização
 - AWS Container registry, pode conter repositórios públicos e privados.
 - Tem um boa integração com ECS e EKS.
 - Acessos controlados pelo IAM.
-- Permite replicação em varias regiões e em varias contas.
+- Permite replicação em várias regiões e em várias contas.
 - Scaneia as imagem para por seguranças, podendo ser manual ao a realizar um push.
   - **Base scanning -> CVE** , caso encontre algum erro ele notifica via EventBridge.
   - Scan profundo - Usa o **Amazon Inspector** para procurar vulnerabilidade caso encontre algum erro ele notifica via EventBridge.
@@ -1704,7 +1704,7 @@ Pode se configurar health checks para monitora a disponibilidade e a saúde da a
 - São pagos $ 0.50 para endpoints AWS - $ 0.70 para outros endpoints.
 - Há custos adicionais de outras features (String matching, https, latency measurament).
 - Pode se usar http, https, tcp para se configurar como será a verificação.
-- Disponibiliza 15 diferentes hosts para checagem (em varias regiões)
+- Disponibiliza 15 diferentes hosts para checagem (em várias regiões)
 - há o modelo de health check calculado, usado para validar o outros health checks e em cima de cada verificação se calcula um valor que diz se esta estável ou não.
 - E possível passar dados customizados (text) no retorno do health check nos primeiros 5120 bytes e com isso configurar para passar ou falhar na verificação.
   ![image-20230216204214129](assets/image-20230216204214129.png)
@@ -1886,7 +1886,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Diferente do EBS que só pode sem usado em apenas uma **AZ**, o **EFS** pode ser montado e AZs diferentes
 - Pague por uso.
 - Usa um **security group** para se linkar as instâncias.
-- Usados quando se quer compartilhar arquivos com varias instâncias ex. arquivos **wordpress**.
+- Usados quando se quer compartilhar arquivos com várias instâncias ex. arquivos **wordpress**.
 - Usados apenas com **Linux** (AMI), não compatível com Windows.
 - Pode ser encriptado usando KMS.
 - Pode se usar o AWS Access Point para restringir o acesso aos usuários.
@@ -2212,7 +2212,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Permite criar pontos de acesso para buckets para cenários onde se tem dados compartilhados.
 - Permite restringir o acesso via VPC e configurar o acesso ao bucket via tags o nomes de buckets.
 - o S3 gera um novo pseudônimo de ponto de acesso. (DNS Name).
-- Na pratica, em vez de criar uma police com varias regras para cada usuário, cria se um access point onde quem tiver acesso acessa aquele S3.
+- Na pratica, em vez de criar uma police com várias regras para cada usuário, cria se um access point onde quem tiver acesso acessa aquele S3.
   ![image-20230208035923878](assets/image-20230208035923878.png)
 
 ---
@@ -2496,7 +2496,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Usado para buscas de qualquer campo, muito usado em conjunto com aplicações big data.
 - Fork do projeto ElastichSearch, que mudou de licença, por isso a AWS criou o seu proprio.
-- Pode se disponibilizar um cluster com varias instâncias. Ou pode se usar no modo serverless.
+- Pode se disponibilizar um cluster com várias instâncias. Ou pode se usar no modo serverless.
 - Tem integrações com **Kinesis Data FireHose**, AWS IoT, **Cloud Watch Logs**.
 - Seria o ELK stack da AWS.
 - É subsistuto do ElasticSearch
@@ -2729,7 +2729,7 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 - **Delay Queues** - Permite definir uma atraso na **disponibilização** da mensagem para **leitura**.
   - Default é 0 segundos. Mas na criação da fila pode se definir um novo default para a fila.
 - **Dead letter queue**
-  - Fila onde pode ser enviada mensagens não processada, ou processadas com erro por varias vezes. Exemplo a mensagem foi processada 5 vezes sem sucesso, mova ela para **DLQ** para debug futuro.
+  - Fila onde pode ser enviada mensagens não processada, ou processadas com erro por várias vezes. Exemplo a mensagem foi processada 5 vezes sem sucesso, mova ela para **DLQ** para debug futuro.
   - Para que seja enviada para a DLQ é necessário setar o threshold **maximumReceives**, que define quantas vezes a mensagem será disponibilizada para processamento. Quando atigir esse threshold ela será movida para a DLQ.
   - Usado para debug de problemas, onde se pode colocar uma alarme que notifica a ocorrência de problemas.
   - Uma DLQ deve respeitar o tipo da fila, ou seja se for uma fila FIFO a DLQ deve ser uma fila FIFO.
@@ -2777,7 +2777,7 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
   - Do lado do servidor, usa a SQS Key (SSE-SNS), mas é possivel usar uma chave criada no KMS (SSE-KMS).
 - **SNS + SQS - Fan Out pattern**
   - A ideia é usar um tópico SNS na frente de **N** fila para garantir que aquela mensagem possa se processado por **N** sistema, seja para evitar perda de dados ou por causas de serviços que só permitem notificar um único tópico (ex: **S3 events**).
-  - Pode usar em varias regiões.
+  - Pode usar em várias regiões.
     ![fan out](assets/image-20210902211203812-1676968809224-3.png)
   - **Message Filtering** - permite filtrar as mensagem e notificar os assinantes de acordo com os filtros.
     - Uma json policy para filtragem.
@@ -2923,7 +2923,7 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 - **Pode se usar o EventBrigde para agendar a execução.**
 - Pode ser acionado usando **Step Funtions.**
 - Caso precise executar com alta performance (HPA) pode se usar o modo Multi Node
-  - Disponibiliza varias instâncias para execução dos Jobs.
+  - Disponibiliza várias instâncias para execução dos Jobs.
   - **Não é possível usar instâncias spot.**
   - Trabalha bem com Placement Group.
 - Diferença entre Batch e Lambda
@@ -2963,7 +2963,7 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 
 ### Executando Jobs na AWS
 
-- As soluções são varias de variam de acordo com a demanda.
+- As soluções são várias de variam de acordo com a demanda.
   - 1 - Bom para longas execuções, mas não escala, há necessidade de gerenciamento de infraestrutura.
   - 2 - Escala bem, porem tem as limitações do Lambda (tempo de execução).
   - 3 - Reativo a diversos tipos de eventos, porém tem as limitações do Lambda (tempo de execução).
@@ -3109,7 +3109,6 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 ### AWS CloudWatch
 
 #### Logs
-
 - Coleta métricas e **logs** de tudo no AWS. Também é possível enviar logs através do:
   - SDK, Cloud Watch Logs Agent, Cloud Watch Unified Agent.
   - Elastick Beanstalk, ECS, Lambda, VPC Flow Logs, API Gateway, CloudTrail
@@ -3132,11 +3131,8 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
     - Não é automático, precisa configurar ou usar a API call **CreatExportTask**.
 - Subscrição de logs:
   ![image-20230222054249909](assets/image-20230222054249909.png)
-- A possibilidade de agregar logs de varias regiões.
+- A possibilidade de agregar logs de várias regiões.
   ![image-20230222054341446](assets/image-20230222054341446.png)
-
-
-
 - A maioria dos problema que se da aqui e por causa de permissões configuradas errado.
 - Permite aplicar filtros através de expressões regulares ou métricas ou IPs. E com isso dispara alarmes.
 - Por padrão nenhum log e enviado das instâncias EC2, caso queira ter os logs é necessária habilitar o **CloudWatch Agent** e isso fará que o **CloudWatch unified Agent** nas instâncias envie os logs.
@@ -3314,9 +3310,8 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 ### AWS CloudFormation
 
 ![cloud-formation](assets/image-20210911100149772.png)
-
 - Permite criar qualquer recurso da AWS via código (95%).
-- Usado para criar infraestrutura como código (IAC).
+- Usado para criar infraestrutura como código (IAAC).
 - Usa Yaml ou json para declarar os recursos.
 - Ele mesmo se resolve sob a ordem de criação dos recursos.
 - Taggea de forma uniforme os recursos criados.
@@ -3526,7 +3521,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 ![cost-explorer](assets/image-20210911104942473.png)
 
-- Serviço usado para **ver, entender e gerenciar os gastos** (com varias granularidade mês, ano , dia).
+- Serviço usado para **ver, entender e gerenciar os gastos** (com várias granularidade mês, ano , dia).
 - Permite que você explore **seus custos e uso da AWS** em um nível alto e detalhado de análise, e permite que você mergulhe mais fundo usando uma série de dimensões de filtragem (por exemplo, serviço da AWS, região, conta de membro, etc.)
 - Contem vários relatórios para analisar os gastos, e permite criar outros customizado.
 - Tem um recurso que prever o uso com base nos últimos 12 meses.

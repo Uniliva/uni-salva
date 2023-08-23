@@ -548,7 +548,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 
 #### Migrations
 
-- Após criar um ambiente, não se pode mudar o tipo do **load balancer** apenas as configurações, caso precise mudar sera necessário realizar uma migração.
+- Após criar um ambiente, não se pode mudar o tipo do **load balancer** apenas as configurações, caso precise mudar será necessário realizar uma migração.
   - Para isso:
     - Crie um novo ambiente com as mesmas configurações, exceto o ELB. (ou seja não pode ser um clone).
     - Deploy a aplicação no novo ambiente.
@@ -1096,7 +1096,7 @@ Tasks definitions
      - Adiciona ou  atualiza o cache ao se atualizar o banco de dados.
      - Vantagens:
        - Os dados em cache estarão sempre atualizados.
-       - Não há demora na busca do cache pois todo dados sera adicionado ao cache (write Penalty).
+       - Não há demora na busca do cache pois todo dados será adicionado ao cache (write Penalty).
      - Desvantagens
        - Caso os dados do cache seja perdido, perde as vantagem disso, sendo necessário implementar o **lazy load**.
        - Todos os itens estarão em cache, sendo que talvez não seja necessário.
@@ -1365,7 +1365,7 @@ Tasks definitions
 
 - Pode se usar o AWS CLI para deployar um template do CloudFormation.
 - O CF trabalha com templates é composto por:
-  - **Format version**: A versão do formato define a capacidade de um modelo
+  - **Format version**: A versão do formato define a capacidade de um modelo.
   - **Description**: Quaisquer comentários sobre o seu modelo podem ser especificados na descrição.
   - **Resources**: Recursos (AWS) que se quer criar. - Mandatório
     - Há mais de 224 tipos de recursos diferentes. [Veja todos ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
@@ -1423,13 +1423,10 @@ Tasks definitions
   - Na criação da stack tem as duas opções, realizar o rollback ou manter os recursos problemáticos.
    ![image-20230810203106959](assets/image-20230810203106959.png)
 
-
 - É possível habilitar a notificação das ações da stack via tópico SNS.
 ![image-20230810203717530](assets/image-20230810203717530.png)
-
 - Tem o **CF Drift** que mostra qual foi a alteração que o recurso criado pela Stack sofreu.
   - Para usa-lo vá até a Stack e em opções use o **detect Drift**
-
 - A Stack police serve para limitar as ações que uma Stack pode fazer, como por exemplos, quais recursos que pode criar ou atualizar.
   - Pode ser usada por organizações para evitar a criação de recurso ou atualização de recursos.
   - Ou para evitar atualizações acidentais, como por exemplo remoção de recurso do banco de dados de produção.
@@ -1442,13 +1439,11 @@ Tasks definitions
   - Permite criar, deletar, atualizar stacks em múltiplas contas e regiões com uma única operação.
   - Administradores de contas podem criar StackSets.
   - Contas de confiança (Trusted accounts) também podem criar, atualizar e atualizar stacks de um StackSet.
-  - Se atualizar um StackSet todas as contas sera atualizado.
-
+  - Se atualizar um StackSet todas as contas será atualizado.
 - **ChangeSets**
   - Usados para verificar qual alterações serão aplicadas.
   - Não diz se a atualização será um sucesso, apenas mostra quais são as alterações.
   ![image-20230810204031080](assets/image-20230810204031080.png)
-
 - **Nested Stacks**
   - Permite criar stack usando outras stack (stack aninhadas).
   - Usado quando se que aproveitar uma stack já pronta. 
@@ -1458,12 +1453,11 @@ Tasks definitions
     - Cross Stack
       - Usada para stack com diferente ciclos de vida.
       - Usa **Output** export e a **fn::ImportValues**.
-      - Exemplo se cria uma VPC numa stack e o VPC ID sera usado por varias outras Stacks.
+      - Exemplo se cria uma VPC numa stack e o VPC ID será usado por várias outras Stacks.
     - Nested Stack
-      - Usado para componentes que sera reutilizados.
+      - Usado para componentes que será reutilizados.
       - Exemplo: Stack de configurações de um ALB.
-      - Não é uma stack compartilhada, as stack compõem um stack maior.
-    
+      - Não é uma stack compartilhada, as stack compõem um stack maior.    
     ![image-20230810205136667](assets/image-20230810205136667.png)
 
 ---
@@ -1492,10 +1486,8 @@ Tasks definitions
 
 {{% notice style="note" %}}
 > Contextualização:
-
  - O que é [CDK](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#cdk)
 {{% /notice %}}
-
 - Permite definir a infra estrutura em uma linguagem de programação.
   - Em: Java | Python | JavaScript / TypScript | .Net.
 - Contém a maioria dos recursos da AWS como **construtores**, onde se chama alterando apenas os campos variaveis. 
@@ -1511,9 +1503,7 @@ Tasks definitions
   ![image-20230819104243582](assets/image-20230819104243582.png)
   - Entenda o bootstrapping  
   ![image-20230819104504372](assets/image-20230819104504372.png)
-
 - Para testar usa se o **CDK Assertion Module**.
-
 ![image-20230819104642772](assets/image-20230819104642772.png)
 
 ---
