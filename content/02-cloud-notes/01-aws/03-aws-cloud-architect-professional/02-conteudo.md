@@ -771,7 +771,7 @@ Como previnir:
 - Serviço que permite provisionar, gerenciar e implantar facilmente certificados **SSL/TLS** para uso com os serviços da AWS e os recursos internos conectado.
 - Permite solicitar certificados e implanta-los em **Elastic Load Balancers,** distribuições do **Amazon CloudFront** e APIs no **Amazon API Gateway. e APPSync**
 - Permite criar certificados privados para recursos internos e centralizar o gerenciamento do ciclo de vida dos certificados
-- Permite criar certificados que serão validados no inicio e a partir dai o trafico fica sendo http, o que reduz o uso de CPU das instancias.
+- Permite criar certificados que serão validados no inicio e a partir dai o tráfego fica sendo http, o que reduz o uso de CPU das instancias.
   ![image-20230206204824008](assets/image-20230206204824008.png)
 - Serviço **regional**, assim caso tenha serviço global precisa gerar certificados para cada região.
   - Não é possivel usar em serviços globais.
@@ -892,7 +892,7 @@ Como previnir:
 - No caso do **Security Group** é mais complicado de fazer, pois ele parte da ideia de regras de deliberação de acesso (**ALLOW**). caso precisa-se teria que criar um grupo de IPs que podem acessar e permitia o acesso **SG** assim o resto seria bloqueado, mas como seriam muitos torna-se quase inviável.
 - Também é possível configurar um firewall num **EC2** para fazer esse bloqueio.
   ![ip-bloqueio](assets/image-20210911060135778.png)
-  - Caso na sua estrutura esteja usando um **application load balance **(ALB), e possível bloquear usando a **NACL** e configurar o **Security Group** das instâncias EC2 para aceitar o trafico apenas do **application Load balance**.
+  - Caso na sua estrutura esteja usando um **application load balance **(ALB), e possível bloquear usando a **NACL** e configurar o **Security Group** das instâncias EC2 para aceitar o tráfego apenas do **application Load balance**.
     ![alb-blocling-ip](assets/image-20210911060717080.png)
   - Ou pode se instalar o **WAF** no **ALB**, onde se poderia criar regras de filtros de acesso.
     ![waf](assets/image-20210911061131017.png)
@@ -963,7 +963,7 @@ Como previnir:
   - Logs do CloudTrail -> podem ser ser exportados para o S3 ou Cloud Watch.
     - Logs das chamadas de APIs da AWS.
   - Logs de Fluxo VPC (VPC Flow Logs) -> podem ser ser exportados para o S3 ou Cloud Watch.
-    - Dados sobre trafico de IPs e Interfaces de redes.
+    - Dados sobre tráfego de IPs e Interfaces de redes.
   - Logs de acessos Route 53 -> podem ser enviados para o Cloud Watch.
     - Loga as informações que queries recebidas pelo Route 53.
   - Logs de acessos do S3 -> podem ser exportados para o S3.
@@ -981,7 +981,7 @@ Como previnir:
 - **É um serviço regional.**
 - Recebe dados do:
   - **Cloud Trail** - detecta chamadas incomuns e não autorizadas.
-  - **VPC Flow** - detecta trafico incomum e IPs incomuns.
+  - **VPC Flow** - detecta tráfego incomum e IPs incomuns.
   - **DNS Logs** - detecta instâncias dados comprometedores enviando dados de DNS.
   - **Kubernetes Autid Logs** - detecta atividade suspeita e potencial compremetrimento dos clusters.
 - Ler todos e através de algoritmos ele detecta coisas erradas.
@@ -1057,9 +1057,9 @@ Resource police restritas para a organização
   - **hardware** (EC2 Instance Store)
 - Tem que ter uma rede conectada.
 - Tem que um firewall (**Security group**).
-- Quando parado os dados de memorias são perdidos e os dados no volume **EBS** e mantido até a próxima inicialização
-- Caso queira manter os dados de memoria salvo quando para use a opção de **Hibernate** (hibernar), que mantém em memoria os dados.
-- Quando destruído a instância os dados de memoria e do **EBS** principal são destruídos, mas é possível adicionar um segundo EBS ou marcar para preservar o default.
+- Quando parado os dados de memórias são perdidos e os dados no volume **EBS** e mantido até a próxima inicialização
+- Caso queira manter os dados de memória salvo quando para use a opção de **Hibernate** (hibernar), que mantém em memória os dados.
+- Quando destruído a instância os dados de memória e do **EBS** principal são destruídos, mas é possível adicionar um segundo EBS ou marcar para preservar o default.
 - **EC2 Nitro** - nova tecnologia de virtualização adotada pela AWS.
   - Melhora o uso da rede.
   - Melhora o **IOPS** (Input/output operations per second) dos armazenamento **EBS**.
@@ -1260,7 +1260,7 @@ Resource police restritas para a organização
 - Elastic Container Service - **Serviço de container proprietário da AWS.**
 - Você deve prover e manter a infraestrutura (instâncias EC2). Ou usa o **Fargate** que abstrai esse gerenciamento.
 - Não te tem custo, só paga as maquinas usadas (EC2, EBS ...).
-- Para se subir container, primeiro é necessário configurar uma **ECS Task**, ele descreve com será construido o container, seria algo semelhante como um arquivo **docker-compose**. E na Task que se define as políticas de acesso a recursos que a aplicação vai usar alem de rede e grupo de segurança.
+- Para se subir container, primeiro é necessário configurar uma **ECS Task**, ele descreve com será construido o container, seria algo semelhante como um arquivo **docker-compose**. E na Task que se define as políticas de acesso a recursos que a aplicação vai usar além de rede e grupo de segurança.
 - As Task podem ser disparadas pelo **Event Brigde**, isso dispara a execução do ECS.
 - Tem integração direta como o Application Load Balancer e o Network Load balancer.
 - Conceitos
@@ -1279,7 +1279,7 @@ Resource police restritas para a organização
 
 - Amazon Elastic Kubernetes Service.
 - Serviço de **kubernetes** totalmente gerenciado pela AWS.
-- Custo de **$0,1** por hora por cluster kubernet ($75 por mês) mais os recurso (EC2, EBS).
+- Custo de **$0,1** por hora por cluster kubernets ($75 por mês) mais os recurso (EC2, EBS).
 - Deploy complexo, requer uma pessoa que manja.
 - É Open source assim caso migre de nuvem terá mais facilidade no processo.
 - Usa o **ECR** para armazenar as imagens.
@@ -1295,7 +1295,7 @@ Resource police restritas para a organização
     - **EFS (quando usando Fargate)**
     - **FSx for Lustre**
     - **Fsx for NetApp ONTAP.**
-- É possível rodar o EKS no On-primeses usando o **EKS AnyWhere**
+- É possível rodar o EKS no On-primeses usando o **EKS AnyWhere**.
   - Pode se usar uma imagem da Amazon customizada do Kubernets (AMI), rodando localmente.
   - Pode se conectar o **EKS do On-primeses a AWS** usando EKS **conector**.
   - Usado quando se quer diminuirá a latência, ou por demanda regularizaria. exemplo os dados governamentais do Chile deve ficar no Chile, Roda em um datacenter conectado a AWS.
@@ -1381,7 +1381,7 @@ Resource police restritas para a organização
 
 ### Elastic Load Balancing
 
-- Distribui o trafico entre as instâncias de EC2.
+- Distribui o tráfego entre as instâncias de EC2.
 - Usa o healh check para verificar o status da instâncias.
 - Cria um endpoint, para ser a única entrada de requisições.
 - Não gerencia sessões por padrão, existe uma **feature** chamada **Stick session,** que realiza isso, porém não é recomendado o uso, pois que controla o dados da sessão é a aplicação.
@@ -1405,7 +1405,7 @@ Resource police restritas para a organização
   - **Gateway load balance** GWLB - (v2 - 2020)
     - Opera no level 3 (rede) - protocolo IP
     - Usado para balecear carga de soluções de terceiro
-    - Usado para Firewall, fazer sistema de detecção e intrusão. Ou seja, usado quando se deseja escanear o trafico.
+    - Usado para Firewall, fazer sistema de detecção e intrusão. Ou seja, usado quando se deseja escanear o tráfego.
     - Utiliza o protocolo GENEVE no porta 6081.
       ![image-20230215071036163](assets/image-20230215071036163.png)
   - **Network load balancer** NLB -(v2 - new generation - 2017)
@@ -1417,12 +1417,12 @@ Resource police restritas para a organização
       - Como cada AZ tem um IP estático, quando acionado DNS ele retorna todos os IPs de todas as AZ relacionado ao NLB.
       - Caso precise retornar apenas um é só adicionar a Região mais AZ no DNS.
         - Caso de uso, vc tem duas aplicação instaladas em 3 AZ, e elas conversam entre si.
-        - Caso a APP A chame a B em diferente regiões você vai pagar pelo trafico de transferência de região. nesse caso pode se criar uma lógica para que a aplicação A recupere o o IP da aplicação B da região onde ela esta assim não tendo que pagar pelo trafico Cross Region.
+        - Caso a APP A chame a B em diferente regiões você vai pagar pelo tráfego de transferência de região. nesse caso pode se criar uma lógica para que a aplicação A recupere o o IP da aplicação B da região onde ela esta assim não tendo que pagar pelo tráfego Cross Region.
           ![image-20230215070245743](assets/image-20230215070245743.png)
 
 #### Target groups
 
-- Agrupa as "maquinas" para onde o trafico será redirecionado.
+- Agrupa as "maquinas" para onde o tráfego será redirecionado.
 - Essas "Maquinas" podem ser instâncias **EC2, servidores on-premisses linkados via IP e Lambdas.**
 - Agrupa
   - As instâncias EC2.
@@ -1452,7 +1452,7 @@ Resource police restritas para a organização
 
 ##### Cross-Zone load balance
 
-- Essa funcionalidade distribui o acesso igualmente pela quantidade de instâncias, independente de que zona ela esta, caso não habilitada será distribuído o trafico igualmente pela zonas de disponibilidade, e cada instância pode receber quantidade de trafico diferente.
+- Essa funcionalidade distribui o acesso igualmente pela quantidade de instâncias, independente de que zona ela esta, caso não habilitada será distribuído o tráfego igualmente pela zonas de disponibilidade, e cada instância pode receber quantidade de tráfego diferente.
   ![Cross-Zone load balance](assets/image-20210819054020911.png)
 - Configurações de disponibilidade
   ![Configurações de disponibilidade](assets/image-20210819054054427.png)
@@ -1470,7 +1470,7 @@ Resource police restritas para a organização
 
 ##### SSL Certificates
 
-- Permite criptografar trafico entre cliente o **load balance** (in-flight encryption).
+- Permite criptografar tráfego entre cliente o **load balance** (in-flight encryption).
 - Hoje temos o SSL e o TLS (este é mais seguro que o SSL).
 - **CLB** - apenas uma aplicação e apenas um certificado.
 - **ALB** - suporta múltiplos **listeners** (entenda como app diferente) e múltiplos certificados e usa **SNI** (server name indication) para isso.
@@ -1531,13 +1531,13 @@ Resource police restritas para a organização
   - AWS Service - Para expor APIs de serviços AWS, (post a message on SQS, ou iniciar um step function, S3)
 - Recursos:
   - Versionamento de APIs.
-  - Gerenciamento de trafico (API keys e Throttles)
+  - Gerenciamento de tráfego (API keys e Throttles)
 - Limitações
   - **Timeout de 29 segundos.**
   - Tamanho do payload de no **máximo 10 MB.**
 - Deployment stages
   - Permite criar vários estágios de deploy e através dele é possível fazer rollback.
-  - Além de controlar o direcionamento do trafico.
+  - Além de controlar o direcionamento do tráfego.
 - **LOGs**
   - Possivel enviar os logs para o **Cloud Watch** com os niveis ERRO e INFO
   - Pode logar o request e response completos.
@@ -1622,7 +1622,7 @@ Resource police restritas para a organização
 
 - Serviço gerenciado de DNS.
 - Serviço pago, $0.50 por zona configurada.
-- Gerencia Roteamento da aplicação para regiões de acordo com alguns critérios muito usado como recuperação de desastre, pois identifica falhas e redireciona o trafico para outros lugares .
+- Gerencia Roteamento da aplicação para regiões de acordo com alguns critérios muito usado como recuperação de desastre, pois identifica falhas e redireciona o tráfego para outros lugares .
 - Dentro do serviço também é possível comprar domínios com no **registro.br** .
 - Pode se setar TTL nos Records para controlar o tempo de vida. Ele é obrigatório para todos os tipos de records exceto para o tipo Alias
   ![route-53](assets/image-20210820062829949.png)
@@ -1671,7 +1671,7 @@ São políticas de redirecionamento que é possível configurar no **route 53.**
   - Se cria vários **record** com o mesmo nome, com retornos diferentes para cada região.
 - **Failover routing police** (política de roteamento de falhas)
   - Se defini servidores primários e de **failover**, caso o primário de algum problema será
-    redirecionado o trafico automaticamente. Usa health checks.
+    redirecionado o tráfego automaticamente. Usa health checks.
   - Se cria vários **record** com o mesmo nome, com retornos diferentes cada um com seu **health check** e se define quem vai ser o primário e o segundario.
 - **Geolocation routing police** (política baseada em Geo localização)
   - Redireciona a requisição de acordo com a localização do usuário.
@@ -1753,7 +1753,7 @@ Pode se configurar health checks para monitora a disponibilidade e a saúde da a
 
 Serviço que melhora a disponibilidade de um serviço usando os ponto de presença, melhora a disponibilidade em cerca de 60%.
 
-- 2 Anycast IP são criado para redirecionar o trafico para os pontos de presença.
+- 2 Anycast IP são criado para redirecionar o tráfego para os pontos de presença.
 - É usado como proxy para as aplicações do AWS.
 - Recomendado para servidores http, com conteúdo não estático.
 - Funciona com Elastic IP, ALB, NLB, EC2 Instances
@@ -2219,7 +2219,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 ##### S3 Multi-Region Access Points
 
-- Permite criar um access point global, que redireciona o trafico de acesso para o bucket na região mais proxima.
+- Permite criar um access point global, que redireciona o tráfego de acesso para o bucket na região mais proxima.
 - A ideia é se ter buckets replicados em cada região e através de um Access Point acessa-lo, assim diminuindo a latência.
 - Usado em cenários de faillover, (ativo-ativo ou ativo-passivo).
   ![image-20230208040542497](assets/image-20230208040542497.png)
@@ -2368,7 +2368,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 ### ElastiCache
 
-- Banco de dados em memoria, **Redis o MemCached.**
+- Banco de dados em memória, **Redis o MemCached.**
 - Serviço gerenciado pela AWS.
 - Caso de uso:
   - Pode ser usado como cache do banco de dado, para aliviar o acesso ao RDS.
@@ -2432,11 +2432,11 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - NoSql do tipo chave e valor.
 - Alto volume de dados (1 milhão de requisição por segundo).
 - Similar ao apache Cassandra (há a possibilidade de migrar para DynamoDB)
-- Tamanho máximo de objeto (registro aceito 400 KB), para objetos maiores se armazena no S3 e guarda a referencia no DynamoDB.
-- Escala horizontalmente automaticamente de acordo com numero de requisição.
+- Tamanho máximo de objeto (registro aceito 400 KB), para objetos maiores se armazena no S3 e guarda a referência no DynamoDB.
+- Escala horizontalmente automaticamente de acordo com número de requisição.
 - Permite usar o DAX (DynamoDB Accelarator) para melhorar o IO para milissegundos.
-  - Cachea em memoria registos muito acessado, por 5 minutos (TTL).
-  - Resolve o problema de Hot key, ou seja registros muitos acessados (muitas leituras).
+  - Cachea em memória registos muito acessado, por 5 minutos (TTL).
+  - Resolve o problema de **Hot Key**, ou seja registros muitos acessados (muitas leituras).
   - Pode se ter até 11 nodes de cache.
 - Replica em 3 AZ (Zona de disponibilidade).
 - Tem um scopo regional.
@@ -2452,9 +2452,9 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - **eventual (eventually)** -> Pega a informação de qualquer  uma das replicas é 5
     vezes mais rápido, pois não valida se a informação é a mais recente.
   - **forte (strong)** -> valida se a informação é mais recente e para isso antes de
-    retorna-la, valida em todas as replicas.
+    retorná-la, valida em todas as replicas.
     - Para usar seta o parameter **ConsistentRead** como true na APIs (GetItem, BatchGetItem, Query, Scan).
-- Quando criado pode se escolher entre provisionado e on-demand (paga por requisição feita)
+- Quando criado pode se escolher entre provisionado e on-demand (paga por requisição feita).
   - Caso provisionado é preciso definir a:
     - Unidade de capacidade de leitura (**RCU** - Read Capacity Units), sendo cobrado ($0.00013) por RCU.
       - 1 RCU - 1 leitura consistente (**strong**) lendo até 4KB por segundo.
@@ -2592,7 +2592,7 @@ Serviço de banco de dados relacional da AWS.
 
 - **Cross region read** replica - útil para desastre **recover** .
 - Global database
-  - Se tem 1 região primaria (read/write) e 5 outras regioões segundarias, com replicação de menor que 1 segundo.
+  - Se tem 1 região primaria (read/write) e 5 outras regiões segundarias, com replicação de menor que 1 segundo.
   - há 16 replicas de leitura por região segundaria.
   - Caso de desastre, promove-se outra região como primaria em menos de 1 minuto.
   - ![global](assets/image-20210819085935598.png)
@@ -2617,7 +2617,7 @@ Serviço de banco de dados relacional da AWS.
 
 #### Storage auto scale
 
-Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionalidade ele aumenta o tamanho da banco ao se aproximar de limite de uso do espaço.
+Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionalidade ele aumenta o tamanho da banco ao se aproximar de limite de uso do espaço.
 
 - Ajuda a aumentar o armazenamento dinamicamente. Quando detetado que esta próximo do limite.
 - Necessário setar um _threshold_ de limite máximo de alocação de armazenamento.
@@ -2626,7 +2626,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 
 #### Read replicas
 
-- Ajusta a escalar na leitura dos dados do banco.
+- Ajuda a escalar na leitura dos dados do banco.
 - Podem ser criada em:
   - Na mesma **AZ** onde esta o banco..
   - Em outra **AZ**.
@@ -2666,9 +2666,9 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 #### Autenticação
 
 - Pode ser feita usando usuário e senha.
-- Para os bancos postgres, aurora e mysql, ha a opção de **IAM Autetication** que gera um token para se acessar o banco.
+- Para os bancos postgres, aurora e mysql, há a opção de **IAM Autetication** que gera um token para se acessar o banco.
   - Centraliza os usuários, controla acesso via roles.
-  - Todo o trafico seria feito usando SSL.
+  - Todo o tráfego seria feito usando SSL.
     ![iam-autatication-rds](assets/image-20210819081821387.png)
 
 ---
@@ -2748,7 +2748,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 ### AWS MQ
 
 - Permite usa mensageira com os protocolos tradicionais do mercado MQTT, AMQP, STOMP, WSS, Opemwire na AWS.
-- E um serviço referenciado pela AWS para rodar RabbitMQ e ActiveMQ.
+- E um serviço referênciado pela AWS para rodar RabbitMQ e ActiveMQ.
 - Não escala como o SQS ou SNS.
 - **Pode ser usado numa configuração de Multi-AZ para failover.**
 - Usado para migra soluções criadas nessa plataforma
@@ -3045,7 +3045,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - Permite armazenar e analisar trilhões de dados por dia.
 - **1000 vezes mais rapido e 1/10 mas baratos que banco relacionais.**
 - Tem compatibilidade com o SQL.
-- Dados recentes são armazenados em memoria e depois enviado para armazenamento permanente em um armazenamento mais barato.
+- Dados recentes são armazenados em memória e depois enviado para armazenamento permanente em um armazenamento mais barato.
 - Permite criar funções de analise de series temporais.
 - Tem criptografia em transito e em repouso.
 - Uso:
@@ -3183,7 +3183,7 @@ Quando se cria um bando no RDS se passa quando ele deve ter, com essa funcionali
 - É possível compartilhar um Dashboard com um terceiro via **cognito**.
 - até 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.  
   **Synthetics Canary**
-  - Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o trafico.
+  - Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o tráfego.
   - Permite configurar scripts (nodeJs e Python) para monitorar APIs e URLs, WebSites.
     - Pode agendar a execução da de única vez ou de tempos em tempos.
     - Permite acessos a recursos do Google Chrome.
@@ -3282,9 +3282,9 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - **in-place** -> mata o antigo e coloca o novo (somente disponível para EC2).
   - **blue / green** -> criar um novo recurso e roteia os dados em parte.
     - Este por usa vez usa o **Traffic Shifted** podendo ser:
-      - **Canary** - divide o trafico entre as duas versões em percentagem até chegar os 100% da novar versão.
-      - **Linear** - divide o trafico entre as duas versões igualmente.
-      - **All-at-once** - envia todo o trafico um para uma ou para outra.
+      - **Canary** - divide o tráfego entre as duas versões em percentagem até chegar os 100% da novar versão.
+      - **Linear** - divide o tráfego entre as duas versões igualmente.
+      - **All-at-once** - envia todo o tráfego um para uma ou para outra.
 - EC2
   - Usa o **AppSpec.yml** (definição da aplicação) + estratégia de deploy.
   - O Code deploy atualiza (in place) as instâncias de acordo com a estratégia de deploy.
@@ -3293,13 +3293,13 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - ASG
   - há dois tipos de deploy
     - **in place** - Substitui parte dos das instância de acordo estratégia de deploy.
-    - **blue - greem** - Criar um novo scale group com as novas instância e usa o ELB para controlar o trafico. Após um tempo o antigo ASG é removido.
+    - **blue - greem** - Criar um novo scale group com as novas instância e usa o ELB para controlar o tráfego. Após um tempo o antigo ASG é removido.
 - Lambda
   - Code deploy criar uma nova versão do lambda.
   - Executa uma Lambda de teste (**Pre-Traffic)** para validar a nova versão.
-  - Usa o **Traffic Shifting** para distribuir o trafico entre as versões deployadas.
+  - Usa o **Traffic Shifting** para distribuir o tráfego entre as versões deployadas.
   - Usa o Cloud Watch Alarms para fazer rollback caso necessário.
-  - Caso esteja OK, redireciona todo o trafico para a nova versão e executa uma Lambda de teste **(Post Traffic)** para validar se o trafico esta OK.
+  - Caso esteja OK, redireciona todo o tráfego para a nova versão e executa uma Lambda de teste **(Post Traffic)** para validar se o tráfego esta OK.
     ![image-20230222065311164](assets/image-20230222065311164.png)
     ![image-20230312110533059](assets/image-20230312110533059.png)
   - **SAM Framework usa nativamente o code deploy.**
@@ -3624,8 +3624,8 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
       - (**52vCpu 208Gb Memória**) com 42 TBs compatível com S3.
       - Caso necessário pode vir com **placa de vídeo.**
   - **SnowCone** - Dispositivo menor espaço, pesa cerca de 2,1 kg, com bateria opcional.
-    - HDD - **2 vCPUS, 4 Gb de memoria, 8TBs de espaço,** USB tipo c.
-    - SSD - **2 vCPUS, 4 Gb de memoria, 14 TB of SSD**
+    - HDD - **2 vCPUS, 4 Gb de memória, 8TBs de espaço,** USB tipo c.
+    - SSD - **2 vCPUS, 4 Gb de memória, 14 TB of SSD**
   - **SnowMobile** - Caminhão, usado para transporta dados acima de **10 PBs para AWS.**
     ![snow-family](assets/image-20210902060123753.png)
 - Não é possível importar os dado do **Snowball** diretamente para o **Glacier**, primeiro se importaria para o S3 e com uma política de ciclo de vida se moveria para o **Glacier**.
@@ -3689,14 +3689,14 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   - Muito barato comparado as outras.
 - **Pilot Light**
   ​ ![dr-pilot](assets/image-20210909062035023.png)
-  - A ideia aqui é usar versões pequenas das aplicação (apenas para Apps Core) em outra regiões, e continuamente, sincronizar os dados entre elas. Caso ocorra um desastre seria só redirecionar os trafico para nova região e escalar a aplicação.
+  - A ideia aqui é usar versões pequenas das aplicação (apenas para Apps Core) em outra regiões, e continuamente, sincronizar os dados entre elas. Caso ocorra um desastre seria só redirecionar os tráfego para nova região e escalar a aplicação.
 - **Warm standby**
   ​ ![dr-warm-standby](assets/image-20210909062340297.png)
-  - A ideia aqui seria ter toda a infraestrutura replicada só que em escala menor, caso haja um desastre, se redirecionaria o trafico e escalava as aplicações.
+  - A ideia aqui seria ter toda a infraestrutura replicada só que em escala menor, caso haja um desastre, se redirecionaria o tráfego e escalava as aplicações.
 - **hot site / multi site approach**
   ![hot-site](assets/image-20210909062732217.png)
   ![DR-muilt-site](assets/image-20210909062821953.png)
-- A ideia aqui e se ter as aplicações e recurso distribuídos entres as regiões, e os dados sincronizados assim se ocorrer um desastre o trafico seria redirecionado quase que instantaneamente.
+- A ideia aqui e se ter as aplicações e recurso distribuídos entres as regiões, e os dados sincronizados assim se ocorrer um desastre o tráfego seria redirecionado quase que instantaneamente.
 - Tem o menor tempo de recuperação (RTO), porém é uma solução mas cara.
 
 #### Dicas
@@ -3839,9 +3839,9 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 ![AWS VPC - Internet Gateway, Route Tables, NACLs | 4sysops](assets/Public-and-private-route-table-diagram.png)
 
-- Serve para **direcionar** o trafico de rede para as **subnets**, permitindo assim que se tenha acesso a Internet ou não.
+- Serve para **direcionar** o tráfego de rede para as **subnets**, permitindo assim que se tenha acesso a Internet ou não.
 - É boa pratica criar no mínimo duas tabelas de rotas por VPC:
-  - Uma tabela de rotas publica que ter as **subnets** publicas, esta se liberar o trafico de qualquer lugar colocando como target o **Internet Gateway.**
+  - Uma tabela de rotas publica que ter as **subnets** publicas, esta se liberar o tráfego de qualquer lugar colocando como target o **Internet Gateway.**
   - Uma privada onde vai estar as **subnetes** privadas.
 
 ### NAT Gateway
@@ -3853,7 +3853,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Pague por hora e banda usada.
 - São criado em uma **AZ** especifica e **Usam Elastic IP.** caso queira alta disponibilidade é recomendado criar e mais de uma **AZ**.
 - Não pode ser usado por instâncias da mesma sub-rede, apenas por outras.
-- Se criar um **NAT Gateway** numa **subnet** publica e apronta o trafico das subnets privadas para o NAT, que por sua vez via **route table** repassa ao **Internet Gateway**, como nas **subnets** privadas só que pode acessar e que esta na mesma **VPC** se mantém a segurança.
+- Se criar um **NAT Gateway** numa **subnet** publica e apronta o tráfego das subnets privadas para o NAT, que por sua vez via **route table** repassa ao **Internet Gateway**, como nas **subnets** privadas só que pode acessar e que esta na mesma **VPC** se mantém a segurança.
 - Há uma opção de usar uma i**nstancia EC2 como NAT Instance.**
   - Mas barato que o Nat Gateway, porém não é resiliente e toda manutenção deve ser feita por nós.
   - Deve se usar um **IP Elastico** junto a instância.
@@ -3917,7 +3917,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 - Permite criar **endpoints para acesso de serviços internos da AWS.**
 - Escala **Horizontalmente** e tem **redundância**.
-- Usado quando queremos que uma rede privada tenha acesso a recursos AWS, mas sem que esse trafico saia para a internet.
+- Usado quando queremos que uma rede privada tenha acesso a recursos AWS, mas sem que esse tráfego saia para a internet.
 - Ele remove a necessidade de se ter uma **NAT Gateway** para acessar serviços da AWS.
 - Usado **para subnets privadas.**
 - Tipos:
@@ -3960,13 +3960,13 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 
 ![image-20230228061439898](assets/image-20230228061439898.png)
 
-- Permite capturar o trafico **IP dentro de uma VPC.**
+- Permite capturar o tráfego **IP dentro de uma VPC.**
 - Esta em **nivel de VPCs.**
 - Tipos:
   - **VPC Flow Logs** - se aplica a tudo dentro da VPC.
   - **Subnet Flow Logs** - se aplica as subnets dentro de uma VPC.
   - **ENI Flow Log** - Se aplica a uma interface de rede.
-- Podem ajudar a monitorar traficos de rede dentro da VPC, ajuda na **troubleshooting**.
+- Podem ajudar a monitorar tráfegos de rede dentro da VPC, ajuda na **troubleshooting**.
 - Pode se usar o **Athena** ou **Cloud Watch Insights** para identificar anomalias.
   ![image-20230228061544920](assets/image-20230228061544920.png)
 - Arquiteturas com FPC Flow Logs

@@ -297,7 +297,7 @@ Tempos os seguintes serviços AWS usados para integração de aplicações:
 ![image-20230812124931088](assets/image-20230812124931088.png)
   - Facilita o consumo dos dados. É uma lib java.
   - Cada shard pode ser lido apenas por uma instância KCL. 
-    - exemplo: 4 shards -> pode se ter no máximo 4 instancias do KCL
+    - exemplo: 4 shards -> pode se ter no máximo 4 instâncias do KCL
     - Isso significa que o auto scale esta relacionado a quantidade de shard que se tem provisionados.
   - Usa o DynamoDB para guardar o progresso, por isso precisa configurar acessos no IAM. Isso porque pode haver mais de um KCL executando e para que não haja colisão o track é feito usando o DynamoDB.
 
@@ -425,7 +425,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 #### IMDS - EC2 instance metadata
 
 - Informações sobre a instância.
-- Permite que instancias vejam informações sobre elas mesmas, sem a necessidade de ter um IAM Role.
+- Permite que instâncias vejam informações sobre elas mesmas, sem a necessidade de ter um IAM Role.
 - Pode ser acessado via **URL**: http://169.254.169.254/latest/meta-data.
   - Permite acessar tanto o user data (script de inicialização) quanto o meta data.Só permite acesso, não preciso negar.
 - Ha duas versões
@@ -495,7 +495,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
     - É mais rápido, mas a instancia fica indisponível por algum tempo.
     - Bom para ambientes de dev e hom.  
     ![image-20230807084407578](assets/image-20230807084407578.png)
-  - **Rolling** - Cria uma nova versão (chamada de **bucket**)  derrubando parte das instancias já existentes e redireciona o trafego quando a nova versão estiver de pé.
+  - **Rolling** - Cria uma nova versão (chamada de **bucket**)  derrubando parte das instâncias já existentes e redireciona o trafego quando a nova versão estiver de pé.
 
     - Não há custo adicional.
     - Demora mais tempo para deployar.
@@ -575,7 +575,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 - As dependências devem ser enviadas juntos com o condigo da Lambda. Respeitando a limitações do tamanho do pacote. 
 - Suporta também **Lambda Contêiner Image**.
   - Criadas usando o Lambda Runtime API.
-- Para atualizar uma Lambda usando o **CloudFormation** deve se realizar o upload o pacote zipado para o S3 e referencia-lo no CloudFormation.
+- Para atualizar uma Lambda usando o **CloudFormation** deve se realizar o upload o pacote zipado para o S3 e referência-lo no CloudFormation.
   - O S3 deve usar versionamento, para poder disparar o CloudFormation.
   - Caso use para implantar em cross account é necessário ter um Bucket police para permitir acesso ao CloudFormation de cada conta.
 - **Lambda Trigger**
@@ -620,7 +620,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
         - O Lambda suporta processamento em ordem FIFO, escalando de acordo com o numero de groups ativos. - Escalonamento 
           - Para SQS Standard
             - Pode escalar até 60 instância por minuto.
-            - Pode processar ate 1000 batches de mensagens simultaneamente.
+            - Pode processar até 1000 batches de mensagens simultaneamente.
           - Para SQS FIFO
             - Processa a mensagem em ordem desde que estejam no mesmo GrupoID.
             - Scala de acordo com numero de grupo de mensagem ativos.
@@ -647,7 +647,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 - **Lambda polices**
   - **Lambda Execution Role**
     - IAM Role que da acesso ao recursos para leitura e escritas.
-      - AWSLambdaBasicExecutionRole -> permiti fazer upload de logs para CloudWatch.
+      - AWSLambdaBasicExecutionRole -> permite fazer upload de logs para CloudWatch.
       - AWSLambdaKinesisExecutionRole -> permite ler do Kinesis,
       - AWSLambdaDynamoDBExecutionRole -> Permite ler de streams do DynamoDB.
       - AWSLambdaSQSQueueExecutionRole -> permite ler do SQS.
@@ -672,7 +672,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
   - Assim não da para acessar os recursos que são criados na VPC criada na sua conta.
     - Para resolver isso é necessário realizar a implantação da lambda em sua VPC informando o VPC ID, as subnets e grupos de segurança.
     - O o Lambda criar uma ENI nas subnets para conectar a VPC. Precisa ter permissão para criar ENI (API CreateNetworkInterface) ou via role **AWSLambdaENIExecutionRole**.
-    - Também é necessário um role de acesso chamada **AWSLambdaVPCAccessExecutionRole**.    
+    - Também é necessário uma role de acesso chamada **AWSLambdaVPCAccessExecutionRole**.    
     ![image-20230814053259347](assets/image-20230814053259347.png)
   - Lambdas configuradas para rodar em uma VPC em uma subnet publica **não terá acesso a internet ou tera um IP publico.**
   - Para ter acesso deve se rodar a Lambda em uma subnet privada e usar o NAT Gateway | instance para acessar a internet.  
@@ -681,20 +681,20 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 - **Lambda performance**
   - CPU esta relacionado a Memória, aumentado memoria aumenta CPU.
   - Deve executar entre 5 segundos e 15 minutos (timeout).
-  - Tem o Contexto de execução que:
+  - Tem o contexto de execução que:
     - Inicia as dependências de uma Lambda (conexões com banco). É uma péssima ideia iniciar uma conexão com banco de dado na função, pois isso consome do tempo de execução.  
     - Para usar é só chamar fora do handle da função.
     ![image-20230814055326413](assets/image-20230814055326413.png)    
     - É mantido por um tempo, é pode ser reutilizado por outras execuções (reduzindo tempo de inicialização).
     - Tem acesso ao diretório /tmp, para gravação de arquivos temporários. Será compartilhado com as outra execuções.
       - Para guardar aquivos grandes, que não precisam ser baixados a toda execução.
-      - Tem até ate 10 GB de espaço.
+      - Tem até até 10 GB de espaço.
       - Caso precise encriptar dados use o KMS.
     - Caso precise de armazenamento permanente use o S3.
 
 - **Lambda Layers**
   - Permite criar runtime customizadas.
-  - Pode se ter ate 5 layers por função de ate 250 MB.
+  - Pode se ter até 5 layers por função de até 250 MB.
   - Permite externalizar dependências para reuso. Evitando assim perda de tempo com uploads de novas versões.  
   ![image-20230814060607313](assets/image-20230814060607313.png)
   
@@ -707,7 +707,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
     ![image-20230814061203377](assets/image-20230814061203377.png)
 
 - **Lambda Concurrency an Throttling**
-  - Pode ter ate 1000 execuções concorrentes para toda conta - (soft Limit).
+  - Pode ter até 1000 execuções concorrentes para toda conta - (soft Limit).
   - Pode se configurar a quantidade de concorrência que se quer ter via **reserved concurrency**.
   - Caso a quantidade de invocação passe o limite configurado ocorre o throttling.
   - É recomendado que se defina os limites, pois caso não defina, uma lambda pode causar o throttle em todas as outras dentro da conta.
@@ -715,8 +715,8 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
     - Caso ocorra o throttling ela vai devolver para a fila interna e tenta reprocessar ao longo de 6 horas com um back off exponencial.
 
 - **Lambda Container Image**
-  - Permite executar contêiner criados com base na **Lambda Runtime API** de ate 10 GB de tamanho.
-  - A vantagem é que a imagem vai esta com todas as dependências.  
+  - Permite executar contêiner criados com base na **Lambda Runtime API** de até 10 GB de tamanho.
+  - A vantagem é que a imagem vai está com todas as dependências.  
   ![image-20230814071004237](assets/image-20230814071004237.png)
   - Boas praticas:
     - Use sempre imagem Base AWS-provided.
@@ -729,8 +729,8 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
     - O $Latest representa a ultima versão.
   - Pode ser criar Alias para essa versões.
     - Pode se criar alias por ambiente.
-    - Usados para canário deploy, onde se pode adicionar uma segunda versão e colocar pesos no roteamento do trafico a fim de testar a nova versão.
-    - Não pode referenciar outros alias, apenas versões.  
+    - Usados para canário deploy, onde se pode adicionar uma segunda versão e colocar pesos no roteamento do tráfego a fim de testar a nova versão.
+    - Não pode referênciar outros alias, apenas versões.  
     ![image-20230814071802676](assets/image-20230814071802676.png)
   - Pode se usar o **Code Deploy** para realizar o traffic shift (roteamento do trafego).  
   ![image-20230814072828143](assets/image-20230814072828143.png)
@@ -764,7 +764,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 #### Visão extra - desenvolvedor
 
 - Construido em cima do CloudFormation.
-- o Arquivo YML (a **receita**) chamado **template.yaml**, que depois é transformado em um template do **CloudFormation**.
+  - o Arquivo YML (a **receita**) chamado **template.yaml**, que depois é transformado em um template do **CloudFormation**.
   - Requer a definição das sessões de **Transform** e do **Resources**.
   - Veja um [exemplo](https://github.com/Uniliva/uni-salva/blob/main/content/02-cloud-notes/01-aws/04-aws-cloud-develop-associate/exemplos-codigos/sam/template.yaml)
   
@@ -778,7 +778,7 @@ sam init
 sam build  <options>
 
 # empacota a aplicação para cloudFormation
-sam package aws cloudformation package  --s3-bucket <bucket-name> --template-file template.yaml --output-template-file gen/template-generated.yaml
+sam package  --s3-bucket <bucket-name> --template-file template.yaml --output-template-file gen/template-generated.yaml
 
 ## é equivalente a: 
 aws cloudformation package  --s3-bucket <bucket-name> --template-file template.yaml --output-template-file gen/template-generated.yaml
@@ -832,6 +832,7 @@ sam deploy --guided
 - Permite automatizar deploys com um comando usando CodePipeline.
 - Permite deployar em vários ambientes, além de acesso a logs, troubleshooting e health checks.
 
+---
 
 ### Amazon ECS
 
@@ -875,13 +876,13 @@ Pode escalar por
 
 
 #### ECS Tasks definitions
-- Semelhante ao docker compose ou deployment (EKS), ou seja serve para definir como vai ser ciado o contêiner.
-- Tasks rodando na mesma AZ compartilham o mesmo sistema de arquivo EFS.
-- Numa Tasks é possível adicionar vários containers, como aqueles sidecars
+- Semelhante ao docker compose ou deployment (EKS), ou seja, serve para definir como vai ser criado o contêiner.
+- Tasks rodando na mesma **AZ** compartilham o mesmo sistema de arquivo EFS.
+- Numa Tasks é possível adicionar vários containers, como aqueles **sidecars**.
 - Caso esteja rodando com o Launch type EC2, pode se definir uma **task placement strategy** e uma **task placement constraints** para definir onde o **ECS** deve alocar os novos containers (tasks) criados. Funciona assim:
-  - Se identifica a instância que atenda os requisitos de memoria e CPU e Portas definidos na **task definitions**.
-  - Valida se a instância esta aderente as restrições de alocamento definidas na **task placement constraints**.
-  - Valida se a instancia esta aderente as estrategias de alocamento definidas na **task placement strategy**.
+  - Se identifica a instância que atenda os requisitos de memória e CPU e Portas definidos na **task definitions**.
+  - Valida se a instância está aderente as restrições de alocamento definidas na **task placement constraints**.
+  - Valida se a instância está aderente as estratégias de alocamento definidas na **task placement strategy**.
   - Aloca na instância selecionada.
 - As **task placement strategy** são
   - **BinPack** 
@@ -898,8 +899,8 @@ Pode escalar por
 - Pode se combinar as **task placement strategy**
 ![image-20230804055506695](assets/image-20230804055506695.png)
 - Já as **task placement constraints** pode ser definidas para limitar o alocamento. Podendo ser:
-  - **distinctInstance** - Obriga que o alocamento seja feito é instâncias deferentes.
-  - **memberOf** - Obriga que se atenda a expressão que pode ser uma **cluster query language**
+  - **distinctInstance** - Obriga que o alocamento seja feito é instâncias diferentes.
+  - **memberOf** - Obriga que se atenda a expressão que pode ser uma **cluster query language**.
   ![image-20230804055847335](assets/image-20230804055847335.png)
 
 
@@ -907,12 +908,12 @@ Pode escalar por
 
 ![image-20230801064002809](assets/image-20230801064002809.png)
 
-- Serve para escalar o servidor que roda as instancias
+- Serve para escalar o servidor que roda as instâncias.
 - Pode usar o Auto Scaling group baseando-se em:
   - Uso do CPU
   - Adição programada, por eventos tipo horário comercial e noite.
 - Pode usar o **ECS Cluster Capacity Provider**
-  - Provisiona novas instâncias automaticamente para atender a demanda de tasks ECS.
+  - Provisiona novas instâncias (ec2) automaticamente para atender a demanda de tasks ECS.
   - Usa um Auto Scaling Group e adiciona novas instâncias quando considerando RAM e CPU usados.
 
 
@@ -925,18 +926,18 @@ Pode escalar por
 ![image-20230801070042188](assets/image-20230801070042188.png)
 
 Tasks definitions
-- Define como sera o contêiner docker.
+- Define como será o contêiner docker.
 - As informações primordiais são:
   - Imagem do contêiner.
   - Mapeamento de porta (contêiner e host).
   - Variáveis de ambiente.
-    - Pode sem **hardcode**, ou referencias de **parameter** stores os **secrets**.
+    - Pode sem **hardcode**, ou referências de **parameter** store os **secrets**.
     - Pode ser carregadas em **bulk** do S3 (arquivos de configurações completos)
-  - CPU e Memórias.
-  - Configuração de rede
-  - IAM Role
-    - Se adiciona na **task definition** para dar acessos aos recursos
-  - Configurações de Logs
+  - CPU e Memória.
+  - Configuração de rede.
+  - IAM Role.
+    - Se adiciona na **task definition** para dar acessos aos recursos.
+  - Configurações de Logs.
 - Como funciona no load balancer:
   - Para **EC2 launch types**
     - Cria se uma porta randômica para cada contêiner através da opção **Dynamic Host Port Mapping** na definição da task.
@@ -978,15 +979,15 @@ Tasks definitions
 
  {{% notice style="note" %}}
 > Contextualização:
- - O que é [RDS](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds)
+ - O que é [RDS](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#rds)
 
 - Veja também:
-  - [Backups](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#backups)
-  - [Replicas de leituras](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#read-replicas)
-   - [Multi AZ disastre recover](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#multi-az-disastre-recover)
+  - [Backups](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#backups)
+  - [Replicas de leituras](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#read-replicas)
+   - [Multi AZ disastre recover](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#multi-az-disastre-recover)
    {{% /notice %}}
 
-- Para converte um instancia do **RDS** de Sigle AZ para **Multi AZ**, só é necessario alterar o banco e mudar nas configuraçõa. E isso não gera disponibilidade.
+- Para converte um instancia do **RDS** de Sigle AZ para **Multi AZ**, só é necessario alterar o banco e mudar nas configurações. E isso não gera disponibilidade.
 
 ---
 
@@ -994,7 +995,7 @@ Tasks definitions
 
  {{% notice style="note" %}}
 > Contextualização:
- - O que é [Aurora](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aurora)
+ - O que é [Aurora](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aurora)
  {{% /notice %}}
 
 ---
@@ -1008,21 +1009,17 @@ Tasks definitions
 
 #### Visão extra - desenvolvedor
 - Pode se alterar o modo de **provisionado** ou **sob demanda** a cada 24 horas.
-
 - Tipos de dados aceitos nos atributos:
   - Tipo escalares -> String, number, Binary, Boolean, Null.
   - Documentos -> Map, List.
-  - Conjuntos -> String Set, Number Set, Binary Set
-  
+  - Conjuntos -> String Set, Number Set, Binary Set  
 - Caso provisione os WCU e RCU, e exceda pode se usar temporariamente o **Burst Capacity**, que permite ter um Throughput extra.
-  - Mas se excede-lo receberá um exception do tipo **ProvisionedThroughputExceededException**.
-  
+  - Mas se excede-lo receberá um exception do tipo **ProvisionedThroughputExceededException**.  
 - Tem uma funcionalidade de auto scale que reconfigura os valores de WCU e RCU de acordo com o uso.
-
 - Operações
   - **Write**
     - PutItem -> cria novo item.
-    - UpdateItem -> Atualiza atribuídos de um item ja existente.
+    - UpdateItem -> Atualiza atribuídos de um item já existente.
     - Conditional expression for Writes -> Adiciona / Deleta / Atualiza de acordo com uma condição.
       - Bom para quando a itens concorrentes. Pois tem uma funcionalidade chamada de **Optimistic Locking** que evita que atualizações / delete enquanto esta sendo atualizado ou deletado.
         - Cada item tem um atributo para validação como se fosse uma versão.
@@ -1045,12 +1042,12 @@ Tasks definitions
     - Usado para melhorar a performance das operações (executar um conjunto de ações juntas).
     - Caso parte falhe retorna os itens (**UnprocessedItems**) que falharam para uma retentativa futura.
     - BatchWriteItem -> escreve em lotes.
-      - Permite inserir ou deletar 25 itens em uma única chamada.
-      - Permite escrever até 16 MB de dados, e ate 400 KB de dados por item.
+      - Permite inserir ou deletar **25 itens** em uma única chamada.
+      - Permite escrever até **16 MB de dados, e até 400 KB de dados por item.**
       - Não da pra atualizar os itens com isso.
     - BatchGetItem -> busca em lotes.
       - retorna de uma ou mais tabelas.
-      - Retorna ate 100 itens ou 16 MB de dados.
+      - Retorna até 100 itens ou 16 MB de dados.
       - São recuperados em paralelos o que diminui a latência.
   - **PartQL** - Permite executar queries semelhante ao SQL (insert, select, update, delete).
     - Não permite realização de JOINs.
@@ -1076,7 +1073,7 @@ Tasks definitions
 - **DynamoDB Transactions**
   - Serve para criar transações no dynamo (em uma ou mais tabelas), ou seja tudo é inserido ou nada.
   - Serve para situações onde se depende que todos os itens sejam salvos (quando as informações estão quebradas em tabelas).
-  - Usados para ACID com Leituras e Escritas e consome 2 WCUcaso escrita ou 2 RCU para leitura.  
+  - Usados para ACID com Leituras e Escritas e consome 2 WCU na escrita ou 2 RCU na leitura.  
   ![image-20230815211858410](assets/image-20230815211858410.png)
 
 
@@ -1085,9 +1082,8 @@ Tasks definitions
 
  {{% notice style="note" %}}
 > Contextualização:
- - O que é [ElastiCache](http://localhost:1313/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elasticache)
+ - O que é [ElastiCache](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#elasticache)
  {{% /notice %}}
-
  - Estrategias de cache
    - **Lazy loading / Cache aside / Lazy population**
      - Tenta recuperar do cache, se não encontrar consulta no banco e salva no cache.
@@ -1116,7 +1112,7 @@ Tasks definitions
 - Compatível com o REDIS.
 - Ultra performático com mais de 160 milhões de request por segundo.
 - Tem dados gravados via logs de transação em Multi AZ.
-- Pode escalar de 10 GBs ate 100 TBs de armazenamento.
+- Pode escalar de 10 GBs até 100 TBs de armazenamento.
 - Usado em Web e mobile apps, gaming online e streaming de mídia.
 
 
@@ -1131,16 +1127,14 @@ Tasks definitions
 - Cachea as dependências mais usadas
 - Contém dominios e dentro há repositórios.
 ![image-20230819072751625](assets/image-20230819072751625.png)
-
 - Pode gerar eventos, que pode ser escutados para validar pacotes, ou para triggar o codeStar (codePipeline).
 - Usa Resouce Police para dar acesso (a outras contas). e quando se da acesso não tem como granularizar, ou seja o acesso e dado a todos os repositórios.
 - Um repositório pode apontar para outros repositórios (**upstream repository**).
   - Permite ter apenas um URL para varios repos.
-  - Pode se ter ate 10 **upstream repository**
+  - Pode se ter até 10 **upstream repository**
   - E Apenas uma conexão externa (link para um repo publico como o maven) por repo.  
   ![image-20230819073621158](assets/image-20230819073621158.png)
 - Dominios
-
 ![image-20230819074022929](assets/image-20230819074022929.png)
 
 ---
@@ -1156,7 +1150,6 @@ Tasks definitions
   - Não se compartilha SSH keys.
   - Se cria uma IAM Role usando a API AssumeRole do STS .
   ![image-20230818193717335](assets/image-20230818193717335.png)
-
 - Pode se criar regras de notificações para notificar sobre eventos nos repositórios.
   - Tem como target o SNS e o Slack Chat.
 - Pode se criar Triggers para disparar ações.
@@ -1167,19 +1160,19 @@ Tasks definitions
 ### AWS CodeBuild
 
 ![image-20230818210428355](assets/image-20230818210428355.png)
-- Usa por detrás o docker para criar o ambiente (ubuntu, Amazon Linux, ... ) e execução do build.
-- Permite configurar um timeout de ate 8 horas, utils para evitar que o build fique executando para sempre.
+- Usa por de trás o docker para criar o ambiente (ubuntu, Amazon Linux, ... ) e execução do build.
+- Permite configurar um timeout de até 8 horas, util para evitar que o build fique executando para sempre.
 - Permite configurar instância (CPU e RAM) que será executado, além de certificados usados.
 - Precisa ter uma IAM Role para acesso ao recursos.
 - Os logs de execução pode ser armazenados no **S3 e CW**.
-- Pode se usar o **CW Metric**s para estatísticas de build.
+- Pode se usar o **CW Metrics** para estatísticas de build.
 - Pode se usar o **EventBridge** para notificações.
 - Pode ser usado sem a necessidade de de usar o **CodePipeline**.
 - Realiza o cache de dados reusáveis no S3 para usos futuros.
 - Tem um arquivo chamado **buildspec.yml** onde se script de build/test.
 ![image-20230818210615205](assets/image-20230818210615205.png)
 - Usando o **codeAgent** pode se executar ele localmente.
-  - Isso também pode ser usado caso queira usar instâncias gerenciadas por voce para executar o build.
+  - Isso também pode ser usado caso queira usar instâncias gerenciadas por você para executar o build.
 - Por padrão ele roda fora da VPC, mas caso precise acessar algum recurso (RDS, ElastiCache, etc) na sua VPC, pose ser configura-lo para executar em sua VPC.
   - Pode se usar o **Paramtes Store** ou **Secrets Manager** para armazenar as variáveis de ambiente que contém segredos.
 
@@ -1204,18 +1197,19 @@ Tasks definitions
       - Vai conter estratégias podendo ser Blue/Green ou in-place.
       - Para adicionar uma instância no **deployment group** usa-se tags.
   - Lambda
-    - Usa a estratégias de **Traffic Shift** para deploy.
+    - Usa somente a estratégias de **Blue/Green** com **Traffic Shift** para deploy.
     - É integrado com o SAM Framework.
   -  ECS
-    - Usa somente a estratégias de **Blue/Green** para deploy.
+     - Usa somente a estratégias de **Blue/Green** para deploy.
 - Permite realizar rollback, caso erro ou via alarmes do **CW**.
 - Permite controlar a granularidade dos deploy (estratégias de deploy). 
-  - in-place / Metade / blue Green.
+  - in-place / linear / blue Green.
 - Usa o arquivo chamado **appspec.yml**, o passo a passo do deploy.
 - Erros comuns
   - **InvalidSignatueException** - Ocorre quando a hora do cloudDeploy esta diferente da hora da instância.
 - Acesse os logs do processo de deploy na instância em **/opt/codedeploy-agent/deployment-root/deploymnent-logs**
-- 
+
+
 ---
 
 ### AWS CodePipeline
@@ -1245,7 +1239,6 @@ Tasks definitions
       - Usa o saída do estágio anterior para disparar.
   - Os artefatos gerados são armazenados no **S3** e fica disponíveis para os estágios..
   ![image-20230818201114814](assets/image-20230818201114814.png)
-
 - Pode se usar eventos (EventBridge) para notificar o andamento da Pipeline, podendo executar ações.
 - Caso de erro a pipe vai parar, e se pode ver os logs de erros no console.
 - Usa IAM Role (AWSCodePipelineServiceRole-*) para para acessar os recursos.
@@ -1260,8 +1253,7 @@ Tasks definitions
     - Não é eficiente, pois fica fazendo pulling.
 - Como funciona a aprovação manual
   ![image-20230818204829999](assets/image-20230818204829999.png)
-
-- Pode o **codePipelinese** com o **cloudFormation** para se criar toda a infraestrutura.
+- Pode rodar o **codePipeline** com o **cloudFormation** para se criar toda a infraestrutura.
   - Exemplos:  criar uma Task e Service do ECS / criar lambdas em diversas contras.
   ![image-20230818212324169](assets/image-20230818212324169.png)
 
@@ -1276,8 +1268,9 @@ Tasks definitions
 {{% /notice %}}
 
 - Suporta Java e Python.
-- Foi treinado com milhoes de reopositorios open-source e Amazon,
+- Foi treinado com milhões de repositórios open-source e Amazon.
 - Integrado com Github, Bitbucket e CodeCommit.
+
 ---
 
 ### AWS CodeStar
@@ -1306,11 +1299,11 @@ Tasks definitions
     - Precisa que a role atribuída tenha acesso ao X-Ray.
   - Como configurar no ECS: 
     - Usa porta 2000 e protocolo UDP, 
-    - Usa a variável de ambiente AWS_XRAY_DAEMON_ADDRESS para inciar o url do daemon.
+    - Usa a variável de ambiente AWS_XRAY_DAEMON_ADDRESS para indicar o url do daemon.
     - Há 2 formas de se fazer:
       - Habilitando o daemon na instância do cluster.
-      - Habilitando um contêiner que será um **side car** com o daemon.
-      - Caso Fargate, usa o modelo **side car**.      
+      - Habilitando um contêiner que será um **sidecar** com o daemon.
+      - Caso Fargate, usa o modelo **sidecar**.      
       ![image-20230813080418098](assets/image-20230813080418098.png)
 - **Tracer**
   - Pode se habilitar para cada request ou por um percentual delas.
@@ -1318,7 +1311,6 @@ Tasks definitions
 - **Security**
   - Usa IAM para autorização.
   - Guarda os dados em repouso encriptado.
-
 - Conceitos 
   - **Segment** - Representa uma aplicação, cada uma tem um.
   - **SubSegments** - Pode se querer granularizar uma aplicação, caso a api tenha dois endpoint pode se criar uma para cada.
@@ -1331,14 +1323,11 @@ Tasks definitions
     ![image-20230813074728747](assets/image-20230813074728747.png)
   - **Annotations** - Mapa de chave e valor usados para indexar os traces e para realizar filtros.
   - **Metadata** - Informações adicionais, que não são indexadas e não são usadas para filtros.
-
 - **API**
   - APIs que o daemon precisa para escrever os traces.  
   ![image-20230813075251286](assets/image-20230813075251286.png)  
   - APIs que o daemon precisa para ler os traces.  
   ![image-20230813075450709](assets/image-20230813075450709.png)
-
-
 - **Como usar**
 ![image-20230813071856713](assets/image-20230813071856713.png)
   - Em aplicações: (Importa o SDK).
@@ -1348,10 +1337,9 @@ Tasks definitions
     - Se instala o daemon do X-Ray (EC2 / Lambda), ele trabalha em baixo nível coletando pacotes UDP (Linux/ Mac/ Windows).
     - Cada aplicação deve ter permissões IAM para escrever no X-Ray.
     - Pode enviar traces cross account, para isso a IAM Role deve ser configurada.
-
 - Problemas com X-Ray
   - Não funciona o EC2
-    - Valide as IAM Roles, se est~ao com as permissões corretas.
+    - Valide as IAM Roles, se estão com as permissões corretas.
     - Valide se o daemon esta rodando na instância.
   - Não funciona no Lambda
     - Valide se a IAM Execution Role esta com a permissão (AWSX-RayWriteOnlyAccess).
@@ -1383,7 +1371,7 @@ Tasks definitions
     - Há mais de 224 tipos de recursos diferentes. [Veja todos ](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
   - **Parameters**: São inputs dinâmicos que pode se passar para o template.
     - São usados para permitir o reuso dos templates.
-    - Usa se a função **fn::Ref** para referenciar um parâmetro em qualquer lugar no template.
+    - Usa se a função **fn::Ref** para referênciar um parâmetro em qualquer lugar no template.
     - Em **YML** usa se o **!Ref** para representar a função **fn::Ref**.
     ![image-20230810194424083](assets/image-20230810194424083.png)
     - há também os Pseudos Parâmetros que são oferecido pela AWS.
@@ -1393,7 +1381,7 @@ Tasks definitions
     ![image-20230810195353883](assets/image-20230810195353883.png)
     - Para acessar usa se a função **fn::FindInMap** que no YML é **!FindInMap[MapName, TopLevelKey, SecondLevelKey]**.
     ![image-20230810195742359](assets/image-20230810195742359.png)
-  - **Outputs**: Referencias de recursos que serão criados.
+  - **Outputs**: referências de recursos que serão criados.
     - Permite exporta valores para serem usados em outras stack. Por exemplo, tem um stack do CF que cria uma VPC, pode se exportar o VPC ID e Subnets IDs para que possam ser usando em outra stack que cria os security groups.
     - Não é possível deletar uma stack, quem tem o output usado em outra stack. Ou seja não pode deletar pois há uma dependência.
     ![image-20230810200306843](assets/image-20230810200306843.png)
@@ -1414,7 +1402,7 @@ Tasks definitions
   - **Metadata**: Os metadados podem ser usados ​​no modelo para fornecer mais informações usando objetos JSON ou YAML.
 - Há também as Funções intrisicas
     - **fn::GetAtt** (**!GetAtt** no YML) - usada para recuperar o valor de um atributo de um recurso criado. Uso:  !GetAtt [nome recurso].[nome atributo]
-    - **fn::Ref** (**!Ref** no YML) - usada para referenciar o valor de parâmetros ou o id do recursos no template.
+    - **fn::Ref** (**!Ref** no YML) - usada para referênciar o valor de parâmetros ou o id do recursos no template.
     - **fn::FindInMap** (**!FindInMap** no YML) - usada para acessar valores num mapa.
     - **fn::ImportValue** (**!ImportValue** no YML) - usada para importar outputs de outras stacks.
     - **fn::Join** (**!Join** no YML) - usada para juntar com um delimitador. Uso !Join [ delimitador, [valores separados por virgula]].
@@ -1541,12 +1529,12 @@ Tasks definitions
 #### Visão extra - desenvolvedor
 - métricas
   - Métricas pertencem a un **namespaces** e contem **dimensões** (atributos, exemplo: ambiente, id da instancia ...).
-    - Pode se ter ate 30 dimensões diferente para cada métrica.
+    - Pode se ter até 30 dimensões diferente para cada métrica.
   - Para criar uma métrica customizadas use a API **PutMetricData** passando os atribuídos (dimensões).
   - Para configurar o tempo de resolução (período de coleta) usa a API **StorageResolution** podendo ser:
     - Standard -> 1 Minutos.
     - High Resolution -> 1|5|10|30 segundos - tem um alto custo.
-  - Pode se enviar métricas de ate 2 semanas atrás ou 2 horas no futuro. Sem que haja rejeição do cloudWatch.
+  - Pode se enviar métricas de até 2 semanas atrás ou 2 horas no futuro. Sem que haja rejeição do cloudWatch.
 - Logs
   - Tem o **CloudWatch Logs Insights** - que permite realizar queries nos logs.
     - Pode se realizar filtros baseados em condições, calcular e realizar agregações estáticas, ordenar por eventos, limitar números de linhas retornadas.
@@ -1958,7 +1946,7 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 - Como funciona:
   ![image-20230820085154740](assets/image-20230820085154740.png)
   
-- Isso para dados com tamanho ate 4KB. Para maiores deve se usa o **Envelope Encrytion** que seria a API **GenarateDataKey**.
+- Isso para dados com tamanho até 4KB. Para maiores deve se usa o **Envelope Encrytion** que seria a API **GenarateDataKey**.
   - Nesse a computação para criptografar e descritografar é feita do lado do cliente. 
   - Para criptografar:  
   ![image-20230820085535921](assets/image-20230820085535921.png)  
@@ -1968,7 +1956,7 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
     - Este tem uma funcionalidade de cache do Data Key. Usado para diminuir a quantidade de chamada aos KMS.
   
 - APIs do KMS
-  - **Encrypt** -> usada para criptografar objetos de ate 4KB direto no KMS.
+  - **Encrypt** -> usada para criptografar objetos de até 4KB direto no KMS.
   - **GenerateDataKey** -> Usada para gerar uma **Data Key Simétrica** unica (DEK), que vai ser usada pra criptografar objetos maiores que 4kb.
     - Retorna a **Data Key Simétrica** e texto
     - **E** ele criptografado com a chave que foi chamada na API.
