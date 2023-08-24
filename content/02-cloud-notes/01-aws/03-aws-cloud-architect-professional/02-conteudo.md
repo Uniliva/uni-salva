@@ -545,7 +545,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 
 ![cloud-trail](assets/image-20210906211912761.png)
 
-- Provem governança, **compliance** e **auditoria**, é o dedo duro da galera que fez merda.
+- provém governança, **compliance** e **auditoria**, é o dedo duro da galera que fez merda.
 - Habilitado por default, tem custo zero.
 - Recebe informações do **SDK / console / cli / IAM User e IAM roles.**
 - Permite ver tudo que foi feito na conta (inclusão, criação ou exclusão de recurso).
@@ -611,7 +611,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 
 #### Cloud HSM - Hardware Security Module
 
-- AWS provem um hardware dedicado para que nós possamos gerenciar nossas chaves.
+- AWS provém um hardware dedicado para que nós possamos gerenciar nossas chaves.
   - Ela não tem acesso ao hardware após provisionar, caso perder os acesso não tem como recuperar.
 - O hardware é resistente a alteração e é homologado (FIPS 140-2 Level 3 Compliance)
 - Suporta criptografia simetrica e assimetrica.
@@ -648,7 +648,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
 - **Chaves proprias da AWS**
   - Criada pela AWS, para recurso da AWS, Não temos acesso nem de visualização.
   - SSE-S3, SSE-SQS, SSE-DDB.
-  - São ee graça.
+  - São de graça.
 - **Chaves do HSM**
   - Chaves criada usando o HSM (**hardware security module** ).
   - Replicado em mais de uma AZ.
@@ -1213,7 +1213,7 @@ Resource police restritas para a organização
   - **Agilidade** - Velocidade de se ter infraestrutura a toque de caixa.
     ![Auto Scaling group](assets/image-20210819054218858.png)
 - **Composto pelo atributos**
-  - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que seram criadas) .
+  - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que serám criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
   - Rede onde irá criar as instâncias.
   - Informações sobre o **Load balance** onde esta linkado.
@@ -1487,7 +1487,7 @@ Resource police restritas para a organização
   - **Agilidade** - Velocidade de se ter infraestrutura a toque de caixa.
     ![Auto Scaling group](assets/image-20210819054218858-1676454365145-1.png)
 - **Composto pelo atributos**
-  - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que seram criadas) .
+  - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que serám criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
   - Rede onde irá criar as instâncias.
   - Informações sobre o **Load balance** onde esta linkado.
@@ -1871,7 +1871,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - Não permite o aumento ou redução do
 - Algumas instâncias EC2 podem ter discos diretamente conectado ao servidor onde são virtualizadas.
 - Armazenamento com melhor I/O.
-- Dados guardo dentro da instância, e perdido ao se parar a instância
+- Dados guardados dentro da instância, e perdido ao se parar a instância
 - Excelente para guardar cache / dados temporários.
 - Existe um recurso de hibernação que preserva os dados.
   ![image-20230219071547162](assets/image-20230219071547162.png)
@@ -1899,7 +1899,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 - **Throughput mode**
   - **Bursting** - Inicia com 1 TB = 50MiB/s e pode ter um bust de até 100MiB/s;
   - **Provisioned** - Possível definir um nível.
-  - **Elastic ** - Escala de acordo com carga de trabalho.
+  - **Elastic** - Escala de acordo com carga de trabalho.
 - **Storages Ties** (lifecycle management feature - Move os arquivos após 30 dias)
   - **Standard** - para arquivos acessados frequentemente
   - **Infrequent access (EFS-IA)** - Arquivos que não são acessado com muita frequência, tem preço menor, pórem e cobrado por recuperação de arquivo.
@@ -1947,7 +1947,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - Não é possivel converter de um para outro
   - **Caso precise migrar de single para multi AZ, é necessário criar um Multi AZ e usar um AWS DataSync.**
   - Tambem é possivel realizar um backup da Single e restorar no Multi, seria mais rapido que usando o AWS DataSyng.
-- Não é possivel reduzir o tamanha de um file system, apenas aumentar, caso precisa o remcomendado e criar um novo e usar o AWS DataSync para copiar os dados.
+- Não é possivel reduzir o tamanho de um file system, apenas aumentar, caso precisa o remcomendado e criar um novo e usar o AWS DataSync para copiar os dados.
 
 ---
 
@@ -2047,7 +2047,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - **CRR** - Cross region replication
     - Usado para compliance, baixar a latência de acesso, replicação em diferentes contas.
   - **S3 RTC** - Replication Time Control
-    - Garante que a maioria dos objetos do S3 seja replicado em segundo e que 99,99% seja replicado em no maximo 15 minutos.
+    - Garante que a maioria dos objetos do S3 seja replicado em segundo e que 99,99% seja replicado em no máximo 15 minutos.
     - Usado para complienve e Disatre Recovery.
       ![Cross region replication](assets/image-20210819054942170.png)
 - Após habilitado só irá replicar novos objetos, **os antigos não serão replicados.**
@@ -2061,8 +2061,8 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 ![lifecycle management](assets/image-20210819055054870.png)
 
-- **Ações de transição** - Permite definir quando o objeto sera movido
-- **Ações de expiração** - Permite definir tempo de expiração dos objetos e regras para deletar
+- **Ações de transição** - Permite definir quando o objeto será movido.
+- **Ações de expiração** - Permite definir tempo de expiração dos objetos e regras para deletar.
 - Também é possível definir regras por **prefixos** ou **tag** , para, por exemplo, mover apenas objetos de uma pasta X.
 
 #### S3 - Transfer acceleration
@@ -2110,7 +2110,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
 
 - Permite usar SQL para melhorar a recuperação de dados por meio de filtros
 - É possível realizar filtros por linhas e colunas (consultas simples de SQL)
-- Usa menos banda de rede pois as queries seram executado do lado do S3 e só retornará o resultado.
+- Usa menos banda de rede pois as queries serám executado do lado do S3 e só retornará o resultado.
   ![select-s3](assets/image-20210901073640794.png)
 
 #### S3 - Storage Class Analysis
@@ -2166,7 +2166,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   - Para **download** (fácil, use CLI)
   - Para **upload** (complidado, use SDK)
 - Tem um tempo de expiração padrão de 3600 segundos, mas e possível alterar.
-  - S3 consoler - pode ter de 1 minuto a 12 horas (720 minutos)
+  - S3 console - pode ter de 1 minuto a 12 horas (720 minutos)
   - AWS ClI - pode ter até 604800 (168 horas)
 - Permite gerar url assinadas tanto para get (download) quanto post (upload).
   ![Presigned urls](assets/image-20210819055145289.png)
@@ -4263,7 +4263,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 ![image-20230303062953533](assets/image-20230303062953533.png)
 
 - Serviço de ML para automatizar code reviews de realizar recomendações de performance no código.
-- Provem duas funcionalidades:
+- provém duas funcionalidades:
   - **CodeGuru Review** - Realiza o review (analise) de conteúdo estático.
   - **CodeGuru Profiler** - Realiza recomendações sobre a performance das aplicação durante o tempo de execução.
 
@@ -4344,7 +4344,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 - Podem enviar e-mails transacionais, como confirmações de pedidos, notificações de transações financeiras, lembretes de senha e outros e-mails importantes relacionados ao serviço.
 - Inclui recursos de monitoramento e relatórios detalhados, permitindo que as empresas avaliem a eficácia de suas campanhas de e-mail e monitorem a entrega de seus e-mails.
   - Conjunto de configuração. Permite customizar o envio e a analise do processo.
-    - **Event Destinations** - permite configurar para onde sera enviados os dados de envio e resposta do e-mail.
+    - **Event Destinations** - permite configurar para onde será enviados os dados de envio e resposta do e-mail.
     - **Ip Pool Management** - Use para enviar e-mail específicos e **particulares**.
 - Suporta **DKIM (DomainKeys Identified Mail) e SPF (Sender Policy Framework)**
 - Pode ser acessado via API e SMTP.

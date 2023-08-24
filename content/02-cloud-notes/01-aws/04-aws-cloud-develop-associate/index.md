@@ -1792,10 +1792,9 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 {{% notice style="note" %}}
 > Contextualização:
 
- - da uma lida em [Identity Federation & Congnito](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#identity-federation--congnito)
+ - leiaa sobre [Identity Federation & Congnito](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#identity-federation--congnito)
 {{% /notice %}}
-
-- Permite que usuarios de fora da AWS possa ter acesso a recurso da AWS.
+- Permite que usuários de fora da AWS possa ter acesso a recurso da AWS.
 - Ha dois produtos disponiveis:
 - Suporta muitos usuários.
 - **Cognito user pools** (CUP)
@@ -1818,7 +1817,6 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
   - Tem a opção de realizar um callback em caso de login sucesso.
     ![image-20230819111427615](assets/image-20230819111427615.png)
   - Tem a capacidade de triggar uma Lambda para realizar ações como validação, migração ou autenticação.
-  
   ![image-20230819112618602](assets/image-20230819112618602.png)
 - **Cognito identity pools** (Identidade Federada)
   - Provem acesso temporário a recursos da AWS. Usa o STS para gerar credenciais tempórarias.
@@ -1826,15 +1824,11 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
   - Permite usar provider como OpenID e SAML.
   - Permite usuários anônimos (usuários não autenticados).
   - Usa IAM Police para configurar quais acesso o usuário terá.
-  
   ![image-20230819114641872](assets/image-20230819114641872.png)
-  
   - Diferença entre ele o o **Cognito Users Pools**.
     - No **CUP** todos os usuários ficam armazenados no banco interno.
     - O **CUP** se integra o outro providers via federação, ou seja, serve apenas para recuperar os dados para salvar na base de dados.
-  
   ![image-20230819114818298](assets/image-20230819114818298.png)
-  
   ![image-20230819115605419](assets/image-20230819115605419.png)
 
 ---
@@ -1906,15 +1900,11 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 
 #### Visão extra - desenvolvedor
 - Todas as chamadas são logadas no CloudTrail.
-
 - Copiando snapshot criptografado entre regiões. 
   ![image-20230820083428692](assets/image-20230820083428692.png)
-
 - Tem uma IAM police semelhante ao S3. A unica diferença é que se pode tem uma condição IAM, onde se informa qual conta vai chamar e via qual serviço.
-
 - Como funciona:
-  ![image-20230820085154740](assets/image-20230820085154740.png)
-  
+  ![image-20230820085154740](assets/image-20230820085154740.png)  
 - Isso para dados com tamanho até 4KB. Para maiores deve se usa o **Envelope Encrytion** que seria a API **GenarateDataKey**.
   - Nesse a computação para criptografar e descritografar é feita do lado do cliente. 
   - Para criptografar:  
@@ -1922,21 +1912,16 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
   - Para Descriptografar  
   ![image-20230820085703643](assets/image-20230820085703643.png)
   - Por se complexo, geralmente usa-se o SDK para realizar essas operações.
-    - Este tem uma funcionalidade de cache do Data Key. Usado para diminuir a quantidade de chamada aos KMS.
-  
+    - Este tem uma funcionalidade de cache do Data Key. Usado para diminuir a quantidade de chamada aos KMS.  
 - APIs do KMS
   - **Encrypt** -> usada para criptografar objetos de até 4KB direto no KMS.
   - **GenerateDataKey** -> Usada para gerar uma **Data Key Simétrica** unica (DEK), que vai ser usada pra criptografar objetos maiores que 4kb.
     - Retorna a **Data Key Simétrica** e texto
-    - **E** ele criptografado com a chave que foi chamada na API.
-  
+    - **E** ele criptografado com a chave que foi chamada na API.  
  - **GenerateDataKeyWithoutPlaintext** -> Semelhante a anterior, a unica diferença e que não retorna a **Data Key Simétrica** e texto, sendo necessário descriptografar depois
-   - É mais demorado, pois precisa fazer duas operações.
-   
+   - É mais demorado, pois precisa fazer duas operações.   
  - **Decypt** -> usada para descriptografar objetos de até 4KB direto no KMS (usado para descriptografar a **Data Key Simétrica** caso use a API **GenerateDataKeyWithoutPlaintext** ).
-
  - **GenerateRandom** -> gerar uma Byte String randômica.
-
 - Limites do KMS  
   ![image-20230820091745673](assets/image-20230820091745673.png)  
   - Cotas
@@ -1945,7 +1930,6 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
       - Para resolver isso use a API **GenerateDataKey** via SDK, pois ela cachea o DEK por um tempo.
     - Caso exceda as cotas vai tomar um erro do tipo **ThrottlingException**.
       - Use **Exponetional Backoff** para resolver o problema.
-
 - S3 Bucket Key
   - Usado para reduzir a chamada ao KMS. Quando não se usa uma chame que não é proprietaria da AWS.
   ![image-20230820093145303](assets/image-20230820093145303.png)
@@ -1981,11 +1965,11 @@ Não cai muitas coisas sobre isso na prova da certificação develop, mas é imp
 
 - Apis
   - **GetParameters** - Retorna os parametros de acordo o o nome passado na flag --names (pode ser mais de um). 
-    - Pode se usar a flag **--with-decription** para retonar o valor parametros com valor criptografado.
+    - Pode se usar a flag **--with-decription** para retonar o valor parametros com valor descriptografado.
   - **GetParametersByPath** - Retorna os todos os parametros contidos no path passado na flag --path. 
-    - Pode se usar a flag **--with-decription** para retonar o valor parametros com valor criptografado.
+    - Pode se usar a flag **--with-decription** para retonar o valor parametros com valor descriptografado.
     - Pode se usar o flag **--recursive** para retonar recursivamente os parametro dentro do path.
-- Caso use a flag **--with-decription** é necesssario ter a permissão do KMS de **Decypt**.
+- Caso use a flag **--with-decription** é necesssario ter a permissão do KMS de **Decypt** do KMS.
 
 ---
 ### AWS Secrets Manager
