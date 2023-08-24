@@ -409,7 +409,7 @@ Ao gerar o key pair atente-se ao:
 
 #### Use data
 
-Usado para pre configurar um instancia Ec2. O exemplo abaixo instala o apache na instância.
+Usado para pre configurar um instância Ec2. O exemplo abaixo instala o apache na instância.
 
 ```shell
 ## Considerando que AMI seja RedHat Based.
@@ -441,7 +441,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
     ```shell
       curl http://169.254.169.254/latest/metadata -H "X-aws-ec2-metadata-token: $TOKEN" 
       ```
-- Quando se configura credencias para a instancia ela usa o **IMDS** para recuperar-las usando a chamada
+- Quando se configura credencias para a instância ela usa o **IMDS** para recuperar-las usando a chamada
 ```shell
   curl  -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/metadata/identity-credentials/ec2/security-credentials/ec2-instance
 ```
@@ -492,7 +492,7 @@ echo “Hello World from $(hostname -f)” > /var/www/html/index.html
 - As opções de deploys para updates são:
   ![image-20230807090025037](assets/image-20230807090025037.png)
   - **All at once** - Tudo de uma vez.
-    - É mais rápido, mas a instancia fica indisponível por algum tempo.
+    - É mais rápido, mas a instância fica indisponível por algum tempo.
     - Bom para ambientes de dev e hom.  
     ![image-20230807084407578](assets/image-20230807084407578.png)
   - **Rolling** - Cria uma nova versão (chamada de **bucket**)  derrubando parte das instâncias já existentes e redireciona o trafego quando a nova versão estiver de pé.
@@ -987,7 +987,7 @@ Tasks definitions
    - [Multi AZ disastre recover](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#multi-az-disastre-recover)
    {{% /notice %}}
 
-- Para converte um instancia do **RDS** de Sigle AZ para **Multi AZ**, só é necessario alterar o banco e mudar nas configurações. E isso não gera disponibilidade.
+- Para converte um instância do **RDS** de Sigle AZ para **Multi AZ**, só é necessario alterar o banco e mudar nas configurações. E isso não gera disponibilidade.
 
 ---
 
@@ -1518,7 +1518,7 @@ Tasks definitions
 
 #### Visão extra - desenvolvedor
 - métricas
-  - Métricas pertencem a un **namespaces** e contem **dimensões** (atributos, exemplo: ambiente, id da instancia ...).
+  - Métricas pertencem a um **namespaces** e contém **dimensões** (atributos, exemplo: ambiente, id da instância ...).
     - Pode se ter até 30 dimensões diferente para cada métrica.
   - Para criar uma métrica customizadas use a API **PutMetricData** passando os atribuídos (dimensões).
   - Para configurar o tempo de resolução (período de coleta) usa a API **StorageResolution** podendo ser:
@@ -1594,15 +1594,13 @@ aws sts get-session-token --serial-number <arn-do-dispositivo-mfa> --token-code 
 ---
 
 ### AWS Limits (Quotas)
-
 - **API Rate Limits**
   - Descreve quantas chamadas se pode fazer nas APIs.
   - exemplos: 
     - a API describeInstances do ec2 é de 100 chamadas por segundo. 
-    - a API getObjects do s3  é de 55000 por segundo por prefix.
+    - a API getObjects do s3  é de 5500 por segundo por prefix.
   - Para erros intermitentes é recomendado implementar o **exponential backoff**.
   - Para erros consistente (limite ultrapassado sempre) recomenda-se solicitar um aumento no limite no **throttling**.
-
 - **Service Quotas** - Limites de serviços
   - Descreve os limites dos serviços.
   - Pode se usar a API de contas para aumentar os limites ou abir um abir um ticket junto a AWS.
@@ -1614,7 +1612,6 @@ aws sts get-session-token --serial-number <arn-do-dispositivo-mfa> --token-code 
 - É um mecanismo de retry que já vem configurado nas chamadas de API via SDK.
 - Mas caso use CLI, deve implementar caso necessário.
 - Quais tipo de erros deve se usar o retry? apenas com erros **5xx** e **throttling**.
-
 ![image-20230725064736484](assets/image-20230725064736484.png)
 
 
@@ -1622,11 +1619,9 @@ aws sts get-session-token --serial-number <arn-do-dispositivo-mfa> --token-code 
 
 ### Credentials Provider chain
 
-Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
-
+Descreve a sequência que se usa para recuperar os acessos ao recursos da AWS.
 - CLI
 ![image-20230725065043214](assets/image-20230725065043214.png)
-
 - SDK
 ![image-20230725065206292](assets/image-20230725065206292.png)
 
@@ -1695,7 +1690,6 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
   - **5xxErros** - Erros do lado do servidor.
 - Diferença entre HTTP APi e REST API
 ![image-20230817063033512](assets/image-20230817063033512.png)
-
 - **WebSocket**
   - Para aplicações bidirecionais com webSocket.
   - Usado pra chats, games ou aplicações que precisa manter conexão abertas.
@@ -1718,38 +1712,23 @@ Descreve a sequencia que se usa para recuperar os acessos ao recursos da AWS.
 
  - O que é [CloudFront](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#amazon-cloudfront)
 {{% /notice %}}
-
-
-
 Para que o CloudFront possa armazenar o cache ele gera a **cache key** que:
-
 - Por default é formada o hostname + path do recurso.
 - Mas é possível adicionar outros itens na formação dessa chave, sendo:
   - **HTTP Headers** - nome, whitelist
   - **Cookies** -   nome, whitelist, include all except , all
   - **Queries strings** -   nome, whitelist, include all except , all
-
 - Todos os itens adicionado a chave são enviados automaticamente para a origem caso não encontre no cache.
 - Mas é possível adicionar esses itens apenas na origem.
   - Cache policy vs Origin Request policy
   ![image-20230731061417341](assets/image-20230731061417341.png)
-
 - Tem uma tela que permite invalidar o cache.
-
 **Classes de cobrança**
-
 - **all - all regions** - engloba todas as edge locations e tem melhor performance.
-- **200 - most regions** - exclui as regiões mas caras
-- **100** - as regiões mais baratas 
-
-
-
+- **200 - most regions** - exclui as regiões mas caras.
+- **100** - as regiões mais baratas. 
 ![image-20230731064707171](assets/image-20230731064707171.png)
-
-
-
 **Logs em tempo real**
-
 ![image-20230731065011189](assets/image-20230731065011189.png)
 
 ---

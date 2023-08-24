@@ -419,7 +419,7 @@ Forma de se usar o ADSF (active directory na **AWS**)
   - Projetos (Ultron, MArk 1 , SpaceX)
 - Role **OrganizationAccountAccessRole** permite que os usuário que podem assumi-la, tenha permissão de admin dentro da conta.
   - Com ela é possível criar novos usuários.
-  - **Essa role é criada automaticamente quando se cria uma conta dentro de uma OU. Porem caso a conta já exista e esta convidando ela pra a OU é necessário criá-la manualmente.**
+  - **Essa role é criada automaticamente quando se cria uma conta dentro de uma OU. porém caso a conta já exista e esta convidando ela pra a OU é necessário criá-la manualmente.**
 - Caso tenha plano de **instancias reservadas,** estas podem ser usadas por qualquer **conta dentro de uma organização**. Isso gera muita economia, pois essa instância reservada, estará sempre em uso.
 - Com AWS Organization, pode se controlar os contratos de Instâncias reservadas ou savings plans de qualquer conta que faz parte dela.
 - Migrando uma conta de uma Organization para outra Organization.
@@ -788,7 +788,7 @@ Como previnir:
     ![image-20230207050311492](assets/image-20230207050311492.png)
 - SSL nos Web Services com instâncias EC2
   - Usa se um NLB e a comunicação até a instância é feita usando https.
-  - Porem isso é ruim, pois consome memória.
+  - porém isso é ruim, pois consome memória.
   - E cada EC2 precisa configurar o certificado em sua maquina.
   - Ele deve ser recuperado no boot do sistema de um parameter store usando script no user data.
     ![image-20230207050747416](assets/image-20230207050747416.png)
@@ -1547,7 +1547,7 @@ Resource police restritas para a organização
     - São envidas com base nos stages, há possibilidade de envio de métricas detalhadas.
   - X-Ray
     - Pode se habilitar o tracing para recuperar informações sobre as requisições.
-    - Pode se cria um desenho da requisição até o destinario.
+    - Pode se cria um desenho da requisição até o destinário.
 - **Tipos de endpoints**
   - **Edge-Optimized (default)** - Para clientes Globais (melhora a latencia).
   - **Regional** - Para apenas uma região.
@@ -1596,7 +1596,7 @@ Resource police restritas para a organização
 
 - EC2 com Elastic IP
   - Em caso de falha na instância, se cria uma nova e atacha o Elastic IP.
-  - Funcional, barato, porem não é escalável devido ao fato de se ter apenas um IP.
+  - Funcional, barato, porém não é escalável devido ao fato de se ter apenas um IP.
     ![image-20230217061653780](assets/image-20230217061653780.png)
 - Api Gateway + AWS Service
   ![image-20230217062549339](assets/image-20230217062549339.png)
@@ -1624,7 +1624,7 @@ Resource police restritas para a organização
 - Serviço pago, $0.50 por zona configurada.
 - Gerencia Roteamento da aplicação para regiões de acordo com alguns critérios muito usado como recuperação de desastre, pois identifica falhas e redireciona o tráfego para outros lugares .
 - Dentro do serviço também é possível comprar domínios com no **registro.br** .
-- Pode se setar TTL nos Records para controlar o tempo de vida. Ele é obrigatório para todos os tipos de records exceto para o tipo Alias
+- Pode se setar TTL nos Records para controlar o tempo de vida. Ele é obrigatório para todos os tipos de records exceto para o tipo Alias.
   ![route-53](assets/image-20210820062829949.png)
 
 #### Common Records
@@ -1646,7 +1646,7 @@ Resource police restritas para a organização
 
 
 ```shell
-# para verificar use o comando prar verificar os valores retornado pelos dns
+# para verificar use o comando para verificar os valores retornado pelos dns
 nslookup <url>
 dig <url> 
 ```
@@ -2340,7 +2340,7 @@ Serviço que melhora a disponibilidade de um serviço usando os ponto de presen�
   ![image-20230219111932005](assets/image-20230219111932005.png)
 - CloudFront Function
   - Leves escritas em javascript, para CDN de alta escalabilidade e sensível a latência.
-  - Roda no pronto de presença, tem o processamento isolado
+  - Roda no pronto de presença, tem o processamento isolado.
   - Usado para **mudar dados de request e response.**
   - **Não recomendado para chamar funcionalidade externas.**
   - Recomendado para pequenas alterações no request e response.
@@ -2965,7 +2965,7 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 
 - As soluções são várias de variam de acordo com a demanda.
   - 1 - Bom para longas execuções, mas não escala, há necessidade de gerenciamento de infraestrutura.
-  - 2 - Escala bem, porem tem as limitações do Lambda (tempo de execução).
+  - 2 - Escala bem, porém tem as limitações do Lambda (tempo de execução).
   - 3 - Reativo a diversos tipos de eventos, porém tem as limitações do Lambda (tempo de execução).
   - 4 - Bom para jobs longos um custo maior e é mais complexo de implementar.
   - 5 - Bom para jobs longos, não há necessidade de gerenciamento de infraestrutura.
@@ -3165,8 +3165,8 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 - tem 3 status:
   - OK , INSUFICIENTE_DATA, ALARM.
 - Os alarmes podem ser disparados através de métricas e filtros.
-- Muito usado em conjunto com Ec2, para auto scale e monitorar saude.
-- Tem os 3 targets EC2, EC2 Auto Scaling, SNS (permite enviar para os outros).
+- Muito usado em conjunto com Ec2, para auto scale e monitorar saúde.
+- Tem os 3 targets **EC2, EC2 Auto Scaling**, SNS (permite enviar para os outros).
 - Pode enviar dados para o **eventBrigde** para conectar ao outros serviços.
 
 ---
@@ -3178,7 +3178,8 @@ Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionali
 - Neles é possível incluir gráficos de diferentes **contas AWS e regiões.**
 - É possível compartilhar um Dashboard com um terceiro via **cognito**.
 - até 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.  
-  **Synthetics Canary**
+
+### Synthetics Canary
   - Robo que fica verificando a saúde de API e caso encontre problema pode ajustar o ALB ou DNS para redirecionar o tráfego.
   - Permite configurar scripts (nodeJs e Python) para monitorar APIs e URLs, WebSites.
     - Pode agendar a execução da de única vez ou de tempos em tempos.
@@ -3461,7 +3462,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
   ![image-20230223061608471](assets/image-20230223061608471.png)
 - Bom saber
   - Pode checar se o bucket S3 é publico. Mas não checa se os objetos dentro são publicos.
-  - Pode checar os limites de serviços, porem para aumenta-los precisa abrir solicitação no AWS Suport center ou usar AWS Service Quotas.
+  - Pode checar os limites de serviços, porém para aumenta-los precisa abrir solicitação no AWS Suport center ou usar AWS Service Quotas.
 
 ---
 
@@ -4055,7 +4056,7 @@ Permite criar eventos, ous seja ações predefinidas ou agendadas que podem disp
 ### AWS VPN
 
 - Permite conectar o **on-premises a AWS** via internet publica, com segurança.
-- AWS Recomenda a criação de uma **VPN diferente para cada VPC.** Porem isso pode ser complicado, por isso é recomendado o uso de **DX (Direct Conect).**
+- AWS Recomenda a criação de uma **VPN diferente para cada VPC.** porém isso pode ser complicado, por isso é recomendado o uso de **DX (Direct Conect).**
 - para se criar precisa:
   - Do lado on-premises:
     - Disponibilizar um estrutura com com IP publico.
