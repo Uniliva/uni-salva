@@ -1,3 +1,9 @@
+---
+title: "Streams"
+weight: 4
+---
+
+
 <script src="https://gist.github.com/Uniliva/c44f6ac7856e24a4cea75c419ca06482.js"></script>
 
 - Metodos uteis - min / max
