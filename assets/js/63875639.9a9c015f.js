@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkuni_docs=self.webpackChunkuni_docs||[]).push([[9048],{14612:e=>{e.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"Linux","slug":"/category/linux","permalink":"/uni-salva/docs/category/linux","sidebar":"developerNotesSidebar","navigation":{"next":{"title":"Ubuntu","permalink":"/uni-salva/docs/developer-notes/linux/Ubuntu"}}}}')}}]);
