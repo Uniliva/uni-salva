@@ -28,6 +28,6 @@ jobs:
       - name: Implantar no GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.GH_PAT }}  # Usando o token personalizado
           publish_dir: ./build
           cname: docs.uniii.com.br  # Define o domínio personalizado
