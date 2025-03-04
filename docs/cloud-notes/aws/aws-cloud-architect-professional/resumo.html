@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/resumo" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Resumão | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/uni-salva/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/uni-salva/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Resumão | Uniii docs"><meta data-rh="true" name="description" content="AWS Accounts and Organizations"><meta data-rh="true" property="og:description" content="AWS Accounts and Organizations"><link data-rh="true" rel="icon" href="/uni-salva/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo" hreflang="x-default"><link rel="stylesheet" href="/uni-salva/assets/css/styles.2ce171b8.css">
+<script src="/uni-salva/assets/js/runtime~main.f7c89ff8.js" defer="defer"></script>
+<script src="/uni-salva/assets/js/main.6b7b68b6.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/uni-salva/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/uni-salva/"><div class="navbar__logo"><img src="/uni-salva/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/uni-salva/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/uni-salva/docs/category/linux">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-develop-associate">Cloud Notes</a><a class="navbar__item navbar__link" href="/uni-salva/docs/devops-notes/kubernetes/conteudo">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-develop-associate">AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-develop-associate">Developer Associate</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/conteudo">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/conteudo">Conteúdo estudado</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/uni-salva/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/uni-salva/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Resumão</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Resumão</h1></header><h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-accounts-and-organizations">AWS Accounts and Organizations<a href="#aws-accounts-and-organizations" class="hash-link" aria-label="Link direto para AWS Accounts and Organizations" title="Link direto para AWS Accounts and Organizations">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="aws-organizations">AWS Organizations<a href="#aws-organizations" class="hash-link" aria-label="Link direto para AWS Organizations" title="Link direto para AWS Organizations">​</a></h4>
+<ul>
+<li>
+<p>Há um limite de 20 contas por organização.</p>
+</li>
+<li>
+<p>Role <strong>OrganizationAccountAccessRole</strong>  da permissão de admin dentro das  contas da organização</p>
+<ul>
+<li>Essa role é criada automaticamente quando se cria uma conta dentro de uma OU. Porém caso a conta já exista e esta convidando ela pra a OU é necessário criá-la manualmente..</li>
+</ul>
+</li>
+<li>
+<p>Permite compartilhar instancias reservadas com as contas</p>
+</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="service-control-policies-scp">Service Control Policies (SCP)<a href="#service-control-policies-scp" class="hash-link" aria-label="Link direto para Service Control Policies (SCP)" title="Link direto para Service Control Policies (SCP)">​</a></h5>
+<ul>
+<li>É aplicada para todos os usuários e Roles de um conta incluindo usuário Root.</li>
+<li><strong>Não se aplicam a roles que interligam serviços</strong>, ou seja não se aplicam para roles que integra com o AWS Organization.</li>
+<li>Devem ter permissões explicitas, e por padrão não permitem nada.</li>
+<li>São herdadas numa estrutura de OUs.<!-- -->
+<ul>
+<li>Ha duas estrategias que se pode usar:<!-- -->
+<ul>
+<li><strong>Deny List</strong>  - Tudo liberado e crias SCP para negar as coisas. - <strong>Default</strong>
+<ul>
+<li>Cria se um SCP que libera tudo e outras que vão negando.</li>
+</ul>
+</li>
+<li><strong>Allow List</strong> - Criar se SCP para liberar resursos especificos</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Na police pode ser usar as condicions:<!-- -->
+<ul>
+<li><strong>awsTagKeys</strong> - Para informar quais tags podem ser passadas.</li>
+<li><strong>aws<!-- -->:RequestTags<!-- -->/&lt;tagname&gt;</strong> - Para obrigar que uma tag seja passada.</li>
+</ul>
+</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="tag-polices">Tag Polices<a href="#tag-polices" class="hash-link" aria-label="Link direto para Tag Polices" title="Link direto para Tag Polices">​</a></h5>
+<p><img decoding="async" loading="lazy" alt="image-20230314204757719" src="/uni-salva/assets/images/image-20230314204757719-30bb113761de911a9187b238182534ab.png" width="296" height="228" class="img_ev3q"></p>
+<ul>
+<li>Permite configurar os valores possiveis de tags e quais recursos podem recebe-las. ou seja padronizar o uso de tag</li>
+<li>Usa se o eventbrigde para monitorar tags fora de compliance</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="ai-services">AI Services<a href="#ai-services" class="hash-link" aria-label="Link direto para AI Services" title="Link direto para AI Services">​</a></h5>
+<ul>
+<li>A AWS usa seus dados para Melhorar a IA, caso queira desabilitar essa funcionalidade deve se criar uma police.</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="backup-police">Backup police<a href="#backup-police" class="hash-link" aria-label="Link direto para Backup police" title="Link direto para Backup police">​</a></h5>
+<ul>
+<li>Permite criar regras de backup, que devem ser respeitas pelas contas</li>
+<li>Pode ser adicinadas a OU ou a contas.</li>
+<li>Descrever janelas de backups, frequência, região;</li>
+</ul>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="aws-control-tower">AWS Control Tower<a href="#aws-control-tower" class="hash-link" aria-label="Link direto para AWS Control Tower" title="Link direto para AWS Control Tower">​</a></h4>
+<ul>
+<li>Permite configurar e governar um Múltiplas contas AWS para seguir praticas recomendadas.</li>
+<li>Não se aplica a conta de gerenciamento nem ao usuario root.</li>
+<li>Permite criar <strong>Landing Zone</strong> - Conjunto de contra que seguem um padrão de configuração / regras de como deve se comportar (em qual região pode operar).</li>
+<li>Permite aplicar política usando <strong>guardrails</strong> (regras de governança pre-configuradas).  Aplicado em nível de OU.<!-- -->
+<ul>
+<li><strong>Preventivo</strong>, usando SCPs, desabilitando recursos, o bloqueando ações.</li>
+<li><strong>Detectivo</strong>, Usando AWS Config, para validar se as configuração da conta esta de acordo.<!-- -->
+<ul>
+<li>Usa o <strong>AWS Config</strong> para validar se esta fora da compliance, caso esteja usa uma lambda para realizar alterações (tipo remover porta aberta, que não é permitido), ou para enviar notificações via SNS.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Fabrica de contas</strong> - Permite criar novas contas e  configurar como serão os recursos da conta, como VPC, Security Groups. Usa <strong>AWS Service Catalog</strong> para provisionar novas contas.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="identity-management-and-permissions">Identity Management and Permissions<a href="#identity-management-and-permissions" class="hash-link" aria-label="Link direto para Identity Management and Permissions" title="Link direto para Identity Management and Permissions">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iam">IAM<a href="#iam" class="hash-link" aria-label="Link direto para IAM" title="Link direto para IAM">​</a></h4>
+<ul>
+<li>
+<p>Dentro do <strong>IAM</strong> temos:</p>
+<ul>
+<li><strong>iam user</strong> - Usuário comum.</li>
+<li><strong>federated user</strong> - usuário de fora da organização, usuário do <strong>Facebook</strong> por exemplo.</li>
+<li><strong>iam role</strong> - permissões que são dadas a recurso, tipo EC2 para acessa um S3. Pode ser assumida por usuarios (usando STS) ou recursos</li>
+<li><strong>identity provider (idp)</strong> - Permite customizado acesso provider de terceiros e liberara acesso via token de acesso do STS.</li>
+</ul>
+</li>
+<li>
+<p><strong>IAM Polices</strong> - Políticas de acesso (permissões).</p>
+<ul>
+<li>A validação de acesso é feita a cada acesso, de forma automática. Podem ser do tipo:<!-- -->
+<ul>
+<li>i<strong>dentity-based</strong> - Política que são destinados a usuário / grupos e rules</li>
+<li><strong>resource-based</strong> - Políticas que são atribuídas a recursos, para da acesso a outro recursos. Ao usar isso ao invés de uma role, o usuário não perde os acesso que tinha.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Access Advisor</strong> - Permite ver as permissões e a ultima vez que foi usada.</p>
+</li>
+<li>
+<p><strong>Access Analize</strong></p>
+<ul>
+<li>
+<p>Permite analisar quais recursos são compartilhada com entidades externas, ex buckets.</p>
+</li>
+<li>
+<p>Permite definir uma Zona de confiança com as contas ou as organizações que confia. O que estiver fora dessa Zona terá o acesso sinalizado</p>
+</li>
+<li>
+<p>Pode ler logs de do CloudTrail e gerar polices com permissões granuladas.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Polices com variaveis e tags</strong></p>
+<ul>
+<li>Permite criar politicas genéricas e usar tags para definir condições para os recursos.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230314214316972" src="/uni-salva/assets/images/image-20230314214316972-7b234b34db68e0e50e98d488910a738e.png" width="765" height="329" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230314214601047" src="/uni-salva/assets/images/image-20230314214601047-cefa593cf17a21ee0ea6450ad4a8f069.png" width="764" height="303" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230314214526574" src="/uni-salva/assets/images/image-20230314214526574-74c22d3e3e48fd20873ae9d852fbcdfa.png" width="760" height="390" class="img_ev3q"></p>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iam-permission-boundaries"><strong>IAM Permission Boundaries</strong><a href="#iam-permission-boundaries" class="hash-link" aria-label="Link direto para iam-permission-boundaries" title="Link direto para iam-permission-boundaries">​</a></h4>
+<ul>
+<li>
+<p>Quando se criar usuário ou <strong>Roles</strong> e possível dar <strong>permissão genéricas,</strong> tipo de administrador , e setar um <strong>limite</strong> para essas permissões, exemplo o cara é administrado apenas nos recursos do S3.</p>
+</li>
+<li>
+<p>Suportado apenas por usuários e roles (Não grupos).</p>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iam-security-tools">IAM Security Tools<a href="#iam-security-tools" class="hash-link" aria-label="Link direto para IAM Security Tools" title="Link direto para IAM Security Tools">​</a></h4>
+<ul>
+<li><strong>IAM Credencial Report (Account level)</strong> -&gt; Lista todas as contas de usuário e o status de cada uma.</li>
+<li><strong>IAM Access Advisor</strong> -&gt; Mostras os serviços que o usuário tem acesso e a ultima vez que o mesmo acessou.</li>
+</ul>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="sts">STS<a href="#sts" class="hash-link" aria-label="Link direto para STS" title="Link direto para STS">​</a></h4>
+<ul>
+<li>
+<p>Serviço de geração token para acesso validos de 15 minutos a 12 horas.</p>
+</li>
+<li>
+<p>Fornece uma api chamada <strong>assumeRole</strong>, que é usada para assumir outras roles.</p>
+</li>
+<li>
+<p>Cria se uma police do tipo <strong>Trust Police</strong> com a ação assume role, e com a principal a que se confia.</p>
+</li>
+<li>
+<p><img decoding="async" loading="lazy" alt="image-20230314223039124" src="/uni-salva/assets/images/image-20230314223039124-a2b1a7047dec3fb0afd6e88042622aac.png" width="1068" height="462" class="img_ev3q"></p>
+</li>
+<li>
+<p>Lembrando que quando assuminos uma Role, perdemos nossos acessos anteriores.</p>
+</li>
+<li>
+<p>Permite revogar o acesso a role adicionando um novo bloco de statement ou usando o <strong>AWSRevokeOlderSessions</strong>.</p>
+</li>
+<li>
+<p><strong>Usando em cross acount</strong></p>
+<p><img decoding="async" loading="lazy" alt="image-20230314223227312" src="/uni-salva/assets/images/image-20230314223227312-dccf6f3eeadd3f3cd937f5e70793c27c.png" width="1094" height="499" class="img_ev3q"></p>
+<ul>
+<li>Cria se um relação de confiança com a outra conta.</li>
+<li>Pode gerar um external ID (segredo entre a conta e a conta externa) para a outra conta.</li>
+<li>Configura uma assume Role com esse ID. para mais segurança</li>
+<li>Mas é possível configurar apenas com o ID da conta externa.</li>
+</ul>
+</li>
+<li>
+<p><strong>Session Tags</strong></p>
+<ul>
+<li>Usado para segregar acessos, assim quem assume a role é obrigado a passar a tag de sessão para acessar o determinado recurso.</li>
+</ul>
+</li>
+<li>
+<p><strong>APIs importantes</strong></p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230314220824665" src="/uni-salva/assets/images/image-20230314220824665-21f319640ede011ab3dd8b44f7cf2ec8.png" width="824" height="328" class="img_ev3q"></p>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="acm">ACM<a href="#acm" class="hash-link" aria-label="Link direto para ACM" title="Link direto para ACM">​</a></h4>
+<ul>
+<li>Serviço <strong>regional</strong>, não é possível copiar certificados entre regiões</li>
+<li>Caso queira usar global cada região deve ter seu próprio certificado</li>
+<li>Usado em ELB, API Gateway e Cloud Front</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="sni---sever-name-indication">SNI - Sever Name Indication<a href="#sni---sever-name-indication" class="hash-link" aria-label="Link direto para SNI - Sever Name Indication" title="Link direto para SNI - Sever Name Indication">​</a></h4>
+<ul>
+<li><strong>Ele requer que seja passado o hostname do servidor destinatário, para iniciar o processo de handshake.</strong></li>
+<li>Funciona apenas com <strong>ALB e NLB</strong> da nova geração e com o <strong>CloudFront</strong>.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="s3-encryption-for-objects">S3 Encryption for Objects<a href="#s3-encryption-for-objects" class="hash-link" aria-label="Link direto para S3 Encryption for Objects" title="Link direto para S3 Encryption for Objects">​</a></h4>
+<ul>
+<li>
+<p><strong>SSE-S3</strong> - Criptografa os objetos do S3 usando chave gerenciada pela AWS (AES-256).</p>
+<ul>
+<li>Usada para todos os dados no Glacier</li>
+</ul>
+</li>
+<li>
+<p>SSE-KMS - Criptografa os objetos do S3 usando chaves criadas no KMS.</p>
+<ul>
+<li>As chamadas de uso do KMS é logado no cloudtrail.</li>
+<li><strong>Caso esteja usando essa criptografia, se o bucket for publico, o usuário não vai conseguir ver os objetos</strong>, pois ele não vai ter acesso a chave.</li>
+<li>Para conseguir realizar uploads no bucket, precisa ter acesso a permissão (kms<!-- -->:GenerateDataKey<!-- -->) caso contrario não vai conseguir.</li>
+</ul>
+</li>
+<li>
+<p>SSE-C - Criptografa os objetos do S3 usando a chave gerenciada pelo usuário, quando se usa por exemplo o Cloud HSM</p>
+</li>
+<li>
+<p>Criptografia Client-Side - Quando o usuário criptografa os dados antes de enviar ao S#.</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="s3---security">S3 - Security<a href="#s3---security" class="hash-link" aria-label="Link direto para S3 - Security" title="Link direto para S3 - Security">​</a></h3>
+<ol>
+<li>Forma de acesso ao bucket e aos objetos contido nele.</li>
+</ol>
+<ul>
+<li><strong>Baseada em usuários</strong> (user based) - diz-se que para ter acesso precisa ter permissão via IAM Console, ou seja toda chamada de API é validada junto ao IAM.</li>
+<li><strong>Baseada em recurso</strong> (Resource based)<!-- -->
+<ul>
+<li><strong>Bucket Polices</strong>
+<ul>
+<li>Regras de acesso ao bucket, permite outros recurso e outras contas a ter acesso.</li>
+<li>Escrita em json.</li>
+<li>Pode ser usada para dar acesso publico ao bucket.</li>
+<li>Pode ser usada para foçar o uso de criptografia,</li>
+<li>Pode ser usada para dar acesso a cross account.</li>
+<li>Pode se usar as condições:<!-- -->
+<ul>
+<li><strong>SourceIP</strong> - Para validar se o IP é publico ou elástico</li>
+<li><strong>VpcSourceIp</strong> - Para validar se o IP é privado (isso considerando um VPC endpoint)</li>
+<li><strong>Source VPC</strong> ou <strong>Source VPC Endpoint</strong> - permite trabalhar com VPC endpoints<!-- -->
+<ul>
+<li>Permite filtrar o acesso para apenas aqueles que usaram um determinado VPC endpoint ou range de IPs.</li>
+</ul>
+</li>
+<li><strong>ClouldFront Origin Identity</strong> - Permite que apenas o cloudFront acesso a bucket.</li>
+<li><strong>MFA</strong> - Permite usar para exclusão de dados</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Object Access Control List (ACL)</strong> - Define a lista de acesso de cada objeto armazenado (nível mais baixo).</li>
+<li><strong>Bubcket Access Control List (ACL)</strong> - Define a lista de acesso de cada <strong>bucket</strong> (menos comum de ser usado);</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vault-lock-e-s3-object-lock">Vault Lock e S3 Object Lock<a href="#vault-lock-e-s3-object-lock" class="hash-link" aria-label="Link direto para Vault Lock e S3 Object Lock" title="Link direto para Vault Lock e S3 Object Lock">​</a></h3>
+<ul>
+<li><strong>Vault Lock</strong> -<!-- -->
+<ul>
+<li>Adota o WORM (Write Once Read Many)</li>
+<li>Permite configurar para que arquivos nunca seja delatados ou alterados, usado em compliance.</li>
+</ul>
+</li>
+<li><strong>S3 Object Lock</strong>
+<ul>
+<li>Semelhante ao anterior, mas permite configurar a retenção do objeto, por exemplo o arquivo não pode ser modificado por 30 dias, o a nota fiscal não pode ser apagada por 5 anos.</li>
+<li>Adota o WORM (Write Once Read Many)</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="s3-access-points">S3 Access Points<a href="#s3-access-points" class="hash-link" aria-label="Link direto para S3 Access Points" title="Link direto para S3 Access Points">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230311060847623" src="/uni-salva/assets/images/image-20230311060847623-b6b2c9e57aa020a6e81b8ff089aff4ab.png" width="793" height="219" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="s3-multi-region-access-points">S3 Multi-Region Access Points<a href="#s3-multi-region-access-points" class="hash-link" aria-label="Link direto para S3 Multi-Region Access Points" title="Link direto para S3 Multi-Region Access Points">​</a></h4>
+<ul>
+<li>Permite criar um access point global, que redireciona o trafico de acesso para o bucket na região mais proxima.</li>
+<li>A ideia e se ter buckets replicados em cada região e através de um Access Point acessa-lo, assim diminuindo a latência.</li>
+<li>Usado em cenários de faillover, (ativo-ativo ou ativo-passivo).</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230311060946272" src="/uni-salva/assets/images/image-20230311060946272-0c966560ab37b3de80855df94f0b66f2.png" width="862" height="404" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="soluções-com-waf">Soluções com WAF<a href="#soluções-com-waf" class="hash-link" aria-label="Link direto para Soluções com WAF" title="Link direto para Soluções com WAF">​</a></h4>
+<ul>
+<li>Usando WAF pra acessa ALB apenas pelo Cloud Front. Usando o Secrets Manager para gerar novos valores para o header e atualiza-los via Lambda.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230208045537986" src="/uni-salva/assets/images/image-20230208045537986-1679386870079-4-fed260b4ebf4d90bb1edac912bccb1a9.png" width="1130" height="465" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-firewal-manager">AWS Firewal manager<a href="#aws-firewal-manager" class="hash-link" aria-label="Link direto para AWS Firewal manager" title="Link direto para AWS Firewal manager">​</a></h3>
+<ul>
+<li>Permite gerenciar regras de todas as contas AWS de forma centralizada.</li>
+<li>Tem regras comuns de segurança.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230208045823263" src="/uni-salva/assets/images/image-20230208045823263-1679386870079-6-37ee7372a2d73b735c7e43ed35dd36b4.png" width="1045" height="521" class="img_ev3q"></p>
+<ul>
+<li>Diferenças entre WAF e AWS Firewal manager e AWS Shield<!-- -->
+<ul>
+<li>WAF usado para proteção em nivel de aplicação (camada 7).</li>
+<li>AWS Shield usado para proteção  contras DDos ( camada 6 e 4 (rede e transporte)).</li>
+<li>AWS Firewal manager usado para centralizar regras, permite aplicar o WAF e SHIELD em varias contas.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-guard-duty">AWS Guard Duty<a href="#aws-guard-duty" class="hash-link" aria-label="Link direto para AWS Guard Duty" title="Link direto para AWS Guard Duty">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230315164138710" src="/uni-salva/assets/images/image-20230315164138710-ae96b1b514c12f229fbf9c5b17540caf.png" width="817" height="224" class="img_ev3q"></p>
+<ul>
+<li>
+<p>Serviço de inteligência artificial para detectar anomalias na sua conta.</p>
+</li>
+<li>
+<p><strong>É um serviço regional.</strong></p>
+</li>
+<li>
+<p>é um serviço inteligente de detecção de ameaças que monitora continuamente suas contas da AWS, instâncias do Amazon Elastic Compute Cloud (EC2), clusters do Amazon Elastic Kubernetes Service (EKS) e dados armazenados no Amazon Simple Storage Service (S3) para atividades maliciosas sem o uso de software ou agentes de segurança.</p>
+</li>
+<li>
+<p>Se for detectada atividade maliciosa em potencial, como comportamento anômalo, exfiltração de credenciais ou comunicação de infraestrutura de comando e controle (C2), o GuardDuty gera descobertas de segurança detalhadas que podem ser usadas para visibilidade da segurança e assistência na correção.</p>
+</li>
+<li>
+<p>O GuardDuty pode monitorar atividades de reconhecimento por um invasor, como atividade incomum de API, verificação de porta intra-VPC, padrões incomuns de solicitações de login com falha ou sondagem de porta desbloqueada de um IP ruim conhecido.</p>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ec2">EC2<a href="#ec2" class="hash-link" aria-label="Link direto para EC2" title="Link direto para EC2">​</a></h3>
+<p><strong>EC2 Nitro</strong> - nova tecnologia de virtualização adotada pela AWS,</p>
+<ul>
+<li>Melhora o uso da rede. Melhora o <strong>IOPS</strong> (Input/output operations per second) dos armazenamento <strong>EBS</strong>.</li>
+</ul>
+<p><strong>EC2 Graviton</strong></p>
+<p><img decoding="async" loading="lazy" alt="image-20230213071117156" src="/uni-salva/assets/images/image-20230213071117156-6e0c924d099799323458df288e8e8305.png" width="1027" height="443" class="img_ev3q"></p>
+<ul>
+<li>
+<p>Entregam o melhor performance em relação ao custo. Sendo 46 % mais em contas em comparação com a 5 geração.</p>
+</li>
+<li>
+<p><strong>Placement Groups</strong> - Grupos de Posicionamento</p>
+<ul>
+<li>
+<p>Permite decide a estratégia posicionamento das instâncias EC2. ou seja onde vai ficar as instâncias de vai ser:</p>
+<ul>
+<li>
+<p><strong>Cluster</strong> - Todas ais instâncias ficam juntas, tem baixa latência, mas ficam numa única AZ. (alta performance, mas tem um alto risco).</p>
+<ul>
+<li>Boa escolha quando se tem instâncias com rede otimizada (enhanced Networking).</li>
+<li>Usados para jobs de processamento rápido de BigData e aplicação que precisam de baixa latência de rede</li>
+</ul>
+</li>
+<li>
+<p><strong>Spread</strong> - (espalhadas) As instâncias ficar  espalhadas em servidores em diferentes AZ, com uma máximo de 7 instâncias por grupo por AZ. Usados em aplicações criticas.</p>
+<ul>
+<li>Baixo risco que indisponibilidade.</li>
+</ul>
+</li>
+<li>
+<p><strong>Partition</strong> - Similar ao <strong>Spread</strong>, mas as instâncias ficam espalhadas em diferentes partições (conjunto de Racks) numa AZ. Pode escalar para centenas de instâncias por grupo, usadas com o Hadoop, Kafka, Cassandra.</p>
+<ul>
+<li>Pode ter ate 7 partição por AZ, e centenas de instâncias.</li>
+<li>As partições não compartilham o mesmo hack.</li>
+<li>Se a partição falhar todas as maquinas são perdidas.</li>
+<li>As instâncias podem compartilhar dados da partição vias EC2 Metadata.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Metricas</strong></p>
+<p><img decoding="async" loading="lazy" alt="image-20230213202651772" src="/uni-salva/assets/images/image-20230213202651772-62f05736a526faaa57ae3753e24f3675.png" width="924" height="551" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tipos-de-instâncias">Tipos de instâncias<a href="#tipos-de-instâncias" class="hash-link" aria-label="Link direto para Tipos de instâncias" title="Link direto para Tipos de instâncias">​</a></h3>
+<ul>
+<li><a href="https://aws.amazon.com/pt/ec2/instance-types/" target="_blank" rel="noopener noreferrer">https://aws.amazon.com/pt/ec2/instance-types/</a></li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Tipos de instancias" src="/uni-salva/assets/images/image-20210819053521220-1679386870079-1-4a7a3e34ab825b2f835e06173a94bdf3.png" width="1359" height="580" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230213065140415" src="/uni-salva/assets/images/image-20230213065140415-1679386870079-3-5789817aa8a57ec9175e4a97dc92f610.png" width="962" height="326" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="alta-performance-computacional-hpc">Alta performance computacional HPC<a href="#alta-performance-computacional-hpc" class="hash-link" aria-label="Link direto para Alta performance computacional HPC" title="Link direto para Alta performance computacional HPC">​</a></h3>
+<ul>
+<li>
+<p>Serviços que ajudam ter alta performance na AWS:</p>
+<ul>
+<li>
+<p><strong>Transferência de dados</strong></p>
+<ul>
+<li><strong>AWS Direct Conect</strong> - Permite mover GBs de dados para a cloud.</li>
+<li><strong>SnowBall e SnowMobile</strong> - Pemite mover PB de dados para a cloud.</li>
+<li><strong>AWS DataSync</strong> - Permite mover grandes quantidade de dados do on-primeses para cloud .(usando S3, EFx, Fxs for Windows)</li>
+</ul>
+</li>
+<li>
+<p><strong>Computação</strong></p>
+<ul>
+<li><strong>Instâncias EC2</strong>
+<ul>
+<li>Com CPU otimizada ou GPU otimizada.</li>
+<li>spot instances / Spot Fleets para economia + auto scaling.</li>
+</ul>
+</li>
+<li><strong>EC2 Placentament Groups</strong> - Permite usar um conjunto de maquinas  (cluster) num mesmo <strong>rack</strong> ou região o que diminui a latência..<!-- -->
+<ul>
+<li><strong>EC2 Enhanced Networking  SR-IOV</strong> (Rede aprimorada para EC2)<!-- -->
+<ul>
+<li>Interface de rede para HPC.</li>
+<li>Alta banda, Alto PPS (pacotes por segundos), baixa latência.</li>
+<li>Opção 1: <strong>Elastic Network Adapter</strong> (ENA) aumenta a capacidade para 100Gbps.</li>
+<li>Opção 2: Intel 82599 VF para 10 GBs - Antiga não usado mais</li>
+</ul>
+</li>
+<li><strong>Elastic Fabric Adapter</strong> (EFA)<!-- -->
+<ul>
+<li>Interface de rede usada para HPC no Linux com foco.</li>
+<li>Melhora a ENA para Alta HPC, apenas para linux.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Armazenamento</strong></p>
+<ul>
+<li><strong>Ligado na instância</strong>
+<ul>
+<li><strong>EBS</strong> - Escala ate 256,000 IOP with io2 Block express.</li>
+<li><strong>Instance store</strong> - escala para milhões de IOPS, mas é perdido quando a instância desliga.</li>
+</ul>
+</li>
+<li>Na rede<!-- -->
+<ul>
+<li><strong>S3</strong> - Armazenamento de objetos.</li>
+<li><strong>EFS</strong> - Escala IOPS baseado no tamanho total, ou IOPS provisionado .</li>
+<li><strong>FSx for Lustre</strong> - FileSystem otimizado para HPC usando linux.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Automação e Orquestração</strong></p>
+<ul>
+<li>
+<p><strong>AWS Batch</strong> - para trabalhar com jobs e agendamentos.</p>
+</li>
+<li>
+<p><strong>AWS ParallelCluster</strong></p>
+<ul>
+<li>Ferramenta Open Source para deploy e gerenciamento de cluster HPC.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><img decoding="async" loading="lazy" alt="image-20230313193528173" src="/uni-salva/assets/images/image-20230313193528173-14309548a84eabc1634c90ea4c9f9700.png" width="1262" height="664" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230313193620770" src="/uni-salva/assets/images/image-20230313193620770-4cd3acf716cad29b4ef887c80cbed1c8.png" width="1251" height="634" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230313193801352" src="/uni-salva/assets/images/image-20230313193801352-77871c7fa7f39d379fde0a3e0afe47f6.png" width="1140" height="555" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-eks">Amazon EKS<a href="#amazon-eks" class="hash-link" aria-label="Link direto para Amazon EKS" title="Link direto para Amazon EKS">​</a></h3>
+<ul>
+<li>
+<p>Custo de <strong>$0,1</strong> por hora por cluster kubernete ($75 por mês) mais os recurso (EC2, EBS).</p>
+</li>
+<li>
+<p>Tipos dos nodes</p>
+<ul>
+<li><strong>Gerenciados pela AWS</strong></li>
+<li><strong>Gerenciado pelo cliente</strong></li>
+<li><strong>AWS Fargate</strong></li>
+</ul>
+</li>
+<li>
+<p>Volumes</p>
+<ul>
+<li>Usa se o <strong>CSI (Container storage interface)</strong></li>
+<li>Suporta:<!-- -->
+<ul>
+<li><strong>EBS</strong></li>
+<li><strong>EFS (quando usando Fargate)</strong></li>
+<li><strong>FSx for Lustre</strong></li>
+<li><strong>Fsx for NetApp ONTAP.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>É possivel rodar o EKS no On-primeses usando o <strong>EKS AnyWhere</strong></p>
+<ul>
+<li>Pode se usar uma imagem da Amazon customizada do Kubernets (AMI), rodando localmente.</li>
+<li>Pode se conectar o <strong>EKS do On-primeses a AWS</strong> usando EKS <strong>conector</strong>.</li>
+<li>Usado quando se quer diminuirá a latência, ou por demanda regularizaria. exemplo os dados governamentais do Chile deve ficar no Chile, Roda em um datacenter conectado a AWS.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-lambda">AWS Lambda<a href="#aws-lambda" class="hash-link" aria-label="Link direto para AWS Lambda" title="Link direto para AWS Lambda">​</a></h3>
+<ul>
+<li>
+<p>Tem de <strong>128 MB</strong> ate <strong>10 GB</strong> de memoria que pode ser usado.</p>
+</li>
+<li>
+<p>Tem escopo regional.</p>
+</li>
+<li>
+<p>Pague por <strong>milissegundo</strong> usado para executar o código.</p>
+</li>
+<li>
+<p>Tempo de execução de ate <strong>15 minutos.</strong></p>
+</li>
+<li>
+<p>Cobrado de 100 em 100 milissegundos de uso.</p>
+</li>
+<li>
+<p>Faz escalonamento horizontal e pode ter <strong>ate 999 execução simultâneas.</strong></p>
+</li>
+<li>
+<p><strong>Triggers</strong></p>
+<ul>
+<li>
+<p>API Gateway</p>
+</li>
+<li>
+<p>Kinisis</p>
+</li>
+<li>
+<p>DynamoDB Data Streams</p>
+</li>
+<li>
+<p>S3 events</p>
+</li>
+<li>
+<p>EventBridge</p>
+</li>
+<li>
+<p>SNS, SQS</p>
+</li>
+<li>
+<p>Cloud Watch Logs</p>
+</li>
+<li>
+<p>AWS Cognito</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Limitações</p>
+<ul>
+<li><strong>Execução</strong>
+<ul>
+<li>Alocação de memoria - 128MB - 10GB.</li>
+<li>CPU - Linkado a memoria ram <strong>(Não é possivel alterar)</strong>
+<ul>
+<li>2vCPU - 1,719 MB de RAM</li>
+<li>6vCPU - 10,240 MB de RAM</li>
+</ul>
+</li>
+<li>Tempo de execução - ate 15 minutos.</li>
+<li>Variáveis de ambiente - <strong>ate 4KB.</strong></li>
+<li>Espaço em disco (no container do Lambda) - <strong>10 MB.</strong></li>
+<li>Execuções simultâneas da mesma Lambda - <strong>1000 (Pode ser alterado com solicitação).</strong></li>
+<li>Tamanho do paylod <strong>6MB (Sync) / 256 KB (async)</strong></li>
+</ul>
+</li>
+<li><strong>Deploy</strong>
+<ul>
+<li>Tamanho do pacote zippado com a função lambda - 50MB.</li>
+<li>Tamanho do pacote com a função lambda - 250MB.</li>
+<li>Tamanho da imagem - 10 GB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Lambdas@Edge</p>
+<ul>
+<li>
+<p>É possível executar Lambdas em ponto de presenças, para auxiliar itens relacionados ao CDN , Route 53 ....</p>
+<p><img decoding="async" loading="lazy" alt="lambda@edge" src="/uni-salva/assets/images/image-20210903204606738-1679386870079-2-03351d44099666a21f5c97f00355f7d7.png" width="1003" height="316" class="img_ev3q"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-app-runner">AWS App Runner<a href="#aws-app-runner" class="hash-link" aria-label="Link direto para AWS App Runner" title="Link direto para AWS App Runner">​</a></h3>
+<ul>
+<li>Serviço gerenciado pela AWS que facilita o deploy de aplicações web ou API em escala.</li>
+<li>Não necessita conhecimento de infraestrutura para usar.</li>
+<li>Pode se iniciar apenas com o source code ou a imagem do container.</li>
+<li>Automaticamente compila e deploya a aplicação.</li>
+<li>Automaticamente escala e configura alta disponibilidade e load balancer e criptografia.</li>
+<li>Tem suporte a acesso a VPC.</li>
+<li>Permite uso de banco de dados, cache e mensageria.</li>
+<li>Semenhante a idea do heroku.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-api-gateway">Amazon API Gateway<a href="#amazon-api-gateway" class="hash-link" aria-label="Link direto para Amazon API Gateway" title="Link direto para Amazon API Gateway">​</a></h3>
+<p>Limitações</p>
+<ul>
+<li><strong>Timeout de 29 segundos.</strong></li>
+<li>Tamanho do payload de no <strong>máximo 10 MB.</strong></li>
+</ul>
+<p><strong>LOGs</strong></p>
+<ul>
+<li>
+<p>Possivel enviar os logs para o <strong>Cloud Watch</strong> com os niveis ERRO e INFO</p>
+</li>
+<li>
+<p>Pode logar o request e response completos.</p>
+</li>
+<li>
+<p>Pode enviar os logs de acessos de forma customizada</p>
+</li>
+<li>
+<p>Pode ser enviados diretamente para o <strong>Kinesis Data Firehose</strong> como alternativa.</p>
+</li>
+<li>
+<p>Metricas</p>
+<ul>
+<li>São envidas com base nos <strong>stages</strong>, há possibilidade de envio de métricas detalhadas.</li>
+</ul>
+</li>
+<li>
+<p>X-Ray</p>
+<ul>
+<li>Pode se habilitar o tracing para recuperar informações sobre as requisições.</li>
+<li>Pode se cria um desenho da requisição ate o destinario.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="appsync">AppSync<a href="#appsync" class="hash-link" aria-label="Link direto para AppSync" title="Link direto para AppSync">​</a></h3>
+<ul>
+<li>Gerenciado pela AWS, para GraphQL.</li>
+<li>Solução flexível e escalável para criar APIs GraphQL seguras e em tempo real, que podem ser usadas para uma ampla variedade de casos de uso em aplicativos móveis e da web.</li>
+<li>Um caso de uso comum do AWS AppSync é a criação de aplicativos móveis e da web que exigem uma experiência de usuário rica e em tempo real, como aplicativos de bate-papo, jogos multiplayer e aplicativos de colaboração em tempo real. O AWS AppSync permite que os desenvolvedores criem APIs GraphQL em tempo real, que fornecem atualizações instantâneas aos clientes quando os dados são atualizados no back-end.</li>
+<li>Outro caso de uso do AWS AppSync é a criação de aplicativos móveis e da web que precisam integrar dados de várias fontes, como bancos de dados, serviços da web e outras APIs. O AWS AppSync simplifica a integração de dados, permitindo que os desenvolvedores criem um único ponto de acesso para vários back-ends e serviços, além de oferecer recursos avançados de resolução de conflitos e versionamento.</li>
+<li>Além disso, o AWS AppSync também é útil para aplicativos que exigem segurança e controle granular de acesso aos dados. Com o AppSync, os desenvolvedores podem definir regras de autorização e autenticação para controlar o acesso aos dados, bem como criar um histórico de auditoria de todas as ações do usuário no back-end.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-route-53">Amazon Route 53<a href="#amazon-route-53" class="hash-link" aria-label="Link direto para Amazon Route 53" title="Link direto para Amazon Route 53">​</a></h3>
+<ul>
+<li>
+<p>Pode se setar TTL nos Records para controlar o tempo de vida. Ele é obrigatório para todos os tipos de records exceto para o tipo Alias</p>
+</li>
+<li>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="common-records">Common Records<a href="#common-records" class="hash-link" aria-label="Link direto para Common Records" title="Link direto para Common Records">​</a></h3>
+<ul>
+<li>A Record  (IPV4) -&gt; <a href="http://www.google.com" target="_blank" rel="noopener noreferrer">www.google.com</a> -&gt; 12.34.56.78</li>
+<li>AAAA Record (IPV6) -&gt;  <a href="http://www.google.com" target="_blank" rel="noopener noreferrer">www.google.com</a> -&gt; 2001::od:b8::7337</li>
+<li>CNAME -&gt; hostname to hostname -&gt; <a href="http://www.search.google.com" target="_blank" rel="noopener noreferrer">www.search.google.com</a> -&gt; <a href="http://www.google.com" target="_blank" rel="noopener noreferrer">www.google.com</a>
+<ul>
+<li>É pago</li>
+<li>Não funciona para registro to tipo root ex: -&gt; <a href="http://www.google.com" target="_blank" rel="noopener noreferrer">www.google.com</a> -&gt; <a href="http://www.search.google.com" target="_blank" rel="noopener noreferrer">www.search.google.com</a></li>
+</ul>
+</li>
+<li>ALIAS -&gt;  hostname to aws resource -&gt; <a href="http://www.exemplo.com" target="_blank" rel="noopener noreferrer">www.exemplo.com</a> -&gt; (S3, RDS, ELB, CloudFront ...)<!-- -->
+<ul>
+<li>Na AWS é grátis.</li>
+<li>Checa a saúde do recurso.</li>
+<li>Funciona para registo to tipo root ex: -&gt; <a href="http://www.google.com" target="_blank" rel="noopener noreferrer">www.google.com</a> -&gt; <a href="http://www.search.google.com" target="_blank" rel="noopener noreferrer">www.search.google.com</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="routing-police">Routing police<a href="#routing-police" class="hash-link" aria-label="Link direto para Routing police" title="Link direto para Routing police">​</a></h3>
+<p>São políticas de redirecionamento que é possível configurar no <strong>route 53.</strong></p>
+<ul>
+<li><strong>Simple routing police</strong> (política de roteamento simples).</li>
+<li><strong>Weighted routing police</strong> (política de roteamento com pesos).</li>
+<li><strong>Latency routing police</strong> (política de roteamento baseado na latência)</li>
+<li><strong>Failover routing police</strong> (política de roteamento de falhas)</li>
+<li><strong>Geolocation routing police</strong> (política baseada em Geo localização)</li>
+<li><strong>Geoproximity routing police</strong> (política de roteamento por proximidade)<!-- -->
+<ul>
+<li>Redireciona o usuário para o recurso mais próximo da localização do mesmo.</li>
+<li>Diferencia se do anterior, pois ele é usado para países enquanto esse seria para locais dentro do pais.</li>
+<li>Usa o Bias para manipular a proximidade, com ele é possível dizer o quando quer redirecionar do traffico. Como se fosse uma preferência maior.</li>
+<li><img decoding="async" loading="lazy" alt="image-20230216203132009" src="/uni-salva/assets/images/image-20230216203132009-1679386870079-9-7cdb54cfc35c8ff8fc5856c8cdd86b34.png" width="1059" height="539" class="img_ev3q"></li>
+<li>Traffic Flow<!-- -->
+<ul>
+<li>Simplifica a criação de record grandes e com configurações complexas.</li>
+<li>Tem um editor visual para se montar árvores de roteamento.</li>
+<li>Suporta versionamento.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Multi Value routing police</strong> (Política de rateamento de multi valores)</li>
+</ul>
+</li>
+<li>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="health-check">Health check<a href="#health-check" class="hash-link" aria-label="Link direto para Health check" title="Link direto para Health check">​</a></h3>
+<p>Pode se configurar health checks para monitora a disponibilidade e a saúde da aplicação.</p>
+<ul>
+<li>São pagos <strong>$ 0.50 para endpoints AWS - $ 0.70</strong> para outros endpoints.</li>
+<li>Há custos adicionais de outras features (String matching, https, latency measurament).</li>
+<li>Disponibiliza <strong>15 diferentes hosts</strong> para checagem (em varias regiões)</li>
+<li>E possível passar dados customizados (text) no retorno do health check nos primeiros <strong>5120 bytes e com isso configurar para passar ou falhar na verificação.</strong></li>
+<li>São integrados com <strong>CouldWatch Metrics</strong></li>
+<li>Para verificar a <strong>saúde de uma maquina numa subnet privado</strong>, pode se criar métricas que são envidas para o <strong>cloud Watch e dali é possível checa-las com o heath check.</strong></li>
+</ul>
+</li>
+<li>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="hosted-zones">Hosted Zones<a href="#hosted-zones" class="hash-link" aria-label="Link direto para Hosted Zones" title="Link direto para Hosted Zones">​</a></h3>
+<ul>
+<li>É um container de registros para definir como rotear o tráfego para um domínio e seus subdomínios. Podem ser<!-- -->
+<ul>
+<li><strong>Publicos</strong> - contém records que especificam rotas para a internet.<!-- -->
+<ul>
+<li>Pode se usar o DNSSEC para proteger contra MITM.</li>
+</ul>
+</li>
+<li><strong>Privados</strong> - contém records que especificam rotas internas vista apenas nas VPCs.<!-- -->
+<ul>
+<li>Precisa que o <strong>enableDnsHostnames</strong> e <strong>enableDnsSupport</strong> estejam habilitados na VPC.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230315180350694" src="/uni-salva/assets/images/image-20230315180350694-d497d48c8b639f4f61a07ed7159b5a8e.png" width="869" height="339" class="img_ev3q"></p>
+<ul>
+<li>
+<p><strong>Hybrid DNS e Resolvers</strong></p>
+<ul>
+<li>
+<p><strong>Hybrid DNS</strong></p>
+<ul>
+<li>Permite que se use Outros DNS em conjunto com o Route 53, O Route 53 fica como root DNS resolver e ele pode delegar a resolução de nomes para os outros Servidores de DNS.</li>
+</ul>
+</li>
+<li>
+<p><strong>Resolvers</strong></p>
+<ul>
+<li>
+<p>O <strong>Resolver endpoint</strong> é um ponto de extremidade em sua VPC, que permite que os recursos em sua VPC resolvam nomes de domínio em outros VPCs.</p>
+</li>
+<li>
+<p>Podem ser associados a <strong>uma ou mais VPC</strong> na mesma região.</p>
+</li>
+<li>
+<p>Cada endpoint suporta ate <strong>10000 queries</strong> por segundos por IP.</p>
+</li>
+<li>
+<p>São divididos em :</p>
+<ul>
+<li>
+<p><strong>Inbound endpoint</strong></p>
+<ul>
+<li>Permite que a rede envie DNS Queries para o Route 53 Resolver.</li>
+<li>Permite resolver DNS da AWS e de Recursos na Zona DNS Privada configurada na VPC.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230217055352111" src="/uni-salva/assets/images/image-20230217055352111-1679386870079-5-cf8fb3a37d90a0965a44e9796af9c1be.png" width="1188" height="481" class="img_ev3q"></p>
+</li>
+<li>
+<p><strong>Outbound endpoint</strong></p>
+<ul>
+<li>Permite que o Route 53 envie DNS queries para os DNS resolver que não seja do Route 53. (para o servidor de DNS no On-premises).</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230315181217037" src="/uni-salva/assets/images/image-20230315181217037-f1156057d31c8786d0c40d961e4c9d0a.png" width="714" height="288" class="img_ev3q"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-global-accelerator">AWS Global Accelerator<a href="#aws-global-accelerator" class="hash-link" aria-label="Link direto para AWS Global Accelerator" title="Link direto para AWS Global Accelerator">​</a></h3>
+<p>Serviço que melhora a disponibilidade de um serviço usando os ponto de presença, melhora a disponibilidade em cerca de 60%.</p>
+<ul>
+<li>2 Anycast IP são criado para redirecionar o trafico para os pontos de presença.</li>
+<li>Funciona com Elastic IP, ALB, NLB, EC2 Instances</li>
+<li>Suporta preservação do IP do cliente, exceto para <strong>NLBs e Elastic IPs</strong></li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230217055915316" src="/uni-salva/assets/images/image-20230217055915316-1679386870079-7-b25b0e3e0568d63565a9174f9b835615.png" width="645" height="264" class="img_ev3q"></p>
+<ul>
+<li>Diferença entre <strong>CloudFront e Global Accelerator</strong>
+<ul>
+<li>Ambos usam a rede <strong>Global da AWS e pontos de presença.</strong> e tem integração com <strong>AWS Shield para proteção contra DDOS.</strong></li>
+<li>CloudFront<!-- -->
+<ul>
+<li>Usado para <strong>conteúdo estático</strong> que precisa ser cacheado.</li>
+<li>Guarda o <strong>conteúdo estático no ponto de presença</strong>.</li>
+</ul>
+</li>
+<li>Global Accelerator<!-- -->
+<ul>
+<li>Melhora o desempenho de aplicações que usam <strong>TCP e UDP. Tipo chats, games, VoiP</strong> ....</li>
+<li>Mais adequado para aplicativos em <strong>tempo real e serviços que exigem comunicação bidirecional</strong>, como jogos online e aplicativos de negócios.</li>
+<li>Faz proxy dos pacote entre os pontos de presenças em uma ou mais regiões.</li>
+<li>Bom para aplicações que usam <strong>IP estático.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-outposts">AWS Outposts<a href="#aws-outposts" class="hash-link" aria-label="Link direto para AWS Outposts" title="Link direto para AWS Outposts">​</a></h3>
+<ul>
+<li>Permite implementar o que se chama de cloud hibrida.</li>
+<li>Ou seja, permite executar a AWS nos servidores on-premises.</li>
+<li>Executa<!-- -->
+<ul>
+<li>EC2, EBS, S3, EKS, ECS, RDS, EMR</li>
+</ul>
+</li>
+<li>Tem um tipo de classe S3 chamada <strong>S3 Outposts.</strong></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-wavelength">AWS WaveLength<a href="#aws-wavelength" class="hash-link" aria-label="Link direto para AWS WaveLength" title="Link direto para AWS WaveLength">​</a></h3>
+<ul>
+<li>Oferece <strong>baixa latência e alto desempenho</strong> para aplicativos <strong>móveis e de Internet das coisas (IoT)</strong> por meio da integração com as redes de <strong>5G das operadoras de telecomunicaçõe</strong>s.</li>
+<li>Para entender imagine que a AWS disponibilize nos datacenter da VIVO (ISP) racks outposts que conseguem executar AWS próximo ao cliente para requisições envolvendo 5G.</li>
+<li>Serviços que podem ser implantados:<!-- -->
+<ul>
+<li><strong>EC3, EBS, VPC ...</strong></li>
+</ul>
+</li>
+<li>Uso:<!-- -->
+<ul>
+<li>Coneção de veiculos inteligentes, Lives interativas, AR/VR, games e tempo real.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="storage">Storage<a href="#storage" class="hash-link" aria-label="Link direto para Storage" title="Link direto para Storage">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230311114844322" src="/uni-salva/assets/images/image-20230311114844322-6e1264f25587c422bb1b11f3dd249c17.png" width="830" height="331" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ebs">EBS<a href="#ebs" class="hash-link" aria-label="Link direto para EBS" title="Link direto para EBS">​</a></h3>
+<ul>
+<li>Para se encriptar um volume já criado sem encriptação e <strong>necessário criar um snapshot</strong> e depois criar uma copia desse snapshot e <strong>marcar a opção de encriptação</strong> e depois criar um volume a partir desse novo snapshot e conecta-lo na instância.</li>
+<li>Tipos</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="tipos-ebs" src="/uni-salva/assets/images/image-20210819054408303-1679386870080-11-ebce6ada3f96676021dc019ed8567f42.png" width="1058" height="446" class="img_ev3q"></p>
+<ul>
+<li>
+<p>Oss tipos io1 / io2 permitem conectar o mesmo em <strong>mais de uma instância</strong>, isso é usado em aplicação de alta disponibilidade, ex Cassandra .</p>
+</li>
+<li>
+<p><strong>Data Lifecycle Manager</strong></p>
+<ul>
+<li>
+<p>Automatiza a criação, retenção e deleção de snapshot EBS e AMIs.</p>
+</li>
+<li>
+<p>Qual a diferença dele para o AWS Backup.</p>
+<ul>
+<li>O <strong>AWS Backup</strong> permite gerenciar o <strong>Backups de todos os serviços</strong> incluindo o EBS num unico lugar.</li>
+<li>Enquanto o <strong>DLM só permite gerenciar o Backup de EBS e AMIs.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="efs---elastic-file-system">EFS - Elastic file system<a href="#efs---elastic-file-system" class="hash-link" aria-label="Link direto para EFS - Elastic file system" title="Link direto para EFS - Elastic file system">​</a></h3>
+<ul>
+<li>
+<p>Usa um <strong>security group</strong> para se linkar as instâncias.</p>
+</li>
+<li>
+<p>Usados apenas com <strong>Linux</strong> (AMI), não compatível com <strong>Windows.</strong></p>
+</li>
+<li>
+<p>Pode se usar o <strong>AWS Access Point</strong> para restringir o acesso aos usuários.</p>
+</li>
+<li>
+<p>Suporta milhares de clientes, e pode ter ate <strong>10gb+ de thoughput .</strong></p>
+</li>
+<li>
+<p>O tipo de performance pode ser definido na criação podendo ser:</p>
+<ul>
+<li><strong>General purpose (default)</strong> - (web server - cms, etc...)</li>
+<li><strong>Max I/O</strong> - Big data, processamento de vídeo.</li>
+</ul>
+</li>
+<li>
+<p><strong>Throughput mode</strong></p>
+<ul>
+<li><strong>Bursting</strong> - Inicia com 1 TB = 50MiB/s e pode ter um bust de ate 100MiB/s;</li>
+<li><strong>Provisioned</strong> - Possível definir um nível.</li>
+<li>**Elastic ** - Escala de acordo com carga de trabalho.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storages Ties</strong> (lifecycle management feature - Move os arquivos após 30 dias)</p>
+<ul>
+<li><strong>Standard</strong> - para arquivos acessados frequentemente</li>
+<li><strong>Infrequent access (EFS-IA)</strong> - Arquivos que não são acessado com muita frequência, tem preço menor, pórem e cobrado por recuperação de arquivo.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fsx">FSx<a href="#fsx" class="hash-link" aria-label="Link direto para FSx" title="Link direto para FSx">​</a></h3>
+<ul>
+<li>Permite configurar sistema de arquivos de terceiros como:<!-- -->
+<ul>
+<li><strong>FSx For Lustre</strong>
+<ul>
+<li>Lustre <strong>(linux + cluster)</strong> é um sistema de arquivo distribuído e paralelo para computação em escala. Usado em <strong>marchine learning e Computação de alta performace (HPC)</strong>,  sistema de arquivos <strong>distribuídos</strong>.</li>
+<li>Permite ler e escrever no S3 através dele.<!-- -->
+<ul>
+<li>Possivel usar uma funcionalidade de carregamento preguiço, que só ira carregar os <strong>dados do S3</strong>, quando for solicitados evitando gasto carregando milhares de dados.</li>
+</ul>
+</li>
+<li>Tipos de sistemas de arquivos<!-- -->
+<ul>
+<li><strong>Scratch File System</strong>
+<ul>
+<li>Usado para armazenamento temporario, e não há replicação.</li>
+<li>Tem uma velocidade muita alta (6x faster, 200MBps)</li>
+<li>Usado para ligar se ao S3</li>
+<li><img decoding="async" loading="lazy" alt="image-20230219091942131" src="/uni-salva/assets/images/image-20230219091942131-1679386870080-14-50a9f2a3dfe7500d234a531a4d8ec3d9.png" width="516" height="269" class="img_ev3q"></li>
+</ul>
+</li>
+<li><strong>Persistente File System</strong>
+<ul>
+<li>Usado para armazenamento de longo periodos.</li>
+<li><img decoding="async" loading="lazy" alt="image-20230219092102564" src="/uni-salva/assets/images/image-20230219092102564-1679386870079-8-f3c0ba91ea52eb5f949f4a371eb76266.png" width="482" height="244" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Fsx for Windows File System.</strong>
+<ul>
+<li>Tem suporte para os protocolos <strong>SMB e NTFS.</strong></li>
+<li>Tem suporte para o <strong>Active Directory da Microsoft.</strong></li>
+<li>Suporta o sistema de arquivos distribuido do Windows DFS.</li>
+<li>Permite agrupar Filesystem utilizando o <strong>DFS Namespaces.</strong></li>
+</ul>
+</li>
+<li><strong>FSx NetApp ONTAP</strong>
+<ul>
+<li>Permite criar sistema de arquivo do tipo NetApp ONTAP. (sistema compativel com linux, mac e linux)</li>
+<li>Compativel com os protocolos NFS, SMB,ISCSI</li>
+</ul>
+</li>
+<li><strong>FSx for OpenZFS</strong>
+<ul>
+<li>Compativel com NFS (V3, v4, v4.1, v4.2)</li>
+<li>Usado para rodar sistema de arquivo ZFS na AWS.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Na criação se diz se vai ser <strong>single AZ ou Multi AZ.</strong>
+<ul>
+<li>Não é possivel converter de um para outro</li>
+<li><strong>Caso precise migrar de single para multi AZ, é necessário criar um Multi AZ e usar um AWS DataSync.</strong></li>
+<li>Tambem é possivel realizar um backup da Single e restorar no Multi, seria mais rapido que usando o <strong>AWS DataSync.</strong></li>
+</ul>
+</li>
+<li>Não é possível reduzir o tamanho de um <strong>file system</strong>, apenas aumentar, caso precisa o recomendado e criar um novo e usar <strong>o AWS DataSync para copiar os dados.</strong></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="s3---storage-lens">S3 - Storage Lens<a href="#s3---storage-lens" class="hash-link" aria-label="Link direto para S3 - Storage Lens" title="Link direto para S3 - Storage Lens">​</a></h3>
+<ul>
+<li>Usado para analisar e entender e otimizar o uso do S3 na orgranização.</li>
+<li>Mostra no dashboard dados de multipas regiões e multipas contas.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219083841776" src="/uni-salva/assets/images/image-20230219083841776-1679386870079-10-15fb6338f0238915a83a9c5af88f0187.png" width="1162" height="629" class="img_ev3q"></p>
+<ul>
+<li>Permite configurar metrica customizadas</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-datasync">AWS DataSync<a href="#aws-datasync" class="hash-link" aria-label="Link direto para AWS DataSync" title="Link direto para AWS DataSync">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="dataSync" src="/uni-salva/assets/images/image-20210909071549775-1679386870080-12-b54beb0ebe051d24baa6c0255eb4d033.png" width="1019" height="489" class="img_ev3q"></p>
+<ul>
+<li>Usado para mover grades quantidade de dados do on-primises para AWS. e de AWS para AWS.</li>
+<li>Permite sincronizar dados com S3 , FSx, EFS. A cada hora / dia/ semana (ou seja agendado.)</li>
+<li>Usa os protocores <strong>SMS</strong> , <strong>NFS</strong> e outros para mover os dados do <strong>NAS</strong> (network attached storage) para AWS.</li>
+<li>Preserva os permissões e metadata dos arquivos migrados.</li>
+<li>O AWS DataSync pode ser configurado para se conectar a várias origens de dados diferentes, incluindo servidores locais, sistemas de arquivos do EFS, buckets do S3, sistemas de arquivos do Network File System (NFS) e servidores do Amazon FSx for Windows File Server. Ele também pode ser usado para migrar dados entre diferentes regiões da AWS ou entre diferentes contas da AWS.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="storage-services-price-comparison">Storage Services Price Comparison<a href="#storage-services-price-comparison" class="hash-link" aria-label="Link direto para Storage Services Price Comparison" title="Link direto para Storage Services Price Comparison">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230219095338480" src="/uni-salva/assets/images/image-20230219095338480-1679386870080-13-9490bb329b85289c4071c1326ef78870.png" width="1173" height="585" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-cloudfront">Amazon CloudFront<a href="#amazon-cloudfront" class="hash-link" aria-label="Link direto para Amazon CloudFront" title="Link direto para Amazon CloudFront">​</a></h3>
+<ul>
+<li>
+<p>Possível bloquear um pais de acessar via <strong>Geo Restriction</strong>.</p>
+<ul>
+<li>Para isso o CLoudFront adiciona o cabeçario <strong>cloudFront-Viewer-Country.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>CloudFront Signed URL</strong> - são comummente usados para distribuir conteúdo privado por meio da geração dinâmica de <strong>CloudFront Signed URL</strong> (uma para cada conteúdo).</p>
+</li>
+<li>
+<p><strong>CloudFront Signed cookies</strong> - são comummente usados para distribuir vários conteúdo privados com uma única URL.</p>
+</li>
+<li>
+<p>Diferença entre CloudFront Signed URL e S3 Signed URL</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230311194611289" src="/uni-salva/assets/images/image-20230311194611289-987b8be737214ad05c4b18a483ef207f.png" width="855" height="393" class="img_ev3q"></p>
+<p>Pode se usar o <strong>Origin Access Identity (OAI)</strong> para que apenas CDN acesse o bucket e não redirecione para o bucket. Nesse caso o <strong>bucket</strong> pode continuar privado e acessando pelo CDN vai aparecer os arquivos, pois eles são acessado por um &quot;usuário cdn&quot; liberado.</p>
+<ul>
+<li>A evolução do <strong>OAI e o OAC (Origins Access control)</strong></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="field-level-encryption">Field level Encryption<a href="#field-level-encryption" class="hash-link" aria-label="Link direto para Field level Encryption" title="Link direto para Field level Encryption">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230311194847949" src="/uni-salva/assets/images/image-20230311194847949-a7a6602da8ba86ea7462f25d15d5fa04.png" width="904" height="422" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lambdasedge-e-cloudfront-function">Lambdas@Edge e CloudFront Function<a href="#lambdasedge-e-cloudfront-function" class="hash-link" aria-label="Link direto para Lambdas@Edge e CloudFront Function" title="Link direto para Lambdas@Edge e CloudFront Function">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230311195829806" src="/uni-salva/assets/images/image-20230311195829806-72c31899970686f01696baeba490da94.png" width="926" height="820" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230311200012319" src="/uni-salva/assets/images/image-20230311200012319-31902c7cc18b7a59bd609a480e15799f.png" width="830" height="475" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="handling-extreme-rates">Handling Extreme Rates<a href="#handling-extreme-rates" class="hash-link" aria-label="Link direto para Handling Extreme Rates" title="Link direto para Handling Extreme Rates">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230311200431967" src="/uni-salva/assets/images/image-20230311200431967-78fb8e6f074f5f82e90a229c8fbcd810.png" width="861" height="426" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dynamodb">DynamoDB<a href="#dynamodb" class="hash-link" aria-label="Link direto para DynamoDB" title="Link direto para DynamoDB">​</a></h3>
+<ul>
+<li>
+<p>Tamanho <strong>máximo de objeto (registro aceito 400 KB)</strong>, para objetos maiores se <strong>armazena no S3 e guarda a referencia no DynamoDB.</strong></p>
+</li>
+<li>
+<p>Permite usar o <strong>DAX (DynamoDB Accelarator)</strong> para melhorar o <strong>IO para milissegundos.</strong></p>
+<ul>
+<li>Cachea registo muito acessado, por <strong>5 minutos (TTL)</strong></li>
+</ul>
+</li>
+<li>
+<p>Permite criar <strong>tabela global</strong>, que replica os dados em diferentes regiões (Brasil,
+EUA, Europa por exemplo) para isso é necessário ativar o <strong>DynamoDB Streams.</strong></p>
+</li>
+<li>
+<p>Suporta <strong>ACID (Transações sobre múltiplas tabelas)</strong></p>
+</li>
+<li>
+<p>Devo usar DAX ou ElasticCache</p>
+<ul>
+<li>Se a cliente acessar a t<strong>abela diretamente</strong> usa se <strong>DAX, Cache de objetos individuais</strong> (exemplo buscar um resultado pela PK).</li>
+<li>Mas se a consulta for <strong>resultado de uma computação</strong> então deve se usar o <strong>ElasticCache</strong> (exemplo resultado de uma media dos registo).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rds">RDS<a href="#rds" class="hash-link" aria-label="Link direto para RDS" title="Link direto para RDS">​</a></h3>
+<p>RDS para Lamba</p>
+<ul>
+<li>Caso use <strong>Lambda</strong>, como é <strong>serveless</strong>, pode se ter um problema de <strong>TooManyConnections.</strong></li>
+<li>Para evitar isso usa-se o <strong>RDS Proxy</strong>, que fica responsável por gerenciar o <strong>pool de conexões,</strong> liberando sempre que se encerra uma lambda.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230311203551564" src="/uni-salva/assets/images/image-20230311203551564-e25cb71856c5363e275f67a1ec1dc99a.png" width="531" height="544" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230311203653384" src="/uni-salva/assets/images/image-20230311203653384-9dd549d23252a78d70c7cadcd0685484.png" width="822" height="421" class="img_ev3q"></p>
+<hr>
+<p><strong>Aurora</strong></p>
+<ul>
+<li><strong>Faz replicação (6 copias) em 3 AZ.</strong></li>
+<li><img decoding="async" loading="lazy" alt="image-20230311204121199" src="/uni-salva/assets/images/image-20230311204121199-19f98f4a0e5bb99f62aa984b5ac2c34e.png" width="777" height="293" class="img_ev3q"></li>
+<li><strong>Pode se adicionar ate 15 replica de leituras, para melhorar o uso.</strong></li>
+<li>Tem a opção serveless, não se preocupando com gerenciamento.</li>
+<li><strong>Cresce de 10GB em 10GB podendo chegar ate 128TB de dados.</strong></li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="global-aurora">Global aurora<a href="#global-aurora" class="hash-link" aria-label="Link direto para Global aurora" title="Link direto para Global aurora">​</a></h5>
+<ul>
+<li><strong>Cross region read</strong> replica - útil para desastre <strong>recover</strong> .</li>
+<li>Global database<!-- -->
+<ul>
+<li>Se tem 1 região primaria (read/write) e <strong>5 outras regiões segundarias</strong>, com replicação de <strong>menor que 1 segundo.</strong></li>
+<li>há <strong>16 replicas de leitura</strong> por região segundaria.</li>
+<li>Caso de desastre, promove-se outra região como primaria em <strong>menos de 1 minuto.</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-sqs">Amazon SQS<a href="#amazon-sqs" class="hash-link" aria-label="Link direto para Amazon SQS" title="Link direto para Amazon SQS">​</a></h3>
+<ul>
+<li>Retém as mensagem de 1 a 14 dias.</li>
+<li>Mensagem de ate <strong>254Kb de tamanho</strong>, é possível usar o <strong>S3 para guardar mensagem</strong> maiores.</li>
+<li>Possível usar métrica da <strong>SQS</strong> para dispara o <strong>Auto Scaling Group</strong>  via CloudWatch metrics (<strong>approximateNumerofMensages</strong>).</li>
+<li><strong>Message visibility timeout</strong>
+<ul>
+<li>Quando uma mensagem é recuperado por um consumidor, ela fica invisível para os outros, esse tempo que invisibilidade é definido por esse campo.</li>
+</ul>
+</li>
+<li><strong>Delay Queues</strong> - Permite definir uma atraso na <strong>disponibilização</strong> da mensagem para <strong>leitura</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230312084806136" src="/uni-salva/assets/images/image-20230312084806136-25023ad9252c179d61ebd824148c47cc.png" width="865" height="423" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="kinesis">Kinesis<a href="#kinesis" class="hash-link" aria-label="Link direto para Kinesis" title="Link direto para Kinesis">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230312090123655" src="/uni-salva/assets/images/image-20230312090123655-f46fd6b9e4f63666ed6c737a00fc75ed.png" width="758" height="435" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230312090651492" src="/uni-salva/assets/images/image-20230312090651492-513f6f190fb6b118778b97033379ca3a.png" width="875" height="402" class="img_ev3q"></p>
+<ul>
+<li>
+<p><strong>Consumers</strong></p>
+<ul>
+<li>Kinesis client library (KCL, usado para leitura em paralelo, checkpoint e leitura coordenada)</li>
+<li>AWS SDK. Lambda</li>
+</ul>
+</li>
+<li>
+<p><strong>Producer</strong></p>
+<ul>
+<li>Lambda, Kinesis data firehose, kinesis data analytics.</li>
+<li><strong>AWS SDK , Kinesis Producer Libary (KPL - permite usar batch, compressão, retry)</strong></li>
+<li>Kinesis Agent - Usado para monitorar logs, e enviá-los ao Kinesis Data Streams ou Kinesis Firehose.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="kinesis-data-firehose">Kinesis Data Firehose<a href="#kinesis-data-firehose" class="hash-link" aria-label="Link direto para Kinesis Data Firehose" title="Link direto para Kinesis Data Firehose">​</a></h3>
+<ul>
+<li>Carrega dados para armazenamentos no AWS (Como S3, ReadShift, OpenSearch e Splunk).</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230315191951846" src="/uni-salva/assets/images/image-20230315191951846-265e7ab10833999f8733bcbf3b8d08a5.png" width="799" height="381" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230312090847732" src="/uni-salva/assets/images/image-20230312090847732-897dc1ae8ed73179a7d61565c6e5d8a0.png" width="873" height="884" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230312091116784" src="/uni-salva/assets/images/image-20230312091116784-abdd0bf40148db52fc33644917df5bf0.png" width="803" height="464" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230312091300171" src="/uni-salva/assets/images/image-20230312091300171-343d3baac6d0e656e41af2909b528851.png" width="838" height="338" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-batch">AWS Batch<a href="#aws-batch" class="hash-link" aria-label="Link direto para AWS Batch" title="Link direto para AWS Batch">​</a></h3>
+<p>Caso precise executar com alta performance (HPA) pode se usar o modo Multi Node</p>
+<ul>
+<li>Disponibiliza varias instâncias para execução dos Jobs.</li>
+<li><strong>Não é possível usar instâncias spot.</strong></li>
+<li>Trabalha bem com Placement Group.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230312091604835" src="/uni-salva/assets/images/image-20230312091604835-2e43a7e298bdaf49ea46dc9c4c45684d.png" width="737" height="314" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230312091635621" src="/uni-salva/assets/images/image-20230312091635621-5c3fb75d270df87989f992a4a070d790.png" width="883" height="444" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-glue">AWS Glue<a href="#aws-glue" class="hash-link" aria-label="Link direto para AWS Glue" title="Link direto para AWS Glue">​</a></h3>
+<ul>
+<li>
+<p>Serviço gerenciado de <strong>ETL</strong> (extract, tranform, and Load).</p>
+</li>
+<li>
+<p>Serviço <strong>Serverless</strong>, possui 3 serviços:</p>
+<ul>
+<li><strong>AWS Crawler</strong> - Os rastreadores (Crawler) e classificadores examinam dados de fontes diferentes, classificam dados, detectam informações de esquema e armazenam meta-dados automaticamente no AWS Glue Data Catalog.</li>
+<li>**AWS ETL ** - O núcleo do programa ETL fornece geração de código Python ou Scala para limpeza, enriquecimento, remoção de duplicatas e outras tarefas complexas de transformação de dados.</li>
+<li><strong>AWS Glue Data Catalog</strong> - fornece armazenamento centralizado e uniforme de meta-dados para rastreamento, consulta e transformação de dados usando meta-dados salvos.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="redshift">Redshift<a href="#redshift" class="hash-link" aria-label="Link direto para Redshift" title="Link direto para Redshift">​</a></h3>
+<ul>
+<li>Banco para Data warehouse.</li>
+<li>Envia-se os dados em escala (de hora em hora) para data <strong>warehouse</strong>.</li>
+<li><strong>10x</strong> melhor que outros <strong>OLAP</strong>, e escala para PBs (Penta bytes) de dados.</li>
+<li><strong>Redshit Workload Management (WLM)</strong>
+<ul>
+<li>Permite criar múltiplas filas para tratar as execuções de carga de trabalho (fila super usuário, fila de trabalho curtos, fila de trabalhos longos).</li>
+<li>Isso garante que um trabalho rápido não fique preso a um trabalho longo.</li>
+</ul>
+</li>
+<li>Pode escalar de <strong>1 nó ate 128</strong> nós com cada nó tendo ate <strong>16 TB</strong> de espaço.</li>
+<li>Tem uma funcionado chamada <strong>Sprectrum</strong> que permite executar a queries direto no <strong>S3</strong>, sem precisar carregar os dados para o <strong>RedShift</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="athena">Athena<a href="#athena" class="hash-link" aria-label="Link direto para Athena" title="Link direto para Athena">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230312093513420" src="/uni-salva/assets/images/image-20230312093513420-0c2245abc70c2364ef7d2a416bba6d0d.png" width="874" height="434" class="img_ev3q"></p>
+<hr>
+<p><img decoding="async" loading="lazy" alt="image-20230312094053137" src="/uni-salva/assets/images/image-20230312094053137-21707964973951c6813c5ecacb26ed66.png" width="814" height="358" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cloudwatch">AWS CloudWatch<a href="#aws-cloudwatch" class="hash-link" aria-label="Link direto para AWS CloudWatch" title="Link direto para AWS CloudWatch">​</a></h3>
+<ul>
+<li>Pode enviar os logs para:<!-- -->
+<ul>
+<li>Kinesis Data Streams</li>
+<li>Kinesis firehose</li>
+<li>Lambda</li>
+<li>OpenSearch</li>
+<li>S3 (export)<!-- -->
+<ul>
+<li>Só pode criptografar os logs com <strong>AES-256 (SSE-S3), não pode SS3-KMS.</strong></li>
+<li>Pode levar ate 12 para exportar.</li>
+<li>Não é automático, precisa configurar ou usar a API call CreatExportTask.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230312100317531" src="/uni-salva/assets/images/image-20230312100317531-238343f2fc59685177555435bca47dd9.png" width="967" height="965" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dashboards">Dashboards<a href="#dashboards" class="hash-link" aria-label="Link direto para Dashboards" title="Link direto para Dashboards">​</a></h3>
+<ul>
+<li>Com as métricas é possível criar Dashboards, para facilitar a visualização.</li>
+<li>Os Dashboards são <strong>globais</strong>.</li>
+<li>Neles é possível incluir gráficos de diferentes <strong>contas AWS e regiões.</strong></li>
+<li>É possível compartilhar um Dashboard com um terceiro via <strong>cognito</strong>.</li>
+<li>Ate 3 Dashboards são de graça, e demais se paga $3 dólares por mês por Dashboard.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-deploy">Code deploy<a href="#code-deploy" class="hash-link" aria-label="Link direto para Code deploy" title="Link direto para Code deploy">​</a></h3>
+<ul>
+<li>Permite deployar aplicações em EC2, Lambdas, ECS</li>
+<li>Pode deployar segundo as estratégias<!-- -->
+<ul>
+<li><strong>in-place</strong> -&gt; mata o antigo e coloca o novo (somente disponível para EC2).</li>
+<li><strong>blue / green</strong> -&gt; criar um novo recurso e roteia os dados em parte.<!-- -->
+<ul>
+<li>Este por usa vez usa o <strong>Traffic Shifted</strong> podendo ser:<!-- -->
+<ul>
+<li><strong>Canary</strong> - divide o trafico entre as duas versões em percentagem ate chegar os 100% da novar versão.</li>
+<li><strong>Linear</strong> - divide o trafico entre as duas versões igualmente.</li>
+<li><strong>All-at-once</strong> - envia todo o trafico um para uma ou para outra.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-trusted-advisor">AWS Trusted Advisor<a href="#aws-trusted-advisor" class="hash-link" aria-label="Link direto para AWS Trusted Advisor" title="Link direto para AWS Trusted Advisor">​</a></h3>
+<ul>
+<li>Fornece orientação que ajuda a <strong>reduzir custos e aumentar o desempenho e melhorar a</strong>
+<strong>segurança.</strong></li>
+<li>Analisa e gera recomendações sobre:<!-- -->
+<ul>
+<li><strong>Custo</strong>.</li>
+<li>Performance.</li>
+<li>Segurança.</li>
+<li>Tolerança a falha.</li>
+<li><strong>Limites de serviços.</strong></li>
+</ul>
+</li>
+<li>Bom saber<!-- -->
+<ul>
+<li>Pode checar se o <strong>bucket S3 é publico</strong>. Mas não checa se os objetos dentro são públicos.</li>
+<li>Pode checar os limites de serviços, porem para aumenta-los precisa abrir solicitação no <strong>AWS Suport center</strong> ou usar <strong>AWS Service Quotas.</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-budget">AWS Budget<a href="#aws-budget" class="hash-link" aria-label="Link direto para AWS Budget" title="Link direto para AWS Budget">​</a></h3>
+<ul>
+<li>Pode definir um <strong>orçamento</strong> que o alerte quando você exceder (ou estiver previsto para exceder) seu custo orçado ou valor de uso.</li>
+<li>Pode criar até <strong>20.000 orçamentos. (soft Limit)</strong></li>
+<li><strong>O 2 são de graça</strong>, mas os demais se paga <strong>0.02 $ por dia por Budget.</strong></li>
+<li>Há 4 Tipos de Budget que podem ser criados:<!-- -->
+<ul>
+<li><strong>Usage</strong></li>
+<li>Cost</li>
+<li><strong>Reservation</strong></li>
+<li>Savings Plan</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cost-explorer">Cost Explorer<a href="#cost-explorer" class="hash-link" aria-label="Link direto para Cost Explorer" title="Link direto para Cost Explorer">​</a></h3>
+<ul>
+<li>
+<p>Serviço usado para <strong>ver, entender e gerenciar os gastos</strong> (com varias granularidade mês, ano , dia).</p>
+</li>
+<li>
+<p><strong>Quando devo usar o AWS Compute Optimizer e quando devo usar o AWS Cost Explorer</strong>?</p>
+<ul>
+<li>
+<p><strong>AWS Cost Explorer</strong> se quiser identificar instâncias do <strong>EC2 subutilizadas</strong> e quiser entender o impacto potencial em sua fatura.</p>
+</li>
+<li>
+<p><strong>AWS Compute Optimizer</strong> se quiser ver as recomendações de tipo de instância além do <strong>downsizing</strong>. Faz o uso de aprendizado de máquina para identificar tipos de carga de trabalho e escolher automaticamente a metodologia de recomendação específica de carga de trabalho para eles.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cloud-migrations---the-6r">Cloud Migrations - The 6R<a href="#cloud-migrations---the-6r" class="hash-link" aria-label="Link direto para Cloud Migrations - The 6R" title="Link direto para Cloud Migrations - The 6R">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230223203920041" src="/uni-salva/assets/images/image-20230223203920041-1679386870080-16-93c0e67d1c953fb131ad080699c83b97.png" width="888" height="382" class="img_ev3q"></p>
+<ul>
+<li><a href="https://aws.amazon.com/pt/blogs/enterprise-strategy/6-strategies-for-migrating-applications-to-the-cloud/" target="_blank" rel="noopener noreferrer">6 estratégia para migra para a cloud.</a>
+<ul>
+<li><strong>Rehosting</strong> -  “lift-and-shift.”  - re-hospedagem<!-- -->
+<ul>
+<li>Apenas mova do on-premises para AWS (a aplicação inteiramente).</li>
+</ul>
+</li>
+<li><strong>Replatforming</strong>  - “lift-tinker-and-shift.” - Nova plataforma<!-- -->
+<ul>
+<li>Migra por exemplo de um banco on-premises para  o RDS.</li>
+<li>Ou seja migra a plataforma, estava Weblogic muda para Tomcat.</li>
+<li>Não muda o core da aplicação.</li>
+</ul>
+</li>
+<li><strong>Repurchasing</strong> — &quot;drop and shop&quot; - recompra<!-- -->
+<ul>
+<li>Muda para um nova solução, ex muda de CRM para Salesforce.</li>
+</ul>
+</li>
+<li><strong>Refactoring / Re-architecting</strong> <!-- -->
+<ul>
+<li>Reescreve a aplicação em uma nova arquitetura.</li>
+<li>Mas demorado, e mais caro, porem pode se tirar  o máximo da cloud.</li>
+<li>Facilita novas features.</li>
+</ul>
+</li>
+<li><strong>Retire</strong>   - Livrar-se<!-- -->
+<ul>
+<li>Livra se do que não se usa, ou que usa muito pouco.</li>
+</ul>
+</li>
+<li><strong>Retain</strong> -reter<!-- -->
+<ul>
+<li>Deixa no on-premises e se conecta aos AWS.</li>
+<li>Se mantém, pois é muito complexo a migração o não vale o esforço.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-storage-gateway">AWS Storage Gateway<a href="#aws-storage-gateway" class="hash-link" aria-label="Link direto para AWS Storage Gateway" title="Link direto para AWS Storage Gateway">​</a></h3>
+<ul>
+<li><strong>S3 File Gateway</strong> - Usado para armazenar arquivos.</li>
+<li><strong>FSx File Gateway</strong> - Bom para cache de dados de arquivos muitos acessados.</li>
+<li><strong>Volumes Gateway (EBS)</strong> - Usados para armazenar dados de backups, ou volumes.</li>
+<li><strong>Fitas (TAPE) Gateway (S3 Glacier) -</strong> Usado onde há processos semelhantes fitas.</li>
+</ul>
+<p>Uso:</p>
+<ul>
+<li>Recuperação de desastre.</li>
+<li>Backup e Restauração.</li>
+<li>Armazenamento.</li>
+<li>Redução de latência e cache no ambiente on-premises.</li>
+</ul>
+<p>Arquitetura com Storage Gateway</p>
+<ul>
+<li>Usado para migrar dados do on-premises para AWS, ou para conectar aplicação migrada no modo Rehosting.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230223210344227" src="/uni-salva/assets/images/image-20230223210344227-1679386870080-15-7647601204185523252b332b6d57ddbd.png" width="1092" height="545" class="img_ev3q"></p>
+<ul>
+<li>Usado como replica de leitura entre ambientes de on-premises</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230223210608224" src="/uni-salva/assets/images/image-20230223210608224-1679386870080-17-38bf00c6ead3aba7c1441253c47e6c61.png" width="720" height="512" class="img_ev3q"></p>
+<ul>
+<li>Para processo de backup, para economia</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230223210652331" src="/uni-salva/assets/images/image-20230223210652331-1679386870080-18-7a4d972c554a6bb19056efc09a645018.png" width="1122" height="418" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="disaster-recovery-in-aws">Disaster Recovery in AWS<a href="#disaster-recovery-in-aws" class="hash-link" aria-label="Link direto para Disaster Recovery in AWS" title="Link direto para Disaster Recovery in AWS">​</a></h3>
+<p><strong>Termos importante</strong></p>
+<ul>
+<li>RPO - Recover point objective - está relacionado com a frequência de backup.</li>
+<li>RTO - Recover time objective - está relacionado a tempo de recuperação de desastre.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="estratégias-de-dr">Estratégias de DR<a href="#estratégias-de-dr" class="hash-link" aria-label="Link direto para Estratégias de DR" title="Link direto para Estratégias de DR">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="dr-estrategias" src="/uni-salva/assets/images/image-20210909061054824-1679386870080-20-5446a57eae4667517dea73bd60972769.png" width="632" height="174" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dicas">Dicas<a href="#dicas" class="hash-link" aria-label="Link direto para Dicas" title="Link direto para Dicas">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="dicas" src="/uni-salva/assets/images/image-20210909063130084-1679386870080-19-8ed24904e0f4baf2b7543646c7d403cf.png" width="595" height="396" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-fis---fault-injection-simulator">AWS FIS - Fault Injection Simulator<a href="#aws-fis---fault-injection-simulator" class="hash-link" aria-label="Link direto para AWS FIS - Fault Injection Simulator" title="Link direto para AWS FIS - Fault Injection Simulator">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230224062326078" src="/uni-salva/assets/images/image-20230224062326078-1679386870080-23-0c1e48a8a38b87a29e9ccf0095a2961d.png" width="1151" height="254" class="img_ev3q"></p>
+<ul>
+<li>Permite <strong>Injetar falhas</strong> nas cargas de trabalho na AWS a fim de <strong>validar a capacidade de resiliência</strong> das soluções.</li>
+<li>Suportas os serviços: <strong>EC2, RDs, EKS, ECS ....</strong></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vm-migration-service">VM Migration Service<a href="#vm-migration-service" class="hash-link" aria-label="Link direto para VM Migration Service" title="Link direto para VM Migration Service">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230312135218322" src="/uni-salva/assets/images/image-20230312135218322-543255dee26ed3681377d74499907af1.png" width="810" height="377" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="drs-elastic-disaster-recover">DRS Elastic Disaster Recover<a href="#drs-elastic-disaster-recover" class="hash-link" aria-label="Link direto para DRS Elastic Disaster Recover" title="Link direto para DRS Elastic Disaster Recover">​</a></h3>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-endpoints">VPC Endpoints<a href="#vpc-endpoints" class="hash-link" aria-label="Link direto para VPC Endpoints" title="Link direto para VPC Endpoints">​</a></h3>
+<ul>
+<li>
+<p>Tipos:</p>
+<ul>
+<li>
+<p><strong>Interface</strong> - cria uma interface de rede (<strong>ENI</strong>) que fornece um IP para os serviços devem ser configurado o acesso <strong>no Security Group.</strong></p>
+<ul>
+<li>Quando criado cria se um <strong>URL que será atachada ao ENI.</strong></li>
+<li>Precisa habilidar as configurações na VPC <strong>&quot;Enable DNS Hostnames&quot; e &quot;Enable DNS Support&quot;</strong>, pois Serviço de DNS ira resolver o <strong>Private Endpoint para rede privada.</strong></li>
+<li>Para todos exceto o DynamoDB. e S3</li>
+<li>As interfaces podem ser compartilhadas via <strong>DX e VPN.</strong></li>
+<li>Para usar endpoints da interface, você precisa estar atento às propriedades e limitações atuais:<!-- -->
+<ul>
+<li>Para cada endpoint de interface, você pode escolher somente uma <strong>sub-rede</strong> por AZ.</li>
+<li>Quando o provedor de serviços e o consumidor tiverem <strong>contas diferentes e usarem várias AZ</strong> e o consumidor visualizar as informações do serviço do VPC endpoint, a resposta incluirá apenas as <strong>AZ comuns.</strong></li>
+<li>Por padrão, cada endpoint de interface é compatível com uma largura de banda de até <strong>10 Gbps</strong> por AZ e pode ser automaticamente dimensionada para até <strong>40 Gbps</strong>.</li>
+<li>Um endpoint de interface é compatível somente com <strong>tráfego TCP.</strong></li>
+<li>Ao criar um endpoint, <strong>você pode anexar uma política de endpoint</strong> a ele para controlar o acesso ao serviço ao qual está se conectando.</li>
+<li>Endpoints são compatíveis <strong>somente na mesma região</strong>. Não é possível criar um endpoint entre uma VPC e um <strong>serviço em uma região diferente.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Gateway</strong> - usa um Gateway para provisionar um destino e deve ser configurado na tabela de rotas (<strong>Route Table</strong>)</p>
+<ul>
+<li>Somente para <strong>S3 e Dynamo DB</strong>.</li>
+<li>Não tem custo. <strong>Tem maior flexibilidade de acessos.</strong></li>
+<li>Não pode ser expandido para fora da VPC. Ous seja não pode ser compartilhado usando <strong>(VPN, DX, TGW, Peering)</strong> só funciona <strong>dentro da VPC.</strong></li>
+<li>Se deve criar um único por VPC. O <strong>DNS deve esta habilitado e com isso pode se usar hostname para o S3 ou DynamoDB</strong></li>
+<li>Criado em <strong>nivel de VPC,</strong> por isso que é necessário definir a entrada de acesso no rout table</li>
+<li>Para usar endpoints do gateway, você precisa estar atento às limitações atuais:<!-- -->
+<ul>
+<li>Você não pode usar um <strong>ID de lista de prefixos da AWS</strong> em uma regra de saída de uma ACL da rede para permitir ou negar o tráfego de saída. Se as regras da ACL da rede restringirem o tráfego, será preciso especificar <strong>o bloco CIDR</strong> (intervalo de endereço IP) para o serviço. <strong>Mas você pode usar um ID da lista de prefixos da AWS em uma regra do grupo de segurança</strong> de saída.</li>
+<li><strong>Endpoints</strong> são compatíveis <strong>somente na mesma região</strong>. Não é possível criar um endpoint <strong>entre uma VPC e um serviço em uma região diferente.</strong></li>
+<li>Endpoints são compatíveis somente com <strong>tráfego de IPv4.</strong></li>
+<li>Não é possível transferir um endpoint de uma <strong>VPC para outra</strong>, nem de um serviço para outro.</li>
+<li>Você tem uma cota para o número de endpoints criados por você por VPC.  <strong>20 podendo ir ate 255.</strong></li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230227061041750" src="/uni-salva/assets/images/image-20230227061041750-21b2a91bbc0379de9afef1d0f791d4e6.png" width="1097" height="216" class="img_ev3q"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Caso use  <strong>VPC Endpoints</strong> deve se atentar a usar as configurações de DNS, Outra coisa que pode gerar confusão e que a partir da hora que se usa o <strong>VPC Endpoints</strong> e necessário informar as região ao usar comandos do CLI, pois o <strong>VPC Endpoints</strong> tem escopo regional.</p>
+</li>
+<li>
+<p><strong>VPC Endpoint Police</strong></p>
+<ul>
+<li>Permite controlar os acesso a <strong>serviços AWS.</strong></li>
+<li>Não sobrescreve <strong>política do S3 ou só IAM</strong>, apenas adiciona a endpoint a definição de quem pode acessa-lo.</li>
+<li>Caso queria restringir o acesso de algum recurso a apenas ao <strong>VPC Endpoint é necessário</strong> ir no recurso e definir uma política de acesso que indique que o acesso a aquele recurso deve ter origem do VPC Endpoint com a condição <strong>&quot;aws<!-- -->:sourceVpce<!-- -->&quot;</strong> onde se passa os endpoints que podem acessar o recurso.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-privatelink---vpc-endpoint-services">AWS PrivateLink - VPC Endpoint Services<a href="#aws-privatelink---vpc-endpoint-services" class="hash-link" aria-label="Link direto para AWS PrivateLink - VPC Endpoint Services" title="Link direto para AWS PrivateLink - VPC Endpoint Services">​</a></h3>
+<ul>
+<li>Usado para expor serviços AWS na VPCs (na VPC próprias ou cross VPC)</li>
+<li>Sem precisar ligar as VPC com <strong>VPC Peering</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="AWS PrivateLink - VPC Endpoint Services" src="/uni-salva/assets/images/image-20210908203529744-1679386870081-25-0ea3e7e97eb11404d4692cc2dc946dce.png" width="1060" height="566" class="img_ev3q"></p>
+<ul>
+<li>Permite compartilhar um <strong>serviço de uma VPC com outra VPC</strong> sem precisar que aquele serviço publico, ou sem precisar ligar as VPC com <strong>VPC Peering.</strong></li>
+<li>Forma mais segura e escalável de se <strong>expor mais de 1000 serviços AWS.</strong></li>
+<li>Sem a necessidade de <strong>Peering, DX e VPN, NAT ou RouteTables.</strong></li>
+<li>Faz uso do <strong>VPC endpoints, por isso muitas vezes pode ser considerado o mesmo serviço.</strong></li>
+<li>Usando com S3 e Direct Connect</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230227065519211" src="/uni-salva/assets/images/image-20230227065519211-1679386870081-29-a225afdd79057911750132dc9bf43df1.png" width="1162" height="328" class="img_ev3q"></p>
+<ul>
+<li>Usando com VPC Peering</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230227065551394" src="/uni-salva/assets/images/image-20230227065551394-1679386870080-21-0d5a775667f00c0a4fdd827734add1ef.png" width="1033" height="264" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="virtual-interface-vif">Virtual Interface VIF<a href="#virtual-interface-vif" class="hash-link" aria-label="Link direto para Virtual Interface VIF" title="Link direto para Virtual Interface VIF">​</a></h3>
+<ul>
+<li><strong>Public VIF</strong> - Permite conectar serviços publicos da AWS (S3, EC2).</li>
+<li><strong>Private VIF</strong> - Permite conectar aos recursos na sua VPC (EC2, ALB).</li>
+<li><strong>Transit Virtual Interface</strong> - Conecta aos recursos usando um TGW (Transit Gateway).</li>
+<li>Endpoints privados não precisam de interfaces (Private VIF) para conexão, pois podem ser acessados diretamente.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="egress-only-internet-gateway">Egress Only Internet Gateway<a href="#egress-only-internet-gateway" class="hash-link" aria-label="Link direto para Egress Only Internet Gateway" title="Link direto para Egress Only Internet Gateway">​</a></h3>
+<ul>
+<li>Um <strong>gateway</strong> da Internet somente de saída é um componente da VPC horizontalmente escalado, redundante e altamente disponível que permite a comunicação de saída pela <strong>IPv6</strong> das instâncias na VPC para a Internet e impede a Internet de iniciar uma conexão <strong>IPv6</strong> com suas instâncias.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="o-aws-transit-gateway">O AWS Transit Gateway<a href="#o-aws-transit-gateway" class="hash-link" aria-label="Link direto para O AWS Transit Gateway" title="Link direto para O AWS Transit Gateway">​</a></h3>
+<ul>
+<li>
+<p><strong>Casos de Uso</strong></p>
+<ul>
+<li>Para implementar a topologia <strong>Hub e Spoke (star).</strong></li>
+<li>Para conectar vários Amazon VPCs entre regiões (usando  <strong>peering do Transit Gateway</strong>).</li>
+<li>Forneça aplicativos em todo o mundo - <strong>o Transit Gateway</strong> ajuda a criar aplicativos que abrangem milhares de Amazon VPCs. Tudo é mais fácil de implantar, gerenciar e solucionar problemas.</li>
+</ul>
+</li>
+<li>
+<p><strong>Limitações</strong></p>
+<ul>
+<li>Você pode se conectar a no máximo três <strong>Transit Gateways</strong> em uma única Conexão <strong>Direct Connect</strong> para conectividade híbrida.</li>
+<li><strong>O Transit Gateway</strong> não oferece suporte ao roteamento entre VPCs com CIDRs sobrepostos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inter e Intra Region Peering</strong></p>
+<ul>
+<li>Dentro de uma região é possivel ter dois <strong>TGW</strong> ( Transit Gateway) com finalidades diferentes e conecta-los usando i<strong>ntra-Refion Peering Mesh.</strong></li>
+<li>Mas caso queira conectar a outra região com um estrutura semelhante seria necessário criar um novo TGW e realizar o <strong>inter-Region Peeering Mesh.</strong></li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230227055738521" src="/uni-salva/assets/images/image-20230227055738521-1679386870080-22-cc3ae38e80933dde9067addb8ad1591c.png" width="1865" height="573" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="custo-de-rede">Custo de rede<a href="#custo-de-rede" class="hash-link" aria-label="Link direto para Custo de rede" title="Link direto para Custo de rede">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="net-cost" src="/uni-salva/assets/images/image-20210908205716392-1679386870080-24-65043ec1a8d02dbc7627cba6d8a90263.png" width="1088" height="539" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20210908210015556" src="/uni-salva/assets/images/image-20210908210015556-1679386870081-30-905602ed3e224e35dad97c08193539b8.png" width="1096" height="551" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20210908210158231" src="/uni-salva/assets/images/image-20210908210158231-1679386870081-26-4effc5a0d894cab19d1b993693290d54.png" width="1096" height="554" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20210908210357597" src="/uni-salva/assets/images/image-20210908210357597-1679386870081-28-979e93179350c7fab1606993630bde5d.png" width="1114" height="584" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cloudhub">CloudHub<a href="#cloudhub" class="hash-link" aria-label="Link direto para CloudHub" title="Link direto para CloudHub">​</a></h3>
+<ul>
+<li>Permite conectar mais de <strong>10 Customer Gateway a cada Virtual Private Gateway.</strong></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="machine-learning">Machine Learning<a href="#machine-learning" class="hash-link" aria-label="Link direto para Machine Learning" title="Link direto para Machine Learning">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230303060442789" src="/uni-salva/assets/images/image-20230303060442789-1679386870081-27-71978ed4f47475568a0cdcc5ad458416.png" width="915" height="475" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="outros-serviços">Outros Serviços<a href="#outros-serviços" class="hash-link" aria-label="Link direto para Outros Serviços" title="Link direto para Outros Serviços">​</a></h3>
+<ul>
+<li>
+<p><strong>CodeCommit</strong>: armazene o código em repositórios controlados por versão. O código pode existir em múltiplos branches (ramificações).</p>
+</li>
+<li>
+<p><strong>CodeBuild</strong>: construa e teste o código sob demanda em suas pipelines de CICD.</p>
+</li>
+<li>
+<p><strong>CodeDeploy</strong>: faça o deploy do código em EC2, ASG, Lambda ou ECS.</p>
+</li>
+<li>
+<p><strong>CodePipeline</strong>: orquestre pipelines de CICD. Se usar o CodeCommit como fonte, ele se conectará a apenas um branch.</p>
+</li>
+<li>
+<p><strong>CloudSearch</strong>: solução de busca gerenciada para realizar pesquisas de texto completo, auto completar em suas aplicações.</p>
+</li>
+<li>
+<p><strong>Alexa for Business</strong>: use a Alexa para ajudar os funcionários a serem mais produtivos em salas de reunião e suas mesas.</p>
+</li>
+<li>
+<p><strong>Lex</strong>: Reconhecimento automático de fala (ASR) para converter fala em texto. Útil para construir chatbots.</p>
+</li>
+<li>
+<p><strong>Connect</strong>: receba chamadas, crie fluxos de contato, centro de contato virtual baseado em nuvem.</p>
+</li>
+<li>
+<p><strong>Rekognition</strong>: encontre objetos, pessoas, textos, cenas em imagens e vídeos usando Machine Learning.</p>
+</li>
+<li>
+<p><strong>Kinesis Video Stream</strong>: um fluxo por dispositivo de vídeo, análise usando instâncias do EC2 ou Rekognition.</p>
+</li>
+<li>
+<p><strong>WorkSpaces</strong>: estações de trabalho Windows sob demanda. WAM é usado para gerenciar aplicativos.</p>
+</li>
+<li>
+<p><strong>AppStream 2.0</strong>: transmita aplicativos de desktop para navegadores da web.</p>
+</li>
+<li>
+<p><strong>Mechanical Turk</strong>: marketplace de crowdsourcing para realizar tarefas simples para humanos, integração com SWF.</p>
+</li>
+<li>
+<p><strong>Device Farm</strong>: serviço de teste de aplicativos para seus aplicativos móveis e web em dispositivos reais.</p>
+</li>
+</ul>
+<hr>
+<p><strong>Data Exchange</strong> -  é um serviço de troca de dados na nuvem que permite que os clientes encontrem, assinem e usem dados de terceiros de maneira segura e eficiente.</p>
+<p><img decoding="async" loading="lazy" alt="AWS Data Exchange :: AWS Control Tower Workshop" src="/uni-salva/assets/images/image-adx-1-caeaaa25675cd791e453aa104f48213f.png" width="2002" height="933" class="img_ev3q"></p>
+<p><strong>Data Pipeline -</strong> permite criar pipelines da dados, onde se pode mover e transformar.</p>
+<p><img decoding="async" loading="lazy" alt="AWS Data Pipeline | AWS Big Data Blog" src="/uni-salva/assets/images/Prediction1-1-79d2d07b87c707207fe2afd6261fcbcb.png" width="800" height="434" class="img_ev3q"></p>
+<p><strong>Lake Formation</strong> - ajuda a simplificar e acelerar a criação de data lakes seguros na nuvem</p>
+<p><img decoding="async" loading="lazy" alt="Governança de Data Lake – AWS Lake Formation – Amazon Web Services" src="/uni-salva/assets/images/Lake-formation-HIW.9ea3fab3b2ac697a42ae7a805b986278ffd4f41e-a90a8fdf3896c1566f4a7d122b30f8f1.png" width="1180" height="522" class="img_ev3q"></p>
+<p><strong>AWS AppFlow</strong> -  permite a transferência segura de dados entre diferentes aplicativos de nuvem  como Salesforce, Slack, Marketo e Zendesk, S3 e o Snowflake</p>
+<p><img decoding="async" loading="lazy" alt="Amazon AppFlow automates bidirectional data flows between AWS and SaaS apps  - Help Net Security" src="/uni-salva/assets/images/amazon_appflow-5267ce4c1932761bdbda95f80d5a07be.png" width="2360" height="688" class="img_ev3q"></p>
+<p><strong>AWS ECS Anywhere</strong> - Permite executar ecs em maquinas do cliente.</p>
+<p>![Conceitos básicos do Amazon ECS Anywhere – Amazon Web Services](assets/product-page-HIW-diagram_ECS-Anywhere@2x (1).3348533490091f0f0c9ae6d049092fea266b45fa.png)</p>
+<p><strong>AWS EKS Anywhere</strong> - permite que os usuários executem seus clusters do Amazon Elastic Kubernetes Service (EKS) em qualquer lugar - localmente, em data centers da empresa ou em outras nuvens - e gerenciem esses clusters por meio do AWS Management Console, AWS CLI ou API.</p>
+<p>Usa se o <strong>AWS EKS Distro</strong> (versão do kubernetes da AWS) para rodar no cliente</p>
+<p><img decoding="async" loading="lazy" src="https://d1.awsstatic.com/Product-Page-Diagram_Amazon-EKS-Anywhere%402x.f232bec85fb40cdaff00a24719e663c4dc24ee91.png" alt="Kubernetes on-premises: Amazon EKS Anywhere, Amazon Web Services" class="img_ev3q"></p>
+<p><strong>AWS keyspaces</strong> - antigo Amazon Managed Apache Cassandra Service - permite criar e executar aplicativos Cassandra escaláveis na nuvem.</p>
+<p><strong>AWS Cloud9</strong>  - IDE baseado na nuvem que permite que os desenvolvedores escrevam, executem e depurem código.  permite que várias pessoas trabalhem juntas no mesmo código e vejam as alterações em tempo real.</p>
+<p><strong>AWS Amplify</strong> - é um conjunto de ferramentas e serviços para criar e implantar aplicativos web e móveis escaláveis e seguros.</p>
+<p><img decoding="async" loading="lazy" alt="Getting started with AWS Amplify for Android and Bitrise - Bitrise" src="/uni-salva/assets/images/aws_ampl-89791263eff4f6e497d2247bd708f223.png" width="1910" height="600" class="img_ev3q"></p>
+<p><strong>Amazon Pinpoint</strong> é um serviço de marketing por e-mail, SMS e notificação push para envolver e reter usuários em aplicativos móveis e web.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230321052153550" src="/uni-salva/assets/images/image-20230321052153550-ec285cd6427521affe049574f513aec2.png" width="794" height="390" class="img_ev3q"></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/02-resumo.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/conteudo"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Conteúdo estudado</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/uni-salva/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Questões da prova</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-accounts-and-organizations" class="table-of-contents__link toc-highlight">AWS Accounts and Organizations</a></li><li><a href="#identity-management-and-permissions" class="table-of-contents__link toc-highlight">Identity Management and Permissions</a></li><li><a href="#s3---security" class="table-of-contents__link toc-highlight">S3 - Security</a></li><li><a href="#vault-lock-e-s3-object-lock" class="table-of-contents__link toc-highlight">Vault Lock e S3 Object Lock</a></li><li><a href="#s3-access-points" class="table-of-contents__link toc-highlight">S3 Access Points</a></li><li><a href="#aws-firewal-manager" class="table-of-contents__link toc-highlight">AWS Firewal manager</a></li><li><a href="#aws-guard-duty" class="table-of-contents__link toc-highlight">AWS Guard Duty</a></li><li><a href="#ec2" class="table-of-contents__link toc-highlight">EC2</a></li><li><a href="#tipos-de-instâncias" class="table-of-contents__link toc-highlight">Tipos de instâncias</a></li><li><a href="#alta-performance-computacional-hpc" class="table-of-contents__link toc-highlight">Alta performance computacional HPC</a></li><li><a href="#amazon-eks" class="table-of-contents__link toc-highlight">Amazon EKS</a></li><li><a href="#aws-lambda" class="table-of-contents__link toc-highlight">AWS Lambda</a></li><li><a href="#aws-app-runner" class="table-of-contents__link toc-highlight">AWS App Runner</a></li><li><a href="#amazon-api-gateway" class="table-of-contents__link toc-highlight">Amazon API Gateway</a></li><li><a href="#appsync" class="table-of-contents__link toc-highlight">AppSync</a></li><li><a href="#amazon-route-53" class="table-of-contents__link toc-highlight">Amazon Route 53</a></li><li><a href="#common-records" class="table-of-contents__link toc-highlight">Common Records</a></li><li><a href="#routing-police" class="table-of-contents__link toc-highlight">Routing police</a></li><li><a href="#health-check" class="table-of-contents__link toc-highlight">Health check</a></li><li><a href="#hosted-zones" class="table-of-contents__link toc-highlight">Hosted Zones</a></li><li><a href="#aws-global-accelerator" class="table-of-contents__link toc-highlight">AWS Global Accelerator</a></li><li><a href="#aws-outposts" class="table-of-contents__link toc-highlight">AWS Outposts</a></li><li><a href="#aws-wavelength" class="table-of-contents__link toc-highlight">AWS WaveLength</a></li><li><a href="#storage" class="table-of-contents__link toc-highlight">Storage</a></li><li><a href="#ebs" class="table-of-contents__link toc-highlight">EBS</a></li><li><a href="#efs---elastic-file-system" class="table-of-contents__link toc-highlight">EFS - Elastic file system</a></li><li><a href="#fsx" class="table-of-contents__link toc-highlight">FSx</a></li><li><a href="#s3---storage-lens" class="table-of-contents__link toc-highlight">S3 - Storage Lens</a></li><li><a href="#aws-datasync" class="table-of-contents__link toc-highlight">AWS DataSync</a></li><li><a href="#storage-services-price-comparison" class="table-of-contents__link toc-highlight">Storage Services Price Comparison</a></li><li><a href="#amazon-cloudfront" class="table-of-contents__link toc-highlight">Amazon CloudFront</a></li><li><a href="#field-level-encryption" class="table-of-contents__link toc-highlight">Field level Encryption</a></li><li><a href="#lambdasedge-e-cloudfront-function" class="table-of-contents__link toc-highlight">Lambdas@Edge e CloudFront Function</a></li><li><a href="#handling-extreme-rates" class="table-of-contents__link toc-highlight">Handling Extreme Rates</a></li><li><a href="#dynamodb" class="table-of-contents__link toc-highlight">DynamoDB</a></li><li><a href="#rds" class="table-of-contents__link toc-highlight">RDS</a></li><li><a href="#amazon-sqs" class="table-of-contents__link toc-highlight">Amazon SQS</a></li><li><a href="#kinesis" class="table-of-contents__link toc-highlight">Kinesis</a></li><li><a href="#kinesis-data-firehose" class="table-of-contents__link toc-highlight">Kinesis Data Firehose</a></li><li><a href="#aws-batch" class="table-of-contents__link toc-highlight">AWS Batch</a></li><li><a href="#aws-glue" class="table-of-contents__link toc-highlight">AWS Glue</a></li><li><a href="#redshift" class="table-of-contents__link toc-highlight">Redshift</a></li><li><a href="#athena" class="table-of-contents__link toc-highlight">Athena</a></li><li><a href="#aws-cloudwatch" class="table-of-contents__link toc-highlight">AWS CloudWatch</a></li><li><a href="#dashboards" class="table-of-contents__link toc-highlight">Dashboards</a></li><li><a href="#code-deploy" class="table-of-contents__link toc-highlight">Code deploy</a></li><li><a href="#aws-trusted-advisor" class="table-of-contents__link toc-highlight">AWS Trusted Advisor</a></li><li><a href="#aws-budget" class="table-of-contents__link toc-highlight">AWS Budget</a></li><li><a href="#cost-explorer" class="table-of-contents__link toc-highlight">Cost Explorer</a></li><li><a href="#cloud-migrations---the-6r" class="table-of-contents__link toc-highlight">Cloud Migrations - The 6R</a></li><li><a href="#aws-storage-gateway" class="table-of-contents__link toc-highlight">AWS Storage Gateway</a></li><li><a href="#disaster-recovery-in-aws" class="table-of-contents__link toc-highlight">Disaster Recovery in AWS</a></li><li><a href="#estratégias-de-dr" class="table-of-contents__link toc-highlight">Estratégias de DR</a></li><li><a href="#dicas" class="table-of-contents__link toc-highlight">Dicas</a></li><li><a href="#aws-fis---fault-injection-simulator" class="table-of-contents__link toc-highlight">AWS FIS - Fault Injection Simulator</a></li><li><a href="#vm-migration-service" class="table-of-contents__link toc-highlight">VM Migration Service</a></li><li><a href="#drs-elastic-disaster-recover" class="table-of-contents__link toc-highlight">DRS Elastic Disaster Recover</a></li><li><a href="#vpc-endpoints" class="table-of-contents__link toc-highlight">VPC Endpoints</a></li><li><a href="#aws-privatelink---vpc-endpoint-services" class="table-of-contents__link toc-highlight">AWS PrivateLink - VPC Endpoint Services</a></li><li><a href="#virtual-interface-vif" class="table-of-contents__link toc-highlight">Virtual Interface VIF</a></li><li><a href="#egress-only-internet-gateway" class="table-of-contents__link toc-highlight">Egress Only Internet Gateway</a></li><li><a href="#o-aws-transit-gateway" class="table-of-contents__link toc-highlight">O AWS Transit Gateway</a></li><li><a href="#custo-de-rede" class="table-of-contents__link toc-highlight">Custo de rede</a></li><li><a href="#cloudhub" class="table-of-contents__link toc-highlight">CloudHub</a></li><li><a href="#machine-learning" class="table-of-contents__link toc-highlight">Machine Learning</a></li><li><a href="#outros-serviços" class="table-of-contents__link toc-highlight">Outros Serviços</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
