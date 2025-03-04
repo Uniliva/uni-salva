@@ -1,5 +1,5 @@
 ---
-title: "Prometheus"
+title: "📈 Prometheus"
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-title: " ArgoCD"
+title: "🔄 ArgoCD"
 
 ---
 

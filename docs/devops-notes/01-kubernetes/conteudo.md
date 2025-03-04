@@ -1,5 +1,5 @@
 ---
-title: "Documentação"
+title: "Conheça o Kubernetes"
 sidebar_position: 1
 ---
 

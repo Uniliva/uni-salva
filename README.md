@@ -2,7 +2,6 @@
 
 Minhas anotações do dia a dia.
 
-
 ### Rodando local
 
 ```

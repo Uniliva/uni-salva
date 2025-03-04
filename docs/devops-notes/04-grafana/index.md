@@ -1,5 +1,5 @@
 ---
-title: "Grafana"
+title: "📊 Grafana"
 
 ---
 

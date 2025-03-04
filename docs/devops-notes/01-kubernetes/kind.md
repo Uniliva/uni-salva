@@ -1,5 +1,5 @@
 ---
-title: "Kind"
+title: "Conheça o Kind"
 sidebar_position: 2
 ---
 
