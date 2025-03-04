@@ -15,7 +15,7 @@ sidebar_position: 1
 
 - plano de controle - gerencia os serviços dentro do host.
 - scheduler - Resp. por subir e os serviços.
-- API Server - resp pela comunicação ente nós e master.
+- API Server - responsável pela comunicação ente nós e master.
 - Node Controller - Resp. por manter o estado dentro do cluster store.
 - Cluster store (etcd) - Armazenamentos do dados do cluster.
 
@@ -35,8 +35,8 @@ sidebar_position: 1
 
 ### API
 
-- Gerencia os recursos do cluster (criar pod, deletera Replica Set, criar volume ..)
-- Para usar manipular os recusos do kuberntes, sempre vamos usar a api
+- Gerencia os recursos do cluster (criar pod, deletará Replica Set, criar volume ..)
+- Para usar manipular os recuses do Kubernetes, sempre vamos usar a api
 - Para usar a api usamos o kubctl.
 
 ![image-20211118205810711](assets/image-20211118205810711.png)
