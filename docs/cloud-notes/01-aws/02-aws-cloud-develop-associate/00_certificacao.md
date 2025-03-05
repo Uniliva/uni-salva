@@ -1,5 +1,6 @@
 ---
-title: "Developer Associate"
+title: "Certificação"
+sidebar_position: 0
 ---
 
 :::tip
@@ -8,7 +9,7 @@ Leia sobre a [AWS Certified Developer - Associate. (DVA-C02)](https://aws.amazon
 
 ---
 
-| Dominio | % do exame |
+| Domínio | % do exame |
 | ------- | ---------- |  
 |Domínio 1: Desenvolvimento com os serviços da AWS |32%|
 |Domínio 2: Segurança |26%|
@@ -98,31 +99,6 @@ Armazenamento:
 - [x] Amazon S3
 - [x] Amazon S3 Glacier
 </details>
-
----
-
-## Análise:
-
-> Serviços AWS usado para análise de dados.
-
-### AWS Athena
-
-:::tip
-> Contextualização:
-
- - O que é [AWS Athena](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-athena)
-:::
-
-
----
-
-### Amazon OpenSearch Service
-
-:::tip
-> Contextualização:
-
- - O que é [OpenSearch](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#aws-opensearch)
-:::
 
 ---
 

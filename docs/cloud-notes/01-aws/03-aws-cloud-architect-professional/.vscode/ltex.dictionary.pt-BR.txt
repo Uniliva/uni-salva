@@ -1,0 +1,15 @@
+Policy
+Cognito
+Custom
+Identity
+AssumeRoleWithSAML
+Directory
+Access
+keys
+access
+key
+logs
+Conditions
+token
+MFA
+Federation

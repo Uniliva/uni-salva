@@ -1,0 +1,4 @@
+{"rule":"PT_BARBARISMS_REPLACE","sentence":"^\\QCustom Identity Broker\\E$"}
+{"rule":"CHEMICAL_FORMULAS_TYPOGRAPHY","sentence":"^\\QRoles (funções)\nUsadas para conceder acesso de recursos a recursos (exemplo: acesso ao S3 por um EC2).\\E$"}
+{"rule":"SI_UNITS_EXPONENT","sentence":"^\\QRoles (funções)\nUsadas para conceder acesso de recursos a recursos (exemplo: acesso ao S3 por um EC2).\\E$"}
+{"rule":"REPEATED_WORDS_3X","sentence":"^\\QIAM Permission Boundaries (limite de permissões)\nAo criar usuários ou roles, é possível conceder permissões genéricas (por exemplo, administrador) e definir um limite para essas permissões.\\E$"}
