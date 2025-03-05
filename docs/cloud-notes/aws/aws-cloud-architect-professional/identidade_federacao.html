@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Identidade e Federação | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Identidade e Federação | Uniii docs"><meta data-rh="true" name="description" content="image-20230131205355434"><meta data-rh="true" property="og:description" content="image-20230131205355434"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.9751068b.js" defer="defer"></script>
+<script src="/assets/js/main.fde1f8cf.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">☁️ AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/WWWWWWWWW">xxx</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">☁️ AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Identidade e Federação</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Identidade e Federação</h1></header><p><img decoding="async" loading="lazy" alt="image-20230131205355434" src="/assets/images/image-20230131205355434-71bc91efcc4e922e5bac64f69334cc6a.png" width="945" height="489" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="iam">IAM<a href="#iam" class="hash-link" aria-label="Link direto para IAM" title="Link direto para IAM">​</a></h2>
+<ul>
+<li>Escopo global, controle de acessos.</li>
+<li>Tem como base o princípio do menor privilégio possível.</li>
+<li>Criação de usuários e grupos de usuários; grupos não podem conter outros grupos.</li>
+<li>Atribuem-se políticas de acesso (<strong>IAM Policy</strong>) aos grupos, que concedem acesso a todos os usuários daquele grupo.</li>
+<li><strong>Access keys</strong> usadas para conceder acesso ao AWS CLI e ao AWS SDK.<!-- -->
+<ul>
+<li>É possível usar um serviço de Shell na nuvem (<strong>Cloud Shell</strong>) que gera um CLI sem a necessidade de configurar uma access key.</li>
+</ul>
+</li>
+<li><strong>Roles (funções)</strong>
+<ul>
+<li>Usadas para conceder acesso de recursos a recursos (exemplo: acesso ao S3 por um EC2).</li>
+<li>Criação de roles que dão acesso a recursos sem necessidade de atribuí-las a um usuário ou grupo.</li>
+<li>Podem ser assumidas por recursos, usuários federados ou usuários de outras contas AWS.</li>
+<li>Quando se assume uma role, as permissões que o usuário tinha antes são sobrescritas, ou seja, ele só terá acesso às permissões da role.</li>
+</ul>
+</li>
+<li>Dentro do <strong>IAM</strong>, temos:<!-- -->
+<ul>
+<li><strong>IAM User</strong> - Usuário comum.</li>
+<li><strong>Federated User</strong> - Usuário de fora da organização, como um usuário do <strong>Facebook</strong>, por exemplo.</li>
+<li><strong>IAM Role</strong> - Permissões dadas a recursos, como um EC2 para acessar um S3.</li>
+<li><strong>Identity Provider (IdP)</strong> - Permite acesso customizado a provedores de terceiros e libera acesso via token do STS.</li>
+</ul>
+</li>
+<li><strong>IAM Policies</strong> - Políticas de acesso (permissões).<!-- -->
+<ul>
+<li>Seguem a regra do menor privilégio.</li>
+<li>A validação de acesso é feita automaticamente a cada requisição.</li>
+<li>Podem ser do tipo:<!-- -->
+<ul>
+<li><strong>Identity-based</strong> - Políticas destinadas a usuários, grupos e roles.</li>
+<li><strong>Resource-based</strong> - Políticas atribuídas a recursos para conceder acesso a outros recursos. Ao usar esse modelo em vez de uma role, o usuário não perde os acessos que já possuía.</li>
+</ul>
+</li>
+<li>São escritas em JSON e contêm os campos: <code>Effect</code>, <code>Action</code>, <code>Resource</code>, <code>Condition</code>, <code>Policy Variables</code>.</li>
+<li><strong>Access Advisor</strong> - Permite visualizar as permissões e a última vez que foram utilizadas.</li>
+<li><strong>Access Analyzer</strong>
+<ul>
+<li>Permite analisar quais recursos são compartilhados com entidades externas, como buckets S3.</li>
+<li>Permite definir uma <strong>Zona de Confiança</strong> com contas ou organizações. O que estiver fora dessa zona terá o acesso sinalizado.</li>
+<li>Além disso, há um validador de policies:<!-- -->
+<ul>
+<li>Valida as melhores práticas de escrita de policies.</li>
+<li>Dá sugestões sobre erros, alertas e segurança.</li>
+</ul>
+</li>
+<li>Também é possível gerar policies automaticamente.<!-- -->
+<ul>
+<li>O <strong>AWS Access Analyzer</strong> pode ler os logs do <strong>CloudTrail</strong> e gerar policies com permissões refinadas.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Tags e variáveis</strong>
+<ul>
+<li>Permitem criar policies com recursos genéricos.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>IAM Policy Conditions</strong>
+<ul>
+<li>Permitem adicionar condições nas políticas de acesso da AWS.</li>
+<li>Operações que podem ser usadas nas condições:
+<img decoding="async" loading="lazy" src="/assets/images/2023-01-27-06-34-18-image-1b0c7eab6be04f6da3d5972e61e50f7b.png" width="1080" height="544" class="img_ev3q"></li>
+</ul>
+</li>
+<li><strong>IAM Permission Boundaries</strong> (limite de permissões)<!-- -->
+<ul>
+<li>Ao criar usuários ou <strong>roles</strong>, é possível conceder permissões genéricas (por exemplo, administrador) e definir um <strong>limite</strong> para essas permissões. Exemplo: um usuário pode ser administrador apenas em recursos do S3.</li>
+<li>Suportado apenas por usuários e roles (não por grupos).</li>
+<li><strong>SCP (Service Control Policies)</strong>.
+<img decoding="async" loading="lazy" src="/assets/images/2023-01-27-06-09-29-image-2b0dada4ed99bd6952aecc7f6384e938.png" width="426" height="353" class="img_ev3q">
+<strong>Lógica da avaliação de política:</strong>
+<img decoding="async" loading="lazy" alt="image-20230131195843146" src="/assets/images/image-20230131195843146-f26ba554e24970cc83d719b376c26bd3.png" width="938" height="412" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="mfa-multi-factor-authentication">MFA (Multi-Factor Authentication)<a href="#mfa-multi-factor-authentication" class="hash-link" aria-label="Link direto para MFA (Multi-Factor Authentication)" title="Link direto para MFA (Multi-Factor Authentication)">​</a></h3>
+<ul>
+<li>Existem duas opções via ‘software’ (dispositivo MFA virtual, chave de segurança U2F, como <strong>YubiKey</strong>).</li>
+<li>Há uma opção de equipamento físico (exemplo: token <strong>Gemalto</strong>).</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="iam-security-tools">IAM Security Tools<a href="#iam-security-tools" class="hash-link" aria-label="Link direto para IAM Security Tools" title="Link direto para IAM Security Tools">​</a></h3>
+<ul>
+<li><strong>IAM Credential Report (nível da conta)</strong> → Lista todas as contas de usuário e o status de cada uma.</li>
+<li><strong>IAM Access Advisor</strong> → Mostra os serviços que o usuário tem acesso e a última vez que os utilizou.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="recomendações-básicas">Recomendações básicas<a href="#recomendações-básicas" class="hash-link" aria-label="Link direto para Recomendações básicas" title="Link direto para Recomendações básicas">​</a></h3>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-27-06-10-24-image-91b38c73c010bb4e5cc474f4fe1a68c3.png" width="954" height="643" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sts">STS<a href="#sts" class="hash-link" aria-label="Link direto para STS" title="Link direto para STS">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="assume-role">Assume Role<a href="#assume-role" class="hash-link" aria-label="Link direto para Assume Role" title="Link direto para Assume Role">​</a></h3>
+<ul>
+<li>Criamos as roles e definimos os <strong>principais</strong> que podem acessá-las.</li>
+<li>Geramos credenciais temporárias, que geram um token válido de 15 minutos a 12 horas.</li>
+<li>Onde usar <strong>Assume Role</strong>:<!-- -->
+<ul>
+<li>Para conceder acesso temporário a usuários ou recursos em uma conta onde eles não têm acesso.</li>
+<li>Para conceder acesso a usuários externos à organização (usuários federados).</li>
+</ul>
+</li>
+<li>Permite revogar o acesso à role adicionando um novo bloco <code>Statement</code> ou usando o <strong>AWSRevokeOlderSessions</strong>.</li>
+<li>Lembrando que, ao assumirmos uma role, perdemos nossos acessos anteriores.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="session-tags">Session Tags<a href="#session-tags" class="hash-link" aria-label="Link direto para Session Tags" title="Link direto para Session Tags">​</a></h3>
+<ul>
+<li>Muito utilizadas para usuários federados.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="apis-importantes-do-sts">APIs Importantes do STS<a href="#apis-importantes-do-sts" class="hash-link" aria-label="Link direto para APIs Importantes do STS" title="Link direto para APIs Importantes do STS">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230819201623066" src="/assets/images/image-20230819201623066-22a74a7ebcbb6899c66221048b6606ab.png" width="870" height="362" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="identity-federation--cognito">Identity Federation &amp; Cognito<a href="#identity-federation--cognito" class="hash-link" aria-label="Link direto para Identity Federation &amp; Cognito" title="Link direto para Identity Federation &amp; Cognito">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="identity-federation">Identity Federation<a href="#identity-federation" class="hash-link" aria-label="Link direto para Identity Federation" title="Link direto para Identity Federation">​</a></h3>
+<ul>
+<li>Permite conceder acesso a usuários externos para recursos na sua conta AWS.</li>
+<li>Não é necessário criar um usuário para isso.</li>
+<li>Casos de uso:<!-- -->
+<ul>
+<li>A empresa usa seu próprio sistema de identificação (exemplo: <strong>Active Directory da Microsoft</strong>).</li>
+<li>Uma aplicação web precisa acessar recursos da AWS.</li>
+</ul>
+</li>
+<li>Métodos de implementação:<!-- -->
+<ul>
+<li><strong>SAML 2.0</strong>
+<ul>
+<li>Sigla para <strong>Security Assertion Markup Language 2.0</strong>.</li>
+<li>Padrão aberto, compatível com vários provedores como o <strong>Active Directory</strong>.</li>
+<li><strong>Requer a criação de uma relação de confiança entre o provedor e a AWS.</strong></li>
+<li>Utiliza a API <strong>AssumeRoleWithSAML</strong>.</li>
+<li>Hoje em dia, o <strong>SSO</strong> é mais recomendado por ser mais simples.</li>
+</ul>
+</li>
+<li><strong>Custom Identity Broker</strong>
+<ul>
+<li><strong>Não é compatível com o SAML 2.0</strong>.</li>
+<li>Método mais antigo e menos recomendado.</li>
+</ul>
+</li>
+<li><strong>Web Identity Federation com ou sem Cognito</strong>.<!-- -->
+<ul>
+<li><strong>Sem Cognito:</strong>
+<ul>
+<li>Não recomendado.</li>
+</ul>
+</li>
+<li><strong>Com Cognito:</strong>
+<ul>
+<li>Método recomendado.</li>
+<li>Cria uma role com o menor privilégio possível.</li>
+<li>Estabelece uma relação de confiança entre o provedor de identidade e a AWS.</li>
+<li><strong>Vantagens:</strong>
+<ul>
+<li><strong>Suporta usuários anônimos.</strong></li>
+<li>Suporta <strong>MFA</strong>.</li>
+<li><strong>Sincronização de dados</strong>.</li>
+</ul>
+</li>
+<li>Uma vez concedido o acesso, criam-se policies configuradas com variáveis que restringem o acesso ao usuário apenas ao que foi designado para ele.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Single Sign-On (SSO)</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-directory-service">AWS Directory Service<a href="#aws-directory-service" class="hash-link" aria-label="Link direto para AWS Directory Service" title="Link direto para AWS Directory Service">​</a></h3>
+<p>Forma de usar o <strong>Active Directory</strong> na AWS.</p>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-05-52-47-image-76a9ba5148ec36e5f16639ec1420c2a8.png" width="916" height="486" class="img_ev3q"></p>
+<hr>
+<p><strong>AWS Managed Microsoft AD</strong></p>
+<ul>
+<li>É possível configurar o <strong>Active Directory (AD) em mais de uma VPC.</strong></li>
+<li><strong>EC2 Windows</strong>
+<ul>
+<li>Nele, podem ser executadas aplicações que utilizam o AD, como o <strong>SharePoint</strong>.</li>
+</ul>
+</li>
+<li><strong>Integrações</strong>
+<ul>
+<li>Pode ser integrado com <strong>RDS para SQL, AWS Workspaces e QuickSight</strong>.</li>
+<li>Pode-se usar o <strong>SSO</strong> para fornecer acesso a aplicações de terceiros.</li>
+</ul>
+</li>
+<li>Pode ser usado em conjunto com o <strong>AD do ambiente on-premise</strong>.</li>
+<li>Permite adicionar outros <strong>Domain Controllers (DCs)</strong> para escalabilidade.</li>
+<li>Possui <strong>backups automáticos</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-02-26-image-8f574901880dedc86bd1ba80309a80a4.png" width="1106" height="578" class="img_ev3q"></p>
+<hr>
+<p><strong>Conectando ao AD no On-Premise</strong></p>
+<ul>
+<li>Deve-se estabelecer uma conexão via <strong>Direct Connect ou VPN Connection</strong>.</li>
+<li>A relação de confiança pode ser feita de três formas:<!-- -->
+<ul>
+<li><strong>One-Way Trust</strong>
+<ul>
+<li>AWS → On-Premise</li>
+</ul>
+</li>
+<li><strong>One-Way Trust</strong>
+<ul>
+<li>On-Premise → AWS</li>
+</ul>
+</li>
+<li><strong>Two-Way Forest Trust</strong>
+<ul>
+<li>AWS ⟷ On-Premise</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A relação de confiança <strong>não envolve sincronização</strong>. Ela apenas indica que o AD remoto é válido e confiável.</li>
+<li><strong>Replicação não é suportada.</strong></li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-09-43-image-a1b1f6bdd53ca7da382434cc19f03926.png" width="699" height="528" class="img_ev3q"></p>
+<p><strong>Criando um Processo de Replicação na Nuvem</strong></p>
+<ul>
+<li>Para criar um <strong>processo de replicação</strong> do AD na nuvem, deve-se:<!-- -->
+<ul>
+<li>Instalar uma <strong>réplica do AD em uma instância EC2</strong>.</li>
+<li>Criar a <strong>relação de confiança com o AWS Managed AD</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-12-50-image-66e038c9da6ddaceebea359eb19eb391.png" width="1238" height="520" class="img_ev3q"></p>
+<hr>
+<p><strong>AD Connector</strong></p>
+<ul>
+<li>Permite criar um <strong>gateway para o AD no On-Premise</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-14-36-image-ab37fa5175de10c42fb61efd10b6c388.png" width="1247" height="709" class="img_ev3q"></p>
+<hr>
+<p><strong>Simple AD</strong></p>
+<ul>
+<li>Serviço básico de Active Directory oferecido pela AWS.</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-17-06-image-698a8045e28766b424760f6a1d132b75.png" width="1240" height="615" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-organizations">AWS Organizations<a href="#aws-organizations" class="hash-link" aria-label="Link direto para AWS Organizations" title="Link direto para AWS Organizations">​</a></h2>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-18-39-image-11d5d6a7c04816cafcadfc36902a6803.png" width="762" height="459" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="principais-recursos">Principais Recursos<a href="#principais-recursos" class="hash-link" aria-label="Link direto para Principais Recursos" title="Link direto para Principais Recursos">​</a></h3>
+<ul>
+<li>Consolida <strong>múltiplas contas</strong> em uma única estrutura organizacional.</li>
+<li>Permite <strong>unificar a fatura</strong> de pagamento e custos (<strong>Consolidated Billing</strong>).</li>
+<li>Centraliza <strong>auditoria, monitoramento e segurança</strong> em uma única conta.</li>
+<li>Há um <strong>limite de 20 contas</strong> por organização (esse limite pode ser aumentado via suporte AWS).</li>
+<li>Com <strong>AWS Organizations</strong>, é possível definir <strong>políticas de acesso a recursos (SCPs)</strong> aplicáveis às contas.<!-- -->
+<ul>
+<li><strong>Exemplo:</strong> se quiser que a conta de desenvolvimento não tenha acesso ao <strong>Athena</strong>, basta criar uma <strong>SCP</strong> restringindo esse serviço e aplicá-la na conta de desenvolvimento.</li>
+</ul>
+</li>
+<li>Na AWS, quando falamos em permissões, o <strong>DENY</strong> sempre tem maior precedência que o <strong>ALLOW</strong>.<!-- -->
+<ul>
+<li><strong>Exemplo:</strong> se um recurso for negado na <strong>OU Prod</strong>, ele estará <strong>negado</strong> na <strong>OU HR</strong>, mesmo que uma política conceda acesso.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Organização das Contas</strong></p>
+<ul>
+<li>As contas podem ser organizadas de diferentes formas:<!-- -->
+<ul>
+<li><strong>BU (Business Unit)</strong> → Unidades de negócio (ex.: vendas, financeiro, cobrança).</li>
+<li><strong>Ambientes</strong> → Produção, desenvolvimento, homologação.</li>
+<li><strong>Projetos</strong> → Projetos específicos (ex.: Ultron, Mark 1, SpaceX).</li>
+</ul>
+</li>
+</ul>
+<p><strong>Role OrganizationAccountAccessRole</strong></p>
+<ul>
+<li>A role <strong>OrganizationAccountAccessRole</strong> permite que os usuários que a assumem tenham permissões administrativas dentro da conta.<!-- -->
+<ul>
+<li>Com ela, é possível criar novos usuários.</li>
+<li><strong>Essa role é criada automaticamente ao criar uma conta dentro de uma OU.</strong>
+<ul>
+<li><strong>Porém, se a conta já existir e for adicionada à OU via convite, a role precisa ser criada manualmente.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Instâncias Reservadas e Economia</strong></p>
+<ul>
+<li>Se houver um plano de <strong>instâncias reservadas</strong>, ele pode ser utilizado por qualquer <strong>conta dentro da organização</strong>.<!-- -->
+<ul>
+<li>Isso permite uma grande economia, pois a instância reservada estará sempre em uso.</li>
+</ul>
+</li>
+<li>Com <strong>AWS Organizations</strong>, é possível gerenciar <strong>contratos de instâncias reservadas</strong> e <strong>Savings Plans</strong> de todas as contas associadas.</li>
+</ul>
+<p><strong>Migrando uma Conta para Outra Organização</strong></p>
+<ol>
+<li><strong>Remova a conta</strong> da organização antiga.</li>
+<li><strong>Envie um convite</strong> para a nova organização.</li>
+<li><strong>Aceite o convite</strong> na conta migrada.</li>
+</ol>
+<p><img decoding="async" loading="lazy" src="/assets/images/2023-01-31-06-44-23-image-7789a2826f5f78309fefa3f17186cdd0.png" width="1203" height="305" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="service-control-policies-scp">Service Control Policies (SCP)<a href="#service-control-policies-scp" class="hash-link" aria-label="Link direto para Service Control Policies (SCP)" title="Link direto para Service Control Policies (SCP)">​</a></h3>
+<ul>
+<li>Define <strong>lista de ações permitidas ou bloqueadas</strong> no IAM.</li>
+<li>Aplicável a <strong>OUs e Contas</strong>.</li>
+<li><strong>Não se aplica</strong> à conta de gerenciamento.</li>
+<li><strong>Afeta todos os usuários e roles</strong> de uma conta, incluindo o <strong>usuário Root</strong>.</li>
+<li><strong>Não se aplica a roles que interligam serviços</strong> (ex.: roles que integram com <strong>AWS Organizations</strong>).</li>
+<li>Por padrão, <strong>não permitem nada</strong>, exigindo permissões explícitas.</li>
+</ul>
+<p><strong>Casos de Uso</strong></p>
+<ul>
+<li>
+<p><strong>Restringir acesso a serviços em uma conta ou OU.</strong></p>
+<ul>
+<li>Exemplo: bloquear o uso do <strong>EMR</strong>.<br>
+<img decoding="async" loading="lazy" src="/assets/images/image-20230131195742445-3dc93514efe3322a545b3ed7b634d8e6.png" width="1010" height="488" class="img_ev3q"></li>
+</ul>
+</li>
+<li>
+<p><strong>Exigir que os usuários adicionem tags nos recursos.</strong></p>
+<ul>
+<li><strong>Exemplo:</strong> Restringir o uso de certas tags por usuários.<br>
+<img decoding="async" loading="lazy" src="/assets/images/image-20230131200305779-e6abb6a0583a77475ad61f98d94f69b1.png" width="999" height="502" class="img_ev3q"></li>
+<li><strong>Obrigar o uso de tags para criar recursos</strong> (sem tags, a criação será bloqueada).<br>
+<img decoding="async" loading="lazy" src="/assets/images/image-20230131200756847-c772ba2515d4b4ce05f9590b33d5483f.png" width="982" height="505" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tag-policys">Tag Policys<a href="#tag-policys" class="hash-link" aria-label="Link direto para Tag Policys" title="Link direto para Tag Policys">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230131200944909" src="/assets/images/image-20230131200944909-895ca82a68ae1d0f87c71ee66ce3b800.png" width="957" height="516" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ai-services">AI Services<a href="#ai-services" class="hash-link" aria-label="Link direto para AI Services" title="Link direto para AI Services">​</a></h3>
+<ul>
+<li>A AWS usa seus dados para Melhorar a IA, caso queira desabilitar essa funcionalidade deve se criar uma police.
+<img decoding="async" loading="lazy" alt="image-20230131201130472" src="/assets/images/image-20230131201130472-5bc9d2c7ca7ac64dcea4d0e37af85757.png" width="961" height="518" class="img_ev3q"></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="backup-police">Backup police<a href="#backup-police" class="hash-link" aria-label="Link direto para Backup police" title="Link direto para Backup police">​</a></h3>
+<ul>
+<li>Permite criar regras de backup
+<img decoding="async" loading="lazy" alt="image-20230131201536580" src="/assets/images/image-20230131201536580-8288dedd893e071b79ba30d6a5099fa1.png" width="970" height="463" class="img_ev3q"></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-iam-identity-center">AWS IAM Identity Center<a href="#aws-iam-identity-center" class="hash-link" aria-label="Link direto para AWS IAM Identity Center" title="Link direto para AWS IAM Identity Center">​</a></h2>
+<p><strong>Sucessor do AWS Single Sign-On (SSO).</strong></p>
+<ul>
+<li><strong>Um único login</strong> para acessar <strong>todas as contas</strong> da sua organização na AWS.</li>
+<li>Permite acesso a <strong>aplicações de terceiros</strong>, como <strong>Salesforce</strong> e <strong>Office 365</strong>.</li>
+<li>Compatível com <strong>aplicações que suportam SAML 2.0</strong>.</li>
+<li>Pode ser utilizado para login em <strong>instâncias EC2 com Windows</strong>.</li>
+</ul>
+<p><strong>Integração com Provedores de Identidade (IdP)</strong></p>
+<ul>
+<li>Permite integração com <strong>Active Directory (AD)</strong> ou outros provedores de identidade.</li>
+<li>Possibilita a <strong>gestão centralizada de usuários e grupos</strong> dentro da AWS.</li>
+</ul>
+<p><strong>Arquitetura do AWS IAM Identity Center</strong></p>
+<ul>
+<li>O serviço permite criar uma <strong>estrutura organizada de usuários e grupos</strong> dentro da AWS.<!-- -->
+<ul>
+<li><strong>Facilita o gerenciamento de permissões e acessos</strong> em múltiplas contas.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230131202516255" src="/assets/images/image-20230131202516255-c6bde1646402a826905d2ce78a6e45f7.png" width="983" height="528" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="image-20230131202644744" src="/assets/images/image-20230131202644744-0436bac767dc17771a5e95b1b0352494.png" width="933" height="514" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-control-tower">AWS Control Tower<a href="#aws-control-tower" class="hash-link" aria-label="Link direto para AWS Control Tower" title="Link direto para AWS Control Tower">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-iam-identity-center-1">AWS IAM Identity Center<a href="#aws-iam-identity-center-1" class="hash-link" aria-label="Link direto para AWS IAM Identity Center" title="Link direto para AWS IAM Identity Center">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230309193510226" src="/assets/images/image-20230309193510226-fc882bdd7536b293d7cb0502d3c12def.png" width="992" height="504" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="image-20230309192640760" src="/assets/images/image-20230309192640760-aa4b5fcb9fa8cb79a7613616bdc46708.png" width="1054" height="591" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="image-20230309192736039" src="/assets/images/image-20230309192736039-2fce89bc1362f4b7dae31a0d8e9e4015.png" width="1031" height="557" class="img_ev3q"></p>
+<p><strong>O que é o AWS IAM Identity Center?</strong></p>
+<ul>
+<li>É uma <strong>maneira simplificada e eficiente</strong> de configurar e governar um ambiente <strong>seguro e compatível</strong> para múltiplas contas AWS, seguindo as <strong>melhores práticas recomendadas</strong>.</li>
+</ul>
+<p><strong>Landing Zone</strong></p>
+<ul>
+<li><strong>Conjunto de boas práticas recomendadas pela AWS.</strong></li>
+<li>Permite configurar um ambiente seguro, escalável e segue padrões recomendados.</li>
+<li><strong>Control Tower</strong> é o serviço AWS que ajuda a implementar uma <strong>Landing Zone</strong> de forma automatizada.</li>
+</ul>
+<p><strong>Benefícios</strong></p>
+<ul>
+<li>
+<p><strong>Automação simplificada</strong> → Configuração do ambiente em poucos cliques.</p>
+</li>
+<li>
+<p><strong>Aplicação de políticas de governança</strong> usando <strong>guardrails</strong> (regras pré-configuradas).</p>
+<ul>
+<li><strong>Aplicadas no nível de Organização (OU).</strong></li>
+<li><strong>Tipos de guardrails:</strong>
+<ul>
+<li><strong>Preventivos</strong> → Utilizam <strong>SCPs</strong> (Service Control Policies) para <strong>desativar recursos</strong> ou <strong>bloquear ações indesejadas</strong>.</li>
+<li><strong>Detetivos</strong> → Utilizam <strong>AWS Config</strong> para validar se as configurações das contas estão corretas.<br>
+<img decoding="async" loading="lazy" alt="image-20230131204036833" src="/assets/images/image-20230131204036833-9a9b898888fac6edd7de0268fda269cf.png" width="833" height="258" class="img_ev3q"></li>
+</ul>
+</li>
+<li><strong>Níveis de guardrails:</strong>
+<ul>
+<li><strong>Mandatórios</strong> → Obrigatórios, geralmente relacionados à segurança (ex.: desabilitar acesso a determinado recurso).</li>
+<li><strong>Fortemente Recomendados</strong> → Baseados em boas práticas (ex.: criptografar dados do <strong>EBS</strong>).</li>
+<li><strong>Eletivos</strong> → Definidos pela empresa para um propósito específico (ex.: padronização de nomes no <strong>S3</strong>).<br>
+<img decoding="async" loading="lazy" alt="image-20230309193113465" src="/assets/images/image-20230309193113465-16828abc4b9a1f40b0c7708f16904fa9.png" width="1042" height="464" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Monitoramento e Correção Automática</strong></p>
+<ul>
+<li>Detecta <strong>violações de políticas</strong> e pode corrigi-las automaticamente.</li>
+<li>Permite monitorar a conformidade do ambiente por meio de um <strong>painel de controle interativo</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Fábrica de Contas</strong></p>
+<ul>
+<li>Permite a <strong>criação e configuração automatizada de novas contas AWS</strong>.</li>
+<li>Define como serão configurados os <strong>recursos da conta</strong> (ex.: <strong>VPC, Security Groups</strong>).</li>
+<li>Utiliza <strong>AWS Service Catalog</strong> para provisionar novas contas.<br>
+<img decoding="async" loading="lazy" alt="image-20230309193317976" src="/assets/images/image-20230309193317976-f8fb3b13890cc24ae78c650ee97c6cc5.png" width="1053" height="576" class="img_ev3q"></li>
+</ul>
+<p><strong>Como funciona a automação de novas contas?</strong></p>
+<ul>
+<li>O processo de criação e configuração das contas pode ser <strong>totalmente automatizado</strong>, garantindo conformidade e segurança desde o início.<br>
+<img decoding="async" loading="lazy" alt="image-20230309193740658" src="/assets/images/image-20230309193740658-cb46b52a2ff378d2bc6d2bd8d0e7480c.png" width="850" height="418" class="img_ev3q"></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-resource-access-manager-ram">AWS Resource Access Manager (RAM)<a href="#aws-resource-access-manager-ram" class="hash-link" aria-label="Link direto para AWS Resource Access Manager (RAM)" title="Link direto para AWS Resource Access Manager (RAM)">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="RAM" src="/assets/images/image-20210907133859114-7de43d78b5a52d660587c31bea803e6c.png" width="637" height="439" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="o-que-é-o-aws-ram">O que é o AWS RAM?<a href="#o-que-é-o-aws-ram" class="hash-link" aria-label="Link direto para O que é o AWS RAM?" title="Link direto para O que é o AWS RAM?">​</a></h3>
+<ul>
+<li>O <strong>AWS Resource Access Manager (RAM)</strong> permite <strong>compartilhar recursos</strong> entre contas na mesma <strong>AWS Organizations</strong>.</li>
+<li><strong>Benefícios:</strong>
+<ul>
+<li><strong>Evita duplicação de recursos</strong>, reduzindo custos e complexidade.</li>
+<li><strong>Mantém o controle</strong> → Somente o dono do recurso compartilhado pode excluí-lo.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="recursos-que-podem-ser-compartilhados-no-aws-ram">Recursos que podem ser compartilhados no AWS RAM<a href="#recursos-que-podem-ser-compartilhados-no-aws-ram" class="hash-link" aria-label="Link direto para Recursos que podem ser compartilhados no AWS RAM" title="Link direto para Recursos que podem ser compartilhados no AWS RAM">​</a></h3>
+<p>A seguir, alguns dos recursos que podem ser compartilhados entre contas AWS:</p>
+<ul>
+<li><strong>AWS App Mesh</strong> → Serviço de malha de serviços para comunicação segura entre microsserviços.</li>
+<li><strong>Amazon Aurora</strong> → Banco de dados relacional totalmente gerenciado, compatível com MySQL e PostgreSQL.</li>
+<li><strong>AWS Certificate Manager Private Certificate Authority (ACM PCA)</strong> → Gerenciamento e emissão de certificados privados.</li>
+<li><strong>AWS CodeBuild</strong> → Serviço de compilação e testes contínuos para desenvolvimento de software.</li>
+<li><strong>Amazon EC2</strong> → Serviço de computação na nuvem para executar servidores virtuais.</li>
+<li><strong>EC2 Image Builder</strong> → Automatiza a criação e manutenção de imagens seguras do Amazon Machine Image (AMI).</li>
+<li><strong>AWS Glue</strong> → Serviço de ETL para integração e transformação de dados.</li>
+<li><strong>AWS License Manager</strong> → Gerenciamento centralizado de licenças de software na AWS.</li>
+<li><strong>AWS Network Firewall</strong> → Firewall gerenciado para proteger redes VPC.</li>
+<li><strong>AWS Outposts</strong> → Infraestrutura AWS em data centers locais para ambientes híbridos.</li>
+<li><strong>Amazon S3 on Outposts</strong> → Armazenamento de objetos do S3 disponível em ambientes locais usando AWS Outposts.</li>
+<li><strong>AWS Resource Groups</strong> → Organização e gerenciamento de recursos AWS por grupos lógicos.</li>
+<li><strong>Amazon Route 53</strong> → Serviço de DNS escalável e altamente disponível.</li>
+<li><strong>AWS Systems Manager Incident Manager</strong> → Gerenciamento de incidentes e resposta a falhas.</li>
+<li><strong>Amazon VPC</strong> → Serviço para criação de redes virtuais privadas na AWS.</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/01_identidade_federacao.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Certificação</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Questões da prova</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#iam" class="table-of-contents__link toc-highlight">IAM</a><ul><li><a href="#mfa-multi-factor-authentication" class="table-of-contents__link toc-highlight">MFA (Multi-Factor Authentication)</a></li><li><a href="#iam-security-tools" class="table-of-contents__link toc-highlight">IAM Security Tools</a></li><li><a href="#recomendações-básicas" class="table-of-contents__link toc-highlight">Recomendações básicas</a></li></ul></li><li><a href="#sts" class="table-of-contents__link toc-highlight">STS</a><ul><li><a href="#assume-role" class="table-of-contents__link toc-highlight">Assume Role</a></li><li><a href="#session-tags" class="table-of-contents__link toc-highlight">Session Tags</a></li><li><a href="#apis-importantes-do-sts" class="table-of-contents__link toc-highlight">APIs Importantes do STS</a></li></ul></li><li><a href="#identity-federation--cognito" class="table-of-contents__link toc-highlight">Identity Federation &amp; Cognito</a><ul><li><a href="#identity-federation" class="table-of-contents__link toc-highlight">Identity Federation</a></li><li><a href="#aws-directory-service" class="table-of-contents__link toc-highlight">AWS Directory Service</a></li></ul></li><li><a href="#aws-organizations" class="table-of-contents__link toc-highlight">AWS Organizations</a><ul><li><a href="#principais-recursos" class="table-of-contents__link toc-highlight">Principais Recursos</a></li><li><a href="#service-control-policies-scp" class="table-of-contents__link toc-highlight">Service Control Policies (SCP)</a></li><li><a href="#tag-policys" class="table-of-contents__link toc-highlight">Tag Policys</a></li><li><a href="#ai-services" class="table-of-contents__link toc-highlight">AI Services</a></li><li><a href="#backup-police" class="table-of-contents__link toc-highlight">Backup police</a></li></ul></li><li><a href="#aws-iam-identity-center" class="table-of-contents__link toc-highlight">AWS IAM Identity Center</a></li><li><a href="#aws-control-tower" class="table-of-contents__link toc-highlight">AWS Control Tower</a></li><li><a href="#aws-iam-identity-center-1" class="table-of-contents__link toc-highlight">AWS IAM Identity Center</a></li><li><a href="#aws-resource-access-manager-ram" class="table-of-contents__link toc-highlight">AWS Resource Access Manager (RAM)</a><ul><li><a href="#o-que-é-o-aws-ram" class="table-of-contents__link toc-highlight">O que é o AWS RAM?</a></li><li><a href="#recursos-que-podem-ser-compartilhados-no-aws-ram" class="table-of-contents__link toc-highlight">Recursos que podem ser compartilhados no AWS RAM</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
