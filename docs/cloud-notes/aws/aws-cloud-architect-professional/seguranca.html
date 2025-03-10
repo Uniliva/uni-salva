@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/seguranca" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Segurança | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Segurança | Uniii docs"><meta data-rh="true" name="description" content="AWS CloudTrail"><meta data-rh="true" property="og:description" content="AWS CloudTrail"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.f42f6ebf.js" defer="defer"></script>
+<script src="/assets/js/main.63efd3a2.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">☁️ AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/WWWWWWWWW">xxx</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">☁️ AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Segurança</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Segurança</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cloudtrail">AWS CloudTrail<a href="#aws-cloudtrail" class="hash-link" aria-label="Link direto para AWS CloudTrail" title="Link direto para AWS CloudTrail">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="cloud-trail" src="/assets/images/image-20210906211912761-1b52c2f75d068bb964b91b8a8aeda7d3.png" width="1041" height="438" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Proporciona <strong>governança, compliance e auditoria</strong>, permitindo rastrear ações realizadas na conta.</li>
+<li>Habilitado por padrão e sem custo inicial.</li>
+<li>Coleta informações do <strong>SDK, Console, CLI, IAM Users e IAM Roles</strong>.</li>
+<li>Permite visualizar todas as ações realizadas na conta (inclusão, criação ou exclusão de recursos).</li>
+<li>Monitora todas as chamadas de <strong>API</strong> na conta.</li>
+<li>Armazena os logs por <strong>90 dias no CloudTrail</strong>. Para retenção maior, é possível configurar o armazenamento no <strong>Amazon S3</strong> (não habilitado por padrão).</li>
+<li>Aplicado por padrão em todas as regiões da AWS.</li>
+<li>Pode ser habilitado para monitorar todas as contas da organização ou apenas uma conta específica.</li>
+</ul>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="tipos-de-eventos-analisados">Tipos de Eventos Analisados<a href="#tipos-de-eventos-analisados" class="hash-link" aria-label="Link direto para Tipos de Eventos Analisados" title="Link direto para Tipos de Eventos Analisados">​</a></h4>
+<blockquote>
+<p>Eventos Gerenciados</p>
+</blockquote>
+<ul>
+<li>Eventos relacionados a operações feitas em recursos, como:<!-- -->
+<ul>
+<li>Criação de regras, buckets S3, instâncias EC2 e modificações em recursos.</li>
+<li>Separação entre eventos de <strong>leitura e escrita</strong>.</li>
+<li><strong>Análise manual</strong> necessária para identificar possíveis problemas.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Eventos de Dados</p>
+</blockquote>
+<ul>
+<li><strong>Não são logados por padrão</strong>. Devem ser habilitados manualmente e possuem custo adicional.</li>
+<li>Operam no <strong>nível de objeto</strong>, sendo aplicáveis a serviços como:<!-- -->
+<ul>
+<li><strong>AWS Lambda</strong> (invocação de funções).</li>
+<li><strong>Amazon S3</strong> (criação, remoção e recuperação de objetos).</li>
+<li><strong>Amazon DynamoDB</strong> (operações em itens da tabela).</li>
+</ul>
+</li>
+<li>Eventos são separados entre <strong>leitura e escrita</strong>.</li>
+<li><strong>Análise manual</strong> necessária para investigação de problemas.</li>
+</ul>
+<blockquote>
+<p>CloudTrail Insights</p>
+</blockquote>
+<ul>
+<li>Utilizado para detectar <strong>anomalias e padrões incomuns</strong> na conta.</li>
+<li><strong>Análise automática</strong> baseada em <strong>inteligência artificial</strong> para identificar:<!-- -->
+<ul>
+<li>Uso excessivo de recursos.</li>
+<li>Limites atingidos (<strong>soft</strong> e <strong>hard limits</strong>).</li>
+</ul>
+</li>
+<li>Integração com <strong>Amazon EventBridge</strong> para envio de notificações automáticas.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="insights" src="/assets/images/image-20210906212303526-b4d980c9cddc1c33bbb6add6b83a1b4b.png" width="1113" height="190" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="arquiteturas-de-solução-cloudtrail">Arquiteturas de Solução CloudTrail<a href="#arquiteturas-de-solução-cloudtrail" class="hash-link" aria-label="Link direto para Arquiteturas de Solução CloudTrail" title="Link direto para Arquiteturas de Solução CloudTrail">​</a></h3>
+<blockquote>
+<p>Integração do CloudTrail com o Amazon S3</p>
+</blockquote>
+<ul>
+<li>Possibilita armazenar logs de eventos de forma persistente.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230202053730049" src="/assets/images/image-20230202053730049-919e3a48088c36029f60492a7b5d32e6.png" width="1080" height="436" class="img_ev3q"></p>
+<blockquote>
+<p>Monitoramento de Várias Contas e Regiões</p>
+</blockquote>
+<ul>
+<li>Permite centralizar logs de diferentes contas e regiões em um único local.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230202054026755" src="/assets/images/image-20230202054026755-b43e000b23e526be1f9a1c1b50af839e.png" width="983" height="446" class="img_ev3q"></p>
+<blockquote>
+<p>Alertas via Chamadas de API</p>
+</blockquote>
+<ul>
+<li>Possibilidade de configurar alertas para eventos específicos, como:<!-- -->
+<ul>
+<li><strong>Desligamento ou remoção de instâncias EC2</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230202054303139" src="/assets/images/image-20230202054303139-15aa9ea77da759431a1c97635f4935a3.png" width="1027" height="407" class="img_ev3q"></p>
+<blockquote>
+<p>Uso do CloudTrail em uma Organização</p>
+</blockquote>
+<ul>
+<li>Estratégia para monitoramento e auditoria de múltiplas contas dentro de uma organização AWS.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230202054456250" src="/assets/images/image-20230202054456250-48a9bebf35b999a06c1d2eae2a290138.png" width="1094" height="454" class="img_ev3q"></p>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="como-reagir-a-eventos-o-mais-rápido-possível">Como Reagir a Eventos o Mais Rápido Possível<a href="#como-reagir-a-eventos-o-mais-rápido-possível" class="hash-link" aria-label="Link direto para Como Reagir a Eventos o Mais Rápido Possível" title="Link direto para Como Reagir a Eventos o Mais Rápido Possível">​</a></h4>
+<p>Os eventos no CloudTrail podem levar até <strong>15 minutos</strong> para serem processados. Para acelerar a reação a eventos importantes, algumas estratégias incluem:</p>
+<blockquote>
+<p>Amazon EventBridge</p>
+</blockquote>
+<ul>
+<li>Pode <strong>disparar eventos</strong> a partir de qualquer chamada de API no CloudTrail.</li>
+<li><strong>Método mais rápido</strong> para reagir a eventos críticos.</li>
+</ul>
+<blockquote>
+<p>Amazon CloudWatch Logs</p>
+</blockquote>
+<ul>
+<li>Permite <strong>streaming de logs</strong> diretamente para o CloudWatch.</li>
+<li>Possibilita a criação de <strong>filtros</strong> para análise e detecção de anomalias.</li>
+</ul>
+<blockquote>
+<p>Armazenamento no Amazon S3</p>
+</blockquote>
+<ul>
+<li>O CloudTrail envia logs para o <strong>Amazon S3 em aproximadamente 5 minutos</strong>.</li>
+<li>É possível <strong>analisar os logs</strong> e disparar ações automáticas, além de armazenar os dados para auditoria.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-kms">AWS KMS<a href="#aws-kms" class="hash-link" aria-label="Link direto para AWS KMS" title="Link direto para AWS KMS">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li><strong>AWS KMS (Key Management Service)</strong> é o serviço de gerenciamento de chaves de criptografia da AWS.</li>
+<li><strong>Não é possível baixar as chaves</strong> gerenciadas pelo KMS.</li>
+<li>Permite criar, gerenciar e controlar o uso de chaves de criptografia na AWS.</li>
+<li>Serviços que Possuem a Opção de Criptografia<!-- -->
+<ul>
+<li><strong>EBS, S3, RedShift, RDS, EFS</strong>, entre outros.</li>
+</ul>
+</li>
+<li>Serviços com Criptografia Ativada por Padrão<!-- -->
+<ul>
+<li><strong>CloudTrail Logs, S3 Glacier, Storage Gateway</strong>, entre outros.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Importação de Chaves Externas</p>
+</blockquote>
+<ul>
+<li>Permite importar uma chave gerada externamente.</li>
+<li>A AWS <strong>não</strong> gerencia essa chave, ficando a responsabilidade por conta do usuário.</li>
+<li>Apenas chaves <strong>simétricas</strong> são suportadas.</li>
+</ul>
+<blockquote>
+<p>CloudHSM - Hardware Security Module</p>
+</blockquote>
+<ul>
+<li>A AWS fornece um <strong>hardware dedicado</strong> para gerenciamento de chaves criptográficas.</li>
+<li><strong>A AWS não tem acesso ao hardware após a provisão</strong>, então, se o acesso for perdido, não há como recuperá-lo.</li>
+<li>O hardware é <strong>resistente a alterações</strong> e possui certificação <strong>FIPS 140-2 Level 3 Compliance</strong>.</li>
+<li>Suporta <strong>criptografia simétrica e assimétrica</strong>.</li>
+<li>O <strong>Amazon Redshift</strong> suporta criptografia via HSM.</li>
+<li>É possível distribuir múltiplos <strong>CloudHSM</strong> em diferentes <strong>Zonas de Disponibilidade (AZs)</strong> para aumentar a <strong>disponibilidade</strong>.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="tipos-de-chaves">Tipos de Chaves<a href="#tipos-de-chaves" class="hash-link" aria-label="Link direto para Tipos de Chaves" title="Link direto para Tipos de Chaves">​</a></h4>
+<p><img decoding="async" loading="lazy" alt="image-20230202060448371" src="/assets/images/image-20230202060448371-f43cb5a5c6825ce385806afbef201cbb.png" width="966" height="224" class="img_ev3q"></p>
+<blockquote>
+<p>Customer Master Keys (CMK - Chaves Gerenciadas pelo Usuário)</p>
+</blockquote>
+<ul>
+<li>Criadas pelo usuário dentro do <strong>AWS KMS</strong> ou <strong>CloudHSM</strong>.</li>
+<li>Podem ser <strong>deletadas</strong> ou <strong>modificadas</strong>.</li>
+<li>É possível habilitar <strong>rotação automática</strong> da chave a cada <strong>1 ano</strong>.</li>
+<li>A rotação manual também é possível, sendo <strong>recomendada para chaves assimétricas</strong>.</li>
+<li><strong>Custos</strong>:<!-- -->
+<ul>
+<li>$1 por mês por chave.</li>
+<li>$0.003 a cada <strong>1.000 chamadas</strong> à API.</li>
+</ul>
+</li>
+<li><strong>Tipos de Chaves</strong>:<!-- -->
+<ul>
+<li><strong>Simétricas (AES-256)</strong>:<!-- -->
+<ul>
+<li>Todos os serviços da AWS utilizam esse tipo de chave.</li>
+<li>O usuário <strong>não</strong> tem acesso direto à chave.</li>
+<li>Para criptografar ou descriptografar, é necessário usar a API do KMS.</li>
+</ul>
+</li>
+<li><strong>Assimétricas (RSA &amp; ECC Key Pairs)</strong>:<!-- -->
+<ul>
+<li>São compostas por um <strong>par de chaves</strong>:<!-- -->
+<ul>
+<li><strong>Chave pública</strong>: usada para criptografar dados.</li>
+<li><strong>Chave privada</strong>: usada para descriptografar dados (não é acessível pelo usuário).</li>
+</ul>
+</li>
+<li><strong>Casos de uso</strong>:<!-- -->
+<ul>
+<li>Criptografar dados <strong>fora da AWS</strong>, onde não se pode chamar a API do KMS.</li>
+<li>Assinatura digital de objetos.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Chaves Gerenciadas pela AWS (CMK)</p>
+</blockquote>
+<ul>
+<li>Criadas e gerenciadas pela <strong>AWS</strong> (sem acesso para o usuário).</li>
+<li>Possuem <strong>rotação automática</strong> a cada <strong>1 ano</strong>.</li>
+<li><strong>Não possuem custo adicional</strong>.</li>
+<li>São usadas por serviços da AWS, como:<!-- -->
+<ul>
+<li><strong>EBS, S3, RedShift, RDS, EFS</strong>.</li>
+</ul>
+</li>
+<li>São identificadas com nomes como:<!-- -->
+<ul>
+<li><code>aws/rds</code>, <code>aws/ebs</code>, <code>aws/service-name</code>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Chaves Próprias da AWS</p>
+</blockquote>
+<ul>
+<li>Criadas pela AWS para seus próprios serviços (sem acesso ou visualização pelo usuário).</li>
+<li>Usadas em:<!-- -->
+<ul>
+<li><strong>SSE-S3</strong>, <strong>SSE-SQS</strong>, <strong>SSE-DynamoDB</strong>.</li>
+</ul>
+</li>
+<li><strong>Não possuem custo adicional</strong>.</li>
+</ul>
+<blockquote>
+<p>Chaves do CloudHSM</p>
+</blockquote>
+<ul>
+<li>Criadas usando <strong>CloudHSM</strong> (<strong>Hardware Security Module</strong>).</li>
+<li>Replicadas automaticamente em múltiplas <strong>Zonas de Disponibilidade (AZs)</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="cloudhsm" src="/assets/images/image-20210907151911356-3a23b0d5131e73a3f1466e861c76adb8.png" width="967" height="434" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="hms-kms" src="/assets/images/image-20210907152024180-fdbf50d6f10e6b401bbaba15e9b5e83a.png" width="1002" height="287" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="kms-em-múltiplas-regiões">KMS em Múltiplas Regiões<a href="#kms-em-múltiplas-regiões" class="hash-link" aria-label="Link direto para KMS em Múltiplas Regiões" title="Link direto para KMS em Múltiplas Regiões">​</a></h4>
+<ul>
+<li>Permite <strong>criptografar dados em uma região</strong> e <strong>descriptografar em outra</strong>.</li>
+<li>O <strong>KMS não é um serviço global</strong>. Ele opera de forma <strong>multi-regional com replicação</strong>, onde cada KMS regional é gerenciado separadamente.</li>
+<li><strong>Casos de uso</strong>:<!-- -->
+<ul>
+<li><strong>Disaster Recovery</strong>.</li>
+<li><strong>Gerenciamento Global de Dados</strong> (ex.: <strong>DynamoDB Global Tables</strong>).</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230202061204254" src="/assets/images/image-20230202061204254-0a6528b5371af243fe25892fcebff9b8.png" width="869" height="475" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="arquiteturas-de-solução-ssl-e-kms">Arquiteturas de Solução SSL E KMS<a href="#arquiteturas-de-solução-ssl-e-kms" class="hash-link" aria-label="Link direto para Arquiteturas de Solução SSL E KMS" title="Link direto para Arquiteturas de Solução SSL E KMS">​</a></h3>
+<p>Arquiteturas de solução para implementação de SSL em aplicações hospedadas na AWS.</p>
+<blockquote>
+<p><strong>SSL no ALB (Application Load Balancer)</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Essa é a forma mais comum de implementar SSL na AWS.</p>
+</li>
+<li>
+<p>O ALB usa o <strong>AWS Certificate Manager (ACM)</strong> para validar os certificados SSL.</p>
+</li>
+<li>
+<p>A comunicação entre o ALB e os servidores backend ocorre via HTTP, reduzindo o consumo de CPU nas instâncias EC2, pois elas não precisam processar a criptografia SSL.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230207050311492" src="/assets/images/image-20230207050311492-68b71bfee433d2c32c449f17e50e032a.png" width="639" height="475" class="img_ev3q"></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>SSL nos Web Services com instâncias EC2</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Usa-se um <strong>Network Load Balancer (NLB)</strong> para encaminhar o tráfego HTTPS até as instâncias EC2.</p>
+</li>
+<li>
+<p>No entanto, essa abordagem tem desvantagens:</p>
+<ul>
+<li>Consome mais memória nas instâncias EC2.</li>
+<li>Cada instância EC2 precisa ter um certificado SSL configurado.</li>
+<li>O certificado deve ser recuperado no boot do sistema a partir do <strong>AWS Systems Manager Parameter Store</strong>, utilizando um script no <strong>User Data</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230207050747416" src="/assets/images/image-20230207050747416-4afd0a153c3ab8a5192f933c1aead40d.png" width="1105" height="481" class="img_ev3q"></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Cloud HSM - SSL Offloading</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Utiliza o <strong>AWS CloudHSM</strong> para processar a criptografia SSL externamente, reduzindo a carga sobre as instâncias EC2.</p>
+</li>
+<li>
+<p>O <strong>CloudHSM</strong> possui <strong>SSL Acceleration</strong>, tornando o processo mais rápido.</p>
+</li>
+<li>
+<p>Suportado por servidores web como <strong>Nginx, Apache e IIS</strong>.</p>
+</li>
+<li>
+<p>Oferece um nível elevado de segurança, pois a chave de criptografia nunca é exposta ou trafegada. Todo o processamento ocorre dentro do HSM.</p>
+</li>
+<li>
+<p>Para usar essa abordagem, é necessário:</p>
+<ul>
+<li>Criar um usuário no HSM para realizar a criptografia.</li>
+<li>Armazenar as credenciais desse usuário no <strong>AWS Secrets Manager</strong> ou no <strong>AWS Systems Manager Parameter Store</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230207051237227" src="/assets/images/image-20230207051237227-5566d199a466aa1f61cd2477091f2de4.png" width="710" height="539" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-ssm-parameter-store">AWS SSM Parameter Store<a href="#aws-ssm-parameter-store" class="hash-link" aria-label="Link direto para AWS SSM Parameter Store" title="Link direto para AWS SSM Parameter Store">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="ssm-parameters" src="/assets/images/image-20210907145157513-f157c6a94dab24d35638a39c334e146a.png" width="398" height="479" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Permite <strong>armazenar configurações e segredos</strong> como parâmetros.</li>
+<li>Oferece <strong>criptografia opcional</strong> utilizando o <strong>AWS KMS</strong>.</li>
+<li>É um serviço <strong>serverless</strong>, fácil de usar com SDKs da AWS.</li>
+<li>Permite <strong>disparar eventos</strong> via <strong>Amazon CloudWatch Events</strong>.</li>
+<li>Os parâmetros são organizados em forma de <strong>caminhos (Paths)</strong>, facilitando a estruturação.
+<img decoding="async" loading="lazy" alt="ssm-paths" src="/assets/images/image-20210907145248801-83ae8fa1ac724b423af6f08fd2d9f229.png" width="937" height="504" class="img_ev3q"></li>
+<li>Possui <strong>integração com o AWS CloudFormation</strong> para facilitar a automação e gerenciamento da infraestrutura.</li>
+</ul>
+<blockquote>
+<p>Integração com AWS Secrets Manager</p>
+</blockquote>
+<ul>
+<li>É possível acessar segredos armazenados no <strong>AWS Secrets Manager</strong> diretamente via <strong>Parameter Store</strong>.</li>
+<li>Para isso, basta utilizar o seguinte caminho: /aws/reference/secretsmanager/secret_id_in_secrets_manager</li>
+</ul>
+<blockquote>
+<p>Custos e Limitações</p>
+</blockquote>
+<ul>
+<li><strong>Até 10.000 parâmetros</strong>, com tamanho de até <strong>4 KB</strong>, são <strong>gratuitos</strong> por conta e região.</li>
+<li><strong>Até 100.000 parâmetros</strong>, com tamanho de até <strong>8 KB</strong>, têm um custo de <strong>$0.05 por parâmetro</strong>.
+<img decoding="async" loading="lazy" alt="tiers" src="/assets/images/image-20210907145612224-d489cba0c76b66a00f4250616bd99651.png" width="1036" height="563" class="img_ev3q"></li>
+</ul>
+<blockquote>
+<p>TTL para Parâmetros (Advanced Tier)</p>
+</blockquote>
+<ul>
+<li>No <strong>Advanced Tier</strong>, é possível definir um <strong>TTL (Time-to-Live)</strong> para forçar a atualização ou exclusão do parâmetro.</li>
+<li>Caso de uso: <strong>armazenamento de tokens de acesso</strong>.</li>
+<li>Exemplo: armazenar um <strong>token de acesso</strong> no <strong>Parameter Store</strong> com TTL de <strong>25 minutos</strong>.</li>
+<li>Quando o token expirar, um evento do <strong>CloudWatch Events</strong> pode ser disparado para gerar um novo token automaticamente e atualizar o parâmetro.
+<img decoding="async" loading="lazy" alt="ttl-ssm" src="/assets/images/image-20210907150009873-6f491de32e36d5534debfcc37e9de2fc.png" width="1077" height="208" class="img_ev3q"></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-secrets-manager">AWS Secrets Manager<a href="#aws-secrets-manager" class="hash-link" aria-label="Link direto para AWS Secrets Manager" title="Link direto para AWS Secrets Manager">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230206061620483" src="/assets/images/image-20230206061620483-86b621d33d0dff4d6971d5dd5e9a4854.png" width="294" height="498" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Serviço para <strong>armazenamento seguro de segredos</strong>, como credenciais de banco de dados, chaves de API e outros dados sensíveis.</li>
+<li>Permite <strong>rotação automática de credenciais</strong> usando uma <strong>função Lambda</strong>.</li>
+<li>Ideal para <strong>armazenar senhas em produção</strong> e gerenciar credenciais de forma segura.</li>
+<li><strong>Nativamente suportado</strong> por diversos bancos de dados na AWS, como <strong>Amazon RDS e DynamoDB</strong>.</li>
+<li>Os segredos são <strong>sempre criptografados</strong>.</li>
+<li>O acesso aos segredos é controlado via <strong>políticas baseadas em recursos (Resource-based Policies)</strong>.</li>
+<li>Permite <strong>compartilhamento de segredos entre contas da AWS</strong>.
+<img decoding="async" loading="lazy" alt="image-20230206062018809" src="/assets/images/image-20230206062018809-92ca8cfd2f4ed16cf82eed62efa7dee8.png" width="1045" height="423" class="img_ev3q"></li>
+</ul>
+<blockquote>
+<p>Diferenças entre AWS Secrets Manager e AWS SSM Parameter Store</p>
+</blockquote>
+<ul>
+<li>
+<p>AWS Secrets Manager</p>
+<ul>
+<li><strong>Mais caro</strong> em comparação com o Parameter Store.</li>
+<li>Permite <strong>rotação automática de credenciais</strong>.</li>
+<li>Ao criar um segredo para bancos de dados, o serviço gera <strong>automaticamente</strong> uma <strong>função Lambda</strong> para alterar a senha periodicamente.</li>
+<li><strong>Criptografia obrigatória</strong>.</li>
+</ul>
+</li>
+<li>
+<p>AWS SSM Parameter Store</p>
+<ul>
+<li><strong>API simples</strong>, mais acessível.</li>
+<li><strong>Não possui mecanismo automático de rotação</strong> nativo, mas pode ser configurado usando <strong>EventBridge + Lambda</strong>.</li>
+<li><strong>Criptografia opcional</strong>.</li>
+<li>Permite recuperar segredos do <strong>AWS Secrets Manager</strong> via API do <strong>SSM Parameter Store</strong>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Rotação de Senhas: Secrets Manager vs. Parameter Store</p>
+</blockquote>
+<ul>
+<li>No <strong>Secrets Manager</strong>, a rotação de senhas é <strong>automática</strong>.</li>
+<li>No <strong>Parameter Store</strong>, é necessário <strong>criar e manter uma integração</strong> via <strong>EventBridge + Lambda</strong> para gerenciar a rotação manualmente.
+<img decoding="async" loading="lazy" alt="image-20230206062741073" src="/assets/images/image-20230206062741073-1f81bdd774bdb551d5162c6bd6220758.png" width="1147" height="458" class="img_ev3q"></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rds-security">RDS Security<a href="#rds-security" class="hash-link" aria-label="Link direto para RDS Security" title="Link direto para RDS Security">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li><strong>Criptografia em repouso</strong> utilizando <strong>AWS KMS</strong> para <strong>volumes EBS e snapshots</strong>.</li>
+<li><strong>TDE (Transparent Data Encryption)</strong> disponível para <strong>Oracle e SQL Server</strong>.</li>
+<li><strong>Criptografia em trânsito</strong> para todos os bancos de dados no <strong>Amazon RDS</strong>.</li>
+<li><strong>Autenticação IAM</strong> disponível para <strong>MySQL e PostgreSQL</strong>.<!-- -->
+<ul>
+<li><strong>Apenas a autenticação é feita usando IAM. A autorização ainda é gerenciada pelo RDS.</strong></li>
+</ul>
+</li>
+<li>É possível <strong>gerar um snapshot criptografado</strong> a partir de um snapshot <strong>não criptografado</strong>.</li>
+<li><strong>AWS CloudTrail não registra as queries feitas no RDS.</strong> Apenas ações administrativas são registradas.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ssl-encryption-sni-e-mitm">SSL Encryption, SNI e MITM<a href="#ssl-encryption-sni-e-mitm" class="hash-link" aria-label="Link direto para SSL Encryption, SNI e MITM" title="Link direto para SSL Encryption, SNI e MITM">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li><strong>SSL (Secure Sockets Layer)</strong> – Usado para <strong>criptografar conexões</strong>.</li>
+<li><strong>TLS (Transport Layer Security)</strong> – Versão mais recente do <strong>protocolo SSL</strong>.</li>
+<li><strong>CA (Certificate Authorities)</strong> – Entidades responsáveis por emitir certificados de confiança.<!-- -->
+<ul>
+<li>Exemplos: <strong>Comodo, Symantec, GoDaddy, Let&#x27;s Encrypt</strong>.</li>
+</ul>
+</li>
+<li><strong>Os certificados SSL possuem uma data de validade</strong> e devem ser renovados periodicamente.</li>
+</ul>
+<blockquote>
+<p>Como funciona a comunicação segura?</p>
+</blockquote>
+<ol>
+<li>Quando dois hosts iniciam uma conexão segura, eles realizam o <strong>handshake</strong> usando <strong>criptografia assimétrica</strong>.</li>
+<li>A criptografia assimétrica tem <strong>alto custo computacional</strong>, então, após o handshake, são geradas <strong>chaves simétricas</strong> para as interações seguintes.</li>
+<li>O uso de chaves simétricas reduz o custo da criptografia e melhora o desempenho.
+<img decoding="async" loading="lazy" alt="Tipos de Certificados SSL: Qual é o Mais Adequado Para o Seu Site?" src="/assets/images/How-SSL-Certificates-Work-1-d2dd14856ab90e11a6cbe4323a17b0cf.jpg" width="1258" height="489" class="img_ev3q"></li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sni---server-name-indication">SNI - Server Name Indication<a href="#sni---server-name-indication" class="hash-link" aria-label="Link direto para SNI - Server Name Indication" title="Link direto para SNI - Server Name Indication">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Resolve o problema do carregamento de múltiplos certificados em servidores web, permitindo <strong>diferentes aplicações com diferentes certificados</strong> no mesmo servidor.</li>
+<li><strong>Exige que o hostname do servidor destinatário seja enviado no início do handshake</strong>.</li>
+<li>Assim, o servidor seleciona o certificado adequado ou retorna um padrão.</li>
+<li><strong>Suporte na AWS</strong>:<!-- -->
+<ul>
+<li>Funciona apenas com <strong>ALB (Application Load Balancer)</strong>, <strong>NLB (Network Load Balancer) da nova geração</strong> e <strong>CloudFront</strong>.</li>
+<li><strong>Não funciona</strong> com <strong>CLB (Classic Load Balancer)</strong>, que é da geração antiga.
+<img decoding="async" loading="lazy" alt="image-20230206202222478" src="/assets/images/image-20230206202222478-9f84cd88b8efe49fbe8ba5c99f4fe341.png" width="552" height="447" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="What is SNI? | mlytics" src="/assets/images/UZtj9r5EHYtUmJ0vc6mOEBadx-ZrYL2mtW2UcX7-F4pZ4RGbueactj0Q_8bO35oh8yQkbT8jSfwKOV69Y0WCHxkI203wNXSgUzPfbJKPsErnd8LfUdj71nJYSycbHN2v4ODGIaya=s0-1fcf13b6428c9c790611ed4945e3a205.png" width="800" height="500" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-certificate-manager-acm">AWS Certificate Manager (ACM)<a href="#aws-certificate-manager-acm" class="hash-link" aria-label="Link direto para AWS Certificate Manager (ACM)" title="Link direto para AWS Certificate Manager (ACM)">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Serviço da AWS que permite <strong>provisionar, gerenciar e implantar certificados SSL/TLS</strong>.</li>
+<li>Facilita a <strong>implantação de certificados</strong> em:<!-- -->
+<ul>
+<li><strong>Elastic Load Balancers (ALB, NLB)</strong></li>
+<li><strong>Amazon CloudFront</strong></li>
+<li><strong>Amazon API Gateway e AWS AppSync</strong></li>
+</ul>
+</li>
+<li><strong>Criação de certificados privados</strong> para uso interno, centralizando o gerenciamento do ciclo de vida dos certificados.</li>
+</ul>
+<blockquote>
+<p>Características do ACM</p>
+</blockquote>
+<ul>
+<li>Permite criar certificados que são <strong>validados no início da conexão</strong>, reduzindo o uso de CPU das instâncias, já que o tráfego subsequente pode ser HTTP.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230206204824008" src="/assets/images/image-20230206204824008-e23529cd90b4cc93491f58e8a760833b.png" width="588" height="267" class="img_ev3q"></p>
+<ul>
+<li>O ACM é um serviço <strong>regional</strong>:<!-- -->
+<ul>
+<li>Para serviços <strong>globais</strong>, é necessário gerar certificados separadamente em cada região.</li>
+<li><strong>Não é possível copiar certificados entre regiões.</strong>
+<img decoding="async" loading="lazy" alt="image-20230206205322539" src="/assets/images/image-20230206205322539-a0fb52bf1d898ab3866e460444445d1b.png" width="1087" height="542" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="mitm---man-in-the-middle-attack">MITM - Man-in-the-Middle Attack<a href="#mitm---man-in-the-middle-attack" class="hash-link" aria-label="Link direto para MITM - Man-in-the-Middle Attack" title="Link direto para MITM - Man-in-the-Middle Attack">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Executing a Man-in-the-Middle Attack in just 15 Minutes - Hashed Out" src="/assets/images/man-in-the-middle-attack-8eab1fe8eeddb0c74fe47cebff626db3.png" width="880" height="487" class="img_ev3q"></p>
+<blockquote>
+<p>Como prevenir ataques MITM?</p>
+</blockquote>
+<ol>
+<li><strong>Sempre utilize HTTPS</strong> em vez de HTTP.</li>
+<li><strong>Use DNS com DNSSEC habilitado</strong> para evitar manipulação de respostas DNS.<!-- -->
+<ul>
+<li>O <strong>Amazon Route 53</strong> suporta <strong>DNSSEC</strong> para:<!-- -->
+<ul>
+<li>Registros de domínio.</li>
+<li>Serviço de DNS, integrando-se ao <strong>AWS KMS</strong> para maior segurança.
+<img decoding="async" loading="lazy" alt="InfoSec: Security of DNS" src="/assets/images/dns_2en-52e78f9a97230f4c3134e81bf4780313.png" width="1929" height="717" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ddos-e-web-security">DDoS e Web Security<a href="#ddos-e-web-security" class="hash-link" aria-label="Link direto para DDoS e Web Security" title="Link direto para DDoS e Web Security">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230208042949083" src="/assets/images/image-20230208042949083-7496815c3c51410c6be05d6798c91fc9.png" width="1018" height="408" class="img_ev3q"></p>
+<blockquote>
+<p>Como se proteger</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230208043243655" src="/assets/images/image-20230208043243655-b84a2073796e77df01b30c7796309ffa.png" width="1040" height="487" class="img_ev3q"></p>
+<blockquote>
+<p>Arquitetura usada contra DDoS</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="aws-shield" src="/assets/images/image-20210907152708797-bc2af9ae6bf2ac850d8efbe7eb398484.png" width="654" height="234" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-shield">AWS Shield<a href="#aws-shield" class="hash-link" aria-label="Link direto para AWS Shield" title="Link direto para AWS Shield">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>
+<p>Protege contra ataques <strong>DDoS</strong>, incluindo <strong>SYN Flood, UDP Flood e Reflection Attack</strong>.</p>
+</li>
+<li>
+<p>Atua nas camadas <strong>3 (Rede) e 4 (Transporte)</strong> do modelo <strong>OSI</strong>.</p>
+</li>
+<li>
+<p><strong>Versão Standard</strong> é gratuita para todos os clientes AWS.</p>
+</li>
+<li>
+<p><strong>Versão Advanced</strong> oferece proteção adicional na camada <strong>7 (Aplicação)</strong>.</p>
+</li>
+<li>
+<p>Está presente nos <strong>pontos de presença (PoPs)</strong> da AWS.</p>
+</li>
+<li>
+<p>O <strong>AWS Shield Advanced</strong> oferece suporte 24/7 por meio do <strong>DDoS Response Team (DRP)</strong>:</p>
+<ul>
+<li>Custo adicional de <strong>$3000 por organização</strong>.</li>
+<li>Pode ser usado em <strong>Route 53, CloudFront, Global Accelerator e Load Balancer</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="aws-shield" src="/assets/images/image-20210907152708797-bc2af9ae6bf2ac850d8efbe7eb398484.png" width="654" height="234" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-waf-web-application-firewall">AWS WAF (Web Application Firewall)<a href="#aws-waf-web-application-firewall" class="hash-link" aria-label="Link direto para AWS WAF (Web Application Firewall)" title="Link direto para AWS WAF (Web Application Firewall)">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li><strong>Firewall para aplicações web</strong>.</li>
+<li>Permite <strong>bloquear acessos indesejados</strong> através de listas de regras personalizadas.</li>
+<li>Opera nos <strong>pontos de presença</strong> da AWS.</li>
+<li><strong>Protege aplicações contra ataques na camada 7 (Aplicação).</strong></li>
+<li>Pode ser utilizado em:<!-- -->
+<ul>
+<li><strong>Load Balancer (ALB)</strong> – Regras aplicadas localmente.</li>
+<li><strong>API Gateway</strong> – Regras por região ou nos pontos de presença.</li>
+<li><strong>CloudFront</strong> – Regras globais ou específicas por ponto de presença.</li>
+<li><strong>AppSync</strong> – Para proteger <strong>APIs GraphQL</strong>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Web ACL (Web Access Control List)</p>
+</blockquote>
+<ul>
+<li>Permite criar regras de bloqueio baseadas em:<!-- -->
+<ul>
+<li><strong>Faixas de IPs, headers e parâmetros de requisição.</strong></li>
+<li><strong>Ataques como SQL Injection e Cross-Site Scripting (XSS).</strong></li>
+<li><strong>Bloqueio geográfico (por país ou região).</strong></li>
+<li><strong>Bloqueio por taxa de requisições (rate-based rules).</strong></li>
+</ul>
+</li>
+<li><strong>Custo de $5/mês por Web ACL.</strong></li>
+</ul>
+<blockquote>
+<p>Ações disponíveis no WAF</p>
+</blockquote>
+<ul>
+<li><strong>Contagem de requisições</strong> para monitoramento.</li>
+<li><strong>Liberação ou bloqueio de IPs, headers e outros critérios.</strong></li>
+<li><strong>Validação via CAPTCHA</strong> do lado do cliente.</li>
+</ul>
+<blockquote>
+<p>Logs do AWS WAF</p>
+</blockquote>
+<ul>
+<li>
+<p>Logs podem ser enviados para <strong>CloudWatch Logs</strong>.</p>
+</li>
+<li>
+<p><strong>Suporta envio de até 5 MB por segundo</strong>.</p>
+</li>
+<li>
+<p><strong>Pode armazenar logs no S3</strong> (com intervalo de 5 minutos).</p>
+</li>
+<li>
+<p><strong>Pode enviar logs para o Kinesis Data Firehose</strong>, sujeito às cotas do <strong>Kinesis</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230208045204468" src="/assets/images/image-20230208045204468-7ebd8e98a19aee7d5e3f5072228c939f.png" width="871" height="344" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>AWS Managed Rules</p>
+</blockquote>
+<ul>
+<li>
+<p>Conjunto de <strong>regras pré-configuradas</strong> que podem ser aplicadas rapidamente.</p>
+</li>
+<li>
+<p><strong>Mais de 190 regras prontas disponíveis</strong>.</p>
+</li>
+<li>
+<p>Possível buscar regras adicionais no <strong>AWS Marketplace</strong>.</p>
+</li>
+<li>
+<p>Baseadas em <strong>grupos de controles de segurança</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230208044625325" src="/assets/images/image-20230208044625325-3818f9f0f4c8baf2f069e1f58e83a6ee.png" width="1105" height="534" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="soluções-com-waf">Soluções com WAF<a href="#soluções-com-waf" class="hash-link" aria-label="Link direto para Soluções com WAF" title="Link direto para Soluções com WAF">​</a></h3>
+<ul>
+<li>
+<p><strong>Restrição de acesso ao ALB via CloudFront</strong>, utilizando o <strong>Secrets Manager</strong> para gerar e atualizar valores de headers via Lambda.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230208045537986" src="/assets/images/image-20230208045537986-fed260b4ebf4d90bb1edac912bccb1a9.png" width="1130" height="465" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-firewall-manager">AWS Firewall Manager<a href="#aws-firewall-manager" class="hash-link" aria-label="Link direto para AWS Firewall Manager" title="Link direto para AWS Firewall Manager">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Gerenciamento centralizado de regras de segurança</strong> em múltiplas contas AWS.</p>
+</li>
+<li>
+<p>Permite <strong>aplicar regras comuns de segurança</strong> globalmente.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230208045823263" src="/assets/images/image-20230208045823263-37ee7372a2d73b735c7e43ed35dd36b4.png" width="1045" height="521" class="img_ev3q"></p>
+</li>
+</ul>
+<blockquote>
+<p>Diferenças entre WAF, AWS Firewall Manager e AWS Shield</p>
+</blockquote>
+<ul>
+<li><strong>WAF</strong> → Proteção na camada <strong>7 (Aplicação)</strong>.</li>
+<li><strong>AWS Shield</strong> → Proteção contra <strong>DDoS</strong> nas camadas <strong>3 e 4 (Rede e Transporte)</strong>.</li>
+<li><strong>AWS Firewall Manager</strong> → Centraliza a aplicação de regras do <strong>WAF e Shield</strong> em várias contas AWS.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bloqueio-de-ips">Bloqueio de IPs<a href="#bloqueio-de-ips" class="hash-link" aria-label="Link direto para Bloqueio de IPs" title="Link direto para Bloqueio de IPs">​</a></h3>
+<ul>
+<li>Para bloquear <strong>IPs indesejados</strong>, o método recomendado depende do serviço em uso:</li>
+</ul>
+<blockquote>
+<p><strong>Network ACL (NACL)</strong></p>
+</blockquote>
+<ul>
+<li>Melhor opção para <strong>bloqueio direto de IPs</strong>.</li>
+<li>Suporta <strong>regras de negação (DENY)</strong>.</li>
+</ul>
+<blockquote>
+<p><strong>Security Groups</strong></p>
+</blockquote>
+<ul>
+<li><strong>Não suportam regras de bloqueio explícito</strong>, pois trabalham com listas de <strong>permissão (ALLOW)</strong>.</li>
+<li>Para bloquear IPs, é necessário criar uma lista de <strong>IPs permitidos</strong> e negar todo o resto, o que pode ser inviável em cenários com muitos IPs.</li>
+</ul>
+<blockquote>
+<p><strong>Firewall em instância EC2</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Também pode ser usado para bloquear tráfego específico.</p>
+<p><img decoding="async" loading="lazy" alt="ip-bloqueio" src="/assets/images/image-20210911060135778-70078e7d57355b7194dae69a71e3ab9b.png" width="816" height="430" class="img_ev3q"></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Bloqueio de IPs em Load Balancers</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Application Load Balancer (ALB)</strong>:</p>
+<ul>
+<li>Bloqueio via <strong>NACL</strong> e <strong>Security Groups</strong>.</li>
+<li>Alternativamente, pode ser usado o <strong>WAF</strong> para criar regras de filtro.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="alb-blocking-ip" src="/assets/images/image-20210911060717080-cd76608b34c01162c9faebe6ec8b5ef4.png" width="941" height="364" class="img_ev3q"></p>
+</li>
+<li>
+<p><strong>Network Load Balancer (NLB)</strong>:</p>
+<ul>
+<li><strong>A única forma de bloquear IPs é via NACL</strong>, pois <strong>o NLB não suporta Security Groups</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="nlb-blocking-ip" src="/assets/images/image-20210911060927094-94a5b1ab71652238ec5021cdb1d00bb4.png" width="935" height="361" class="img_ev3q"></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Bloqueio de IPs em CDNs</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Caso esteja usando um <strong>CDN (CloudFront)</strong>, o <strong>AWS WAF</strong> pode ser utilizado para bloquear acessos <strong>antes que o tráfego chegue à VPC</strong>, sem necessidade de configurar <strong>NACLs</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="cdn-bloquin" src="/assets/images/image-20210911061200043-1fcc25c4525d5ab557e526cce305d620.png" width="1156" height="458" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-inspector">AWS Inspector<a href="#aws-inspector" class="hash-link" aria-label="Link direto para AWS Inspector" title="Link direto para AWS Inspector">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230208051418787" src="/assets/images/image-20230208051418787-cc2a551d820a8832fa699dd6ba34bbf5.png" width="1112" height="591" class="img_ev3q"></p>
+<ul>
+<li>Serviço que <strong>analisa vulnerabilidades</strong> em recursos da AWS.</li>
+<li><strong>AWS Inspector</strong> inspeciona <strong>instâncias EC2, imagens do ECR e funções Lambda</strong> contra ameaças conhecidas.</li>
+<li>Utiliza um <strong>agente (SSM Agent)</strong> para análise de instâncias EC2.</li>
+<li>Analisa <strong>apenas instâncias em execução</strong> e identifica <strong>riscos na aplicação</strong>.</li>
+</ul>
+<blockquote>
+<p>Recursos analisados</p>
+</blockquote>
+<ul>
+<li><strong>Instâncias EC2</strong> – Procura vulnerabilidades em pacotes e permissões indevidas.</li>
+<li><strong>Imagens de container no ECR</strong> – Verifica falhas conhecidas antes da implantação.</li>
+<li><strong>Funções Lambda</strong> – Avaliação de segurança em código e dependências.</li>
+</ul>
+<blockquote>
+<p>Configuração e custos</p>
+</blockquote>
+<ul>
+<li>Permite configurar a <strong>periodicidade das análises</strong>.</li>
+<li>Tem um <strong>alto custo</strong>, com os seguintes planos:<!-- -->
+<ul>
+<li><strong>$60/mês</strong> → Análises de rede (<strong>acesso indevido e capacidade</strong>).</li>
+<li><strong>$120/mês</strong> → Análise da máquina (<strong>checagem de vulnerabilidades</strong>).</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Métodos de análise</p>
+</blockquote>
+<ul>
+<li><strong>Verificação de vulnerabilidades de pacotes</strong> em <strong>EC2, ECR e Lambda</strong>, baseada no banco de dados <strong>CVE</strong>.</li>
+<li><strong>Avaliação de acessibilidade de rede</strong> em instâncias EC2.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-config">AWS Config<a href="#aws-config" class="hash-link" aria-label="Link direto para AWS Config" title="Link direto para AWS Config">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="config" src="/assets/images/image-20210906213344276-f7b6c2aaab035a8294f79511631e505c.png" width="987" height="223" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Serviço que ajuda a verificar a conformidade (<strong>compliance</strong>) da conta AWS ao longo do tempo.</li>
+<li>Permite visualizar quais modificações foram feitas nos recursos da conta.</li>
+<li>Pode utilizar <strong>tópicos SNS</strong> para notificações sobre alterações detectadas.</li>
+<li>Permite agregar as análises de múltiplas contas da organização em uma única conta de auditoria.</li>
+<li><strong>Serviço pago</strong>, pois escaneia continuamente os serviços habilitados.</li>
+<li>Pode ser configurado para monitoramento contínuo, para detectar novos recursos ou com um intervalo definido (por exemplo, uma vez por dia).</li>
+<li>Integra-se ao <strong>SSM Automation</strong>, permitindo a execução de <strong>correções automáticas</strong> ao detectar não conformidades.<!-- -->
+<ul>
+<li><strong>Exemplo:</strong> Caso um <strong>Security Group</strong> esteja liberado para um range de IPs não permitido, o AWS Config pode detectar essa configuração e executar uma <strong>automação</strong> para removê-la e notificar via <strong>SNS</strong> ou <strong>EventBridge</strong>.</li>
+</ul>
+</li>
+<li><strong>Serviço regional</strong>, mas é possível incluir a análise de serviços globais.</li>
+<li>Contém <strong>mais de 75 regras</strong> prontas para validar a conformidade de serviços, além da possibilidade de criar regras personalizadas.<!-- -->
+<ul>
+<li>Para criar regras personalizadas, é necessário desenvolver uma <strong>AWS Lambda Function</strong> que realize a validação.<!-- -->
+<ul>
+<li><strong>Exemplo:</strong> Se apenas instâncias EC2 do tipo <strong>t2.micro</strong> são permitidas, uma Lambda pode ser criada para validar esse requisito e ser vinculada a uma regra específica.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Custo:</strong> $0.003 por regra habilitada.</li>
+<li>Permite visualizar alterações feitas nos recursos e identificar quem realizou a modificação.</li>
+<li><strong>Exemplo de uso:</strong> Criar uma regra que valida se há acesso <strong>SSH</strong> aberto em um <strong>Security Group</strong> e, caso detectado, disparar uma notificação ou ação corretiva automática.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="notify" src="/assets/images/image-20210906213444390-df7512559657c1f190b056d2ef7d889b.png" width="1074" height="468" class="img_ev3q"></p>
+<blockquote>
+<p>Perguntas que podem ser respondidas pelo AWS Config:</p>
+</blockquote>
+<ul>
+<li>Há algum <strong>Security Group</strong> configurado <strong>sem SSH</strong>?</li>
+<li>Meus <strong>buckets S3</strong> têm acesso público?</li>
+</ul>
+<blockquote>
+<p><strong>AWS Config Resource</strong></p>
+</blockquote>
+<ul>
+<li>Dashboard que exibe os recursos em conformidade ou não.</li>
+<li>Permite visualizar as configurações e histórico de alterações.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-managed-logs">AWS Managed Logs<a href="#aws-managed-logs" class="hash-link" aria-label="Link direto para AWS Managed Logs" title="Link direto para AWS Managed Logs">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Logs gerenciados e produzidos automaticamente por serviços AWS.</li>
+<li>Os logs podem ser exportados para <strong>Amazon S3</strong> ou <strong>CloudWatch Logs</strong>, dependendo do serviço.</li>
+</ul>
+<blockquote>
+<p><strong>Principais logs gerenciados pela AWS:</strong></p>
+</blockquote>
+<ul>
+<li><strong>Load Balancer Logs</strong> → logs de acesso dos <strong>Application Load Balancers</strong> e <strong>Network Load Balancers</strong>.</li>
+<li><strong>AWS CloudTrail Logs</strong> → registra chamadas de API feitas dentro da AWS.</li>
+<li><strong>VPC Flow Logs</strong> → captura informações sobre tráfego IP em <strong>VPCs e interfaces de rede</strong>.</li>
+<li><strong>Route 53 Resolver Query Logs</strong> → registra as queries DNS recebidas pelo <strong>Route 53</strong>.</li>
+<li><strong>S3 Access Logs</strong> → logs detalhados sobre acessos a buckets <strong>S3</strong>.</li>
+<li><strong>CloudFront Access Logs</strong> → registra acessos às distribuições <strong>CloudFront</strong>.</li>
+<li><strong>AWS Config Logs</strong> → logs gerados pelo <strong>AWS Config</strong> contendo detalhes sobre conformidade e mudanças em recursos.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-guardduty">AWS GuardDuty<a href="#aws-guardduty" class="hash-link" aria-label="Link direto para AWS GuardDuty" title="Link direto para AWS GuardDuty">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230211200819545" src="/assets/images/image-20230211200819545-dea43c0a31fa58b193fa5a4826b912cf.png" width="1073" height="330" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li><strong>Serviço de detecção de ameaças</strong> que utiliza inteligência artificial para analisar comportamentos suspeitos na conta AWS.</li>
+<li>Possui <strong>free trial</strong>, mas é cobrado após o período gratuito.</li>
+<li><strong>Serviço regional</strong>, ou seja, deve ser ativado em cada região AWS necessária.</li>
+</ul>
+<blockquote>
+<p><strong>Fontes de dados analisadas pelo GuardDuty:</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>AWS CloudTrail</strong> → detecta chamadas de API incomuns ou não autorizadas.</p>
+</li>
+<li>
+<p><strong>VPC Flow Logs</strong> → identifica tráfego anômalo e interações com IPs maliciosos.</p>
+</li>
+<li>
+<p><strong>DNS Logs</strong> → detecta comunicação suspeita com domínios comprometidos.</p>
+</li>
+<li>
+<p><strong>Kubernetes Audit Logs</strong> → monitora eventos suspeitos em <strong>clusters Kubernetes gerenciados pelo EKS</strong>.</p>
+</li>
+<li>
+<p>O GuardDuty analisa essas fontes de dados utilizando algoritmos de machine learning para detectar <strong>anomalias e possíveis ameaças</strong>.</p>
+</li>
+<li>
+<p>Pode ser integrado ao <strong>Amazon EventBridge</strong> para disparar notificações e automações.</p>
+</li>
+<li>
+<p>Permite configurar uma conta centralizada dentro da <strong>AWS Organizations</strong> para atuar como <strong>Administrador do GuardDuty</strong>, gerenciando detecções de ameaças em todas as contas da organização.</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230211201043035" src="/assets/images/image-20230211201043035-302831c7bddbc4b6e1b100851da4bd92.png" width="350" height="531" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="iam-advanced-policies">IAM Advanced Policies<a href="#iam-advanced-policies" class="hash-link" aria-label="Link direto para IAM Advanced Policies" title="Link direto para IAM Advanced Policies">​</a></h2>
+<p>Políticas avançadas do IAM permitem a criação de regras mais refinadas para controlar acessos dentro da AWS.</p>
+<blockquote>
+<p><strong>Condições (Conditions)</strong></p>
+</blockquote>
+<p>Permite definir condições específicas para conceder ou negar acesso a recursos da AWS.</p>
+<ul>
+<li>
+<p><strong>SourceIP</strong> - Restringe acesso com base no IP de origem ou em um intervalo de IPs.</p>
+<ul>
+<li>Exemplo: Só permitir que um usuário acesse a AWS se estiver dentro da rede da empresa.<br>
+<img decoding="async" loading="lazy" alt="image-20230211201501809" src="/assets/images/image-20230211201501809-8905c74bb5d2d629f7f75a196f869d10.png" width="873" height="428" class="img_ev3q"></li>
+</ul>
+</li>
+<li>
+<p><strong>RequestedRegion</strong> - Permite restringir a criação ou chamada de recursos a uma determinada região.</p>
+<ul>
+<li>Exemplo: Impedir a criação de recursos fora da região <code>us-east-1</code>.<br>
+<img decoding="async" loading="lazy" alt="image-20230211202114475" src="/assets/images/image-20230211202114475-1af79651fe038d84183bece6d9bef0c2.png" width="609" height="445" class="img_ev3q"></li>
+</ul>
+</li>
+<li>
+<p><strong>ResourceTag</strong> - Controla permissões com base em tags dos recursos.</p>
+<ul>
+<li>Exemplo: Permitir que um usuário inicie apenas instâncias EC2 que tenham a tag <code>Project=DataAnalytics</code>.<br>
+<img decoding="async" loading="lazy" alt="image-20230211202458218" src="/assets/images/image-20230211202458218-3b954c51d9fdcece68f7083afc9b8e8e.png" width="559" height="380" class="img_ev3q"></li>
+</ul>
+</li>
+<li>
+<p><strong>MFA (Autenticação Multifator)</strong> - Requer autenticação multifator para determinadas ações sensíveis.</p>
+<ul>
+<li>Exemplo: Impedir que usuários excluam objetos de um bucket S3 ou encerrem instâncias EC2 sem MFA ativado.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="iam-para-s3">IAM para S3<a href="#iam-para-s3" class="hash-link" aria-label="Link direto para IAM para S3" title="Link direto para IAM para S3">​</a></h3>
+<p>O IAM permite aplicar regras de acesso tanto no nível do bucket quanto no nível dos objetos individuais, e há diferenças importantes entre os dois.</p>
+<ul>
+<li>Para regras que se aplicam a todos os objetos dentro de um bucket, utiliza-se o caractere <code>*</code>.<br>
+<img decoding="async" loading="lazy" alt="image-20230211203540314" src="/assets/images/image-20230211203540314-0ef56b25f95a822e3d85308a785f1211.png" width="1094" height="477" class="img_ev3q"></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="políticas-restritas-para-a-organização">Políticas Restritas para a Organização<a href="#políticas-restritas-para-a-organização" class="hash-link" aria-label="Link direto para Políticas Restritas para a Organização" title="Link direto para Políticas Restritas para a Organização">​</a></h3>
+<ul>
+<li>Permite restringir o uso de políticas apenas a membros de uma organização da AWS Organizations.<br>
+<img decoding="async" loading="lazy" alt="image-20230211203825071" src="/assets/images/image-20230211203825071-905930dc799c48b38c81e1a36041698c.png" width="1133" height="495" class="img_ev3q"></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-security-hub">AWS Security Hub<a href="#aws-security-hub" class="hash-link" aria-label="Link direto para AWS Security Hub" title="Link direto para AWS Security Hub">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="security-hub" src="/assets/images/image-20210907161531824-a1134e012319aa3cba85b8ae4048e74c.png" width="680" height="295" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<ul>
+<li>Centraliza a gestão de segurança de múltiplas contas.</li>
+<li>Agrega alertas de outros serviços de segurança da AWS.</li>
+<li>Utiliza o <strong>AWS Config</strong> para avaliar continuamente a conformidade dos recursos.</li>
+<li>Permite automação para correção de problemas comuns, como portas SSH expostas ao público.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-detective">Amazon Detective<a href="#amazon-detective" class="hash-link" aria-label="Link direto para Amazon Detective" title="Link direto para Amazon Detective">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>Serviço que ajuda a investigar incidentes de segurança e analisar a causa raiz de atividades suspeitas.</p>
+<ul>
+<li>Utiliza <strong>Machine Learning</strong> e <strong>grafos</strong> para identificar padrões suspeitos.</li>
+<li>Consolida logs de diversos serviços da AWS, criando uma visão unificada das atividades.</li>
+<li>Permite gerar visualizações detalhadas para facilitar a análise forense e a resposta a incidentes.</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/02_seguranca.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Identidade e Federação</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Questões da prova</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-cloudtrail" class="table-of-contents__link toc-highlight">AWS CloudTrail</a><ul><li><a href="#arquiteturas-de-solução-cloudtrail" class="table-of-contents__link toc-highlight">Arquiteturas de Solução CloudTrail</a></li></ul></li><li><a href="#aws-kms" class="table-of-contents__link toc-highlight">AWS KMS</a><ul><li><a href="#arquiteturas-de-solução-ssl-e-kms" class="table-of-contents__link toc-highlight">Arquiteturas de Solução SSL E KMS</a></li></ul></li><li><a href="#aws-ssm-parameter-store" class="table-of-contents__link toc-highlight">AWS SSM Parameter Store</a></li><li><a href="#aws-secrets-manager" class="table-of-contents__link toc-highlight">AWS Secrets Manager</a></li><li><a href="#rds-security" class="table-of-contents__link toc-highlight">RDS Security</a></li><li><a href="#ssl-encryption-sni-e-mitm" class="table-of-contents__link toc-highlight">SSL Encryption, SNI e MITM</a></li><li><a href="#sni---server-name-indication" class="table-of-contents__link toc-highlight">SNI - Server Name Indication</a></li><li><a href="#aws-certificate-manager-acm" class="table-of-contents__link toc-highlight">AWS Certificate Manager (ACM)</a></li><li><a href="#mitm---man-in-the-middle-attack" class="table-of-contents__link toc-highlight">MITM - Man-in-the-Middle Attack</a></li><li><a href="#ddos-e-web-security" class="table-of-contents__link toc-highlight">DDoS e Web Security</a></li><li><a href="#aws-shield" class="table-of-contents__link toc-highlight">AWS Shield</a></li><li><a href="#aws-waf-web-application-firewall" class="table-of-contents__link toc-highlight">AWS WAF (Web Application Firewall)</a><ul><li><a href="#soluções-com-waf" class="table-of-contents__link toc-highlight">Soluções com WAF</a></li></ul></li><li><a href="#aws-firewall-manager" class="table-of-contents__link toc-highlight">AWS Firewall Manager</a><ul><li><a href="#bloqueio-de-ips" class="table-of-contents__link toc-highlight">Bloqueio de IPs</a></li></ul></li><li><a href="#aws-inspector" class="table-of-contents__link toc-highlight">AWS Inspector</a></li><li><a href="#aws-config" class="table-of-contents__link toc-highlight">AWS Config</a></li><li><a href="#aws-managed-logs" class="table-of-contents__link toc-highlight">AWS Managed Logs</a></li><li><a href="#aws-guardduty" class="table-of-contents__link toc-highlight">AWS GuardDuty</a></li><li><a href="#iam-advanced-policies" class="table-of-contents__link toc-highlight">IAM Advanced Policies</a><ul><li><a href="#iam-para-s3" class="table-of-contents__link toc-highlight">IAM para S3</a></li><li><a href="#políticas-restritas-para-a-organização" class="table-of-contents__link toc-highlight">Políticas Restritas para a Organização</a></li></ul></li><li><a href="#aws-security-hub" class="table-of-contents__link toc-highlight">AWS Security Hub</a></li><li><a href="#amazon-detective" class="table-of-contents__link toc-highlight">Amazon Detective</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
