@@ -217,14 +217,9 @@ sidebar_position: 0
 
 ---
 
-## Segurança
-
-
-
 
 ## Compute & Load Balancing
 
-![image-20230212210211474](assets/image-20230212210211474.png)
 
 ### EC2
 
@@ -418,7 +413,7 @@ sidebar_position: 0
 
 ---
 
-### Para a prova
+#### Para a prova
 
 - Existe uma política de encerramento no **auto scaling group:**
   - 1 . Encontra a AZ com maior numero de instâncias.
