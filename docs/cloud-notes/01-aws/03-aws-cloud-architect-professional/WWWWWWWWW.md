@@ -5,9 +5,10 @@ sidebar_position: 66
 
 Corrija os erros de português, adicione linhas com explicações caso acho necessário para tornar os itens mais fáceis de entender e:
 - respeite comece os cabeçarios do markdown a partir do nível 2 (##) 
-- Adicione notas de temas que questões que podem cair na prova de certificação se achar necessário
+- nÃO REMOVAS AS IMAGENS
+- Adicione notas E LINKS de temas que questões que podem cair na prova de certificação se achar necessário
   - estou usando o docusarus então use as admonitions para isso
-  :::note
+  :::note 
 Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 :::
 
@@ -27,214 +28,143 @@ Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 ::: 
 
-- retorne no formato markdown, use > ao invés de ### or ####
 Faça isso para a documentação abaixo:
 
 
-### EC2
 
-- Elastic Compute cloud.
-- Maquinas nas nuvem que são possível usar sob demanda.
-- O Armazenamento e feito com:
-  - **Network-attached:**
-    - EBS (Elastic block storage)
-  - **hardware** (EC2 Instance Store)
-- Tem que ter uma rede conectada.
-- Tem que um firewall (**Security group**).
-- Quando parado os dados de memórias são perdidos e os dados no volume **EBS** e mantido até a próxima inicialização
-- Caso queira manter os dados de memória salvo quando para use a opção de **Hibernate** (hibernar), que mantém em memória os dados.
-- Quando destruído a instância os dados de memória e do **EBS** principal são destruídos, mas é possível adicionar um segundo EBS ou marcar para preservar o default.
-- **EC2 Nitro** - nova tecnologia de virtualização adotada pela AWS.
-  - Melhora o uso da rede.
-  - Melhora o **IOPS** (Input/output operations per second) dos armazenamento **EBS**.
-- **EC2 Graviton**
-  ![image-20230213071117156](assets/image-20230213071117156.png)
-  - Entregam o melhor performance em relação ao custo. Sendo 46 % mais em contas em comparação com a 5 geração.
-  - Suporta muitos OS (Linux, AML 2)
-  - Não disponível para Windows.
-- **EC2 vCPU**
-  - Uma CPU, seria um core de um processador, pode conter várias threads.
-  - Uma vCPU seria cada uma dessas threads.
-  - É possível especificar qual a configuração de vCPU você precisa, por exemplo para uma aplicação node que é single thead pode se definir 1 vCPU.
-- **Placement Groups** - Grupos de Posicionamento
-  - Permite decide a estratégia posicionamento das instâncias EC2. ou seja onde vai ficar as instâncias de vai ser:
-    - **Cluster** - Todas ais instâncias ficam juntas, tem baixa latência, mas ficam numa única AZ. (alta performance, mas tem um alto risco).
-      - Boa escolha quando se tem instâncias com rede otimizada (enhanced Networking).
-      - Usados para jobs de processamento rápido de BigData e aplicação que precisam de baixa latência de rede
-    - **Spread** - (espalhadas) As instâncias ficar espalhadas em servidores em diferentes AZ, com no máximo de 7 instâncias por grupo por AZ. Usados em aplicações criticas.
-      - Baixo risco que indisponibilidade.
-    - **Partition** - Similar ao **Spread**, mas as instâncias ficam espalhadas em diferentes partições (conjunto de Racks) numa AZ. Pode escalar para centenas de instâncias por grupo, usadas com o Hadoop, Kafka, Cassandra.
-      - Pode ter até 7 partição por AZ, e centenas de instâncias.
-      - As partições não compartilham o mesmo hack.
-      - Se a partição falhar todas as maquinas são perdidas.
-      - As instâncias podem compartilhar dados da partição vias EC2 Metadata.
-        ![AWS - Placement Groups](assets/placementgroups.jpeg)
-- É possível mover uma instância de um placement group. Para isso é necessário:
-  - **Parar a instância e usando o CLI mudar ela de placement group e depois inicia-la novamente.**
-- **Metricas**
-  ![image-20230213202651772](assets/image-20230213202651772.png)
-- Instance recovery
-  - O **CloudWatch** monitora a instância, caso a instância e problema é possível recupera-la usando uma alarme, criando uma nova com o mesmo IP na mesma rede, com os mesmos metadados e o mesmo **placement group**.
-  - Além disso é possível alerta vias **SNS** a equipe.
+### Elastic Load Balancing
 
----
+- Distribui o tráfego entre as instâncias de EC2.
+- Usa o healh check para verificar o status da instâncias.
+- Cria um endpoint, para ser a única entrada de requisições.
+- Não gerencia sessões por padrão, existe uma **feature** chamada **Stick session,** que realiza isso, porém não é recomendado o uso, pois que controla o dados da sessão é a aplicação.
+- Serviço gerenciado pela AWS.
+- Pode ser configurado com **privado** ou **publico**.
+- Envia métricas para o CloudWatch.
+- Há 4 tipos de **ELB**:
+  - **classic load balancer** CLB -(v1 - old generation - 2009)
+    - http, https e tcp.
+    - Checa a saúde via endpoint da aplicação (http ou TCP).
+    - Necessário adicionar instâncias manualmente.
+  - **Application load balancer** ALB (v2 - new generation - 2016)
+    - http, https e webSocket e http/2.
+    - Usa target group para agrupar as instâncias.
+    - Tem suporte a **routinhg** baseado em (**listeners**) sendo:
+      - **Path** ex:(uni.com/post & uni.com/users).
+      - **hostmane url** (curriculo.uni.com e fotos.uni.com).
+      - **query string** (uni.com?id=123&order=123).
+    - Usados bastante numa arquitetura de microserviços
+      ![image-20230215065448165](assets/image-20230215065448165.png)
+  - **Gateway load balance** GWLB - (v2 - 2020)
+    - Opera no level 3 (rede) - protocolo IP
+    - Usado para balecear carga de soluções de terceiro
+    - Usado para Firewall, fazer sistema de detecção e intrusão. Ou seja, usado quando se deseja escanear o tráfego.
+    - Utiliza o protocolo GENEVE no porta 6081.
+      ![image-20230215071036163](assets/image-20230215071036163.png)
+  - **Network load balancer** NLB -(v2 - new generation - 2017)
+    - tcp, tls (secure tcp) e udp.
+    - **Tem uma latência menor que o ALB ~ 100ms vs (400 ms do ALB).**
+    - Tem um IP estatico por AZ, é possível usar um Elastic IP.
+      ![Network load balancer](assets/image-20210819053951068.png)
+    - Zonal DNS Name
+      - Como cada AZ tem um IP estático, quando acionado DNS ele retorna todos os IPs de todas as AZ relacionado ao NLB.
+      - Caso precise retornar apenas um é só adicionar a Região mais AZ no DNS.
+        - Caso de uso, vc tem duas aplicação instaladas em 3 AZ, e elas conversam entre si.
+        - Caso a APP A chame a B em diferente regiões você vai pagar pelo tráfego de transferência de região. nesse caso pode se criar uma lógica para que a aplicação A recupere o o IP da aplicação B da região onde ela esta assim não tendo que pagar pelo tráfego Cross Region.
+          ![image-20230215070245743](assets/image-20230215070245743.png)
 
-#### Tipos de instâncias
+#### Target groups
 
-- Veja [tipos de instâncias](https://aws.amazon.com/pt/ec2/instance-types/)
-- Veja [informações extras sobre instâncias](https://instances.vantage.sh/)
+- Agrupa as "maquinas" para onde o tráfego será redirecionado.
+- Essas "Maquinas" podem ser instâncias **EC2, servidores on-premisses linkados via IP e Lambdas.**
+- Agrupa
+  - As instâncias EC2.
+  - As Tasks do ECS.
+  - Lambdas Funtions - a requisição é traduzida para um evento.
+- É responsável por checar a saúde das instâncias.
 
-![Tipos de instancias](assets/image-20210819053521220.png)
- ![image-20230213065140415](assets/image-20230213065140415.png)
+#### Stick session
 
-- Nomenclatura dos tipos de instâncias:
+![image-20230215071913741](assets/image-20230215071913741.png)
 
-  - exemplo: m5.2xlarge
+- Permite que as requisições enviada as instâncias que já atenderam aquele cliente a fim de não perder os dados de sessão.
+- Tipos cookies que podem ser usados
+  - **aplication-based cookies**
+    - **Custom cookie**
+      - Gerado pelo target.
+      - Pode incluir diversos atributos.
+      - Pode ter um nome individual por target group.
+      - Não use os nomes AWSALB, AWSALBAPP, AWSALBBTG, pois são reservados.
+    - **application cookie**
+      - Gerados pelo load balancer.
+      - Cookie name AWSALBAPP.
+  - **duration-based cookies**
+    - Cookie gerados pelo load balance.
+    - Tem uma duração especificada.
+    - Tem os nomes AWSALB para ALB, AWSALBBTG para CLB.
 
-    - m -> classe da instância.
-    - 5 -> geração das maquinas.
-    - 2xlarge -> Tamanho das instâncias
+##### Cross-Zone load balance
 
-    
+- Essa funcionalidade distribui o acesso igualmente pela quantidade de instâncias, independente de que zona ela esta, caso não habilitada será distribuído o tráfego igualmente pela zonas de disponibilidade, e cada instância pode receber quantidade de tráfego diferente.
+  ![Cross-Zone load balance](assets/image-20210819054020911.png)
+- Configurações de disponibilidade
+  ![Configurações de disponibilidade](assets/image-20210819054054427.png)
+  **Request Routing Algoritimo**
+- Least Outstanding Request - Solicitação menos pendente
+  - Redireciona para estância que tiver o menor numero de requisições pendentes. Ou seja para instância menos ocupada.
+  - Funciona com ALB (HTTP) e CLB (HTTP).
+- Round Robin - Sequência circular
+  - Funciona com ALB e CLB.
+  - Redireciona em sequencia 1, 2, 3, e reinicia pelo 1 , 2, 3 independente da quantidade de requisições pendente.
+- Flow Hash
+  - Seleciona o Destino baseado no protocolo, o IP e a porta de origem e destino, e a numero sequencial do TCP.
+  - Cada coneção UDP/TCP e roteado para um único destino durante toda a conexão.
+  - Funciona com o NLB
 
----
+##### SSL Certificates
 
-#### Precificação
+- Permite criptografar tráfego entre cliente o **load balance** (in-flight encryption).
+- Hoje temos o SSL e o TLS (este é mais seguro que o SSL).
+- **CLB** - apenas uma aplicação e apenas um certificado.
+- **ALB** - suporta múltiplos **listeners** (entenda como app diferente) e múltiplos certificados e usa **SNI** (server name indication) para isso.
+- **NLB** - suporta múltiplos **listeners** (entenda como app diferente) e múltiplos certificados usa **SNI** para isso.
+  ![LB SSL Certificates](assets/image-20210819054122152.png)
+  ![SNI](assets/image-20210819054148720.png)
 
-- Todas são pagas por **horas** ativas.
-- **on-demand**
-  - Não necessário contrato, só rodar quando necessário.
-  - Recomendado para cargas de trabalho curtas, (dura 3 meses, ou 1 mês).
-- **reserved Instances**
-  - Se faz um contrato de **1 a 3 anos,** se reduz o custo em até **75%.**
-  - Recomendado para **longas cargas de trabalho**, exemplo banco de dados.
-  - Pode ser compartilhado entre as contas de uma organização.
-  - **Tipos de reservas**
-    - **reserved instances** - onde se reserva um instância de um determinado tipo.
-    - **convertible reserved instance** - onde se reserva um instância e é possível alterar o tipo depois, e pode ter até **54% de desconto**.
-    - **scheduled reserved instance** - exemplo - toda terça entre 20 a 22 horas.
-  - **Tipos de pagamento**
-    - **NURI** - no upfront payments - Nenhum pagamento adiantado - redução em até **32%.**
-    - **PURI** - partial up-front - Adiantado parcial - redução em até **42% .**
-    - **AURI** - all up-front - Tudo adiantado - redução em até **43%.**
-- **spot instances**
-  - Usado para aplicação **serveless**, que podem ser **paradas a qualquer momento**, são maquinas que **estão paradas na AWS**, poder chegar até 90% mais baratas. a desvantagens e que ela pode parar a qualquer momento, quando quiser.
-  - Não são recomendadas para aplicações que precisam de disponibilidades.
-  - AWS pode interromper com uma notificação de 2 minutos.
-    - **spot fleets**
-      - Conjuntos de **spot instance** de diferentes tipos de maquinas e opcionalmente pode haver instâncias on-demand pra chavear (pool de tipo da maquina e em diferentes regiões), a fim de ter maior economia para executar as carga de trabalho. São configuradas para _manter_ a capacidade alvo, iniciando instâncias de substituição após as Instâncias Spot na frota serem encerradas
-      - Usados para aproveitar **spot instances com baixo custo**, pois o spot **fleets** pode automaticamente selecionar o conjunto mais barato para executar sua carga de trabalho.
-      - Nele se define o preço máximo a pagar pelas instâncias spot e o AWS seleciona um conjunto de instância que esteja abaixo desse preço para executar a carga de trabalho.
-        ![image-20230213210748846](assets/image-20230213210748846.png)
-      - Caso as instâncias estejam caras ele encerra e passa o processamento para instâncias sob demandas.
-      - soft limits
-        - Tem uma limitação de 10 mil instâncias por frota (Fleet) seja ec2 ou Spot.
-        - Tem uma limitação de 1000,000 instâncias por região.
-      - Estratégia de alocação de instâncias
-        - Menor preço - bom para carga de trabalhos curtas
-        - Diversificada - Distribuída, bom para carga de trabalho que precisa está disponível e que tenha longo tempo de execução.
-        - Capacidade otimizada - bom para cargas pesadas
-- **dedicate instance**
-  - Alugar se uma instância que só será sua, outro usuários não terão acesso a hardware.
-- **dedicate host**
-  - Aluga-se um servidor físico, para demandas de compliance principalmente.
-  - Aluga-se por até 3 anos.
-  - Mas caro tipo de instância.
-- **salving plan**
-  - Modelo de economia baseado no compromisso de uma quantidade de uso medido em horas num período de 1 ou 3 anos.
-  - Economia de até 66%, é flexível e não precisa se preocupar em gerenciar o custo por instância, apenas com a quantidade de horas usados nas cargas de trabalho
-  - **EC2 Instance Savings plan** - Economia de até 72 %, seleciona os tipos de instâncias e as regiões onde ela vai operar. Pode se alterar entre os tipos de instâncias selecionadas e os SO.
-  - **Compute Savings plan** - Economia de até 66 %, tem se maior flexibilidade na conversão do tipo de instância e na movimentação entre regiões. Além de poder adicionar Lambdas e Spots.
-  - **SageMaker Savings plan** - Economia de até 64 %, para carga de trabalhos do SageMaker.
-- **capacity reservation**
-  - Permite reserva instâncias por um período "**curto de tempo**", sem precisar se comprometer com um plano de 1 ou 3 anos.
-  - Usando por exemplo para reservar maquinas para a **black friday.**
-  - Pode ser combinado com o **salving plan.**
-
----
-
-#### HPC - Alta performance computacional
-
-- Serviços que ajudam ter alta performance na AWS:
-  - **Transferência de dados**
-    - **AWS Direct Conect** - Permite mover GBs de dados para a cloud.
-    - **SnowBall e SnowMobile** - Pemite mover PB de dados para a cloud.
-    - **AWS DataSync** - Permite mover grandes quantidade de dados do on-primeses para cloud .(usando S3, EFx, Fxs for Windows)
-  - **Computação**
-    - **Instâncias EC2**
-      - Com CPU otimizada ou GPU otimizada.
-      - spot instances / Spot Fleets para economia + auto scaling.
-    - **EC2 Placentament Groups** - Permite usar um conjunto de maquinas (cluster) num mesmo **rack** ou região o que diminui a latência..
-      - **EC2 Enhanced Networking SR-IOV** (Rede aprimorada para EC2)
-        - Interface de rede para HPC.
-        - Alta banda, Alto PPS (pacotes por segundos), baixa latência.
-        - Opção 1: **Elastic Network Adapter** (ENA) aumenta a capacidade para 100Gbps.
-        - Opção 2: Intel 82599 VF para 10 GBs - Antiga não usado mais
-      - **Elastic Fabric Adapter** (EFA)
-        - Interface de rede usada para HPC no Linux com foco.
-        - Melhora a ENA para Alta HPC, apenas para linux.
-  - **Armazenamento**
-    - **Ligado na instância**
-      - **EBS** - Escala até 256,000 IOPS with io2 Block express.
-      - **Instance store** - escala para milhões de IOPS, mas é perdido quando a instância desliga.
-    - Na rede
-      - **S3** - Armazenamento de objetos.
-      - **EFS** - Escala IOPS baseado no tamanho total, ou IOPS provisionado .
-      - **FSx for Lustre** - FileSystem otimizado para HPC usando linux.
-  - **Automação e Orquestração**
-    - **AWS Batch** - para trabalhar com jobs e agendamentos.
-    - **AWS ParallelCluster**
-      - Ferramenta Open Source para deploy e gerenciamento de cluster HPC.
-
----
-
-#### Auto Scaling group
+##### Auto Scaling group ALG
 
 - Permite aumentar a quantidade de **EC2** de acordo com a demanda, ou alarmes gerados pelo **CloudWatch** com base nas métricas ou eventos.
 - Não a cobrança, você só e cobrando pelas recursos (ec2, ebs ..) que são usados.
   - **Escabilidade** - habilidade de escalar vertical e/ou horizontal.
-  - **Elasticidade** - Capacidade de escalar dinamicamente, através de alarmes ou métricas, ou reduzir as instâncias com a diminuição do volume de acesso, ou uso.
+  - **Elaticidades** - Capacidade de escalar dinamicamente, através de alarmes ou métricas, ou reduzir as instâncias com a diminuição do volume de acesso, ou uso.
   - **Agilidade** - Velocidade de se ter infraestrutura a toque de caixa.
-    ![Auto Scaling group](assets/image-20210819054218858.png)
+    ![Auto Scaling group](assets/image-20210819054218858-1676454365145-1.png)
 - **Composto pelo atributos**
   - Uma **configuração** \ **templates** de lançamento (define o tipo de maquina/ armazenamento / Security Group / SSH key pair / User Data que será usada nas instância que serám criadas) .
   - Seta as capacidade mínimas e máximas (quantidade de instâncias).
   - Rede onde irá criar as instâncias.
   - Informações sobre o **Load balance** onde esta linkado.
-  - Política de escalabilidade, que define quando irá escalar.
+  - Política de escalabilidade, que define quando irá escalar para cima ou para baixo.
 - **Scaling polices**
-  - Política de escalabilidade, que define quando irá escalar.
+  - Política de escalabilidade, que define quando irá escalar para cima ou para baixo.
     - **Dynamic scaling police**
-      - É possível usar métricas geradas pelo **CloudWatch** para definir as políticas (como media de consumo de CPU, ou quantidade de requisição).
-      - Metricas boas para auto scaling:
-        - CPUUtilização , RequestCountPerTarget
-        - Average Networtk In | Out - para aplicação que usam rede para transferência ....
-        - Custom metricas
+      - É possível usar métricas geradas pelo **CloudWatch** para definir as políticas (como media de consume de CPU, ou quantidade de requisição).
     - **Sheduled scaling police**
-      - É possível agendar para uma determinado período (horário comercial).
+      - É possível agendar para uma determinado período.
     - **Preditive scaling police**
       - É possível usa **marchine learning** (analise do uso anteriores) para criar uma previsão de escalabilidade.
 - **Scaling cooldowns** - tempo que deve ser esperado após ser lançada uma instância para validar se as métricas delas estão valida, ou se é preciso escalar.
 
----
-
-**Processos executados pelo auto scaling**
-![image-20230213205639426](assets/image-20230213205639426.png)
-
----
-
-#### Para a prova
+### Para a prova
 
 - Existe uma política de encerramento no **auto scaling group:**
-  - 1 . Encontra a AZ com maior numero de instâncias.
+  - 1. Encontra a AZ com maior numero de instâncias.
   - 2 . Termina a que tiver o configuração de inicialização mais antiga.
 - Ciclo de vida de uma instancia com o ASG
-  ![Ciclo de vida de uma instancia](assets/image-20210819054243240.png)
+  ![Ciclo de vida de uma instancia](assets/image-20210819054243240-1676454365145-2.png)
 - Diferença entre Configuração de lançamento (Launch configuration) e templates de lançamento (Launch tempalte)
   - **Launch configuration** é legado, devem ser **recriado** toda vez que se alterar algum atributo
   - **Launch tempalte** é nova e:
     - Tem versionamento, que resolve o problema anterior.
     - Pode se cria subconjuntos de configurações que podem ser herdados por outros templates
     - Permite provisionar instâncias on-demand / spot instances ou um mix de ambos.
-
----

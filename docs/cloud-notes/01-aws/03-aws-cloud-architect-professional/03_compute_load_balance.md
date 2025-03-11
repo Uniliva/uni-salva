@@ -7,7 +7,7 @@ sidebar_position: 3
 
 ---
 
-## EC2
+## EC2 - Elastic Compute Cloud 
 
 - **Elastic Compute Cloud** (EC2).
 - Máquinas na nuvem que podem ser utilizadas sob demanda.
@@ -73,7 +73,7 @@ sidebar_position: 3
 
 ---
 
-> ### Auto Scaling Group
+> Auto Scaling Group
 
 - Permite ajustar automaticamente a quantidade de instâncias **EC2** com base na demanda.
 - O ajuste pode ser feito com **CloudWatch** através de métricas ou eventos.
@@ -104,5 +104,193 @@ sidebar_position: 3
 Para informações detalhadas sobre tipos de instâncias, acesse:
 - [AWS EC2 Instance Types](https://aws.amazon.com/pt/ec2/instance-types/)
 - [Vantage - AWS Instances](https://instances.vantage.sh/)
+
+---
+
+## ECS - Elastic Container Service
+
+- **Elastic Container Service (ECS)** - Serviço de container proprietário da AWS.
+- Você deve prover e manter a infraestrutura (instâncias EC2) ou utilizar o **Fargate**, que abstrai esse gerenciamento.
+- O ECS em si não tem custo, você paga apenas pelos recursos utilizados (EC2, EBS, etc.).
+- Para subir um container, primeiro é necessário configurar uma **ECS Task**, que descreve como o container será construído. A Task é semelhante a um arquivo **docker-compose** e define:
+  - Políticas de acesso a recursos utilizados pela aplicação.
+  - Configurações de rede e grupos de segurança.
+- As Tasks podem ser disparadas pelo **EventBridge**, que aciona a execução do ECS.
+- Integração direta com o **Application Load Balancer** e **Network Load Balancer**.
+
+:::info
+A **ECS Task** é um conceito essencial para a certificação AWS. Você deve entender como configurá-la e como ela se relaciona com a execução dos containers.
+:::
+
+> Conceitos
+
+- **Execução em EC2 vs. Fargate:**
+  - EC2: Requer provisionamento e gerenciamento das instâncias.
+  - Fargate: AWS gerencia automaticamente a infraestrutura.
+  
+  ![image-20230214061221428](assets/image-20230214061221428.png)
+  ![image-20230214061618805](assets/image-20230214061618805.png)
+  ![ecs](assets/image-20210903065745303.png)
+  ![ecs-ec2](assets/image-20210903070040856.png)
+  ![ecs-fargate](assets/image-20210903070257948.png)
+  ![fagate_ec2](assets/image-20210903074403137.png)
+  ![ec2-fargate](assets/image-20210903074442934.png)
+
+---
+
+## EKS - Elastic Kubernetes Service
+
+- **Amazon Elastic Kubernetes Service (EKS)** - Serviço de Kubernetes totalmente gerenciado pela AWS.
+- Custo de **$0,1 por hora por cluster** Kubernetes (~$75/mês) mais os recursos utilizados (EC2, EBS, etc.).
+- **Deploy complexo**, requer conhecimento especializado.
+- **Open source**, facilitando a migração entre nuvens.
+- Utiliza o **ECR** para armazenar as imagens.
+
+> Tipos de Nodes
+
+- **Gerenciados pela AWS**
+- **Gerenciados pelo cliente**
+- **AWS Fargate**
+
+> Volumes
+
+- Ao criar um node, é necessário especificar a classe de armazenamento.
+- Utiliza **CSI (Container Storage Interface)**.
+- Suporte a:
+  - **EBS**
+  - **EFS (quando usando Fargate)**
+  - **FSx for Lustre**
+  - **FSx for NetApp ONTAP**
+
+:::tip
+Para certificação, saiba como EKS gerencia volumes e a diferença entre EBS, EFS e FSx.
+:::
+
+> EKS On-Premises (EKS Anywhere)
+
+- Permite rodar o **EKS no ambiente on-premises**.
+- Pode-se utilizar uma **AMI customizada da Amazon para Kubernetes** localmente.
+- Conexão do **EKS on-premises à AWS** via **EKS Connector**.
+- Útil para casos onde:
+  - É necessário **reduzir latência**.
+  - Existem **regras regulatórias** exigindo armazenamento local de dados (exemplo: dados governamentais do Chile).
+
+  ![eks](assets/image-20210903074736202.png)
+
+:::warning
+O EKS Anywhere é um tema relevante para certificações, pois permite rodar Kubernetes em ambientes híbridos.
+:::
+
+---
+
+## ECR - Elastic Container Registry
+
+- **AWS Elastic Container Registry (ECR)** - Repositório de imagens de containers.
+- Pode conter **repositórios públicos e privados**.
+- **Alta integração com ECS e EKS**.
+- Acessos controlados via **IAM**.
+- **Suporte à replicação** em múltiplas regiões e contas AWS.
+
+> Segurança e Scans de Imagens
+
+- Possui scanner de segurança integrado:
+  - **Base scanning (CVE)** - Notifica vulnerabilidades via **EventBridge**.
+  - **Scan profundo** - Utiliza o **Amazon Inspector** para análises mais detalhadas.
+
+:::danger
+A segurança das imagens de containers é frequentemente abordada em certificações AWS. Certifique-se de entender como funcionam os scans e as notificações de vulnerabilidades.
+:::
+
+---
+
+## AWS Lambda
+
+- Trabalha com eventos.
+- Possui de **128 MB** até **10 GB** de memória disponível.
+- Tem escopo regional.
+- Pagamento baseado no **milissegundo** de execução.
+- **Serverless** (não há necessidade de gerenciar servidores).
+- Foco no código da aplicação, sem preocupações com infraestrutura.
+- É necessário monitoramento adequado, pois a infraestrutura é liberada após o uso.
+- Provisiona servidores automaticamente conforme a demanda.
+- **Altamente disponível** e **tolerante a falhas**.
+- Tempo máximo de execução: **15 minutos**.
+- Cobrança a cada **100 milissegundos de uso**.
+- Faz escalonamento horizontal e pode ter **até 999 execuções simultâneas**.
+
+---
+
+> Triggers
+
+- API Gateway, 
+- Kinesis, 
+- DynamoDB Data Streams, 
+- S3 events, 
+- CloudFront, 
+- EventBridge, 
+- SNS, SQS, 
+- CloudWatch Logs, 
+- AWS Cognito, 
+
+:::info
+É essencial entender os diferentes gatilhos (triggers) do AWS Lambda para a certificação AWS.
+:::
+
+---
+
+> Limitações
+
+- **Execução**
+  - **Alocação de memória:** 128MB - 10GB.
+  - **CPU:** Vinculada à memória RAM (não é possível alterar diretamente).
+    - 2vCPU - 1,719 MB de RAM.
+    - 6vCPU - 10,240 MB de RAM.
+  - **Tempo máximo de execução:** 15 minutos.
+  - **Variáveis de ambiente:** até 4KB.
+  - **Espaço em disco no container do Lambda (/tmp):** 10 MB.
+  - **Execuções simultâneas da mesma Lambda:** 1000 (pode ser alterado mediante solicitação).
+  - **Tamanho do payload:**
+    - 6MB (síncrono).
+    - 256 KB (assíncrono).
+
+- **Deploy**
+  - Tamanho máximo do pacote compactado (zip): 50MB.
+  - Tamanho máximo do pacote descompactado: 250MB.
+  - Tamanho máximo da imagem do container: 10 GB.
+
+:::warning
+As limitações de execução e deploy do AWS Lambda são frequentemente cobradas em exames de certificação.
+:::
+
+> Lambdas@Edge
+
+- Permite executar Lambdas em pontos de presença (PoPs), auxiliando serviços como **CDN** e **Route 53**.
+- Reduz latência ao executar código próximo ao usuário final.
+
+  ![lambda@edge](assets/image-20210903204606738.png)
+
+> CloudFront Functions
+
+- Saiba mais em [Edge Functions](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#edge-function).
+
+---
+
+## AWS App Runner
+
+- Serviço **gerenciado pela AWS** que facilita o deploy de aplicações web ou APIs em escala.
+- **Não requer conhecimento de infraestrutura** para ser utilizado.
+- Pode ser iniciado a partir do **código-fonte** ou de uma **imagem de container**.
+- **Compila e faz deploy automaticamente** da aplicação.
+- **Escala automaticamente**, garantindo alta disponibilidade, load balancing e criptografia.
+- Suporte a **acesso a VPC**.
+- Permite integração com **banco de dados, cache e mensageria**.
+- Semelhante ao conceito do **Heroku**.
+
+  ![image-20230214194005966](assets/image-20230214194005966.png)
+
+:::tip
+O AWS App Runner é uma opção para quem busca simplicidade na implementação de aplicações sem gerenciar infraestrutura, algo que pode ser cobrado na certificação AWS.
+:::
+
 
 ---
