@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Compute &amp; Load Balancing | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Compute &amp; Load Balancing | Uniii docs"><meta data-rh="true" name="description" content="image-20230212210211474"><meta data-rh="true" property="og:description" content="image-20230212210211474"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.6cab4101.js" defer="defer"></script>
+<script src="/assets/js/main.677076ff.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">☁️ AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Compute &amp; Load Balancing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/WWWWWWWWW">xxx</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">☁️ AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Compute &amp; Load Balancing</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Compute &amp; Load Balancing</h1></header><p><img decoding="async" loading="lazy" alt="image-20230212210211474" src="/assets/images/image-20230212210211474-e470bdaf6ebad21ca7de1b4971c88dc4.png" width="1128" height="497" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ec2---elastic-compute-cloud">EC2 - Elastic Compute Cloud<a href="#ec2---elastic-compute-cloud" class="hash-link" aria-label="Link direto para EC2 - Elastic Compute Cloud" title="Link direto para EC2 - Elastic Compute Cloud">​</a></h2>
+<ul>
+<li><strong>Elastic Compute Cloud</strong> (EC2).</li>
+<li>Máquinas na nuvem que podem ser utilizadas sob demanda.</li>
+<li>O armazenamento pode ser feito de duas formas:<!-- -->
+<ul>
+<li><strong>Network-attached:</strong>
+<ul>
+<li>EBS (Elastic Block Storage).</li>
+</ul>
+</li>
+<li><strong>Hardware (EC2 Instance Store):</strong>
+<ul>
+<li>Armazenamento físico diretamente na instância.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A instância precisa estar conectada a uma rede.</li>
+<li>Deve possuir um firewall (<strong>Security Group</strong>).</li>
+<li>Quando a instância é parada, os dados da memória são perdidos, mas os dados armazenados no <strong>EBS</strong> são mantidos até a próxima inicialização.</li>
+<li>Caso queira preservar os dados em memória ao parar a instância, use a opção <strong>Hibernate</strong> (hibernar), que mantém os dados na RAM.</li>
+<li>Quando a instância é encerrada:<!-- -->
+<ul>
+<li>Os dados da memória e do <strong>EBS</strong> principal são perdidos.</li>
+<li>É possível adicionar um segundo EBS ou marcar a opção para preservar o volume principal.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>EC2 Nitro</div><div class="admonitionContent_BuS1"><p><strong>EC2 Nitro</strong> é uma tecnologia de virtualização da AWS que:</p><ul>
+<li>Melhora o desempenho da rede.</li>
+<li>Aumenta a eficiência de <strong>IOPS</strong> (operações de entrada/saída por segundo) no armazenamento <strong>EBS</strong>.</li>
+</ul></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>EC2 Graviton</div><div class="admonitionContent_BuS1"><ul>
+<li>Proporciona melhor desempenho em relação ao custo, sendo <strong>46% mais eficiente</strong> que a 5ª geração.</li>
+<li>Suporta vários sistemas operacionais, como Linux e Amazon Linux 2 (AML 2).</li>
+<li><strong>Não é compatível com Windows.</strong></li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p><strong>EC2 vCPU</strong></p>
+</blockquote>
+<ul>
+<li>Uma <strong>CPU física</strong> pode ter múltiplos núcleos (<strong>cores</strong>), cada um com múltiplas <strong>threads</strong>.</li>
+<li>Uma <strong>vCPU</strong> representa uma dessas threads.</li>
+<li>É possível configurar a quantidade de vCPUs conforme a necessidade da aplicação.<!-- -->
+<ul>
+<li>Exemplo: uma aplicação Node.js que é <strong>single-threaded</strong> pode utilizar apenas <strong>1 vCPU</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Placement Groups (Grupos de Posicionamento)</strong></p>
+</blockquote>
+<ul>
+<li>Define a estratégia de posicionamento das instâncias EC2:<!-- -->
+<ul>
+<li><strong>Cluster:</strong>
+<ul>
+<li>Todas as instâncias ficam juntas.</li>
+<li>Baixa latência, mas ficam em uma única <strong>AZ (Availability Zone)</strong>.</li>
+<li>Alta performance, porém com maior risco de falha.</li>
+<li>Ideal para <strong>processamento de Big Data</strong> e <strong>aplicações com baixa latência de rede</strong>.</li>
+</ul>
+</li>
+<li><strong>Spread:</strong>
+<ul>
+<li>Instâncias espalhadas em servidores diferentes, até <strong>7 por AZ</strong>.</li>
+<li>Reduz riscos de indisponibilidade.</li>
+<li>Indicado para <strong>aplicações críticas</strong>.</li>
+</ul>
+</li>
+<li><strong>Partition:</strong>
+<ul>
+<li>Similar ao Spread, mas as instâncias são distribuídas em <strong>diferentes partições (racks)</strong> dentro de uma AZ.</li>
+<li>Pode ter até <strong>7 partições por AZ</strong> e centenas de instâncias.</li>
+<li><strong>Partições não compartilham o mesmo rack</strong>.</li>
+<li>Se uma partição falhar, todas as instâncias dentro dela serão perdidas.</li>
+<li>Instâncias podem compartilhar dados da partição via <strong>EC2 Metadata</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>atenção</div><div class="admonitionContent_BuS1"><p><strong>Mover uma instância entre Placement Groups:</strong></p><ul>
+<li>É necessário <strong>parar a instância</strong>.</li>
+<li>Utilizar <strong>CLI</strong> para alterar o Placement Group.</li>
+<li>Reiniciar a instância após a mudança.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Auto Scaling Group</p>
+</blockquote>
+<ul>
+<li>Permite ajustar automaticamente a quantidade de instâncias <strong>EC2</strong> com base na demanda.</li>
+<li>O ajuste pode ser feito com <strong>CloudWatch</strong> através de métricas ou eventos.</li>
+<li>Não há cobrança pelo <strong>Auto Scaling Group</strong>, apenas pelos recursos utilizados.
+<strong>Características principais:</strong></li>
+<li><strong>Escalabilidade:</strong> capacidade de aumentar ou reduzir instâncias.</li>
+<li><strong>Elasticidade:</strong> ajuste dinâmico com base na necessidade.</li>
+<li><strong>Agilidade:</strong> provisionamento rápido de infraestrutura.
+<strong>Políticas de escalabilidade:</strong></li>
+<li><strong>Dynamic Scaling Policy:</strong>
+<ul>
+<li>Baseia-se em métricas do <strong>CloudWatch</strong>, como <strong>CPUUtilization</strong> e <strong>RequestCountPerTarget</strong>.</li>
+</ul>
+</li>
+<li><strong>Scheduled Scaling Policy:</strong>
+<ul>
+<li>Agendamento para um período específico (ex: horário comercial).</li>
+</ul>
+</li>
+<li><strong>Predictive Scaling Policy:</strong>
+<ul>
+<li>Utiliza <strong>Machine Learning</strong> para prever e ajustar a escalabilidade com base em dados históricos.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>nota</div><div class="admonitionContent_BuS1"><p><strong>Para certificação:</strong></p><ul>
+<li>O <strong>Auto Scaling Group</strong> encerra instâncias seguindo estas etapas:<!-- -->
+<ol>
+<li>Encontra a AZ com maior número de instâncias.</li>
+<li>Remove a instância com a configuração mais antiga.</li>
+</ol>
+</li>
+<li><strong>Diferença entre Launch Configuration e Launch Template:</strong>
+<ul>
+<li><strong>Launch Configuration:</strong> legado, precisa ser recriado para cada alteração.</li>
+<li><strong>Launch Template:</strong> moderno, com suporte a versionamento e configuração flexível.</li>
+</ul>
+</li>
+</ul></div></div>
+<p>Para informações detalhadas sobre tipos de instâncias, acesse:</p>
+<ul>
+<li><a href="https://aws.amazon.com/pt/ec2/instance-types/" target="_blank" rel="noopener noreferrer">AWS EC2 Instance Types</a></li>
+<li><a href="https://instances.vantage.sh/" target="_blank" rel="noopener noreferrer">Vantage - AWS Instances</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ecs---elastic-container-service">ECS - Elastic Container Service<a href="#ecs---elastic-container-service" class="hash-link" aria-label="Link direto para ECS - Elastic Container Service" title="Link direto para ECS - Elastic Container Service">​</a></h2>
+<ul>
+<li><strong>Elastic Container Service (ECS)</strong> - Serviço de container proprietário da AWS.</li>
+<li>Você deve prover e manter a infraestrutura (instâncias EC2) ou utilizar o <strong>Fargate</strong>, que abstrai esse gerenciamento.</li>
+<li>O ECS em si não tem custo, você paga apenas pelos recursos utilizados (EC2, EBS, etc.).</li>
+<li>Para subir um container, primeiro é necessário configurar uma <strong>ECS Task</strong>, que descreve como o container será construído. A Task é semelhante a um arquivo <strong>docker-compose</strong> e define:<!-- -->
+<ul>
+<li>Políticas de acesso a recursos utilizados pela aplicação.</li>
+<li>Configurações de rede e grupos de segurança.</li>
+</ul>
+</li>
+<li>As Tasks podem ser disparadas pelo <strong>EventBridge</strong>, que aciona a execução do ECS.</li>
+<li>Integração direta com o <strong>Application Load Balancer</strong> e <strong>Network Load Balancer</strong>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>A <strong>ECS Task</strong> é um conceito essencial para a certificação AWS. Você deve entender como configurá-la e como ela se relaciona com a execução dos containers.</p></div></div>
+<blockquote>
+<p>Conceitos</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Execução em EC2 vs. Fargate:</strong></p>
+<ul>
+<li>EC2: Requer provisionamento e gerenciamento das instâncias.</li>
+<li>Fargate: AWS gerencia automaticamente a infraestrutura.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230214061221428" src="/assets/images/image-20230214061221428-6792187b225374dd5e6418f2e2e2cd1e.png" width="1235" height="503" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20230214061618805" src="/assets/images/image-20230214061618805-5587a61bebbca4d3d0efb407fb0d68e3.png" width="1337" height="680" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="ecs" src="/assets/images/image-20210903065745303-f9333429fd8a3c5a39f5e66443fd2601.png" width="679" height="319" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="ecs-ec2" src="/assets/images/image-20210903070040856-478ebd6c67cda5c60749eb9e99f5337d.png" width="1005" height="551" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="ecs-fargate" src="/assets/images/image-20210903070257948-9c03c1ad4f0daab5e4b665d53e7d4d32.png" width="1020" height="546" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="fagate_ec2" src="/assets/images/image-20210903074403137-43c3400c4426dee0aa81dcf19fcc7c02.png" width="647" height="464" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="ec2-fargate" src="/assets/images/image-20210903074442934-89b15bf6f45215c1621d3d87a1172b54.png" width="669" height="335" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="eks---elastic-kubernetes-service">EKS - Elastic Kubernetes Service<a href="#eks---elastic-kubernetes-service" class="hash-link" aria-label="Link direto para EKS - Elastic Kubernetes Service" title="Link direto para EKS - Elastic Kubernetes Service">​</a></h2>
+<ul>
+<li><strong>Amazon Elastic Kubernetes Service (EKS)</strong> - Serviço de Kubernetes totalmente gerenciado pela AWS.</li>
+<li>Custo de <strong>$0,1 por hora por cluster</strong> Kubernetes (~$75/mês) mais os recursos utilizados (EC2, EBS, etc.).</li>
+<li><strong>Deploy complexo</strong>, requer conhecimento especializado.</li>
+<li><strong>Open source</strong>, facilitando a migração entre nuvens.</li>
+<li>Utiliza o <strong>ECR</strong> para armazenar as imagens.</li>
+</ul>
+<blockquote>
+<p>Tipos de Nodes</p>
+</blockquote>
+<ul>
+<li><strong>Gerenciados pela AWS</strong></li>
+<li><strong>Gerenciados pelo cliente</strong></li>
+<li><strong>AWS Fargate</strong></li>
+</ul>
+<blockquote>
+<p>Volumes</p>
+</blockquote>
+<ul>
+<li>Ao criar um node, é necessário especificar a classe de armazenamento.</li>
+<li>Utiliza <strong>CSI (Container Storage Interface)</strong>.</li>
+<li>Suporte a:<!-- -->
+<ul>
+<li><strong>EBS</strong></li>
+<li><strong>EFS (quando usando Fargate)</strong></li>
+<li><strong>FSx for Lustre</strong></li>
+<li><strong>FSx for NetApp ONTAP</strong></li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>Para certificação, saiba como EKS gerencia volumes e a diferença entre EBS, EFS e FSx.</p></div></div>
+<blockquote>
+<p>EKS On-Premises (EKS Anywhere)</p>
+</blockquote>
+<ul>
+<li>
+<p>Permite rodar o <strong>EKS no ambiente on-premises</strong>.</p>
+</li>
+<li>
+<p>Pode-se utilizar uma <strong>AMI customizada da Amazon para Kubernetes</strong> localmente.</p>
+</li>
+<li>
+<p>Conexão do <strong>EKS on-premises à AWS</strong> via <strong>EKS Connector</strong>.</p>
+</li>
+<li>
+<p>Útil para casos onde:</p>
+<ul>
+<li>É necessário <strong>reduzir latência</strong>.</li>
+<li>Existem <strong>regras regulatórias</strong> exigindo armazenamento local de dados (exemplo: dados governamentais do Chile).</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="eks" src="/assets/images/image-20210903074736202-d8dffe48459feeddfdf07417d0f3cd8f.png" width="1059" height="537" class="img_ev3q"></p>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>atenção</div><div class="admonitionContent_BuS1"><p>O EKS Anywhere é um tema relevante para certificações, pois permite rodar Kubernetes em ambientes híbridos.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ecr---elastic-container-registry">ECR - Elastic Container Registry<a href="#ecr---elastic-container-registry" class="hash-link" aria-label="Link direto para ECR - Elastic Container Registry" title="Link direto para ECR - Elastic Container Registry">​</a></h2>
+<ul>
+<li><strong>AWS Elastic Container Registry (ECR)</strong> - Repositório de imagens de containers.</li>
+<li>Pode conter <strong>repositórios públicos e privados</strong>.</li>
+<li><strong>Alta integração com ECS e EKS</strong>.</li>
+<li>Acessos controlados via <strong>IAM</strong>.</li>
+<li><strong>Suporte à replicação</strong> em múltiplas regiões e contas AWS.</li>
+</ul>
+<blockquote>
+<p>Segurança e Scans de Imagens</p>
+</blockquote>
+<ul>
+<li>Possui scanner de segurança integrado:<!-- -->
+<ul>
+<li><strong>Base scanning (CVE)</strong> - Notifica vulnerabilidades via <strong>EventBridge</strong>.</li>
+<li><strong>Scan profundo</strong> - Utiliza o <strong>Amazon Inspector</strong> para análises mais detalhadas.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>perigo</div><div class="admonitionContent_BuS1"><p>A segurança das imagens de containers é frequentemente abordada em certificações AWS. Certifique-se de entender como funcionam os scans e as notificações de vulnerabilidades.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-lambda">AWS Lambda<a href="#aws-lambda" class="hash-link" aria-label="Link direto para AWS Lambda" title="Link direto para AWS Lambda">​</a></h2>
+<ul>
+<li>Trabalha com eventos.</li>
+<li>Possui de <strong>128 MB</strong> até <strong>10 GB</strong> de memória disponível.</li>
+<li>Tem escopo regional.</li>
+<li>Pagamento baseado no <strong>milissegundo</strong> de execução.</li>
+<li><strong>Serverless</strong> (não há necessidade de gerenciar servidores).</li>
+<li>Foco no código da aplicação, sem preocupações com infraestrutura.</li>
+<li>É necessário monitoramento adequado, pois a infraestrutura é liberada após o uso.</li>
+<li>Provisiona servidores automaticamente conforme a demanda.</li>
+<li><strong>Altamente disponível</strong> e <strong>tolerante a falhas</strong>.</li>
+<li>Tempo máximo de execução: <strong>15 minutos</strong>.</li>
+<li>Cobrança a cada <strong>100 milissegundos de uso</strong>.</li>
+<li>Faz escalonamento horizontal e pode ter <strong>até 999 execuções simultâneas</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Triggers</p>
+</blockquote>
+<ul>
+<li>API Gateway,</li>
+<li>Kinesis,</li>
+<li>DynamoDB Data Streams,</li>
+<li>S3 events,</li>
+<li>CloudFront,</li>
+<li>EventBridge,</li>
+<li>SNS, SQS,</li>
+<li>CloudWatch Logs,</li>
+<li>AWS Cognito,</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>É essencial entender os diferentes gatilhos (triggers) do AWS Lambda para a certificação AWS.</p></div></div>
+<hr>
+<blockquote>
+<p>Limitações</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Execução</strong></p>
+<ul>
+<li><strong>Alocação de memória:</strong> 128MB - 10GB.</li>
+<li><strong>CPU:</strong> Vinculada à memória RAM (não é possível alterar diretamente).<!-- -->
+<ul>
+<li>2vCPU - 1,719 MB de RAM.</li>
+<li>6vCPU - 10,240 MB de RAM.</li>
+</ul>
+</li>
+<li><strong>Tempo máximo de execução:</strong> 15 minutos.</li>
+<li><strong>Variáveis de ambiente:</strong> até 4KB.</li>
+<li><strong>Espaço em disco no container do Lambda (/tmp):</strong> 10 MB.</li>
+<li><strong>Execuções simultâneas da mesma Lambda:</strong> 1000 (pode ser alterado mediante solicitação).</li>
+<li><strong>Tamanho do payload:</strong>
+<ul>
+<li>6MB (síncrono).</li>
+<li>256 KB (assíncrono).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Deploy</strong></p>
+<ul>
+<li>Tamanho máximo do pacote compactado (zip): 50MB.</li>
+<li>Tamanho máximo do pacote descompactado: 250MB.</li>
+<li>Tamanho máximo da imagem do container: 10 GB.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>atenção</div><div class="admonitionContent_BuS1"><p>As limitações de execução e deploy do AWS Lambda são frequentemente cobradas em exames de certificação.</p></div></div>
+<blockquote>
+<p>Lambdas@Edge</p>
+</blockquote>
+<ul>
+<li>
+<p>Permite executar Lambdas em pontos de presença (PoPs), auxiliando serviços como <strong>CDN</strong> e <strong>Route 53</strong>.</p>
+</li>
+<li>
+<p>Reduz latência ao executar código próximo ao usuário final.</p>
+<p><img decoding="async" loading="lazy" alt="lambda@edge" src="/assets/images/image-20210903204606738-03351d44099666a21f5c97f00355f7d7.png" width="1003" height="316" class="img_ev3q"></p>
+</li>
+</ul>
+<blockquote>
+<p>CloudFront Functions</p>
+</blockquote>
+<ul>
+<li>Saiba mais em <a href="https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#edge-function" target="_blank" rel="noopener noreferrer">Edge Functions</a>.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-app-runner">AWS App Runner<a href="#aws-app-runner" class="hash-link" aria-label="Link direto para AWS App Runner" title="Link direto para AWS App Runner">​</a></h2>
+<ul>
+<li>
+<p>Serviço <strong>gerenciado pela AWS</strong> que facilita o deploy de aplicações web ou APIs em escala.</p>
+</li>
+<li>
+<p><strong>Não requer conhecimento de infraestrutura</strong> para ser utilizado.</p>
+</li>
+<li>
+<p>Pode ser iniciado a partir do <strong>código-fonte</strong> ou de uma <strong>imagem de container</strong>.</p>
+</li>
+<li>
+<p><strong>Compila e faz deploy automaticamente</strong> da aplicação.</p>
+</li>
+<li>
+<p><strong>Escala automaticamente</strong>, garantindo alta disponibilidade, load balancing e criptografia.</p>
+</li>
+<li>
+<p>Suporte a <strong>acesso a VPC</strong>.</p>
+</li>
+<li>
+<p>Permite integração com <strong>banco de dados, cache e mensageria</strong>.</p>
+</li>
+<li>
+<p>Semelhante ao conceito do <strong>Heroku</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230214194005966" src="/assets/images/image-20230214194005966-ee6590fe9a1dd0f738d492909f1a9540.png" width="1157" height="614" class="img_ev3q"></p>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>O AWS App Runner é uma opção para quem busca simplicidade na implementação de aplicações sem gerenciar infraestrutura, algo que pode ser cobrado na certificação AWS.</p></div></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/03_compute_load_balance.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Questões da prova</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/WWWWWWWWW"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">xxx</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#ec2---elastic-compute-cloud" class="table-of-contents__link toc-highlight">EC2 - Elastic Compute Cloud</a></li><li><a href="#ecs---elastic-container-service" class="table-of-contents__link toc-highlight">ECS - Elastic Container Service</a></li><li><a href="#eks---elastic-kubernetes-service" class="table-of-contents__link toc-highlight">EKS - Elastic Kubernetes Service</a></li><li><a href="#ecr---elastic-container-registry" class="table-of-contents__link toc-highlight">ECR - Elastic Container Registry</a></li><li><a href="#aws-lambda" class="table-of-contents__link toc-highlight">AWS Lambda</a></li><li><a href="#aws-app-runner" class="table-of-contents__link toc-highlight">AWS App Runner</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
