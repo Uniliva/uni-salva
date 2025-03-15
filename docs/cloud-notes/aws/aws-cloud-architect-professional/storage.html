@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/storage" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Storage | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/storage"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Storage | Uniii docs"><meta data-rh="true" name="description" content="storage"><meta data-rh="true" property="og:description" content="storage"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/storage"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/storage" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/storage" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.dc084c2f.js" defer="defer"></script>
+<script src="/assets/js/main.3a4bc957.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">☁️ AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Compute &amp; Load Balancing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Storage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/066666exemplo">066666exemplo</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">☁️ AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Storage</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Storage</h1></header><p><img decoding="async" loading="lazy" alt="storage" src="/assets/images/image-20210902070844946-ab8577527a13075cc425961dd41a435e.png" width="1069" height="436" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ebs---elastic-block-storage">EBS - Elastic Block Storage<a href="#ebs---elastic-block-storage" class="hash-link" aria-label="Link direto para EBS - Elastic Block Storage" title="Link direto para EBS - Elastic Block Storage">​</a></h2>
+<p>O <strong>Amazon EBS (Elastic Block Store)</strong> é um serviço de <strong>armazenamento persistente</strong> para instâncias <strong>EC2</strong>.
+Ele fornece <strong>volumes de armazenamento em bloco</strong>, altamente disponíveis e replicados dentro da mesma <strong>Zona de Disponibilidade (AZ)</strong>.</p>
+<p><strong>Características principais</strong></p>
+<ul>
+<li><strong>Armazenamento de instâncias EC2</strong>.</li>
+<li><strong>Replicação automática dentro da Zona de Disponibilidade</strong> para garantir disponibilidade e durabilidade.</li>
+<li><strong>Backup feito por snapshots</strong>, armazenados no <strong>Amazon S3</strong>.</li>
+<li><strong>Possibilidade de criptografia</strong> para dados em repouso, em trânsito e nos snapshots.</li>
+<li><strong>Expansão de volume</strong> sem necessidade de recriação.</li>
+</ul>
+<blockquote>
+<p>Snapshots</p>
+</blockquote>
+<ul>
+<li><strong>Snapshots são backups do volume EBS</strong> e podem ser feitos de forma <strong>incremental</strong> (somente os blocos alterados desde o último snapshot são salvos).</li>
+<li><strong>Snapshots consomem I/O</strong>, por isso é recomendável fazê-los quando há <strong>baixo uso da instância</strong>.</li>
+<li><strong>Não é necessário parar a instância para criar um snapshot</strong>, mas é <strong>recomendado</strong> para evitar inconsistências.</li>
+<li><strong>Os snapshots são armazenados no Amazon S3 e podem ser copiados entre regiões</strong>, permitindo <strong>recuperação de desastres (Disaster Recovery)</strong>.</li>
+<li><strong>Pode-se criar AMIs a partir de snapshots</strong>, facilitando a replicação de máquinas virtuais.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Se precisar <strong>migrar</strong> um volume EBS <strong>para outra região</strong>, primeiro <strong>crie um snapshot</strong>, copie-o para a nova região e depois crie um novo volume EBS a partir desse snapshot.<br>
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre Snapshots do EBS</a></p>
+</blockquote></div></div>
+<hr>
+<blockquote>
+<p>Criptografia</p>
+</blockquote>
+<ul>
+<li><strong>Pode ser aplicada a volumes EBS, snapshots e AMIs criadas a partir de volumes criptografados</strong>.</li>
+<li><strong>Transparente para o usuário</strong>, sem impacto no desempenho.</li>
+<li><strong>Para criptografar um volume não criptografado:</strong>
+<ol>
+<li>Criar um snapshot do volume.</li>
+<li>Criar uma <strong>cópia do snapshot</strong> marcando a opção de criptografia.</li>
+<li>Criar um novo volume a partir desse snapshot criptografado.</li>
+<li>Conectar o volume à instância EC2.</li>
+</ol>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>RAID com EBS</p>
+</blockquote>
+<p>O <strong>EBS permite a configuração de RAID</strong>, mas isso deve ser feito no <strong>sistema operacional da instância EC2</strong> (não há suporte nativo no console da AWS).</p>
+<ul>
+<li><strong>RAID 0</strong> - Os dados são distribuídos entre vários discos.<!-- -->
+<ul>
+<li><strong>Vantagem</strong>: melhora o desempenho, aumentando a taxa de transferência.</li>
+<li><strong>Desvantagem</strong>: não há tolerância a falhas.</li>
+</ul>
+</li>
+<li><strong>RAID 1</strong> - Os dados são espelhados entre os discos.<!-- -->
+<ul>
+<li><strong>Vantagem</strong>: alta disponibilidade e tolerância a falhas.</li>
+<li><strong>Desvantagem</strong>: armazenamento duplicado (usa o dobro de espaço).</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Importante</strong></div><div class="admonitionContent_BuS1"><ul>
+<li><strong>RAID 0</strong> é usado para <strong>desempenho</strong>, como em cargas de trabalho intensivas de leitura/escrita.</li>
+<li><strong>RAID 1</strong> é usado para <strong>alta disponibilidade</strong>, pois garante que os dados sejam espelhados em dois volumes.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Tipos de EBS</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="Tipos EBS" src="/assets/images/image-20210819054333580-f85edfa5be596ec9123105fa38912351.png" width="1920" height="1163" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="Tipos EBS 2" src="/assets/images/image-20210819054408303-ebce6ada3f96676021dc019ed8567f42.png" width="1058" height="446" class="img_ev3q"></p>
+<p>Os volumes <strong>io1/io2</strong> permitem conexão <strong>simultânea</strong> a <strong>várias instâncias EC2</strong>, sendo úteis para aplicações distribuídas como <strong>Apache Cassandra</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="EBS Multi-Attach" src="/assets/images/image-20230219071352401-a46403665811ad24331af3123b61b005.png" width="424" height="459" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Se a questão mencionar <strong>várias instâncias acessando o mesmo volume EBS</strong>, a resposta pode ser <strong>io1/io2 com Multi-Attach</strong>.<br>
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre Multi-Attach</a></p>
+</blockquote></div></div>
+<hr>
+<blockquote>
+<p>Data Lifecycle Manager (DLM)</p>
+</blockquote>
+<p>O <strong>AWS Data Lifecycle Manager (DLM)</strong> permite <strong>automatizar a criação, retenção e exclusão de snapshots do EBS</strong> e <strong>AMIs</strong>.</p>
+<blockquote>
+<p>Recursos do DLM</p>
+</blockquote>
+<ul>
+<li><strong>Automatiza backups agendados</strong>.</li>
+<li><strong>Copia snapshots para outras regiões</strong> (para recuperação de desastres).</li>
+<li><strong>Permite deletar snapshots antigos automaticamente</strong> para evitar custos desnecessários.</li>
+<li><strong>Usa tags para definir quais volumes devem ser protegidos</strong>.</li>
+</ul>
+<p><strong>Diferença entre <strong>AWS Backup</strong> e <strong>DLM</strong></strong></p>
+<table><thead><tr><th>Característica</th><th>AWS Backup</th><th>Data Lifecycle Manager (DLM)</th></tr></thead><tbody><tr><td><strong>Abrangência</strong></td><td>Gerencia backups de vários serviços AWS</td><td>Gerencia apenas backups de EBS e AMIs</td></tr><tr><td><strong>Automação</strong></td><td>Backup centralizado para múltiplos serviços</td><td>Automação focada em EBS e AMIs</td></tr><tr><td><strong>Retenção de dados</strong></td><td>Políticas flexíveis de retenção e expiração</td><td>Apenas snapshots e AMIs</td></tr></tbody></table>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Se a questão falar sobre <strong>gestão automatizada de snapshots do EBS</strong>, a resposta provavelmente será <strong>Data Lifecycle Manager (DLM)</strong>.<br>
+<!-- -->Se a pergunta envolver <strong>gerenciamento centralizado de backups de vários serviços AWS</strong>, então <strong>AWS Backup</strong> é a resposta correta.<br>
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre AWS DLM</a></p>
+</blockquote></div></div>
+<hr>
+<p>Aqui está sua documentação revisada, com correções gramaticais, explicações adicionais e <strong>admonitions</strong> para destacar pontos importantes para a certificação <strong>AWS Certified Solutions Architect - Professional</strong>.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="instance-store">Instance Store<a href="#instance-store" class="hash-link" aria-label="Link direto para Instance Store" title="Link direto para Instance Store">​</a></h2>
+<p>O <strong>Instance Store</strong> é um tipo de armazenamento em bloco que fica diretamente <strong>dentro do host físico</strong> onde a instância EC2 está sendo executada.</p>
+<blockquote>
+<p>Características</p>
+</blockquote>
+<ul>
+<li><strong>Diferente do EBS</strong>, que é um armazenamento persistente fora do host, o <strong>Instance Store</strong> armazena os dados <strong>no próprio servidor físico</strong> onde a instância está rodando.</li>
+<li><strong>Não permite redimensionamento</strong> (não é possível aumentar ou diminuir o tamanho do volume).</li>
+<li><strong>Melhor desempenho de I/O</strong> comparado ao EBS, pois o armazenamento está fisicamente dentro do host.</li>
+<li><strong>Os dados são temporários</strong> e são perdidos ao parar ou terminar a instância.</li>
+<li><strong>Recomendado para armazenar cache, dados temporários e buffers</strong>.</li>
+<li>Algumas instâncias EC2 vêm com discos locais <strong>diretamente conectados ao servidor físico</strong> onde são virtualizadas.</li>
+<li><strong>Hibernação disponível</strong>: permite preservar os dados armazenados no <strong>Instance Store</strong> quando a instância entra em hibernação.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219071547162" src="/assets/images/image-20230219071547162-60484b7e55374e2b58c03751365e8185.png" width="537" height="536" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Se a questão mencionar <strong>armazenamento de alta velocidade, temporário e sem persistência</strong>, a resposta provavelmente será <strong>Instance Store</strong>.<br>
+<!-- -->Se a questão tratar de <strong>armazenamento persistente</strong>, então <strong>EBS</strong> é a melhor resposta.<br>
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre o Instance Store</a></p>
+</blockquote></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="efs---elastic-file-system">EFS - Elastic File System<a href="#efs---elastic-file-system" class="hash-link" aria-label="Link direto para EFS - Elastic File System" title="Link direto para EFS - Elastic File System">​</a></h2>
+<p>O <strong>Amazon EFS (Elastic File System)</strong> é um <strong>sistema de arquivos escalável e totalmente gerenciado</strong>, que pode ser montado em <strong>múltiplas instâncias EC2</strong> simultaneamente.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230219074924856" src="/assets/images/image-20230219074924856-1d778a097fed17a8d1acbaa1b6df5136.png" width="600" height="334" class="img_ev3q"></p>
+<blockquote>
+<p>Características</p>
+</blockquote>
+<ul>
+<li><strong>Usa o protocolo NFSv4.1</strong>, permitindo que várias instâncias EC2 acessem o mesmo sistema de arquivos simultaneamente.</li>
+<li><strong>Diferente do EBS</strong>, que só pode ser montado em uma única <strong>Zona de Disponibilidade (AZ)</strong>, o <strong>EFS</strong> pode ser montado em várias <strong>AZs</strong>.</li>
+<li><strong>Modelo de pagamento por uso</strong>: você paga apenas pelo armazenamento utilizado.</li>
+<li><strong>Proteção de acesso via Security Groups</strong>.</li>
+<li><strong>Suporte apenas para Linux (AMI)</strong>, <strong>não compatível com Windows</strong>.</li>
+<li><strong>Possibilidade de criptografia usando AWS KMS</strong>.</li>
+<li><strong>Suporte a AWS Access Point</strong>, permitindo restrição de acesso para diferentes usuários.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219075953769" src="/assets/images/image-20230219075953769-ac0f50c960b0e51f54ce0540a53a3b30.png" width="391" height="559" class="img_ev3q"></p>
+<ul>
+<li><strong>Suporte a milhares de conexões simultâneas</strong>, com <strong>throughput superior a 10GB/s</strong>.</li>
+<li><strong>Permite replicação entre regiões (Cross-Region Replication)</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Modos de Desempenho</p>
+</blockquote>
+<p>O <strong>modo de performance</strong> do EFS pode ser definido na criação:</p>
+<ul>
+<li><strong>General Purpose (padrão)</strong> → Recomendado para aplicações como servidores web e CMS (ex: WordPress).</li>
+<li><strong>Max I/O</strong> → Ideal para Big Data, Machine Learning e processamento de vídeo.</li>
+</ul>
+<blockquote>
+<p>Modos de Throughput</p>
+</blockquote>
+<p>O throughput do EFS pode ser ajustado de três formas:</p>
+<ul>
+<li><strong>Bursting</strong> → Começa com 1 TB = 50MiB/s e pode atingir picos de até <strong>100MiB/s</strong>.</li>
+<li><strong>Provisioned</strong> → Permite definir manualmente um nível de throughput.</li>
+<li><strong>Elastic</strong> → Escala automaticamente de acordo com a carga de trabalho.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Storage Tiers</p>
+</blockquote>
+<p>O <strong>EFS suporta gerenciamento de ciclo de vida</strong>, permitindo mover arquivos automaticamente para uma camada de armazenamento mais barata após <strong>30 dias de inatividade</strong>.</p>
+<ul>
+<li><strong>Standard</strong> → Para arquivos acessados frequentemente.</li>
+<li><strong>Infrequent Access (EFS-IA)</strong> → Para arquivos acessados raramente.<!-- -->
+<ul>
+<li><strong>Menor custo de armazenamento</strong>, mas cobra taxa por recuperação de dados.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219075605555" src="/assets/images/image-20230219075605555-a9fa500486ad48d709db7232e45f7037.png" width="357" height="559" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Casos de Uso</p>
+</blockquote>
+<ul>
+<li>Compartilhamento de arquivos entre várias instâncias EC2.</li>
+<li>Hospedagem de sites que precisam de armazenamento compartilhado (ex: <strong>WordPress</strong>).</li>
+<li>Ambientes de desenvolvimento e análise de dados que exigem <strong>escalabilidade automática</strong>.</li>
+<li>Aplicações que necessitam de um <strong>sistema de arquivos distribuído e tolerante a falhas</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="efs-uso" src="/assets/images/image-20210819054634544-ca14afc58919e55ce74e8b18ddc0c801.png" width="424" height="502" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Se a questão mencionar <strong>armazenamento de arquivos compartilhado entre várias instâncias EC2</strong>, a resposta provavelmente será <strong>EFS</strong>.<br>
+<!-- -->Se a necessidade for <strong>armazenamento de bloco persistente</strong> para uma única instância, então a melhor opção será <strong>EBS</strong>.<br>
+<a href="https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre o Amazon EFS</a></p>
+</blockquote></div></div>
+<hr>
+<p>Aqui está sua documentação revisada e aprimorada para facilitar a compreensão e auxiliar na sua preparação para a certificação <strong>AWS Certified Solutions Architect - Professional</strong>.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-fsx">Amazon FSx<a href="#amazon-fsx" class="hash-link" aria-label="Link direto para Amazon FSx" title="Link direto para Amazon FSx">​</a></h2>
+<p>O <strong>Amazon FSx</strong> é um serviço da AWS que permite configurar <strong>sistemas de arquivos de terceiros totalmente gerenciados</strong>. <br> Ele é semelhante ao <strong>EFS</strong>, mas enquanto o EFS é voltado para sistemas baseados em <strong>Linux</strong> com o protocolo <strong>NFS</strong>, o FSx permite o uso de sistemas de arquivos mais específicos, como <strong>Windows File Server, Lustre, NetApp ONTAP e OpenZFS</strong>.</p>
+<blockquote>
+<p>Características Gerais</p>
+</blockquote>
+<ul>
+<li><strong>Gerenciado pela AWS</strong>, eliminando a necessidade de configurar e manter servidores de arquivos manualmente.</li>
+<li><strong>Oferece suporte a diferentes sistemas de arquivos</strong> para atender a diversas necessidades de desempenho e compatibilidade.</li>
+<li><strong>Permite escolher entre implantação Single-AZ e Multi-AZ</strong>.<!-- -->
+<ul>
+<li><strong>Não é possível converter</strong> um sistema de arquivos <strong>Single-AZ para Multi-AZ</strong> diretamente.</li>
+<li>Para migração, pode-se criar um novo <strong>Multi-AZ</strong> e usar <strong>AWS DataSync</strong> ou realizar um backup da versão <strong>Single-AZ</strong> e restaurá-lo na versão <strong>Multi-AZ</strong>.</li>
+</ul>
+</li>
+<li><strong>Não é possível reduzir o tamanho do sistema de arquivos</strong>, apenas aumentá-lo.<!-- -->
+<ul>
+<li>Caso precise diminuir, a recomendação é criar um novo FSx e utilizar <strong>AWS DataSync</strong> para copiar os dados.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de FSx</p>
+</blockquote>
+<p>O <strong>Amazon FSx</strong> suporta quatro tipos principais de sistemas de arquivos:</p>
+<blockquote>
+<p>FSx for Lustre</p>
+</blockquote>
+<ul>
+<li><strong>Lustre</strong> é um sistema de arquivos distribuído e paralelo otimizado para <strong>computação de alto desempenho (HPC)</strong>.</li>
+<li>Utilizado em <strong>Machine Learning, Big Data, simulações científicas e renderização de vídeos</strong>.</li>
+<li>Suporta integração com <strong>Amazon S3</strong>, permitindo ler e escrever diretamente no S3.<!-- -->
+<ul>
+<li><strong>Lazy Loading (Carregamento Preguiçoso)</strong> → Os dados do S3 são carregados apenas quando solicitados, evitando custos desnecessários ao transferir grandes volumes de dados.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Tipos de FSx for Lustre</strong></p>
+<ol>
+<li>
+<p><strong>Scratch File System</strong></p>
+<ul>
+<li>Projetado para <strong>armazenamento temporário</strong>, sem replicação de dados.</li>
+<li><strong>Extremamente rápido</strong> (até <strong>6x mais rápido</strong>, com throughput de <strong>200MBps</strong>).</li>
+<li><strong>Recomendado para cargas de trabalho temporárias</strong> que precisam de alta performance.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219091942131" src="/assets/images/image-20230219091942131-50a9f2a3dfe7500d234a531a4d8ec3d9.png" width="516" height="269" class="img_ev3q"></p>
+</li>
+<li>
+<p><strong>Persistent File System</strong></p>
+<ul>
+<li><strong>Projetado para armazenamento de longo prazo</strong>.</li>
+<li><strong>Os dados são replicados dentro da mesma AZ</strong>, garantindo maior disponibilidade.</li>
+<li>Mais adequado para workloads que exigem <strong>persistência e redundância</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219092102564" src="/assets/images/image-20230219092102564-f3c0ba91ea52eb5f949f4a371eb76266.png" width="482" height="244" class="img_ev3q"></p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>FSx for Windows File Server</p>
+</blockquote>
+<ul>
+<li><strong>Compatível com protocolos SMB e NTFS</strong>.</li>
+<li><strong>Suporte ao Active Directory da Microsoft</strong>, permitindo integração com domínios existentes.</li>
+<li><strong>Suporta Distributed File System (DFS)</strong>, possibilitando criar um sistema de arquivos distribuído.</li>
+<li><strong>Permite agrupar múltiplos file systems com DFS Namespaces</strong>, simplificando a organização dos dados.</li>
+</ul>
+<hr>
+<blockquote>
+<p>FSx for NetApp ONTAP</p>
+</blockquote>
+<ul>
+<li><strong>Permite criar sistemas de arquivos baseados no NetApp ONTAP</strong> (compatível com Linux, macOS e Windows).</li>
+<li>Compatível com <strong>NFS, SMB e iSCSI</strong>, oferecendo alta flexibilidade.</li>
+<li>Ideal para empresas que já utilizam soluções NetApp e desejam migrar para a AWS.</li>
+</ul>
+<hr>
+<blockquote>
+<p>FSx for OpenZFS</p>
+</blockquote>
+<ul>
+<li>Compatível com <strong>NFS (v3, v4, v4.1, v4.2)</strong>.</li>
+<li><strong>Permite rodar o sistema de arquivos ZFS na AWS</strong>, oferecendo suporte a snapshots, compressão e alta integridade dos dados.</li>
+<li>Ótimo para cargas de trabalho que exigem <strong>alta confiabilidade e eficiência no uso de espaço</strong>.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Se a questão mencionar <strong>armazenamento de arquivos para Windows</strong>, a resposta mais adequada será <strong>FSx for Windows</strong>.<br>
+<!-- -->Se for <strong>computação de alto desempenho (HPC)</strong>, a resposta será <strong>FSx for Lustre</strong>.<br>
+<!-- -->Se a questão mencionar <strong>NetApp ONTAP</strong> ou <strong>OpenZFS</strong>, deve-se escolher FSx específico para essas tecnologias.<br>
+<a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is-fsx.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre Amazon FSx</a></p>
+</blockquote></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-s3">Amazon S3<a href="#amazon-s3" class="hash-link" aria-label="Link direto para Amazon S3" title="Link direto para Amazon S3">​</a></h2>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>Amazon S3 (Simple Storage Service)</strong> é um serviço de armazenamento de objetos da AWS. Ele é altamente escalável, durável e seguro, sendo utilizado para armazenar e recuperar qualquer quantidade de dados a qualquer momento.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="características-principais">Características Principais<a href="#características-principais" class="hash-link" aria-label="Link direto para Características Principais" title="Link direto para Características Principais">​</a></h3>
+<ul>
+<li>É um serviço <strong>regional</strong> com visibilidade <strong>global</strong>.</li>
+<li>É totalmente gerenciado pela AWS.</li>
+<li>O nome do bucket deve ser <strong>único globalmente</strong>, pois é utilizado na URL dos arquivos armazenados. O nome deve ter entre <strong>3 a 63 caracteres</strong>, sem caracteres especiais.</li>
+<li>Os dados são <strong>replicados em pelo menos 3 zonas de disponibilidade (AZs)</strong> dentro da região escolhida.</li>
+<li>Possui uma durabilidade de <strong>99,999999999% (11 noves)</strong>.</li>
+<li>É possível definir permissões de acesso para buckets e objetos.</li>
+<li>Permite armazenar arquivos de <strong>0 bytes até 5 terabytes de tamanho</strong>.</li>
+<li><strong>Multipart Upload</strong> é um processo que permite dividir um arquivo grande em partes menores e enviá-las paralelamente.<!-- -->
+<ul>
+<li>O uso de <strong>Multipart Upload</strong> é recomendado para arquivos maiores que <strong>100 MB</strong>.</li>
+<li>É possível remover partes incompletas usando <strong>lifecycle policy</strong>, para evitar desperdício de armazenamento devido a uploads cancelados.</li>
+</ul>
+</li>
+<li>É possível recuperar objetos utilizando <strong>recuperação em paralelo</strong>, onde o arquivo é baixado em partes simultaneamente.<!-- -->
+<ul>
+<li>Também é possível recuperar apenas o <strong>cabeçalho do arquivo</strong>, economizando largura de banda.</li>
+</ul>
+</li>
+<li>O S3 é um sistema de <strong>armazenamento baseado em objetos (Object-Level Storage)</strong>.</li>
+<li>As ações dentro do S3 podem gerar eventos para automação e monitoramento.</li>
+<li>Para controle de acesso, existem dois mecanismos principais:<!-- -->
+<ul>
+<li><strong>ACL (Access Control List):</strong> Define regras de acesso a objetos e buckets.</li>
+<li><strong>Bucket Policy:</strong> Permite definir regras mais granulares de acesso ao bucket.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Casos de Uso</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>Backup e armazenamento de dados</strong>.</li>
+<li><strong>Hospedagem de aplicações (sites estáticos)</strong>.</li>
+<li><strong>Armazenamento de mídia (imagens, vídeos, áudios)</strong>.</li>
+<li><strong>Distribuição de software e atualizações</strong>.</li>
+</ul></div></div>
+<blockquote>
+<p>Segurança e Compliance</p>
+</blockquote>
+<ul>
+<li><strong>Glacier Vault Lock:</strong> Permite configurar regras para impedir a exclusão de arquivos, garantindo conformidade regulatória.</li>
+<li><strong>S3 Object Lock:</strong> Semelhante ao Vault Lock, mas permite configurar <strong>retenção temporal</strong>. Por exemplo:<!-- -->
+<ul>
+<li>Um arquivo pode ser protegido contra modificação por <strong>30 dias</strong>.</li>
+<li>Uma nota fiscal pode ser configurada para não ser excluída por <strong>5 anos</strong>.</li>
+</ul>
+</li>
+<li><strong>S3 Events:</strong> Integra-se apenas com <strong>SNS, SQS e Lambda</strong> para notificações e automação.</li>
+<li>S3 permite adicionar <strong>metadados e tags</strong> aos objetos, mas <strong>não é possível pesquisar objetos diretamente por eles</strong>. Para buscar objetos por metadados, é recomendado armazenar essas informações no <strong>DynamoDB</strong> e usá-lo como indexador.</li>
+</ul>
+<blockquote>
+<p>Precificação</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Como é cobrado?</div><div class="admonitionContent_BuS1"><p>O custo do S3 depende dos seguintes fatores:</p><ul>
+<li>Armazenamento (GBs por mês).</li>
+<li>Transferência de dados <strong>para fora da região do bucket</strong>.</li>
+<li>Requisições via API: <strong>PUT, GET, COPY, LIST, POST</strong>.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Classes de S3</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>O Amazon S3 oferece diversas classes de armazenamento para diferentes necessidades de acesso e custo. Escolher a classe correta pode otimizar custos e garantir o nível adequado de disponibilidade e durabilidade dos dados.</p></div></div>
+<ul>
+<li><strong>Standard S3:</strong> Classe de uso geral, projetada para dados que precisam estar disponíveis imediatamente e com alta durabilidade.</li>
+<li><strong>Intelligent-Tiering:</strong> Projetada para dados com padrões de acesso variáveis. Move automaticamente objetos não acessados por 30 dias para uma camada de menor custo e retorna os dados à camada de alto desempenho quando acessados.</li>
+<li><strong>Standard-Infrequent Access (IA):</strong> Para dados acessados raramente, mas que precisam de resposta rápida quando acessados. Tem menor custo de armazenamento em relação ao Standard S3, mas cobra por recuperação.</li>
+<li><strong>One Zone-IA:</strong> Similar ao Standard-IA, mas armazena os dados em uma única Zona de Disponibilidade (AZ), resultando em menor custo e menor durabilidade.</li>
+<li><strong>Glacier Instant Retrieval:</strong> Ideal para dados arquivados que precisam ser acessados ocasionalmente, oferecendo recuperação em milissegundos. A duração mínima de armazenamento é de 90 dias.</li>
+<li><strong>Glacier Flexible Retrieval:</strong> Para arquivamento de longo prazo, onde cada arquivo é chamado de <strong>Archive</strong> e armazenado em <strong>Vaults</strong> (equivalente a buckets). Formas de recuperação:<!-- -->
+<ul>
+<li><strong>Expedited</strong>: (1 a 5 minutos) - Custo: $10</li>
+<li><strong>Standard</strong>: (3 a 5 horas) - Custo: $0.05</li>
+<li><strong>Bulk</strong>: (5 a 12 horas) - Gratuito</li>
+<li>Duração mínima de armazenamento: 90 dias.</li>
+</ul>
+</li>
+<li><strong>Glacier Deep Archive:</strong> Projetado para arquivamento de longo prazo (anos). Formas de recuperação:<!-- -->
+<ul>
+<li><strong>Standard</strong>: (12 horas) - Custo: $0.10</li>
+<li><strong>Bulk</strong>: (48 horas) - Custo: $0.025</li>
+<li>Duração mínima de armazenamento: 180 dias.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>É possível utilizar o <strong>Intelligent-Tiering</strong> para mover automaticamente os dados entre diferentes classes de armazenamento, otimizando custos.</p></div></div>
+<p><img decoding="async" loading="lazy" alt="image-20230223070219643" src="/assets/images/image-20230223070219643-4ce630bb7f4d375c2c55e5296fc79b15.png" width="1137" height="468" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20230223070240725" src="/assets/images/image-20230223070240725-99f1a655775a21a62a6dbfd23c339bb3.png" width="1157" height="415" class="img_ev3q"></p>
+<p>Recomendação de leitura: <a href="https://searchaws.techtarget.com/tip/Analyze-Amazon-S3-storage-classes-from-Standard-to-Glacier" target="_blank" rel="noopener noreferrer">Analise as classes de armazenamento do Amazon S3, do padrão ao Glacier</a></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>diferentes classes de armazenamento do S3</strong>, pedindo para identificar a mais adequada com base em custo, latência de recuperação e tempo mínimo de retenção.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa precisa armazenar backups de logs que raramente serão acessados, mas devem ser mantidos por pelo menos <strong>180 dias</strong>. Qual a classe de armazenamento do S3 mais adequada para reduzir custos?</p><ul>
+<li>✅ Amazon S3 Glacier Deep Archive</li>
+</ul><hr><blockquote>
+<p>O <strong>S3 Object Lock</strong> pode ser exigido em conformidade com regulamentos como <strong>HIPAA, FINRA e SEC 17a-4(f)</strong>, garantindo que arquivos não possam ser modificados ou excluídos dentro de um período específico.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa do setor financeiro precisa armazenar documentos regulatórios que <strong>não podem ser apagados ou modificados por 7 anos</strong>. Qual funcionalidade do S3 deve ser utilizada?</p><ul>
+<li>✅ Amazon S3 Object Lock no modo Compliance</li>
+</ul><hr><blockquote>
+<p>Questões podem testar <strong>eventos do S3</strong> e como automatizar fluxos de trabalho quando um arquivo é carregado ou excluído.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Um time de Data Science quer ser <strong>automaticamente notificado</strong> sempre que um novo dataset for carregado no S3. Como isso pode ser implementado?</p><ul>
+<li>✅ Configurar <strong>S3 Event Notifications</strong> para acionar um tópico <strong>SNS</strong> ou enviar mensagens para <strong>SQS</strong></li>
+</ul><hr><blockquote>
+<p>Questões podem abordar <strong>restrições de nomeação de buckets</strong> e visibilidade global do S3.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma equipe tenta criar um bucket do S3 chamado <code>logs</code>. No entanto, a criação falha. Qual pode ser o motivo?</p><ul>
+<li>✅ O nome do bucket do S3 deve ser <strong>único globalmente</strong>, e <code>logs</code> já pode estar em uso por outra conta.</li>
+</ul><hr><blockquote>
+<p>O <strong>S3 Transfer Acceleration</strong> pode ser útil para acelerar uploads de arquivos para buckets que precisam receber dados de diferentes partes do mundo.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Um time de desenvolvimento precisa permitir <strong>uploads rápidos de arquivos grandes</strong> para um bucket do S3 a partir de clientes localizados globalmente. Qual recurso AWS pode ajudar?</p><ul>
+<li>✅ <strong>S3 Transfer Acceleration</strong></li>
+</ul><hr><blockquote>
+<p>Questões podem comparar <strong>diferentes formas de recuperação de objetos armazenados no Glacier</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Um cliente armazenou arquivos no <strong>Glacier Flexible Retrieval</strong> e precisa recuperar os dados em <strong>menos de 5 minutos</strong>. Qual método de recuperação deve ser usado?</p><ul>
+<li>✅ <strong>Expedited Retrieval</strong></li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gerenciamento-de-armazenamento">Gerenciamento de Armazenamento<a href="#gerenciamento-de-armazenamento" class="hash-link" aria-label="Link direto para Gerenciamento de Armazenamento" title="Link direto para Gerenciamento de Armazenamento">​</a></h3>
+<blockquote>
+<p>Consistência de Dados</p>
+</blockquote>
+<p>A consistência de dados no S3 segue o seguinte modelo:</p>
+<ul>
+<li><strong>Leitura após gravação para novos objetos:</strong> Assim que um novo objeto é gravado no S3, ele pode ser imediatamente lido.</li>
+<li><strong>Consistência eventual para sobrescrita e deleção:</strong> Se um objeto for sobrescrito ou excluído, pode haver um pequeno atraso até que a alteração se propague.</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Esse comportamento pode impactar aplicações que dependem de leitura imediata após atualizações de objetos.</p></div></div>
+<hr>
+<blockquote>
+<p>Replicação</p>
+</blockquote>
+<ul>
+<li>
+<p>O <strong>S3 Versioning</strong> deve estar habilitado em ambos os buckets para que a replicação funcione corretamente.</p>
+</li>
+<li>
+<p>A replicação pode ser configurada entre diferentes contas AWS.</p>
+</li>
+<li>
+<p><strong>Não replica regras do Lifecycle Management.</strong></p>
+</li>
+<li>
+<p>Existem três tipos de replicação:</p>
+<ul>
+<li>
+<p><strong>SRR (Same Region Replication):</strong></p>
+<ul>
+<li>Usado para agrupamento de logs e replicação de dados entre diferentes ambientes (por exemplo, desenvolvimento e homologação).</li>
+</ul>
+</li>
+<li>
+<p><strong>CRR (Cross Region Replication):</strong></p>
+<ul>
+<li>Usado para requisitos de conformidade (compliance), redução de latência de acesso e replicação entre contas diferentes.</li>
+</ul>
+</li>
+<li>
+<p><strong>S3 RTC (Replication Time Control):</strong></p>
+<ul>
+<li>Garante que a maioria dos objetos do S3 seja replicada em segundos e que 99,99% sejam replicados em no máximo 15 minutos.</li>
+<li>Usado para compliance e <strong>Disaster Recovery</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Cross region replication" src="/assets/images/image-20210819054942170-33dc5e7c457fb2b43c99883205bf593c.png" width="1383" height="508" class="img_ev3q"></p>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>atenção</div><div class="admonitionContent_BuS1"><p>Após a habilitação, <strong>apenas novos objetos serão replicados</strong>. Objetos já existentes <strong>não</strong> serão replicados automaticamente.</p></div></div>
+<ul>
+<li>A deleção pode ser replicada, mas isso é opcional. Se não for ativada, o marcador de deleção <strong>não será propagado para o bucket de destino</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Versionamento</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="Versioning" src="/assets/images/image-20210819055012729-98a91b0d4ae8313f2c4888c77fb47c56.png" width="1367" height="591" class="img_ev3q"></p>
+<p>O <strong>versionamento</strong> no S3 permite que múltiplas versões de um objeto sejam armazenadas, garantindo proteção contra exclusões acidentais.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>Se um objeto for excluído, o S3 apenas adicionará um marcador de exclusão, sem remover completamente os dados.</p></div></div>
+<hr>
+<blockquote>
+<p>Gerenciamento do Ciclo de Vida</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="lifecycle management" src="/assets/images/image-20210819055054870-41fb7b339e40c294a34ad13681b17875.png" width="1403" height="617" class="img_ev3q"></p>
+<p>O gerenciamento do ciclo de vida permite definir regras automáticas para mover e excluir objetos no S3, reduzindo custos de armazenamento.</p>
+<ul>
+<li><strong>Ações de transição:</strong> Movem objetos entre classes de armazenamento, como do <strong>S3 Standard</strong> para <strong>S3 Glacier</strong>.</li>
+<li><strong>Ações de expiração:</strong> Definem um tempo para que objetos sejam automaticamente deletados.</li>
+<li>Regras podem ser aplicadas com base em <strong>prefixos</strong> ou <strong>tags</strong>, permitindo segmentação granular (por exemplo, mover apenas objetos de uma determinada pasta).</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Essa funcionalidade é essencial para otimizar custos ao mover arquivos menos acessados para camadas de armazenamento mais baratas.</p></div></div>
+<hr>
+<blockquote>
+<p>Aceleração de Transferência</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="Transfer acceleration " src="/assets/images/image-20210819055118471-730385e85b9f955c8ea4df9150144f6c.png" width="1384" height="540" class="img_ev3q"></p>
+<p>O <strong>S3 Transfer Acceleration</strong> usa a rede global da AWS para acelerar uploads para buckets S3, melhorando a velocidade de transferência, principalmente para usuários geograficamente distantes do bucket de destino.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>Ideal para uploads de arquivos grandes ou aplicações globais com alto volume de transferência de dados.</p></div></div>
+<hr>
+<blockquote>
+<p>Storage Class Analysis</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>Storage Class Analysis</strong> ajuda a identificar padrões de uso dos objetos armazenados no S3. Ele permite decidir quando mover objetos para classes de armazenamento mais econômicas, como S3 Glacier ou S3 Intelligent-Tiering.</p></div></div>
+<ul>
+<li>Analisa automaticamente os padrões de acesso aos dados.</li>
+<li>Ajuda a otimizar custos, sugerindo mudanças de classe de armazenamento.</li>
+<li>Exibe relatórios detalhados sobre o uso dos objetos ao longo do tempo.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219083635525" src="/assets/images/image-20230219083635525-fdd38b1acf39082e46d93a7606f5967d.png" width="1144" height="614" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Storage Lens</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>Storage Lens</strong> fornece insights detalhados sobre a utilização do armazenamento S3 em toda a organização. Ele permite monitorar, analisar e otimizar o uso do armazenamento.</p></div></div>
+<ul>
+<li>Permite visualizar múltiplas regiões e contas em um painel unificado.</li>
+<li>Gera relatórios detalhados sobre o armazenamento e uso de objetos.</li>
+<li>Possui opção para configurar métricas personalizadas.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219083841776" src="/assets/images/image-20230219083841776-15fb6338f0238915a83a9c5af88f0187.png" width="1162" height="629" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230219084109555" src="/assets/images/image-20230219084109555-69e707b4615cb1b7bd59432849df7040.png" width="1118" height="570" class="img_ev3q"></p>
+<p>Aqui estão cinco questões e dicas baseadas no conteúdo que você forneceu:</p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente testam o comportamento de <strong>consistência de dados no S3</strong>, especialmente para leitura após gravação e sobrescrita de objetos.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma aplicação grava um arquivo em um bucket S3 e imediatamente tenta lê-lo. Em seguida, o mesmo arquivo é atualizado e lido novamente logo após a atualização. Qual comportamento pode ser esperado?</p><ul>
+<li>✅<!-- -->
+<ul>
+<li>A primeira leitura será bem-sucedida, pois o S3 garante <strong>consistência de leitura após gravação para novos objetos</strong>.</li>
+<li>A segunda leitura pode retornar a versão anterior do arquivo por um curto período, pois <strong>atualizações e deleções seguem consistência eventual</strong>.</li>
+</ul>
+</li>
+</ul><hr><blockquote>
+<p>Questões podem abordar <strong>replicação de dados no S3</strong>, como SRR (Same Region Replication) e CRR (Cross Region Replication).</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma empresa quer garantir que os dados armazenados no S3 sejam replicados automaticamente em <strong>outra conta AWS, localizada em uma região diferente</strong>, para atender requisitos de compliance. Qual solução AWS deve ser usada?</p><ul>
+<li>✅ <strong>Cross Region Replication (CRR)</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>versionamento no S3</strong> é um tema recorrente, testando como objetos são protegidos contra exclusões acidentais.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma equipe ativou o versionamento em um bucket S3. Posteriormente, um usuário exclui um arquivo acidentalmente. Como a equipe pode recuperar esse arquivo?</p><ul>
+<li>✅ O S3 cria um <strong>marcador de exclusão</strong>, mas <strong>a versão antiga do objeto ainda existe</strong> e pode ser restaurada removendo o marcador.</li>
+</ul><hr><blockquote>
+<p>Questões podem explorar o <strong>gerenciamento do ciclo de vida (Lifecycle Management)</strong> do S3 para otimização de custos.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma empresa quer mover arquivos do S3 Standard para <strong>Glacier</strong> automaticamente após 90 dias e excluir os arquivos após 1 ano. Como isso pode ser configurado?</p><ul>
+<li>✅ Criar uma <strong>regra de ciclo de vida</strong> no bucket S3 com as seguintes ações:<!-- -->
+<ul>
+<li><strong>Transição</strong> para Glacier após 90 dias.</li>
+<li><strong>Expiração</strong> do objeto após 365 dias.</li>
+</ul>
+</li>
+</ul><hr><blockquote>
+<p>Questões podem envolver <strong>S3 Transfer Acceleration</strong>, usado para melhorar a velocidade de uploads globais para o S3.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Um time de desenvolvimento precisa permitir <strong>uploads rápidos de arquivos grandes</strong> para um bucket do S3 a partir de clientes localizados globalmente. Qual recurso AWS pode ajudar?</p><ul>
+<li>✅ <strong>S3 Transfer Acceleration</strong></li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="segurança-e-controle-de-acesso">Segurança e Controle de Acesso<a href="#segurança-e-controle-de-acesso" class="hash-link" aria-label="Link direto para Segurança e Controle de Acesso" title="Link direto para Segurança e Controle de Acesso">​</a></h3>
+<blockquote>
+<p>Criptografia</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>O S3 suporta diversas formas de criptografia para proteger os dados, tanto em repouso quanto em trânsito.</p></div></div>
+<ul>
+<li><strong>SSE-S3</strong>: Criptografa os objetos usando chaves gerenciadas pela AWS (AES-256).<!-- -->
+<ul>
+<li>Utilizado por padrão para todos os dados armazenados no Glacier.</li>
+<li>Requer o cabeçalho HTTP <code>X-amz-server-side-encryption: AES256</code>.</li>
+</ul>
+</li>
+<li><strong>SSE-KMS</strong>: Utiliza chaves gerenciadas pelo AWS Key Management Service (KMS).<!-- -->
+<ul>
+<li>As chamadas ao KMS são registradas no CloudTrail para auditoria.</li>
+<li>Requer o cabeçalho HTTP <code>X-amz-server-side-encryption: aws:kms</code>.</li>
+<li>Se um bucket for público, mas estiver usando SSE-KMS, os usuários não conseguirão acessar os objetos sem permissões específicas da chave KMS.</li>
+<li>Para realizar uploads, é necessário ter a permissão <code>kms:GenerateDataKey</code>, caso contrário, a operação falhará.</li>
+</ul>
+</li>
+<li><strong>SSE-C</strong>: O usuário fornece a chave de criptografia ao enviar os dados. Recomendado para quem usa soluções como AWS CloudHSM.</li>
+<li><strong>Criptografia Client-Side</strong>: Os dados são criptografados antes do upload para o S3, garantindo que a AWS nunca tenha acesso ao conteúdo não criptografado.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Encryption" src="/assets/images/image-20210819054838607-e8381ffc03bf67e384f52a65959a340c.png" width="1398" height="457" class="img_ev3q"></p>
+<p><strong>Configuração Adicional de Segurança</strong></p>
+<ul>
+<li><strong>Forçar uso de SSL:</strong> É possível criar uma <em>Bucket Policy</em> para exigir que todas as conexões usem SSL, utilizando a condição <code>aws:SecureTransport</code>.</li>
+<li><strong>Criptografia em Trânsito:</strong>
+<ul>
+<li>O S3 disponibiliza dois endpoints:<!-- -->
+<ul>
+<li><strong>HTTP</strong>: Sem criptografia (não recomendado).</li>
+<li><strong>HTTPS</strong>: Utiliza SSL/TLS para segurança em trânsito.<!-- -->
+<ul>
+<li>Obrigatório ao usar SSE-C para garantir a proteção da chave de criptografia.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Criptografia Default:</strong> Se um bucket tiver criptografia padrão ativada e um objeto for enviado já criptografado pelo cliente, ele não será criptografado novamente.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>Sempre utilize HTTPS ao interagir com o S3 para garantir a segurança dos dados em trânsito.</p></div></div>
+<hr>
+<blockquote>
+<p>Controle de Acesso</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Baseado em usuários (User-based):</strong></p>
+<ul>
+<li>Acesso controlado via permissões do <strong>IAM</strong>.</li>
+<li>Todas as chamadas de API são validadas pelo IAM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Baseado em recursos (Resource-based):</strong></p>
+<ul>
+<li><strong>Bucket Policies:</strong>
+<ul>
+<li>Define permissões para buckets e pode conceder acesso a outras contas ou serviços AWS.</li>
+<li>Escrito em <strong>JSON</strong>.</li>
+<li>Pode ser usado para:<!-- -->
+<ul>
+<li>Tornar um bucket público.</li>
+<li><strong>Forçar criptografia</strong> nos objetos armazenados.</li>
+<li>Conceder acesso entre contas (<strong>cross-account access</strong>).</li>
+<li>Aplicar restrições baseadas em IP ou VPC.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Object ACLs e Bucket ACLs:</strong>
+<ul>
+<li><strong>Object ACLs</strong> definem permissões por objeto.</li>
+<li><strong>Bucket ACLs</strong> definem permissões no nível do bucket (menos comum).</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="AWS IAM Security Part 1: S3 Access Control Tools" src="/assets/images/AWS-S3-access-control-tools-ad3e3127369e7837500e3e3c9b60a024.png" width="800" height="353" class="img_ev3q"></p>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>atenção</div><div class="admonitionContent_BuS1"><p>O controle de acesso no S3 pode ser feito via IAM <strong>ou</strong> Bucket Policy. Caso contrário, o acesso será negado.</p></div></div>
+<hr>
+<blockquote>
+<p>Segurança e Auditoria</p>
+</blockquote>
+<p>O S3 fornece ferramentas para auditoria e monitoramento:</p>
+<ul>
+<li><strong>S3 Access Logs:</strong> Registra acessos ao bucket, podendo ser armazenados em outro S3.</li>
+<li><strong>CloudTrail:</strong> Monitora chamadas de API relacionadas ao S3.</li>
+<li><strong>MFA Delete:</strong> Protege contra exclusões acidentais exigindo autenticação multifator (MFA) para deletar objetos.</li>
+</ul>
+<hr>
+<blockquote>
+<p>MFA Delete</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>atenção</div><div class="admonitionContent_BuS1"><p>O <strong>MFA Delete</strong> impede a exclusão permanente de objetos versionados no S3, adicionando uma camada extra de segurança.</p></div></div>
+<ul>
+<li>Deve ser habilitado pelo <strong>proprietário do bucket</strong> (conta root).</li>
+<li>Só pode ser ativado via <strong>CLI</strong>, usando o perfil da <strong>conta root</strong>.</li>
+<li>Requer que o <strong>Versionamento do S3</strong> esteja ativado.</li>
+<li>Quando é necessário:<!-- -->
+<ul>
+<li>Para excluir permanentemente um objeto.</li>
+<li>Para desabilitar o versionamento do bucket.</li>
+</ul>
+</li>
+<li>Quando <strong>não</strong> é necessário:<!-- -->
+<ul>
+<li>Para excluir uma versão específica de um objeto.</li>
+<li>Para habilitar o versionamento.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Vault Lock e S3 Object Lock</p>
+</blockquote>
+<p><strong>Vault Lock</strong></p>
+<ul>
+<li>Implementa o <strong>WORM (Write Once, Read Many)</strong>.</li>
+<li>Permite a configuração para que arquivos <strong>nunca sejam excluídos ou alterados</strong>.</li>
+<li>Utilizado principalmente para <strong>compliance e retenção obrigatória de dados</strong>.</li>
+</ul>
+<p><strong>S3 Object Lock</strong></p>
+<ul>
+<li>Similar ao <strong>Vault Lock</strong>, mas permite definir um período de retenção.</li>
+<li>Exemplos de uso:<!-- -->
+<ul>
+<li>Impedir a modificação de um arquivo por <strong>30 dias</strong>.</li>
+<li>Garantir que uma <strong>nota fiscal seja preservada por 5 anos</strong>.</li>
+</ul>
+</li>
+<li>Também adota o <strong>WORM (Write Once, Read Many)</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>VPC Endpoint para o S3</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Os <strong>VPC Endpoints</strong> permitem o acesso direto ao S3 sem passar pela internet, ideal para instâncias sem conectividade externa.</p></div></div>
+<ul>
+<li>
+<p>Possibilita acesso seguro a <strong>buckets públicos ou cross-account</strong>.</p>
+</li>
+<li>
+<p>Evita a necessidade de NAT Gateway ou Internet Gateway para comunicação com o S3.</p>
+<p><img decoding="async" loading="lazy" alt="VPC Endpoint para o S3" src="/assets/images/image-20230207061400269-ef1b6f5497b55889b3c5ce3d4599ef52.png" width="1152" height="529" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>diferentes métodos de criptografia no S3</strong>, pedindo para identificar o mais adequado para cada cenário.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma empresa precisa armazenar arquivos altamente sensíveis no S3 e quer garantir que apenas usuários autorizados possam descriptografá-los, além de registrar todas as tentativas de acesso à chave de criptografia. Qual método deve ser utilizado?</p><ul>
+<li>✅ <strong>SSE-KMS</strong> (Server-Side Encryption com AWS KMS), pois permite controle granular sobre chaves e auditoria via CloudTrail.</li>
+</ul><hr><blockquote>
+<p>O <strong>MFA Delete</strong> pode ser cobrado em perguntas para testar conhecimento sobre proteção contra exclusões acidentais.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma empresa ativou o versionamento no S3 e quer impedir que objetos sejam excluídos permanentemente sem uma autenticação adicional. Qual funcionalidade deve ser usada?</p><ul>
+<li>✅ <strong>MFA Delete</strong>, que exige um código de autenticação multifator para a exclusão permanente de objetos.</li>
+</ul><hr><blockquote>
+<p>Questões podem explorar a diferença entre <strong>controle de acesso baseado em IAM e Bucket Policy</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma equipe de segurança quer garantir que apenas usuários de um determinado grupo IAM possam acessar um bucket S3, sem precisar configurar permissões em cada objeto individualmente. Qual abordagem é recomendada?</p><ul>
+<li>✅ <strong>Bucket Policy</strong>, pois permite definir regras de acesso no nível do bucket de forma centralizada.</li>
+</ul><hr><blockquote>
+<p>O <strong>VPC Endpoint para S3</strong> pode ser exigido em cenários de segurança para evitar tráfego pela internet.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma empresa tem instâncias em uma VPC privada sem acesso à internet, mas precisa permitir que essas instâncias acessem um bucket S3. Qual solução deve ser usada?</p><ul>
+<li>✅ Criar um <strong>VPC Endpoint para S3</strong>, garantindo acesso seguro sem necessidade de NAT Gateway ou Internet Gateway.</li>
+</ul><hr><blockquote>
+<p>O <strong>S3 Object Lock</strong> pode aparecer em questões relacionadas à retenção de dados e conformidade regulatória.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong>  Uma empresa do setor de saúde precisa armazenar registros médicos em um bucket S3, garantindo que esses arquivos <strong>não possam ser modificados ou excluídos por um período de 10 anos</strong>. Qual funcionalidade deve ser utilizada?</p><ul>
+<li>✅ <strong>S3 Object Lock no modo Compliance</strong>, pois impede alterações e exclusões dentro do período configurado.</li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="logs-e-monitoramento">Logs e Monitoramento<a href="#logs-e-monitoramento" class="hash-link" aria-label="Link direto para Logs e Monitoramento" title="Link direto para Logs e Monitoramento">​</a></h3>
+<blockquote>
+<p>Logs de Acesso</p>
+</blockquote>
+<ul>
+<li>O <strong>S3 Access Logs</strong> permite armazenar <strong>server access logs</strong> para auditoria e análise.</li>
+<li>Pode ser integrado ao <strong>AWS Athena</strong> para consulta e análise avançada.</li>
+<li>Os logs devem ser armazenados em um <strong>bucket separado</strong> para evitar loops infinitos.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Eventos</p>
+</blockquote>
+<p><strong>Access Logs</strong></p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>S3 Access Logs</strong> registra todas as requisições feitas ao bucket para auditoria e análise de acessos.</p></div></div>
+<ul>
+<li>É possível armazenar os logs em outro bucket S3.</li>
+<li>Auxilia na auditoria e pode ser analisado usando o <strong>Athena</strong>.</li>
+<li>Os logs devem ser armazenados em um bucket diferente para evitar loops.</li>
+<li>A entrega dos logs pode levar algumas horas.</li>
+<li>Os registros podem estar incompletos em alguns casos.</li>
+</ul>
+<p><strong>Event Notifications</strong></p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>S3 Event Notifications</strong> permite disparar eventos quando ocorrem mudanças em um bucket, como a criação ou exclusão de objetos.</p></div></div>
+<ul>
+<li>Suporta envio de eventos para <strong>SNS, SQS e Lambda</strong>.</li>
+<li>É necessário criar uma <strong>resource policy</strong> para permitir que o S3 envie eventos para SNS, SQS ou Lambda.</li>
+<li>A policy deve ser anexada ao recurso de destino (SNS, SQS ou Lambda).</li>
+<li>Os eventos são enviados em segundos, mas podem levar alguns minutos.</li>
+<li><strong>Assim como no versionamento, em situações raras onde duas pessoas editam ao mesmo tempo, pode ocorrer o recebimento de apenas um evento em vez de dois.</strong></li>
+</ul>
+<p><strong>Trusted Advisor</strong></p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>Trusted Advisor</strong> ajuda a monitorar e sugerir melhorias na segurança e configuração dos buckets S3.</p></div></div>
+<ul>
+<li>Verifica permissões dos buckets para garantir que não estão públicos por engano.</li>
+<li>Permite visualizar alterações recentes e tomar ações corretivas.</li>
+</ul>
+<p><strong>EventBridge</strong></p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>EventBridge</strong> é um serviço que permite criar regras de eventos e acionar serviços como Lambda, SNS e SQS com eventos do S3.</p></div></div>
+<ul>
+<li><strong>Requer que o log em nível de objeto esteja habilitado para funcionar</strong>.</li>
+<li>Permite integrar o S3 com uma gama mais ampla de serviços, diferente das <strong>Event Notifications</strong>, que suportam apenas SNS, SQS e Lambda.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230726193905599" src="/assets/images/image-20230726193905599-3b8f47bc2b18df7a34956be303411587.png" width="852" height="332" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>S3 Access Logs</strong> e sua utilização para auditoria.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma equipe de segurança deseja monitorar <strong>todas as requisições feitas a um bucket S3</strong>, registrando logs para auditoria e análise posterior. Qual solução da AWS deve ser utilizada?</p><ul>
+<li>✅ <strong>S3 Access Logs</strong>, que registra todas as requisições ao bucket e pode ser armazenado em outro bucket para análise.</li>
+</ul><hr><blockquote>
+<p>O <strong>S3 Event Notifications</strong> pode ser abordado em questões sobre notificações de eventos em buckets S3.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma aplicação precisa ser notificada <strong>sempre que um novo objeto for enviado a um bucket S3</strong>. A notificação deve ser enviada para um serviço da AWS que consiga processar a mensagem e executar uma ação automática. Qual solução é a mais apropriada?</p><ul>
+<li>✅ <strong>S3 Event Notifications</strong> enviando eventos para um <strong>Amazon SNS, Amazon SQS ou AWS Lambda</strong>.</li>
+</ul><hr><blockquote>
+<p>O <strong>Trusted Advisor</strong> pode aparecer em questões sobre <strong>boas práticas de segurança no S3</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Um time de compliance precisa verificar <strong>se há buckets públicos na conta da AWS</strong> para evitar exposição indevida de dados. Qual serviço da AWS pode ser utilizado para essa análise?</p><ul>
+<li>✅ <strong>AWS Trusted Advisor</strong>, que identifica buckets públicos e sugere melhorias de segurança.</li>
+</ul><hr><blockquote>
+<p>O <strong>Amazon EventBridge</strong> pode ser testado em questões sobre monitoramento de eventos do S3.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa precisa capturar eventos <strong>de cada objeto armazenado ou excluído no S3</strong> e enviar essas informações para vários serviços da AWS além do SNS, SQS ou Lambda. Qual serviço é mais adequado?</p><ul>
+<li>✅ <strong>Amazon EventBridge</strong>, pois oferece suporte a um conjunto mais amplo de destinos para eventos do S3.</li>
+</ul><hr><blockquote>
+<p>Questões podem explorar a diferença entre <strong>S3 Event Notifications e EventBridge</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Um time de engenharia precisa processar <strong>eventos em tempo real do S3</strong>, mas requer suporte para múltiplos destinos além do SNS, SQS e Lambda. Qual serviço deve ser utilizado?</p><ul>
+<li>✅ <strong>Amazon EventBridge</strong>, pois permite roteamento avançado e integração com diversos serviços além dos suportados pelo S3 Event Notifications.</li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="acesso-e-integração">Acesso e Integração<a href="#acesso-e-integração" class="hash-link" aria-label="Link direto para Acesso e Integração" title="Link direto para Acesso e Integração">​</a></h3>
+<blockquote>
+<p>Presigned URLs</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Presigned URLs</strong> permitem o acesso temporário a um recurso armazenado no S3, sem a necessidade de conceder permissões diretas ao usuário.</p></div></div>
+<ul>
+<li>
+<p>Pode-se usar o <strong>AWS CLI</strong> ou o <strong>SDK</strong> para gerar URLs assinadas.</p>
+<ul>
+<li>Para <strong>download</strong>: processo simples, pode ser feito via CLI.</li>
+<li>Para <strong>upload</strong>: mais complexo, deve ser realizado via SDK.</li>
+</ul>
+</li>
+<li>
+<p>O tempo de expiração padrão é <strong>3600 segundos (1 hora)</strong>, mas pode ser alterado:</p>
+<ul>
+<li><strong>Console do S3</strong>: de <strong>1 minuto a 12 horas (720 minutos)</strong>.</li>
+<li><strong>AWS CLI</strong>: até <strong>604800 segundos (168 horas, ou 7 dias)</strong>.</li>
+</ul>
+</li>
+<li>
+<p>As URLs assinadas podem ser geradas tanto para <strong>GET (download)</strong> quanto para <strong>POST (upload)</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="Presigned URLs" src="/assets/images/image-20210819055145289-4a766448686909d0d55e7ee3fbe28180.png" width="1413" height="567" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Access Points</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Os <strong>Access Points</strong> simplificam o gerenciamento de permissões para buckets compartilhados.</p></div></div>
+<ul>
+<li>
+<p>Facilitam o controle de acesso, permitindo regras baseadas em <strong>VPCs, tags e nomes de bucket</strong>.</p>
+</li>
+<li>
+<p>O S3 gera um <strong>novo pseudônimo de ponto de acesso (DNS Name)</strong>.</p>
+</li>
+<li>
+<p>Em vez de configurar políticas complexas, cria-se um <strong>Access Point</strong> para gerenciar permissões de maneira centralizada.</p>
+<p><img decoding="async" loading="lazy" alt="S3 Access Points" src="/assets/images/image-20230208035923878-9aa9aa7ad0afa7d6ade39cc2adb79cc5.png" width="923" height="272" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Multi-Region Access Points</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Os <strong>Multi-Region Access Points</strong> direcionam automaticamente o tráfego para a região mais próxima, melhorando a latência e a disponibilidade.</p></div></div>
+<ul>
+<li>
+<p>Permite o acesso global a buckets replicados em múltiplas regiões.</p>
+</li>
+<li>
+<p>Ideal para <strong>failover ativo-ativo ou ativo-passivo</strong>.</p>
+</li>
+<li>
+<p>Reduz a latência ao direcionar usuários para a cópia mais próxima do bucket.</p>
+<p><img decoding="async" loading="lazy" alt="S3 Multi-Region Access Points" src="/assets/images/image-20230208040542497-fdad3b4cb5e623cf8ab1c5f37c1da944.png" width="963" height="490" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Object Lambda</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>O <strong>S3 Object Lambda</strong> permite modificar ou enriquecer objetos do S3 no momento da recuperação, sem alterar o original.</p></div></div>
+<ul>
+<li>
+<p>Casos de uso:</p>
+<ul>
+<li>Converter arquivos de <strong>XML para JSON</strong>.</li>
+<li>Remover ou mascarar informações sensíveis para ambientes não produtivos.</li>
+<li>Adicionar <strong>marca d’água</strong> em imagens e redimensioná-las automaticamente.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="S3 Object Lambda" src="/assets/images/image-20230208041324542-beec80fd19529d26622ae18754e91859.png" width="623" height="477" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões podem abordar o uso de <strong>Presigned URLs</strong> para fornecer acesso temporário a objetos no S3 sem alterar permissões no bucket.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma aplicação precisa permitir que usuários façam <strong>upload temporário de arquivos diretamente para um bucket S3</strong>, sem conceder permissões permanentes ao bucket. Qual recurso da AWS deve ser utilizado?</p><ul>
+<li>✅ <strong>Presigned URLs</strong>, pois permitem a geração de URLs temporárias para upload e download sem expor permissões do bucket.</li>
+</ul><hr><blockquote>
+<p>Os <strong>Access Points</strong> do S3 são frequentemente abordados em questões sobre gerenciamento de permissões em buckets compartilhados.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa precisa fornecer acesso a diferentes aplicações para um bucket compartilhado do S3, aplicando políticas específicas para cada aplicação sem gerenciar permissões no nível do bucket. Qual recurso do S3 deve ser utilizado?</p><ul>
+<li>✅ <strong>S3 Access Points</strong>, pois permitem definir políticas de acesso separadas para diferentes aplicações e usuários.</li>
+</ul><hr><blockquote>
+<p>Questões sobre <strong>acesso otimizado e replicação em múltiplas regiões</strong> podem abordar os <strong>Multi-Region Access Points</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa multinacional precisa garantir <strong>acesso rápido a arquivos armazenados no S3</strong> para usuários em diversas regiões, minimizando latência e garantindo resiliência. Qual solução é mais adequada?</p><ul>
+<li>✅ <strong>Multi-Region Access Points</strong>, pois direcionam automaticamente os usuários para a cópia mais próxima do bucket.</li>
+</ul><hr><blockquote>
+<p>O <strong>S3 Object Lambda</strong> pode ser abordado em questões sobre modificação de objetos no momento do acesso.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa precisa entregar versões mascaradas de documentos armazenados no S3 quando acessados por usuários sem permissões administrativas, sem modificar os arquivos originais. Qual recurso pode ser utilizado?</p><ul>
+<li>✅ <strong>S3 Object Lambda</strong>, pois permite modificar objetos no momento da recuperação sem alterar os dados originais.</li>
+</ul><hr><blockquote>
+<p>Questões sobre <strong>acesso seguro ao S3</strong> podem abordar a configuração de permissões para <strong>Presigned URLs</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Um desenvolvedor gerou uma <strong>Presigned URL</strong> para upload em um bucket S3, mas recebeu um erro de acesso negado ao tentar usá-la. O que pode estar causando esse problema?</p><ul>
+<li>✅ O usuário que gerou a URL <strong>não tem permissões suficientes</strong> para realizar uploads no bucket ou para gerar <strong>Presigned URLs</strong> com permissões de escrita.</li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="consultas-e-analytics">Consultas e Analytics<a href="#consultas-e-analytics" class="hash-link" aria-label="Link direto para Consultas e Analytics" title="Link direto para Consultas e Analytics">​</a></h3>
+<blockquote>
+<p>Select e Glacier Select</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>O <strong>S3 Select</strong> e o <strong>Glacier Select</strong> permitem recuperar partes de um objeto armazenado no Amazon S3 usando consultas SQL. Isso melhora a eficiência ao acessar grandes volumes de dados, pois evita o download completo do objeto.</p></div></div>
+<ul>
+<li>Permite usar SQL para recuperar apenas os dados necessários de um objeto armazenado no S3 ou Glacier.</li>
+<li>Suporta filtros por linhas e colunas, realizando consultas SQL simples diretamente no armazenamento.</li>
+<li><strong>Economiza largura de banda</strong>, pois as consultas são executadas no lado do S3, retornando apenas os resultados necessários.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="select-s3" src="/assets/images/image-20210901073640794-7cfe0af907e9294ce144bfe21541cfd7.png" width="572" height="301" class="img_ev3q"></p>
+<p>Aqui estão cinco questões e dicas baseadas em <strong>Consultas e Analytics no S3</strong>:</p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões podem abordar o uso do <strong>S3 Select</strong> para melhorar a eficiência da recuperação de dados.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa armazena grandes arquivos CSV no S3 e deseja recuperar <strong>apenas colunas específicas sem baixar o arquivo inteiro</strong>. Qual recurso do S3 deve ser utilizado?</p><ul>
+<li>✅ <strong>S3 Select</strong>, pois permite executar consultas SQL diretamente nos objetos do S3, reduzindo a necessidade de transferência de dados.</li>
+</ul><hr><blockquote>
+<p>Questões sobre <strong>acesso eficiente a dados arquivados</strong> podem abordar o <strong>Glacier Select</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa armazena dados arquivados no <strong>S3 Glacier</strong> e precisa recuperar <strong>apenas registros específicos sem restaurar o objeto inteiro</strong>. Qual recurso deve ser utilizado?</p><ul>
+<li>✅ <strong>Glacier Select</strong>, pois permite realizar consultas SQL diretamente em objetos armazenados no Glacier, reduzindo custos e tempo de recuperação.</li>
+</ul><hr><blockquote>
+<p>Questões podem exigir a escolha do <strong>método mais eficiente</strong> para processar grandes volumes de dados armazenados no S3.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa precisa processar <strong>petabytes de dados armazenados no S3</strong> para análises de Big Data sem mover os arquivos para outro serviço. Qual solução é recomendada?</p><ul>
+<li>✅ <strong>AWS Athena</strong>, pois permite executar consultas SQL diretamente nos dados armazenados no S3 sem necessidade de ETL.</li>
+</ul><hr><blockquote>
+<p>Questões podem abordar estratégias para <strong>reduzir custos ao analisar dados armazenados no S3</strong>.</p>
+</blockquote><p>📌 <strong>Exemplo:</strong> Uma empresa está enfrentando altos custos ao transferir grandes volumes de dados do S3 para um cluster de análise. Como esses custos podem ser reduzidos?</p><ul>
+<li>✅ Utilizando <strong>S3 Select</strong> para processar os dados diretamente no S3, reduzindo a quantidade de dados transferidos para o cluster.</li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="boas-práticas">Boas Práticas<a href="#boas-práticas" class="hash-link" aria-label="Link direto para Boas Práticas" title="Link direto para Boas Práticas">​</a></h3>
+<blockquote>
+<p>S3 Well-Architected</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>O <strong>Well-Architected Framework</strong> fornece diretrizes para construir aplicações eficientes, seguras e resilientes usando o S3.</p></div></div>
+<p><img decoding="async" loading="lazy" alt="S3 Well-Architected" src="/assets/images/image-20210905114534983-cbcd35663032dbd9cb3abbcec6cb49d9.png" width="998" height="312" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<blockquote>
+<p>O <strong>Well-Architected Framework</strong> pode ser testado em questões que exigem boas práticas para segurança e otimização de custos no S3.</p>
+</blockquote>
+</blockquote><p>📌 <strong>Exemplo:</strong> Ao projetar uma solução de armazenamento na AWS, quais pilares do <strong>AWS Well-Architected Framework</strong> devem ser considerados para garantir eficiência e segurança?</p><ul>
+<li>✅<!-- -->
+<ul>
+<li><strong>Excelência Operacional</strong>: Monitoramento e automação do S3.</li>
+<li><strong>Segurança</strong>: Controle de acesso com IAM, KMS e políticas de bucket.</li>
+<li><strong>Confiabilidade</strong>: Replicação entre regiões e versionamento.</li>
+<li><strong>Eficiência de Desempenho</strong>: Uso de S3 Select para reduzir transferência de dados.</li>
+<li><strong>Otimização de Custos</strong>: Uso de classes de armazenamento adequadas.</li>
+</ul>
+</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-datasync">AWS DataSync<a href="#aws-datasync" class="hash-link" aria-label="Link direto para AWS DataSync" title="Link direto para AWS DataSync">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="dataSync" src="/assets/images/image-20210909071549775-b54beb0ebe051d24baa6c0255eb4d033.png" width="1019" height="489" class="img_ev3q"></p>
+<p><strong>AWS DataSync</strong> é um serviço gerenciado que facilita a movimentação de grandes volumes de dados entre ambientes on-premises e a AWS, bem como entre serviços dentro da própria AWS.</p>
+<blockquote>
+<p><strong>Características:</strong></p>
+</blockquote>
+<ul>
+<li>Permite transferências programadas de dados para <strong>Amazon S3</strong>, <strong>Amazon FSx</strong> e <strong>Amazon EFS</strong>, podendo ser configurado para ocorrer a cada hora, dia ou semana.</li>
+<li>Suporta os protocolos <strong>SMB</strong> (Server Message Block) e <strong>NFS</strong> (Network File System) para transferir dados de <strong>NAS</strong> (Network Attached Storage) para a AWS.</li>
+<li>Mantém as permissões, metadados e atributos dos arquivos transferidos, garantindo consistência e segurança.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><p>Questões podem abordar integrações do DataSync com diferentes serviços de armazenamento e como configurar transferências eficientes.</p><p>📌 <strong>Exemplo:</strong> Uma empresa deseja migrar 100 TB de dados de um NAS on-premises para um bucket do Amazon S3 de forma rápida e automatizada. O requisito é que os metadados e permissões dos arquivos sejam preservados. Qual serviço AWS deve ser utilizado?</p><p>✅ AWS DataSync</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-transfer-family">AWS Transfer Family<a href="#aws-transfer-family" class="hash-link" aria-label="Link direto para AWS Transfer Family" title="Link direto para AWS Transfer Family">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230219094730037" src="/assets/images/image-20230219094730037-87d1a5ad8fced089a497fc80db10e90a.png" width="1016" height="450" class="img_ev3q"></p>
+<p>O <strong>AWS Transfer Family</strong> é um serviço gerenciado que permite transferir arquivos de forma segura para a AWS usando <strong>FTP, FTPS e SFTP</strong>.</p>
+<blockquote>
+<p><strong>Características:</strong></p>
+</blockquote>
+<ul>
+<li>Suporta <strong>DNS personalizado</strong>, pois os endpoints públicos podem ter IPs dinâmicos.</li>
+<li>Facilita a integração com serviços de armazenamento como <strong>Amazon S3</strong> e <strong>Amazon EFS</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230219095015298" src="/assets/images/image-20230219095015298-a5a73b95de2abd9f8e12b9c59fa98133.png" width="1149" height="600" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><p>É importante entender quando usar <strong>Transfer Family</strong> em vez de outros métodos de transferência, como <strong>DataSync</strong> ou <strong>Snowball</strong>. Questões podem explorar autenticação, DNS e permissões para servidores SFTP gerenciados.</p><p>📌 <strong>Exemplo:</strong> Uma empresa deseja disponibilizar um servidor SFTP gerenciado para que clientes externos enviem arquivos diretamente para um bucket do S3. Qual serviço AWS pode atender essa necessidade?</p><p>✅ AWS Transfer Family</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="comparação-de-preços-dos-serviços-de-armazenamento">Comparação de Preços dos Serviços de Armazenamento<a href="#comparação-de-preços-dos-serviços-de-armazenamento" class="hash-link" aria-label="Link direto para Comparação de Preços dos Serviços de Armazenamento" title="Link direto para Comparação de Preços dos Serviços de Armazenamento">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230219095338480" src="/assets/images/image-20230219095338480-9490bb329b85289c4071c1326ef78870.png" width="1173" height="585" class="img_ev3q"></p>
+<p>A AWS oferece diferentes serviços de armazenamento, cada um com um modelo de precificação distinto. É essencial conhecer as diferenças entre <strong>S3, EBS, EFS, FSx e Glacier</strong> para escolher a melhor opção conforme o caso de uso.</p>
+<blockquote>
+<p>Considerações para custos:</p>
+</blockquote>
+<ul>
+<li><strong>Amazon S3</strong>: Preços baseados em armazenamento, requisições e transferência de dados.</li>
+<li><strong>Amazon EFS</strong>: Modelo de pagamento por capacidade usada e classes de armazenamento otimizadas para custo.</li>
+<li><strong>Amazon FSx</strong>: Preço varia conforme o sistema de arquivos escolhido (<strong>Windows, Lustre, NetApp, OpenZFS</strong>).</li>
+<li><strong>Amazon EBS</strong>: Preço por gigabyte provisionado, com variações para SSD e HDD.</li>
+<li><strong>Amazon S3 Glacier</strong>: Armazenamento de baixo custo para arquivamento de longo prazo, mas com custos de recuperação.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><p>Questões frequentemente comparam os modelos de <strong>precificação</strong> dos serviços de armazenamento. Esteja preparado para identificar o mais econômico para um determinado caso de uso.</p><p>📌 <strong>Exemplo:</strong> Uma empresa precisa armazenar grandes volumes de arquivos que são acessados raramente, mas precisam ser recuperados em menos de 5 minutos. Qual serviço AWS apresenta o menor custo para esse requisito?</p><p>✅ Amazon S3 Glacier Instant Retrieval</p></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/04-storage.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Compute &amp; Load Balancing</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Resumão</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#ebs---elastic-block-storage" class="table-of-contents__link toc-highlight">EBS - Elastic Block Storage</a></li><li><a href="#instance-store" class="table-of-contents__link toc-highlight">Instance Store</a></li><li><a href="#efs---elastic-file-system" class="table-of-contents__link toc-highlight">EFS - Elastic File System</a></li><li><a href="#amazon-fsx" class="table-of-contents__link toc-highlight">Amazon FSx</a></li><li><a href="#amazon-s3" class="table-of-contents__link toc-highlight">Amazon S3</a><ul><li><a href="#características-principais" class="table-of-contents__link toc-highlight">Características Principais</a></li><li><a href="#gerenciamento-de-armazenamento" class="table-of-contents__link toc-highlight">Gerenciamento de Armazenamento</a></li><li><a href="#segurança-e-controle-de-acesso" class="table-of-contents__link toc-highlight">Segurança e Controle de Acesso</a></li><li><a href="#logs-e-monitoramento" class="table-of-contents__link toc-highlight">Logs e Monitoramento</a></li><li><a href="#acesso-e-integração" class="table-of-contents__link toc-highlight">Acesso e Integração</a></li><li><a href="#consultas-e-analytics" class="table-of-contents__link toc-highlight">Consultas e Analytics</a></li><li><a href="#boas-práticas" class="table-of-contents__link toc-highlight">Boas Práticas</a></li></ul></li><li><a href="#aws-datasync" class="table-of-contents__link toc-highlight">AWS DataSync</a></li><li><a href="#aws-transfer-family" class="table-of-contents__link toc-highlight">AWS Transfer Family</a></li><li><a href="#comparação-de-preços-dos-serviços-de-armazenamento" class="table-of-contents__link toc-highlight">Comparação de Preços dos Serviços de Armazenamento</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>

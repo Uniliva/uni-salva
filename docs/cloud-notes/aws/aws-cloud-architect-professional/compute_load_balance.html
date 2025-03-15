@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Compute &amp; Load Balancing | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Compute &amp; Load Balancing | Uniii docs"><meta data-rh="true" name="description" content="image-20230212210211474"><meta data-rh="true" property="og:description" content="image-20230212210211474"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
-<script src="/assets/js/runtime~main.6cab4101.js" defer="defer"></script>
-<script src="/assets/js/main.677076ff.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.dc084c2f.js" defer="defer"></script>
+<script src="/assets/js/main.3a4bc957.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
-<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">☁️ AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Compute &amp; Load Balancing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/WWWWWWWWW">xxx</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">☁️ AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Compute &amp; Load Balancing</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Compute &amp; Load Balancing</h1></header><p><img decoding="async" loading="lazy" alt="image-20230212210211474" src="/assets/images/image-20230212210211474-e470bdaf6ebad21ca7de1b4971c88dc4.png" width="1128" height="497" class="img_ev3q"></p>
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">☁️ AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Compute &amp; Load Balancing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Storage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/066666exemplo">066666exemplo</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">☁️ AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Compute &amp; Load Balancing</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Compute &amp; Load Balancing</h1></header><p><img decoding="async" loading="lazy" alt="image-20230212210211474" src="/assets/images/image-20230212210211474-e470bdaf6ebad21ca7de1b4971c88dc4.png" width="1128" height="497" class="img_ev3q"></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="ec2---elastic-compute-cloud">EC2 - Elastic Compute Cloud<a href="#ec2---elastic-compute-cloud" class="hash-link" aria-label="Link direto para EC2 - Elastic Compute Cloud" title="Link direto para EC2 - Elastic Compute Cloud">​</a></h2>
 <ul>
@@ -377,6 +377,824 @@
 </li>
 </ul>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>O AWS App Runner é uma opção para quem busca simplicidade na implementação de aplicações sem gerenciar infraestrutura, algo que pode ser cobrado na certificação AWS.</p></div></div>
-<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/03_compute_load_balance.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Questões da prova</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/WWWWWWWWW"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">xxx</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#ec2---elastic-compute-cloud" class="table-of-contents__link toc-highlight">EC2 - Elastic Compute Cloud</a></li><li><a href="#ecs---elastic-container-service" class="table-of-contents__link toc-highlight">ECS - Elastic Container Service</a></li><li><a href="#eks---elastic-kubernetes-service" class="table-of-contents__link toc-highlight">EKS - Elastic Kubernetes Service</a></li><li><a href="#ecr---elastic-container-registry" class="table-of-contents__link toc-highlight">ECR - Elastic Container Registry</a></li><li><a href="#aws-lambda" class="table-of-contents__link toc-highlight">AWS Lambda</a></li><li><a href="#aws-app-runner" class="table-of-contents__link toc-highlight">AWS App Runner</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="elastic-load-balancing">Elastic Load Balancing<a href="#elastic-load-balancing" class="hash-link" aria-label="Link direto para Elastic Load Balancing" title="Link direto para Elastic Load Balancing">​</a></h2>
+<ul>
+<li>Distribui o tráfego entre as instâncias de EC2.</li>
+<li>Usa o <strong>health check</strong> para verificar o status das instâncias.</li>
+<li>Cria um <strong>endpoint</strong> para ser a única entrada de requisições.</li>
+<li>Não gerencia sessões por padrão. Existe uma <strong>feature</strong> chamada <strong>Sticky Session</strong>, que realiza isso. No entanto, não é recomendado o uso, pois o controle dos dados da sessão deve ser feito pela aplicação.</li>
+<li>Serviço gerenciado pela AWS.</li>
+<li>Pode ser configurado como <strong>privado</strong> ou <strong>público</strong>.</li>
+<li>Envia métricas para o CloudWatch.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de Elastic Load Balancer (ELB)</p>
+</blockquote>
+<p><strong>Classic Load Balancer (CLB) - (v1 - geração antiga - 2009)</strong></p>
+<ul>
+<li>Suporta <strong>HTTP, HTTPS e TCP</strong>.</li>
+<li>Verifica a saúde via endpoint da aplicação (<strong>HTTP ou TCP</strong>).</li>
+<li>Necessário adicionar instâncias manualmente.</li>
+</ul>
+<p><strong>Application Load Balancer (ALB) - (v2 - nova geração - 2016)</strong></p>
+<ul>
+<li>Suporta <strong>HTTP, HTTPS, WebSocket e HTTP/2</strong>.</li>
+<li>Utiliza <strong>target groups</strong> para agrupar instâncias.</li>
+<li>Suporte a <strong>routing</strong> baseado em <strong>listeners</strong>, incluindo:<!-- -->
+<ul>
+<li><strong>Path-based routing</strong> (exemplo: <code>uni.com/post</code> &amp; <code>uni.com/users</code>).</li>
+<li><strong>Hostname-based routing</strong> (<code>curriculo.uni.com</code> e <code>fotos.uni.com</code>).</li>
+<li><strong>Query string routing</strong> (<code>uni.com?id=123&amp;order=123</code>).</li>
+</ul>
+</li>
+<li>Muito utilizado em arquiteturas de microserviços.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230215065448165" src="/assets/images/image-20230215065448165-7536c112dc954c5119aa46f6bf67ed15.png" width="1121" height="475" class="img_ev3q"></p>
+<p><strong>Gateway Load Balancer (GWLB) - (v2 - 2020)</strong></p>
+<ul>
+<li>Opera na camada <strong>3</strong> (rede) - protocolo <strong>IP</strong>.</li>
+<li>Usado para balancear carga de soluções de terceiros.</li>
+<li>Aplicado para <strong>firewall</strong>, <strong>sistemas de detecção e intrusão</strong>, e inspeção de tráfego.</li>
+<li>Utiliza o protocolo <strong>GENEVE</strong> na porta <strong>6081</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230215071036163" src="/assets/images/image-20230215071036163-a9c864d0f122ee0c361977da5e530810.png" width="426" height="643" class="img_ev3q"></p>
+<p><strong>Network Load Balancer (NLB) - (v2 - nova geração - 2017)</strong></p>
+<ul>
+<li>Suporta <strong>TCP, TLS (Secure TCP) e UDP</strong>.</li>
+<li>Possui latência menor que o ALB (~100ms vs. 400ms do ALB).</li>
+<li>Tem um <strong>IP estático</strong> por <strong>AZ</strong>, podendo usar um <strong>Elastic IP</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Network load balancer" src="/assets/images/image-20210819053951068-9e54526072c67b583e2082579d1b2f70.png" width="1093" height="466" class="img_ev3q"></p>
+<p><strong>DNS Zonal do NLB</strong></p>
+<ul>
+<li>Como cada <strong>AZ</strong> possui um IP estático, ao acionar o DNS ele retorna todos os IPs das AZs associadas ao NLB.</li>
+<li>Se precisar retornar apenas um IP, é necessário adicionar a <strong>Região + AZ</strong> no DNS.</li>
+<li><strong>Caso de uso:</strong> Se uma aplicação <strong>A</strong> precisa se comunicar com <strong>B</strong> em diferentes regiões, pode-se otimizar os custos evitando o tráfego <strong>Cross-Region</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230215070245743" src="/assets/images/image-20230215070245743-0d248c91895bdca8be1057d996737654.png" width="458" height="528" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Target Groups</p>
+</blockquote>
+<ul>
+<li>Agrupam os recursos para onde o tráfego será redirecionado.</li>
+<li>Podem conter <strong>instâncias EC2, servidores on-premises (via IP) e Lambdas</strong>.</li>
+<li>Possuem suporte a:<!-- -->
+<ul>
+<li><strong>Instâncias EC2</strong></li>
+<li><strong>Tasks do ECS</strong></li>
+<li><strong>Lambda Functions</strong> (a requisição é traduzida para um evento)</li>
+</ul>
+</li>
+<li>Responsáveis por verificar a saúde das instâncias.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Sticky Session</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230215071913741" src="/assets/images/image-20230215071913741-7c5368212c9f07f435c3a813b739fb49.png" width="378" height="476" class="img_ev3q"></p>
+<ul>
+<li>Permite que requisições subsequentes sejam enviadas à mesma instância que já atendeu o cliente, evitando perda de dados de sessão.</li>
+<li>Tipos de cookies suportados:<!-- -->
+<ul>
+<li><strong>Application-based cookies</strong>
+<ul>
+<li><strong>Custom cookie</strong>
+<ul>
+<li>Gerado pelo <strong>target</strong>.</li>
+<li>Pode incluir diversos atributos.</li>
+<li>Pode ter um nome individual por target group.</li>
+<li>Nomes <strong>AWSALB, AWSALBAPP, AWSALBBTG</strong> são reservados e não devem ser utilizados.</li>
+</ul>
+</li>
+<li><strong>Application cookie</strong>
+<ul>
+<li>Gerado pelo load balancer.</li>
+<li>Nome do cookie: <strong>AWSALBAPP</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Duration-based cookies</strong>
+<ul>
+<li>Gerado pelo load balancer.</li>
+<li>Possui duração especificada.</li>
+<li>Nome do cookie: <strong>AWSALB</strong> (ALB) e <strong>AWSALBBTG</strong> (CLB).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Cross-Zone Load Balancing</p>
+</blockquote>
+<ul>
+<li>Distribui o tráfego igualmente entre as instâncias, independentemente da zona de disponibilidade (AZ).</li>
+<li>Caso <strong>desativado</strong>, a distribuição ocorre apenas entre as AZs, podendo resultar em tráfego desigual entre instâncias.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Cross-Zone load balance" src="/assets/images/image-20210819054020911-0c06debe3c6e338a9f532ade72304881.png" width="1086" height="582" class="img_ev3q"></p>
+<ul>
+<li>Algoritmos de roteamento de requisição<!-- -->
+<ul>
+<li><strong>Least Outstanding Request</strong> (Solicitação menos pendente)<!-- -->
+<ul>
+<li>Redireciona para a instância com menos requisições pendentes.</li>
+<li>Funciona com <strong>ALB (HTTP) e CLB (HTTP)</strong>.</li>
+</ul>
+</li>
+<li><strong>Round Robin</strong> (Sequência circular)<!-- -->
+<ul>
+<li>Funciona com <strong>ALB e CLB</strong>.</li>
+<li>Redireciona as requisições em sequência (1, 2, 3... e reinicia o ciclo).</li>
+</ul>
+</li>
+<li><strong>Flow Hash</strong>
+<ul>
+<li>Seleciona o destino baseado no <strong>protocolo, IP, porta de origem e destino, e número sequencial do TCP</strong>.</li>
+<li>Cada conexão <strong>UDP/TCP</strong> é roteada para um único destino durante toda a sessão.</li>
+<li>Funciona com <strong>NLB</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>SSL Certificates</p>
+</blockquote>
+<ul>
+<li>Permite <strong>criptografar</strong> o tráfego entre o cliente e o <strong>load balancer</strong> (<strong>in-flight encryption</strong>).</li>
+<li>Atualmente, o <strong>TLS</strong> é mais seguro que o <strong>SSL</strong>.</li>
+<li>Suporte por tipo de ELB:<!-- -->
+<ul>
+<li><strong>CLB</strong>: Suporta apenas <strong>uma aplicação</strong> e <strong>um certificado</strong>.</li>
+<li><strong>ALB</strong>: Suporta <strong>múltiplos listeners</strong> (diferentes aplicações) e <strong>múltiplos certificados</strong>, utilizando <strong>SNI</strong> (Server Name Indication).</li>
+<li><strong>NLB</strong>: Suporta <strong>múltiplos listeners</strong> e <strong>múltiplos certificados</strong>, também utilizando <strong>SNI</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="LB SSL Certificates" src="/assets/images/image-20210819054122152-9163c02489d1fb3e5af466009792d724.png" width="1024" height="244" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="SNI" src="/assets/images/image-20210819054148720-2670a9bda932e48dea5bf218b3fb34e3.png" width="1149" height="514" class="img_ev3q"></p>
+<p>Aqui está o conteúdo corrigido e melhorado com explicações adicionais, mantendo as imagens e usando admonitions do Docusaurus para destacar informações importantes para a certificação. 🚀</p>
+<hr>
+<blockquote>
+<p>Auto Scaling Group (ASG)</p>
+</blockquote>
+<p>O <strong>Auto Scaling Group (ASG)</strong> é um serviço da AWS que permite aumentar ou reduzir dinamicamente a quantidade de instâncias <strong>EC2</strong> de acordo com a demanda. Isso pode ser feito automaticamente com base em métricas do <strong>CloudWatch</strong>, garantindo escalabilidade eficiente e otimização de custos.</p>
+<ul>
+<li><strong>Não há cobrança direta pelo ASG</strong>, apenas pelos recursos consumidos, como EC2 e EBS.</li>
+<li>Benefícios:<!-- -->
+<ul>
+<li><strong>Escalabilidade</strong> – Capacidade de escalar verticalmente (instâncias maiores) e/ou horizontalmente (mais instâncias).</li>
+<li><strong>Elasticidade</strong> – Ajuste dinâmico do número de instâncias conforme a demanda, ativado por métricas ou alarmes.</li>
+<li><strong>Agilidade</strong> – Infraestrutura altamente responsiva, permitindo ajustes automáticos com rapidez.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Auto Scaling Group" src="/assets/images/image-20210819054218858-1676454365145-1-5a05a009fc7078746e34d75e20ce1d19.png" width="1109" height="451" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Componentes do ASG</p>
+</blockquote>
+<p>O ASG é composto pelos seguintes elementos principais:</p>
+<ul>
+<li>
+<p><strong>Configuração de lançamento (Launch Configuration) ou Template de Lançamento (Launch Template)</strong><br>
+<!-- -->Define os detalhes das instâncias EC2 que serão criadas, incluindo:</p>
+<ul>
+<li>Tipo da máquina (exemplo: t3.micro, m5.large).</li>
+<li>Tipo de armazenamento.</li>
+<li>Security Groups.</li>
+<li>Chave SSH.</li>
+<li>User Data (scripts de inicialização).</li>
+</ul>
+</li>
+<li>
+<p><strong>Capacidade mínima e máxima</strong><br>
+<!-- -->Define a quantidade mínima e máxima de instâncias no grupo.</p>
+</li>
+<li>
+<p><strong>Rede</strong><br>
+<!-- -->Especifica em quais <strong>Subnets</strong> e <strong>Zonas de Disponibilidade (AZs)</strong> as instâncias serão lançadas.</p>
+</li>
+<li>
+<p><strong>Integração com Load Balancer</strong><br>
+<!-- -->Se o ASG estiver vinculado a um <strong>Elastic Load Balancer (ELB)</strong>, as instâncias serão automaticamente adicionadas ao balanceamento de carga.</p>
+</li>
+<li>
+<p><strong>Política de escalabilidade</strong><br>
+<!-- -->Determina as condições para adicionar ou remover instâncias.</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de Políticas de Escalabilidade</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Dynamic Scaling Policy</strong></p>
+<ul>
+<li>Usa métricas do <strong>CloudWatch</strong> para aumentar ou reduzir instâncias conforme necessário.</li>
+<li>Exemplos:<!-- -->
+<ul>
+<li>Se o uso de CPU ultrapassar 70%, adicionar uma nova instância.</li>
+<li>Se o número de requisições ultrapassar um limite, escalar horizontalmente.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Scheduled Scaling Policy</strong></p>
+<ul>
+<li>Permite programar a escalabilidade para horários específicos.</li>
+<li>Exemplo: Aumentar o número de instâncias às 8h e reduzir às 22h.</li>
+</ul>
+</li>
+<li>
+<p><strong>Predictive Scaling Policy</strong></p>
+<ul>
+<li>Usa <strong>Machine Learning</strong> para prever o uso futuro e ajustar a escalabilidade automaticamente.</li>
+<li>Baseia-se em dados históricos para antecipar picos de tráfego.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Scaling Cooldowns</p>
+</blockquote>
+<ul>
+<li><strong>Cooldown Period</strong>
+<ul>
+<li>Após lançar uma nova instância, o ASG aguarda um tempo antes de avaliar novas escalabilidades.</li>
+<li>Isso evita que instâncias sejam adicionadas ou removidas rapidamente, causando instabilidade.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>🎯 Para a Prova: Conceitos Importantes</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>Auto Scaling Group</strong> tem uma <strong>política de encerramento de instâncias</strong>:<!-- -->
+<ol>
+<li>Identifica a <strong>Zona de Disponibilidade (AZ)</strong> com mais instâncias.</li>
+<li>Escolhe a instância mais antiga (com a configuração de inicialização mais antiga) para encerramento.</li>
+</ol>
+</li>
+<li><strong>Ciclo de vida de uma instância no ASG</strong>:<br>
+<img decoding="async" loading="lazy" alt="Ciclo de Vida da Instância" src="/assets/images/image-20210819054243240-1676454365145-2-a7773d764ab484f1bc68264b0499b4ca.png" width="1124" height="566" class="img_ev3q"></li>
+</ul></div></div>
+<blockquote>
+<p><strong>Diferença entre Launch Configuration e Launch Template</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Launch Configuration</strong></p>
+<ul>
+<li><strong>Legado</strong> – Não recomendado para novos projetos.</li>
+<li><strong>Não suporta versionamento</strong> – qualquer alteração exige a recriação do ASG.</li>
+</ul>
+</li>
+<li>
+<p><strong>Launch Template</strong></p>
+<ul>
+<li><strong>Moderno e recomendado</strong>.</li>
+<li><strong>Suporta versionamento</strong>, permitindo modificações sem precisar recriar o ASG.</li>
+<li>Permite <strong>herança de configurações</strong> entre diferentes templates.</li>
+<li>Suporta <strong>instâncias On-Demand e Spot</strong>, permitindo um <strong>mix de ambos</strong> para otimizar custos.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>Aqui está a documentação corrigida e melhorada, com explicações adicionais para facilitar o entendimento e notas relevantes para a certificação AWS Certified Solutions Architect - Professional. 🚀</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-api-gateway">Amazon API Gateway<a href="#amazon-api-gateway" class="hash-link" aria-label="Link direto para Amazon API Gateway" title="Link direto para Amazon API Gateway">​</a></h2>
+<p>O <strong>Amazon API Gateway</strong> é um serviço totalmente gerenciado e <strong>serverless</strong>, usado para criar, publicar, manter, monitorar e proteger <strong>APIs REST e WebSocket</strong>. Ele facilita a comunicação entre clientes e serviços da AWS ou sistemas externos.</p>
+<p><img decoding="async" loading="lazy" alt="API Gateway" src="/assets/images/image-20210903212259138-fb70ae065f866332a9456902af7ad61a.png" width="1133" height="477" class="img_ev3q"></p>
+<blockquote>
+<p>Benefícios</p>
+</blockquote>
+<ul>
+<li><strong>Escalabilidade automática</strong> – Suporta milhares de chamadas simultâneas sem precisar gerenciar infraestrutura.</li>
+<li><strong>Segurança integrada</strong> – Suporte para autenticação via IAM, Lambda Authorizer e Amazon Cognito.</li>
+<li><strong>Gerenciamento de tráfego</strong> – Permite controle sobre o uso da API com <strong>throttling</strong> e <strong>rate limiting</strong>.</li>
+<li><strong>Monitoramento nativo</strong> – Integração com <strong>CloudWatch Logs</strong> e <strong>AWS X-Ray</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de API</p>
+</blockquote>
+<p>O <strong>API Gateway</strong> suporta diferentes tipos de APIs, cada uma adequada para casos específicos:</p>
+<ul>
+<li>
+<p><strong>APIs RESTful</strong></p>
+<ul>
+<li>Ideal para chamadas síncronas HTTP/HTTPS.</li>
+<li>Pode se conectar a <strong>EC2, Lambda, DynamoDB, entre outros</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>APIs WebSocket</strong></p>
+<ul>
+<li>Suporte para comunicação <strong>bidirecional e em tempo real</strong>.</li>
+<li>Usado para <strong>chats, jogos multiplayer e sistemas de notificação</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>APIs AWS Service</strong></p>
+<ul>
+<li>Exposição de serviços internos da AWS via API Gateway.</li>
+<li>Exemplo: disparar mensagens no <strong>SQS</strong>, iniciar <strong>Step Functions</strong>, acessar <strong>S3</strong>, entre outros.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Recursos do API Gateway</p>
+</blockquote>
+<ul>
+<li><strong>Versionamento de APIs</strong> – Permite criar múltiplas versões para facilitar atualizações e compatibilidade.</li>
+<li><strong>Gerenciamento de tráfego</strong> – Controle de acesso por <strong>API Keys</strong>, <strong>Throttling</strong> (limites por segundo) e <strong>cotas</strong> (número total de requisições permitidas).</li>
+</ul>
+<hr>
+<blockquote>
+<p>📌 Limitações Importantes</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>perigo</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>Timeout máximo:</strong> 29 segundos</li>
+<li><strong>Tamanho máximo do payload:</strong> 10 MB</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Deployment Stages</p>
+</blockquote>
+<ul>
+<li>Permite criar <strong>vários estágios de deploy</strong> (ex.: <code>dev</code>, <code>staging</code>, <code>production</code>).</li>
+<li>Possibilita <strong>rollback</strong> para versões anteriores.</li>
+<li>Permite controle de tráfego entre diferentes versões da API.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Logs e Monitoramento</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>CloudWatch Logs</strong></p>
+<ul>
+<li>Captura logs detalhados de requisições (ERRO e INFO).</li>
+<li>Permite logar <strong>requests</strong> e <strong>responses</strong> completos.</li>
+<li>Logs podem ser enviados para <strong>Kinesis Data Firehose</strong> como alternativa.</li>
+</ul>
+</li>
+<li>
+<p><strong>Métricas</strong></p>
+<ul>
+<li>API Gateway gera métricas por <strong>stage</strong> no <strong>CloudWatch</strong>.</li>
+<li>É possível ativar métricas detalhadas.</li>
+</ul>
+</li>
+<li>
+<p><strong>AWS X-Ray</strong></p>
+<ul>
+<li>Permite rastrear requisições e visualizar o fluxo da API até o serviço de destino.</li>
+<li>Ajuda na <strong>detecção de gargalos</strong> e <strong>problemas de desempenho</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de Endpoints</p>
+</blockquote>
+<ul>
+<li><strong>Edge-Optimized (Padrão)</strong>- Melhora a latência globalmente usando a rede da <strong>Amazon CloudFront</strong>.</li>
+<li><strong>Regional</strong> - Restrito a uma <strong>única região</strong> da AWS.</li>
+<li><strong>Private</strong> - Acesso apenas por <strong>máquinas dentro da mesma VPC</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Caching no API Gateway</p>
+</blockquote>
+<ul>
+<li><strong>Reduz chamadas ao backend, melhorando a performance</strong>.</li>
+<li><strong>TTL padrão:</strong> 300 segundos (pode ser configurado entre <strong>0 a 3600 segundos</strong>).</li>
+<li><strong>Configuração por Stage</strong>, mas pode ser aplicada por método específico.</li>
+<li><strong>Tamanho do cache:</strong> 0.5GB a 237GB.</li>
+<li><strong>Suporte a criptografia</strong> para segurança adicional.</li>
+<li><strong>O cliente pode invalidar o cache</strong> enviando o header <code>Cache-Control: max-age=0</code> (requer permissões via IAM).</li>
+</ul>
+<hr>
+<blockquote>
+<p>Planos de Uso</p>
+</blockquote>
+<p>Define <strong>quem pode acessar a API</strong> e <strong>com que frequência</strong>.</p>
+<ul>
+<li><strong>Throttling</strong> – Define <strong>limites de requisições por segundo</strong>.</li>
+<li><strong>Cotas</strong> – Define um <strong>limite total de requisições</strong> em um período.</li>
+<li><strong>API Keys</strong>
+<ul>
+<li>Identificam clientes individualmente no API Gateway.</li>
+<li>Associadas a <strong>Planos de Uso</strong> para aplicar restrições.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>IAM Permissions e Segurança</p>
+</blockquote>
+<p>A segurança no API Gateway envolve dois conceitos principais:</p>
+<ul>
+<li><strong>Autenticação</strong> – Garante que o usuário está logado (<strong>feito via IAM</strong>).</li>
+<li><strong>Autorização</strong> – Define o que o usuário pode acessar (<strong>feito via IAM Policy</strong>).</li>
+</ul>
+<p>O <strong>API Gateway</strong> verifica permissões usando <strong>SigV4</strong> (assinatura de credenciais enviadas no header).<br>
+<!-- -->Ideal para controle de <strong>usuários internos</strong> dentro da <strong>AWS Organization</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="IAM Policy" src="/assets/images/image-20210904052941839-6e42da1de8c5f2138ba401c2b1db316e.png" width="599" height="325" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Lambda Authorizer</p>
+</blockquote>
+<ul>
+<li>Também chamado de <strong>autorizador personalizado</strong>.</li>
+<li><strong>Valida tokens customizados</strong> (ex.: OAuth, JWT, SAML).</li>
+<li><strong>Responde com permissões do usuário</strong>, permitindo ou negando acesso à API.</li>
+<li><strong>Resultados podem ser cacheados por até 1 hora</strong>, reduzindo chamadas à Lambda.</li>
+<li>Cobrado <strong>por invocação da Lambda</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Custom Authorization" src="/assets/images/image-20210904053330911-679f35ab87ebc48a283116874b26bd7c.png" width="601" height="343" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Cognito User Pools</p>
+</blockquote>
+<ul>
+<li><strong>Gerencia autenticação de usuários</strong> na AWS.</li>
+<li>Não realiza autorização, apenas autenticação.</li>
+<li>Suporte a <strong>Google, Facebook, Amazon, Apple</strong> para login externo.</li>
+<li>Pode ser integrado ao API Gateway para <strong>controle de acesso via JWT tokens</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Cognito" src="/assets/images/image-20210904053801646-0c50c20bf242efaa7111d7834265f9c0.png" width="862" height="287" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>📌 Arquitetura com API Gateway</p>
+</blockquote>
+<p><strong>Upload de arquivos para o S3 via API Gateway</strong></p>
+<ul>
+<li>API Gateway <strong>tem um limite de 10 MB</strong>, o que pode ser um problema para uploads grandes.<!-- -->
+<ul>
+<li><strong>Solução recomendada:</strong> gerar uma <strong>URL assinada (pre-signed URL)</strong> no S3 e retornar via API Gateway.</li>
+<li>Essa abordagem permite uploads <strong>sem limite de tamanho</strong> diretamente para o S3.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Upload via API Gateway" src="/assets/images/image-20230216061952676-1f86c18159fe1a4e2f8fa7d8f02fd190.png" width="1099" height="521" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Comparação com outras soluções</p>
+</blockquote>
+<p><strong>EC2 com Elastic IP</strong></p>
+<ul>
+<li>Em caso de falha, cria-se uma nova instância e <strong>reatribui-se o Elastic IP</strong>.</li>
+<li><strong>Funcional e barato</strong>, mas <strong>não escalável</strong> (apenas um IP fixo).</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="EC2 com Elastic IP" src="/assets/images/image-20230217061653780-1a28949504d6a2f2f6cab57ca54b3f46.png" width="687" height="495" class="img_ev3q"></p>
+<p><strong>API Gateway + AWS Service</strong></p>
+<ul>
+<li>API Gateway pode ser usado para <strong>expor serviços internos da AWS</strong>.</li>
+<li>Exemplo: ativar um <strong>Step Function</strong>, enviar mensagem para <strong>SQS</strong>, etc.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="API Gateway com AWS Service" src="/assets/images/image-20230217062549339-e7fab99c00e88f9058944b7755c3016a.png" width="1156" height="555" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>🎯 Para a Prova: Conceitos Importantes</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>Timeout máximo de requisições:</strong> 29 segundos</li>
+<li><strong>Tamanho máximo do payload:</strong> 10 MB</li>
+<li><strong>Caching:</strong> TTL padrão de 300 segundos (pode ser alterado).</li>
+<li><strong>Métodos de autenticação:</strong>
+<ul>
+<li>IAM (interno AWS)</li>
+<li>Lambda Authorizer (customizado)</li>
+<li>Cognito (para usuários externos)</li>
+</ul>
+</li>
+<li><strong>Melhores práticas de escalabilidade e segurança:</strong>
+<ul>
+<li>Usar <strong>Regional Endpoints</strong> quando a API for consumida apenas em uma região.</li>
+<li>Utilizar <strong>CloudFront</strong> para reduzir a latência globalmente.</li>
+<li>Evitar expor APIs privadas sem controle adequado de segurança.</li>
+</ul>
+</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-appsync">AWS AppSync<a href="#aws-appsync" class="hash-link" aria-label="Link direto para AWS AppSync" title="Link direto para AWS AppSync">​</a></h2>
+<p>O <strong>AWS AppSync</strong> é um serviço <strong>gerenciado de GraphQL</strong> que permite a criação de APIs para acessar, manipular e sincronizar dados de diferentes fontes, como <strong>bancos de dados, DynamoDB, APIs REST, e outros serviços da AWS</strong>.</p>
+<p>Além disso, <strong>suporta comunicação em tempo real</strong> através de <strong>WebSockets</strong> e <strong>MQTT sobre WebSockets</strong>, tornando-o ideal para aplicações que exigem atualizações instantâneas.</p>
+<hr>
+<blockquote>
+<p>Benefícios</p>
+</blockquote>
+<ul>
+<li><strong>Gerenciado pela AWS</strong> – Reduz a necessidade de configuração e manutenção.</li>
+<li><strong>Suporte a múltiplas fontes de dados</strong> – Integra-se com DynamoDB, RDS, Lambda, APIs REST, entre outros.</li>
+<li><strong>Suporte a comunicação em tempo real</strong> – Permite atualizações dinâmicas para clientes conectados.</li>
+<li><strong>Sincronização offline</strong> – Perfeito para aplicações móveis que precisam armazenar dados localmente e sincronizar quando houver conexão com a internet.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Como o AppSync funciona?</p>
+</blockquote>
+<p>O <strong>AppSync</strong> permite definir um esquema GraphQL que abstrai múltiplas fontes de dados. Assim, em vez de fazer várias chamadas a APIs distintas, um cliente pode <strong>recuperar ou modificar</strong> dados de diversas origens com <strong>uma única requisição GraphQL</strong>.</p>
+<p>Exemplo:</p>
+<ul>
+<li>Um aplicativo pode buscar <strong>usuários de um DynamoDB</strong>, <strong>dados financeiros de um RDS</strong> e <strong>notícias de uma API REST</strong>, tudo dentro de uma única chamada GraphQL.</li>
+</ul>
+<hr>
+<blockquote>
+<p>🔗 Integração com Cognito</p>
+</blockquote>
+<p>O <strong>AWS AppSync</strong> pode ser integrado com o <strong>Amazon Cognito</strong> para <strong>autenticação e controle de acesso</strong>.</p>
+<ul>
+<li>
+<p><strong>Permissões baseadas em grupos de usuários</strong></p>
+<ul>
+<li>Exemplo: em um blog, diferentes tipos de usuários (administradores, escritores e leitores) podem ter <strong>diferentes permissões</strong> definidas diretamente no AppSync.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vantagem:</strong></p>
+<ul>
+<li>As permissões <strong>não precisam estar no código do aplicativo</strong>, facilitando mudanças e gerenciamento de segurança.</li>
+</ul>
+</li>
+</ul>
+<p>📌 <strong>Exemplo de controle de acesso baseado em grupos:</strong><br>
+<img decoding="async" loading="lazy" alt="Autenticação com Cognito" src="/assets/images/image-20230216065240574-e937144fa22ff0b9ca3a50827935dacc.png" width="1153" height="623" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>AppSync para Aplicações Móveis</p>
+</blockquote>
+<ul>
+<li><strong>Suporte a sincronização offline</strong> – Os dados podem ser armazenados localmente e <strong>sincronizados automaticamente</strong> quando houver conexão.</li>
+<li><strong>Ideal para aplicativos móveis</strong> que precisam de acesso a dados mesmo sem internet.</li>
+</ul>
+<p>📌 <strong>Exemplo de sincronização de dados em um aplicativo mobile:</strong><br>
+<img decoding="async" loading="lazy" alt="Sincronização Offline" src="/assets/images/image-20230819135735921-9341dce837b89cd39b189a510a5cad90.png" width="886" height="392" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>🎯 Para a Prova: Conceitos Importantes</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>AppSync é um serviço de GraphQL gerenciado pela AWS.</strong></li>
+<li><strong>Suporte a múltiplas fontes de dados</strong>, como DynamoDB, RDS e APIs REST.</li>
+<li><strong>Permite comunicação em tempo real</strong> via <strong>WebSocket e MQTT sobre WebSocket</strong>.</li>
+<li><strong>Integração com Cognito para controle de permissões baseado em grupos.</strong></li>
+<li><strong>Ideal para aplicações móveis</strong> devido ao suporte à <strong>sincronização offline</strong>.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="amazon-route-53">Amazon Route 53<a href="#amazon-route-53" class="hash-link" aria-label="Link direto para Amazon Route 53" title="Link direto para Amazon Route 53">​</a></h2>
+<p>O <strong>Amazon Route 53</strong> é um serviço gerenciado de <strong>DNS (Domain Name System)</strong> da AWS, usado para registrar domínios, rotear tráfego da internet para recursos da AWS e gerenciar a alta disponibilidade de aplicações.</p>
+<ul>
+<li><strong>Serviço pago</strong>: custa <strong>$0.50 por zona hospedada</strong>.</li>
+<li><strong>Roteamento inteligente</strong>: permite direcionar tráfego com base em <strong>latência, geolocalização, failover</strong> e outras regras.</li>
+<li><strong>Recuperação de desastres</strong>: identifica falhas e redireciona automaticamente para recursos alternativos.</li>
+<li><strong>Registro de domínios</strong>: pode ser usado para <strong>comprar domínios</strong> diretamente pela AWS.</li>
+<li><strong>TTL (Time To Live)</strong>: define o tempo de cache de um registro. O TTL é <strong>obrigatório</strong> para todos os tipos de registros, exceto o <strong>Alias</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="route-53" src="/assets/images/image-20210820062829949-24edc640fb11881c2e93d3318925f83a.png" width="658" height="303" class="img_ev3q"></p>
+<p><strong>Common Records (Tipos de Registros)</strong></p>
+<table><thead><tr><th>Tipo</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>A Record (IPv4)</strong></td><td>Mapeia um domínio para um endereço IP v4. Ex: <code>www.google.com -&gt; 12.34.56.78</code></td></tr><tr><td><strong>AAAA Record (IPv6)</strong></td><td>Mapeia um domínio para um endereço IPv6. Ex: <code>www.google.com -&gt; 2001::od:b8::7337</code></td></tr><tr><td><strong>CNAME</strong></td><td>Aponta um hostname para outro hostname (<code>www.search.google.com -&gt; www.google.com</code>). <br>🔸 <strong>Não pode ser usado no domínio raiz (ex: google.com)</strong>. <br>🔸 <strong>Registro pago</strong>.</td></tr><tr><td><strong>Alias</strong></td><td>Aponta um hostname para um <strong>recurso AWS</strong> (S3, ELB, CloudFront, etc.). <br>🔹 <strong>Gratuito na AWS</strong>. <br>🔹 <strong>Funciona no domínio raiz</strong>. <br>🔹 <strong>TTL gerenciado automaticamente pelo Route 53</strong>.</td></tr><tr><td><strong>NS (Name Server)</strong></td><td>Define os servidores de nomes responsáveis pela resolução do domínio.</td></tr></tbody></table>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>nota</div><div class="admonitionContent_BuS1"><div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Para verificar os valores retornados pelos DNS use:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">nslookup &lt;url&gt;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dig &lt;url&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>📌 <strong>Dica para a Prova</strong><br>
+<strong>Alias vs CNAME</strong>:</p><ul>
+<li>O <strong>CNAME</strong> é pago e não pode ser usado no domínio raiz.</li>
+<li>O <strong>Alias</strong> é gratuito e pode ser usado no domínio raiz.</li>
+<li>O <strong>Alias</strong> é recomendado para apontar para <strong>recursos AWS</strong> (S3, ELB, CloudFront).</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Routing Policies (Políticas de Roteamento)</p>
+</blockquote>
+<p>O <strong>Route 53</strong> oferece diferentes formas de direcionar tráfego.</p>
+<p><strong>1. Simple Routing (Roteamento Simples)</strong></p>
+<ul>
+<li>Retorna <strong>um único IP</strong> para um domínio.</li>
+<li><strong>Não suporta</strong> health checks.</li>
+<li>Se houver vários IPs configurados, o <strong>navegador escolhe qual usar</strong>.</li>
+</ul>
+<p><strong>2. Weighted Routing (Roteamento por Peso)</strong></p>
+<ul>
+<li>Distribui tráfego entre <strong>vários servidores</strong> com base em <strong>pesos atribuídos</strong>.</li>
+<li>Exemplo:<!-- -->
+<ul>
+<li>Servidor A (peso 80) recebe 80% do tráfego.</li>
+<li>Servidor B (peso 20) recebe 20% do tráfego.</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Latency Routing (Roteamento por Latência)</strong></p>
+<ul>
+<li>Redireciona tráfego para o servidor <strong>com menor latência</strong>.</li>
+<li>Usa métricas da AWS para determinar a <strong>melhor região</strong> para o usuário.</li>
+</ul>
+<p><strong>4. Failover Routing (Roteamento por Failover)</strong></p>
+<ul>
+<li><strong>Garante alta disponibilidade</strong> direcionando tráfego para um <strong>servidor de backup</strong> quando o principal falha.</li>
+<li><strong>Requer health checks</strong> para monitorar a saúde dos servidores.</li>
+</ul>
+<p><strong>5. Geolocation Routing (Roteamento por Geolocalização)</strong></p>
+<ul>
+<li>Direciona tráfego <strong>com base na localização do usuário</strong>.</li>
+<li>Exemplo:<!-- -->
+<ul>
+<li>Usuários do Brasil → Servidor na AWS São Paulo</li>
+<li>Usuários dos EUA → Servidor na AWS Virgínia</li>
+</ul>
+</li>
+</ul>
+<p><strong>6. Geoproximity Routing (Roteamento por Proximidade)</strong></p>
+<ul>
+<li>Similar ao <strong>Geolocation</strong>, mas permite ajustar a proximidade de um destino com o <strong>bias</strong>.</li>
+<li>Exemplo: aumentar o bias para a região da Europa para direcionar mais tráfego para lá.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>nota</div><div class="admonitionContent_BuS1"><p>O <strong>Bias</strong> (ou viés) no contexto do Geoproximity Routing do Route 53 é um ajuste que permite manipular a proximidade de um local para aumentar ou diminuir a chance de um usuário ser direcionado para determinada região.</p></div></div>
+<p><img decoding="async" loading="lazy" alt="image-20230216203132009" src="/assets/images/image-20230216203132009-7cdb54cfc35c8ff8fc5856c8cdd86b34.png" width="1059" height="539" class="img_ev3q"></p>
+<p><strong>7. Multi Value Routing (Roteamento Multi Valor)</strong></p>
+<ul>
+<li>Retorna <strong>múltiplos IPs</strong> e permite que o navegador escolha qual utilizar.</li>
+<li><strong>Requer health checks</strong> para garantir que apenas IPs saudáveis sejam retornados.</li>
+<li><strong>Suporta até 8 registros saudáveis</strong>.</li>
+</ul>
+<p><strong>8. IP-based Routing (Roteamento por Bloco de IPs)</strong></p>
+<ul>
+<li>Direciona tráfego <strong>com base no bloco de IP (CIDR)</strong> do usuário.</li>
+<li>Útil para <strong>controlar custos de rede</strong> e otimizar conexões internas.</li>
+</ul>
+<hr>
+<blockquote>
+<p>🔍 Health Check (Verificação de Saúde)</p>
+</blockquote>
+<p>O <strong>Route 53</strong> pode monitorar a saúde dos seus recursos para garantir <strong>alta disponibilidade</strong>.</p>
+<ul>
+<li><strong>Custo</strong>:<!-- -->
+<ul>
+<li><strong>$0.50 por endpoint AWS</strong>.</li>
+<li><strong>$0.70 por endpoint externo</strong>.</li>
+</ul>
+</li>
+<li><strong>Suporta</strong>:<!-- -->
+<ul>
+<li>HTTP, HTTPS, TCP.</li>
+<li><strong>String Matching</strong> (verificar se a resposta contém um valor específico).</li>
+<li><strong>Medição de latência</strong>.</li>
+</ul>
+</li>
+<li><strong>São 15 localizações diferentes</strong> ao redor do mundo para testar a disponibilidade.</li>
+<li><strong>Pode ser usado para monitorar servidores on-premises</strong>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>📌 <strong>Dica para a Prova</strong></p><ul>
+<li>Health Checks são <strong>essenciais para failover automático</strong>.</li>
+<li>Pode-se configurar um <strong>Health Check Calculado</strong>, que combina múltiplas verificações para decidir se um serviço está saudável ou não.</li>
+</ul></div></div>
+<p><img decoding="async" loading="lazy" alt="image-20230216204214129" src="/assets/images/image-20230216204214129-207da6861640967ab479b4fde7ce8d27.png" width="1139" height="592" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Hosted Zones</p>
+</blockquote>
+<p>Uma <strong>Hosted Zone</strong> é um <strong>container de registros DNS</strong>.</p>
+<ul>
+<li><strong>Custo:</strong> $0.50 por zona hospedada.</li>
+<li><strong>Tipos:</strong>
+<ul>
+<li><strong>Pública</strong>: visível para a internet.</li>
+<li><strong>Privada</strong>: visível apenas dentro de uma <strong>VPC</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230216203839092" src="/assets/images/image-20230216203839092-1c9e87f4837ff66f4d7c91291bd2c31c.png" width="1198" height="591" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Hybrid DNS &amp; Resolvers</p>
+</blockquote>
+<p><strong>Hybrid DNS</strong></p>
+<ul>
+<li>Permite combinar <strong>Route 53 + outros servidores DNS</strong> (ex: um DNS on-premises).</li>
+<li>Útil para cenários híbridos <strong>AWS + Data Center local</strong>.</li>
+</ul>
+<p><strong>Route 53 Resolvers</strong></p>
+<ul>
+<li><strong>Permitem resolver domínios entre VPCs e redes on-premises</strong>.</li>
+<li><strong>Inbound Endpoint</strong>: recebe queries DNS da rede externa para a AWS.</li>
+<li><strong>Outbound Endpoint</strong>: permite que a AWS envie queries para um DNS externo.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230217055352111" src="/assets/images/image-20230217055352111-cf8fb3a37d90a0965a44e9796af9c1be.png" width="1188" height="481" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>dica</div><div class="admonitionContent_BuS1"><p>📌 <strong>Dica para a Prova</strong></p><ul>
+<li><strong>Inbound Endpoint</strong> é usado para <strong>resolver DNS da AWS internamente</strong>.</li>
+<li><strong>Outbound Endpoint</strong> permite <strong>consultar DNS externos</strong> a partir da AWS.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-global-accelerator">AWS Global Accelerator<a href="#aws-global-accelerator" class="hash-link" aria-label="Link direto para AWS Global Accelerator" title="Link direto para AWS Global Accelerator">​</a></h2>
+<p>O <strong>AWS Global Accelerator</strong> melhora a <strong>disponibilidade</strong> e o <strong>desempenho</strong> de aplicações globais ao utilizar a rede <strong>AWS Global Network</strong> e <strong>Pontos de Presença (PoPs)</strong> da AWS. Isso pode <strong>reduzir a latência em até 60%</strong> para usuários finais.</p>
+<p><strong>Principais Características</strong></p>
+<ul>
+<li><strong>Dois Anycast IPs</strong> são criados para redirecionar o tráfego para os pontos de presença da AWS.</li>
+<li>Atua como um <strong>proxy</strong> para as aplicações hospedadas na AWS.</li>
+<li><strong>Indicado para servidores HTTP com conteúdo dinâmico</strong> (não estático).</li>
+<li>Funciona com:<!-- -->
+<ul>
+<li><strong>Elastic IPs</strong></li>
+<li><strong>Application Load Balancer (ALB)</strong></li>
+<li><strong>Network Load Balancer (NLB)</strong></li>
+<li><strong>Instâncias EC2</strong></li>
+</ul>
+</li>
+<li><strong>Preserva o IP do cliente</strong>, exceto quando usado com <strong>NLBs e Elastic IPs</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230217055915316" src="/assets/images/image-20230217055915316-b25b0e3e0568d63565a9174f9b835615.png" width="645" height="264" class="img_ev3q"></p>
+<p><strong>Diferença entre <strong>CloudFront</strong> e <strong>Global Accelerator</strong></strong></p>
+<table><thead><tr><th>Recurso</th><th>CloudFront</th><th>Global Accelerator</th></tr></thead><tbody><tr><td><strong>Uso principal</strong></td><td>Distribuição de conteúdo estático</td><td>Aplicações interativas e comunicação em tempo real</td></tr><tr><td><strong>Cache</strong></td><td>Sim (nos pontos de presença)</td><td>Não faz cache</td></tr><tr><td><strong>Protocolos</strong></td><td>HTTP, HTTPS</td><td>TCP, UDP</td></tr><tr><td><strong>Casos de uso</strong></td><td>Streaming, imagens, sites estáticos</td><td>Jogos, VoIP, bancos de dados distribuídos, APIs globais</td></tr><tr><td><strong>IP fixo</strong></td><td>Não</td><td>Sim</td></tr></tbody></table>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><p>Se a questão mencionar <strong>conteúdo estático</strong> e <strong>cache</strong>, a resposta provavelmente é <strong>CloudFront</strong>.<br>
+<!-- -->Se falar de <strong>baixa latência para conexões TCP/UDP globais</strong>, a resposta tende a ser <strong>Global Accelerator</strong>.<br>
+<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html" target="_blank" rel="noopener noreferrer">Saiba mais sobre AWS Global Accelerator</a></p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-outposts">AWS Outposts<a href="#aws-outposts" class="hash-link" aria-label="Link direto para AWS Outposts" title="Link direto para AWS Outposts">​</a></h2>
+<p>O <strong>AWS Outposts</strong> permite que empresas <strong>executem serviços da AWS dentro de seus próprios data centers</strong>, criando uma <strong>nuvem híbrida</strong>.</p>
+<p><strong>Como funciona?</strong></p>
+<ul>
+<li>A AWS fornece <strong>racks físicos</strong> que as empresas instalam <strong>on-premises</strong>.</li>
+<li>A responsabilidade pela <strong>segurança física</strong> desses racks é da empresa.</li>
+<li><strong>Mantém a experiência da AWS</strong>, mas dentro da infraestrutura local.</li>
+</ul>
+<p><strong>Vantagens</strong></p>
+<p>✅ <strong>Baixa latência</strong>: Ideal para aplicações que precisam de tempo de resposta rápido.<br>
+<!-- -->✅ <strong>Residência dos dados</strong>: Os dados permanecem na empresa, evitando problemas de compliance.<br>
+<!-- -->✅ <strong>Redução de custos com transferência de dados</strong> entre AWS e o data center da empresa.</p>
+<p><strong>Serviços suportados no AWS Outposts</strong></p>
+<ul>
+<li><strong>EC2, EBS, S3, EKS, ECS, RDS, EMR</strong>, entre outros.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230218125409314" src="/assets/images/image-20230218125409314-cc60ac2a7740606615da7c56d44bb03e.png" width="1051" height="578" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Casos comuns em provas da AWS</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>Se a questão mencionar <strong>latência ultrabaixa</strong> e <strong>uso de AWS dentro da própria infraestrutura</strong>, a resposta provavelmente será <strong>AWS Outposts</strong>.</li>
+<li>É útil para <strong>governança e conformidade</strong>, onde dados precisam ficar armazenados <strong>localmente</strong>.<br>
+<a href="https://aws.amazon.com/outposts/" target="_blank" rel="noopener noreferrer">Saiba mais sobre AWS Outposts</a></li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-wavelength">AWS Wavelength<a href="#aws-wavelength" class="hash-link" aria-label="Link direto para AWS Wavelength" title="Link direto para AWS Wavelength">​</a></h2>
+<p>O <strong>AWS Wavelength</strong> é um serviço da AWS que leva a <strong>nuvem para dentro da infraestrutura das operadoras de telefonia móvel</strong>, possibilitando <strong>baixa latência</strong> para aplicações <strong>5G</strong>.</p>
+<p><strong>Como funciona?</strong></p>
+<ul>
+<li>A AWS disponibiliza <strong>racks Outposts</strong> dentro dos <strong>data centers das operadoras de telecom</strong>.</li>
+<li>Isso permite que aplicações na AWS fiquem <strong>fisicamente mais próximas dos usuários móveis</strong>, reduzindo a latência.</li>
+<li>É especialmente útil para <strong>aplicações que exigem resposta em tempo real</strong>.</li>
+</ul>
+<p><strong>Casos de Uso</strong></p>
+<ul>
+<li>🚗 <strong>Carros conectados</strong> (veículos autônomos e monitoramento em tempo real).</li>
+<li>🎥 <strong>Streaming ao vivo e interativo</strong> (lives sem delay).</li>
+<li>🕶️ <strong>Realidade Aumentada/Virtual (AR/VR)</strong>.</li>
+<li>🎮 <strong>Jogos online em tempo real</strong>.</li>
+</ul>
+<p><strong>Serviços compatíveis</strong></p>
+<ul>
+<li><strong>EC2, EBS, VPC</strong>, entre outros.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 📌</strong></div><div class="admonitionContent_BuS1"><p>Se a questão mencionar <strong>baixa latência para dispositivos móveis 5G</strong>, a resposta pode ser <strong>AWS Wavelength</strong>.<br>
+<a href="https://aws.amazon.com/wavelength/" target="_blank" rel="noopener noreferrer">Saiba mais sobre AWS Wavelength</a></p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-local-zones">AWS Local Zones<a href="#aws-local-zones" class="hash-link" aria-label="Link direto para AWS Local Zones" title="Link direto para AWS Local Zones">​</a></h2>
+<p>O <strong>AWS Local Zones</strong> permite que empresas <strong>executem serviços da AWS mais próximos dos usuários finais</strong>, reduzindo a <strong>latência</strong> e melhorando o <strong>desempenho</strong> de aplicações sensíveis ao tempo de resposta.</p>
+<blockquote>
+<p>Como funciona?</p>
+</blockquote>
+<ul>
+<li>A AWS implanta <strong>infraestrutura local</strong> (data centers menores) <strong>próxima a grandes centros urbanos</strong>.</li>
+<li>Essas zonas locais estão <strong>conectadas a uma região AWS principal</strong>, o que permite rodar cargas de trabalho críticas de baixa latência sem precisar depender exclusivamente da região AWS mais próxima.</li>
+<li>Empresas podem habilitar <strong>Local Zones</strong> em sua conta AWS, caso estejam disponíveis na localização desejada.</li>
+</ul>
+<blockquote>
+<p>Serviços disponíveis nas AWS Local Zones</p>
+</blockquote>
+<ul>
+<li><strong>EC2 (máquinas virtuais)</strong></li>
+<li><strong>EBS (armazenamento de bloco)</strong></li>
+<li><strong>RDS (banco de dados gerenciado)</strong></li>
+<li><strong>ElastiCache (cache de alto desempenho)</strong></li>
+<li><strong>Direct Connect (conexão direta com a AWS)</strong></li>
+</ul>
+<blockquote>
+<p>Exemplo de uso</p>
+</blockquote>
+<p>Atualmente, a única região AWS na América do Sul é <strong>São Paulo</strong>.<br>
+<!-- -->Se uma empresa no <strong>Chile</strong> quiser uma latência menor, ela poderia habilitar uma <strong>AWS Local Zone</strong> no Chile (caso disponível) para executar seus serviços <strong>sem precisar se conectar diretamente à região de São Paulo</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="image-20230218130317935" src="/assets/images/image-20230218130317935-78b9e27064a5f5037e3568f963315590.png" width="1131" height="651" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>Se a questão mencionar <strong>baixa latência</strong> para usuários em <strong>grandes centros urbanos</strong>, a resposta pode ser <strong>AWS Local Zones</strong>.</li>
+<li>Se precisar rodar <strong>cargas computacionais sensíveis à latência</strong> (como streaming, renderização de vídeos ou jogos online), essa pode ser a solução.<br>
+<a href="https://aws.amazon.com/about-aws/global-infrastructure/localzones/" target="_blank" rel="noopener noreferrer">Saiba mais sobre AWS Local Zones</a></li>
+</ul></div></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/03_compute_load_balance.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Segurança</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Storage</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#ec2---elastic-compute-cloud" class="table-of-contents__link toc-highlight">EC2 - Elastic Compute Cloud</a></li><li><a href="#ecs---elastic-container-service" class="table-of-contents__link toc-highlight">ECS - Elastic Container Service</a></li><li><a href="#eks---elastic-kubernetes-service" class="table-of-contents__link toc-highlight">EKS - Elastic Kubernetes Service</a></li><li><a href="#ecr---elastic-container-registry" class="table-of-contents__link toc-highlight">ECR - Elastic Container Registry</a></li><li><a href="#aws-lambda" class="table-of-contents__link toc-highlight">AWS Lambda</a></li><li><a href="#aws-app-runner" class="table-of-contents__link toc-highlight">AWS App Runner</a></li><li><a href="#elastic-load-balancing" class="table-of-contents__link toc-highlight">Elastic Load Balancing</a></li><li><a href="#amazon-api-gateway" class="table-of-contents__link toc-highlight">Amazon API Gateway</a></li><li><a href="#aws-appsync" class="table-of-contents__link toc-highlight">AWS AppSync</a></li><li><a href="#amazon-route-53" class="table-of-contents__link toc-highlight">Amazon Route 53</a></li><li><a href="#aws-global-accelerator" class="table-of-contents__link toc-highlight">AWS Global Accelerator</a></li><li><a href="#aws-outposts" class="table-of-contents__link toc-highlight">AWS Outposts</a></li><li><a href="#aws-wavelength" class="table-of-contents__link toc-highlight">AWS Wavelength</a></li><li><a href="#aws-local-zones" class="table-of-contents__link toc-highlight">AWS Local Zones</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
 </body>
 </html>
