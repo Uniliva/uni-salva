@@ -1,9 +1,6 @@
 ---
 title: "Bancos de dados"
 sidebar_position: 6
----
-Entendi seu feedback e vou seguir à risca suas orientações! Aqui está sua documentação corrigida, organizada e enriquecida com mais explicações e notas importantes para a certificação AWS Certified Solutions Architect - Professional.  
-
 ---  
 
 ## DynamoDB  
