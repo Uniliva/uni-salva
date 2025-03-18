@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/Service_Communication" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Comunicação entre serviço | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/Service_Communication"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Comunicação entre serviço | Uniii docs"><meta data-rh="true" name="description" content="AWS Step Functions"><meta data-rh="true" property="og:description" content="AWS Step Functions"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/Service_Communication"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/Service_Communication" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/Service_Communication" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.0a79422d.js" defer="defer"></script>
+<script src="/assets/js/main.e6b4bfa8.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/Service_Communication">Comunicação entre serviço</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Comunicação entre serviço</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Comunicação entre serviço</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-step-functions">AWS Step Functions<a href="#aws-step-functions" class="hash-link" aria-label="Link direto para AWS Step Functions" title="Link direto para AWS Step Functions">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="step-function" src="/assets/images/image-20210911102112816-79ebff01a9d5b08b8df851af25563ec6.png" width="545" height="314" class="img_ev3q"></p>
+<p>O <strong>AWS Step Functions</strong> é um serviço que permite <strong>orquestrar</strong> e <strong>automatizar</strong> fluxos de trabalho complexos na AWS. Ele facilita a coordenação de <strong>funções AWS Lambda</strong> e outros serviços, garantindo execução ordenada, paralela ou condicional de tarefas.</p>
+<blockquote>
+<p>Principais Características:</p>
+</blockquote>
+<ul>
+<li>Usa um modelo de <strong>máquina de estados</strong> descrito em <strong>JSON</strong> para definir o fluxo da aplicação.</li>
+<li>Permite configurar a execução de <strong>Lambdas sequenciais, paralelas</strong>, com <strong>condições</strong>, <strong>timeouts</strong> e <strong>tratamento de erros</strong>.</li>
+<li>Suporta <strong>execução de workflows por até 1 ano</strong>, sendo necessário renová-los para continuar a execução após esse período.</li>
+<li>Integra-se com diversos serviços AWS para automação de processos empresariais.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Integrações com outros serviços</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230220120258941" src="/assets/images/image-20230220120258941-19844e4d2d542ac4291645e6cfff2119.png" width="1125" height="540" class="img_ev3q"></p>
+<p>O Step Functions pode se integrar diretamente com vários serviços da AWS, sem necessidade de código intermediário. Algumas das integrações mais comuns incluem:</p>
+<ul>
+<li><strong>AWS Lambda:</strong> Para execução de funções sem servidor dentro do fluxo de trabalho.</li>
+<li><strong>Amazon S3:</strong> Para interações com objetos armazenados no S3.</li>
+<li><strong>Amazon DynamoDB:</strong> Para manipulação de dados estruturados.</li>
+<li><strong>Amazon SNS e SQS:</strong> Para envio de notificações e filas de mensagens.</li>
+<li><strong>AWS Glue:</strong> Para execução de ETLs.</li>
+<li><strong>Amazon SageMaker:</strong> Para incorporar Machine Learning ao fluxo de trabalho.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Gatilhos de Execução do Step Functions</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230220120340225" src="/assets/images/image-20230220120340225-072088eee0a7e127694c4413fd31a559.png" width="1122" height="596" class="img_ev3q"></p>
+<p>O Step Functions pode ser acionado por diferentes fontes, incluindo:</p>
+<ul>
+<li><strong>API Gateway:</strong> Permite iniciar fluxos via chamadas HTTP.</li>
+<li><strong>EventBridge:</strong> Executa o workflow em resposta a eventos AWS.</li>
+<li><strong>AWS Lambda:</strong> Inicia fluxos diretamente a partir de funções Lambda.</li>
+<li><strong>Amazon S3:</strong> Pode disparar workflows ao criar ou modificar objetos.</li>
+<li><strong>AWS SDK e AWS CLI:</strong> Permite iniciar fluxos de forma programática.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de Workflows no Step Functions</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230220120628216" src="/assets/images/image-20230220120628216-3c6f7e0f6fd4a0fa8598df3b9d16a04e.png" width="1014" height="471" class="img_ev3q"></p>
+<p>O AWS Step Functions oferece dois tipos principais de workflows:</p>
+<ol>
+<li>
+<p><strong>Standard Workflows:</strong></p>
+<ul>
+<li>Ideal para processos longos e complexos.</li>
+<li>Suporta execuções que duram até <strong>1 ano</strong>.</li>
+<li>Histórico detalhado de execução.</li>
+</ul>
+</li>
+<li>
+<p><strong>Express Workflows:</strong></p>
+<ul>
+<li>Projetado para execuções rápidas e de alta taxa de requisições.</li>
+<li>Limite de duração de <strong>5 minutos</strong>.</li>
+<li>Usa modelo de precificação baseado em <strong>número de execuções</strong>, enquanto o <strong>Standard Workflow</strong> cobra pelo tempo de execução.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Quando usar cada tipo de workflow?</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>nota</div><div class="admonitionContent_BuS1"><ul>
+<li>Use <strong>Standard Workflow</strong> para <strong>processos de longa duração</strong>, como fluxos de aprovação e ETLs.</li>
+<li>Use <strong>Express Workflow</strong> para <strong>eventos de alta taxa de tráfego</strong>, como ingestão de logs e processamento de eventos em tempo real.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Exemplo de Arquitetura com Step Functions</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230220121021456" src="/assets/images/image-20230220121021456-747c88872cbbd30e86de945a750049cd.png" width="1040" height="545" class="img_ev3q"></p>
+<p>A imagem acima mostra um exemplo de arquitetura onde o Step Functions orquestra múltiplas funções AWS Lambda para processamento de dados.</p>
+<blockquote>
+<p>Casos de Uso Comuns</p>
+</blockquote>
+<ul>
+<li><strong>Processamento de pedidos</strong> em e-commerce.</li>
+<li><strong>Orquestração de ETL</strong> (Extração, Transformação e Carga de dados).</li>
+<li><strong>Automação de resposta a incidentes</strong> (ex.: segurança e compliance).</li>
+<li><strong>Processamento de arquivos e imagens</strong>.</li>
+<li><strong>Treinamento e inferência de modelos de Machine Learning</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Benefícios do AWS Step Functions</p>
+</blockquote>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>✅ <strong>Alta disponibilidade e tolerância a falhas</strong>: Workflows são automaticamente gerenciados pela AWS.<br>
+<!-- -->✅ <strong>Facilidade de integração</strong>: Conecta-se facilmente com outros serviços AWS sem necessidade de código extra.<br>
+<!-- -->✅ <strong>Observabilidade</strong>: Possui logs detalhados e histórico de execução.<br>
+<!-- -->✅ <strong>Escalabilidade</strong>: Suporta workloads de qualquer tamanho.<br>
+<!-- -->✅ <strong>Baixo custo para processos event-driven</strong>: Express Workflows cobram apenas por execução.</p></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>quando usar AWS Step Functions em comparação com outros serviços AWS</strong>, como SQS, SNS e EventBridge.</p>
+</blockquote><p>📌 Uma empresa deseja criar um <strong>workflow automatizado para processar pedidos</strong>, onde cada pedido passa por diversas etapas, incluindo <strong>validação, pagamento e envio de e-mails</strong>. Qual serviço AWS é mais indicado para gerenciar esse fluxo de forma organizada e resiliente?</p><ul>
+<li>✅ <strong>AWS Step Functions</strong>, pois permite orquestrar diferentes etapas do workflow com controle de estados, execução sequencial e tratamento de falhas.</li>
+</ul><p>📌 Uma aplicação precisa processar eventos em tempo real, mas sem rastrear estados ou ter dependência entre as mensagens. Qual opção é mais adequada?</p><ul>
+<li>✅ <strong>Amazon SQS ou EventBridge</strong>, pois são mais indicados para sistemas <strong>event-driven</strong>, onde não há necessidade de acompanhar estados entre mensagens.</li>
+</ul><hr><blockquote>
+<p><strong>AWS Step Functions Standard vs. Express Workflows</strong> é um tema recorrente nas provas, especialmente para cenários de escalabilidade e custo.</p>
+</blockquote><p>📌 Uma aplicação precisa processar <strong>milhões de eventos curtos por segundo</strong>, com tempo de execução abaixo de <strong>5 minutos</strong> por workflow. Qual opção do Step Functions é mais adequada?</p><ul>
+<li>✅ <strong>Express Workflow</strong>, pois é otimizado para <strong>execuções rápidas e alta taxa de requisições</strong>, cobrando por número de execuções ao invés de tempo de execução.</li>
+</ul><p>📌 Um workflow de <strong>ETL de dados</strong> precisa rodar por <strong>horas ou até dias</strong>, garantindo <strong>resiliência e rastreamento detalhado das execuções</strong>. Qual tipo de workflow do Step Functions deve ser escolhido?</p><ul>
+<li>✅ <strong>Standard Workflow</strong>, pois permite <strong>execuções de até 1 ano</strong>, mantém logs detalhados e oferece <strong>retries automáticos</strong> em caso de falhas.</li>
+</ul><hr><blockquote>
+<p><strong>Step Functions vs. AWS Lambda</strong>: Algumas questões podem testar a necessidade de usar workflows em vez de apenas funções serverless.</p>
+</blockquote><p>📌 Uma aplicação precisa <strong>coordenar a execução de múltiplas funções Lambda</strong> de forma sequencial, garantindo que uma função só inicie após a conclusão da anterior. Como fazer isso de forma otimizada?</p><ul>
+<li>✅ <strong>AWS Step Functions</strong>, pois fornece <strong>controle de estados</strong> e <strong>execução sequencial</strong> sem necessidade de gerenciar lógica de orquestração manualmente dentro do código.</li>
+</ul><p>📌 Uma aplicação precisa executar <strong>uma única função Lambda de maneira independente</strong>, sem necessidade de acompanhar estados ou combinar múltiplas execuções. O uso do Step Functions é necessário?</p><ul>
+<li>❌ <strong>Não!</strong> Para esse caso, uma única <strong>AWS Lambda</strong> chamada diretamente pelo API Gateway ou EventBridge seria suficiente, sem a sobrecarga do Step Functions.</li>
+</ul><hr><blockquote>
+<p>Questões podem abordar <strong>integrações do Step Functions com outros serviços AWS</strong>.</p>
+</blockquote><p>📌 Uma empresa precisa <strong>orquestrar um processo de Machine Learning</strong>, onde os dados são carregados no <strong>S3</strong>, pré-processados com <strong>AWS Glue</strong>, e depois enviados ao <strong>Amazon SageMaker</strong> para inferência. Como automatizar essa pipeline?</p><ul>
+<li>✅ <strong>AWS Step Functions</strong>, pois permite orquestrar múltiplos serviços AWS, garantindo que cada etapa seja executada na ordem correta e lidando com falhas automaticamente.</li>
+</ul><p>📌 Uma empresa quer executar <strong>cálculos financeiros pesados em grande escala</strong> usando um workflow. No entanto, cada cálculo pode levar <strong>mais de 15 minutos</strong> para ser concluído. Qual a melhor abordagem?</p><ul>
+<li>✅ <strong>Executar os cálculos em containers no AWS Batch</strong> e orquestrá-los com <strong>AWS Step Functions</strong>, pois Lambdas possuem limite de <strong>15 minutos</strong> de execução.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-sqs">AWS SQS<a href="#aws-sqs" class="hash-link" aria-label="Link direto para AWS SQS" title="Link direto para AWS SQS">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="SQS" src="/assets/images/5e3f44ce52788a4fb8b8432e4441bf3f-SQS-diagram-55fc40afe501ed4ed4ed864e9e624f04.svg" width="850" height="326" class="img_ev3q"></p>
+<p>O <strong>Amazon Simple Queue Service (SQS)</strong> é um serviço de <strong>mensageria assíncrona</strong>, totalmente gerenciado pela AWS, que permite o desacoplamento de componentes de aplicações distribuídas.</p>
+<blockquote>
+<p>Principais Características:</p>
+</blockquote>
+<ul>
+<li>Possui <strong>escopo regional</strong> e é gerenciado pela AWS.</li>
+<li>Segue o modelo:<!-- -->
+<ul>
+<li><strong>Produtor</strong> → <strong>envia</strong> → <strong>fila</strong> ← <strong>recupera</strong> ← <strong>Consumidor</strong>.</li>
+</ul>
+</li>
+<li>O consumidor faz um <strong>pull</strong> na fila para recuperar mensagens.<!-- -->
+<ul>
+<li>Pode receber até <strong>10 mensagens por vez</strong>.</li>
+<li><strong>O consumidor deve excluir a mensagem após o processamento</strong>, pois <strong>não há exclusão automática</strong> após a leitura.</li>
+</ul>
+</li>
+<li><strong>Escalabilidade automática</strong>, suportando desde <strong>1 até 10.000 mensagens por segundo</strong>.</li>
+<li><strong>Tempo de retenção</strong> das mensagens entre <strong>4 horas (mínimo) e 14 dias (máximo)</strong>.</li>
+<li><strong>Sem limite de quantidade de mensagens na fila</strong>.</li>
+<li><strong>Mensagens de até 256 KB</strong>. Para mensagens maiores, pode-se armazená-las no <strong>S3</strong> e usar <strong>SQS Extended Client Library</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Auto Scaling e Métricas</p>
+</blockquote>
+<ul>
+<li>O <strong>Amazon CloudWatch</strong> monitora métricas da fila, como:<!-- -->
+<ul>
+<li><strong>ApproximateNumberOfMessages</strong>: Número estimado de mensagens na fila.</li>
+<li><strong>NumberOfMessagesSent</strong>: Quantidade de mensagens enviadas.</li>
+<li><strong>NumberOfMessagesReceived</strong>: Quantidade de mensagens recebidas.</li>
+</ul>
+</li>
+<li>É possível configurar <strong>Auto Scaling</strong> para escalar os consumidores de forma automática com base no tamanho da fila.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Política de Acesso</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230812075815579" src="/assets/images/image-20230812075815579-731bb9064100f16ff7941547b5425226.png" width="905" height="401" class="img_ev3q"></p>
+<ul>
+<li>Permite definir quem pode <strong>enviar</strong> e <strong>consumir</strong> mensagens da fila.</li>
+<li>Pode ser usada para permitir <strong>acesso entre contas</strong> (cross-account).</li>
+<li>Exemplo de uso: Permitir que um bucket do <strong>S3</strong> publique eventos na fila SQS.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Integração com AWS Lambda</p>
+</blockquote>
+<ul>
+<li>A <strong>SQS pode acionar funções Lambda</strong>, processando mensagens <strong>em batch</strong> automaticamente.</li>
+<li>Lambda lê mensagens da fila, processa e as remove após o sucesso da execução.</li>
+<li>Ideal para <strong>event-driven architectures</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Criptografia no SQS</p>
+</blockquote>
+<ul>
+<li><strong>Em trânsito</strong>: O tráfego entre os serviços e o SQS é <strong>criptografado automaticamente via HTTPS</strong>.</li>
+<li><strong>Em repouso</strong>:<!-- -->
+<ul>
+<li>O <strong>SQS usa SSE-SQS (Server-Side Encryption)</strong> com uma chave padrão.</li>
+<li>Também é possível usar uma <strong>chave gerenciada no AWS KMS (SSE-KMS)</strong> para maior controle.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Message Visibility Timeout</p>
+</blockquote>
+<ul>
+<li>Quando um consumidor recupera uma mensagem, ela fica <strong>invisível</strong> para os outros consumidores até ser processada.</li>
+<li>O tempo de invisibilidade é definido pelo <strong>Message Visibility Timeout</strong>.</li>
+<li><strong>Valor padrão: 30 segundos</strong>.</li>
+<li>Se o processamento demorar mais que o tempo definido, a mensagem <strong>reaparece na fila</strong> e pode ser processada novamente, levando a <strong>duplicação</strong>.</li>
+<li>Para estender o tempo de invisibilidade, usa-se a API <strong>ChangeMessageVisibility</strong> do AWS SDK.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Delay Queues</p>
+</blockquote>
+<ul>
+<li>Define um <strong>atraso</strong> na entrega da mensagem para os consumidores.</li>
+<li><strong>Padrão: 0 segundos</strong> (entrega imediata).</li>
+<li>No momento da <strong>criação da fila</strong>, pode-se configurar um <strong>atraso padrão</strong> para todas as mensagens.</li>
+<li>Ideal para cenários onde é necessário um tempo antes de processar as mensagens.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Dead Letter Queue (DLQ)</p>
+</blockquote>
+<ul>
+<li>As mensagens podem ser enviadas para uma <strong>fila de erro (DLQ - Dead Letter Queue)</strong> se <strong>não forem processadas corretamente após um número definido de tentativas</strong>.</li>
+<li>O número de tentativas antes de mover para a DLQ é definido pelo <strong>maximumReceives</strong>.</li>
+<li><strong>Usado para debug</strong>, permitindo identificar problemas sem perder as mensagens.</li>
+<li>Importante:<!-- -->
+<ul>
+<li><strong>A DLQ deve ser do mesmo tipo da fila principal</strong>, ou seja, <strong>se a fila for FIFO, a DLQ também deve ser FIFO</strong>.</li>
+</ul>
+</li>
+<li><strong>Redrive to Source Queue</strong>: Permite reenviar as mensagens da DLQ para a fila original após corrigir o problema.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Request-Response System no SQS</p>
+</blockquote>
+<ul>
+<li>O SQS pode ser usado para <strong>modelos de requisição-resposta</strong>.</li>
+<li>Ao postar uma mensagem na fila, o produtor informa um <strong>CorrelationID</strong> e uma <strong>fila de resposta</strong>.</li>
+<li>Assim que a mensagem for processada, a resposta é enviada para a fila de retorno.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="request-response-system" src="/assets/images/image-20210902210040788-b2df3254b315e3a5cd1a780b8d5fee91.png" width="1053" height="531" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Comparação: SQS vs SNS vs Kinesis</p>
+</blockquote>
+<p>Embora todos sejam <strong>serviços de mensageria</strong>, possuem diferenças fundamentais.</p>
+<p><img decoding="async" loading="lazy" alt="SQS x SNS x Kinesis" src="/assets/images/image-20210903062441530-fcb72f02eee5662e623df8b3d964473e.png" width="1032" height="429" class="img_ev3q"></p>
+<p><strong>Principais diferenças:</strong></p>
+<table><thead><tr><th>Serviço</th><th>Tipo</th><th>Mensagens Persistentes?</th><th>Casos de Uso</th></tr></thead><tbody><tr><td><strong>SQS</strong></td><td>Fila</td><td>✅ Sim</td><td>Processamento assíncrono, desacoplamento de sistemas</td></tr><tr><td><strong>SNS</strong></td><td>Publicação/Assinatura</td><td>❌ Não</td><td>Notificações push, mensagens broadcast para múltiplos consumidores</td></tr><tr><td><strong>Kinesis</strong></td><td>Stream</td><td>✅ Sim</td><td>Processamento de eventos em tempo real, análise contínua de dados</td></tr></tbody></table>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>Quando usar SQS, SNS ou Kinesis?</strong></div><div class="admonitionContent_BuS1"><ul>
+<li><strong>SQS</strong>: Quando precisa de <strong>mensagens persistentes</strong> e consumidores independentes.</li>
+<li><strong>SNS</strong>: Quando quer <strong>distribuir mensagens para múltiplos assinantes</strong> (ex.: notificações push, alertas).</li>
+<li><strong>Kinesis</strong>: Quando precisa de <strong>análise de dados em tempo real</strong> e streaming contínuo de eventos.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p><strong>Dead Letter Queue (DLQ) é frequentemente abordado na prova</strong>, especialmente sobre quando e como configurar essa funcionalidade para evitar perda de mensagens.</p>
+</blockquote><p>📌 Uma aplicação está processando mensagens de uma fila <strong>SQS Standard</strong>, mas algumas mensagens falham repetidamente no processamento. Como garantir que essas mensagens possam ser analisadas posteriormente?</p><ul>
+<li>✅ Configurar uma <strong>Dead Letter Queue (DLQ)</strong> e definir um <strong>MaximumReceives</strong> apropriado.</li>
+</ul><p>📌 Uma aplicação usa <strong>SQS FIFO</strong> para garantir ordem e exatamente uma vez no processamento. Como deve ser configurada a DLQ?</p><ul>
+<li>✅ A <strong>DLQ também deve ser FIFO</strong>, pois não é permitido misturar tipos de fila.</li>
+</ul><hr><blockquote>
+<p><strong>Message Visibility Timeout</strong> pode gerar duplicação de mensagens se não for configurado corretamente.</p>
+</blockquote><p>📌 Um serviço recupera mensagens da SQS, mas leva <strong>1 minuto</strong> para processá-las. Se o <strong>Message Visibility Timeout</strong> estiver no valor padrão (30 segundos), o que pode acontecer?</p><ul>
+<li>✅ A mensagem pode ser entregue a outro consumidor antes de ser processada completamente, gerando <strong>processamento duplicado</strong>.</li>
+</ul><p>📌 Como evitar a duplicação no cenário acima?</p><ul>
+<li>✅ Ajustar o <strong>Message Visibility Timeout</strong> para um tempo superior ao tempo médio de processamento das mensagens.</li>
+</ul><hr><blockquote>
+<p><strong>Integração do SQS com Lambda</strong> é um tema comum na certificação.</p>
+</blockquote><p>📌 O que acontece quando uma função Lambda processa mensagens de uma fila <strong>SQS Standard</strong> e falha no processamento?</p><ul>
+<li>✅ A mensagem será <strong>reprocessada automaticamente</strong>, pois <strong>SQS Standard pode entregar mensagens mais de uma vez</strong>.</li>
+</ul><p>📌 Como evitar que mensagens com erro causem reprocessamentos infinitos ao usar Lambda com SQS?</p><ul>
+<li>✅ Configurar uma <strong>DLQ</strong> para armazenar mensagens que falharam após um número máximo de tentativas.</li>
+</ul><hr><blockquote>
+<p><strong>Comparação entre SQS, SNS e Kinesis</strong> é essencial para escolher a melhor solução na prova.</p>
+</blockquote><p>📌 Um sistema precisa entregar <strong>uma mensagem para múltiplos consumidores simultaneamente</strong>, garantindo <strong>baixa latência</strong>. Qual serviço AWS é mais adequado?</p><ul>
+<li>✅ <strong>Amazon SNS</strong>, pois permite <strong>publicação/assinatura (pub/sub)</strong> e entrega mensagens para vários consumidores ao mesmo tempo.</li>
+</ul><p>📌 Uma aplicação precisa processar um <strong>grande volume de dados em tempo real</strong>, mantendo <strong>ordem e reprocessamento</strong>. Qual serviço AWS é mais adequado?</p><ul>
+<li>✅ <strong>Amazon Kinesis</strong>, pois suporta <strong>streaming de dados com retenção e reprocessamento</strong>.</li>
+</ul><hr><blockquote>
+<p><strong>Auto Scaling baseado em métricas do SQS</strong> pode aparecer na prova.</p>
+</blockquote><p>📌 Como escalar dinamicamente os consumidores de uma fila SQS para lidar com um alto volume de mensagens?</p><ul>
+<li>✅ Configurar <strong>Auto Scaling Group</strong> para os consumidores baseado na métrica <strong>ApproximateNumberOfMessages</strong> do <strong>Amazon CloudWatch</strong>.</li>
+</ul><p>📌 Uma fila SQS está com <strong>alto número de mensagens pendentes</strong> e os consumidores não estão dando conta. Como resolver esse problema?</p><ul>
+<li>✅ Aumentar o número de instâncias do consumidor via <strong>Auto Scaling</strong> ou otimizar o código para processar mensagens em batch.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-mq">AWS MQ<a href="#aws-mq" class="hash-link" aria-label="Link direto para AWS MQ" title="Link direto para AWS MQ">​</a></h2>
+<p>O <strong>AWS MQ</strong> é um serviço gerenciado de <strong>mensageria compatível com protocolos tradicionais</strong>, permitindo a execução de <strong>RabbitMQ</strong> e <strong>ActiveMQ</strong> na AWS. Ele é ideal para empresas que desejam <strong>migrar</strong> suas soluções de mensageria existentes para a nuvem sem precisar modificar aplicações que dependem desses protocolos.</p>
+<blockquote>
+<p>Principais características:</p>
+</blockquote>
+<ul>
+<li>Suporta <strong>protocolos tradicionais</strong> de mensageria, como <strong>MQTT, AMQP, STOMP, WSS e OpenWire</strong>.</li>
+<li>Serviço gerenciado da AWS para executar <strong>RabbitMQ</strong> e <strong>ActiveMQ</strong>.</li>
+<li><strong>Não escala automaticamente</strong> como o <strong>Amazon SQS</strong> ou <strong>Amazon SNS</strong>.</li>
+<li><strong>Pode ser configurado em Multi-AZ</strong>, garantindo alta disponibilidade e <strong>failover automático</strong>.</li>
+<li>Principalmente usado para <strong>migração de soluções legadas</strong> que já utilizam esses protocolos.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Casos de Uso</p>
+</blockquote>
+<ul>
+<li>Empresas que já utilizam <strong>RabbitMQ ou ActiveMQ</strong> e desejam <strong>migrar para a AWS</strong> sem modificar a aplicação.</li>
+<li>Sistemas que exigem <strong>entrega ordenada e garantida de mensagens</strong>.</li>
+<li>Ambientes que necessitam de <strong>suporte a protocolos tradicionais</strong> incompatíveis com <strong>SQS/SNS</strong>.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>AWS MQ vs SQS/SNS</strong></div><div class="admonitionContent_BuS1"><table><thead><tr><th>Característica</th><th>AWS MQ</th><th>Amazon SQS</th><th>Amazon SNS</th></tr></thead><tbody><tr><td><strong>Modelo</strong></td><td>Broker de Mensagens</td><td>Fila de Mensagens</td><td>Publicação/Assinatura (Pub/Sub)</td></tr><tr><td><strong>Protocolos Suportados</strong></td><td>MQTT, AMQP, STOMP, OpenWire, etc.</td><td>Protocolo proprietário da AWS</td><td>Protocolo proprietário da AWS</td></tr><tr><td><strong>Escalabilidade</strong></td><td>Limitada</td><td>Altamente escalável</td><td>Altamente escalável</td></tr><tr><td><strong>Persistência de Mensagens</strong></td><td>Sim</td><td>Sim</td><td>Não</td></tr><tr><td><strong>Ordem Garantida</strong></td><td>Sim (depende da configuração)</td><td>Apenas em filas FIFO</td><td>Não</td></tr><tr><td><strong>Caso de Uso</strong></td><td>Migração de aplicações que já usam mensageria tradicional</td><td>Processamento assíncrono com alta escalabilidade</td><td>Distribuição de mensagens para múltiplos consumidores</td></tr></tbody></table></div></div>
+<hr>
+<blockquote>
+<p>Alta Disponibilidade e Failover</p>
+</blockquote>
+<ul>
+<li>O <strong>AWS MQ</strong> pode ser configurado em <strong>Multi-AZ</strong>, garantindo <strong>failover automático</strong> caso ocorra falha em uma zona de disponibilidade.</li>
+<li>Em um ambiente <strong>ActiveMQ</strong>, é possível configurar um <strong>Cluster de Brokers</strong>, distribuindo a carga e melhorando a resiliência.</li>
+<li>No <strong>RabbitMQ</strong>, pode-se utilizar <strong>replicação de filas</strong> para maior confiabilidade.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Custos e Considerações</p>
+</blockquote>
+<ul>
+<li><strong>AWS MQ pode ser mais caro</strong> que SQS/SNS devido à necessidade de manter brokers ativos.</li>
+<li>Não é ideal para <strong>alta escala</strong>, pois não escala horizontalmente como o <strong>SQS</strong>.</li>
+<li>Recomenda-se para <strong>cargas de trabalho previsíveis</strong> e <strong>migração de aplicações legadas</strong>.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente testam a <strong>diferença entre AWS MQ, SQS e SNS</strong>, avaliando qual solução é mais adequada para diferentes cenários de mensageria.</p>
+</blockquote><p>📌 Uma empresa já utiliza <strong>ActiveMQ on-premises</strong> e deseja migrar para a AWS sem refatorar a aplicação. Qual serviço AWS deve ser utilizado?</p><ul>
+<li>✅ <strong>AWS MQ</strong> (Compatível com ActiveMQ, sem necessidade de modificar a aplicação).</li>
+</ul><p>📌 Uma aplicação distribuída precisa de uma solução de mensageria <strong>altamente escalável</strong>, mas não exige compatibilidade com protocolos tradicionais. Qual a melhor opção?</p><ul>
+<li>✅ <strong>Amazon SQS</strong> (Escalável e totalmente gerenciado, ideal para mensagens assíncronas).</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS MQ pode ser configurado em Multi-AZ</strong> para garantir alta disponibilidade, ativando um <strong>failover automático</strong> caso um broker falhe.</p>
+</blockquote><p>📌 Uma empresa precisa de um serviço de mensageria que ofereça <strong>failover automático</strong> entre zonas de disponibilidade, garantindo alta disponibilidade. Qual a melhor solução?</p><ul>
+<li>✅ <strong>AWS MQ</strong> configurado em <strong>Multi-AZ</strong>.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS MQ</strong> não escala horizontalmente como o <strong>SQS</strong> ou <strong>SNS</strong>, tornando-se <strong>mais caro e menos adequado</strong> para grandes volumes de mensagens.</p>
+</blockquote><p>📌 Qual serviço AWS é mais adequado para processar <strong>milhões de mensagens por segundo</strong> com escalabilidade automática?</p><ul>
+<li>✅ <strong>Amazon SQS</strong> (Melhor para escalabilidade massiva).</li>
+</ul><p>📌 Um sistema precisa garantir <strong>ordem estrita</strong> das mensagens e evitar duplicação. Qual serviço deve ser escolhido?</p><ul>
+<li>✅ <strong>Amazon SQS FIFO</strong> (Suporte à ordem estrita e processamento único de mensagens).</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-sns">AWS SNS<a href="#aws-sns" class="hash-link" aria-label="Link direto para AWS SNS" title="Link direto para AWS SNS">​</a></h2>
+<p>O <strong>Amazon Simple Notification Service (SNS)</strong> é um serviço de <strong>mensageria assíncrona</strong> baseado no padrão <strong>pub/sub (publicação/assinatura)</strong>, permitindo o envio de notificações para múltiplos assinantes simultaneamente. Ele é amplamente utilizado para <strong>distribuir eventos</strong> e <strong>notificar serviços ou usuários</strong> de maneira escalável.</p>
+<blockquote>
+<p>Principais características</p>
+</blockquote>
+<ul>
+<li>Serviço <strong>gerenciado</strong> pela AWS, com <strong>escopo regional</strong>.</li>
+<li>Utiliza o modelo <strong>Produtor → Envia → Tópico → Notifica → Assinantes</strong> (<strong>pub/sub pattern</strong>).</li>
+<li><strong>Cada tópico pode ter até 12 milhões de assinantes</strong>.</li>
+<li><strong>Soft limit de 100.000 tópicos por conta</strong>.</li>
+<li><strong>Mensagens não são retidas</strong> após a entrega; elas são descartadas após a notificação.</li>
+<li>Suporte a diversos tipos de assinantes:<!-- -->
+<ul>
+<li><strong>HTTP(S), e-mail, Lambda, dispositivos móveis, Kinesis Data Firehose</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Entrega de Mensagens e Ordem de Processamento</p>
+</blockquote>
+<ul>
+<li><strong>O SNS &quot;empurra&quot; as mensagens para os assinantes</strong>, ao contrário do <strong>SQS</strong>, que exige polling.</li>
+<li>Caso seja necessário garantir <strong>ordem de entrega</strong> e <strong>evitar duplicação</strong>, recomenda-se o uso de <strong>SQS FIFO</strong> como assinante.</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📌 <strong>Quando usar SNS vs. SQS FIFO?</strong></div><div class="admonitionContent_BuS1"><ul>
+<li><strong>SNS:</strong> Para <strong>notificações em tempo real</strong> para múltiplos assinantes sem necessidade de ordem específica.</li>
+<li><strong>SQS FIFO:</strong> Para garantir <strong>ordem estrita</strong> das mensagens e evitar <strong>duplicações</strong>.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Política de Acesso (IAM Policy)</p>
+</blockquote>
+<ul>
+<li>Permite definir <strong>quem pode enviar mensagens para um tópico</strong>.</li>
+<li>Funciona de forma semelhante às <strong>políticas de acesso do SQS</strong>.</li>
+<li>Exemplo de caso de uso:<!-- -->
+<ul>
+<li><strong>Restringir o envio de mensagens</strong> apenas para serviços internos.</li>
+<li><strong>Permitir que outra conta AWS publique mensagens no tópico</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Criptografia no SNS</p>
+</blockquote>
+<ul>
+<li><strong>Em trânsito:</strong> A comunicação é <strong>segura por padrão</strong> via <strong>HTTPS</strong>.</li>
+<li><strong>Em repouso:</strong>
+<ul>
+<li>Usa <strong>SSE-SNS</strong> (Server-Side Encryption) com chave padrão da AWS.</li>
+<li><strong>Pode ser configurado com AWS KMS (SSE-KMS)</strong> para maior controle.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>SNS + SQS - Fan-Out Pattern</p>
+</blockquote>
+<p>A arquitetura <strong>Fan-Out</strong> usa um <strong>tópico SNS</strong> para distribuir mensagens para múltiplas filas <strong>SQS</strong>, garantindo que diferentes sistemas possam processar o mesmo evento.</p>
+<p>📌 <strong>Benefícios do Fan-Out Pattern</strong>:</p>
+<ul>
+<li>Permite que <strong>vários sistemas processem a mesma mensagem</strong>.</li>
+<li><strong>Evita perda de dados</strong> ao garantir que cada consumidor receba sua própria cópia da mensagem.</li>
+<li>Útil para serviços que <strong>só permitem notificação para um único destino</strong> (<strong>exemplo: S3 Events</strong>).</li>
+<li><strong>Funciona entre regiões AWS</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Fan-Out" src="/assets/images/image-20210902211203812-1676968809224-3-9fa8d0258ed0553ac21c34429721899e.png" width="908" height="253" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Message Filtering (Filtragem de Mensagens)</p>
+</blockquote>
+<ul>
+<li>O SNS permite filtrar mensagens para <strong>notificar assinantes apenas quando um critério for atendido</strong>.</li>
+<li>Utiliza <strong>JSON policies</strong> para definir regras de filtragem.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>📌 Exemplo:</div><div class="admonitionContent_BuS1"><ul>
+<li>Um <strong>sistema de pedidos</strong> pode publicar eventos no SNS.</li>
+<li>Apenas <strong>assinantes interessados em &quot;Pedidos Cancelados&quot;</strong> recebem notificações desse tipo.</li>
+</ul></div></div>
+<p><img decoding="async" loading="lazy" alt="Filtragem de Mensagens" src="/assets/images/image-20230221054138361-f821aec006065f4ae74ad58331df599f.png" width="753" height="264" class="img_ev3q"></p>
+<p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/message-filtering.html" target="_blank" rel="noopener noreferrer">Documentação oficial do SNS Message Filtering</a></p>
+<hr>
+<blockquote>
+<p>Integração com Kinesis Data Firehose</p>
+</blockquote>
+<p>O <strong>Amazon SNS</strong> pode enviar mensagens diretamente para o <strong>Kinesis Data Firehose</strong>, permitindo:</p>
+<ul>
+<li><strong>Armazenamento em tempo real</strong> no <strong>S3, Redshift ou Elasticsearch</strong>.</li>
+<li><strong>Processamento e análise de logs e eventos</strong> em grande escala.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="SNS + Firehose" src="/assets/images/image-20230221055222919-d5b5508557314c0ee7c11c0da2fa734e.png" width="987" height="250" class="img_ev3q"></p>
+<p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html" target="_blank" rel="noopener noreferrer">Documentação oficial da integração SNS + Firehose</a></p>
+<hr>
+<blockquote>
+<p>Retry e Dead Letter Queue (DLQ)</p>
+</blockquote>
+<p>📌 O <strong>SNS reenvia mensagens automaticamente</strong> caso o assinante não esteja disponível.</p>
+<ul>
+<li><strong>Para serviços AWS (ex: Lambda, SQS)</strong>, o <strong>SNS já possui um mecanismo de retry automático</strong>.</li>
+<li><strong>Para endpoints externos (ex: HTTP)</strong>, é necessário <strong>configurar uma política de retry</strong>.</li>
+<li><strong>Caso uma mensagem não seja entregue após várias tentativas, pode-se configurar uma DLQ (Dead Letter Queue)</strong>.</li>
+</ul>
+<p>📌 <strong>Quando usar DLQ no SNS?</strong></p>
+<ul>
+<li>Para <strong>garantir que mensagens não sejam perdidas</strong> se o destinatário estiver indisponível.</li>
+<li>Para <strong>analisar falhas na entrega</strong> e evitar perda de dados críticos.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Retry Policy" src="/assets/images/image-20230221060719941-20b21162820418afd7c8ffaeb456f79e.png" width="1086" height="342" class="img_ev3q"></p>
+<blockquote>
+<p>Como funciona a DLQ no SNS?</p>
+</blockquote>
+<ul>
+<li>A DLQ é <strong>associada à assinatura</strong> do tópico SNS.</li>
+<li>Mensagens que <strong>falham após múltiplas tentativas</strong> são <strong>enviadas para a DLQ</strong> para futura análise.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="DLQ SNS" src="/assets/images/image-20230221061229092-d56b0566834cc505787712978f2fccb0.png" width="1001" height="320" class="img_ev3q"></p>
+<p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-dead-letter-queues.html" target="_blank" rel="noopener noreferrer">Documentação oficial sobre SNS DLQ</a></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões sobre <strong>SNS vs. SQS</strong> são comuns, exigindo que você escolha a solução mais adequada para um caso específico.</p>
+</blockquote><p>📌 Uma aplicação precisa enviar notificações <strong>instantâneas</strong> para diversos sistemas distribuídos, garantindo <strong>entrega em tempo real</strong>, mas <strong>não exige ordenação nem processamento único</strong> das mensagens. Qual serviço deve ser utilizado?</p><ul>
+<li>✅ <strong>Amazon SNS</strong> (pub/sub para notificações em tempo real)</li>
+</ul><p>📌 Um sistema precisa garantir que <strong>mensagens sejam processadas em ordem e sem duplicações</strong>. Qual serviço deve ser utilizado?</p><ul>
+<li>✅ <strong>Amazon SQS FIFO</strong> (garante ordem e deduplicação)</li>
+</ul><p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-vs-sqs.html" target="_blank" rel="noopener noreferrer">Comparação oficial SNS vs. SQS</a></p><hr><blockquote>
+<p>Perguntas podem abordar <strong>políticas de acesso (IAM) do SNS</strong>, testando se você sabe como controlar <strong>quem pode publicar ou assinar tópicos SNS</strong>.</p>
+</blockquote><p>📌 Uma equipe de segurança exige que <strong>apenas aplicações dentro da conta AWS da empresa possam publicar mensagens em um tópico SNS</strong>. Como garantir isso?</p><ul>
+<li>✅ Criar uma <strong>SNS Access Policy</strong> restringindo publicações apenas para a <strong>conta AWS específica</strong>.</li>
+</ul><p>📌 Um parceiro externo precisa <strong>assinar</strong> um tópico SNS para receber notificações, mas <strong>não pode publicar mensagens</strong>. Como configurar isso corretamente?</p><ul>
+<li>✅ Criar uma <strong>política SNS</strong> permitindo apenas <strong>&quot;Subscribe&quot;</strong> para o parceiro e negando <strong>&quot;Publish&quot;</strong>.</li>
+</ul><p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html" target="_blank" rel="noopener noreferrer">Guia oficial de políticas do SNS</a></p><hr><blockquote>
+<p>SNS pode ser testado em relação à <strong>criptografia</strong> e <strong>segurança</strong> na prova, exigindo que você saiba configurar <strong>SSE-SNS</strong> e <strong>SSE-KMS</strong>.</p>
+</blockquote><p>📌 Uma aplicação envia mensagens <strong>sensíveis</strong> para um tópico SNS. A empresa exige que os dados estejam <strong>criptografados em repouso</strong> usando uma <strong>chave gerenciada pelo cliente</strong>. Qual configuração deve ser usada?</p><ul>
+<li>✅ <strong>Habilitar SSE-KMS</strong> no tópico SNS com uma chave do AWS KMS.</li>
+</ul><p>📌 O tráfego entre os produtores e o SNS <strong>deve ser criptografado</strong> para evitar interceptação. Qual configuração garante isso?</p><ul>
+<li>✅ <strong>Configurar os produtores para usar HTTPS</strong> ao publicar mensagens no SNS.</li>
+</ul><p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html" target="_blank" rel="noopener noreferrer">Documentação sobre criptografia do SNS</a></p><hr><blockquote>
+<p>SNS é frequentemente cobrado na prova em questões sobre <strong>Fan-Out Pattern</strong> e <strong>integração com SQS</strong>.</p>
+</blockquote><p>📌 Uma aplicação precisa <strong>garantir que múltiplos sistemas recebam e processem mensagens do mesmo evento</strong>, evitando perda de dados. Qual solução AWS pode ser usada?</p><ul>
+<li>✅ <strong>Configurar SNS para distribuir mensagens para várias filas SQS (Fan-Out Pattern)</strong>.</li>
+</ul><p>📌 Um serviço em outra região precisa processar mensagens enviadas por um tópico SNS. Como garantir que ele receba os eventos corretamente?</p><ul>
+<li>✅ Criar <strong>SQS em outra região</strong>, assiná-la ao tópico SNS e habilitar <strong>cross-region replication</strong>.</li>
+</ul><p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html" target="_blank" rel="noopener noreferrer">Fan-Out Pattern com SNS + SQS</a></p><hr><blockquote>
+<p>Questões podem testar <strong>retry policies e Dead Letter Queues (DLQ) no SNS</strong>, cobrando como garantir a entrega de mensagens.</p>
+</blockquote><p>📌 Um endpoint HTTP assina um tópico SNS, mas está frequentemente indisponível. Como evitar a perda de mensagens?</p><ul>
+<li>✅ <strong>Configurar uma DLQ para armazenar mensagens falhas e reprocessá-las posteriormente</strong>.</li>
+</ul><p>📌 Um serviço recebe notificações do SNS via Lambda, mas algumas mensagens estão falhando. Como melhorar a resiliência?</p><ul>
+<li>✅ <strong>Habilitar DLQ no SNS para capturar mensagens falhas e analisar os erros</strong>.</li>
+</ul><p>🔗 <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-dead-letter-queues.html" target="_blank" rel="noopener noreferrer">DLQ no SNS</a></p></div></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/07_Service_Communication.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Bancos de dados</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Resumão</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-step-functions" class="table-of-contents__link toc-highlight">AWS Step Functions</a></li><li><a href="#aws-sqs" class="table-of-contents__link toc-highlight">AWS SQS</a></li><li><a href="#aws-mq" class="table-of-contents__link toc-highlight">AWS MQ</a></li><li><a href="#aws-sns" class="table-of-contents__link toc-highlight">AWS SNS</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
