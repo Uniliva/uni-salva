@@ -1,0 +1,171 @@
+Olá fiz alguma anotações sobre recursos AWS para a certificação architect progfessiona da AWS, porém tem alguns erros de português então corrija os erros de português.
+Adicione explicações sobre o caso acho necessário para tornar os itens mais fáceis de entender e comece o primeiro nivel de cabeçarios do markdown a partir do nível 2 (##) use > para o nivel 3 (ou seja ao invez de colocar ### Titulo coloque > titulo) e negrito para o nivel 4 (apenas o titulo), NÃO REMOVAS AS IMAGENS
+- Adicione notas (perguntas e resposta ou detalhamentos) E LINKS de temas que questões que podem cair na prova de certificação.
+- estou usando o docusarus então use as admonitions para isso
+- Não der as DICAS de Prova Agora, vou te pedir depois
+Faça isso para a documentação abaixo:
+
+
+### RDS
+
+![image-20230220111311099](assets/image-20230220111311099.png)
+Serviço de banco de dados relacional da AWS.
+
+- Escala automaticamente em minutos.
+- Serviço totalmente gerenciado pela AWS.
+  - Provisiona SO, faz os bkps e restores, monitora desempenho, faz manutenção.
+  - Usa armazenamento do tipo EBS (gp2 ou io1), permite auto-scale.
+  - Não temos acesso ao **SSH** da maquina onde esta o banco.
+- Permite criptografia.
+- Segurança
+  ![image-20230220111829023](assets/image-20230220111829023.png)
+- Replica em mais de uma AZ, para segurança e recuperação de desastres (quando habilitado é gerado um DNS name e o chateamento em caso de falha é automático.).
+- Executado em uma VPC, se for acessar via Lambda lembre-se que deve estar na mesma VPC.
+- Permite replicas de leitura (**read replicas**) para melhorar a performance. Pode se criar replicas em outras regiões para diminuir a latência. Para se distribuir o acesso de leitura entre essas replicas usa-se o Route 53, onde pode se configurar uma política de peso para encaminhamento (Weighted Record Set)
+- **Tipos**
+  - **Postgres**
+  - **Mysql**
+  - **MariaDB**
+  - **Oracle**
+  - **Aurora**
+- RDS para Lamba
+  - Caso use Lambda, como é serveless, pode se ter um problema de **TooManyConnections**.
+  - Para evitar isso usa-se o **RDS Proxy**, que fica responsável por gerenciar o pool de conexões, liberando sempre que se encerra uma lambda.
+
+![image-20230220112418563](assets/image-20230220112418563.png)
+- RDS para ORACLE
+
+![image-20230220112048190](assets/image-20230220112048190.png)
+- **Pilares da well architecture**
+  ![well-arch](assets/image-20210905112316072.png)
+
+---
+
+#### Aurora
+
+- DB proprietário da AWS.
+- 5 vezes mais performatico que o **mysql.**
+- 3 vezes mais performatico que o **postgres**.
+- Serviço de escopo regional, porém é possível usar em multi regiões podendo criar uma instalação o global, mas o que será uma **master** numa região e replicas de leituras nas outras.
+- **Faz replicação (6 copias) em 3 AZ.**
+- **Pode se adicionar até 15 replica de leituras, para melhorar o uso.**
+- Tem a opção serveless, não se preocupando com gerenciamento.
+- **Cresce de 10GB em 10GB podendo chegar até 128TB de dados.**
+- Tem uma funcionalidade chamada encaminhamento de escrita, que permite que uma replica de leitura receba uma requisição de escrita e encaminhe para o node de escrita, e via replicação o dado e inserido ou atualizado na replica de leitura.
+- 20% mais barato que o RDS comum.
+- ![aurora](assets/image-20210819082549024.png)
+- ![aurora-cluster](assets/image-20210819082823818.png)
+
+##### Auroral - well architected
+
+![aurora-well-arch](assets/image-20210905112856784.png)
+
+##### Conceitos avançados aurora
+
+![image-20230220114134315](assets/image-20230220114134315.png)
+
+###### Aurora Replica - auto scaling
+
+![aurora-auto scaling](assets/image-20210819084400925.png)
+
+###### Custom endpoints
+
+![custom-endpoint](assets/image-20210819084618981.png)
+
+###### Serveless
+
+- Scala automaticamente o banco de acordo com o uso.
+- Bom para carga de trabalho que não são muito frequente.
+- Não e necessário planejar, pois ele auto escala para atender a demanda.
+- Pago por segundo de uso.
+  ![image-20230220114609406](assets/image-20230220114609406.png)
+
+###### Multi Master
+
+- Caso queira alta disponibilidade, nesse caso caso haja falha, todos os nós de leitura passa a escrever também.
+- ![multi-master](assets/image-20210819085334494.png)
+
+###### Global aurora
+
+- **Cross region read** replica - útil para desastre **recover** .
+- Global database
+  - Se tem 1 região primaria (read/write) e 5 outras regiões segundarias, com replicação de menor que 1 segundo.
+  - há 16 replicas de leitura por região segundaria.
+  - Caso de desastre, promove-se outra região como primaria em menos de 1 minuto.
+  - ![global](assets/image-20210819085935598.png)
+
+###### Marchine Learning
+
+- Aurora permite usar **marchine learning** nos dados através de interação com os serviços **Amazon SageMaker** e **Amazon comprehand**.
+- Não há necessidade de ter experiência em **marchine learning** para usar essa funcionalidade.
+- Caso de uso:
+  - Deteção de fraude, propaganda localizada, recomendação de produtos.
+    ![aurora-ml](assets/image-20210819091225067.png)
+
+#### Backups
+
+- São habilitado automaticamente no RDS.
+- São realizados automaticamente.
+  - Backup diário.
+  - Logs de transações são feito backup a cada 5 minutos, o que permite que seja restaurado a qualquer ponto de 5 em 5 minutos.
+- Tem uma retenção default de **7** dias, que pode ser estendido para **35** dias.
+- Também é possível realizar snapshot do banco **(db snapshot)**.
+  - Isso permite uma maior tempo de retenção.
+
+#### Storage auto scale
+
+Quando se cria um banco no RDS se passa quando ele deve ter, com essa funcionalidade ele aumenta o tamanho da banco ao se aproximar de limite de uso do espaço.
+
+- Ajuda a aumentar o armazenamento dinamicamente. Quando detetado que esta próximo do limite.
+- Necessário setar um _threshold_ de limite máximo de alocação de armazenamento.
+- Automaticamente modifica o armazenamento se:
+  - Tiver menos que **10%** de armazenamento alocado.
+
+#### Read replicas
+
+- Ajuda a escalar na leitura dos dados do banco.
+- Podem ser criada em:
+  - Na mesma **AZ** onde esta o banco..
+  - Em outra **AZ**.
+  - Em outra **Região**.
+- Após criado, é realizado replicação dos dados de forma assíncrona **( por isso a consistência eventual)**
+
+##### Caso de uso
+
+- Imagine que se tenha uma aplicação em produção que armazena informação num banco, ai surgi outra aplicação que gera relatório, e que ler varia tabelas, nesse cenário se cria uma replica só de leitura para essa nova aplicação
+  ![read-replicas](assets/image-20210819064416702.png)
+
+##### Precificação
+
+- Custo de rede (replicação).
+  - Não há se a replica estiver na mesma região.
+  - Caso seja em regiões diferentes há um custo adicional de transferência
+    ![price](assets/image-20210819064819009.png)
+
+#### Multi AZ (disastre recover)
+
+- E criado uma replica do banco de dados em outra **AZ**, e os dados são sincronizados.
+- E gerado um único **DNS name** para apontar para o banco tido com "master".
+- Caso falha ele auto eleva o outro para "**master**" e não e necessário intervenção manual.
+- Não é usado para escalar, apenas como medida de **disastre recover.**
+- Caso já tenha um banco que seja **Single AZ** e queira converte-lo para **multi AZ**, será criado por debaixo dos panos um snapshot do banco, que será restaurado no novo banco em outra AZ, e então iniciara o processo de sincronização entre os bancos.
+  ![new db multi az](assets/image-20210819065600206.png)
+
+#### Encryption
+
+- Para encriptação em repouso.
+  - Tanto do **master** quanto das replicas de leitura com **AWS KMS - AES-256**.
+  - Define a encriptação durante a criação, se o **master** não for encriptado as **replicas de leitura** não poderão ser.
+  - Para Oracle e SQL Server há o **TDE** (Trasparent Data Encryption) que é outra maneira de fazer a encriptação do banco.
+- Para encriptação de a bordo (in-flight / durante as transferência).
+  - Pode se usar certificados SSL para realizar a encriptação.
+
+#### Autenticação
+
+- Pode ser feita usando usuário e senha.
+- Para os bancos postgres, aurora e mysql, há a opção de **IAM Autetication** que gera um token para se acessar o banco.
+  - Centraliza os usuários, controla acesso via roles.
+  - Todo o tráfego seria feito usando SSL.
+    ![iam-autatication-rds](assets/image-20210819081821387.png)
+
+---

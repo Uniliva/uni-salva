@@ -1,5 +1,5 @@
 ---
-title: "Compute & Load Balancing"
+title: "Computação & Balanceador de carga"
 sidebar_position: 3
 ---
 
