@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/database" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Bancos de dados | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/database"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Bancos de dados | Uniii docs"><meta data-rh="true" name="description" content="Entendi seu feedback e vou seguir à risca suas orientações! Aqui está sua documentação corrigida, organizada e enriquecida com mais explicações e notas importantes para a certificação AWS Certified Solutions Architect - Professional."><meta data-rh="true" property="og:description" content="Entendi seu feedback e vou seguir à risca suas orientações! Aqui está sua documentação corrigida, organizada e enriquecida com mais explicações e notas importantes para a certificação AWS Certified Solutions Architect - Professional."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/database"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/database" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/database" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.b3633414.js" defer="defer"></script>
+<script src="/assets/js/main.01213d40.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Bancos de dados</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Bancos de dados</h1></header><p>Entendi seu feedback e vou seguir à risca suas orientações! Aqui está sua documentação corrigida, organizada e enriquecida com mais explicações e notas importantes para a certificação AWS Certified Solutions Architect - Professional.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="dynamodb">DynamoDB<a href="#dynamodb" class="hash-link" aria-label="Link direto para DynamoDB" title="Link direto para DynamoDB">​</a></h2>
+<p>O <strong>Amazon DynamoDB</strong> é um banco de dados NoSQL gerenciado que oferece <strong>alta escalabilidade, baixa latência e desempenho previsível</strong>. Ele é amplamente utilizado para aplicações que exigem grande volume de leitura e escrita, como jogos online, e-commerce e aplicações de IoT.</p>
+<blockquote>
+<p>Características Principais</p>
+</blockquote>
+<ul>
+<li><strong>NoSQL</strong> do tipo <strong>chave-valor</strong>.</li>
+<li><strong>Suporta um alto volume de requisições</strong> (até <strong>1 milhão de requisições por segundo</strong>).</li>
+<li><strong>Similar ao Apache Cassandra</strong>, o que facilita a migração.</li>
+<li><strong>Tamanho máximo de um item:</strong> <strong>400 KB</strong>.<!-- -->
+<ul>
+<li>Para objetos maiores, a prática recomendada é armazená-los no <strong>Amazon S3</strong> e guardar apenas a referência no <strong>DynamoDB</strong>.</li>
+</ul>
+</li>
+<li><strong>Escala horizontalmente</strong> de forma automática, aumentando ou reduzindo a capacidade com base na demanda.</li>
+<li><strong>Multi-AZ (Alta Disponibilidade):</strong> Réplica automática dos dados em <strong>três zonas de disponibilidade (AZs)</strong>.</li>
+<li><strong>Latência de milissegundos</strong> para leituras e escritas.</li>
+<li><strong>Escopo regional</strong>: Os dados permanecem dentro da região da AWS onde o banco foi criado.</li>
+<li><strong>Pode ser multi-regional</strong>, usando <strong>DynamoDB Global Tables</strong>, permitindo replicação em regiões diferentes para menor latência e recuperação de desastres.<!-- -->
+<ul>
+<li><strong>Requer ativação do DynamoDB Streams</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>O que são DynamoDB Streams?</strong></p>
+<p>DynamoDB Streams capturam mudanças nos dados das tabelas do DynamoDB e podem ser utilizados para:</p>
+<ul>
+<li>Acionar eventos no <strong>EventBridge</strong>.</li>
+<li>Integrar com o <strong>Kinesis Data Streams</strong> para processamento e análise de dados.</li>
+<li>Criar <strong>DynamoDB Global Tables</strong>, permitindo replicação multi-regional.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230220104955096" src="/assets/images/image-20230220104955096-de413e378ee42f03c00ed68dc51f3250.png" width="1165" height="355" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Consistência de Leitura</p>
+</blockquote>
+<p>No DynamoDB, há dois tipos de leitura:</p>
+<ul>
+<li>
+<p><strong>Leitura Eventual (Eventually Consistent Read)</strong></p>
+<ul>
+<li>Mais rápida e <strong>5 vezes mais barata</strong>.</li>
+<li>Pode retornar dados desatualizados, pois busca os dados de qualquer réplica.</li>
+</ul>
+</li>
+<li>
+<p><strong>Leitura Forte (Strongly Consistent Read)</strong></p>
+<ul>
+<li>Retorna sempre o <strong>dado mais atualizado</strong>, validando em todas as réplicas antes de retornar.</li>
+<li><strong>Mais lenta e mais cara</strong>.</li>
+<li>Para utilizar, é necessário configurar o parâmetro <strong>ConsistentRead = true</strong> nas APIs:<!-- -->
+<ul>
+<li><code>GetItem</code>, <code>BatchGetItem</code>, <code>Query</code>, <code>Scan</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>DynamoDB Accelerator (DAX)</p>
+</blockquote>
+<p>O <strong>DAX (DynamoDB Accelerator)</strong> é um <strong>cache em memória</strong> totalmente gerenciado para o DynamoDB.</p>
+<p><strong>Benefícios do DAX:</strong></p>
+<ul>
+<li>Reduz a latência de <strong>milissegundos para microssegundos</strong>.</li>
+<li>Mantém <strong>registros frequentemente acessados em cache</strong> por até <strong>5 minutos</strong> (<strong>TTL</strong>).</li>
+<li>Resolve o problema de <strong>Hot Key</strong> (<strong>chaves altamente acessadas</strong>).</li>
+<li><strong>Suporta até 11 nós de cache</strong>.</li>
+</ul>
+<p>📌 Quando usar DAX?</p>
+<ul>
+<li>Quando há <strong>altas taxas de leitura</strong>, especialmente em consultas repetitivas.</li>
+<li>Quando a aplicação exige <strong>respostas extremamente rápidas</strong>.</li>
+</ul>
+<p>📌 Quando NÃO usar DAX?</p>
+<ul>
+<li>Quando a aplicação exige <strong>consistência forte</strong> (DAX só oferece <strong>leitura eventual</strong>).</li>
+<li>Quando há poucas leituras e muitas escritas (DAX <strong>não melhora a escrita</strong>).</li>
+</ul>
+<hr>
+<blockquote>
+<p>Modelos de Capacidade</p>
+</blockquote>
+<p>Ao criar uma tabela no DynamoDB, é necessário escolher entre dois modelos de capacidade:</p>
+<p><strong>Provisionado (Provisioned Mode)</strong></p>
+<ul>
+<li><strong>É necessário definir capacidade de leitura e escrita</strong> antecipadamente.</li>
+<li>Mais <strong>barato</strong> para cargas de trabalho previsíveis.</li>
+<li><strong>Pode usar Auto Scaling</strong> para ajustar a capacidade dinamicamente.</li>
+<li>Cobrança baseada em <strong>RCU</strong> (Read Capacity Units) e <strong>WCU</strong> (Write Capacity Units).</li>
+</ul>
+<p>📌 RCU (Read Capacity Units)</p>
+<ul>
+<li>1 <strong>RCU</strong> permite:<!-- -->
+<ul>
+<li>1 leitura <strong>fortemente consistente</strong> de <strong>até 4 KB por segundo</strong>.</li>
+<li>2 leituras <strong>eventualmente consistentes</strong> de <strong>até 4 KB por segundo</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>📌 WCU (Write Capacity Units)</p>
+<ul>
+<li>1 <strong>WCU</strong> permite 1 <strong>escrita de até 1 KB</strong> por segundo.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230814194037758" src="/assets/images/image-20230814194037758-5d7729a86663c68565522daf23a3359c.png" width="841" height="354" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image-20230814194136079" src="/assets/images/image-20230814194136079-ed51db515145fbe92cc1c4ecc768fdc5.png" width="835" height="375" class="img_ev3q"></p>
+<p><strong>Sob demanda (On-Demand Mode)</strong></p>
+<ul>
+<li><strong>Não precisa definir capacidade de leitura e escrita</strong> antecipadamente.</li>
+<li>Ideal para cargas de trabalho <strong>imprevisíveis</strong> ou com <strong>picos de tráfego</strong>.</li>
+<li><strong>2.5x mais caro</strong> do que o modo provisionado.</li>
+<li>Cobrança baseada em:<!-- -->
+<ul>
+<li><strong>Read Request Units (RRU)</strong> = equivalente a <strong>RCU</strong>.</li>
+<li><strong>Write Request Units (WRU)</strong> = equivalente a <strong>WCU</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tipos de Chaves no DynamoDB</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Chave Primária Simples (Partition Key - PK)</strong></p>
+<ul>
+<li>Apenas um <strong>atributo Hash</strong>.</li>
+<li>Deve ser <strong>único na tabela</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Chave Primária Composta (Partition Key + Sort Key - PK + SK)</strong></p>
+<ul>
+<li>Permite <strong>chaves repetidas</strong>, desde que a <strong>PK + SK juntas sejam únicas</strong>.</li>
+<li>Facilita a criação de <strong>consultas otimizadas</strong>, permitindo buscar registros agrupados por PK.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Índices no DynamoDB</p>
+</blockquote>
+<p>O DynamoDB permite criar <strong>índices secundários</strong> para facilitar consultas sem precisar buscar apenas pela chave primária.</p>
+<p>📌 LSI (Local Secondary Index)</p>
+<ul>
+<li>Mantém a <strong>mesma Partition Key (PK)</strong>, mas permite <strong>criar uma nova Sort Key (SK)</strong>.</li>
+<li>Deve ser definido no <strong>momento da criação da tabela</strong>.</li>
+<li><strong>Máximo de 5 LSIs por tabela</strong>.</li>
+</ul>
+<p>📌 GSI (Global Secondary Index)</p>
+<ul>
+<li>Permite criar <strong>uma nova chave primária</strong> (PK + SK) diferente da tabela original.</li>
+<li>Pode ser criado <strong>a qualquer momento</strong> (diferente do LSI).</li>
+<li><strong>Consome RCU e WCU separados da tabela principal</strong>.</li>
+<li>Se houver <strong>throttling no GSI</strong>, a tabela principal também será afetada.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Time To Live (TTL) no DynamoDB</p>
+</blockquote>
+<p>O <strong>TTL (Time To Live)</strong> permite definir um <strong>timestamp de expiração</strong> para os itens, fazendo com que sejam removidos automaticamente.</p>
+<p>📌 Benefícios:</p>
+<ul>
+<li><strong>Reduz custo</strong> ao eliminar registros antigos sem a necessidade de deletá-los manualmente.</li>
+<li><strong>Não consome WCU</strong> (remoção automática sem custo).</li>
+<li>O timestamp deve ser definido no formato <strong>Unix Epoch Timestamp</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Casos de Uso do DynamoDB</p>
+</blockquote>
+<p>📌 Indexador de Objetos</p>
+<ul>
+<li>O DynamoDB pode ser usado como um <strong>indexador de metadados</strong> para objetos armazenados no <strong>S3</strong>, permitindo buscas rápidas.<br>
+<img decoding="async" loading="lazy" alt="image-20230220105121790" src="/assets/images/image-20230220105121790-df6011672fe35760426d3fb1a20079eb.png" width="1021" height="399" class="img_ev3q"></li>
+</ul>
+<p>📌 DAX ou ElastiCache?</p>
+<ul>
+<li><strong>DAX</strong>: Use quando o <strong>cliente acessa os dados diretamente</strong> via chave primária.</li>
+<li><strong>ElastiCache</strong>: Use quando os dados são resultado de <strong>cálculos ou agregações</strong> (ex: médias, contagens).</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>modos de capacidade do DynamoDB</strong> e a escolha ideal entre <strong>Provisioned Mode</strong> e <strong>On-Demand Mode</strong> com base na previsibilidade da carga de trabalho.</p>
+</blockquote><p>📌 Uma empresa possui uma aplicação com <strong>carga de trabalho estável e previsível</strong>. Para reduzir custos, qual modelo de capacidade do DynamoDB é mais recomendado?</p><ul>
+<li>✅ <strong>Provisioned Mode</strong> com Auto Scaling</li>
+</ul><p>📌 Uma startup lançou um novo aplicativo que pode sofrer <strong>picos imprevisíveis de tráfego</strong>. Qual modelo de capacidade deve ser utilizado para evitar throttling e garantir escalabilidade automática?</p><ul>
+<li>✅ <strong>On-Demand Mode</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>DynamoDB Accelerator (DAX)</strong> é um serviço de <strong>cache em memória</strong> para DynamoDB, ideal para reduzir a latência de leituras repetitivas. No entanto, DAX <strong>não suporta leitura forte</strong>.</p>
+</blockquote><p>📌 Uma aplicação de e-commerce precisa <strong>consultar frequentemente</strong> produtos mais vendidos com <strong>baixa latência</strong>, mas a consistência forte <strong>não é necessária</strong>. Qual serviço pode ser utilizado para otimizar a performance?</p><ul>
+<li>✅ <strong>DynamoDB Accelerator (DAX)</strong></li>
+</ul><p>📌 Um sistema bancário precisa acessar o saldo atualizado da conta do cliente <strong>com garantia de consistência forte</strong>. O uso do DAX é recomendado?</p><ul>
+<li>❌ <strong>Não</strong>, pois DAX <strong>só oferece leitura eventual</strong>.</li>
+</ul><hr><blockquote>
+<p>O <strong>DynamoDB Streams</strong> permite capturar alterações nos dados de uma tabela DynamoDB em tempo real. Esse recurso é necessário para replicação entre regiões usando <strong>Global Tables</strong>.</p>
+</blockquote><p>📌 Uma empresa deseja replicar automaticamente seus dados do DynamoDB em <strong>duas regiões da AWS</strong> para <strong>reduzir latência</strong> e <strong>garantir alta disponibilidade</strong>. Qual funcionalidade precisa ser ativada?</p><ul>
+<li>✅ <strong>DynamoDB Streams</strong> e <strong>Global Tables</strong></li>
+</ul><p>📌 Uma aplicação deseja processar eventos em tempo real sempre que novos registros forem inseridos no DynamoDB. Qual serviço pode ser integrado para processar esses eventos?</p><ul>
+<li>✅ <strong>AWS Lambda</strong> ou <strong>Amazon Kinesis Data Streams</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>Time To Live (TTL)</strong> no DynamoDB é uma funcionalidade que permite a remoção automática de registros após um tempo específico, reduzindo custos de armazenamento.</p>
+</blockquote><p>📌 Uma aplicação de chat precisa excluir automaticamente mensagens após <strong>7 dias</strong>. Como essa remoção pode ser feita sem consumir WCU?</p><ul>
+<li>✅ <strong>Ativando o TTL e definindo um timestamp de expiração</strong></li>
+</ul><p>📌 Uma empresa deseja evitar que dados expirados no DynamoDB continuem consumindo armazenamento <strong>sem precisar deletá-los manualmente</strong>. Qual funcionalidade deve ser usada?</p><ul>
+<li>✅ <strong>Time To Live (TTL)</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>Global Secondary Index (GSI)</strong> permite criar novas chaves de busca no DynamoDB, mas consome <strong>RCU e WCU separadamente</strong>. O <strong>Local Secondary Index (LSI)</strong> mantém a mesma Partition Key, mas permite <strong>novas Sort Keys</strong>.</p>
+</blockquote><p>📌 Uma tabela DynamoDB precisa permitir consultas usando um <strong>atributo diferente da chave primária</strong>, e esse índice deve ser criado <strong>após a criação da tabela</strong>. Qual tipo de índice deve ser utilizado?</p><ul>
+<li>✅ <strong>Global Secondary Index (GSI)</strong></li>
+</ul><p>📌 Uma tabela DynamoDB precisa permitir consultas com <strong>diferentes ordenações</strong> mantendo a mesma Partition Key. Qual tipo de índice deve ser utilizado?</p><ul>
+<li>✅ <strong>Local Secondary Index (LSI)</strong> (precisa ser definido no momento da criação da tabela)</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-opensearch">AWS OpenSearch<a href="#aws-opensearch" class="hash-link" aria-label="Link direto para AWS OpenSearch" title="Link direto para AWS OpenSearch">​</a></h2>
+<p>O <strong>AWS OpenSearch</strong> é um serviço gerenciado de <strong>busca e análise de dados</strong>, amplamente utilizado para <strong>big data, monitoramento de logs e análise de segurança</strong>.</p>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li>Permite <strong>buscas textuais avançadas</strong> em qualquer campo dos documentos armazenados.</li>
+<li>É um <strong>fork do ElasticSearch</strong>, criado pela AWS após mudanças na licença do ElasticSearch original.</li>
+<li>Pode ser implantado em <strong>modo cluster (instâncias dedicadas)</strong> ou no <strong>modo serverless</strong>, dependendo da necessidade de escalabilidade e custo.</li>
+<li>Integra-se com <strong>Kinesis Data Firehose, AWS IoT, CloudWatch Logs</strong>, entre outros serviços da AWS.</li>
+<li>Equivalente ao <strong>ELK Stack</strong> da AWS, combinando <strong>OpenSearch (substituto do ElasticSearch), OpenSearch Dashboards (equivalente ao Kibana) e outras ferramentas de análise</strong>.</li>
+</ul>
+<blockquote>
+<p>Casos de Uso</p>
+</blockquote>
+<ul>
+<li><strong>Monitoramento de logs</strong> (por exemplo, logs do CloudWatch ou de aplicações).</li>
+<li><strong>Buscadores full-text</strong>, como motores de busca internos para aplicações.</li>
+<li><strong>Análise de grandes volumes de dados</strong> em tempo real.</li>
+<li><strong>Segurança e detecção de anomalias</strong>, analisando padrões suspeitos em grandes conjuntos de logs.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Arquiteturas com OpenSearch</p>
+</blockquote>
+<p>O OpenSearch pode ser utilizado em diferentes arquiteturas para indexação e busca de dados:</p>
+<p>📌 Buscador baseado em DynamoDB</p>
+<ul>
+<li>Dados armazenados no <strong>DynamoDB</strong> podem ser indexados no OpenSearch para buscas eficientes.<br>
+<img decoding="async" loading="lazy" alt="Buscador com DynamoDB" src="/assets/images/image-20230220110750178-10f376fc77332366d8d20e924f332ea3.png" width="1011" height="457" class="img_ev3q"></li>
+</ul>
+<p>📌 Processamento de dados via Kinesis</p>
+<ul>
+<li>Dados recebidos pelo <strong>Kinesis Data Streams</strong> podem ser enviados para OpenSearch para análise e visualização.<br>
+<img decoding="async" loading="lazy" alt="Dados do Kinesis" src="/assets/images/image-20230820102813438-1e1322e043c0e9dfd78da2fd5f657dd6.png" width="842" height="436" class="img_ev3q"></li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Saiba Mais: OpenSearch vs ElasticSearch</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS OpenSearch</strong> é um fork do ElasticSearch, criado após mudanças na licença da versão original. Isso significa que <strong>OpenSearch mantém muitas funcionalidades do ElasticSearch</strong>, mas é totalmente gerenciado pela AWS e recebe atualizações independentes.</p><p>📌 Qual escolher?</p><ul>
+<li><strong>OpenSearch (AWS)</strong> → Melhor integração com AWS, escalabilidade automática e suporte gerenciado.</li>
+<li><strong>ElasticSearch (Self-Managed)</strong> → Controle total sobre configurações, mas exige manutenção manual.</li>
+</ul><p>🔗 <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html" target="_blank" rel="noopener noreferrer">Documentação oficial da AWS OpenSearch</a></p></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>quando usar OpenSearch em vez de um banco de dados tradicional</strong>, especialmente para buscas full-text, análise de logs e monitoramento de eventos em tempo real.</p>
+</blockquote><p>📌 Uma empresa precisa armazenar <strong>logs de aplicações e permitir buscas textuais rápidas e complexas</strong> para análise de erros e padrões de acesso. Qual serviço AWS é mais adequado?</p><ul>
+<li>✅ <strong>AWS OpenSearch</strong></li>
+</ul><p>📌 Uma aplicação precisa armazenar <strong>dados transacionais estruturados</strong> e garantir <strong>consistência forte</strong> nas leituras. OpenSearch é uma boa escolha?</p><ul>
+<li>❌ <strong>Não!</strong> Para esse caso, um banco relacional como <strong>Amazon RDS</strong> ou um NoSQL como <strong>Amazon DynamoDB</strong> seria mais apropriado.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS OpenSearch</strong> é frequentemente comparado ao ElasticSearch. A AWS criou esse serviço como um fork devido a mudanças na licença do ElasticSearch original.</p>
+</blockquote><p>📌 Qual a principal diferença entre <strong>AWS OpenSearch e ElasticSearch</strong> em relação ao suporte e gerenciamento?</p><ul>
+<li>✅ <strong>AWS OpenSearch é totalmente gerenciado pela AWS</strong>, enquanto o ElasticSearch pode ser usado de forma self-hosted ou com provedores de terceiros.</li>
+</ul><hr><blockquote>
+<p>OpenSearch Serverless** é uma opção sem necessidade de provisionamento de instâncias, sendo cobrado com base no consumo real de recurso</p>
+</blockquote><p>📌 Uma startup quer usar OpenSearch para buscas, mas <strong>precisa de uma solução escalável e sem necessidade de gerenciar servidores</strong>. Qual a melhor escolha?</p><ul>
+<li>✅ <strong>AWS OpenSearch Serverless</strong></li>
+</ul><p>📌 Quando <strong>NÃO</strong> usar OpenSearch Serverless?</p><ul>
+<li>❌ Quando há a necessidade de <strong>controle total sobre as instâncias e tuning avançado de performance</strong>, o modo provisionado pode ser mais adequado.</li>
+</ul><hr><blockquote>
+<p>OpenSearch pode ser integrado com serviços como Kinesis, CloudWatch Logs e S3** para análise de dados em tempo rea</p>
+</blockquote><p>📌 Uma empresa quer processar <strong>eventos de streaming</strong> em tempo real e indexá-los para buscas. Qual a melhor integração da AWS para conectar ao OpenSearch?</p><ul>
+<li>✅ <strong>Kinesis Data Firehose</strong>, pois permite a ingestão contínua de dados para OpenSearch.</li>
+</ul><p>📌 Como visualizar os dados indexados no OpenSearch?</p><ul>
+<li>✅ Através do <strong>OpenSearch Dashboards</strong> (antigo Kibana).</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rds">RDS<a href="#rds" class="hash-link" aria-label="Link direto para RDS" title="Link direto para RDS">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230220111311099" src="/assets/images/image-20230220111311099-075359fbb0478b408fe9d9107a49b2e3.png" width="1057" height="533" class="img_ev3q"></p>
+<p>O Amazon RDS (<strong>Relational Database Service</strong>) é um serviço gerenciado de banco de dados relacional da AWS. Ele automatiza tarefas como provisionamento, backup, recuperação e escalabilidade.</p>
+<ul>
+<li><strong>Escala automaticamente</strong> em minutos.</li>
+<li><strong>Serviço totalmente gerenciado pela AWS</strong>, incluindo:<!-- -->
+<ul>
+<li>Provisionamento do sistema operacional, backups e restores.</li>
+<li>Monitoramento de desempenho e manutenção.</li>
+<li>Armazenamento baseado no <strong>EBS</strong> (gp2, gp3 ou io1), permitindo <strong>auto-scale</strong>.</li>
+<li><strong>Sem acesso via SSH</strong> à máquina onde o banco está hospedado.</li>
+</ul>
+</li>
+<li><strong>Permite criptografia de dados</strong> para segurança.</li>
+</ul>
+<p><strong>Segurança no RDS</strong><br>
+<img decoding="async" loading="lazy" alt="image-20230220111829023" src="/assets/images/image-20230220111829023-c3f32da6ca363e45d25cf04cf4ada832.png" width="955" height="486" class="img_ev3q"></p>
+<ul>
+<li><strong>Alta disponibilidade:</strong> RDS pode replicar os dados em <strong>múltiplas zonas de disponibilidade (Multi-AZ)</strong>.<!-- -->
+<ul>
+<li>Quando habilitado, um <strong>DNS name</strong> é gerado, permitindo o failover automático em caso de falha.</li>
+</ul>
+</li>
+<li><strong>Integração com VPC:</strong>
+<ul>
+<li>O RDS é executado dentro de uma <strong>VPC</strong>.</li>
+<li>Se for acessado via <strong>AWS Lambda</strong>, a função <strong>deve estar na mesma VPC</strong>.</li>
+</ul>
+</li>
+<li><strong>Replicas de leitura</strong> (<em>Read Replicas</em>):<!-- -->
+<ul>
+<li>Melhoram a performance distribuindo a carga de leitura.</li>
+<li>Possível criar <strong>réplicas em outras regiões</strong> para reduzir a latência.</li>
+<li>O <strong>Route 53</strong> pode ser usado para balancear o tráfego entre réplicas com política de peso (<em>Weighted Record Set</em>).</li>
+</ul>
+</li>
+</ul>
+<p><strong>Tipos de bancos de dados suportados pelo RDS:</strong></p>
+<ul>
+<li><strong>PostgreSQL</strong></li>
+<li><strong>MySQL</strong></li>
+<li><strong>MariaDB</strong></li>
+<li><strong>Oracle</strong></li>
+<li><strong>Aurora</strong></li>
+</ul>
+<blockquote>
+<p>Pilares do Well-Architected Framework</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="well-arch" src="/assets/images/image-20210905112316072-6073c87ca8c4589897b3c2bc42fbbdd6.png" width="1040" height="398" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>RDS para Lambda</p>
+</blockquote>
+<ul>
+<li>Cada execução de uma função Lambda pode criar uma nova conexão com o banco de dados. Como o Lambda escala automaticamente para atender à demanda, um grande número de execuções simultâneas pode gerar <strong>muitas conexões simultâneas</strong> ao RDS. Isso pode levar ao erro <strong>TooManyConnections</strong>, que ocorre quando o número máximo de conexões do banco é atingido.</li>
+<li>Para evitar esse problema, a AWS oferece o <strong>RDS Proxy</strong>, que gerencia o pool de conexões e melhora a eficiência.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Benefícios do RDS Proxy:</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>Gerenciamento de pool de conexões:</strong> Mantém um número reduzido de conexões ativas e reutiliza conexões existentes, evitando sobrecarga.</li>
+<li><strong>Escalabilidade eficiente:</strong> Permite que múltiplas execuções do Lambda compartilhem conexões ao invés de abrir novas.</li>
+<li><strong>Segurança:</strong> Pode ser integrado ao <strong>IAM</strong> e ao <strong>Secrets Manager</strong>, eliminando a necessidade de armazenar credenciais no código.</li>
+<li><strong>Failover mais rápido:</strong> Em caso de falha, reduz o tempo de recuperação do banco de dados.</li>
+</ul></div></div>
+<p><strong>Arquitetura RDS com Lambda e Proxy</strong><br>
+<img decoding="async" loading="lazy" alt="image-20230220112418563" src="/assets/images/image-20230220112418563-8b0e578b505b65a652e77005d60d28ab.png" width="473" height="536" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>RDS para Oracle</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230220112048190" src="/assets/images/image-20230220112048190-6eb004f2109b85072253b8ec9b6d0033.png" width="1164" height="596" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Backups no RDS</p>
+</blockquote>
+<ul>
+<li><strong>Habilitados automaticamente.</strong></li>
+<li><strong>Backup diário</strong> e <strong>logs de transação a cada 5 minutos</strong> (permite recuperação em qualquer ponto dentro do período de retenção).</li>
+<li><strong>Retenção padrão de 7 dias</strong> (podendo ser aumentada para <strong>até 35 dias</strong>).</li>
+<li><strong>Snapshots manuais (<em>DB snapshots</em>)</strong> permitem retenção indefinida.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Storage Auto Scale</p>
+</blockquote>
+<ul>
+<li>Permite aumentar o armazenamento automaticamente à medida que o banco se aproxima do limite.</li>
+<li><strong>Define um limite máximo (<em>threshold</em>)</strong> para controle de crescimento.</li>
+<li><strong>Expande automaticamente se houver menos de 10% de espaço disponível.</strong></li>
+</ul>
+<hr>
+<blockquote>
+<p>Read Replicas</p>
+</blockquote>
+<ul>
+<li><strong>Melhora a escalabilidade</strong> de leitura do banco.</li>
+<li>Tipos de réplicas:<!-- -->
+<ul>
+<li>Na mesma <strong>AZ</strong>.</li>
+<li>Em outra <strong>AZ</strong>.</li>
+<li>Em outra <strong>Região</strong>.</li>
+</ul>
+</li>
+<li><strong>Replicação assíncrona</strong>, resultando em <strong>consistência eventual</strong>.</li>
+</ul>
+<blockquote>
+<p>Caso de uso: relatório em uma réplica de leitura
+<img decoding="async" loading="lazy" alt="read-replicas" src="/assets/images/image-20210819064416702-45bf76a0ea98f9380a4be622a661e0d8.png" width="529" height="500" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p>Custos de rede</p>
+</blockquote>
+<ul>
+<li>Sem custo na mesma região.</li>
+<li>Custo adicional se for replicado para outra região.<br>
+<img decoding="async" loading="lazy" alt="price" src="/assets/images/image-20210819064819009-274bbd42b42de58891d1d55f79f0ade6.png" width="1622" height="542" class="img_ev3q"></li>
+</ul>
+<hr>
+<blockquote>
+<p>Multi-AZ (Disaster Recovery)</p>
+</blockquote>
+<ul>
+<li><strong>Cria uma réplica sincronizada do banco em outra AZ.</strong></li>
+<li>O <strong>DNS name</strong> aponta sempre para o banco primário.</li>
+<li>Em caso de falha, ocorre <strong>failover automático</strong> para a réplica secundária.</li>
+<li><strong>Não é usado para escalabilidade</strong>, apenas <strong>alta disponibilidade e recuperação de desastres</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="new db multi az" src="/assets/images/image-20210819065600206-d682b2b3deb2bf591501f90003ca496b.png" width="809" height="753" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Encryption no RDS</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Criptografia em repouso:</strong></p>
+<ul>
+<li><strong>AWS KMS - AES-256</strong> para o banco e réplicas de leitura.</li>
+<li>O banco principal <strong>deve estar criptografado</strong> para que as réplicas sejam criptografadas.</li>
+<li>Suporte a <strong>TDE (Transparent Data Encryption)</strong> para Oracle e SQL Server.</li>
+</ul>
+</li>
+<li>
+<p><strong>Criptografia em trânsito (<em>in-flight</em>)</strong>:</p>
+<ul>
+<li>Uso de <strong>certificados SSL</strong> para proteção durante a transferência de dados.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Autenticação no RDS</p>
+</blockquote>
+<ul>
+<li><strong>Usuário e senha tradicionais.</strong></li>
+<li><strong>IAM Authentication (PostgreSQL, MySQL e Aurora):</strong>
+<ul>
+<li>Permite autenticação via IAM, eliminando a necessidade de armazenar credenciais no código.</li>
+<li>Exige tráfego criptografado com <strong>SSL</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="iam-autatication-rds" src="/assets/images/image-20210819081821387-d7d4b69953c7119e611219bfcd76b5e9.png" width="470" height="508" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam a diferença entre <strong>Multi-AZ e Read Replicas</strong>, testando qual opção é mais adequada para <strong>alta disponibilidade</strong> ou <strong>escalabilidade de leitura</strong>.</p>
+</blockquote><p>📌 Uma aplicação precisa de <strong>alta disponibilidade</strong> e recuperação automática em caso de falha do banco de dados. Qual recurso do RDS deve ser usado?</p><ul>
+<li>✅ <strong>Multi-AZ</strong></li>
+</ul><p>📌 Uma aplicação precisa <strong>escalar a leitura</strong> para distribuir a carga entre múltiplas instâncias. Qual recurso deve ser utilizado?</p><ul>
+<li>✅ <strong>Read Replicas</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>RDS Proxy</strong> é uma solução eficiente para lidar com problemas de <strong>TooManyConnections</strong> em bancos de dados usados por aplicações serverless, como AWS Lambda.</p>
+</blockquote><p>📌 Um sistema usa AWS Lambda para acessar um banco de dados RDS. Com o aumento da carga, há erros de <strong>TooManyConnections</strong>. Como resolver esse problema de forma eficiente?</p><ul>
+<li>✅ <strong>Utilizar o RDS Proxy para gerenciar o pool de conexões</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>RDS realiza backups automáticos</strong> e mantém logs de transação a cada <strong>5 minutos</strong>, permitindo restauração ponto a ponto dentro do período de retenção configurado.</p>
+</blockquote><p>📌 Qual é a <strong>retenção padrão</strong> de backups automáticos do RDS?</p><ul>
+<li>✅ <strong>7 dias (podendo ser estendida até 35 dias)</strong></li>
+</ul><p>📌 Para backups <strong>manuais</strong> com retenção indefinida, qual recurso do RDS deve ser usado?</p><ul>
+<li>✅ <strong>DB Snapshots</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>RDS oferece criptografia de dados em repouso e em trânsito</strong> para aumentar a segurança das informações armazenadas.</p>
+</blockquote><p>📌 Uma empresa precisa garantir que os dados do banco no RDS estejam <strong>criptografados em repouso</strong>. Qual tecnologia AWS deve ser usada?</p><ul>
+<li>✅ <strong>AWS KMS - AES-256</strong></li>
+</ul><p>📌 Durante a comunicação entre uma aplicação e um banco de dados RDS, os dados precisam ser criptografados <strong>em trânsito</strong>. Como isso pode ser feito?</p><ul>
+<li>✅ <strong>Habilitando SSL/TLS para conexões ao banco</strong></li>
+</ul><hr><blockquote>
+<p><strong>Read Replicas entre regiões</strong> são usadas para melhorar a performance global, reduzindo a latência de leitura para usuários distribuídos geograficamente.</p>
+</blockquote><p>📌 Uma aplicação global precisa reduzir a latência de leitura para usuários em diferentes regiões. Qual a melhor solução?</p><ul>
+<li>✅ <strong>Criar Read Replicas em outras regiões</strong></li>
+</ul><p>📌 Como distribuir o tráfego de leitura entre várias Read Replicas?</p><ul>
+<li>✅ <strong>Usando o Route 53 com Weighted Routing</strong></li>
+</ul></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aurora">Aurora<a href="#aurora" class="hash-link" aria-label="Link direto para Aurora" title="Link direto para Aurora">​</a></h3>
+<ul>
+<li>Banco de dados proprietário da AWS.</li>
+<li><strong>5 vezes mais rápido</strong> que o MySQL e <strong>3 vezes mais rápido</strong> que o PostgreSQL.</li>
+<li><strong>Escopo regional</strong>, mas pode ser implantado em várias regiões com replicação global.</li>
+<li><strong>Replicação automática (6 cópias de dados) em 3 AZs.</strong></li>
+<li><strong>Suporte a até 15 réplicas de leitura</strong> para escalabilidade.</li>
+<li>Disponível na versão <strong>serverless</strong>, sem necessidade de gerenciamento manual.</li>
+<li><strong>Expansível até 128 TB</strong>, crescendo automaticamente de <strong>10 GB em 10 GB</strong>.</li>
+<li><strong>Encaminhamento de escrita:</strong> permite que uma réplica de leitura receba operações de escrita e encaminhe para o nó principal.</li>
+<li><strong>20% mais barato</strong> que o RDS tradicional.</li>
+</ul>
+<blockquote>
+<p>Arquitetura do Aurora
+<img decoding="async" loading="lazy" alt="aurora" src="/assets/images/image-20210819082549024-8a67d08d3a7e5482c66a4393f48395b5.png" width="1132" height="447" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="aurora-cluster" src="/assets/images/image-20210819082823818-7d83654f53b76145cdec655fbf8f6222.png" width="1017" height="503" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p>Aurora e Well-Architected Framework
+<img decoding="async" loading="lazy" alt="aurora-well-arch" src="/assets/images/image-20210905112856784-12b50b5fe2beda4c6e06fa7fd44fd0b8.png" width="1048" height="389" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p>Conceitos Avançados do Aurora</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="image-20230220114134315" src="/assets/images/image-20230220114134315-5a8d56b4fb02c5ffc107662f8babc47b.png" width="1078" height="568" class="img_ev3q"></p>
+<blockquote>
+<p>Aurora Replica - Auto Scaling</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="aurora-auto scaling" src="/assets/images/image-20210819084400925-291afea94e77621323a3791c77e8d761.png" width="1016" height="569" class="img_ev3q"></p>
+<blockquote>
+<p>Custom Endpoints</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="custom-endpoint" src="/assets/images/image-20210819084618981-2accd26f7f28f4d5b3cb056a18b7297e.png" width="1053" height="609" class="img_ev3q"></p>
+<blockquote>
+<p>Aurora Serverless</p>
+</blockquote>
+<ul>
+<li><strong>Escala automaticamente</strong> de acordo com a demanda.</li>
+<li>Ideal para cargas de trabalho <strong>intermitentes e imprevisíveis</strong>.</li>
+<li><strong>Cobrança baseada no uso por segundo.</strong></li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230220114609406" src="/assets/images/image-20230220114609406-1cbe4737051ec509dbe78ea84ee0e0a5.png" width="1065" height="561" class="img_ev3q"></p>
+<blockquote>
+<p>Aurora Multi-Master</p>
+</blockquote>
+<ul>
+<li>Proporciona <strong>alta disponibilidade</strong>.</li>
+<li>Caso o nó principal falhe, <strong>todos os nós passam a aceitar escrita</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="multi-master" src="/assets/images/image-20210819085334494-797dba46e77a1701a86b31358a701d8c.png" width="1023" height="474" class="img_ev3q"></p>
+<blockquote>
+<p>Global Aurora</p>
+</blockquote>
+<ul>
+<li><strong>Cross-region read replica</strong>: usado para <strong>recuperação de desastres</strong>.</li>
+<li><strong>Global Database</strong>:<!-- -->
+<ul>
+<li>1 região <strong>primária (read/write)</strong> e até <strong>5 regiões secundárias</strong>.</li>
+<li>Latência de replicação menor que <strong>1 segundo</strong>.</li>
+<li>Até <strong>16 réplicas de leitura por região secundária</strong>.</li>
+<li><strong>Failover para outra região</strong> em menos de 1 minuto em caso de desastre.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="global" src="/assets/images/image-20210819085935598-180bc8c6a9140717e68f84f307240b3f.png" width="327" height="559" class="img_ev3q"></p>
+<blockquote>
+<p>Aurora + Machine Learning</p>
+</blockquote>
+<ul>
+<li>Integração com <strong>Amazon SageMaker</strong> e <strong>Amazon Comprehend</strong>.</li>
+<li>Não requer experiência em <strong>Machine Learning</strong> para utilização.</li>
+<li><strong>Casos de uso:</strong>
+<ul>
+<li>Detecção de fraudes.</li>
+<li>Propaganda personalizada.</li>
+<li>Recomendações de produtos.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="aurora-ml" src="/assets/images/image-20210819091225067-5cd0a662d99aeaf2ce9637a9fc137888.png" width="442" height="496" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>as diferenças entre Aurora e RDS</strong>, testando conhecimento sobre desempenho, escalabilidade e custo.</p>
+</blockquote><p>📌 Uma aplicação precisa de um banco de dados altamente escalável, com suporte para <strong>até 15 réplicas de leitura</strong> e replicação automática entre <strong>3 zonas de disponibilidade</strong>. Qual serviço AWS é mais adequado?</p><ul>
+<li>✅ <strong>Amazon Aurora</strong></li>
+</ul><p>📌 Uma empresa busca um banco de dados gerenciado, mas com suporte a <strong>licenciamento do Oracle ou SQL Server</strong>. Qual serviço AWS deve ser utilizado?</p><ul>
+<li>✅ <strong>Amazon RDS</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>Aurora Serverless</strong> é ideal para cargas de trabalho intermitentes, pois escala automaticamente e cobra apenas pelo uso real.</p>
+</blockquote><p>📌 Uma startup precisa de um banco de dados que <strong>escale automaticamente com base na demanda</strong> e <strong>cobre apenas pelo uso por segundo</strong>. Qual serviço AWS é mais adequado?</p><ul>
+<li>✅ <strong>Amazon Aurora Serverless</strong></li>
+</ul><p>📌 Quando <strong>NÃO</strong> utilizar Aurora Serverless?</p><ul>
+<li>❌ Quando a aplicação precisa de <strong>baixa latência previsível e cargas de trabalho constantes</strong>, o Aurora provisionado pode ser mais adequado.</li>
+</ul><hr><blockquote>
+<p>O <strong>Aurora Global Database</strong> permite replicação entre regiões, sendo útil para recuperação de desastres e baixa latência de leitura global.</p>
+</blockquote><p>📌 Uma empresa multinacional precisa de um banco de dados <strong>com replicação entre regiões</strong>, permitindo leitura rápida para usuários ao redor do mundo. Qual serviço AWS deve ser utilizado?</p><ul>
+<li>✅ <strong>Aurora Global Database</strong></li>
+</ul><p>📌 Qual a principal vantagem do <strong>Aurora Global Database</strong> em relação às <strong>Cross-Region Read Replicas</strong> do RDS?</p><ul>
+<li>✅ <strong>Failover automático para outra região em menos de 1 minuto</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>Aurora Multi-Master</strong> permite escrita em múltiplos nós para alta disponibilidade e failover instantâneo.</p>
+</blockquote><p>📌 Uma aplicação precisa de um banco de dados onde <strong>todos os nós aceitam escrita</strong>, garantindo <strong>failover instantâneo</strong> sem interrupção em caso de falha. Qual recurso deve ser usado?</p><ul>
+<li>✅ <strong>Aurora Multi-Master</strong></li>
+</ul><p>📌 Qual a principal limitação do Aurora Multi-Master?</p><ul>
+<li>❌ <strong>Não suporta replicação entre regiões (apenas dentro da mesma região).</strong></li>
+</ul><hr><blockquote>
+<p>O <strong>Aurora ML Integration</strong> permite a execução de modelos de Machine Learning diretamente no banco de dados.</p>
+</blockquote><p>📌 Uma fintech quer detectar <strong>transações fraudulentas em tempo real</strong> usando Machine Learning, sem necessidade de mover dados para outro serviço. Qual funcionalidade do Aurora pode ser utilizada?</p><ul>
+<li>✅ <strong>Aurora Machine Learning Integration com Amazon SageMaker</strong></li>
+</ul><p>📌 Além da detecção de fraudes, qual outro caso de uso comum para <strong>Aurora Machine Learning</strong>?</p><ul>
+<li>✅ <strong>Recomendações personalizadas de produtos</strong></li>
+</ul></div></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/06_database.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Caching</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Resumão</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#dynamodb" class="table-of-contents__link toc-highlight">DynamoDB</a></li><li><a href="#aws-opensearch" class="table-of-contents__link toc-highlight">AWS OpenSearch</a></li><li><a href="#rds" class="table-of-contents__link toc-highlight">RDS</a><ul><li><a href="#aurora" class="table-of-contents__link toc-highlight">Aurora</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
