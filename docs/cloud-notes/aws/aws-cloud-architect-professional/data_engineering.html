@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/data_engineering" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Engenharia de dados | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Engenharia de dados | Uniii docs"><meta data-rh="true" name="description" content="AWS Kinesis"><meta data-rh="true" property="og:description" content="AWS Kinesis"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.2bfe3fc9.js" defer="defer"></script>
+<script src="/assets/js/main.fd72779b.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/service_communication">Comunicação entre serviço</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering">Engenharia de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Engenharia de dados</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Engenharia de dados</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-kinesis">AWS Kinesis<a href="#aws-kinesis" class="hash-link" aria-label="Link direto para AWS Kinesis" title="Link direto para AWS Kinesis">​</a></h2>
+<p>O <strong>Amazon Kinesis</strong> é um serviço gerenciado da AWS que facilita a coleta, processamento e análise de fluxos (<strong>streams</strong>) de dados em <strong>tempo real</strong>. É amplamente utilizado para monitoramento de logs, métricas, análise de dados de IoT e processamento de Big Data. O Kinesis é frequentemente comparado ao <strong>Apache Kafka</strong>, pois também é uma solução de streaming em tempo real.</p>
+<hr>
+<blockquote>
+<p><strong>Principais Características</strong></p>
+</blockquote>
+<ul>
+<li>Processamento de grandes volumes de dados em tempo real.</li>
+<li>Alternativa da AWS ao <strong>Apache Kafka</strong>.</li>
+<li>Alta disponibilidade: <strong>Dados replicados em 3 zonas de disponibilidade (AZs)</strong> para maior resiliência.</li>
+<li>Integrado a ferramentas de Big Data como <strong>Apache Spark</strong> e <strong>NiFi</strong>.</li>
+<li>Dados organizados em <strong>shards</strong>, garantindo capacidade de processamento distribuída.</li>
+<li>Suporte a <strong>múltiplos consumidores</strong> simultâneos.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Importante</div><div class="admonitionContent_BuS1"><p>Os dados no Kinesis são imutáveis — uma vez gravados, não podem ser alterados ou excluídos.</p></div></div>
+<hr>
+<p><strong>Arquitetura Geral do Amazon Kinesis</strong></p>
+<ul>
+<li>Um <strong>produtor</strong> envia um <strong>record</strong> para o <strong>Kinesis Data Stream</strong>.</li>
+<li>O stream distribui o <strong>record</strong> para um ou mais consumidores.</li>
+<li>Ordenação garantida por <strong>chaves de partição</strong> (Partition Keys). Registros com a mesma chave vão para o mesmo <strong>shard</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Amazon Kinesis" src="/assets/images/product-page-diagram_Amazon-Kinesis_Evolve-from-batch-to-real-time-Analytics.d7ed76be304a30be5720fd159469f157e7c09ede-ef852ce70f4ce9e6e6e5b6d19e577edd.png" width="1770" height="429" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p><strong>Tipos de Aplicações do Amazon Kinesis</strong></p>
+</blockquote>
+<ul>
+<li><strong>Kinesis Data Streams</strong>: Captura, processa e armazena fluxos de dados.</li>
+<li><strong>Kinesis Data Firehose</strong>: Carrega dados para armazenamentos na AWS como <strong>S3</strong>, <strong>Redshift</strong>, <strong>OpenSearch</strong> e <strong>Splunk</strong>.</li>
+<li><strong>Kinesis Data Analytics</strong>: Analisa fluxos de dados em tempo real usando <strong>SQL</strong> e <strong>Apache Flink</strong>.</li>
+<li><strong>Kinesis Video Streams</strong>: Captura, processa e armazena fluxos de vídeo em tempo real.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Kinesis Data Streams</strong></p>
+</blockquote>
+<ul>
+<li>Ideal para ingestão e processamento de grandes volumes de dados com baixa latência.</li>
+<li>Cobrança baseada em <strong>shards provisionados</strong>. Cada shard permite:<!-- -->
+<ul>
+<li><strong>Entrada:</strong> 1 MB/s ou 1.000 registros por segundo.</li>
+<li><strong>Saída:</strong> 2 MB/s para múltiplos consumidores.</li>
+</ul>
+</li>
+<li>Retenção de dados de <strong>1 a 365 dias</strong>.</li>
+<li><strong>Produtores</strong>:<!-- -->
+<ul>
+<li>Lambda, Kinesis Data Firehose, Kinesis Data Analytics.</li>
+<li><strong>AWS SDK</strong> e <strong>Kinesis Producer Library (KPL)</strong> — suportam compressão e batch.</li>
+<li><strong>Kinesis Agent</strong> — coleta logs e envia ao Kinesis Data Streams ou Firehose.</li>
+</ul>
+</li>
+<li><strong>Consumidores</strong>:<!-- -->
+<ul>
+<li><strong>AWS Lambda</strong>, Kinesis Client Library (KCL) e AWS SDK.</li>
+<li>Suporte a leitura paralela, checkpoint e coordenação de leitura.</li>
+</ul>
+</li>
+<li><strong>Modos de Operação</strong>:<!-- -->
+<ul>
+<li><strong>Sob Demanda:</strong> Escala automaticamente com a carga. Pagamento por GB de I/O.</li>
+<li><strong>Provisionado:</strong> Quantidade de shards definida manualmente. Pagamento por hora de shard e I/O por GB.</li>
+</ul>
+</li>
+<li><strong>Padrões de Consumo</strong>:<!-- -->
+<ul>
+<li><strong>Batch</strong> ou <strong>mensagem por mensagem</strong>.</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica</div><div class="admonitionContent_BuS1"><p>Se precisar de processamento paralelo, use o <strong>Kinesis Client Library (KCL)</strong> para leitura distribuída.</p></div></div>
+<p><img decoding="async" loading="lazy" alt="data-streams" src="/assets/images/image-20210903054120413-e9d78829b9f93c7071084a34be19db8d.png" width="1086" height="479" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p><strong>Kinesis Data Firehose</strong></p>
+</blockquote>
+<ul>
+<li>Carrega dados para armazenamentos da AWS como <strong>S3</strong>, <strong>Redshift</strong>, <strong>OpenSearch</strong> e <strong>Splunk</strong>.</li>
+<li>Serviço totalmente gerenciado, com escalabilidade automática e arquitetura <strong>serverless</strong>.</li>
+<li>Cobrança apenas pelos dados processados.</li>
+<li>Funciona próximo do tempo real, pois utiliza um buffer para otimização:<!-- -->
+<ul>
+<li>Buffer baseado em <strong>tempo</strong> ou <strong>tamanho</strong>.</li>
+<li>Caso seja necessário tempo real puro, utilize o <strong>AWS Lambda</strong> para pré-processamento.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Exemplo de Processo de Entrega</strong>:<br>
+<img decoding="async" loading="lazy" alt="image-20230221065515012" src="/assets/images/image-20230221065515012-59c10cd4c38c5bc45fc1c3f8924bfcf8.png" width="1120" height="587" class="img_ev3q"></p>
+<p><strong>Diferença entre Data Streams e Firehose</strong>:<br>
+<img decoding="async" loading="lazy" alt="image-20230221070204566" src="/assets/images/image-20230221070204566-83998f29e7f82cf4fe59ebdd55f41d25.png" width="1110" height="486" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Atenção</div><div class="admonitionContent_BuS1"><p>O Firehose não possui retenção de dados para reprocessamento, como o <strong>Kinesis Data Streams</strong>.</p></div></div>
+<hr>
+<blockquote>
+<p><strong>Kinesis Data Analytics</strong></p>
+</blockquote>
+<ul>
+<li>Análise de fluxos de dados em <strong>tempo real</strong> com <strong>SQL</strong> e <strong>Apache Flink</strong>.</li>
+<li>Serviço gerenciado e altamente escalável.</li>
+<li>Cobrança baseada no volume de dados consumidos.</li>
+<li>Integração com <strong>AWS Lambda</strong> para pré-processamento dos dados.</li>
+<li>Permite consultas contínuas e criação de dashboards de monitoramento em tempo real.</li>
+<li>Uso de <strong>IAM</strong> para controlar o acesso às origens e destinos dos dados processados.</li>
+</ul>
+<p><strong>Aplicações Comuns</strong>:</p>
+<ul>
+<li>Análise de períodos de tempo.</li>
+<li>Monitoramento e dashboards em tempo real.</li>
+<li>Métricas de IoT e logs de auditoria.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="data-analytics" src="/assets/images/image-20210903055735875-bdd521507c961d69af5d4819dc31e7ad.png" width="1073" height="442" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Nota</div><div class="admonitionContent_BuS1"><p>O uso de SQL simplifica a análise para usuários que não têm familiaridade com frameworks complexos como Apache Flink.</p></div></div>
+<hr>
+<blockquote>
+<p><strong>Arquiteturas de Referência com Amazon Kinesis</strong></p>
+</blockquote>
+<p><strong>Pipeline de Dados em Tempo Real</strong><br>
+<img decoding="async" loading="lazy" alt="image-20230221071407686" src="/assets/images/image-20230221071407686-bdb2219ab26f06996561d2a6e75eec22.png" width="1124" height="472" class="img_ev3q"></p>
+<p><strong>Soluções de Baixo Custo para Tempo Real</strong><br>
+<img decoding="async" loading="lazy" alt="image-20230221071638191" src="/assets/images/image-20230221071638191-a62f7de290854c3b4c5f20da65d608d2.png" width="1042" height="550" class="img_ev3q"></p>
+<p><strong>Comparação com Outras Soluções de Streaming</strong><br>
+<img decoding="async" loading="lazy" alt="image-20230221072024210" src="/assets/images/image-20230221072024210-7c4ead4e6bc5c9335ee096dc768b4c24.png" width="1085" height="578" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p><strong>Resumo dos Limites do Kinesis Data Streams</strong></p>
+</blockquote>
+<ul>
+<li>Limite padrão de shards: <strong>500 shards por conta</strong>, podendo ser aumentado.</li>
+<li>Limite de dados de entrada: <strong>1 MB/s</strong> por shard.</li>
+<li>Limite de dados de saída: <strong>2 MB/s</strong> por shard para múltiplos consumidores.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230221064945510" src="/assets/images/image-20230221064945510-eb9d8221f968d0303c7eb8e0937ccd60.png" width="848" height="508" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Limitações</div><div class="admonitionContent_BuS1"><p>Caso precise de maior throughput, é necessário dividir a carga entre múltiplos shards ou aumentar o número de shards provisionados.</p></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões sobre o <strong>Kinesis Data Streams</strong> frequentemente abordam cenários de ingestão de dados em tempo real com alta escala, pedindo para identificar configurações corretas de shards ou modos de operação.</p>
+</blockquote><p>📌 Uma empresa deseja processar <strong>logs de acesso de milhões de usuários simultâneos</strong> em tempo real. Qual modo de operação do Kinesis Data Streams é mais adequado para garantir escalabilidade automática sem gerenciamento manual de shards?</p><ul>
+<li>✅ <strong>Modo Sob Demanda</strong></li>
+</ul><p>📌 Para um aplicativo que coleta <strong>1.500 registros por segundo</strong>, qual deve ser o número mínimo de shards provisionados para garantir a ingestão correta dos dados?</p><ul>
+<li>✅ <strong>2 shards</strong> (Cada shard suporta até 1.000 registros/s)</li>
+</ul><hr><blockquote>
+<p>Perguntas sobre <strong>Kinesis Data Firehose</strong> geralmente envolvem entrega de dados para destinos como <strong>S3, Redshift ou OpenSearch</strong>, focando em otimização de buffer e custos.</p>
+</blockquote><p>📌 Uma equipe de análise de dados deseja carregar informações em tempo quase real no <strong>Amazon S3</strong>. O volume de dados é pequeno, e a latência precisa ser mínima. O que deve ser configurado no Firehose para otimizar a entrega?</p><ul>
+<li>✅ <strong>Buffer com menor tempo possível (60 segundos)</strong> e tamanho mínimo de <strong>1 MB</strong>.</li>
+</ul><p>📌 Uma empresa deseja pré-processar os dados antes de entregá-los ao <strong>Amazon Redshift</strong>. Qual recurso do Firehose deve ser utilizado?</p><ul>
+<li>✅ <strong>AWS Lambda para transformação dos dados</strong>.</li>
+</ul><hr><blockquote>
+<p>Questões sobre <strong>Kinesis Data Analytics</strong> costumam testar conhecimentos sobre consultas <strong>SQL</strong> em streams de dados, integração com <strong>AWS Lambda</strong> e monitoramento de métricas.</p>
+</blockquote><p>📌 Uma startup deseja analisar em tempo real dados de sensores IoT para detecção de falhas. Qual serviço é o mais indicado para processar e analisar esses dados utilizando <strong>SQL</strong>?</p><ul>
+<li>✅ <strong>Kinesis Data Analytics</strong></li>
+</ul><p>📌 Para gerar alarmes com base em eventos processados no <strong>Kinesis Data Analytics</strong>, qual serviço pode ser utilizado para integração imediata?</p><ul>
+<li>✅ <strong>AWS Lambda</strong> para resposta em tempo real.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-msk">AWS MSK<a href="#aws-msk" class="hash-link" aria-label="Link direto para AWS MSK" title="Link direto para AWS MSK">​</a></h2>
+<p>O <strong>Amazon MSK</strong> (Managed Streaming for Apache Kafka) é um serviço gerenciado da AWS baseado no <strong>Apache Kafka</strong>, que facilita a criação e execução de clusters Kafka altamente disponíveis, seguros e escaláveis na nuvem da AWS. Ele é projetado para oferecer todas as funcionalidades do Apache Kafka, mas com gerenciamento simplificado e integração nativa com outros serviços da AWS.</p>
+<p><img decoding="async" loading="lazy" alt="Amazon MSK" src="/assets/images/image-20230221072716148-f02721d760246e721683de3fa93601c3.png" width="1142" height="492" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li><strong>Serviço gerenciado de Kafka</strong>: A AWS gerencia a infraestrutura subjacente, incluindo provisionamento, atualizações de software e manutenção de hardware.</li>
+<li>Alternativa ao <strong>Amazon Kinesis</strong> para processamento de dados em tempo real.</li>
+<li><strong>Armazenamento persistente em EBS</strong>: Dados armazenados em <strong>volumes EBS</strong> pelo tempo que o cliente desejar, garantindo durabilidade e resiliência.</li>
+<li><strong>Alta disponibilidade</strong>: Suporte a múltiplas zonas de disponibilidade (Multi-AZ) para alta disponibilidade.</li>
+<li>Opção de implementação <strong>Serverless</strong>, eliminando a necessidade de provisionamento manual de clusters.</li>
+<li>Integração nativa com serviços da AWS, facilitando a construção de pipelines de dados escaláveis e seguros.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Consumidores no Amazon MSK<br>
+<!-- -->Os dados armazenados nos tópicos Kafka do MSK podem ser consumidos por:</p>
+</blockquote>
+<ul>
+<li><strong>Aplicações personalizadas</strong> que leem diretamente dos tópicos usando clientes Kafka padrão.</li>
+<li><strong>Kinesis Data Analytics</strong>: Processamento avançado de streams de dados.</li>
+<li><strong>AWS Glue</strong>: Transformação e integração de dados.</li>
+<li><strong>AWS Lambda</strong>: Processamento de eventos em tempo real sem necessidade de infraestrutura gerenciada.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Diferenças entre MSK e Amazon Kinesis<br>
+<!-- -->O Amazon MSK e o Amazon Kinesis têm casos de uso semelhantes para processamento de dados em tempo real, mas diferem em arquitetura, gerenciamento e casos de uso específicos.</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="Diferença entre MSK e Kinesis" src="/assets/images/image-20230221072810544-fe08ed9972ea62a55edb5b813c96c046.png" width="1111" height="402" class="img_ev3q"></p>
+<ul>
+<li><strong>MSK</strong> é indicado quando há necessidade de compatibilidade total com o ecossistema Apache Kafka ou integração com sistemas já baseados em Kafka.</li>
+<li><strong>Kinesis</strong> é uma solução mais fácil de configurar e gerenciar para quem já está imerso no ecossistema AWS.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Nota Importante 📘</strong></div><div class="admonitionContent_BuS1"><p>A escolha entre <strong>Amazon MSK</strong> e <strong>Amazon Kinesis</strong> depende dos requisitos específicos de integração, complexidade operacional e compatibilidade com ferramentas externas. Se sua equipe já utiliza Kafka on-premises ou precisa de compatibilidade completa com APIs do Kafka, o <strong>Amazon MSK</strong> pode ser a melhor escolha.</p></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões relacionadas ao <strong>Amazon MSK</strong> frequentemente abordam comparações com o <strong>Amazon Kinesis</strong>, gerenciamento de clusters Kafka e cenários de integração com outros serviços da AWS.</p>
+</blockquote><p>📌 Uma equipe de desenvolvimento utiliza Kafka on-premises para processamento de dados em tempo real. Eles desejam migrar para a AWS mantendo a compatibilidade com seu código atual e minimizando a necessidade de mudanças significativas. Qual serviço AWS é mais adequado?</p><ul>
+<li>✅ Amazon MSK (Managed Streaming for Apache Kafka)</li>
+</ul><p>📌 Uma aplicação precisa processar grandes volumes de dados em tempo real com alta taxa de ingestão. A equipe deseja evitar o gerenciamento complexo de clusters Kafka e prefere uma solução serverless totalmente gerenciada. Qual serviço é recomendado?</p><ul>
+<li>✅ Amazon Kinesis Data Streams</li>
+</ul><hr><blockquote>
+<p>O <strong>Amazon MSK Serverless</strong> é uma alternativa para reduzir a complexidade de provisionamento e gerenciamento de clusters Kafka, ajustando automaticamente a capacidade de acordo com a demanda.</p>
+</blockquote><p>📌 Durante um evento de marketing, o tráfego de dados no cluster Kafka aumenta de forma imprevisível. A equipe quer garantir a continuidade sem precisar redimensionar manualmente o cluster. Qual modo de operação do Amazon MSK é mais indicado?</p><ul>
+<li>✅ Amazon MSK Serverless</li>
+</ul><p>📌 Um cliente deseja integrar seu cluster MSK com serviços de análise de dados em tempo real da AWS. Qual ferramenta é recomendada para processar e analisar fluxos de dados diretamente do MSK?</p><ul>
+<li>✅ Kinesis Data Analytics ou AWS Lambda</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-batch">AWS Batch<a href="#aws-batch" class="hash-link" aria-label="Link direto para AWS Batch" title="Link direto para AWS Batch">​</a></h2>
+<p>O <strong>AWS Batch</strong> é um serviço gerenciado da AWS que permite a execução de trabalhos em lote (<strong>batch jobs</strong>) utilizando <strong>imagens Docker</strong>. Ele simplifica o planejamento, a execução e o dimensionamento de workloads de processamento de dados sem a necessidade de gerenciar infraestrutura de cluster complexa. O pagamento é baseado apenas nos recursos utilizados, como instâncias <strong>EC2</strong>, <strong>Fargate</strong> e <strong>Spot Instances</strong>.</p>
+<hr>
+<blockquote>
+<p><strong>Principais Características</strong></p>
+</blockquote>
+<ul>
+<li>Suporte a execução de <strong>imagens Docker</strong> para jobs em lote.</li>
+<li>Cobrança apenas pelos recursos computacionais utilizados.</li>
+<li>Integração com <strong>AWS Fargate</strong>, eliminando a necessidade de provisionar e gerenciar clusters.</li>
+<li>Suporte a <strong>EC2</strong> e <strong>Spot Instances</strong> para execução na VPC.</li>
+<li>Possibilidade de utilizar <strong>EventBridge</strong> para agendamento de jobs.</li>
+<li>Integração com <strong>AWS Step Functions</strong> para orquestração de workflows complexos.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Opções de Execução no AWS Batch</strong></p>
+</blockquote>
+<ul>
+<li><strong>AWS Fargate:</strong> Execução serverless sem a necessidade de configurar e gerenciar instâncias ou clusters.</li>
+<li><strong>Instâncias Provisionadas (EC2 e Spot):</strong> Possibilidade de maior controle sobre a infraestrutura e otimização de custos usando Spot Instances.<br>
+<img decoding="async" loading="lazy" alt="image-20230221174406433" src="/assets/images/image-20230221174406433-11f00208a6320f0351625bc799880eca.png" width="1080" height="530" class="img_ev3q"></li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Casos de Uso</strong></p>
+</blockquote>
+<ul>
+<li><strong>Processamento de imagens em lote:</strong> Geração de miniaturas, compressão de imagens ou renderização de vídeos.</li>
+<li><strong>Execução de jobs concorrentes:</strong> Processamento paralelo de grandes volumes de dados.</li>
+<li><strong>Análises científicas e simulações:</strong> Modelagem matemática e simulação de cenários complexos.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Alta Performance com AWS Batch</strong></p>
+</blockquote>
+<ul>
+<li>O AWS Batch suporta execução de <strong>multi-node parallel jobs</strong> para workloads de alta performance.<!-- -->
+<ul>
+<li>Distribuição da carga de trabalho em várias instâncias.</li>
+<li><strong>Não suporta instâncias Spot</strong> para alta performance.</li>
+<li>Integração com <strong>Placement Groups</strong> para otimização de baixa latência de rede e alto desempenho.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Diferença entre AWS Batch e AWS Lambda</strong></p>
+</blockquote>
+<ul>
+<li>O <strong>AWS Batch</strong> é indicado para workloads de longa duração, uso intensivo de CPU ou memória e com necessidade de controle detalhado da infraestrutura.</li>
+<li>O <strong>AWS Lambda</strong> é mais adequado para tarefas curtas, baseadas em eventos e com escalabilidade automática.<br>
+<img decoding="async" loading="lazy" alt="image-20230221174255199" src="/assets/images/image-20230221174255199-0c28681c79a3086aca6d5c26570fd2e5.png" width="1045" height="431" class="img_ev3q"></li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Soluções de Arquitetura com AWS Batch</strong></p>
+</blockquote>
+<ul>
+<li><strong>Criação de Thumbnails:</strong> Automação de geração de miniaturas de imagens em massa.<br>
+<img decoding="async" loading="lazy" alt="image-20230221173936781" src="/assets/images/image-20230221173936781-dc1098f43524709c57c9ceeb7b5066e8.png" width="1176" height="551" class="img_ev3q"></li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯 - AWS Batch</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões sobre <strong>AWS Batch</strong> frequentemente abordam cenários de processamento em lote, escolha de tipos de instância (EC2, Fargate, Spot) e casos de uso para jobs de alta performance.</p>
+</blockquote><p>📌 Uma equipe de análise de dados precisa processar grandes volumes de dados diariamente. O processamento deve ocorrer em horários definidos e minimizar custos. Qual estratégia de execução no AWS Batch é mais indicada?</p><ul>
+<li>✅ Uso de <strong>Spot Instances</strong> para redução de custos e agendamento com <strong>EventBridge</strong>.</li>
+</ul><p>📌 Sua empresa precisa executar simulações complexas e altamente paralelas, exigindo várias instâncias trabalhando juntas. Qual recurso do AWS Batch atende melhor a esse cenário?</p><ul>
+<li>✅ <strong>Multi-node parallel jobs</strong> com instâncias EC2 provisionadas, garantindo comunicação entre os nós.</li>
+</ul><hr><blockquote>
+<p>O AWS Batch é capaz de integrar com <strong>AWS Step Functions</strong> para orquestrar workflows complexos. Entender a integração entre esses serviços é importante para a certificação.</p>
+</blockquote><p>📌 Um fluxo de trabalho envolve várias etapas de processamento de dados, onde cada etapa depende da conclusão da anterior. Qual abordagem pode ser utilizada para orquestrar o fluxo com o AWS Batch?</p><ul>
+<li>✅ Utilizar <strong>AWS Step Functions</strong> para coordenar a execução dos jobs no Batch.</li>
+</ul><p>📌 Um projeto precisa de processamento rápido de pequenas tarefas acionadas por eventos e alta escalabilidade automática. O AWS Batch é adequado para esse cenário?</p><ul>
+<li>❌ Não. O uso do <strong>AWS Lambda</strong> seria mais apropriado para pequenas tarefas baseadas em eventos.</li>
+</ul><hr><blockquote>
+<p>Atenção às diferenças entre <strong>AWS Batch</strong> e <strong>AWS Lambda</strong>. Questões costumam abordar quando usar cada serviço de maneira mais eficiente.</p>
+</blockquote><p>📌 Sua aplicação precisa processar milhares de imagens de forma rápida e econômica, sem se preocupar com a infraestrutura subjacente. Qual serviço utilizar?</p><ul>
+<li>✅ <strong>AWS Lambda</strong> para processamento serverless, especialmente se cada execução levar menos de 15 minutos.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-emr">AWS EMR<a href="#aws-emr" class="hash-link" aria-label="Link direto para AWS EMR" title="Link direto para AWS EMR">​</a></h2>
+<p>O <strong>Amazon EMR</strong> (Elastic MapReduce) é um serviço gerenciado da AWS para processamento de grandes volumes de dados utilizando frameworks como <strong>Apache Hadoop</strong>, <strong>Spark</strong>, <strong>HBase</strong>, <strong>Presto</strong> e <strong>Flink</strong>. Ele é amplamente utilizado em cenários de <strong>Big Data</strong>, <strong>Machine Learning</strong> e <strong>Web Indexing</strong>, sendo capaz de processar petabytes de dados de forma rápida e econômica.</p>
+<hr>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li>Criação de clusters Hadoop para análise de grandes volumes de dados.</li>
+<li>Capacidade de escalar automaticamente utilizando <strong>Spot Instances</strong>, reduzindo custos de processamento.</li>
+<li>Suporte a frameworks populares de Big Data: <strong>Apache Spark</strong>, <strong>HBase</strong>, <strong>Presto</strong>, <strong>Flink</strong>.</li>
+<li>Pode ser implantado em centenas de instâncias EC2 para maximizar a capacidade de processamento.</li>
+<li>Uso recomendado em <strong>Single AZ</strong> para maximizar a performance, evitando latência de comunicação entre zonas de disponibilidade.</li>
+<li>Suporte a armazenamento temporário via <strong>EBS</strong> com sistema de arquivos <strong>HDFS (Hadoop File System)</strong>.</li>
+<li>Integração nativa com <strong>S3 (EMRFS)</strong> para armazenamento de longo prazo, garantindo persistência e durabilidade dos dados.</li>
+<li>Integrações adicionais com <strong>DynamoDB</strong> para consultas rápidas e armazenamento de dados estruturados.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Estrutura de Nós (Nodes) no Amazon EMR<br>
+<!-- -->O cluster EMR é composto por três tipos de nós:</p>
+</blockquote>
+<ul>
+<li><strong>Master Node:</strong> Coordena o cluster, distribuindo as tarefas para os outros nós.</li>
+<li><strong>Core Nodes:</strong> Executam tarefas de processamento e armazenam dados no <strong>HDFS</strong>.</li>
+<li><strong>Task Nodes:</strong> Executam tarefas de processamento, mas não armazenam dados no <strong>HDFS</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Tipos de Nodes e Preços" src="/assets/images/image-20230221175637124-ce3af8a1413512e557d4c688fa2080d8.png" width="1091" height="555" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Configurações de Instâncias<br>
+<!-- -->O Amazon EMR oferece dois modelos principais para configurar as instâncias dos nós:</p>
+</blockquote>
+<p><strong>1. Uniform Instance Group:</strong></p>
+<ul>
+<li>Define um único tipo de instância para cada função do nó (Master, Core, Task).</li>
+<li>Opções de compra: <strong>On-Demand</strong> ou <strong>Spot Instances</strong>.</li>
+<li>Suporte a <strong>Auto Scaling</strong> para ajustar automaticamente a capacidade com base na demanda.</li>
+</ul>
+<p><strong>2. Instance Fleet:</strong></p>
+<ul>
+<li>Maior flexibilidade ao permitir combinar diferentes tipos de instâncias (On-Demand e Spot).</li>
+<li>Permite definir um mix de instâncias para otimizar custos.</li>
+<li><strong>Não possui Auto Scaling</strong> automático; a expansão do cluster deve ser gerenciada manualmente.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Armazenamento no EMR</p>
+</blockquote>
+<ul>
+<li><strong>EBS (HDFS):</strong> Utilizado para armazenamento temporário de dados enquanto o cluster está em execução.</li>
+<li><strong>S3 (EMRFS):</strong> Armazenamento de longo prazo com alta durabilidade. Ideal para persistência de dados.</li>
+<li><strong>DynamoDB:</strong> Usado para consultas rápidas e armazenamento de dados não relacionais.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Caso de Uso</p>
+</blockquote>
+<ul>
+<li>Processamento de grandes volumes de dados para análises em tempo quase real.</li>
+<li>Treinamento de modelos de Machine Learning em larga escala.</li>
+<li>Indexação e análise de conteúdo da web.</li>
+<li>Análise de logs de servidores ou eventos de dispositivos IoT.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>Integrações e Ferramentas</strong></div><div class="admonitionContent_BuS1"><ul>
+<li><strong>AWS Glue:</strong> Pode ser integrado ao EMR para catálogos de dados e ETL (Extract, Transform, Load).</li>
+<li><strong>AWS Lambda:</strong> Processamento de dados em tempo real para ingestão no cluster EMR.</li>
+<li><strong>Amazon Athena:</strong> Consultas SQL sobre dados armazenados no S3 tratados pelo EMR.</li>
+<li><a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html" target="_blank" rel="noopener noreferrer">Documentação Oficial do EMR</a></li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><strong>Atenção!</strong></div><div class="admonitionContent_BuS1"><p>Implantações multi-AZ podem gerar latência na comunicação entre os nós do cluster, impactando negativamente a performance.</p></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões sobre <strong>Amazon EMR</strong> geralmente abordam casos de uso para <strong>processamento de Big Data</strong>, otimização de custos com <strong>Spot Instances</strong> e integrações com outros serviços AWS, como <strong>S3</strong> e <strong>DynamoDB</strong>.</p>
+</blockquote><p>📌 Uma empresa precisa processar grandes volumes de dados utilizando Apache Spark para análise de logs. O processamento precisa ser econômico, e os dados devem ser armazenados de forma durável. Qual a configuração recomendada?</p><ul>
+<li>✅ Utilizar um cluster EMR com <strong>Spot Instances</strong> para reduzir custos e armazenar os dados no <strong>S3</strong> via EMRFS para persistência.</li>
+</ul><hr><blockquote>
+<p>O uso de <strong>Instance Fleet</strong> no EMR permite maior flexibilidade na escolha de instâncias, mas pode limitar a escalabilidade automática.</p>
+</blockquote><p>📌 Um time de cientistas de dados deseja criar um cluster EMR altamente flexível para testes exploratórios, utilizando diferentes tipos de instâncias EC2. Eles não querem depender de escalabilidade automática. Qual a abordagem correta?</p><ul>
+<li>✅ Configurar o cluster EMR com <strong>Instance Fleet</strong> para combinar instâncias On-Demand e Spot manualmente.</li>
+</ul><hr><blockquote>
+<p>A escolha entre <strong>Single AZ</strong> e <strong>Multi AZ</strong> pode impactar diretamente a performance do cluster EMR.</p>
+</blockquote><p>📌 Para minimizar a latência durante o processamento de grandes volumes de dados em tempo real, qual a melhor prática para configurar a implantação do cluster EMR?</p><ul>
+<li>✅ Implantar o cluster EMR em <strong>Single AZ</strong> para evitar latência de comunicação entre zonas de disponibilidade.</li>
+</ul><hr><blockquote>
+<p>O <strong>HDFS</strong> é utilizado para armazenamento temporário em clusters EMR, enquanto o <strong>S3</strong> é recomendado para persistência de dados a longo prazo.</p>
+</blockquote><p>📌 Uma empresa deseja armazenar dados processados por um cluster EMR de forma durável e acessível por outras aplicações analíticas. Qual a melhor prática?</p><ul>
+<li>✅ Utilizar o <strong>EMRFS</strong> para salvar os dados diretamente no <strong>Amazon S3</strong>, garantindo durabilidade e acessibilidade.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS Glue</strong> pode ser integrado ao EMR para catálogos de dados e tarefas de ETL.</p>
+</blockquote><p>📌 Um analista de dados precisa executar transformações complexas de ETL em um grande volume de dados antes de armazená-los no S3. Qual combinação de serviços é recomendada?</p><ul>
+<li>✅ Utilizar <strong>AWS Glue</strong> para catalogar e transformar os dados e um cluster <strong>EMR</strong> para processar grandes volumes com <strong>Apache Spark</strong>.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-glue">AWS Glue<a href="#aws-glue" class="hash-link" aria-label="Link direto para AWS Glue" title="Link direto para AWS Glue">​</a></h2>
+<ul>
+<li>Serviço gerenciado de <strong>ETL</strong> (<em>Extract, Transform, Load</em>), que facilita a preparação e transformação de dados para análises.</li>
+<li>É um serviço <strong>serverless</strong>, ou seja, não há necessidade de gerenciar infraestrutura. Oferece três componentes principais:</li>
+<li>Componentes do AWS Glue:<!-- -->
+<ul>
+<li><strong>AWS Crawler:</strong> Rastreia automaticamente dados de diferentes fontes, identifica esquemas, classifica e armazena metadados no <strong>AWS Glue Data Catalog</strong>.</li>
+<li><strong>AWS ETL:</strong> Núcleo do serviço ETL, que gera código Python ou Scala para realizar tarefas complexas de transformação de dados, como limpeza, enriquecimento e remoção de duplicatas.</li>
+<li><strong>AWS Glue Data Catalog:</strong> Armazena metadados de forma centralizada para consulta, transformação e rastreamento de dados. Funciona como uma &quot;biblioteca&quot; dos dados disponíveis.</li>
+</ul>
+</li>
+<li>Permite extrair dados de fontes como <strong>S3</strong> e bancos de dados relacionais (<strong>RDBMS</strong>), transformá-los e carregá-los em serviços como <strong>Amazon Redshift</strong>.</li>
+<li>Possui integração com outros serviços AWS, como <strong>Athena</strong>, <strong>Redshift</strong> e <strong>EMR</strong>, para criar catálogos de dados reutilizáveis (<strong>AWS Glue Data Catalog</strong>).</li>
+<li>Ideal para pipelines de dados complexos, preparação para análises de <em>Big Data</em> e projetos de ciência de dados.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="glue" src="/assets/images/image-20210905124633707-1f60d64d9e9bd67b20db92120d853c53.png" width="958" height="208" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p><strong>Integração com Serviços AWS:</strong></p>
+</blockquote>
+<ul>
+<li><strong>Athena:</strong> Consultas SQL diretamente no catálogo de dados criado no Glue.</li>
+<li><strong>Redshift:</strong> Carregamento eficiente de dados transformados para análises de data warehouse.</li>
+<li><strong>EMR:</strong> Integração para processamento distribuído de grandes volumes de dados.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="glue-catalog" src="/assets/images/image-20210905124749244-a410c3a169bf6244af524eeb01c0d736.png" width="985" height="503" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Detalhamento e Perguntas Frequentes</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O AWS Glue é <strong>serverless</strong>, então não há necessidade de provisionar ou gerenciar servidores.</li>
+<li>Utiliza o <strong>Apache Spark</strong> como mecanismo de execução para processar dados em escala.</li>
+<li>Pode trabalhar com <strong>Workflows</strong> para encadear e gerenciar tarefas de ETL de forma orquestrada.</li>
+<li>A integração com o <strong>AWS Lake Formation</strong> permite implementar controle de acesso baseado em permissões no nível do catálogo de dados.</li>
+</ul><p>📌 <strong>Pergunta:</strong> Uma empresa precisa transformar dados armazenados no S3 e carregá-los no Amazon Redshift para relatórios analíticos. Qual a abordagem mais recomendada?</p><ul>
+<li>✅ Configurar um <strong>AWS Glue Crawler</strong> para catalogar os dados no S3, usar um script ETL do Glue para transformação e carregar os dados no Redshift.</li>
+</ul><p>📌 <strong>Pergunta:</strong> Um cientista de dados deseja consultar dados diretamente do catálogo de dados do Glue sem configurar um cluster EMR. Qual serviço AWS pode ser utilizado?</p><ul>
+<li>✅ <strong>Amazon Athena</strong>, pois permite consultas SQL diretamente sobre os dados catalogados no Glue.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-redshift">AWS Redshift<a href="#aws-redshift" class="hash-link" aria-label="Link direto para AWS Redshift" title="Link direto para AWS Redshift">​</a></h2>
+<ul>
+<li>Serviço de banco de dados para <strong>Data Warehouse</strong> da AWS, projetado para análises em larga escala (OLAP - <em>Online Analytical Processing</em>).</li>
+<li>Baseado no <strong>PostgreSQL</strong>, mas <strong>não é adequado para transações OLTP</strong> (<em>Online Transaction Processing</em>).</li>
+<li>Processa dados em larga escala, com desempenho até <strong>10 vezes superior</strong> a outros sistemas OLAP, capaz de escalar para <strong>petabytes (PB)</strong> de dados.</li>
+<li>Utiliza armazenamento em colunas e permite <strong>execução massiva de consultas paralelas (MPP - Massively Parallel Processing)</strong> para otimizar o processamento de grandes volumes de dados.</li>
+<li>Modelo de pagamento baseado em instâncias provisionadas — você paga apenas pelos recursos utilizados.</li>
+<li>Suporta interface SQL para consultas, facilitando a integração com ferramentas de BI como <strong>AWS QuickSight</strong> ou <strong>Tableau</strong>.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Redshift Workload Management (WLM):</strong></p>
+</blockquote>
+<ul>
+<li>Permite configurar múltiplas filas para otimizar a execução de diferentes cargas de trabalho.</li>
+<li>Exemplo: fila para superusuário, fila para trabalhos curtos e fila para trabalhos longos.</li>
+<li>Pode ser ajustado manualmente ou configurado para ajuste automático.</li>
+<li>Minimiza o risco de bloqueio de tarefas rápidas por execuções demoradas.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Carga de Dados e Integrações:</strong></p>
+</blockquote>
+<ul>
+<li>Suporta carregamento de dados a partir de <strong>Amazon S3</strong>, <strong>DynamoDB</strong>, bancos de dados externos via <strong>AWS DMS (Data Migration Service)</strong> ou fluxos contínuos com <strong>Kinesis Firehose</strong>.</li>
+<li>Pode escalar de <strong>1 a 128 nós</strong>, com cada nó tendo até <strong>16 TB</strong> de espaço de armazenamento.</li>
+<li>Estrutura de nós:<!-- -->
+<ul>
+<li><strong>Nó líder:</strong> Planeja as consultas e agrega os resultados.</li>
+<li><strong>Nó de computação:</strong> Executa as consultas e envia os resultados ao nó líder.<br>
+<img decoding="async" loading="lazy" alt="data-importe" src="/assets/images/image-20210905122049485-9b6960d83699134a5211c3641f421d39.png" width="1119" height="419" class="img_ev3q"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Recursos Adicionais:</strong></p>
+</blockquote>
+<ul>
+<li><strong>Redshift Spectrum:</strong> Permite executar consultas diretamente no <strong>S3</strong> sem necessidade de carregar os dados para dentro do cluster Redshift.<br>
+<img decoding="async" loading="lazy" alt="sprectrum" src="/assets/images/image-20210905122151802-625b722fe3199853615611e805cc1ae2.png" width="658" height="571" class="img_ev3q"></li>
+<li><strong>Redshift Enhanced VPC Routing:</strong> Permite que os dados sejam copiados e carregados através da VPC, evitando tráfego de internet pública, aumentando a segurança.</li>
+<li><strong>Snapshots:</strong> São realizados automaticamente a cada <strong>8 horas</strong>, a cada <strong>5 GB</strong> de dados modificados ou conforme agendamento manual.<!-- -->
+<ul>
+<li>Os snapshots são armazenados no <strong>S3</strong>.</li>
+<li>Para restaurações de snapshots criptografados, é necessário copiar a chave KMS para o novo cluster.<br>
+<img decoding="async" loading="lazy" alt="image-20230221182853451" src="/assets/images/image-20230221182853451-4327d2b38cadf3a96aeeb971708bb6e3.png" width="1057" height="445" class="img_ev3q"></li>
+</ul>
+</li>
+<li><strong>Recuperação de Desastres:</strong>
+<ul>
+<li>O Redshift não é Multi-AZ, ou seja, cada nó está em uma única AZ (Zona de Disponibilidade).</li>
+<li>A recuperação de desastres é feita com base em snapshots armazenados no <strong>S3</strong>.</li>
+<li>Para alguns tipos de cluster, há suporte limitado a múltiplos nós distribuídos entre AZs.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Cenário de Utilização:</strong></p>
+</blockquote>
+<ul>
+<li>Ideal para cargas de trabalho analíticas de larga escala (OLAP) e não para transações rápidas (OLTP).</li>
+<li>Se as consultas forem esporádicas, é recomendável utilizar o <strong>Amazon Athena</strong>, que é serverless e cobra apenas pelas consultas realizadas.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Well-Architected para Redshift:</strong></p>
+</blockquote>
+<ul>
+<li>Implementação de boas práticas para <strong>segurança</strong>, <strong>otimização de desempenho</strong> e <strong>custos</strong>.<br>
+<img decoding="async" loading="lazy" alt="well-arch-redshift" src="/assets/images/image-20210905122323552-aec6e6c821293c87eb1b61b8e055b742.png" width="1033" height="338" class="img_ev3q"></li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões relacionadas ao <strong>Amazon Redshift</strong> frequentemente exploram otimização de performance, recuperação de desastres e integração com outros serviços da AWS.</p>
+</blockquote><p>📌 Uma empresa precisa realizar análises complexas e periódicas em um grande volume de dados armazenados no <strong>Amazon S3</strong>. Para evitar a necessidade de copiar os dados para o cluster do Redshift, qual recurso pode ser utilizado?</p><ul>
+<li>✅ <strong>Amazon Redshift Spectrum</strong></li>
+</ul><p>📌 Durante a configuração do Redshift, um administrador deseja garantir que consultas curtas não fiquem presas aguardando a execução de tarefas longas. Como ele pode fazer isso?</p><ul>
+<li>✅ Configurando o <strong>Redshift Workload Management (WLM)</strong> para criar múltiplas filas de processamento.</li>
+</ul><hr><blockquote>
+<p>O <strong>Redshift Enhanced VPC Routing</strong> pode ser cobrado em questões para verificar seu entendimento sobre a segurança de tráfego de dados.</p>
+</blockquote><p>📌 Uma organização deseja garantir que todo o tráfego de dados entre o Redshift e o <strong>Amazon S3</strong> ocorra dentro da rede privada da VPC. Qual recurso deve ser ativado?</p><ul>
+<li>✅ <strong>Redshift Enhanced VPC Routing</strong></li>
+</ul><p>📌 Um snapshot criptografado de um cluster Redshift precisa ser restaurado em uma conta AWS diferente. O que é necessário para garantir que a restauração seja bem-sucedida?</p><ul>
+<li>✅ Certificar-se de que a chave <strong>KMS</strong> usada na criptografia esteja compartilhada com a nova conta.</li>
+</ul><hr><blockquote>
+<p><strong>Redshift vs Athena:</strong> Certifique-se de entender as diferenças entre esses serviços, especialmente em relação a consultas esporádicas e cargas analíticas pesadas.</p>
+</blockquote><p>📌 Um analista de dados precisa consultar periodicamente pequenos conjuntos de dados no S3, mas com uma carga de trabalho imprevisível. Qual serviço é mais adequado?</p><ul>
+<li>✅ <strong>Amazon Athena</strong>, pois cobra apenas pelas consultas realizadas, sendo mais econômico para cenários esporádicos.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-timestream">AWS Timestream<a href="#aws-timestream" class="hash-link" aria-label="Link direto para AWS Timestream" title="Link direto para AWS Timestream">​</a></h2>
+<ul>
+<li>Serviço de banco de dados para <strong>séries temporais</strong> (<strong>Time Series</strong>), projetado para armazenar e analisar grandes volumes de dados temporais.</li>
+<li>Totalmente gerenciado pela AWS, com alta escalabilidade, desempenho otimizado e arquitetura <strong>serverless</strong> (sem necessidade de gerenciamento de servidores).</li>
+<li>Permite armazenar e analisar trilhões de registros de dados por dia.</li>
+<li><strong>1000 vezes mais rápido e 1/10 mais barato</strong> que bancos de dados relacionais tradicionais para casos de uso específicos de séries temporais.</li>
+<li>Compatível com <strong>SQL</strong>, facilitando consultas analíticas complexas em dados temporais.</li>
+<li>Os dados recentes são armazenados em memória para consultas rápidas e, posteriormente, movidos para um armazenamento mais barato e durável.</li>
+<li>Oferece suporte para criação de funções analíticas de séries temporais, como cálculos de média móvel, agregações por janela de tempo e análises preditivas.</li>
+<li>Possui criptografia em trânsito (TLS) e em repouso (integrado ao AWS KMS).</li>
+<li><strong>Casos de Uso:</strong>
+<ul>
+<li>Monitoramento de dispositivos IoT.</li>
+<li>Análise de dados em tempo real para sistemas de monitoramento de infraestrutura, telemetria e aplicações financeiras.</li>
+</ul>
+</li>
+<li>Integração com outros serviços AWS, como <strong>IoT Core</strong>, <strong>Lambda</strong>, <strong>QuickSight</strong> e <strong>Grafana</strong>, para visualização e análise de dados.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230221185322425" src="/assets/images/image-20230221185322425-45af007a66677f4ac3c218b61dda0ce4.png" width="1107" height="580" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>Nota Importante 🔍</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS Timestream</strong> é otimizado para leitura e escrita de grandes volumes de dados temporais, sendo ideal para cenários onde a latência baixa é crucial. No entanto, não é adequado para transações complexas ou relacionamentos entre dados como um banco de dados relacional tradicional.<br>
+<a href="https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html" target="_blank" rel="noopener noreferrer">Documentação oficial do AWS Timestream</a></p></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões relacionadas ao <strong>AWS Timestream</strong> geralmente abordam sua aplicação em cenários de séries temporais, integração com outros serviços da AWS e comparação de desempenho e custo com bancos de dados relacionais tradicionais.</p>
+</blockquote><p>📌 Uma empresa de monitoramento de dispositivos IoT precisa coletar dados de temperatura de milhares de sensores distribuídos globalmente. Esses dados precisam ser processados e analisados em tempo real para ajustar condições ambientais. Qual solução AWS é mais adequada para lidar com esse cenário?</p><ul>
+<li>✅ AWS Timestream, devido à capacidade de armazenar e consultar grandes volumes de dados temporais rapidamente.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS Timestream</strong> armazena dados recentes em memória para consulta rápida e automaticamente migra para armazenamento mais barato à medida que envelhecem. Questões podem explorar o funcionamento dessa estrutura de armazenamento em camadas.</p>
+</blockquote><p>📌 Uma organização precisa de um banco de dados para analisar dados históricos de vendas para prever tendências futuras. O volume de dados é alto e cresce diariamente. Qual serviço da AWS é recomendado para lidar com esse volume e fornecer respostas analíticas rápidas?</p><ul>
+<li>✅ AWS Timestream, pois é otimizado para análises de séries temporais e dados históricos.</li>
+</ul><hr><blockquote>
+<p>Questões podem abordar a criptografia e a segurança dos dados no <strong>AWS Timestream</strong>, considerando conformidades de segurança e uso do AWS KMS.</p>
+</blockquote><p>📌 Uma empresa está preocupada com a segurança dos dados transmitidos para o AWS Timestream e precisa garantir criptografia em trânsito e em repouso. Qual abordagem o Timestream utiliza para garantir essa segurança?</p><ul>
+<li>✅ O AWS Timestream usa criptografia em trânsito com TLS e em repouso com integração ao AWS Key Management Service (KMS).</li>
+</ul><hr><blockquote>
+<p>O AWS Timestream se integra bem com outros serviços da AWS, como IoT Core, Lambda e QuickSight, para visualização e processamento em tempo real.</p>
+</blockquote><p>📌 Um time de engenharia deseja visualizar dados de sensores em tempo real com gráficos e dashboards dinâmicos. Qual a combinação de serviços AWS mais adequada para atingir esse objetivo?</p><ul>
+<li>✅ AWS Timestream para armazenamento e consulta, AWS IoT Core para ingestão de dados e AWS QuickSight para visualização.</li>
+</ul><hr><blockquote>
+<p>O desempenho e a escalabilidade do AWS Timestream são frequentemente comparados com bancos de dados relacionais tradicionais em questões de prova.</p>
+</blockquote><p>📌 Um analista precisa armazenar e consultar dados de séries temporais com alta frequência de escrita e leitura. Por que o AWS Timestream seria preferido a um banco de dados relacional tradicional?</p><ul>
+<li>✅ Porque o AWS Timestream é até <strong>1000 vezes mais rápido</strong> e até <strong>10 vezes mais barato</strong> para esse tipo de cenário.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-athena">AWS Athena<a href="#aws-athena" class="hash-link" aria-label="Link direto para AWS Athena" title="Link direto para AWS Athena">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230221185621707" src="/assets/images/image-20230221185621707-7dc3d13b2f01fcf161910906bade819c.png" width="264" height="510" class="img_ev3q"></p>
+<blockquote>
+<p>Serviço de consulta <strong>Serverless</strong> que permite realizar análises diretamente em arquivos armazenados no <strong>Amazon S3</strong> utilizando <strong>SQL</strong>. Ideal para consultas ad hoc, análises rápidas e integração com ferramentas de BI como <strong>AWS QuickSight</strong>.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Características principais:</strong></p>
+</blockquote>
+<ul>
+<li><strong>Serverless:</strong> Não requer provisionamento de infraestrutura ou gerenciamento de servidores.</li>
+<li><strong>Linguagem SQL:</strong> Realiza consultas nos dados diretamente no S3.</li>
+<li><strong>Conectores JDBC e ODBC:</strong> Possibilitam a conexão com ferramentas de BI e análise de dados.</li>
+<li><strong>Suporta múltiplos formatos de dados:</strong> CSV, JSON, ORC, Avro, Parquet.</li>
+<li><strong>Cobrança baseada em uso:</strong>
+<ul>
+<li><strong>$5 por TB de dados escaneados.</strong></li>
+<li>Quanto mais eficiente a consulta (menos dados escaneados), menor o custo.</li>
+</ul>
+</li>
+<li><strong>Uso comum:</strong> BI, Analytics, relatórios, análise de <strong>VPC Flow Logs</strong>, <strong>ELB Logs</strong> e análise complexa com junções e funções de janela.</li>
+<li><strong>Baseado em Presto:</strong>
+<ul>
+<li>O <strong>Athena</strong> usa o mecanismo de consulta distribuído <strong>Presto</strong>, com suporte completo ao <strong>SQL padrão</strong>.</li>
+<li>Mais informações: <a href="https://aws.amazon.com/pt/big-data/what-is-presto/" target="_blank" rel="noopener noreferrer">Presto na AWS</a>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Integração com outros serviços:</strong></p>
+</blockquote>
+<ul>
+<li><strong>AWS QuickSight:</strong> Para visualização de dados e criação de dashboards interativos.</li>
+<li><strong>Queries federadas:</strong> Permitem consultar dados em outras fontes além do S3 (RDS, DynamoDB, Redshift), utilizando funções Lambda para integração.</li>
+<li><strong>Armazenamento de resultados no S3:</strong> O resultado das queries pode ser armazenado diretamente no S3 para análises futuras.</li>
+<li>Possibilidade de se conectar a bancos de dados relacionais e NoSQL usando a Lambda como conector.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Well-Architected:</strong></p>
+</blockquote>
+<ul>
+<li>O Athena segue as práticas recomendadas do Well-Architected Framework da AWS para eficiência de custo, performance e segurança.<br>
+<img decoding="async" loading="lazy" alt="athena-well-arch" src="/assets/images/image-20210905115942523-98db3f02a1a855e4c54eeb4d62ddc31e.png" width="980" height="258" class="img_ev3q"></li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Melhorando a performance:</strong></p>
+</blockquote>
+<ul>
+<li>Particione os dados no S3 para limitar a quantidade de dados escaneados.</li>
+<li>Converta os dados para formatos colunarizados como <strong>Parquet</strong> ou <strong>ORC</strong> para melhorar a eficiência de leitura.</li>
+<li>Utilize compressão para reduzir o volume de dados e, consequentemente, o custo das queries.</li>
+<li>Considere otimizar as consultas para evitar <em>full scans</em> desnecessários.<br>
+<img decoding="async" loading="lazy" alt="image-20230221185907561" src="/assets/images/image-20230221185907561-f465696497dfd75d40d0129a02062941.png" width="1084" height="557" class="img_ev3q"></li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Nota sobre práticas recomendadas</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>Quando realizar queries ad hoc, utilize filtros de data ou partições para evitar a varredura de todo o dataset.</li>
+<li>Avalie a aplicação de <strong>AWS Glue Data Catalog</strong> para catalogar e organizar os metadados dos dados armazenados no S3, facilitando a consulta.</li>
+<li>Para alta disponibilidade e consistência dos dados, sempre utilize buckets S3 configurados adequadamente, com versionamento habilitado.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões sobre o <strong>AWS Athena</strong> frequentemente pedem para identificar cenários de uso adequado, integração com outras ferramentas de BI e otimização de custos.</p>
+</blockquote><p>📌 Uma empresa deseja realizar análises ad hoc de grandes volumes de dados armazenados no Amazon S3, sem precisar gerenciar servidores. Qual serviço da AWS é mais indicado?</p><ul>
+<li>✅ <strong>AWS Athena</strong></li>
+</ul><p>📌 Um time de dados está enfrentando custos elevados nas consultas do Athena devido à varredura de grandes volumes de dados. Quais práticas podem ser adotadas para reduzir os custos?</p><ul>
+<li>✅ Particionar os dados no S3 e utilizar formatos colunarizados como <strong>Parquet</strong> ou <strong>ORC</strong>.</li>
+</ul><hr><blockquote>
+<p>Questões também podem abordar integrações do Athena com outros serviços da AWS, como <strong>AWS Glue</strong> para catalogação de dados.</p>
+</blockquote><p>📌 Como o AWS Glue pode ser utilizado para otimizar as consultas do AWS Athena?</p><ul>
+<li>✅ Catalogando os dados no <strong>AWS Glue Data Catalog</strong>, facilitando a organização e otimização das queries.</li>
+</ul><p>📌 Qual é o mecanismo de consulta subjacente ao Athena, conhecido por sua alta performance em análise distribuída de grandes volumes de dados?</p><ul>
+<li>✅ <strong>Presto</strong>, com suporte completo ao SQL padrão.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-quicksight">AWS QuickSight<a href="#aws-quicksight" class="hash-link" aria-label="Link direto para AWS QuickSight" title="Link direto para AWS QuickSight">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Como o Quicksight funciona" src="/assets/images/026e51297c1fa18b850ce2ffc1575a9124bbad16-d27e0e9e3cf7939e8fdbe5c1e5d1bb9c.png" width="1500" height="480" class="img_ev3q"></p>
+<blockquote>
+<p><strong>Visão Geral:</strong></p>
+</blockquote>
+<p>O <strong>AWS QuickSight</strong> é um serviço de inteligência comercial (BI) totalmente gerenciado, escalável e alimentado por machine learning. Ele permite criar e compartilhar painéis interativos e insights visuais rapidamente, sendo ideal para análise de dados baseada na nuvem.</p>
+<hr>
+<blockquote>
+<p><strong>Características Principais:</strong></p>
+</blockquote>
+<ul>
+<li>Serviço de BI <strong>serverless</strong>, escalável e incorporável.</li>
+<li>Utiliza <strong>Machine Learning</strong> para criar insights automáticos.</li>
+<li><strong>Modelo de pagamento:</strong> &quot;Pay-per-session&quot; — você paga apenas pelas sessões ativas de uso.</li>
+<li>Controle de acesso via <strong>usuários ou grupos</strong>, que podem ser gerenciados fora do IAM, facilitando a administração.</li>
+<li>Baseado no mecanismo de cálculos paralelos em memória chamado <strong>SPICE</strong> (Super-fast, Parallel, In-memory Calculation Engine), otimizando consultas e melhorando o desempenho.</li>
+<li>Oferece <strong>Column-Level Security (CLS)</strong> — controle de acesso a nível de coluna para restringir visualização de dados sensíveis.</li>
+</ul>
+<blockquote>
+<p><strong>Conexões e Fontes de Dados:</strong><br>
+<!-- -->O QuickSight pode se conectar a diversas fontes de dados, incluindo:</p>
+</blockquote>
+<ul>
+<li>Bancos de dados gerenciados da AWS como <strong>Aurora</strong> e <strong>RDS</strong>.</li>
+<li>Serviços analíticos como <strong>Athena</strong> e <strong>S3</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Fontes de Dados QuickSight" src="/assets/images/image-20230221191125886-6fd93881426006f89d2af8f8adf1b6a2.png" width="1118" height="503" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p><strong>Vantagens e Casos de Uso:</strong></p>
+</blockquote>
+<ul>
+<li>Criação rápida de <strong>dashboards interativos</strong> para visualização de dados.</li>
+<li>Análises avançadas com o uso de machine learning para detectar anomalias e prever tendências.</li>
+<li>Uso compartilhado para equipes internas ou clientes externos com autenticação segura e acesso controlado.</li>
+<li>Análise integrada com outras ferramentas de dados da AWS, como <strong>Athena</strong> e <strong>Redshift</strong>.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Nota sobre Segurança e Governança</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O uso do <strong>CLS (Column-Level Security)</strong> é essencial para proteger dados sensíveis e garantir conformidade com regulamentações.</li>
+<li>O gerenciamento de usuários e permissões fora do IAM pode simplificar o acesso para grandes equipes de análise ou clientes externos.</li>
+<li>O SPICE permite a manipulação de grandes volumes de dados com alta performance, sendo uma alternativa eficiente para queries pesadas.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Well-Architected</p>
+</blockquote>
+<p>Ao integrar o QuickSight em uma arquitetura bem planejada, considere:</p>
+<ul>
+<li>Utilizar o <strong>AWS Glue Data Catalog</strong> para organização de dados.</li>
+<li>Aplicar boas práticas de segurança no armazenamento dos dados no S3.</li>
+<li>Monitorar e controlar os custos do modelo <strong>Pay-per-session</strong>, especialmente em equipes grandes.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões sobre o <strong>AWS QuickSight</strong> geralmente envolvem integração com fontes de dados AWS, estratégias de segurança como o <strong>Column-Level Security (CLS)</strong> e otimização de custos no modelo <strong>Pay-per-session</strong>.</p>
+</blockquote><p>📌 Uma equipe de análise deseja criar painéis interativos no QuickSight usando dados armazenados no <strong>Amazon Athena</strong> e <strong>S3</strong>, sem precisar configurar um servidor. Qual característica do QuickSight torna isso possível?</p><ul>
+<li>✅ O QuickSight é um serviço <strong>serverless</strong> com suporte a múltiplas fontes de dados da AWS.</li>
+</ul><p>📌 Um cliente deseja garantir que apenas membros específicos da equipe possam visualizar colunas sensíveis em um painel do QuickSight. Qual recurso deve ser configurado?</p><ul>
+<li>✅ <strong>Column-Level Security (CLS)</strong> para controle de acesso a nível de coluna.</li>
+</ul><hr><blockquote>
+<p>O modelo de precificação do QuickSight pode gerar custos inesperados se não gerenciado corretamente, especialmente para equipes grandes ou acessos externos.</p>
+</blockquote><p>📌 Uma organização deseja fornecer acesso esporádico a relatórios de BI para uma equipe de 200 pessoas. Qual estratégia de precificação seria mais econômica no QuickSight?</p><ul>
+<li>✅ Utilizar o modelo <strong>Pay-per-session</strong>, pagando apenas pelos acessos efetivos.</li>
+</ul><p>📌 Um analista precisa integrar o QuickSight a dados armazenados no <strong>Amazon Aurora</strong> para criar painéis interativos. Quais permissões devem ser concedidas para essa integração?</p><ul>
+<li>✅ Permissão no IAM para leitura dos dados no Amazon Aurora e acesso ao QuickSight.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="executando-jobs-na-aws">Executando Jobs na AWS<a href="#executando-jobs-na-aws" class="hash-link" aria-label="Link direto para Executando Jobs na AWS" title="Link direto para Executando Jobs na AWS">​</a></h2>
+<ul>
+<li>A AWS oferece diversas soluções para execução de jobs, variando de acordo com a demanda e o nível de gerenciamento necessário. A escolha correta depende de fatores como <strong>tempo de execução</strong>, <strong>escalabilidade</strong> e <strong>complexidade de implementação</strong>.</li>
+</ul>
+<blockquote>
+<p>Exemplos de soluções para execução de jobs:</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>EC2 (Amazon Elastic Compute Cloud)</strong></p>
+<ul>
+<li>Ideal para longas execuções, mas requer gerenciamento de infraestrutura.</li>
+<li>Não escala automaticamente de forma nativa; precisa de configurações adicionais com Auto Scaling.</li>
+</ul>
+</li>
+<li>
+<p><strong>AWS Lambda</strong></p>
+<ul>
+<li>Escalável e gerenciado, porém limitado a um tempo máximo de execução de <strong>15 minutos</strong>.</li>
+<li>Bom para tarefas curtas e baseadas em eventos, como ETL em tempo real.</li>
+</ul>
+</li>
+<li>
+<p><strong>AWS Step Functions</strong></p>
+<ul>
+<li>Orquestração de workflows serverless com AWS Lambda.</li>
+<li>Reage a eventos complexos, mas herda a limitação de tempo do Lambda.</li>
+</ul>
+</li>
+<li>
+<p><strong>AWS Batch</strong></p>
+<ul>
+<li>Ideal para jobs longos, processando em larga escala.</li>
+<li>Suporte para workloads com grande volume de dados; complexidade maior para configurar.</li>
+</ul>
+</li>
+<li>
+<p><strong>AWS Fargate</strong></p>
+<ul>
+<li>Executa contêineres sem necessidade de gerenciamento de infraestrutura.</li>
+<li>Bom para jobs longos e workloads event-driven.</li>
+</ul>
+</li>
+<li>
+<p><strong>EMR (Elastic MapReduce)</strong></p>
+<ul>
+<li>Usado para grandes volumes de dados no estilo Big Data.</li>
+<li>Baseado no Hadoop e Apache Spark, sendo mais complexo e custoso.</li>
+</ul>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Exemplo de execução de jobs" src="/assets/images/image-20230221180929791-c75f30a633017fa006b7e0575912fe97.png" width="1136" height="492" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>🔎 <strong>Observação</strong></div><div class="admonitionContent_BuS1"><p>Para workloads de Big Data, o <strong>AWS EMR</strong> é recomendado, enquanto jobs event-driven e curtos são mais adequados para o <strong>AWS Lambda</strong>.</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pipelines-para-trabalhar-com-dados">Pipelines para trabalhar com dados<a href="#pipelines-para-trabalhar-com-dados" class="hash-link" aria-label="Link direto para Pipelines para trabalhar com dados" title="Link direto para Pipelines para trabalhar com dados">​</a></h3>
+<p>A AWS oferece diversas ferramentas e abordagens para pipelines de dados. A escolha depende do caso de uso, seja <strong>análise de dados</strong>, <strong>ingestão de grandes volumes</strong> ou comparação de tecnologias.</p>
+<blockquote>
+<p><strong>Análise de dados:</strong> Identificar tendências e insights com rapidez.<br>
+<img decoding="async" loading="lazy" alt="Análise de dados" src="/assets/images/image-20230221191437913-ccbbc501221a1d0d10b602b3cdcc8c5a.png" width="1019" height="428" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p><strong>Ingestão de dados Big Data:</strong> Processar grandes volumes de dados de maneira escalável.<br>
+<img decoding="async" loading="lazy" alt="Ingestão de dados Big Data" src="/assets/images/image-20230221191554977-5d4eb4ff5df34cfceca363cd749a6b9a.png" width="1196" height="542" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p><strong>Comparação de tecnologias:</strong> Identificar a melhor abordagem com base nos requisitos do projeto.<br>
+<img decoding="async" loading="lazy" alt="Comparação de tecnologias" src="/assets/images/image-20230221191808657-80351fa6fc46a792afc89df528bc4af2.png" width="1097" height="441" class="img_ev3q"></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Explicações Adicionais</strong></p>
+</blockquote>
+<ul>
+<li><strong>AWS Glue:</strong> Serviço de ETL serverless, recomendado para processar e mover dados entre serviços AWS.</li>
+<li><strong>Amazon Kinesis:</strong> Excelente para ingestão de dados em tempo real.</li>
+<li><strong>AWS Data Pipeline:</strong> Permite orquestrar e automatizar a movimentação de dados e processos periódicos.</li>
+<li><strong>Amazon Redshift:</strong> Análise de dados estruturados em grande escala.</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>💡 <strong>Detalhamento Importante</strong></div><div class="admonitionContent_BuS1"><p>É fundamental entender os casos de uso ideais de cada ferramenta para escolher a melhor opção em uma arquitetura de Big Data.</p></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/08_data_engineering.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/service_communication"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Comunicação entre serviço</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Resumão</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-kinesis" class="table-of-contents__link toc-highlight">AWS Kinesis</a></li><li><a href="#aws-msk" class="table-of-contents__link toc-highlight">AWS MSK</a></li><li><a href="#aws-batch" class="table-of-contents__link toc-highlight">AWS Batch</a></li><li><a href="#aws-emr" class="table-of-contents__link toc-highlight">AWS EMR</a></li><li><a href="#aws-glue" class="table-of-contents__link toc-highlight">AWS Glue</a></li><li><a href="#aws-redshift" class="table-of-contents__link toc-highlight">AWS Redshift</a></li><li><a href="#aws-timestream" class="table-of-contents__link toc-highlight">AWS Timestream</a></li><li><a href="#aws-athena" class="table-of-contents__link toc-highlight">AWS Athena</a></li><li><a href="#aws-quicksight" class="table-of-contents__link toc-highlight">AWS QuickSight</a></li><li><a href="#executando-jobs-na-aws" class="table-of-contents__link toc-highlight">Executando Jobs na AWS</a><ul><li><a href="#pipelines-para-trabalhar-com-dados" class="table-of-contents__link toc-highlight">Pipelines para trabalhar com dados</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
