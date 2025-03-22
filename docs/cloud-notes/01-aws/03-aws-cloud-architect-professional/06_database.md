@@ -295,7 +295,7 @@ O **AWS OpenSearch** é um fork do ElasticSearch, criado após mudanças na lice
 ---
 
 
-## RDS  
+## AWS RDS  
 
 ![image-20230220111311099](assets/image-20230220111311099.png)  
 
@@ -603,3 +603,90 @@ O Amazon RDS (**Relational Database Service**) é um serviço gerenciado de banc
 :::
 
 ---
+
+## AWS DocumentDB
+
+O **Amazon DocumentDB** é um serviço de banco de dados totalmente gerenciado, otimizado para cargas de trabalho de documentos JSON e compatível com aplicações desenvolvidas para o **MongoDB**. Ele é projetado para oferecer alta performance, disponibilidade e escalabilidade para armazenar, consultar e indexar dados JSON.
+
+---
+
+> **Visão Geral**
+- Implementação gerenciada pela AWS para **MongoDB**, oferecendo compatibilidade com as versões populares do MongoDB (atualmente até a versão 3.6).
+- Conceitos de implantação semelhantes ao **Amazon Aurora**, com arquitetura distribuída e otimização de performance para leituras e gravações.
+- **Alta disponibilidade:** replicado automaticamente em **3 zonas de disponibilidade (AZs)** para garantir tolerância a falhas e recuperação rápida.
+- Escalabilidade automática do armazenamento em blocos de **10 GB**, sem necessidade de intervenção manual.
+- Capaz de escalar automaticamente para lidar com **milhões de requisições por segundo**.
+
+---
+
+> **Armazenamento e Escalabilidade**
+- O armazenamento cresce automaticamente conforme necessário, em blocos de **10 GB**, até um limite de **64 TB**.
+- Permite escalar a capacidade de leitura adicionando réplicas de leitura em até **15 réplicas** distribuídas em diferentes AZs.
+
+---
+
+> **Segurança**
+- Suporta criptografia de dados em repouso usando **AWS KMS**.
+- Permite autenticação com **AWS IAM** e integração com **AWS Secrets Manager** para gerenciamento de credenciais de acesso.
+- Tráfego criptografado em trânsito (TLS/SSL) para comunicação segura.
+
+---
+
+> **Preços**
+- O custo é baseado na quantidade de instâncias de banco de dados, capacidade de armazenamento provisionada e transferência de dados.
+- É importante considerar a arquitetura e os requisitos de escalabilidade para otimizar os custos.
+  
+![Preços do Amazon DocumentDB](assets/image-20230221184504405.png)
+
+---
+
+> **Casos de Uso**
+- Aplicações que já utilizam **MongoDB** e desejam aproveitar um ambiente gerenciado e altamente disponível na AWS.
+- Sistemas de gerenciamento de conteúdo (CMS) e aplicações que armazenam dados semi-estruturados em JSON.
+- Aplicações analíticas que exigem baixa latência para consultas de leitura intensiva.
+
+---
+
+:::note **Integrações com outros serviços da AWS** 📌  
+- **AWS Lambda:** para processamentos serverless integrados com dados JSON armazenados no DocumentDB.  
+- **AWS Glue:** para tarefas de ETL (extração, transformação e carga) dos dados.  
+- **Amazon QuickSight:** para criar dashboards e relatórios de visualização dos dados JSON.  
+- **AWS DMS:** para migração de dados a partir de clusters MongoDB locais ou de outras clouds.  
+:::
+
+---
+
+> **Comparação com MongoDB Gerenciado**
+- O Amazon DocumentDB **não é um MongoDB nativo**, mas sim uma implementação compatível. Isso significa que alguns recursos avançados e versões recentes do MongoDB podem não ser totalmente suportados.
+- A AWS oferece uma alternativa gerenciada para quem deseja aproveitar a infraestrutura AWS com simplicidade operacional e escalabilidade automática.
+
+---
+
+:::tip **Dica para a prova 🎯**  
+
+> Questões sobre **Amazon DocumentDB** geralmente abordam casos de migração de clusters MongoDB, integração com outros serviços AWS e escalabilidade automática de armazenamento. É importante entender a compatibilidade com o MongoDB e os casos de uso para grandes volumes de dados JSON.
+
+📌 Uma empresa usa um cluster **MongoDB on-premises** para armazenar grandes volumes de dados JSON e deseja migrar para a AWS com um serviço totalmente gerenciado e altamente disponível. Qual seria a melhor escolha?  
+- ✅ Amazon DocumentDB (compatível com MongoDB)  
+
+📌 Um cliente deseja um banco de dados NoSQL gerenciado pela AWS para suportar milhões de requisições de leitura e escrita simultâneas, garantindo replicação automática em múltiplas zonas de disponibilidade. Qual é a melhor opção?  
+- ✅ Amazon DocumentDB com réplicas de leitura distribuídas em múltiplas AZs  
+
+---
+
+> O **Amazon DocumentDB** é projetado para crescer automaticamente em blocos de **10 GB** de armazenamento. Questões podem abordar cenários de escalabilidade e otimização de custos.
+
+📌 Se o armazenamento de um cluster Amazon DocumentDB atingir 500 GB, qual será o próximo incremento de armazenamento automático?  
+- ✅ 510 GB (incremento automático de 10 GB)  
+
+📌 Uma aplicação está enfrentando alta latência nas consultas de leitura no Amazon DocumentDB. Qual seria a solução mais adequada para melhorar a performance sem modificar a aplicação?  
+- ✅ Adicionar réplicas de leitura para distribuir a carga de leitura em diferentes AZs  
+
+---
+
+> Perguntas sobre **segurança e criptografia** no Amazon DocumentDB geralmente exploram autenticação com **IAM**, criptografia em trânsito (SSL/TLS) e criptografia em repouso com **AWS KMS**.
+
+📌 Uma organização precisa garantir que os dados armazenados no Amazon DocumentDB estejam criptografados em repouso e em trânsito. Quais práticas atenderiam a esses requisitos?  
+- ✅ Usar criptografia com AWS KMS para dados em repouso e configurar conexões SSL/TLS para tráfego seguro em trânsito.  
+
+:::

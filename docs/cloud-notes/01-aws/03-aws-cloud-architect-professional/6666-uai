@@ -6,42 +6,22 @@ Adicione explicações sobre o caso acho necessário para tornar os itens mais f
 Faça isso para a documentação abaixo:
 
 
+### Executando Jobs na AWS
 
-### Amazon SNS
+- As soluções são várias de variam de acordo com a demanda.
+  - 1 - Bom para longas execuções, mas não escala, há necessidade de gerenciamento de infraestrutura.
+  - 2 - Escala bem, porém tem as limitações do Lambda (tempo de execução).
+  - 3 - Reativo a diversos tipos de eventos, porém tem as limitações do Lambda (tempo de execução).
+  - 4 - Bom para jobs longos um custo maior e é mais complexo de implementar.
+  - 5 - Bom para jobs longos, não há necessidade de gerenciamento de infraestrutura.
+  - 6 - Bom para execução de dados para BigData.
+    ![image-20230221180929791](assets/image-20230221180929791.png)
 
-- Simple Notification Service.
-- Tem escopo regional. Gerenciado pela AWS.
-- Produtor -> **envia** > topico -> **envia** > assinante (pub/sub pattern).
-- O tópico da **push** na mensagem para os assinantes.
-- Usado quando se precisa notificar varios sistemas.
-- **Cada tópico pode ter mais 12 milhões de assinantes.**
-- **Limite de 100000 tópicos. (soft Limit)**
-- Não retém mensagens, após notificar o assinante é descartada.
-- **Assinantes (http, email, lambda, mobile, kinesis data firehose).**
-- Caso garantir a ordem de entrega use a SQS FIFO.
-  - Serve para ordenar as mensagens.
-  - Usado para Deduplicação de mensagem
-- **Politica de acesso**.
-  - Permite definir uma política de quem pode enviar mensagens para o tópico.
-  - Semelhande a do SQS.
-- **Encriptação**
-  - Em transito vem habilitado por padrão (HTTPS).
-  - Do lado do servidor, usa a SQS Key (SSE-SNS), mas é possivel usar uma chave criada no KMS (SSE-KMS).
-- **SNS + SQS - Fan Out pattern**
-  - A ideia é usar um tópico SNS na frente de **N** fila para garantir que aquela mensagem possa se processado por **N** sistema, seja para evitar perda de dados ou por causas de serviços que só permitem notificar um único tópico (ex: **S3 events**).
-  - Pode usar em várias regiões.
-    ![fan out](assets/image-20210902211203812-1676968809224-3.png)
-  - **Message Filtering** - permite filtrar as mensagem e notificar os assinantes de acordo com os filtros.
-    - Uma json policy para filtragem.
-      ![image-20230221054138361](assets/image-20230221054138361.png)
-- Tem integração com o **Kinessis data firehose.**
-  ![image-20230221055222919](assets/image-20230221055222919.png)
-- **Retry**
-  - Caso o subscrito do tópico esteja fora há um processo de retry definido via policy.
-  - Caso não seja um serviço AWS, tem que se configurar uma política de retry.
-    ![image-20230221060719941](assets/image-20230221060719941.png)
-  - Em ultimo caso pode se uma uma DLQ.
-    - E adicionado junto a subscrição
-      ![image-20230221061229092](assets/image-20230221061229092.png)
+### Pipelines para trabalhar com dados
 
----
+- Analise de dados
+  ![image-20230221191437913](assets/image-20230221191437913.png)
+- Ingestão de dados Big Data
+  ![image-20230221191554977](assets/image-20230221191554977.png)
+- Comparação de tecnologias
+  ![image-20230221191808657](assets/image-20230221191808657.png)
