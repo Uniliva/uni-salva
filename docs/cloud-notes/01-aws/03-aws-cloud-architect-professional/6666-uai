@@ -5,23 +5,3 @@ Adicione explicações sobre o caso acho necessário para tornar os itens mais f
 - Não der as DICAS de Prova Agora, vou te pedir depois
 Faça isso para a documentação abaixo:
 
-
-### Executando Jobs na AWS
-
-- As soluções são várias de variam de acordo com a demanda.
-  - 1 - Bom para longas execuções, mas não escala, há necessidade de gerenciamento de infraestrutura.
-  - 2 - Escala bem, porém tem as limitações do Lambda (tempo de execução).
-  - 3 - Reativo a diversos tipos de eventos, porém tem as limitações do Lambda (tempo de execução).
-  - 4 - Bom para jobs longos um custo maior e é mais complexo de implementar.
-  - 5 - Bom para jobs longos, não há necessidade de gerenciamento de infraestrutura.
-  - 6 - Bom para execução de dados para BigData.
-    ![image-20230221180929791](assets/image-20230221180929791.png)
-
-### Pipelines para trabalhar com dados
-
-- Analise de dados
-  ![image-20230221191437913](assets/image-20230221191437913.png)
-- Ingestão de dados Big Data
-  ![image-20230221191554977](assets/image-20230221191554977.png)
-- Comparação de tecnologias
-  ![image-20230221191808657](assets/image-20230221191808657.png)

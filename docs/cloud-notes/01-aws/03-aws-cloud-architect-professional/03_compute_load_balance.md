@@ -413,8 +413,6 @@ O AWS App Runner é uma opção para quem busca simplicidade na implementação 
 ![LB SSL Certificates](assets/image-20210819054122152.png)
 ![SNI](assets/image-20210819054148720.png)
 
-Aqui está o conteúdo corrigido e melhorado com explicações adicionais, mantendo as imagens e usando admonitions do Docusaurus para destacar informações importantes para a certificação. 🚀  
-
 ---
 
 > Auto Scaling Group (ASG)
