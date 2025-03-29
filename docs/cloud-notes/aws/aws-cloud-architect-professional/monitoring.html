@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/monitoring" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Monitoramento | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Monitoramento | Uniii docs"><meta data-rh="true" name="description" content="AWS CloudWatch"><meta data-rh="true" property="og:description" content="AWS CloudWatch"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.c5418a74.js" defer="defer"></script>
+<script src="/assets/js/main.333d2198.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/service_communication">Comunicação entre serviço</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering">Engenharia de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring">Monitoramento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Monitoramento</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Monitoramento</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cloudwatch">AWS CloudWatch<a href="#aws-cloudwatch" class="hash-link" aria-label="Link direto para AWS CloudWatch" title="Link direto para AWS CloudWatch">​</a></h2>
+<blockquote>
+<p>O <strong>Amazon CloudWatch</strong> é um serviço de monitoramento e observabilidade que coleta <strong>logs, métricas e eventos</strong> de serviços AWS e aplicações. Ele permite visualizar dados, criar alarmes e acionar ações automáticas com base em métricas.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Logs</p>
+</blockquote>
+<ul>
+<li>O <strong>CloudWatch Logs</strong> coleta métricas e logs de serviços AWS e aplicações personalizadas.</li>
+<li>Os logs podem ser enviados de diversas fontes, incluindo:<!-- -->
+<ul>
+<li><strong>SDK, CloudWatch Logs Agent e CloudWatch Unified Agent</strong>.</li>
+<li><strong>Serviços AWS</strong> como Elastic Beanstalk, ECS, Lambda, VPC Flow Logs, API Gateway e CloudTrail.</li>
+<li><strong>Route 53</strong> (logs de consultas DNS).</li>
+</ul>
+</li>
+<li>Logs podem ser <strong>exportados para o Amazon S3</strong> ou enviados via stream para o <strong>Amazon OpenSearch</strong> para análises avançadas.</li>
+<li><strong>Estrutura dos logs no CloudWatch:</strong>
+<ul>
+<li><strong>LogGroup</strong> → Agrupamento de logs de uma aplicação ou sistema.</li>
+<li><strong>LogStream</strong> → Fluxo contínuo de logs de um recurso específico.</li>
+</ul>
+</li>
+<li>Possibilidade de <strong>definir retenção</strong> e configurar <strong>exportação periódica</strong> para o Amazon S3.</li>
+<li>Suporte a <strong>criptografia KMS</strong> nos logs.</li>
+<li>Permite visualizar logs em tempo real através do <strong>CloudWatch Logs Insights</strong> ou via <strong>CLI</strong>.</li>
+</ul>
+<p><strong>Destinos suportados para envio de logs:</strong></p>
+<ul>
+<li><strong>Amazon Kinesis Data Streams</strong></li>
+<li><strong>Amazon Kinesis Firehose</strong></li>
+<li><strong>AWS Lambda</strong></li>
+<li><strong>Amazon OpenSearch</strong></li>
+<li><strong>Amazon S3</strong> (Exportação)</li>
+<li>Suporta apenas criptografia <strong>AES-256 (SSE-S3), não suporta SSE-KMS</strong>.</li>
+<li>Pode levar até <strong>12 horas</strong> para exportar.</li>
+<li>Exportação não é automática, exige configuração manual ou uso da API <strong>CreateExportTask</strong>.</li>
+</ul>
+<p><strong>Exemplo de arquitetura de logs:</strong></p>
+<p><img decoding="async" loading="lazy" alt="Subscrição de logs" src="/assets/images/image-20230222054249909-7a695da7827b01d222c5b68680bc6ceb.png" width="1000" height="513" class="img_ev3q"></p>
+<p><strong>Agregação de logs multi-região:</strong></p>
+<p><img decoding="async" loading="lazy" alt="Agregação de logs" src="/assets/images/image-20230222054341446-a9e8a42bea925bd0bfb7623c3d01a66e.png" width="1157" height="594" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🚀 <strong>Importante</strong></div><div class="admonitionContent_BuS1"><p>A maioria dos problemas no CloudWatch Logs ocorre por <strong>permissões configuradas incorretamente</strong> no IAM.</p></div></div>
+<ul>
+<li>O CloudWatch permite <strong>filtrar logs</strong> usando expressões regulares, identificando padrões e acionando <strong>alarmes</strong> com base em eventos críticos.</li>
+<li>Por padrão, <strong>instâncias EC2 não enviam logs</strong> automaticamente. Para capturar logs, é necessário configurar o <strong>CloudWatch Agent</strong>.<!-- -->
+<ul>
+<li>O <strong>CloudWatch Unified Agent</strong> deve ser instalado manualmente nas instâncias EC2 para envio de logs.</li>
+<li>É necessário configurar uma <strong>IAM Policy</strong> com permissões adequadas.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Arquitetura do CloudWatch Unified Agent:</strong></p>
+<p><img decoding="async" loading="lazy" alt="Unified Agent" src="/assets/images/image-20210906093405257-d35974c3206210cd2dc309cb0920dc29.png" width="882" height="435" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Métricas</p>
+</blockquote>
+<ul>
+<li>O CloudWatch coleta métricas automaticamente dos serviços AWS, permitindo monitoramento e automação.</li>
+<li>Modelo de funcionamento:<!-- -->
+<ul>
+<li><strong>Métricas</strong> →&gt; Thresholds (limites definidos)** →&gt; Açõe</li>
+</ul>
+</li>
+<li>Alarmes podem ser criados com base nas métricas e acionam ações, como:<!-- -->
+<ul>
+<li><strong>Publicação em um tópico SNS</strong> para notificações.</li>
+<li><strong>Disparo de um Auto Scaling Policy</strong> para ajuste de recursos.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Tipos de métricas no CloudWatch:</strong></p>
+<ul>
+<li><strong>Métricas padrão</strong> (coletadas a cada <strong>5 minutos</strong>).</li>
+<li><strong>Métricas detalhadas</strong> (opcional, com custo adicional, permite granularidade de até <strong>1 segundo</strong>).</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>💰 <strong>Free Tier</strong></div><div class="admonitionContent_BuS1"><p>O plano gratuito do CloudWatch inclui <strong>10 métricas detalhadas</strong>.</p></div></div>
+<p><img decoding="async" loading="lazy" alt="Monitoramento de métricas" src="/assets/images/image-20210906081300936-81f7c237b843b62e42b3f7415f79c44f.png" width="703" height="334" class="img_ev3q"></p>
+<ul>
+<li><strong>Criação de métricas personalizadas</strong> pode ser feita via API <strong>putMetricData</strong> no SDK/CLI.</li>
+<li><strong>Resolução da métrica:</strong>
+<ul>
+<li><strong>Standard</strong> → Coleta a cada <strong>1 minuto</strong>.</li>
+<li><strong>High Resolution</strong> → Permite granularidade de <strong>1, 5, 10 ou 30 segundos</strong> (custo adicional).</li>
+</ul>
+</li>
+<li>O CloudWatch permite envio de métricas <strong>retroativas</strong> (até 2 semanas) e métricas futuras (até 2 horas).</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>❗ <strong>Monitoramento de Uso de Memória</strong></div><div class="admonitionContent_BuS1"><p>Por padrão, <strong>o uso de memória não é monitorado</strong> no CloudWatch. Para capturar essa métrica, é necessário configurar métricas customizadas.</p></div></div>
+<hr>
+<blockquote>
+<p>Alarmes</p>
+</blockquote>
+<ul>
+<li>Alarmes no CloudWatch permitem definir <strong>gatilhos automáticos</strong> com base nas métricas coletadas.</li>
+<li>Três estados possíveis:<!-- -->
+<ul>
+<li>✅ <strong>OK</strong> → Condição dentro dos parâmetros.</li>
+<li>⚠️ <strong>INSUFFICIENT_DATA</strong> → Dados insuficientes para avaliação.</li>
+<li>🚨 <strong>ALARM</strong> → Condição atingiu um valor crítico.</li>
+</ul>
+</li>
+<li>Alarmes podem ser acionados por métricas e filtros.</li>
+<li>São amplamente utilizados para:<!-- -->
+<ul>
+<li><strong>Auto Scaling de instâncias EC2</strong>.</li>
+<li><strong>Monitoramento de saúde de aplicações e infraestrutura</strong>.</li>
+<li><strong>Acionamento de eventos via SNS</strong>.</li>
+</ul>
+</li>
+<li>Suporte a integração com <strong>Amazon EventBridge</strong> para automação e integração com outros serviços AWS.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Dashboards</p>
+</blockquote>
+<ul>
+<li>O CloudWatch permite a criação de <strong>Dashboards personalizados</strong> para visualização e monitoramento de métricas.</li>
+<li>Os dashboards são <strong>globais</strong>, permitindo visualizar métricas de diferentes <strong>contas AWS e regiões</strong>.</li>
+<li>É possível compartilhar dashboards com terceiros usando <strong>Amazon Cognito</strong>.</li>
+<li><strong>Custo dos dashboards:</strong>
+<ul>
+<li>🚀 <strong>Até 3 dashboards são gratuitos</strong> no Free Tier.</li>
+<li>💰 <strong>Dashboards adicionais custam $3/mês por dashboard</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente testam <strong>CloudWatch Logs e a integração com outros serviços da AWS</strong>, pedindo para identificar a melhor abordagem para monitoramento, retenção de logs e exportação de dados.</p>
+</blockquote><p>📌 Uma equipe de segurança precisa armazenar logs do <strong>CloudWatch Logs</strong> a longo prazo para fins de auditoria. Esses logs devem ser criptografados e exportados automaticamente para o <strong>Amazon S3</strong>. Qual das seguintes afirmações é verdadeira?</p><ul>
+<li>✅ Os logs podem ser exportados para o S3, mas apenas com criptografia <strong>AES-256 (SSE-S3)</strong>, pois o <strong>S3-KMS não é compatível</strong>.</li>
+</ul><p>📌 Um arquiteto de soluções deseja configurar um fluxo contínuo de logs do <strong>CloudWatch Logs</strong> para análise em tempo real em um cluster do <strong>Amazon OpenSearch</strong>. Qual solução ele deve utilizar?</p><ul>
+<li>✅ Criar uma <strong>subscription filter</strong> para direcionar os logs ao <strong>Amazon OpenSearch</strong>.</li>
+</ul><hr><blockquote>
+<p>O <strong>CloudWatch Metrics</strong> é um serviço essencial para monitoramento na AWS, mas métricas detalhadas e personalizadas têm um custo adicional.</p>
+</blockquote><p>📌 Uma aplicação em <strong>EC2</strong> requer métricas de <strong>uso de memória</strong> para análise de performance. Qual é a melhor abordagem para coletar essas métricas?</p><ul>
+<li>✅ Usar o <strong>CloudWatch Unified Agent</strong>, pois métricas de memória não são coletadas por padrão.</li>
+</ul><p>📌 Um arquiteto precisa configurar um <strong>alarme</strong> que interrompa uma instância EC2 caso o uso da CPU fique abaixo de 10% por mais de 30 minutos. Qual serviço pode ser utilizado para automatizar essa ação?</p><ul>
+<li>✅ Criar um <strong>CloudWatch Alarm</strong> acionando uma ação de <strong>EC2 Auto Scaling</strong> para interromper a instância.</li>
+</ul><hr><blockquote>
+<p>O <strong>CloudWatch Dashboards</strong> permite visualizar métricas de diferentes regiões e contas AWS em um único painel, sendo uma solução eficiente para monitoramento centralizado.</p>
+</blockquote><p>📌 Uma equipe quer compartilhar um <strong>Dashboard</strong> do CloudWatch com um parceiro externo, mas sem conceder acesso direto à conta AWS. Qual abordagem pode ser utilizada?</p><ul>
+<li>✅ Configurar o <strong>Amazon Cognito</strong> para autenticação e compartilhamento seguro do painel.</li>
+</ul></div></div>
+<hr>
+<p>Aqui está a versão corrigida e melhorada da sua documentação sobre <strong>AWS Synthetics Canary</strong>, seguindo o padrão de formatação que você pediu:</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-synthetics-canary">AWS Synthetics Canary<a href="#aws-synthetics-canary" class="hash-link" aria-label="Link direto para AWS Synthetics Canary" title="Link direto para AWS Synthetics Canary">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Synthetics Canary</strong> é um serviço que permite monitorar a saúde de APIs e aplicações web, simulando o comportamento de usuários para detectar problemas antes que eles afetem clientes reais. Ele executa <strong>scripts automatizados</strong> que testam APIs, URLs e sites, verificando latência, disponibilidade e funcionalidade.</p>
+<blockquote>
+<p>Funcionalidades principais:</p>
+</blockquote>
+<ul>
+<li>Funciona como um <strong>robô de monitoramento</strong> que detecta problemas e pode acionar correções automáticas, como ajustes em <strong>Application Load Balancers (ALB)</strong> ou <strong>DNS</strong> para redirecionamento de tráfego.</li>
+<li>Suporta <strong>scripts personalizados</strong> em <strong>Node.js</strong> e <strong>Python</strong> para validar respostas de APIs, status HTTP e até capturar screenshots da interface.</li>
+<li>Pode ser <strong>agendado</strong> para execução única ou em intervalos regulares.</li>
+<li>Integração com o navegador <strong>Google Chrome</strong>, permitindo testes em páginas da web.</li>
+<li><strong>Armazena logs, métricas e capturas de tela</strong> no Amazon S3 para análise posterior.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Monitoramento com AWS Synthetics Canary" src="/assets/images/image-20230222053053925-38a1156979a854f5d1e1a45255bd7b02.png" width="1083" height="484" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Casos de Uso</p>
+</blockquote>
+<blockquote>
+<p>1️⃣ Teste de APIs</p>
+</blockquote>
+<ul>
+<li>Verifica a <strong>latência e a resposta</strong> das APIs antes que falhas impactem os usuários finais.</li>
+<li>Pode ser integrado ao <strong>CloudWatch</strong> para geração de métricas e alarmes.</li>
+</ul>
+<blockquote>
+<p>2️⃣ Monitoramento de Websites</p>
+</blockquote>
+<ul>
+<li>Testa <strong>tempo de carregamento</strong>, componentes visuais e funcionalidade de botões e formulários.</li>
+<li>Suporte a captura de <strong>screenshots</strong> e registro de logs detalhados.</li>
+</ul>
+<blockquote>
+<p>3️⃣ Automação de Diagnóstico</p>
+</blockquote>
+<ul>
+<li>Caso um erro seja detectado, pode disparar eventos para <strong>AWS Lambda</strong> ou <strong>Route 53</strong> para redirecionar o tráfego para um endpoint saudável.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O Canary pode acessar <strong>headers, cookies e tokens</strong> para autenticação em APIs protegidas.</li>
+<li>Pode ser configurado para armazenar os <strong>resultados de cada execução</strong> em <strong>Amazon CloudWatch Logs</strong> e <strong>Amazon S3</strong>.</li>
+<li>Suporte para execução em diferentes <strong>regiões da AWS</strong>, garantindo monitoramento global.</li>
+<li>Permite definir <strong>timeouts</strong>, garantindo que APIs lentas ou indisponíveis sejam detectadas rapidamente.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões podem abordar <strong>como o AWS Synthetics Canary detecta falhas em APIs e websites</strong>, além de sua integração com outros serviços para automação de respostas a incidentes.</p>
+</blockquote><p>📌 Uma empresa quer monitorar uma <strong>API crítica</strong> para garantir que ela responda corretamente e dentro do tempo esperado. Caso a API falhe, o tráfego deve ser redirecionado automaticamente para uma versão secundária hospedada em outra região. Qual solução AWS pode ser utilizada?</p><ul>
+<li>✅ <strong>AWS Synthetics Canary para monitoramento</strong> + <strong>Amazon Route 53 Failover Routing</strong> para redirecionamento automático.</li>
+</ul><p>📌 Uma empresa precisa testar automaticamente a <strong>latência e disponibilidade</strong> de um website e gerar <strong>relatórios de tempo de resposta</strong>. Os logs e capturas de tela devem ser armazenados para auditoria. Qual abordagem AWS é recomendada?</p><ul>
+<li>✅ <strong>AWS Synthetics Canary</strong> armazenando logs e capturas no <strong>Amazon S3</strong> e <strong>CloudWatch Logs</strong>.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS Synthetics Canary</strong> pode ser configurado para testar autenticação em APIs e sites protegidos, garantindo que tokens e credenciais sejam processados corretamente.</p>
+</blockquote><p>📌 Um time de segurança deseja monitorar uma API protegida que exige <strong>autenticação com token JWT</strong>. Como o Canary pode ser configurado para isso?</p><ul>
+<li>✅ Configurando o Canary para incluir <strong>headers de autenticação</strong> e tokens JWT nos testes.</li>
+</ul><p>📌 Uma aplicação global deseja monitorar <strong>disponibilidade em várias regiões</strong> e gerar alertas caso ocorra degradação de serviço. Qual estratégia AWS deve ser usada?</p><ul>
+<li>✅ Criar <strong>Canaries distribuídos</strong> em múltiplas regiões e integrar com <strong>Amazon CloudWatch Alarms</strong> para notificações.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-events-e-aws-eventbridge">AWS Events e AWS EventBridge<a href="#aws-events-e-aws-eventbridge" class="hash-link" aria-label="Link direto para AWS Events e AWS EventBridge" title="Link direto para AWS Events e AWS EventBridge">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Events</strong> permite a criação de eventos para disparar ações automaticamente dentro da AWS, seja com base em eventos gerados por serviços da AWS ou em <strong>agendamentos programados</strong>. Já o <strong>AWS EventBridge</strong> é uma evolução do AWS Events, com recursos adicionais, incluindo suporte para <strong>integração com serviços SaaS externos</strong>, <strong>arquivamento de eventos</strong> e <strong>filtros avançados</strong>.</p>
+<hr>
+<blockquote>
+<p>AWS Events</p>
+</blockquote>
+<p>O <strong>AWS Events</strong> permite criar eventos e definir <strong>regras</strong> para disparar ações com base nesses eventos.</p>
+<blockquote>
+<p>Funcionalidades</p>
+</blockquote>
+<ul>
+<li><strong>Intercepta eventos</strong> gerados por serviços AWS, como:<!-- -->
+<ul>
+<li><strong>EC2 Start</strong> → Quando uma instância EC2 é iniciada.</li>
+<li><strong>CodeBuild Failure</strong> → Quando uma compilação falha no AWS CodeBuild.</li>
+<li><strong>S3 Event</strong> → Quando um objeto é criado ou excluído de um bucket S3.</li>
+</ul>
+</li>
+<li>Permite a <strong>criação de eventos agendados</strong> usando expressões <strong>cron</strong> para execuções periódicas.</li>
+<li>Gera eventos no formato <strong>JSON</strong>, que podem ser enviados para diferentes destinos, como:<!-- -->
+<ul>
+<li><strong>SNS (Simple Notification Service)</strong></li>
+<li><strong>SQS (Simple Queue Service)</strong></li>
+<li><strong>Lambda</strong></li>
+<li><strong>Step Functions</strong></li>
+</ul>
+</li>
+</ul>
+<p>📌 <strong>Nota:</strong> O <strong>AWS Events</strong> é mais simples e se limita a eventos internos da AWS, não suportando eventos de fontes externas ou <strong>integração entre contas</strong>.</p>
+<hr>
+<blockquote>
+<p>AWS EventBridge (Ponte de Eventos)</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="EventBridge - Arquitetura" src="/assets/images/image-20230222055737522-f6077d126d2742250aa8c759e854df93.png" width="1170" height="532" class="img_ev3q"></p>
+<p>O <strong>AWS EventBridge</strong> é uma evolução do AWS Events, trazendo novas funcionalidades que o tornam mais flexível e poderoso para arquiteturas baseadas em eventos (<strong>event-driven architecture</strong>).</p>
+<blockquote>
+<p>Principais Recursos</p>
+</blockquote>
+<ul>
+<li><strong>Event Bus (Canal de Eventos):</strong>
+<ul>
+<li>Recebe e processa eventos de diferentes fontes.</li>
+<li>Pode armazenar eventos para análises futuras.</li>
+</ul>
+</li>
+<li><strong>Regras avançadas:</strong>
+<ul>
+<li>Filtragem detalhada de eventos baseada em atributos do JSON.</li>
+<li>Integração com serviços como <strong>Lambda, SQS, SNS e Step Functions</strong>.</li>
+</ul>
+</li>
+<li><strong>Agendamento de Eventos:</strong>
+<ul>
+<li>Assim como o AWS Events, suporta expressões <strong>cron</strong> para execuções recorrentes.</li>
+</ul>
+</li>
+<li><strong>Schemas para eventos:</strong>
+<ul>
+<li>Permite definir formatos de eventos (como JSON ou Avro) para padronizar a comunicação.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Diferenciais do EventBridge</p>
+</blockquote>
+<ul>
+<li><strong>Integração com aplicações SaaS externas</strong>, como <strong>Datadog, Zendesk, Segment</strong>.</li>
+<li><strong>Event Bus personalizado</strong>, permitindo que aplicações próprias postem eventos diretamente no EventBridge.</li>
+<li><strong>Suporte a múltiplas contas AWS</strong>, permitindo agregar eventos de diferentes contas.</li>
+</ul>
+<p>📌 <strong>Nota:</strong> Para acessar um <strong>event bus</strong>, é necessário configurar permissões baseadas em <strong>políticas de recurso</strong>.</p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>AWS Events</strong> é um serviço mais simples, focado em eventos internos da AWS.</li>
+<li>O <strong>EventBridge</strong> amplia as capacidades do AWS Events, permitindo <strong>integração com serviços externos</strong> e <strong>arquiteturas mais flexíveis</strong>.</li>
+<li>Diferente do <strong>SNS</strong>, o EventBridge permite <strong>filtros mais avançados</strong> baseados em atributos do evento.</li>
+<li>O EventBridge será o <strong>substituto do AWS Events</strong> no futuro, mas, por enquanto, ambos coexistem.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>serviços de monitoramento e eventos da AWS</strong>, como o <strong>EventBridge</strong> e o <strong>AWS Events</strong>. Fique atento às diferenças entre eles, especialmente em relação às integrações externas e ao uso de <strong>event buses</strong>.</p>
+</blockquote><p>📌 Uma empresa precisa monitorar eventos gerados por seu sistema SaaS e disparar ações automáticas quando determinados eventos ocorrerem. Qual serviço da AWS deve ser utilizado?</p><ul>
+<li>✅ AWS EventBridge</li>
+</ul><p>📌 O <strong>AWS EventBridge</strong> pode ser utilizado para integrar com <strong>aplicações SaaS</strong>. Qual dos seguintes serviços pode enviar eventos para o <strong>EventBridge</strong>?</p><ul>
+<li>✅ Datadog, Zendesk, Segment</li>
+</ul><hr><blockquote>
+<p>Questões sobre <strong>eventos e regras</strong> com o <strong>AWS Events</strong> e o <strong>AWS EventBridge</strong> costumam destacar a criação de <strong>regras baseadas em eventos</strong> e <strong>destinos</strong> para esses eventos, como <strong>SNS</strong>, <strong>SQS</strong> ou <strong>Lambda</strong>.</p>
+</blockquote><p>📌 Você criou um evento para monitorar o status de uma instância EC2 e deseja que o evento dispare uma notificação sempre que a instância mudar para o estado &quot;running&quot;. Qual serviço da AWS pode ser usado para esse tipo de configuração?</p><ul>
+<li>✅ AWS Events</li>
+</ul><p>📌 Para centralizar eventos em uma única conta AWS, qual recurso do <strong>AWS EventBridge</strong> você deve configurar?</p><ul>
+<li>✅ Event Bus</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-x-ray">AWS X-Ray<a href="#aws-x-ray" class="hash-link" aria-label="Link direto para AWS X-Ray" title="Link direto para AWS X-Ray">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS X-Ray</strong> é um serviço de rastreamento distribuído que permite analisar e depurar aplicações em ambientes de nuvem. Ele oferece uma visualização detalhada do fluxo de solicitações e respostas, ajudando a identificar problemas de desempenho e falhas nas aplicações.</p>
+<blockquote>
+<p>Funcionalidades principais:</p>
+</blockquote>
+<ul>
+<li><strong>Análise visual</strong>: O AWS X-Ray permite mapear visualmente o comportamento das aplicações, mostrando como as solicitações fluem entre os diferentes componentes da aplicação.</li>
+<li><strong>Rastreamento distribuído</strong>: Ele coleta dados detalhados sobre o tempo de resposta, erros e latência das solicitações, ajudando a detectar gargalos e falhas.</li>
+<li><strong>Integrações com vários serviços AWS</strong>: O X-Ray se integra diretamente com serviços como <strong>EC2</strong>, <strong>ECS</strong>, <strong>Lambda</strong>, <strong>Elastic Beanstalk</strong> e <strong>API Gateway</strong>, permitindo rastrear aplicativos executados em diferentes tipos de infraestrutura.</li>
+<li><strong>Análise de erros e performance</strong>: Oferece uma visão clara dos pontos de falha na aplicação, como falhas de código, problemas de desempenho e latência.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Casos de Uso</p>
+</blockquote>
+<ul>
+<li>1️⃣ <strong>Rastreamento de Microservices</strong>
+<ul>
+<li>O X-Ray é útil para monitorar arquiteturas baseadas em microservices, permitindo rastrear as interações entre diferentes serviços e identificar possíveis falhas.</li>
+</ul>
+</li>
+<li>2️⃣ <strong>Análise de Latência</strong>
+<ul>
+<li>Ideal para investigar problemas de latência e desempenho em tempo real, identificando quais partes da aplicação estão demorando mais para responder.</li>
+</ul>
+</li>
+<li>3️⃣ <strong>Depuração de Aplicações</strong>
+<ul>
+<li>Quando surgem falhas ou erros na aplicação, o AWS X-Ray ajuda a localizar a origem do problema, analisando as transações e identificando os serviços com falhas.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O AWS X-Ray pode ser configurado para rastrear transações de ponta a ponta em tempo real, oferecendo visibilidade completa de todas as solicitações em sua aplicação.</li>
+<li>O serviço gera <strong>traces</strong> que mostram como as requisições estão sendo processadas ao longo de todos os serviços envolvidos, como <strong>Lambda</strong>, <strong>EC2</strong> e <strong>ECS</strong>.</li>
+<li>É possível aplicar <strong>filtros personalizados</strong> para identificar serviços e componentes específicos que podem estar afetando o desempenho da aplicação.</li>
+<li>O X-Ray também pode ser integrado ao <strong>CloudWatch</strong> para gerar métricas de desempenho e configurar alarmes para problemas identificados.</li>
+</ul></div></div>
+<p><img decoding="async" loading="lazy" alt="AWS X-Ray" src="/assets/images/image-20230222055737522-f6077d126d2742250aa8c759e854df93.png" width="1170" height="532" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span><strong>Dica para a prova 🎯</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>Questões frequentemente abordam <strong>a integração do AWS X-Ray com outros serviços AWS</strong>, como EC2, Lambda, ECS e API Gateway, para rastrear o comportamento de aplicativos distribuídos.</p>
+</blockquote><p>📌 Uma aplicação composta por microservices que roda no <strong>Amazon EC2</strong> e <strong>AWS Lambda</strong> apresenta problemas de latência. Qual serviço pode ser utilizado para rastrear a performance e encontrar gargalos de forma detalhada?</p><ul>
+<li>✅ AWS X-Ray</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS X-Ray</strong> permite a análise de <strong>latência e erros</strong> em aplicações distribuídas, proporcionando <strong>visibilidade de ponta a ponta</strong> sobre o tráfego de requisições.</p>
+</blockquote><p>📌 Sua aplicação está enfrentando lentidão e você precisa identificar quais serviços estão causando problemas de latência. Qual serviço você deve utilizar para rastrear a execução das requisições de ponta a ponta?</p><ul>
+<li>✅ AWS X-Ray</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS X-Ray</strong> gera <strong>traces</strong> que ajudam a identificar problemas de desempenho ao mostrar as interações entre os componentes de uma aplicação.</p>
+</blockquote><p>📌 Um time de desenvolvimento quer rastrear as transações de sua aplicação para diagnosticar falhas. Qual é a principal funcionalidade do AWS X-Ray que permite esse rastreamento detalhado?</p><ul>
+<li>✅ Geração de <strong>traces</strong> para monitoramento de transações de ponta a ponta.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS X-Ray</strong> pode ser configurado para <strong>filtrar</strong> transações e identificar problemas de forma mais eficiente.</p>
+</blockquote><p>📌 Como você pode configurar o AWS X-Ray para rastrear transações específicas de sua aplicação?</p><ul>
+<li>✅ Usando <strong>filtros personalizados</strong> no AWS X-Ray para rastrear apenas transações específicas.</li>
+</ul><hr><blockquote>
+<p>O <strong>AWS X-Ray</strong> oferece integração com <strong>CloudWatch</strong> para geração de métricas e alarmes, permitindo monitoramento contínuo.</p>
+</blockquote><p>📌 Para configurar alertas sobre problemas de desempenho em sua aplicação, qual serviço você pode integrar ao AWS X-Ray para gerar métricas e alarmes?</p><ul>
+<li>✅ Amazon CloudWatch</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="personal-health-dashboard">Personal Health Dashboard<a href="#personal-health-dashboard" class="hash-link" aria-label="Link direto para Personal Health Dashboard" title="Link direto para Personal Health Dashboard">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>Personal Health Dashboard</strong> é um serviço da AWS que fornece visibilidade detalhada sobre eventos de manutenção e falhas nos serviços AWS que podem impactar sua operação. Ele ajuda a monitorar o estado dos recursos em uso, alertando sobre eventos que podem afetar a disponibilidade de sua infraestrutura.</p>
+<blockquote>
+<p>Funcionalidades principais:</p>
+</blockquote>
+<ul>
+<li><strong>Visibilidade de eventos de manutenção</strong>: Mostra eventos de manutenção planejada ou não planejada que podem afetar a operação dos serviços AWS que você está utilizando.</li>
+<li><strong>Ações de remediação</strong>: Fornece uma lista de ações que você pode tomar para remediar problemas causados por eventos de manutenção, garantindo que sua operação não seja impactada.</li>
+<li><strong>Acesso via API</strong>: É possível acessar o <strong>Personal Health Dashboard</strong> programaticamente por meio da AWS API, permitindo integrações automatizadas.</li>
+<li><strong>Integração com EventBridge</strong>: Você pode usar o <strong>Amazon EventBridge</strong> para reagir aos eventos de manutenção, como enviar notificações ou realizar ações corretivas automaticamente.</li>
+<li><strong>Organizações AWS</strong>: Se você utiliza a <strong>AWS Organizations</strong>, pode agregar e visualizar eventos de múltiplas contas em uma única visão, proporcionando maior controle e visibilidade em ambientes grandes.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Monitoramento de eventos com Personal Health Dashboard" src="/assets/images/image-20230222061145138-3766b24402f5bf58ea52e9558d3c5154.png" width="446" height="597" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Casos de Uso</p>
+</blockquote>
+<ul>
+<li>1️⃣ <strong>Acompanhamento de Manutenção</strong>
+<ul>
+<li>O Personal Health Dashboard permite que você acompanhe e visualize eventos de manutenção planejada e não planejada para todos os serviços AWS que sua organização utiliza.</li>
+<li>Através dessa visão, você pode tomar medidas para minimizar os impactos sobre sua operação.</li>
+</ul>
+</li>
+<li>2️⃣ <strong>Ações Automatizadas com EventBridge</strong>
+<ul>
+<li>Você pode configurar <strong>EventBridge</strong> para reagir automaticamente a eventos do <strong>Personal Health Dashboard</strong>, como notificações sobre falhas ou até a execução de tarefas automatizadas para mitigar problemas.</li>
+</ul>
+</li>
+<li>3️⃣ <strong>Monitoramento em Ambientes Multicontas</strong>
+<ul>
+<li>Em ambientes onde múltiplas contas AWS estão em uso, o <strong>Personal Health Dashboard</strong> pode ser integrado com a AWS Organizations, permitindo a agregação de eventos em uma única visão para um gerenciamento simplificado.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>Personal Health Dashboard</strong> oferece uma visualização detalhada de problemas operacionais, incluindo a análise de falhas de rede, interrupções de serviço e manutenção programada.</li>
+<li>Utilizando a integração com o <strong>EventBridge</strong>, é possível enviar alertas e automatizar respostas para lidar com eventos de manutenção sem intervenção manual.</li>
+<li>A capacidade de acesso via <strong>API</strong> facilita a criação de integrações com outras ferramentas de monitoramento ou automação utilizadas em sua infraestrutura.</li>
+</ul></div></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/09_monitoring.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Engenharia de dados</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Resumão</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-cloudwatch" class="table-of-contents__link toc-highlight">AWS CloudWatch</a></li><li><a href="#aws-synthetics-canary" class="table-of-contents__link toc-highlight">AWS Synthetics Canary</a></li><li><a href="#aws-events-e-aws-eventbridge" class="table-of-contents__link toc-highlight">AWS Events e AWS EventBridge</a></li><li><a href="#aws-x-ray" class="table-of-contents__link toc-highlight">AWS X-Ray</a></li><li><a href="#personal-health-dashboard" class="table-of-contents__link toc-highlight">Personal Health Dashboard</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
