@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/deployment" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Provisionamento de recursos | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Provisionamento de recursos | Uniii docs"><meta data-rh="true" name="description" content="AWS Elastic Beanstalk"><meta data-rh="true" property="og:description" content="AWS Elastic Beanstalk"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.f9013598.js" defer="defer"></script>
+<script src="/assets/js/main.d31c4266.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/service_communication">Comunicação entre serviço</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering">Engenharia de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring">Monitoramento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment">Provisionamento de recursos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control">Controle de custos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Provisionamento de recursos</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Provisionamento de recursos</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-elastic-beanstalk">AWS Elastic Beanstalk<a href="#aws-elastic-beanstalk" class="hash-link" aria-label="Link direto para AWS Elastic Beanstalk" title="Link direto para AWS Elastic Beanstalk">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Elastic Beanstalk</strong> é um serviço <strong>PaaS (Platform as a Service)</strong> que facilita a implantação e o gerenciamento de aplicações na AWS, sem que o desenvolvedor precise se preocupar com a infraestrutura subjacente. Ele cria e gerencia automaticamente os recursos necessários, como instâncias <strong>EC2</strong>, <strong>Load Balancers</strong>, <strong>Auto Scaling</strong>, <strong>RDS</strong> e <strong>S3</strong>, permitindo que os desenvolvedores foquem apenas no código.</p>
+<blockquote>
+<p>Características Principais:</p>
+</blockquote>
+<ul>
+<li><strong>Facilidade para desenvolvedores</strong>: Permite gerenciar aplicações e visualizar o ambiente de implantação de forma centralizada.</li>
+<li><strong>Suporte a diversas tecnologias</strong>: Suporta aplicações em <strong>Java, .NET, PHP, Node.js, Python, Ruby, Go e Docker</strong>.</li>
+<li><strong>Infraestrutura gerenciada</strong>: Cria automaticamente toda a infraestrutura necessária, bastando fornecer o código da aplicação (exemplo: um <strong>arquivo WAR</strong> para o Tomcat).</li>
+<li><strong>Uso de componentes da AWS</strong>: O <strong>Beanstalk</strong> usa serviços como <strong>EC2, S3, RDS, CloudWatch, IAM, Auto Scaling e ELB</strong> para operar.</li>
+<li><strong>Modelo de PaaS</strong>: Funciona de maneira semelhante ao <strong>Heroku</strong>, permitindo implantar aplicações sem gerenciar diretamente servidores.</li>
+<li><strong>Custo do serviço</strong>: O uso do <strong>Elastic Beanstalk</strong> é gratuito, sendo cobrados apenas os recursos subjacentes consumidos (EC2, S3, etc.).</li>
+<li><strong>Ideal para migração</strong>: Permite <strong>migrar aplicações</strong> para a AWS sem necessidade de gerenciar manualmente a infraestrutura.</li>
+<li><strong>Infraestrutura como código</strong>: Baseia-se no <strong>AWS CloudFormation</strong> para provisionar os recursos.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="AWS Elastic Beanstalk" src="/assets/images/image-20230312103936578-a2149da21b3f5eb85ca925cad3dd31a8.png" width="1070" height="540" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Componentes do Elastic Beanstalk</p>
+</blockquote>
+<ul>
+<li><strong>Aplicação</strong>: Representa o código-fonte e a configuração do ambiente.</li>
+<li><strong>Versão da Aplicação</strong>: Define uma versão específica do código a ser implantado.</li>
+<li><strong>Ambiente</strong>: Local onde a aplicação é executada.</li>
+</ul>
+<blockquote>
+<p>Tipos de Tier no Elastic Beanstalk</p>
+</blockquote>
+<ul>
+<li><strong>Web Tier</strong>: Projetado para aplicações <strong>web</strong>, utiliza um <strong>Load Balancer</strong> para distribuir o tráfego entre as instâncias EC2.</li>
+<li><strong>Worker Tier</strong>: Projetado para <strong>processamento assíncrono</strong>, usa <strong>Amazon SQS</strong> para filas de mensagens e <strong>workers</strong> para processar tarefas em segundo plano.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Tipos de Tier no Beanstalk" src="/assets/images/image-20230807075302611-36eabd62b2ea200f9aec521257a03f3d.png" width="863" height="318" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Modos de Deploy no Elastic Beanstalk</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Single Instance</strong>:</p>
+<ul>
+<li>Usa <strong>apenas uma instância EC2</strong>, sem redundância.</li>
+<li>Recomendado para <strong>ambientes de desenvolvimento e teste</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>High Availability (HA)</strong>:</p>
+<ul>
+<li>Usa múltiplas instâncias com <strong>Load Balancer</strong> e <strong>Auto Scaling</strong>.</li>
+<li>Ideal para <strong>ambientes de produção</strong>, pois garante alta disponibilidade e escalabilidade.</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Modos de Deploy no Beanstalk" src="/assets/images/image-20230807075325181-dab2163c4cffbf7bff87d43d70537a23.png" width="764" height="345" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Exemplo de Arquitetura do Elastic Beanstalk</p>
+</blockquote>
+<p>Nesta arquitetura, o Beanstalk gerencia automaticamente a aplicação distribuindo o tráfego por meio de um <strong>Load Balancer</strong> e garantindo escalabilidade com <strong>Auto Scaling</strong>. O <strong>CloudWatch</strong> pode ser usado para monitorar métricas de desempenho, enquanto um banco de dados <strong>RDS</strong> pode ser integrado para persistência de dados.</p>
+<p><img decoding="async" loading="lazy" alt="Arquitetura Elastic Beanstalk" src="/assets/images/image-20230222062858389-89de18e0bb1d4fcaca580781f7d70f49.png" width="1048" height="294" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>Elastic Beanstalk</strong> suporta <strong>rolling updates</strong>, permitindo atualizar a aplicação sem tempo de inatividade.</li>
+<li>Permite configurar <strong>ambientes Blue/Green Deployment</strong>, facilitando a transição segura entre versões.</li>
+<li>É possível definir <strong>perfis IAM</strong> para controlar o acesso dos recursos usados pelo Beanstalk.</li>
+<li>Pode ser integrado ao <strong>CodePipeline</strong> para <strong>CI/CD</strong>, permitindo deploys automáticos sempre que há mudanças no código.</li>
+<li>Suporta <strong>Custom Platforms</strong>, permitindo criar imagens personalizadas do ambiente de execução.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-codedeploy">AWS CodeDeploy<a href="#aws-codedeploy" class="hash-link" aria-label="Link direto para AWS CodeDeploy" title="Link direto para AWS CodeDeploy">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS CodeDeploy</strong> é um serviço gerenciado que automatiza implantações de código em ambientes <strong>EC2, ECS e Lambda</strong>, garantindo alta disponibilidade e reduzindo o risco de downtime durante os deploys. Ele permite a implementação de diferentes <strong>estratégias de implantação</strong>, como <strong>In-Place</strong> e <strong>Blue/Green</strong>, facilitando a adoção de práticas de <strong>Continuous Deployment (CD)</strong>.</p>
+<hr>
+<blockquote>
+<p>Estratégias de Deploy no AWS CodeDeploy</p>
+</blockquote>
+<p>O <strong>CodeDeploy</strong> oferece duas abordagens principais para implantação:</p>
+<ul>
+<li>
+<p><strong>In-Place (Rolling Update)</strong></p>
+<ul>
+<li>Substitui a versão antiga da aplicação pela nova na mesma instância.</li>
+<li>Disponível <strong>somente para EC2 e Auto Scaling Groups (ASG)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Blue/Green Deployment</strong></p>
+<ul>
+<li>Cria um novo conjunto de recursos e <strong>migra gradualmente o tráfego</strong> para a nova versão.</li>
+<li>Permite <strong>rollback rápido</strong>, pois mantém o ambiente anterior até a conclusão do deploy.</li>
+<li>Utiliza o <strong>Traffic Shifting</strong> para redirecionamento do tráfego, podendo ser:<!-- -->
+<ul>
+<li><strong>Canary</strong> – Direciona uma pequena porcentagem do tráfego para a nova versão e aumenta progressivamente.</li>
+<li><strong>Linear</strong> – Distribui o tráfego igualmente entre as versões até atingir 100%.</li>
+<li><strong>All-at-once</strong> – Direciona 100% do tráfego para a nova versão de uma vez.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>CodeDeploy com EC2</p>
+</blockquote>
+<ul>
+<li>O deploy é configurado utilizando o arquivo <strong>AppSpec.yml</strong>, que define a estrutura da aplicação e os estágios da implantação.</li>
+<li>O <strong>CodeDeploy</strong> aplica as atualizações nas instâncias EC2 <strong>de acordo com a estratégia de deploy escolhida</strong>.</li>
+<li>Pode-se configurar <strong>hooks</strong> para validar o processo de deploy antes e depois da atualização.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Deploy EC2" src="/assets/images/image-20230312110435714-83a94e3d5cb15750e581eb37a91a482e.png" width="1018" height="584" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>CodeDeploy com Auto Scaling Groups (ASG)</p>
+</blockquote>
+<ul>
+<li>O deploy pode ser feito de duas maneiras:<!-- -->
+<ul>
+<li><strong>In-Place</strong> – Substitui parte das instâncias de acordo com a estratégia definida.</li>
+<li><strong>Blue/Green</strong> – Cria um <strong>novo Auto Scaling Group (ASG)</strong> com instâncias atualizadas e usa um <strong>ELB</strong> para rotear o tráfego. Após validação, o ASG antigo é removido.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>CodeDeploy com AWS Lambda</p>
+</blockquote>
+<ul>
+<li>O <strong>CodeDeploy</strong> cria <strong>automaticamente uma nova versão da função Lambda</strong>.</li>
+<li>Para garantir uma transição segura, o CodeDeploy executa uma <strong>Lambda de teste (Pre-Traffic)</strong> para validar a nova versão antes do redirecionamento total do tráfego.</li>
+<li>O <strong>Traffic Shifting</strong> controla o fluxo de tráfego entre as versões até a conclusão do deploy.</li>
+<li><strong>CloudWatch Alarms</strong> podem ser configurados para ativar um <strong>rollback automático</strong> caso ocorram falhas.</li>
+<li>Após a validação, o tráfego é <strong>completamente redirecionado</strong> para a nova versão, e uma nova <strong>Lambda de teste (Post-Traffic)</strong> é executada para validação final.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="CodeDeploy com Lambda" src="/assets/images/image-20230222065311164-26a2385355015b8c052e4d91e950e411.png" width="605" height="544" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="Processo de Deploy Lambda" src="/assets/images/image-20230312110533059-3104dd1d6f0da24a5b234ccd53d1e6c4.png" width="912" height="581" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>SAM Framework e CodeDeploy</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS Serverless Application Model (SAM)</strong> já possui <strong>suporte nativo ao AWS CodeDeploy</strong>, permitindo deploys automatizados em <strong>funções Lambda</strong> sem necessidade de configurações adicionais.</p></div></div>
+<hr>
+<blockquote>
+<p>CodeDeploy com Amazon ECS</p>
+</blockquote>
+<ul>
+<li>O CodeDeploy pode ser utilizado para <strong>atualizar tarefas do ECS</strong> sem interromper o serviço.</li>
+<li>Utiliza <strong>Traffic Shifting</strong> para redirecionar solicitações entre a versão antiga e a nova.</li>
+<li>Após a conclusão do deploy, as <strong>tarefas da versão anterior são encerradas automaticamente</strong>.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Deploy no ECS" src="/assets/images/image-20230222065605029-929efc876396dd7245b4a9f7a63e2e19.png" width="1146" height="518" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="Finalização do Deploy ECS" src="/assets/images/image-20230312110703556-137b3cccf763162aef2b996ae96e4571.png" width="970" height="628" class="img_ev3q"><br>
+<img decoding="async" loading="lazy" alt="ECS - Traffic Shifting" src="/assets/images/image-20230312110804503-d01fc6d45391de296773c4f04e01a5b2.png" width="966" height="629" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>CodeDeploy</strong> pode ser integrado ao <strong>AWS CodePipeline</strong> para automação completa do CI/CD.</li>
+<li>Suporta deploys em <strong>on-premises</strong>, permitindo atualizar aplicações em servidores físicos.</li>
+<li>Pode ser configurado para executar <strong>scripts personalizados</strong> antes e depois do deploy usando o <strong>AppSpec.yml</strong>.</li>
+<li>Em deploys Blue/Green no ECS, o CodeDeploy gerencia automaticamente <strong>tarefas no Fargate ou no EC2</strong>.</li>
+<li><strong>Recomenda-se</strong> usar o <strong>CloudWatch Logs</strong> para monitorar o processo de deploy e identificar falhas rapidamente.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cloudformation">AWS CloudFormation<a href="#aws-cloudformation" class="hash-link" aria-label="Link direto para AWS CloudFormation" title="Link direto para AWS CloudFormation">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS CloudFormation</strong> é um serviço de <strong>Infraestrutura como Código (IaC)</strong> que permite criar, gerenciar e provisionar recursos da AWS usando arquivos no formato <strong>YAML ou JSON</strong>. Ele automatiza a criação e configuração de infraestrutura, garantindo consistência e escalabilidade.</p>
+<p><img decoding="async" loading="lazy" alt="CloudFormation" src="/assets/images/image-20210911100149772-59868c4f293565a0116d8947e09038d2.png" width="701" height="344" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li>Permite <strong>criar e gerenciar quase todos os recursos da AWS (95%)</strong> de forma automatizada.</li>
+<li>Usa <strong>arquivos declarativos (YAML ou JSON)</strong> para descrever a infraestrutura.</li>
+<li><strong>Gerencia automaticamente a ordem de criação dos recursos</strong>, garantindo que dependências sejam respeitadas.</li>
+<li>Aplica <strong>tags uniformes</strong> nos recursos criados, facilitando o gerenciamento e a governança.</li>
+<li>Permite <strong>estimar custos</strong> da infraestrutura antes da criação.</li>
+<li><strong>Suporte a múltiplas contas e regiões</strong> através de <strong>StackSets</strong>, permitindo criar infraestrutura globalmente.</li>
+<li>Possui <strong>suporte a recursos personalizados</strong>, onde o CloudFormation chama uma função <strong>AWS Lambda</strong> para criar, atualizar ou excluir recursos que ele não suporta nativamente (ex: limpar buckets S3 ou criar infraestrutura on-premises).</li>
+<li><strong>É a base para diversos serviços AWS</strong>, como:<!-- -->
+<ul>
+<li><strong>AWS Elastic Beanstalk</strong></li>
+<li><strong>AWS Service Catalog</strong></li>
+<li><strong>AWS Serverless Application Model (SAM)</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>Políticas de Retenção e Exclusão de Recursos</p>
+</blockquote>
+<p>O <strong>AWS CloudFormation</strong> permite definir <strong>políticas de exclusão</strong> para evitar a perda acidental de recursos importantes. Os principais tipos são:</p>
+<ul>
+<li>
+<p><strong>DeletionPolicy=Retain</strong></p>
+<ul>
+<li>Preserva recursos específicos ao excluir um stack.</li>
+<li>Útil para garantir que dados críticos não sejam apagados acidentalmente.</li>
+</ul>
+</li>
+<li>
+<p><strong>DeletionPolicy=Snapshot</strong></p>
+<ul>
+<li>Cria um snapshot do recurso antes da exclusão.</li>
+<li>Aplicável a serviços como:<!-- -->
+<ul>
+<li><strong>Amazon EBS</strong> (volumes)</li>
+<li><strong>Amazon ElastiCache Cluster e Replication Group</strong></li>
+<li><strong>Amazon RDS</strong> (instâncias e clusters)</li>
+<li><strong>Amazon Redshift</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>DeletionPolicy=Delete (padrão)</strong></p>
+<ul>
+<li>Remove completamente os recursos ao excluir o stack.</li>
+<li><strong>Exceção:</strong> No caso de <strong>RDS Clusters</strong>, o comportamento padrão é <code>DeletionPolicy=Snapshot</code>, evitando perda de dados acidental.</li>
+</ul>
+</li>
+<li>
+<p>Para remover um <strong>Amazon S3 Bucket</strong>, ele deve estar <strong>vazio</strong> antes da exclusão.</p>
+</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O CloudFormation permite <strong>atualizar stacks sem downtime</strong> usando a estratégia <strong>Change Sets</strong>, que simula as mudanças antes da aplicação.</li>
+<li>Ele pode ser integrado ao <strong>AWS CodePipeline</strong> para automação do CI/CD.</li>
+<li><strong>StackSets</strong> permitem replicar infraestrutura em várias contas e regiões, garantindo padronização e conformidade.</li>
+<li><strong>Drift Detection</strong> possibilita verificar se há alterações manuais feitas nos recursos que podem afetar a infraestrutura gerenciada pelo CloudFormation.</li>
+<li>É possível utilizar <strong>Transformações (Transforms)</strong> para reutilizar templates e aplicar extensões como <strong>AWS::Serverless-2016-10-31</strong> (SAM).</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-sam---serverless-application-model">AWS SAM - Serverless Application Model<a href="#aws-sam---serverless-application-model" class="hash-link" aria-label="Link direto para AWS SAM - Serverless Application Model" title="Link direto para AWS SAM - Serverless Application Model">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Serverless Application Model (SAM)</strong> é um framework que facilita o desenvolvimento, teste e deploy de aplicações <strong>serverless</strong> na AWS. Ele simplifica a configuração de recursos como <strong>AWS Lambda, API Gateway e DynamoDB</strong>, usando um modelo <strong>YAML</strong> que é transformado em <strong>CloudFormation</strong>.</p>
+<hr>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li><strong>Modelo declarativo em YAML</strong>, simplificando a definição da infraestrutura serverless.</li>
+<li><strong>Execução local</strong>: Permite testar <strong>Lambda, API Gateway e DynamoDB</strong> sem precisar implantar na AWS.</li>
+<li><strong>Deploy com Traffic Shifting</strong> via <strong>AWS CodeDeploy</strong>, reduzindo riscos em atualizações.</li>
+<li><strong>Baseado no AWS CloudFormation</strong>, garantindo escalabilidade e reutilização de infraestrutura.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 <strong>Dica Importante</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS SAM</strong> adiciona transformações ao <strong>CloudFormation</strong>, permitindo que aplicações serverless sejam definidas com <strong>menos código</strong> e mais abstração. Isso torna a configuração de recursos como <strong>Lambda e API Gateway</strong> mais rápida e eficiente.</p></div></div>
+<hr>
+<blockquote>
+<p>Arquitetura com AWS SAM</p>
+</blockquote>
+<p>A arquitetura do SAM permite que desenvolvedores modelem e implantem <strong>infraestrutura e código</strong> de maneira unificada.</p>
+<p><img decoding="async" loading="lazy" alt="AWS SAM Arquitetura" src="/assets/images/image-20230222104901039-4bde6c94d260f1af84f5bdd876cb34eb.png" width="1085" height="501" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li><strong>SAM CLI</strong> permite testar funções <strong>Lambda</strong> localmente antes do deploy.</li>
+<li><strong>SAM Build</strong> compila o código das funções <strong>Lambda</strong> antes da implantação.</li>
+<li><strong>SAM Package &amp; Deploy</strong> automatiza a criação e atualização de stacks no <strong>CloudFormation</strong>.</li>
+<li><strong>SAM Policy Templates</strong> facilita a atribuição de permissões aos recursos AWS.</li>
+<li><strong>SAM Pipelines</strong> pode ser integrado ao <strong>AWS CodePipeline</strong> para CI/CD de aplicações serverless.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><strong>Atenção na Prova</strong></div><div class="admonitionContent_BuS1"><p>Questões da certificação AWS podem perguntar sobre <strong>como implantar aplicações serverless</strong> com <strong>menor tempo de inatividade</strong>. O <strong>SAM + CodeDeploy (Traffic Shifting)</strong> é uma solução recomendada, pois permite implantações com <strong>Canary, Linear e All-at-once</strong> para reduzir riscos.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cdk-cloud-development-kit">AWS CDK (Cloud Development Kit)<a href="#aws-cdk-cloud-development-kit" class="hash-link" aria-label="Link direto para AWS CDK (Cloud Development Kit)" title="Link direto para AWS CDK (Cloud Development Kit)">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Cloud Development Kit (CDK)</strong> é um framework de infraestrutura como código (<strong>IaC</strong>) que permite definir e implantar recursos AWS usando <strong>linguagens de programação familiares</strong>, como <strong>TypeScript, Python, Java, C# e Go</strong>. Diferente do <strong>CloudFormation</strong>, que usa <strong>YAML/JSON</strong>, o <strong>CDK permite escrever código imperativo</strong>, tornando a definição da infraestrutura mais flexível e reutilizável.</p>
+<hr>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li><strong>Infraestrutura como código (IaC)</strong> utilizando linguagens de programação.</li>
+<li><strong>Gera automaticamente templates do CloudFormation</strong> para provisionamento de recursos.</li>
+<li><strong>Componentes reutilizáveis</strong> chamados de <strong>&quot;constructs&quot;</strong>, que permitem abstrações poderosas.</li>
+<li><strong>Suporte a múltiplas linguagens</strong>: TypeScript, Python, Java, C# e Go.</li>
+<li><strong>Melhor integração com práticas de CI/CD</strong>, como <strong>AWS CodePipeline</strong>.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 <strong>Dica Importante</strong></div><div class="admonitionContent_BuS1"><p>Se você já trabalha com desenvolvimento de software, o <strong>AWS CDK</strong> permite definir a infraestrutura com <strong>o mesmo paradigma de programação</strong>, evitando a necessidade de aprender <strong>YAML ou JSON</strong> do CloudFormation.</p></div></div>
+<hr>
+<blockquote>
+<p>Componentes do AWS CDK</p>
+</blockquote>
+<p>O CDK organiza a infraestrutura em <strong>três principais componentes</strong>:</p>
+<ul>
+<li><strong>Constructs</strong>: Blocos básicos de construção que representam um ou mais recursos AWS.</li>
+<li><strong>Stacks</strong>: Unidades de provisionamento que correspondem a stacks do CloudFormation.</li>
+<li><strong>Apps</strong>: Contêiner principal que contém uma ou mais stacks.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="AWS CDK Arquitetura" src="/assets/images/image-20230222120307732-46cf2a3f65a72865655f31d0da5684ba.png" width="1118" height="595" class="img_ev3q"></p>
+<hr>
+<blockquote>
+<p>Exemplo de Código</p>
+</blockquote>
+<p>Aqui está um exemplo simples de código em <strong>TypeScript</strong> que cria uma <strong>função Lambda</strong> e uma <strong>tabela DynamoDB</strong> usando o <strong>AWS CDK</strong>:</p>
+<div class="language-typescript codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-typescript codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">as</span><span class="token plain"> cdk </span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;aws-cdk-lib&#x27;</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">as</span><span class="token plain"> lambda </span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;aws-cdk-lib/aws-lambda&#x27;</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">as</span><span class="token plain"> dynamodb </span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;aws-cdk-lib/aws-dynamodb&#x27;</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">class</span><span class="token plain"> </span><span class="token class-name">MyStack</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">extends</span><span class="token plain"> </span><span class="token class-name">cdk</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">Stack </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token function" style="color:#d73a49">constructor</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">scope</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> cdk</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">App</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> id</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token builtin">string</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> props</span><span class="token operator" style="color:#393A34">?</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> cdk</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">StackProps</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">super</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">scope</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> props</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// Criando uma função Lambda</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> myLambda </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">lambda</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Function</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">this</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;MyFunction&#x27;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      runtime</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> lambda</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">Runtime</span><span class="token punctuation" style="color:#393A34">.</span><span class="token constant" style="color:#36acaa">NODEJS_18_X</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      handler</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;index.handler&#x27;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      code</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> lambda</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">Code</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">fromAsset</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&#x27;lambda&#x27;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// Criando uma tabela DynamoDB</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">dynamodb</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Table</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">this</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;MyTable&#x27;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      partitionKey</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> name</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;id&#x27;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> type</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> dynamodb</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">AttributeType</span><span class="token punctuation" style="color:#393A34">.</span><span class="token constant" style="color:#36acaa">STRING</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      billingMode</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> dynamodb</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">BillingMode</span><span class="token punctuation" style="color:#393A34">.</span><span class="token constant" style="color:#36acaa">PAY_PER_REQUEST</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> app </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">cdk</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">App</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">MyStack</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">app</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;MyCDKStack&#x27;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>CDK synth</strong> converte o código em <strong>CloudFormation templates</strong> automaticamente.</li>
+<li>O <strong>CDK deploy</strong> aplica as mudanças diretamente na AWS.</li>
+<li>O <strong>CDK diff</strong> compara a infraestrutura atual com as alterações planejadas.</li>
+<li><strong>Constructs personalizados</strong> podem ser criados para reutilizar código entre projetos.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><strong>Atenção na Prova</strong></div><div class="admonitionContent_BuS1"><p>Na certificação AWS, pode haver questões comparando <strong>CloudFormation e CDK</strong>. Lembre-se:</p><ul>
+<li>O <strong>CloudFormation</strong> é <strong>declarativo</strong> (YAML/JSON).</li>
+<li>O <strong>CDK</strong> é <strong>imperativo</strong> e usa linguagens de programação.</li>
+<li>Ambos geram <strong>stacks do CloudFormation</strong>, mas o <strong>CDK adiciona camadas de abstração</strong>.</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-service-catalog">AWS Service Catalog<a href="#aws-service-catalog" class="hash-link" aria-label="Link direto para AWS Service Catalog" title="Link direto para AWS Service Catalog">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Service Catalog</strong> permite criar, gerenciar e distribuir catálogos de serviços de TI aprovados dentro de uma organização. Ele é usado para padronizar a infraestrutura e garantir que os recursos AWS utilizados sigam <strong>políticas de governança, segurança e compliance</strong> definidas pela empresa.</p>
+<hr>
+<blockquote>
+<p>Principais Características</p>
+</blockquote>
+<ul>
+<li><strong>Controle centralizado</strong> sobre os serviços AWS disponíveis para as contas da organização.</li>
+<li><strong>Melhoria na governança e conformidade</strong> ao restringir quais serviços podem ser utilizados.</li>
+<li><strong>Criação de catálogos baseados em templates do CloudFormation</strong>, facilitando a padronização da infraestrutura.</li>
+<li><strong>Gerenciamento via IAM Policies</strong>, garantindo que somente usuários autorizados possam provisionar recursos.</li>
+</ul>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 <strong>Dica Importante</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS Service Catalog</strong> é ideal para organizações que desejam fornecer <strong>um conjunto de serviços padronizados</strong> para desenvolvedores, evitando a criação manual de infraestrutura não aprovada.</p></div></div>
+<hr>
+<blockquote>
+<p>Funcionamento do AWS Service Catalog</p>
+</blockquote>
+<ol>
+<li><strong>Administradores</strong> criam templates de produtos utilizando <strong>AWS CloudFormation</strong>.</li>
+<li>Esses produtos são organizados em <strong>portfólios</strong>, que agrupam diferentes serviços disponíveis.</li>
+<li>As permissões de acesso são controladas via <strong>AWS IAM Policies</strong>, garantindo que apenas usuários autorizados possam provisionar recursos.</li>
+<li><strong>Usuários finais</strong> acessam o catálogo e provisionam os produtos conforme necessário, sem precisar criar manualmente cada recurso na AWS.</li>
+</ol>
+<hr>
+<blockquote>
+<p>Componentes do AWS Service Catalog</p>
+</blockquote>
+<ul>
+<li><strong>Produto</strong>: Um recurso ou conjunto de recursos AWS definido via <strong>CloudFormation</strong>.</li>
+<li><strong>Portfólio</strong>: Um grupo de produtos organizados para um determinado conjunto de usuários ou equipes.</li>
+<li><strong>Permissões de Acesso</strong>: Controladas via <strong>IAM Policies</strong>, determinando quais usuários podem acessar e provisionar recursos.</li>
+<li><strong>Versionamento</strong>: Permite gerenciar diferentes versões dos produtos dentro do catálogo.</li>
+<li><strong>Regras de Conformidade</strong>: Definem restrições e configurações obrigatórias para os recursos provisionados.</li>
+</ul>
+<hr>
+<p><img decoding="async" loading="lazy" alt="AWS Service Catalog" src="/assets/images/image-20230312103936578-a2149da21b3f5eb85ca925cad3dd31a8.png" width="1070" height="540" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span><strong>Dica</strong></div><div class="admonitionContent_BuS1"><ul>
+<li>O <strong>AWS Service Catalog</strong> pode ser integrado ao <strong>AWS Organizations</strong> para aplicar padrões de governança em várias contas.</li>
+<li>Os produtos podem ser <strong>automatizados</strong> usando <strong>AWS Lambda e AWS Step Functions</strong>.</li>
+<li>Suporta <strong>CloudFormation StackSets</strong>, permitindo a criação de recursos em <strong>múltiplas contas e regiões</strong>.</li>
+</ul></div></div>
+<hr>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><strong>Atenção na Prova</strong></div><div class="admonitionContent_BuS1"><p>Na certificação <strong>AWS Certified Solutions Architect - Professional</strong>, você pode encontrar questões comparando o <strong>AWS Service Catalog</strong> com <strong>AWS Control Tower e AWS Organizations</strong>. Lembre-se:</p><ul>
+<li>O <strong>Service Catalog</strong> <strong>define e restringe os serviços disponíveis</strong> para os usuários.</li>
+<li>O <strong>Control Tower</strong> gerencia a <strong>configuração inicial</strong> e a <strong>conformidade contínua</strong> das contas AWS.</li>
+<li>O <strong>AWS Organizations</strong> permite <strong>gerenciamento centralizado</strong> e <strong>aplicação de políticas SCP</strong> (Service Control Policies).</li>
+</ul></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-systems-manager">AWS Systems Manager<a href="#aws-systems-manager" class="hash-link" aria-label="Link direto para AWS Systems Manager" title="Link direto para AWS Systems Manager">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Systems Manager (SSM)</strong> é um serviço que facilita a <strong>gerência de infraestrutura</strong> em larga escala, abrangendo <strong>instâncias EC2, máquinas on-premises e ambientes híbridos</strong>. Ele permite <strong>monitoramento, automação, aplicação de patches e execução remota de comandos</strong>, sem a necessidade de acessar diretamente os servidores.</p>
+<hr>
+<blockquote>
+<p>Principais Funcionalidades</p>
+</blockquote>
+<ul>
+<li><strong>Gerenciamento de grupos de recursos</strong>, facilitando a visualização de dados operacionais.<!-- -->
+<ul>
+<li>Permite <strong>execução remota de comandos (scripts)</strong> em grupos de instâncias.</li>
+</ul>
+</li>
+<li><strong>Suporte a EC2 e infraestrutura on-premises</strong>, possibilitando uma administração unificada.</li>
+<li><strong>Detecção de problemas de infraestrutura</strong> com monitoramento automatizado.</li>
+<li><strong>Automação de patches de atualização</strong>, garantindo que sistemas estejam sempre protegidos.</li>
+<li><strong>Conexão segura via SSM Session Manager</strong>, eliminando a necessidade de <strong>SSH, Bastion Hosts e chaves SSH</strong>.<!-- -->
+<ul>
+<li>Permite conexão via <strong>AWS Console</strong>.</li>
+<li>Registra logs detalhados no <strong>AWS CloudTrail</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><img decoding="async" loading="lazy" alt="AWS Systems Manager - Console" src="/assets/images/image-20230223053512425-83afead2190180931cf1444fb0efd9f7.png" width="476" height="523" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📌 <strong>Integrações do AWS Systems Manager</strong></div><div class="admonitionContent_BuS1"><ul>
+<li><strong>CloudWatch</strong> → Monitoramento de métricas e dashboards.</li>
+<li><strong>IAM</strong> → Controle de permissões para execução de comandos e acesso ao SSM.</li>
+<li><strong>CloudTrail</strong> → Registro de logs de auditoria das sessões SSM.</li>
+</ul></div></div>
+<hr>
+<blockquote>
+<p>Uso e Requisitos</p>
+</blockquote>
+<ol>
+<li><strong>Instalar o Agente SSM</strong> na instância EC2 ou máquina on-premises.</li>
+<li><strong>Criar uma Role IAM</strong> para permitir que o agente tenha acesso ao <strong>AWS Systems Manager</strong>.</li>
+<li><strong>Configurar políticas de acesso</strong>, garantindo que apenas usuários autorizados possam gerenciar as instâncias.</li>
+</ol>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><strong>Importante!</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS Systems Manager</strong> suporta <strong>Windows, macOS e Linux</strong> e <strong>não precisa de SSH</strong> para funcionar. Isso reduz riscos de segurança, pois <strong>elimina a exposição de portas SSH na internet</strong>.</p></div></div>
+<hr>
+<blockquote>
+<p>Gerenciamento de Patches</p>
+</blockquote>
+<p>O <strong>AWS Systems Manager</strong> possui um <strong>Patch Manager</strong>, que permite <strong>automatizar e aplicar patches de segurança</strong> em larga escala, garantindo que as instâncias estejam sempre protegidas.</p>
+<p><img decoding="async" loading="lazy" alt="Patch Manager" src="/assets/images/image-20230223053242769-41ff4cfc4029ca18d950189a3c890732.png" width="1124" height="547" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 <strong>Dica Prática</strong></div><div class="admonitionContent_BuS1"><p>O <strong>Session Manager</strong> do <strong>AWS Systems Manager</strong> é ideal para ambientes corporativos onde é necessário <strong>auditar acessos a servidores</strong> e <strong>evitar exposição de portas SSH</strong>.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cloud-map">AWS Cloud Map<a href="#aws-cloud-map" class="hash-link" aria-label="Link direto para AWS Cloud Map" title="Link direto para AWS Cloud Map">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Cloud Map</strong> é um serviço totalmente gerenciado pela AWS, utilizado para a <strong>descoberta de serviços e recursos</strong> em sua infraestrutura, permitindo que as aplicações encontrem e se conectem a serviços de forma eficiente e escalável.</p>
+<hr>
+<blockquote>
+<p>Principais Funcionalidades</p>
+</blockquote>
+<ul>
+<li><strong>Descoberta de Serviços</strong>: O Cloud Map permite que você registre e descubra serviços e recursos dentro da sua rede. Ele fornece uma forma centralizada de mapear todos os serviços em sua infraestrutura.</li>
+<li><strong>Mapeamento de Recursos</strong>: Com o Cloud Map, você cria um <strong>mapa de serviços e recursos</strong>, o que facilita a conexão entre o front-end e os serviços back-end, tornando mais eficiente o gerenciamento de comunicação entre diferentes partes da aplicação.</li>
+<li><strong>Health Checks</strong>: O Cloud Map possui <strong>health checks</strong> integrados, que permitem monitorar o estado de saúde dos serviços registrados. Isso é essencial para garantir que os serviços estão operando corretamente e de forma confiável.</li>
+<li><strong>Integração com o Route 53</strong>: O AWS Cloud Map é totalmente integrado com o <strong>Amazon Route 53</strong>, permitindo que você use DNS para resolver nomes de serviços e facilitar a comunicação entre eles.</li>
+<li><strong>Query via SDK, API ou DNS</strong>: Você pode realizar consultas ao Cloud Map utilizando diferentes métodos, como <strong>SDK</strong>, <strong>API</strong> ou <strong>DNS</strong>, oferecendo flexibilidade na integração com suas aplicações.</li>
+</ul>
+<hr>
+<p><img decoding="async" loading="lazy" alt="Cloud Map" src="/assets/images/image-20230223054719268-54bfc5e429d8b15120fac7695880b4fb.png" width="1188" height="526" class="img_ev3q"></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📌 <strong>Dica Importante</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS Cloud Map</strong> é essencial para ambientes em que a <strong>descoberta dinâmica de serviços</strong> é necessária, como em arquiteturas de microserviços. Ele facilita a comunicação entre serviços distribuídos e garante que a aplicação se conecte sempre aos serviços corretos, mesmo em um ambiente altamente dinâmico e escalável.</p></div></div>
+<hr>
+<blockquote>
+<p>Principais Casos de Uso</p>
+</blockquote>
+<ol>
+<li><strong>Microserviços</strong>: Em uma arquitetura de microserviços, onde os serviços podem ser frequentemente escalados ou modificados, o <strong>AWS Cloud Map</strong> ajuda a garantir que os serviços se encontrem e se comuniquem corretamente.</li>
+<li><strong>Aplicações Distribuídas</strong>: Para sistemas com múltiplos componentes distribuídos em diferentes regiões ou ambientes, o <strong>Cloud Map</strong> facilita a comunicação e descoberta de serviços entre essas partes.</li>
+<li><strong>Alta Disponibilidade e Resiliência</strong>: Com a integração de <strong>health checks</strong>, o <strong>Cloud Map</strong> pode ajudar a redirecionar o tráfego para serviços saudáveis, aumentando a <strong>disponibilidade</strong> e <strong>resiliência</strong> do sistema.</li>
+</ol>
+<hr>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><strong>Atenção</strong></div><div class="admonitionContent_BuS1"><p>Certifique-se de que todos os <strong>serviços registrados</strong> no <strong>AWS Cloud Map</strong> possuam <strong>health checks</strong> adequados, para evitar que o sistema direcione o tráfego para instâncias ou serviços <strong>não saudáveis</strong>.</p></div></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/10_deployment.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Monitoramento</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Controle de custos</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-elastic-beanstalk" class="table-of-contents__link toc-highlight">AWS Elastic Beanstalk</a></li><li><a href="#aws-codedeploy" class="table-of-contents__link toc-highlight">AWS CodeDeploy</a></li><li><a href="#aws-cloudformation" class="table-of-contents__link toc-highlight">AWS CloudFormation</a></li><li><a href="#aws-sam---serverless-application-model" class="table-of-contents__link toc-highlight">AWS SAM - Serverless Application Model</a></li><li><a href="#aws-cdk-cloud-development-kit" class="table-of-contents__link toc-highlight">AWS CDK (Cloud Development Kit)</a></li><li><a href="#aws-service-catalog" class="table-of-contents__link toc-highlight">AWS Service Catalog</a></li><li><a href="#aws-systems-manager" class="table-of-contents__link toc-highlight">AWS Systems Manager</a></li><li><a href="#aws-cloud-map" class="table-of-contents__link toc-highlight">AWS Cloud Map</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>

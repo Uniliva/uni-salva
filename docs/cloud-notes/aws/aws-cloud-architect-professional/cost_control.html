@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud-notes/aws/aws-cloud-architect-professional/cost_control" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Controle de custos | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Controle de custos | Uniii docs"><meta data-rh="true" name="description" content="TAGs"><meta data-rh="true" property="og:description" content="TAGs"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
+<script src="/assets/js/runtime~main.f9013598.js" defer="defer"></script>
+<script src="/assets/js/main.d31c4266.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/service_communication">Comunicação entre serviço</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering">Engenharia de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring">Monitoramento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment">Provisionamento de recursos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control">Controle de custos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo">Resumão</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes-prova">Questões da prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Controle de custos</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Controle de custos</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="tags">TAGs<a href="#tags" class="hash-link" aria-label="Link direto para TAGs" title="Link direto para TAGs">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230223061135313" src="/assets/images/image-20230223061135313-4a5eb3c44c855eec24f7898bb0dfb3d9.png" width="746" height="281" class="img_ev3q"></p>
+<blockquote>
+<p>Cost Allocation Tags</p>
+</blockquote>
+<p>As <strong>Cost Allocation Tags</strong> são extremamente úteis para fazer o rastreamento e análise de custos dentro da AWS. Elas ajudam a separar e identificar os custos de diferentes recursos ou departamentos da organização. Ao associar tags a diferentes recursos, você pode gerar relatórios financeiros detalhados que ajudam a controlar orçamentos e a realizar a alocação de custos de forma mais eficiente.</p>
+<ul>
+<li>Com tags, podemos realizar o <strong>tracking</strong> dos recursos.</li>
+<li>Com <strong>Cost Allocation Tags</strong>, podemos habilitar relatórios detalhados de custos.</li>
+<li>As tags podem ser adicionadas como colunas nos relatórios.</li>
+<li>Existem dois tipos de tags:<!-- -->
+<ul>
+<li><strong>AWS Generated</strong>
+<ul>
+<li>Adicionadas aos recursos automaticamente, uma vez que estejam habilitadas.</li>
+<li>Iniciam com o prefixo <strong>AWS:</strong> (ex: <strong>AWS<!-- -->:CreatedBy</strong>).</li>
+</ul>
+</li>
+<li><strong>User Tags</strong>
+<ul>
+<li>Definidas pelo usuário.</li>
+<li>Iniciam com o prefixo <strong>user:</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Essas tags aparecem apenas no <strong>Billing Console</strong>.</li>
+<li>Após criar uma nova tag e adicioná-la ao recurso, leva <strong>24 horas</strong> para aparecer no console.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Tag Editor</p>
+</blockquote>
+<p>O <strong>Tag Editor</strong> é uma ferramenta muito útil, especialmente quando você tem muitos recursos distribuídos em várias regiões. Ele oferece uma visão centralizada de todos os recursos e suas respectivas tags, permitindo que você realize alterações em massa, sem a necessidade de acessar cada recurso individualmente. Isso economiza tempo e ajuda a manter a consistência das tags em toda a organização.</p>
+<ul>
+<li>Serve para gerenciar as tags de múltiplos recursos em um só lugar.</li>
+<li>Permite <strong>adicionar, remover e atualizar tags</strong>.</li>
+<li>Permite procurar <strong>recursos taggeados e não taggeados</strong> em <strong>todas as regiões</strong>.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="calculadora-de-preços-da-aws">Calculadora de preços da AWS<a href="#calculadora-de-preços-da-aws" class="hash-link" aria-label="Link direto para Calculadora de preços da AWS" title="Link direto para Calculadora de preços da AWS">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="calculadora-preco" src="/assets/images/image-20230223061135313-4a5eb3c44c855eec24f7898bb0dfb3d9.png" width="746" height="281" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>A <strong>Calculadora de Preços da AWS</strong> é uma ferramenta online gratuita que ajuda a estimar o custo mensal dos serviços da AWS. Ela permite que os usuários calculem o custo de diferentes combinações de serviços com base em suas necessidades específicas. Esta ferramenta é útil tanto para planejar orçamentos de TI quanto para avaliar diferentes cenários de implantação de aplicativos e serviços na nuvem da AWS.<br>
+<!-- -->A calculadora pode ser usada para determinar custos iniciais e estimativas de longo prazo, ajudando a tomar decisões mais informadas sobre a escolha de serviços e a arquitetura de soluções.</p>
+<ul>
+<li>A <strong>Calculadora de Preços da AWS</strong> oferece uma <strong>visão detalhada de custos</strong> para diversos serviços da AWS.</li>
+<li>Permite simular <strong>diferentes cenários de implantação</strong> de aplicativos.</li>
+<li>Utilizada por empresas para <strong>planejamento e gerenciamento de orçamentos de TI</strong>.</li>
+<li>Oferece <strong>estimativas personalizadas</strong> com base nos recursos selecionados, incluindo <strong>instâncias EC2</strong>, <strong>serviços de banco de dados</strong>, <strong>storage</strong>, e <strong>networking</strong>.</li>
+</ul>
+<blockquote>
+<p>Funcionalidades</p>
+</blockquote>
+<ul>
+<li>A calculadora pode simular custos com base em diferentes configurações de <strong>instâncias EC2</strong> e <strong>tipo de armazenamento</strong>.</li>
+<li>Permite estimar <strong>custos de serviços gerenciados</strong>, como <strong>RDS</strong>, <strong>Lambda</strong> e <strong>S3</strong>.</li>
+<li>Possui <strong>planos de preços</strong> detalhados para modelos como <strong>on-demand</strong>, <strong>reserved</strong> e <strong>spot instances</strong>.</li>
+<li>A estimativa de custo pode ser ajustada de acordo com <strong>fatores como localização</strong> da instância, <strong>uso de largura de banda</strong>, e <strong>opções de backup</strong>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Dica de Uso</strong></div><div class="admonitionContent_BuS1"><p>Ao usar a calculadora, é importante revisar as configurações detalhadas, como as <strong>zonas de disponibilidade</strong> e <strong>opções de pagamento</strong> para cada serviço. Pequenos ajustes podem afetar significativamente o custo total.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-trusted-advisor">AWS Trusted Advisor<a href="#aws-trusted-advisor" class="hash-link" aria-label="Link direto para AWS Trusted Advisor" title="Link direto para AWS Trusted Advisor">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="image-20230223061608471" src="/assets/images/image-20230223061608471-96b836dd5af276b673531177e4acce8f.png" width="1115" height="573" class="img_ev3q"></p>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Trusted Advisor</strong> fornece uma análise em <strong>tempo real dos serviços</strong>, baseada nas melhores práticas recomendadas pela AWS. Ele oferece orientações para ajudar a <strong>reduzir custos</strong>, <strong>aumentar o desempenho</strong> e <strong>melhorar a segurança</strong>. O Trusted Advisor realiza uma análise detalhada dos seus recursos na AWS e gera recomendações para otimizar o uso da infraestrutura. Ele atua em diversas áreas, incluindo <strong>custo</strong>, <strong>segurança</strong>, <strong>performance</strong>, e <strong>tolerância a falhas</strong>.</p>
+<blockquote>
+<p>Principais Funcionalidades:</p>
+</blockquote>
+<ul>
+<li><strong>Análise em tempo real</strong>: Monitora os recursos da AWS e fornece recomendações imediatas.</li>
+<li>Geração de <strong>relatórios detalhados</strong> sobre os seguintes tópicos:<!-- -->
+<ul>
+<li><strong>Custo</strong>: Identifica recursos ociosos ou subutilizados, que podem ser desligados ou ajustados.</li>
+<li><strong>Performance</strong>: Ajuda a otimizar o desempenho dos serviços para melhorar a eficiência.</li>
+<li><strong>Segurança</strong>: Verifica configurações de segurança, como permissões excessivas ou riscos de dados expostos.</li>
+<li><strong>Tolerância a falhas</strong>: Avalia as configurações para garantir alta disponibilidade e resiliência.</li>
+<li><strong>Limites de serviços</strong>: Monitora os limites de uso de recursos e avisa quando eles se aproximam do limite.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Tipos de Planos</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Plano Comum</strong>:</p>
+<ul>
+<li>Realiza checagens e fornece recomendações comuns para otimizar o uso da AWS.</li>
+<li>Recomendado para empresas que desejam melhorar o gerenciamento básico dos recursos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Plano Completo</strong>:</p>
+<ul>
+<li>Disponível para clientes com planos de suporte <strong>Business</strong> ou <strong>Enterprise</strong>.</li>
+<li>Oferece acesso programático via <strong>APIs</strong> para integrar com outros sistemas e automações.</li>
+<li>Permite configurar <strong>alarmes</strong> quando os limites de serviços forem atingidos.</li>
+<li>Fornece recomendações mais avançadas e detalhadas.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Funcionalidades Adicionais</p>
+</blockquote>
+<ul>
+<li>É possível <strong>configurar alertas por e-mail semanalmente</strong>, para receber notificações sobre as recomendações e alertas.</li>
+<li>O <strong>Trusted Advisor</strong> também pode verificar se um <strong>bucket S3</strong> é público, mas <strong>não verifica se os objetos dentro do bucket</strong> são públicos.</li>
+<li>Pode verificar os <strong>limites de serviços</strong>, mas para <strong>aumentá-los</strong>, é necessário abrir uma solicitação no <strong>AWS Support Center</strong> ou usar o <strong>AWS Service Quotas</strong>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>O <strong>Trusted Advisor</strong> não realiza verificações automáticas de recursos que estão em <strong>instâncias spot</strong> ou <strong>em ambientes de alta disponibilidade</strong>. Nestes casos, recomendações de performance e segurança devem ser realizadas manualmente, levando em consideração a arquitetura específica da empresa.</p>
+</blockquote></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="service-quotas">Service Quotas<a href="#service-quotas" class="hash-link" aria-label="Link direto para Service Quotas" title="Link direto para Service Quotas">​</a></h2>
+<blockquote>
+<p>Visão Geral</p>
+</blockquote>
+<p>O <strong>AWS Service Quotas</strong> é um serviço que permite definir <strong>limites (thresholds)</strong> para os recursos e serviços da AWS, ajudando a monitorar e gerenciar o uso dentro da conta. Com ele, é possível receber alertas de quando um serviço está <strong>próximo de atingir o limite</strong> estabelecido, evitando problemas como a superação de limites que podem afetar a operação dos seus aplicativos. Ele é essencial para garantir que os recursos da AWS sejam utilizados de maneira eficiente, evitando surpresas nos custos e ajudando a gerenciar a infraestrutura.</p>
+<blockquote>
+<p>Funcionalidades Principais:</p>
+</blockquote>
+<ul>
+<li>Permite <strong>definir limites personalizados</strong> (thresholds) para os serviços da AWS.</li>
+<li>Envia <strong>notificações</strong> quando um serviço está <strong>próximo do limite da conta</strong>.</li>
+<li>Permite <strong>criar alarmes no Amazon CloudWatch</strong> para monitorar os limites de serviço.</li>
+<li>Acompanhe o uso dos serviços e faça ajustes conforme necessário, baseado nas notificações recebidas.</li>
+</ul>
+<blockquote>
+<p>Como Funciona:</p>
+</blockquote>
+<p>Para definir esses limites, o <strong>AWS Service Quotas</strong> integra-se ao <strong>CloudWatch</strong> para enviar alertas quando um recurso atingir um limite específico. Esses alertas podem ser configurados para enviar <strong>e-mails</strong> ou realizar <strong>ações automáticas</strong> baseadas em suas necessidades. Isso ajuda a ter visibilidade sobre o uso de recursos antes que eles impactem o desempenho ou as operações.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><blockquote>
+<p>O <strong>AWS Service Quotas</strong> também fornece uma interface para solicitar o aumento de quotas em serviços específicos, caso os limites definidos sejam atingidos. Caso precise de mais recursos em um determinado serviço, é possível abrir uma solicitação diretamente pelo console.</p>
+</blockquote></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ec2-launch-types--savings-plan">EC2 Launch Types &amp; Savings Plan<a href="#ec2-launch-types--savings-plan" class="hash-link" aria-label="Link direto para EC2 Launch Types &amp; Savings Plan" title="Link direto para EC2 Launch Types &amp; Savings Plan">​</a></h2>
+<blockquote>
+<p>Tipos de Lançamento EC2 (EC2 Launch Types)</p>
+</blockquote>
+<p>O <strong>Amazon EC2</strong> (Elastic Compute Cloud) oferece diferentes tipos de lançamento para facilitar a adaptação das suas instâncias de acordo com os requisitos de custo, escalabilidade e gerenciamento. Os <strong>Launch Types</strong> definem como as instâncias serão provisionadas e gerenciadas na AWS.</p>
+<p>Existem três tipos principais de lançamento de instâncias EC2:</p>
+<ol>
+<li>
+<p><strong>On-Demand Instances</strong></p>
+<ul>
+<li>As instâncias <strong>On-Demand</strong> são ideais para cargas de trabalho com <strong>demanda imprevisível</strong> ou curta duração.</li>
+<li>Você paga por segundo ou hora, dependendo da instância, sem compromissos de longo prazo.</li>
+<li>Útil quando você não pode prever a utilização ou se a necessidade de capacidade de computação é temporária.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reserved Instances</strong></p>
+<ul>
+<li>As <strong>Reserved Instances</strong> permitem que você reserve capacidade EC2 por <strong>um ou três anos</strong>, com descontos em relação às instâncias On-Demand.</li>
+<li>Ideal para <strong>cargas de trabalho previsíveis</strong> e de longo prazo.</li>
+<li>Existem três opções de pagamento:<!-- -->
+<ul>
+<li><strong>All Upfront (Pago antecipadamente)</strong>: Desconto maior, pagamento completo no início do período.</li>
+<li><strong>Partial Upfront (Pagamento parcial antecipado)</strong>: Uma parte paga antecipadamente e o resto ao longo do período.</li>
+<li><strong>No Upfront (Sem pagamento antecipado)</strong>: Pagamento mensal durante o período da instância reservada.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Spot Instances</strong></p>
+<ul>
+<li>As <strong>Spot Instances</strong> permitem que você aproveite a capacidade de computação não utilizada da AWS, com <strong>grandes descontos</strong> em comparação com as instâncias On-Demand.</li>
+<li>São ideais para <strong>cargas de trabalho flexíveis</strong>, como processamento de dados em massa ou análises em larga escala.</li>
+<li>O preço das Spot Instances varia de acordo com a demanda, e a AWS pode interromper essas instâncias a qualquer momento, com um aviso de dois minutos.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Savings Plans</p>
+</blockquote>
+<p>Os <strong>Savings Plans</strong> são uma forma flexível e econômica de se comprometer com o uso de EC2, oferecendo <strong>descontos em troca de um compromisso de uso</strong> durante um período de um ou três anos. Em vez de fazer compromissos de instâncias específicas, como nas <strong>Reserved Instances</strong>, o Savings Plan permite que você escolha entre diferentes tipos de uso e <strong>serviços</strong> da AWS, como EC2, Fargate e Lambda, e ainda assim obter descontos significativos.</p>
+<p>Existem dois tipos principais de <strong>Savings Plans</strong>:</p>
+<ol>
+<li>
+<p><strong>Compute Savings Plan</strong></p>
+<ul>
+<li>Oferece flexibilidade total, permitindo que você use os recursos em <strong>qualquer tipo de instância EC2</strong>, <strong>qualquer região</strong>, e até mesmo <strong>em diferentes famílias de instâncias</strong>, <strong>opções de sistemas operacionais</strong> e <strong>contas da AWS</strong>.</li>
+<li>Ideal para clientes que precisam de <strong>flexibilidade</strong> nas configurações da infraestrutura.</li>
+</ul>
+</li>
+<li>
+<p><strong>EC2 Instance Savings Plan</strong></p>
+<ul>
+<li>Oferece <strong>descontos mais profundos</strong>, mas com restrições de uso a instâncias EC2 específicas dentro de uma <strong>família de instâncias</strong> e em uma <strong>única região</strong>.</li>
+<li>Ideal para cargas de trabalho previsíveis que não exigem a flexibilidade do <strong>Compute Savings Plan</strong>.</li>
+</ul>
+</li>
+</ol>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><p>Os <strong>Savings Plans</strong> são baseados no consumo de recursos e podem ser usados para uma gama ampla de serviços, como <strong>AWS Lambda</strong> e <strong>AWS Fargate</strong>, o que torna mais fácil obter descontos, mesmo que você use uma combinação de serviços.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="s3-storage-classes">S3 Storage Classes<a href="#s3-storage-classes" class="hash-link" aria-label="Link direto para S3 Storage Classes" title="Link direto para S3 Storage Classes">​</a></h2>
+<blockquote>
+<p>Visão Geral das Classes de Armazenamento S3</p>
+</blockquote>
+<p>O <strong>Amazon S3</strong> (Simple Storage Service) oferece diferentes classes de armazenamento para atender a diferentes necessidades de desempenho, custo e durabilidade. As classes de armazenamento variam em termos de <strong>acessibilidade</strong>, <strong>tempo de recuperação</strong> e <strong>custo</strong>, permitindo que você escolha a mais adequada com base nos seus requisitos de uso e orçamento.</p>
+<p>Cada classe tem características específicas para otimizar o custo e o desempenho, e as empresas podem migrar dados entre essas classes para maximizar a eficiência de custo. As classes mais comuns são:</p>
+<ol>
+<li>
+<p><strong>S3 Standard</strong></p>
+<ul>
+<li>Ideal para dados frequentemente acessados, como sites, aplicativos e backups em tempo real.</li>
+<li>Garantia de <strong>alta durabilidade</strong> e <strong>acesso rápido</strong>.</li>
+<li><strong>Custo mais alto</strong> em comparação com outras classes, devido à alta disponibilidade e baixíssima latência.</li>
+</ul>
+</li>
+<li>
+<p><strong>S3 Intelligent-Tiering</strong></p>
+<ul>
+<li>Otimiza automaticamente os custos movendo dados entre duas camadas: <strong>frequentemente acessada</strong> e <strong>raramente acessada</strong>, sem afetar o desempenho.</li>
+<li><strong>Sem necessidade de gerenciar o processo manualmente</strong>, o que é ideal para dados com padrões de acesso imprevisíveis.</li>
+<li>Ideal para aplicações com grandes volumes de dados, onde não se sabe com certeza o padrão de acesso futuro.</li>
+</ul>
+</li>
+<li>
+<p><strong>S3 Standard-IA (Infrequent Access)</strong></p>
+<ul>
+<li>Destinado a dados que são acessados <strong>raramente</strong>, mas precisam ser recuperados rapidamente quando necessário.</li>
+<li><strong>Custo de armazenamento mais baixo</strong> que o S3 Standard, mas a recuperação tem um custo adicional.</li>
+<li>Ideal para backups e dados de longo prazo que não precisam de acesso frequente.</li>
+</ul>
+</li>
+<li>
+<p><strong>S3 One Zone-IA</strong></p>
+<ul>
+<li>Semelhante ao <strong>S3 Standard-IA</strong>, mas os dados são armazenados em uma única zona de disponibilidade, o que reduz ainda mais os custos de armazenamento.</li>
+<li>Ideal para <strong>dados secundários</strong>, como backups e cópias de dados que não precisam de alta resiliência.</li>
+</ul>
+</li>
+<li>
+<p><strong>S3 Glacier</strong></p>
+<ul>
+<li>Uma solução de <strong>arquivamento de dados</strong> com <strong>latência mais alta</strong> para recuperação (geralmente entre minutos a horas).</li>
+<li><strong>Muito mais barato</strong> que o S3 Standard, mas ideal para dados que não precisam ser acessados frequentemente, como arquivos de longo prazo.</li>
+<li><strong>Ideal para arquivamento</strong>, como o cumprimento de requisitos legais de retenção de dados.</li>
+</ul>
+</li>
+<li>
+<p><strong>S3 Glacier Deep Archive</strong></p>
+<ul>
+<li>A classe <strong>mais econômica</strong> para arquivamento de dados que <strong>não serão acessados por anos</strong>.</li>
+<li>Ideal para dados de retenção a longo prazo e para conformidade regulatória.</li>
+<li>Tem um custo <strong>muito baixo</strong>, mas a recuperação dos dados pode levar horas.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Manejo de Dados com Classes de Armazenamento</p>
+</blockquote>
+<p>As classes de armazenamento do S3 permitem uma grande flexibilidade no gerenciamento de dados, podendo ser alteradas de acordo com as necessidades de acessibilidade e custo. Por exemplo, dados que começam sendo armazenados em <strong>S3 Standard</strong> podem ser movidos automaticamente para o <strong>S3 Glacier</strong> após determinado período de inatividade, ajudando a reduzir custos.</p>
+<blockquote>
+<p>Migração entre Classes de Armazenamento</p>
+</blockquote>
+<p>Você pode configurar regras de <strong>lifecycles</strong> no S3 para mover dados automaticamente entre diferentes classes de armazenamento com base em suas necessidades de acesso ao longo do tempo. Isso é útil para otimizar custos sem precisar gerenciar manualmente o processo de migração.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>📌 <strong>Detalhamento Técnico</strong></div><div class="admonitionContent_BuS1"><p>O <strong>S3 Lifecycle Policy</strong> permite mover dados automaticamente entre classes de armazenamento para reduzir custos conforme a necessidade de acesso muda ao longo do tempo. Essas políticas podem ser definidas com base em regras específicas, como a idade dos objetos ou o padrão de acesso. Além disso, é possível definir o <strong>tempo mínimo de retenção</strong> de dados para classes como S3 Glacier e S3 Glacier Deep Archive.</p></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-budget">AWS Budget<a href="#aws-budget" class="hash-link" aria-label="Link direto para AWS Budget" title="Link direto para AWS Budget">​</a></h2>
+<blockquote>
+<p><strong>Visão Geral do AWS Budget</strong></p>
+</blockquote>
+<p>O <strong>AWS Budget</strong> permite definir um orçamento para monitorar e alertar quando você estiver prestes a exceder o custo ou uso planejado. Ele é essencial para gerenciar os custos de forma proativa e pode ser usado para entender como o consumo de recursos está se saindo em relação aos seus objetivos orçamentários.</p>
+<ul>
+<li>Você pode definir um <strong>orçamento</strong> que avisa quando o custo ou o uso excede (ou está previsto para exceder) o valor do orçamento.</li>
+<li>Usado para <strong>gerenciamento de custos antes de uma demanda</strong>, ou seja, definir um orçamento para determinada demanda de recursos.</li>
+<li>Pode ser usado para <strong>ver quanto foi utilizado</strong> em relação ao planejamento inicial.</li>
+<li>Através das <strong>tags</strong>, é possível ver onde você está gastando seu dinheiro, proporcionando maior controle sobre os custos.</li>
+<li>Pode gerar alertas de gastos, enviar e-mails, postar em tópicos <strong>SNS</strong> (até 5 tópicos) e configurar ações (como Lambdas).</li>
+<li>É possível criar até <strong>20.000 orçamentos</strong> (limite soft).</li>
+<li><strong>Os 2 primeiros orçamentos são gratuitos</strong>, mas os adicionais têm custo de <strong>0,02 USD por dia por orçamento</strong>.</li>
+<li>Há 4 tipos de orçamento que podem ser criados:<!-- -->
+<ul>
+<li><strong>Usage</strong> (Uso)</li>
+<li><strong>Cost</strong> (Custo)</li>
+<li><strong>Reservation</strong> (Reserva)</li>
+<li><strong>Savings Plan</strong> (Plano de Economias)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Pergunta com Possível Enfoque na Certificação AWS:</strong></p>
+</blockquote>
+<ul>
+<li><strong>Qual a diferença entre os tipos de orçamento?</strong>
+<ul>
+<li><strong>Usage Budget</strong>: Foca no uso de recursos.</li>
+<li><strong>Cost Budget</strong>: Foca nos custos com base no uso.</li>
+<li><strong>Reservation Budget</strong>: Relacionado com os custos e a utilização de instâncias reservadas.</li>
+<li><strong>Savings Plan Budget</strong>: Relacionado aos planos de economia, como o AWS Compute Savings Plan.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="budget-actions">Budget Actions<a href="#budget-actions" class="hash-link" aria-label="Link direto para Budget Actions" title="Link direto para Budget Actions">​</a></h3>
+<blockquote>
+<p><strong>O que são e como configurar as ações do Budget</strong></p>
+</blockquote>
+<p>O <strong>AWS Budget Actions</strong> permite que você configure ações automáticas a serem executadas quando o orçamento atingir um certo limite de custo ou uso. Essas ações ajudam a gerenciar e otimizar os gastos sem intervenção manual.</p>
+<ul>
+<li>Permite <strong>configurar ações automáticas</strong> quando o orçamento atingir um limite específico de custo ou uso.</li>
+<li>Suporta 3 tipos de ações:<!-- -->
+<ul>
+<li><strong>Aplicar IAM Policy a Users, Groups e Roles</strong>: Permite restringir a criação de novos recursos.</li>
+<li><strong>Aplicar SCP a OUs</strong>: Permite restringir a criação de novos recursos para unidades organizacionais (OUs).</li>
+<li><strong>Parar instâncias do EC2 ou RDS</strong>: Permite interromper instâncias para controlar o uso de recursos e custos.</li>
+</ul>
+</li>
+<li>As ações podem ser executadas automaticamente ou através de um fluxo de trabalho de aprovação antes da execução.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>Detalhamento sobre o uso de Budget Actions</strong></div><div class="admonitionContent_BuS1"><p>As ações de <strong>IAM Policy</strong> e <strong>SCP</strong> são poderosas para garantir que uma conta não ultrapasse os limites estabelecidos, aplicando restrições de forma imediata. Essas políticas podem ser configuradas para impedir a criação de recursos desnecessários quando o orçamento atingir um determinado valor, ajudando a evitar surpresas nos custos.</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="centralized-budget-management">Centralized Budget Management<a href="#centralized-budget-management" class="hash-link" aria-label="Link direto para Centralized Budget Management" title="Link direto para Centralized Budget Management">​</a></h3>
+<blockquote>
+<p><strong>Gerenciamento Centralizado de Orçamentos</strong></p>
+</blockquote>
+<p>O <strong>Centralized Budget Management</strong> permite gerenciar orçamentos em uma conta centralizada, facilitando o controle de custos em grandes organizações com múltiplas contas. Com isso, você pode criar orçamentos para cada conta e gerenciar tudo de uma única localização.</p>
+<ul>
+<li>Permite gerenciar os <strong>orçamentos em uma conta centralizada</strong>.</li>
+<li>Para cada conta na organização, deve haver um <strong>orçamento para ela</strong>, e depois esse orçamento pode ser gerido pela conta centralizada.</li>
+<li>Você pode ter dois tipos de Unidades Organizacionais (OUs): uma mais restritiva e outra mais flexível.</li>
+<li>Se uma conta da OU mais flexível <strong>exceder os limites</strong> definidos no orçamento, ela pode ser <strong>movida para a OU mais restritiva</strong> e um e-mail pode ser enviado para notificar os administradores da conta.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image-20230223071637464" src="/assets/images/image-20230223071637464-70523bfa841d87b5319cf720fb245027.png" width="1103" height="513" class="img_ev3q"></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cost-explorer">Cost Explorer<a href="#cost-explorer" class="hash-link" aria-label="Link direto para Cost Explorer" title="Link direto para Cost Explorer">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="cost-explorer" src="/assets/images/image-20210911104942473-00dde27fb8552c460d25d0682d790571.png" width="685" height="370" class="img_ev3q"></p>
+<blockquote>
+<p><strong>O que é o AWS Cost Explorer?</strong></p>
+</blockquote>
+<p>O <strong>AWS Cost Explorer</strong> é uma ferramenta poderosa que permite visualizar, entender e gerenciar os gastos com os serviços da AWS. Ele oferece análises detalhadas e relatórios personalizados para ajudar a identificar padrões de gastos e otimizar o uso de recursos.</p>
+<ul>
+<li>Serviço usado para <strong>ver, entender e gerenciar os gastos</strong> (com várias granularidades: mês, ano, dia).</li>
+<li>Permite explorar <strong>seus custos e uso da AWS</strong> com base em dimensões como serviço da AWS, região, conta de membro, etc.</li>
+<li>Contém vários relatórios para analisar os gastos, permitindo criar relatórios personalizados.</li>
+<li>Possui uma funcionalidade que prevê o uso e custos com base nos últimos 12 meses.</li>
+</ul>
+<blockquote>
+<p><strong>Quando devo usar o AWS Cost Explorer e o AWS Compute Optimizer?</strong></p>
+</blockquote>
+<ul>
+<li><strong>AWS Cost Explorer</strong>: Se você deseja identificar <strong>instâncias EC2 subutilizadas</strong> e entender o impacto potencial nas suas faturas.</li>
+<li><strong>AWS Compute Optimizer</strong>: Se você deseja ver recomendações sobre <strong>tipo de instância</strong>, além de sugestões para <strong>downsizing</strong>. Utiliza aprendizado de máquina para identificar os tipos de carga de trabalho e escolher a melhor recomendação de recursos.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="compute-optimizer">Compute Optimizer<a href="#compute-optimizer" class="hash-link" aria-label="Link direto para Compute Optimizer" title="Link direto para Compute Optimizer">​</a></h3>
+<blockquote>
+<p><strong>Como o AWS Compute Optimizer pode ajudar na otimização de custos</strong></p>
+</blockquote>
+<p>O <strong>AWS Compute Optimizer</strong> utiliza <strong>machine learning</strong> para analisar seus recursos e prever recomendações para otimizar o uso dos mesmos, ajudando a reduzir custos sem comprometer o desempenho.</p>
+<ul>
+<li>Usa <strong>Machine Learning</strong> para analisar os <strong>recursos</strong> e prever recomendações para os mesmos.</li>
+<li>Ajuda a <strong>reduzir custos</strong> recomendando os recursos ideais para as cargas de trabalho.</li>
+<li>Suporta <strong>EC2, Auto Scaling Groups (ASG), EBS e Lambda</strong>.</li>
+<li>Pode reduzir até <strong>25% dos custos</strong> com as recomendações.</li>
+<li>As recomendações podem ser exportadas para o <strong>S3</strong> para facilitar o acompanhamento e aplicação.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>Detalhamento sobre o AWS Compute Optimizer</strong></div><div class="admonitionContent_BuS1"><p>O <strong>AWS Compute Optimizer</strong> recomenda instâncias de EC2, volumes EBS e configurações de Auto Scaling mais eficientes, levando em conta o histórico de uso e o tipo de carga de trabalho. Essas recomendações são baseadas em análises de machine learning, ajudando a identificar onde o uso dos recursos pode ser otimizado.</p></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/11_cost_control.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Provisionamento de recursos</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/resumo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Resumão</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#tags" class="table-of-contents__link toc-highlight">TAGs</a></li><li><a href="#calculadora-de-preços-da-aws" class="table-of-contents__link toc-highlight">Calculadora de preços da AWS</a></li><li><a href="#aws-trusted-advisor" class="table-of-contents__link toc-highlight">AWS Trusted Advisor</a></li><li><a href="#service-quotas" class="table-of-contents__link toc-highlight">Service Quotas</a></li><li><a href="#ec2-launch-types--savings-plan" class="table-of-contents__link toc-highlight">EC2 Launch Types &amp; Savings Plan</a></li><li><a href="#s3-storage-classes" class="table-of-contents__link toc-highlight">S3 Storage Classes</a></li><li><a href="#aws-budget" class="table-of-contents__link toc-highlight">AWS Budget</a><ul><li><a href="#budget-actions" class="table-of-contents__link toc-highlight">Budget Actions</a></li><li><a href="#centralized-budget-management" class="table-of-contents__link toc-highlight">Centralized Budget Management</a></li><li><a href="#cost-explorer" class="table-of-contents__link toc-highlight">Cost Explorer</a></li><li><a href="#compute-optimizer" class="table-of-contents__link toc-highlight">Compute Optimizer</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Uniii .</div></div></div></footer></div>
+</body>
+</html>
