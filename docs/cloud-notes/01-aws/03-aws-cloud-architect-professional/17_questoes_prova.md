@@ -1,6 +1,6 @@
 ---
-title: "Questões da prova"
-
+title: "O que cai na prova"
+sidebar_position: 15
 ---
 
 **Compute:**
@@ -57,19 +57,12 @@ title: "Questões da prova"
 **Management and Governance:**
 
 - AWS Organizations SCPs - saiba toda a estrutura de aplicação de SCPs e a herança (vale muitos pontos!).
-
 - Conheça seu CloudFormation e como usar StackSets e Change Sets. 
-
 - AWS Auto Scaling para serviços relevantes. 
-
 - Saiba quais métricas você pode obter com o CloudWatch e quando você precisa de métricas personalizadas.
-
 - Saiba o que capturar com o CloudTrail e como usar o EventBridge ou CloudWatch Alarms/Events para reagir. 
-
 - Casos de uso do Systems Manager Parameter Store e serviços de patching. 
-
 - Service Catalog e como compartilhar portfólios na AWS Organizations. 
-
 - Casos de uso do OpsWorks e opções de implantação.
 
   
