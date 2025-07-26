@@ -1,10 +1,8 @@
-
 ---
-
 title: "Advanced Architecting on AWS"
-
-
+sidebar_position: 1
 ---
+
 
 link: https://bookshelf.vitalsource.com/reader/books/300-ADVARC-30-EN-SG-E/pageid/806
 ![image-20211013092939990](assets/image-20211013092939990.png)
@@ -26,19 +24,15 @@ ec2 - nitro, usado quando se quer não virtualizar certo componentes, tipo a pla
 ## 2 - Multiple Accounts
 
 ![image-20211013134035269](assets/image-20211013134035269.png)
-- Uma que da o acesso e outra (trust police) que diz quem pode acessar essa role.
-- **Multiplas contas**
   ![image-20211013141254429](assets/image-20211013141254429.png)
   - Recomenda ter conta expecifica para auditoria, segurançã que serve apenas para armazenar e gerenciar as demais contas.
   - AWS Sevice catalog, permite criar contas pré configuradas, apravés de templates de cloud formation.
   - Usa se SCP, para aplicar regras comuns as contas de uma organização.
     - Pode ser aplicada a **OU**, **a conta aws** ou **a conta root**
     - Caso a politica seja aplicado a nivel de root, e ela não sera aplicado a conta de gerenciamento, a conta onde fica o cartão de credito, conta de cobrança.
-- SSO 
   - Forma de acessar ambiente multi account, de forma simples e unificada.
   - Ponto e entrada unico.
   - Pode-se usar um provider identity externo, para realizar a autenticação
-- Control Tower
   - Não tem custo, o custo é apenas dos recursos usados.
   - Usar para criar contas do Zero, com boas praticas.
   - Landing zone gerenciada.
@@ -208,13 +202,13 @@ kubectl describe nodes my-node
 kubectl describe pods my-pod
 COMANDOS EKSCTL
 # List the details about a cluster
-    eksctl get cluster [--name=<name>][--region=<region>]
+eksctl get cluster [--name=<name>][--region=<region>]
 # Create the same kind of basic cluster, but with a different name
-    eksctl create cluster --name=cluster-1 --nodes=4
+eksctl create cluster --name=cluster-1 --nodes=4
 # Delete a cluster
-    eksctl delete cluster --name=<name> [--region=<region>]
+eksctl delete cluster --name=<name> [--region=<region>]
 # Create an additional nodegroup
-   eksctl create nodegroup --cluster=<clusterName> [--name=<nodegroupName>]
+eksctl create nodegroup --cluster=<clusterName> [--name=<nodegroupName>]
 ```
 
 ---
@@ -319,9 +313,4 @@ AWS Cloud9
 ![image-20211015160317310](assets/image-20211015160317310.png)
 ![image-20211015161022544](assets/image-20211015161022544.png)
 ![image-20211015164300737](assets/image-20211015164300737.png)
-
----
-
-
-## 13 - Architecting for the EDGEAccounts
 

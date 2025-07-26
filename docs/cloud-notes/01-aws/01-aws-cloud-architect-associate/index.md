@@ -183,7 +183,6 @@ No caso do AWS, refere-se as multi AZs, que dão a segurança de que caso uma fi
 
 ![dicas](assets/image-20210909063130084.png)
 
----
 
 ---
 
@@ -191,15 +190,16 @@ No caso do AWS, refere-se as multi AZs, que dão a segurança de que caso uma fi
 
 ---
 
+
 ### AWS Athena
 
-- Serviço **Serverless**, que permite realizar analises em arquivos no S3.
+- Serviço **Serverless**, que permite realizar análises em arquivos no S3.
 - Usa **SQL** para fazer queries nos arquivos.
-- Tem conetores **JDBC** e **ODBC** para conectar aplicativos de BI.
-- Suportar CVS, JSON, ORC, Avro ...
-- Cobrado por uso, queries executadas e mede de dados escaneados.
-- Pode ser usado em BI, Analitics, relatórios e analises de VPC Flow Logs, ELB Log ..
-- Ideal para queries rápidas ad hoc e se integrar com o AWS **QuickSight** para facilidade de visualização, ele também consegue lidar com análise complexa, inclusive grandes junções, funções de janela e arrays.
+- Tem conectores **JDBC** e **ODBC** para conectar aplicativos de BI.
+- Suporta CSV, JSON, ORC, Avro ...
+- Cobrado por uso, queries executadas e média de dados escaneados.
+- Pode ser usado em BI, Analytics, relatórios e análises de VPC Flow Logs, ELB Log ...
+- Ideal para queries rápidas ad hoc e se integrar com o AWS **QuickSight** para facilidade de visualização. Ele também consegue lidar com análise complexa, inclusive grandes junções, funções de janela e arrays.
 - Usa o [Presto](https://aws.amazon.com/pt/big-data/what-is-presto/) com suporte completo a SQL padrão.
 - **well architected**
   ![athena-well-arch](assets/image-20210905115942523.png)
@@ -209,10 +209,10 @@ No caso do AWS, refere-se as multi AZs, que dão a segurança de que caso uma fi
 ### AWS Elasticsearch
 
 - Usado para buscas de qualquer campo, muito usado em conjunto com aplicações big data.
-- Pode se disponibilizar um cluster com varias instâncias.
-- Tem integrações com **Kinesis Data FireHose**, AWS IoT, **Cloud Watch Logs**.
+- Pode-se disponibilizar um cluster com várias instâncias.
+- Tem integrações com **Kinesis Data Firehose**, AWS IoT, **CloudWatch Logs**.
 - Seria o ELK stack da AWS.
-- Foi subsistido pelo **OpenSearch Service**
+- Foi substituído pelo **OpenSearch Service**.
 - **well architected**
   ![well-arch-search](assets/image-20210905130015143.png)
 
@@ -220,15 +220,15 @@ No caso do AWS, refere-se as multi AZs, que dão a segurança de que caso uma fi
 
 ### AWS Glue
 
-- Serviço gerenciado de **ETL** (extract, tranform, and Load).
+- Serviço gerenciado de **ETL** (Extract, Transform, and Load).
 - Serviço **Serverless**, possui 3 serviços:
-  - **AWS Crawler** - Os rastreadores (Crawler) e classificadores examinam dados de fontes diferentes, classificam dados, detectam informações de esquema e armazenam meta-dados automaticamente no AWS Glue Data Catalog.
-  - **AWS ETL ** - O núcleo do programa ETL fornece geração de código Python ou Scala para limpeza, enriquecimento, remoção de duplicatas e outras tarefas complexas de transformação de dados.
-  - **AWS Glue Data Catalog** - fornece armazenamento centralizado e uniforme de meta-dados para rastreamento, consulta e transformação de dados usando meta-dados salvos.
-- Permite extrair dados do **S3** ou **RBDMS** e transformar e enviar para o **RedShift**.
+  - **AWS Crawler** - Os rastreadores (Crawler) e classificadores examinam dados de fontes diferentes, classificam dados, detectam informações de esquema e armazenam metadados automaticamente no AWS Glue Data Catalog.
+  - **AWS ETL** - O núcleo do programa ETL fornece geração de código Python ou Scala para limpeza, enriquecimento, remoção de duplicatas e outras tarefas complexas de transformação de dados.
+  - **AWS Glue Data Catalog** - fornece armazenamento centralizado e uniforme de metadados para rastreamento, consulta e transformação de dados usando metadados salvos.
+- Permite extrair dados do **S3** ou **RDBMS** e transformar e enviar para o **Redshift**.
   ![glue](assets/image-20210905124633707.png)
-- Pode ser usado com **Athena**, **Redshift**, **EMR** para se criar um catalogo de dados
-  (dataSet) reutilizável (GLUE Data catalog).
+- Pode ser usado com **Athena**, **Redshift**, **EMR** para se criar um catálogo de dados
+  (dataSet) reutilizável (GLUE Data Catalog).
   ![glue-catalog](assets/image-20210905124749244.png)
 
 ---
