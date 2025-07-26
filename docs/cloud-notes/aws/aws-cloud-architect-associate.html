@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Architect Associate | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-associate"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Architect Associate | Uniii docs"><meta data-rh="true" name="description" content="Prova de certificação"><meta data-rh="true" property="og:description" content="Prova de certificação"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-associate"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-associate" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-associate" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
-<script src="/assets/js/runtime~main.afda7fbd.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c3b00866.js" defer="defer"></script>
 <script src="/assets/js/main.a77e40c2.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -226,18 +226,17 @@
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="dicas">Dicas<a href="#dicas" class="hash-link" aria-label="Link direto para Dicas" title="Link direto para Dicas">​</a></h4>
 <p><img decoding="async" loading="lazy" alt="dicas" src="/assets/images/image-20210909063130084-8ed24904e0f4baf2b7543646c7d403cf.png" width="595" height="396" class="img_ev3q"></p>
 <hr>
-<hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2---análises">2 - Análises:<a href="#2---análises" class="hash-link" aria-label="Link direto para 2 - Análises:" title="Link direto para 2 - Análises:">​</a></h2>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-athena">AWS Athena<a href="#aws-athena" class="hash-link" aria-label="Link direto para AWS Athena" title="Link direto para AWS Athena">​</a></h3>
 <ul>
-<li>Serviço <strong>Serverless</strong>, que permite realizar analises em arquivos no S3.</li>
+<li>Serviço <strong>Serverless</strong>, que permite realizar análises em arquivos no S3.</li>
 <li>Usa <strong>SQL</strong> para fazer queries nos arquivos.</li>
-<li>Tem conetores <strong>JDBC</strong> e <strong>ODBC</strong> para conectar aplicativos de BI.</li>
-<li>Suportar CVS, JSON, ORC, Avro ...</li>
-<li>Cobrado por uso, queries executadas e mede de dados escaneados.</li>
-<li>Pode ser usado em BI, Analitics, relatórios e analises de VPC Flow Logs, ELB Log ..</li>
-<li>Ideal para queries rápidas ad hoc e se integrar com o AWS <strong>QuickSight</strong> para facilidade de visualização, ele também consegue lidar com análise complexa, inclusive grandes junções, funções de janela e arrays.</li>
+<li>Tem conectores <strong>JDBC</strong> e <strong>ODBC</strong> para conectar aplicativos de BI.</li>
+<li>Suporta CSV, JSON, ORC, Avro ...</li>
+<li>Cobrado por uso, queries executadas e média de dados escaneados.</li>
+<li>Pode ser usado em BI, Analytics, relatórios e análises de VPC Flow Logs, ELB Log ...</li>
+<li>Ideal para queries rápidas ad hoc e se integrar com o AWS <strong>QuickSight</strong> para facilidade de visualização. Ele também consegue lidar com análise complexa, inclusive grandes junções, funções de janela e arrays.</li>
 <li>Usa o <a href="https://aws.amazon.com/pt/big-data/what-is-presto/" target="_blank" rel="noopener noreferrer">Presto</a> com suporte completo a SQL padrão.</li>
 <li><strong>well architected</strong>
 <img decoding="async" loading="lazy" alt="athena-well-arch" src="/assets/images/image-20210905115942523-98db3f02a1a855e4c54eeb4d62ddc31e.png" width="980" height="258" class="img_ev3q"></li>
@@ -246,28 +245,28 @@
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-elasticsearch">AWS Elasticsearch<a href="#aws-elasticsearch" class="hash-link" aria-label="Link direto para AWS Elasticsearch" title="Link direto para AWS Elasticsearch">​</a></h3>
 <ul>
 <li>Usado para buscas de qualquer campo, muito usado em conjunto com aplicações big data.</li>
-<li>Pode se disponibilizar um cluster com varias instâncias.</li>
-<li>Tem integrações com <strong>Kinesis Data FireHose</strong>, AWS IoT, <strong>Cloud Watch Logs</strong>.</li>
+<li>Pode-se disponibilizar um cluster com várias instâncias.</li>
+<li>Tem integrações com <strong>Kinesis Data Firehose</strong>, AWS IoT, <strong>CloudWatch Logs</strong>.</li>
 <li>Seria o ELK stack da AWS.</li>
-<li>Foi subsistido pelo <strong>OpenSearch Service</strong></li>
+<li>Foi substituído pelo <strong>OpenSearch Service</strong>.</li>
 <li><strong>well architected</strong>
 <img decoding="async" loading="lazy" alt="well-arch-search" src="/assets/images/image-20210905130015143-00ab75f1dee74ed0a18dbf5eb300e52d.png" width="1070" height="263" class="img_ev3q"></li>
 </ul>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-glue">AWS Glue<a href="#aws-glue" class="hash-link" aria-label="Link direto para AWS Glue" title="Link direto para AWS Glue">​</a></h3>
 <ul>
-<li>Serviço gerenciado de <strong>ETL</strong> (extract, tranform, and Load).</li>
+<li>Serviço gerenciado de <strong>ETL</strong> (Extract, Transform, and Load).</li>
 <li>Serviço <strong>Serverless</strong>, possui 3 serviços:<!-- -->
 <ul>
-<li><strong>AWS Crawler</strong> - Os rastreadores (Crawler) e classificadores examinam dados de fontes diferentes, classificam dados, detectam informações de esquema e armazenam meta-dados automaticamente no AWS Glue Data Catalog.</li>
-<li>**AWS ETL ** - O núcleo do programa ETL fornece geração de código Python ou Scala para limpeza, enriquecimento, remoção de duplicatas e outras tarefas complexas de transformação de dados.</li>
-<li><strong>AWS Glue Data Catalog</strong> - fornece armazenamento centralizado e uniforme de meta-dados para rastreamento, consulta e transformação de dados usando meta-dados salvos.</li>
+<li><strong>AWS Crawler</strong> - Os rastreadores (Crawler) e classificadores examinam dados de fontes diferentes, classificam dados, detectam informações de esquema e armazenam metadados automaticamente no AWS Glue Data Catalog.</li>
+<li><strong>AWS ETL</strong> - O núcleo do programa ETL fornece geração de código Python ou Scala para limpeza, enriquecimento, remoção de duplicatas e outras tarefas complexas de transformação de dados.</li>
+<li><strong>AWS Glue Data Catalog</strong> - fornece armazenamento centralizado e uniforme de metadados para rastreamento, consulta e transformação de dados usando metadados salvos.</li>
 </ul>
 </li>
-<li>Permite extrair dados do <strong>S3</strong> ou <strong>RBDMS</strong> e transformar e enviar para o <strong>RedShift</strong>.
+<li>Permite extrair dados do <strong>S3</strong> ou <strong>RDBMS</strong> e transformar e enviar para o <strong>Redshift</strong>.
 <img decoding="async" loading="lazy" alt="glue" src="/assets/images/image-20210905124633707-1f60d64d9e9bd67b20db92120d853c53.png" width="958" height="208" class="img_ev3q"></li>
-<li>Pode ser usado com <strong>Athena</strong>, <strong>Redshift</strong>, <strong>EMR</strong> para se criar um catalogo de dados
-(dataSet) reutilizável (GLUE Data catalog).
+<li>Pode ser usado com <strong>Athena</strong>, <strong>Redshift</strong>, <strong>EMR</strong> para se criar um catálogo de dados
+(dataSet) reutilizável (GLUE Data Catalog).
 <img decoding="async" loading="lazy" alt="glue-catalog" src="/assets/images/image-20210905124749244-a410c3a169bf6244af524eeb01c0d736.png" width="985" height="503" class="img_ev3q"></li>
 </ul>
 <hr>
