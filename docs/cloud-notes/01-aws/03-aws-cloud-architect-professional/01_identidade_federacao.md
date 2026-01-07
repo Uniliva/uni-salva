@@ -6,6 +6,8 @@ sidebar_position: 1
 
 ![image-20230131205355434](assets/image-20230131205355434.png)
 
+> SSO agora é o AWS IAM Identity Center
+
 ---
 
 ## IAM
@@ -87,6 +89,38 @@ sidebar_position: 1
 ### Session Tags
 
 - Muito utilizadas para usuários federados.
+- Session Tags no STS são tags temporárias passadas ao assumir uma role e usadas nas policies IAM para liberar ou negar acesso dinamicamente.
+
+- Criação em uma resource policy
+
+```json
+{
+  "Effect": "Allow",
+  "Action": "s3:ListBucket",
+  "Resource": "arn:aws:s3:::meu-bucket",
+  "Condition": {
+    "StringEquals": {
+      "aws:PrincipalTag/department": "finance"
+    }
+  }
+}
+```
+
+- Uso em chamadas
+
+```shell
+aws sts assume-role \
+  --role-arn arn:aws:iam::123456789012:role/AppRole \
+  --role-session-name sessao1 \
+  --tags Key=department,Value=finance
+```
+
+- Quando Session Tags são muito úteis
+  - Multi-tenant
+  - Controle de acesso por time / cliente / ambiente
+  - Integração com SSO / IdP
+  - Lambdas ou apps que assumem roles dinamicamente
+
 
 ### APIs Importantes do STS
 
@@ -126,6 +160,13 @@ sidebar_position: 1
         - **Sincronização de dados**.
       - Uma vez concedido o acesso, criam-se policies configuradas com variáveis que restringem o acesso ao usuário apenas ao que foi designado para ele.
   - **Single Sign-On (SSO)**
+    - Single Sign-On (SSO) permite que o usuário se autentique uma única vez em um provedor de identidade (IdP) e utilize esse mesmo login para acessar múltiplos sistemas, incluindo a AWS, sem criar usuários IAM.
+    - Na AWS, o SSO funciona por meio de Identity Federation, onde:
+      - A autenticação ocorre no IdP (ex: Active Directory, Azure AD).
+      - A AWS confia nesse IdP.
+      - O acesso é concedido via credenciais temporárias do STS.
+      - As permissões são definidas por roles e policies, podendo usar Session Tags e variáveis.
+    - Hoje, o AWS IAM Identity Center (antigo AWS SSO) é o método mais recomendado, por ser mais simples de configurar, centralizar permissões e integrar com múltiplas contas.
 
 ---
 ### AWS Directory Service
@@ -141,7 +182,7 @@ Forma de usar o **Active Directory** na AWS.
 - **EC2 Windows**
   - Nele, podem ser executadas aplicações que utilizam o AD, como o **SharePoint**.
 - **Integrações**
-  - Pode ser integrado com **RDS para SQL, AWS Workspaces e QuickSight**.
+  - Pode ser integrado com **RDS para SQL Server, AWS Workspaces e QuickSight**.
   - Pode-se usar o **SSO** para fornecer acesso a aplicações de terceiros.
 - Pode ser usado em conjunto com o **AD do ambiente on-premise**.
 - Permite adicionar outros **Domain Controllers (DCs)** para escalabilidade.
@@ -292,13 +333,11 @@ Forma de usar o **Active Directory** na AWS.
 
 ## AWS Control Tower
 
-## AWS IAM Identity Center
-
 ![image-20230309193510226](assets/image-20230309193510226.png)  
 ![image-20230309192640760](assets/image-20230309192640760.png)  
 ![image-20230309192736039](assets/image-20230309192736039.png)  
 
-**O que é o AWS IAM Identity Center?**
+**O que é o AWS Control Tower**
 - É uma **maneira simplificada e eficiente** de configurar e governar um ambiente **seguro e compatível** para múltiplas contas AWS, seguindo as **melhores práticas recomendadas**.
 
 **Landing Zone**
