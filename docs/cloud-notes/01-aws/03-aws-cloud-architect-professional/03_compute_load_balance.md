@@ -73,6 +73,11 @@ sidebar_position: 3
 
 ---
 
+> Networking
+
+![rede para baixa latencia](assets/eni-net.png)
+---
+
 > Auto Scaling Group
 
 - Permite ajustar automaticamente a quantidade de instâncias **EC2** com base na demanda.
@@ -100,6 +105,8 @@ sidebar_position: 3
   - **Launch Template:** moderno, com suporte a versionamento e configuração flexível.
 :::
 
+
+- Acesse pra mais [detalhes do EC2](http://localhost:3000/docs/cloud-notes/aws/aws-cloud-architect-associate#ec2)
 
 Para informações detalhadas sobre tipos de instâncias, acesse:
 - [AWS EC2 Instance Types](https://aws.amazon.com/pt/ec2/instance-types/)
