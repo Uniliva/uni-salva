@@ -510,9 +510,6 @@ O ASG é composto pelos seguintes elementos principais:
   - Permite **herança de configurações** entre diferentes templates.  
   - Suporta **instâncias On-Demand e Spot**, permitindo um **mix de ambos** para otimizar custos.
 
----
-
-Aqui está a documentação corrigida e melhorada, com explicações adicionais para facilitar o entendimento e notas relevantes para a certificação AWS Certified Solutions Architect - Professional. 🚀  
 
 ---
 
