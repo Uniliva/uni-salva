@@ -516,8 +516,6 @@ O **Storage Lens** fornece insights detalhados sobre a utilização do armazenam
 
 ![image-20230219084109555](assets/image-20230219084109555.png)
 
-Aqui estão cinco questões e dicas baseadas no conteúdo que você forneceu:  
-
 ---
 
 :::tip **Dica para a prova 🎯**  
