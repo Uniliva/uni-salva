@@ -73,11 +73,6 @@ sidebar_position: 3
 
 ---
 
-> Networking
-
-![rede para baixa latencia](assets/eni-net.png)
----
-
 > Auto Scaling Group
 
 - Permite ajustar automaticamente a quantidade de instâncias **EC2** com base na demanda.
@@ -105,8 +100,10 @@ sidebar_position: 3
   - **Launch Template:** moderno, com suporte a versionamento e configuração flexível.
 :::
 
+**Importante**
 
-- Acesse pra mais [detalhes do EC2](http://localhost:3000/docs/cloud-notes/aws/aws-cloud-architect-associate#ec2)
+- Acesse pra mais [detalhes do EC2](https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-associate#ec2)
+- Veja também [HPC - Alta performance](https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-associate#alta-performance-computacional-hpc)
 
 Para informações detalhadas sobre tipos de instâncias, acesse:
 - [AWS EC2 Instance Types](https://aws.amazon.com/pt/ec2/instance-types/)
@@ -278,7 +275,7 @@ As limitações de execução e deploy do AWS Lambda são frequentemente cobrada
 
 > CloudFront Functions
 
-- Saiba mais em [Edge Functions](https://docs.uniii.com.br/02-cloud-notes/01-aws/03-aws-cloud-architect-professional/02-conteudo.html#edge-function).
+- Saiba mais em [Edge Functions](https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/caching#edge-function).
 
 ---
 

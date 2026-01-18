@@ -147,9 +147,6 @@ Por padrão, **o uso de memória não é monitorado** no CloudWatch. Para captur
 
 ----
 
-Aqui está a versão corrigida e melhorada da sua documentação sobre **AWS Synthetics Canary**, seguindo o padrão de formatação que você pediu:  
-
----
 
 ## AWS Synthetics Canary  
 

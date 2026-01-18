@@ -109,10 +109,6 @@ Se a pergunta envolver **gerenciamento centralizado de backups de vários servi�
 
 ---
 
-Aqui está sua documentação revisada, com correções gramaticais, explicações adicionais e **admonitions** para destacar pontos importantes para a certificação **AWS Certified Solutions Architect - Professional**.  
-
----
-
 ## Instance Store  
 
 O **Instance Store** é um tipo de armazenamento em bloco que fica diretamente **dentro do host físico** onde a instância EC2 está sendo executada.  
@@ -203,10 +199,6 @@ O **EFS suporta gerenciamento de ciclo de vida**, permitindo mover arquivos auto
 Se a necessidade for **armazenamento de bloco persistente** para uma única instância, então a melhor opção será **EBS**.  
 [Saiba mais sobre o Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html)  
 :::  
-
----
-
-Aqui está sua documentação revisada e aprimorada para facilitar a compreensão e auxiliar na sua preparação para a certificação **AWS Certified Solutions Architect - Professional**.  
 
 ---
 
