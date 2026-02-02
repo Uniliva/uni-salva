@@ -61,7 +61,7 @@ A maioria dos problemas no CloudWatch Logs ocorre por **permissões configuradas
 
 - O CloudWatch coleta métricas automaticamente dos serviços AWS, permitindo monitoramento e automação.
 - Modelo de funcionamento:
-  - **Métricas** →> Thresholds (limites definidos)** →> Açõe
+  - **Métricas** → Thresholds (limites definidos) → Ações
 - Alarmes podem ser criados com base nas métricas e acionam ações, como:
   - **Publicação em um tópico SNS** para notificações.
   - **Disparo de um Auto Scaling Policy** para ajuste de recursos.
@@ -340,7 +340,6 @@ O **AWS X-Ray** é um serviço de rastreamento distribuído que permite analisar
 
 :::
 
-![AWS X-Ray](assets/image-20230222055737522.png)  
 
 ---
 

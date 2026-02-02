@@ -417,10 +417,6 @@ O **AWS Service Catalog** é ideal para organizações que desejam fornecer **um
 
 ---
 
-![AWS Service Catalog](assets/image-20230312103936578.png)  
-
----
-
 :::info **Dica**   
 
 - O **AWS Service Catalog** pode ser integrado ao **AWS Organizations** para aplicar padrões de governança em várias contas.  
