@@ -36,8 +36,6 @@ O **Tag Editor** é uma ferramenta muito útil, especialmente quando você tem m
 ---
 ## Calculadora de preços da AWS
 
-![calculadora-preco](assets/image-20230223061135313.png)
-
 > Visão Geral
 
 A **Calculadora de Preços da AWS** é uma ferramenta online gratuita que ajuda a estimar o custo mensal dos serviços da AWS. Ela permite que os usuários calculem o custo de diferentes combinações de serviços com base em suas necessidades específicas. Esta ferramenta é útil tanto para planejar orçamentos de TI quanto para avaliar diferentes cenários de implantação de aplicativos e serviços na nuvem da AWS.  
