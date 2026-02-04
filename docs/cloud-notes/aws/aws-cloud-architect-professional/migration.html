@@ -4,18 +4,25 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Migração para a AWS | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/migration"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Migração para a AWS | Uniii docs"><meta data-rh="true" name="description" content="Migration"><meta data-rh="true" property="og:description" content="Migration"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/migration"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/migration" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/migration" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
-<script src="/assets/js/runtime~main.c288cd3e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.dde3952a.js" defer="defer"></script>
 <script src="/assets/js/main.80ca7488.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Uniii Docs</b></a><a class="navbar__item navbar__link" href="/docs/developer-notes">Developer Notes</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/cloud-notes">Cloud Notes</a><a class="navbar__item navbar__link" href="/docs/devops-notes">DevOps Notes</a></div><div class="navbar__items navbar__items--right"><a href="https://www.linkedin.com/in/uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Linkedin<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/Uniliva" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/cloud-notes">☁️ Cloud Notes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">📝 AWS Certifications</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-develop-associate/certificacao">Developer Associate</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-associate">Architect Associate</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Architect Professional</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/certificacao">Certificação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/identidade_federacao">Identidade e Federação</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/seguranca">Segurança</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/compute_load_balance">Computação &amp; Balanceador de carga</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/storage">Armazenamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/caching">Caching</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/database">Bancos de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/service_communication">Comunicação entre serviço</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/data_engineering">Engenharia de dados</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/monitoring">Monitoramento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/deployment">Provisionamento de recursos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control">Controle de custos</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/migration">Migração para a AWS</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc">Networking</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/machine_learning">Machine Learning</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/outros_servicos">Outros Serviços</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/questoes_prova">O que cai na prova</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud-notes/aws/aws-advanced-architecting">Advanced Architecting on AWS</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">📝 AWS Certifications</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architect Professional</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Migração para a AWS</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Migração para a AWS</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="migration">Migration<a href="#migration" class="hash-link" aria-label="Link direto para Migration" title="Link direto para Migration">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cloud-migrations---the-6r-">Cloud Migrations - The 6R 🚀<a href="#cloud-migrations---the-6r-" class="hash-link" aria-label="Link direto para Cloud Migrations - The 6R 🚀" title="Link direto para Cloud Migrations - The 6R 🚀">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cloud-migrations---the-7r-">Cloud Migrations - The 7R 🚀<a href="#cloud-migrations---the-7r-" class="hash-link" aria-label="Link direto para Cloud Migrations - The 7R 🚀" title="Link direto para Cloud Migrations - The 7R 🚀">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="image-20230223203920041" src="/assets/images/image-20230223203920041-93c0e67d1c953fb131ad080699c83b97.png" width="888" height="382" class="img_ev3q"></p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 O que são as 6Rs?</div><div class="admonitionContent_BuS1"><p>As 6 estratégias de migração para a nuvem ajudam a escolher o melhor caminho para cada aplicação, considerando esforço, custo e benefícios.</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 O que são os 7Rs?</div><div class="admonitionContent_BuS1"><p>As 7 estratégias de migração para a nuvem ajudam a escolher o melhor caminho para cada aplicação, considerando esforço, custo e benefícios. A AWS atualizou de 6R para 7R, adicionando <strong>Relocate</strong>.</p></div></div>
 <ul>
-<li><a href="https://aws.amazon.com/pt/blogs/enterprise-strategy/6-strategies-for-migrating-applications-to-the-cloud/" target="_blank" rel="noopener noreferrer">6 estratégias para migrar para a cloud</a>
+<li><a href="https://aws.amazon.com/pt/blogs/enterprise-strategy/6-strategies-for-migrating-applications-to-the-cloud/" target="_blank" rel="noopener noreferrer">7 estratégias para migrar para a cloud</a>
 <ul>
-<li><strong>Rehosting</strong> - “lift-and-shift”<!-- -->
+<li><strong>Relocate</strong> - &quot;hypervisor-level lift and shift&quot; (novo!)<!-- -->
+<ul>
+<li>Move workloads VMware para VMware Cloud on AWS sem modificações.</li>
+<li>Não requer compra de novo hardware ou reescrita de aplicações.</li>
+<li>Exemplo: migrar VMs VMware vSphere diretamente para VMware Cloud on AWS.</li>
+</ul>
+</li>
+<li><strong>Rehosting</strong> - &quot;lift-and-shift&quot;<!-- -->
 <ul>
 <li>Migração direta do on-premises para AWS (aplicação inteira, sem grandes mudanças).</li>
 <li>Exemplo: mover VMs do datacenter para EC2.</li>
@@ -58,8 +65,9 @@
 <!-- -->✅ <strong>Rehosting (Lift-and-shift)</strong></p><p>📌 Você precisa mover um banco de dados local para o Amazon RDS com pequenas mudanças de configuração. Qual estratégia aplicar?<br>
 <!-- -->✅ <strong>Replatforming</strong></p><p>📌 A empresa está trocando seu sistema de CRM on-premises por uma solução SaaS como o Salesforce. Qual estratégia representa isso?<br>
 <!-- -->✅ <strong>Repurchasing</strong></p><p>📌 Qual a diferença entre Refactoring e Replatforming?<br>
-<!-- -->✅ Refactoring envolve reescrever a aplicação; Replatforming ajusta a infraestrutura sem reescrever o código.</p><p>📌 Qual abordagem usar para redesenhar aplicações monolíticas em microserviços?<br>
-<!-- -->✅ <strong>Refactor / Re-architect</strong></p></div></div>
+<!-- -->✅ Refactoring envolve reescrever a aplicação; Replatforming ajusta a infraestrutura sem reescrever o código.</p><p>📌 Qual abordagem usar para redesenhar aplicações monolíticas em microserviços?
+✅ <strong>Refactor / Re-architect</strong></p><p>📌 Uma empresa quer mover workloads VMware para AWS sem modificar nada. Qual estratégia?
+✅ <strong>Relocate</strong> (VMware Cloud on AWS)</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-storage-gateway-️">AWS Storage Gateway 🗄️<a href="#aws-storage-gateway-️" class="hash-link" aria-label="Link direto para AWS Storage Gateway 🗄️" title="Link direto para AWS Storage Gateway 🗄️">​</a></h3>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📦 O que é?</div><div class="admonitionContent_BuS1"><p>Permite criar uma ponte entre dados locais e a nuvem AWS, ideal para ambientes híbridos, backup, DR e cache.</p></div></div>
@@ -101,8 +109,77 @@
 </ul>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual tipo de Storage Gateway armazena arquivos diretamente no S3?<br>
 <!-- -->✅ <strong>S3 File Gateway</strong></p><p>📌 Qual tipo de gateway usar para montar compartilhamento com cache local?<br>
-<!-- -->✅ <strong>FSx File Gateway</strong></p><p>📌 Qual gateway simula fitas e integra com Glacier?<br>
-<!-- -->✅ <strong>Tape Gateway</strong></p></div></div>
+<!-- -->✅ <strong>FSx File Gateway</strong></p><p>📌 Qual gateway simula fitas e integra com Glacier?
+✅ <strong>Tape Gateway</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-datasync-">AWS DataSync 🔄<a href="#aws-datasync-" class="hash-link" aria-label="Link direto para AWS DataSync 🔄" title="Link direto para AWS DataSync 🔄">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📡 O que é?</div><div class="admonitionContent_BuS1"><p>Serviço de transferência de dados <strong>online</strong> que automatiza e acelera a movimentação de dados entre on-premises e AWS, ou entre serviços AWS.</p></div></div>
+<p><strong>Características principais:</strong></p>
+<ul>
+<li>Transfere dados até <strong>10x mais rápido</strong> que ferramentas open-source.</li>
+<li>Usa agente instalado on-premises para conectar via NFS, SMB, HDFS ou APIs de armazenamento de objetos.</li>
+<li>Criptografia em trânsito (TLS) e validação de integridade automática.</li>
+<li>Pode usar <strong>Direct Connect</strong> ou internet para transferência.</li>
+<li><strong>Agendamento:</strong> tarefas podem ser agendadas (horária, diária, semanal).</li>
+<li><strong>Largura de banda:</strong> pode limitar o uso de banda para não impactar a rede.</li>
+</ul>
+<p><strong>Destinos suportados:</strong></p>
+<ul>
+<li>Amazon S3 (todas as classes de armazenamento)</li>
+<li>Amazon EFS</li>
+<li>Amazon FSx (Windows File Server, Lustre, NetApp ONTAP, OpenZFS)</li>
+<li>Entre regiões AWS (S3 para S3, EFS para EFS)</li>
+</ul>
+<p><strong>Casos de uso:</strong></p>
+<ul>
+<li>Migração de dados para a nuvem</li>
+<li>Replicação de dados para DR</li>
+<li>Arquivamento de dados cold para S3 Glacier</li>
+<li>Sincronização contínua entre on-premises e AWS</li>
+</ul>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>DataSync vs Storage Gateway</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>DataSync:</strong> migração/sincronização de dados (transferência única ou agendada).</li>
+<li><strong>Storage Gateway:</strong> acesso híbrido contínuo (aplicações acessam dados na nuvem como se fossem locais).</li>
+</ul></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual serviço usar para migrar petabytes de dados de NFS on-premises para S3 pela rede?
+✅ <strong>AWS DataSync</strong></p><p>📌 Qual a diferença entre DataSync e Storage Gateway?
+✅ DataSync é para <strong>transferência/migração</strong>; Storage Gateway é para <strong>acesso híbrido contínuo</strong>.</p><p>📌 DataSync pode transferir dados entre serviços AWS em diferentes regiões?
+✅ Sim! Pode sincronizar S3 para S3 ou EFS para EFS cross-region.</p><p>📌 Qual serviço usar para sincronizar dados de HDFS (Hadoop) para S3?
+✅ <strong>AWS DataSync</strong> (suporta HDFS como source)</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-transfer-family-">AWS Transfer Family 📁<a href="#aws-transfer-family-" class="hash-link" aria-label="Link direto para AWS Transfer Family 📁" title="Link direto para AWS Transfer Family 📁">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📤 O que é?</div><div class="admonitionContent_BuS1"><p>Serviço gerenciado para transferência de arquivos via SFTP, FTPS, FTP e AS2 diretamente para Amazon S3 ou EFS.</p></div></div>
+<p><strong>Protocolos suportados:</strong></p>
+<ul>
+<li><strong>SFTP</strong> (SSH File Transfer Protocol) - porta 22</li>
+<li><strong>FTPS</strong> (FTP over SSL) - porta 990</li>
+<li><strong>FTP</strong> (File Transfer Protocol) - porta 21 (não recomendado, sem criptografia)</li>
+<li><strong>AS2</strong> (Applicability Statement 2) - para B2B</li>
+</ul>
+<p><strong>Características:</strong></p>
+<ul>
+<li>Endpoint pode ser público ou dentro de VPC (via VPC Endpoint).</li>
+<li>Integração com AD, LDAP ou provedor de identidade customizado (Lambda).</li>
+<li>Armazenamento em S3 ou EFS.</li>
+<li>Alta disponibilidade e escalabilidade gerenciada.</li>
+</ul>
+<p><strong>Casos de uso:</strong></p>
+<ul>
+<li>Substituir servidores FTP legados.</li>
+<li>Integração B2B com parceiros que usam protocolos tradicionais.</li>
+<li>Compliance que exige protocolos específicos.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Uma empresa precisa receber arquivos de parceiros via SFTP e armazenar no S3. Qual serviço usar?
+✅ <strong>AWS Transfer Family</strong></p><p>📌 Qual serviço permite que aplicações legadas usem FTP para enviar arquivos para AWS?
+✅ <strong>AWS Transfer Family</strong></p><p>📌 AWS Transfer Family suporta integração com Active Directory?
+✅ Sim! Suporta AD, LDAP e provedores de identidade customizados.</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="comparação-ferramentas-de-transferência-de-dados-">Comparação: Ferramentas de Transferência de Dados 📊<a href="#comparação-ferramentas-de-transferência-de-dados-" class="hash-link" aria-label="Link direto para Comparação: Ferramentas de Transferência de Dados 📊" title="Link direto para Comparação: Ferramentas de Transferência de Dados 📊">​</a></h3>
+<table><thead><tr><th>Ferramenta</th><th>Uso Principal</th><th>Rede</th><th>Volume</th></tr></thead><tbody><tr><td><strong>DataSync</strong></td><td>Migração/sincronização online</td><td>Internet/Direct Connect</td><td>TBs</td></tr><tr><td><strong>Storage Gateway</strong></td><td>Acesso híbrido contínuo</td><td>Internet/Direct Connect</td><td>Contínuo</td></tr><tr><td><strong>Snow Family</strong></td><td>Migração offline</td><td>Física</td><td>PBs</td></tr><tr><td><strong>Transfer Family</strong></td><td>SFTP/FTP para S3/EFS</td><td>Internet</td><td>Arquivos</td></tr><tr><td><strong>S3 Transfer Acceleration</strong></td><td>Upload rápido para S3</td><td>Internet (edge locations)</td><td>Qualquer</td></tr></tbody></table>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual ferramenta usar para migração de 50 TB com conexão de rede limitada (10 Mbps)?
+✅ <strong>Snowball</strong> (migração offline é mais rápida que transferir pela rede lenta)</p><p>📌 Qual ferramenta para sincronização contínua de 1 TB/dia entre on-premises e S3?
+✅ <strong>AWS DataSync</strong> (agendamento automático)</p><p>📌 Aplicações on-premises precisam acessar arquivos no S3 como se fossem locais. Qual usar?
+✅ <strong>S3 File Gateway</strong> (Storage Gateway)</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-snow-family-️">AWS Snow Family ❄️<a href="#aws-snow-family-️" class="hash-link" aria-label="Link direto para AWS Snow Family ❄️" title="Link direto para AWS Snow Family ❄️">​</a></h3>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🚚 O que é?</div><div class="admonitionContent_BuS1"><p>Dispositivos offline para migração de grandes volumes de dados, sem depender da rede. Podem rodar EC2 ou Lambda para processamento em áreas remotas.</p></div></div>
@@ -126,26 +203,68 @@
 <!-- -->Caminhão para transportar mais de 10 PBs para AWS!<br>
 <img decoding="async" loading="lazy" alt="snow-family" src="/assets/images/image-20210902060123753-8e7fd25ae0777461b9681239b046f16f.png" width="1122" height="450" class="img_ev3q"></li>
 </ul>
-<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Atenção!</div><div class="admonitionContent_BuS1"><p>Não é possível importar dados do Snowball direto para Glacier, primeiro vai para S3 e depois ciclo de vida move para Glacier.</p></div></div>
+<p><strong>OpsHub:</strong> Interface gráfica para gerenciar dispositivos Snow (não precisa de CLI).</p>
+<p><strong>Edge Computing com Snow:</strong></p>
+<ul>
+<li>Snowball Edge e Snowcone podem rodar EC2 e Lambda localmente.</li>
+<li>Útil para processamento em locais remotos (navios, minas, fábricas).</li>
+<li>Dados podem ser pré-processados antes de enviar para AWS.</li>
+</ul>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Atenção!</div><div class="admonitionContent_BuS1"><ul>
+<li>Não é possível importar dados do Snowball direto para Glacier - primeiro vai para S3 e depois lifecycle move para Glacier.</li>
+<li>Snowball não pode ser usado para transferir dados entre regiões AWS diretamente.</li>
+<li>Tempo de transferência: considere o tempo de envio físico (~1 semana) no cálculo.</li>
+</ul></div></div>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como migrar mais de 10 PB de dados de um datacenter remoto para a AWS?<br>
 <!-- -->✅ <strong>AWS Snowmobile</strong></p><p>📌 Você precisa migrar até 80 TB de dados com processamento local. Qual opção usar?<br>
 <!-- -->✅ <strong>AWS Snowball Edge</strong></p><p>📌 Qual dispositivo portátil pode operar offline e ser carregado manualmente?<br>
-<!-- -->✅ <strong>Snowcone</strong></p><p>📌 Qual ferramenta AWS permite mover grandes quantidades de dados físicos para a nuvem?<br>
-<!-- -->✅ <strong>AWS Snowball</strong></p></div></div>
+<!-- -->✅ <strong>Snowcone</strong></p><p>📌 Qual ferramenta AWS permite mover grandes quantidades de dados físicos para a nuvem?
+✅ <strong>AWS Snowball</strong></p><p>📌 Quando usar Snowball vs DataSync?
+✅ <strong>Regra prática:</strong> se a transferência pela rede leva mais de 1 semana, use Snowball.
+✅ Fórmula: <code>Dados(TB) × 8 × 1024 / Bandwidth(Mbps) / 86400 = dias</code></p><p>📌 Snowball pode rodar código Lambda localmente?
+✅ Sim! Snowball Edge suporta Lambda para processamento local.</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-dms-database-migration-service-️">AWS DMS (Database Migration Service) 🛢️<a href="#aws-dms-database-migration-service-️" class="hash-link" aria-label="Link direto para AWS DMS (Database Migration Service) 🛢️" title="Link direto para AWS DMS (Database Migration Service) 🛢️">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="aws-dms" src="/assets/images/image-20210909064002076-59040d8c667fa1a99fcae78f2065f044.png" width="1303" height="358" class="img_ev3q"></p>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>Serviço gerenciado para migração de bancos de dados para AWS, com suporte a migração ativa e replicação contínua.</p></div></div>
 <p><strong>Tipos de migração:</strong></p>
 <ul>
-<li><strong>Homogênea:</strong> mesmo tipo de banco (ex: Oracle para Oracle).</li>
-<li><strong>Heterogênea:</strong> tipos diferentes (ex: Oracle para MySQL), usando o <strong>SCT (Schema Conversion Tool)</strong>.</li>
+<li><strong>Homogênea:</strong> mesmo tipo de banco (ex: Oracle para Oracle) - não precisa de SCT.</li>
+<li><strong>Heterogênea:</strong> tipos diferentes (ex: Oracle para Aurora PostgreSQL), usando o <strong>SCT (Schema Conversion Tool)</strong>.</li>
 </ul>
 <p><strong>Modos de operação:</strong></p>
 <ul>
 <li><strong>Full Load:</strong> carga completa inicial.</li>
-<li><strong>CDC only:</strong> replicação contínua.</li>
-<li><strong>Full Load + CDC:</strong> carga inicial + replicação contínua.</li>
+<li><strong>CDC only:</strong> replicação contínua (Change Data Capture).</li>
+<li><strong>Full Load + CDC:</strong> carga inicial + replicação contínua (mais comum).</li>
+</ul>
+<p><strong>Fontes suportadas:</strong></p>
+<ul>
+<li>On-premises e EC2: Oracle, MS SQL, MySQL, MariaDB, PostgreSQL, SAP, MongoDB, DB2</li>
+<li>Azure: Azure SQL Database</li>
+<li>Amazon RDS (todas as engines incluindo Aurora)</li>
+<li>Amazon S3 (como fonte)</li>
+</ul>
+<p><strong>Destinos suportados:</strong></p>
+<ul>
+<li>Amazon RDS, Aurora, Redshift, DynamoDB, S3</li>
+<li>ElastiCache, Kinesis Data Streams, Apache Kafka</li>
+<li>DocumentDB, Amazon Neptune, Redis, Babelfish</li>
+</ul>
+<p><strong>Componentes importantes:</strong></p>
+<ul>
+<li><strong>Replication Instance:</strong> EC2 gerenciada que executa as tarefas de migração.</li>
+<li><strong>Endpoints:</strong> source (origem) e target (destino).</li>
+<li><strong>Replication Task:</strong> define o que migrar e como.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="aws-sct---schema-conversion-tool">AWS SCT - Schema Conversion Tool<a href="#aws-sct---schema-conversion-tool" class="hash-link" aria-label="Link direto para AWS SCT - Schema Conversion Tool" title="Link direto para AWS SCT - Schema Conversion Tool">​</a></h4>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🔧 O que é?</div><div class="admonitionContent_BuS1"><p>Ferramenta desktop que converte schemas de banco de dados de uma engine para outra, essencial para migrações heterogêneas.</p></div></div>
+<p><strong>Funcionalidades:</strong></p>
+<ul>
+<li>Converte schemas, views, stored procedures e funções.</li>
+<li>Identifica código que não pode ser convertido automaticamente (action items).</li>
+<li>Gera relatório de avaliação da migração.</li>
+<li><strong>Data Extraction Agents:</strong> extrai dados de data warehouses para S3, depois DMS carrega no Redshift.</li>
 </ul>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 Dica</div><div class="admonitionContent_BuS1"><p>Pode combinar Snowball com DMS para grandes volumes: extrai dados com SCT, move para Snowball, importa para S3, usa DMS para replicar no banco.</p><p>📌 Como migrar um banco Oracle on-premises para Aurora PostgreSQL na AWS?<br>
 <!-- -->✅ <strong>AWS DMS + Schema Conversion Tool (SCT)</strong></p><p>📌 Qual modo do DMS permite copiar dados em tempo real sem causar downtime?<br>
@@ -183,8 +302,13 @@
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual modelo de DR usa infraestrutura mínima pronta para escalar após um desastre?<br>
 <!-- -->✅ <strong>Pilot Light</strong></p><p>📌 O que significam RPO e RTO?<br>
 <!-- -->✅ <strong>RPO:</strong> quanto de dados pode ser perdido<br>
-<!-- -->✅ <strong>RTO:</strong> tempo que o serviço pode ficar fora do ar</p><p>📌 Qual estratégia de DR garante failover quase instantâneo entre regiões?<br>
-<!-- -->✅ <strong>Multi-site (Hot Site)</strong></p></div></div>
+<!-- -->✅ <strong>RTO:</strong> tempo que o serviço pode ficar fora do ar</p><p>📌 Qual estratégia de DR garante failover quase instantâneo entre regiões?
+✅ <strong>Multi-site (Hot Site)</strong></p><p>📌 Qual estratégia de DR tem menor custo?
+✅ <strong>Backup &amp; Restore</strong> (maior RTO/RPO, mas mais barato)</p><p>📌 Qual a diferença entre Pilot Light e Warm Standby?
+✅ <strong>Pilot Light:</strong> apenas componentes críticos (banco) replicados, compute desligado.
+✅ <strong>Warm Standby:</strong> versão reduzida da aplicação completa rodando.</p><p>📌 Como reduzir RTO de horas para minutos?
+✅ Mudar de <strong>Backup &amp; Restore</strong> para <strong>Pilot Light</strong> ou <strong>Warm Standby</strong>.</p><p>📌 Uma empresa aceita perder até 1 hora de dados (RPO=1h) e precisa recuperar em 4 horas (RTO=4h). Qual estratégia?
+✅ <strong>Pilot Light</strong> ou <strong>Warm Standby</strong> (dependendo do orçamento)</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-fis---fault-injection-simulator-">AWS FIS - Fault Injection Simulator 🧪<a href="#aws-fis---fault-injection-simulator-" class="hash-link" aria-label="Link direto para AWS FIS - Fault Injection Simulator 🧪" title="Link direto para AWS FIS - Fault Injection Simulator 🧪">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="image-20230224062326078" src="/assets/images/image-20230224062326078-0c1e48a8a38b87a29e9ccf0095a2961d.png" width="1151" height="254" class="img_ev3q"></p>
@@ -192,7 +316,33 @@
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual serviço AWS permite injetar falhas controladas em workloads para testar resiliência?<br>
 <!-- -->✅ <strong>AWS Fault Injection Simulator (FIS)</strong></p></div></div>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vm-migration-service--application-discovery-service-️">VM Migration Service &amp; Application Discovery Service 🖥️<a href="#vm-migration-service--application-discovery-service-️" class="hash-link" aria-label="Link direto para VM Migration Service &amp; Application Discovery Service 🖥️" title="Link direto para VM Migration Service &amp; Application Discovery Service 🖥️">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-migration-hub-">AWS Migration Hub 🎯<a href="#aws-migration-hub-" class="hash-link" aria-label="Link direto para AWS Migration Hub 🎯" title="Link direto para AWS Migration Hub 🎯">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🗺️ O que é?</div><div class="admonitionContent_BuS1"><p>Painel centralizado para rastrear o progresso de migrações de aplicações em toda a AWS. Integra com MGN, DMS, e outras ferramentas de migração.</p></div></div>
+<p><strong>Funcionalidades:</strong></p>
+<ul>
+<li><strong>Dashboard unificado:</strong> visão geral de todas as migrações.</li>
+<li><strong>Tracking:</strong> acompanha status de cada servidor/banco.</li>
+<li><strong>Integração:</strong> coleta dados do Application Discovery Service, MGN, DMS.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="migration-hub---refactor-spaces">Migration Hub - Refactor Spaces<a href="#migration-hub---refactor-spaces" class="hash-link" aria-label="Link direto para Migration Hub - Refactor Spaces" title="Link direto para Migration Hub - Refactor Spaces">​</a></h4>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🔄 O que é?</div><div class="admonitionContent_BuS1"><p>Facilita a refatoração incremental de aplicações para microserviços, gerenciando a infraestrutura de roteamento durante a transição.</p></div></div>
+<ul>
+<li>Cria ambiente de refactoring com API Gateway e Lambda.</li>
+<li>Permite migração gradual: roteia tráfego entre monolito e novos microserviços.</li>
+<li>Rollback fácil se algo der errado.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="migration-hub---orchestrator">Migration Hub - Orchestrator<a href="#migration-hub---orchestrator" class="hash-link" aria-label="Link direto para Migration Hub - Orchestrator" title="Link direto para Migration Hub - Orchestrator">​</a></h4>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🎼 O que é?</div><div class="admonitionContent_BuS1"><p>Automatiza e orquestra migrações de workloads usando templates predefinidos (SAP, SQL Server, etc.).</p></div></div>
+<ul>
+<li>Templates para migrações comuns.</li>
+<li>Automatiza tasks de migração end-to-end.</li>
+<li>Integra com MGN e outros serviços.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual serviço oferece visão unificada de todas as migrações em andamento?
+✅ <strong>AWS Migration Hub</strong></p><p>📌 Como facilitar refatoração gradual de monolito para microserviços?
+✅ <strong>Migration Hub Refactor Spaces</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="application-discovery-service-">Application Discovery Service 🔍<a href="#application-discovery-service-" class="hash-link" aria-label="Link direto para Application Discovery Service 🔍" title="Link direto para Application Discovery Service 🔍">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="image-20230224064834394" src="/assets/images/image-20230224064834394-457fb690b96f9b744fb925cc94fc912b.png" width="1104" height="549" class="img_ev3q"></p>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>Planeja migração de projetos com base em informações coletadas dos data centers, mapeando uso de servidores e dependências.</p></div></div>
 <p><strong>Modos:</strong></p>
@@ -223,9 +373,29 @@
 <!-- -->✅ Avalia custos e benefícios da migração para justificar o projeto.</p><p>📌 Como acompanhar o progresso de todas as migrações em tempo real?<br>
 <!-- -->✅ <strong>AWS Migration Hub</strong></p></div></div>
 <hr>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="drs-elastic-disaster-recovery-️">DRS Elastic Disaster Recovery 🛡️<a href="#drs-elastic-disaster-recovery-️" class="hash-link" aria-label="Link direto para DRS Elastic Disaster Recovery 🛡️" title="Link direto para DRS Elastic Disaster Recovery 🛡️">​</a></h4>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>Antes chamado de CloudEndure Disaster Recovery, recupera recursos físicos, virtuais e servidores na nuvem.</p></div></div>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="drs---elastic-disaster-recovery-️">DRS - Elastic Disaster Recovery 🛡️<a href="#drs---elastic-disaster-recovery-️" class="hash-link" aria-label="Link direto para DRS - Elastic Disaster Recovery 🛡️" title="Link direto para DRS - Elastic Disaster Recovery 🛡️">​</a></h4>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>Antes chamado de CloudEndure Disaster Recovery, fornece DR automatizado para servidores físicos, virtuais e em nuvem para AWS.</p></div></div>
 <p><img decoding="async" loading="lazy" alt="image-20230224064703416" src="/assets/images/image-20230224064703416-8c12e5141508cabd6cd59146a74b1557.png" width="1083" height="433" class="img_ev3q"></p>
+<p><strong>Características:</strong></p>
+<ul>
+<li>Replicação contínua em nível de bloco (baixo RPO).</li>
+<li>Recovery rápido (baixo RTO - minutos).</li>
+<li>Suporta: servidores físicos, VMware, Hyper-V, Azure, GCP, outros.</li>
+<li>Testes de DR sem impactar produção.</li>
+<li>Failback para on-premises após o desastre.</li>
+</ul>
+<p><strong>Como funciona:</strong></p>
+<ol>
+<li>Instala agente no servidor origem.</li>
+<li>Replica dados continuamente para staging area (EBS low-cost).</li>
+<li>Em caso de desastre, lança instâncias EC2 de recovery.</li>
+<li>Após resolver, faz failback para origem.</li>
+</ol>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual serviço usar para DR automatizado de servidores on-premises para AWS?
+✅ <strong>AWS Elastic Disaster Recovery (DRS)</strong></p><p>📌 DRS suporta failback para on-premises após recuperação?
+✅ Sim! Permite retornar workloads para o ambiente original.</p><p>📌 Qual a diferença entre DRS e MGN?
+✅ <strong>MGN:</strong> migração permanente para AWS.
+✅ <strong>DRS:</strong> disaster recovery (mantém ambiente original, replica para AWS).</p></div></div>
 <hr>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="migration-evaluator-">Migration Evaluator 📊<a href="#migration-evaluator-" class="hash-link" aria-label="Link direto para Migration Evaluator 📊" title="Link direto para Migration Evaluator 📊">​</a></h4>
 <p><img decoding="async" loading="lazy" alt="image-20230224065000166" src="/assets/images/image-20230224065000166-3ae0547b7695f55600b3e34eecbbb8b8.png" width="1168" height="486" class="img_ev3q"></p>
@@ -234,17 +404,112 @@
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-backup-">AWS Backup 💾<a href="#aws-backup-" class="hash-link" aria-label="Link direto para AWS Backup 💾" title="Link direto para AWS Backup 💾">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="image-20230224065258211" src="/assets/images/image-20230224065258211-c176b8febb73969f8dc41151a30581e3.png" width="1107" height="543" class="img_ev3q"></p>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>O que é?</div><div class="admonitionContent_BuS1"><p>Serviço gerenciado de backup pela AWS, centraliza configurações, suporta cross-region e cross-account, e permite backups agendados ou sob demanda.</p></div></div>
+<p><strong>Serviços suportados:</strong></p>
 <ul>
-<li>Políticas de tags e retenção.</li>
-<li><strong>Backup Vault Lock:</strong>
+<li>EC2, EBS, S3, RDS, Aurora, DynamoDB</li>
+<li>EFS, FSx (todos os tipos)</li>
+<li>DocumentDB, Neptune</li>
+<li>Storage Gateway (Volume Gateway)</li>
+<li>VMware workloads on-premises e na nuvem</li>
+</ul>
+<p><strong>Funcionalidades:</strong></p>
 <ul>
-<li>Implementa WORM (Write Once Read Many), protegendo dados contra deleção acidental ou maliciosa.</li>
+<li><strong>Backup Plans:</strong> políticas com agendamento, retenção e transição para cold storage.</li>
+<li><strong>Cross-region backup:</strong> copia backups para outra região (DR).</li>
+<li><strong>Cross-account backup:</strong> copia para outra conta AWS (proteção extra).</li>
+<li><strong>Políticas de tags:</strong> aplica backup automaticamente por tag.</li>
+<li><strong>Point-in-time recovery (PITR):</strong> para serviços que suportam (RDS, DynamoDB).</li>
 </ul>
-</li>
+<p><strong>Backup Vault Lock (WORM):</strong></p>
+<ul>
+<li>Implementa WORM (Write Once Read Many).</li>
+<li>Protege contra deleção acidental ou maliciosa.</li>
+<li><strong>Compliance mode:</strong> nem o root pode deletar durante período de retenção.</li>
+<li>Atende requisitos de compliance (SEC, FINRA, etc.).</li>
 </ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como proteger backups contra exclusão acidental ou maliciosa?<br>
-<!-- -->✅ <strong>AWS Backup com Vault Lock (WORM)</strong></p><p>📌 Qual serviço AWS permite configurar backups agendados e centralizados para várias contas?<br>
-<!-- -->✅ <strong>AWS Backup</strong></p></div></div>
+<p><strong>AWS Backup Audit Manager:</strong></p>
+<ul>
+<li>Monitora conformidade das atividades de backup.</li>
+<li>Gera relatórios para auditoria.</li>
+<li>Define controles de compliance.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como proteger backups contra exclusão acidental ou maliciosa?
+✅ <strong>AWS Backup com Vault Lock (WORM)</strong></p><p>📌 Qual serviço AWS permite configurar backups agendados e centralizados para várias contas?
+✅ <strong>AWS Backup</strong></p><p>📌 Como garantir que backups não possam ser deletados nem pelo root user?
+✅ <strong>Backup Vault Lock em compliance mode</strong></p><p>📌 Como fazer backup de VMware on-premises diretamente para AWS?
+✅ <strong>AWS Backup</strong> (suporta VMware via Backup Gateway)</p><p>📌 Qual serviço usar para auditar se todas as instâncias EC2 estão sendo backupeadas?
+✅ <strong>AWS Backup Audit Manager</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conectividade-para-migração-">Conectividade para Migração 🔌<a href="#conectividade-para-migração-" class="hash-link" aria-label="Link direto para Conectividade para Migração 🔌" title="Link direto para Conectividade para Migração 🔌">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🌐 Opções de conectividade</div><div class="admonitionContent_BuS1"><p>A escolha da conectividade impacta diretamente a velocidade e segurança da migração.</p></div></div>
+<table><thead><tr><th>Opção</th><th>Bandwidth</th><th>Latência</th><th>Uso</th></tr></thead><tbody><tr><td><strong>Internet pública</strong></td><td>Variável</td><td>Alta</td><td>Migrações pequenas</td></tr><tr><td><strong>VPN Site-to-Site</strong></td><td>Até 1.25 Gbps</td><td>Média</td><td>Migração segura, médio volume</td></tr><tr><td><strong>Direct Connect</strong></td><td>1-100 Gbps</td><td>Baixa</td><td>Grandes volumes, produção</td></tr><tr><td><strong>Direct Connect + VPN</strong></td><td>1-100 Gbps</td><td>Baixa</td><td>Máxima segurança (criptografado)</td></tr><tr><td><strong>Snow Family</strong></td><td>N/A (offline)</td><td>N/A</td><td>Petabytes, rede limitada</td></tr></tbody></table>
+<p><strong>Direct Connect para migração:</strong></p>
+<ul>
+<li>Conexão dedicada entre datacenter e AWS.</li>
+<li>Menor latência e maior consistência que internet.</li>
+<li><strong>Dedicated Connection:</strong> 1, 10 ou 100 Gbps.</li>
+<li><strong>Hosted Connection:</strong> 50 Mbps a 10 Gbps (via parceiro).</li>
+<li>Pode levar semanas para provisionar - planeje com antecedência!</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual opção de conectividade oferece menor latência para migração de grandes volumes?
+✅ <strong>AWS Direct Connect</strong></p><p>📌 Uma empresa precisa migrar 500 TB com conexão de 1 Gbps. Quanto tempo levaria?
+✅ ~46 dias pela rede. <strong>Snowball seria mais rápido!</strong></p><p>📌 Como ter conectividade criptografada com Direct Connect?
+✅ <strong>Site-to-Site VPN sobre Direct Connect</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vmware-cloud-on-aws-️">VMware Cloud on AWS ☁️<a href="#vmware-cloud-on-aws-️" class="hash-link" aria-label="Link direto para VMware Cloud on AWS ☁️" title="Link direto para VMware Cloud on AWS ☁️">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🖥️ O que é?</div><div class="admonitionContent_BuS1"><p>Permite executar workloads VMware vSphere diretamente na AWS, sem necessidade de modificar VMs ou reescrever aplicações.</p></div></div>
+<p><strong>Características:</strong></p>
+<ul>
+<li>Infraestrutura VMware (vSphere, vSAN, NSX) rodando em bare-metal AWS.</li>
+<li>Gerenciado pelo VMware, integrado com serviços AWS.</li>
+<li>Migração usando vMotion (live migration sem downtime).</li>
+<li>Usa <strong>HCX (Hybrid Cloud Extension)</strong> para facilitar migração.</li>
+</ul>
+<p><strong>Casos de uso:</strong></p>
+<ul>
+<li>Migração rápida de datacenters VMware para AWS.</li>
+<li>Extensão de datacenter para a nuvem (burst).</li>
+<li>Disaster Recovery usando VMware Site Recovery.</li>
+<li>Modernização gradual (VMs acessam serviços AWS nativos).</li>
+</ul>
+<p><strong>Integração com AWS:</strong></p>
+<ul>
+<li>VMs podem acessar S3, RDS, Lambda, etc. via ENI.</li>
+<li>Pode usar Direct Connect ou VPN.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Uma empresa quer migrar VMs VMware para AWS sem modificar nada, usando vMotion. Qual serviço?
+✅ <strong>VMware Cloud on AWS</strong></p><p>📌 Qual a diferença entre VMware Cloud on AWS e EC2?
+✅ VMware Cloud on AWS mantém a stack VMware; EC2 são instâncias nativas AWS.</p><p>📌 O que é HCX no contexto de VMware Cloud on AWS?
+✅ Ferramenta para facilitar migração de workloads VMware para a nuvem.</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-outposts-">AWS Outposts 🏢<a href="#aws-outposts-" class="hash-link" aria-label="Link direto para AWS Outposts 🏢" title="Link direto para AWS Outposts 🏢">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>📦 O que é?</div><div class="admonitionContent_BuS1"><p>Hardware da AWS instalado no seu datacenter local, estendendo a infraestrutura AWS para on-premises.</p></div></div>
+<p><strong>Tipos:</strong></p>
+<ul>
+<li><strong>Outposts Rack:</strong> rack completo (42U) com compute e storage.</li>
+<li><strong>Outposts Servers:</strong> servidor individual (1U ou 2U) para locais menores.</li>
+</ul>
+<p><strong>Serviços suportados:</strong></p>
+<ul>
+<li>EC2, EBS, S3 (Outposts S3), ECS, EKS, RDS, EMR</li>
+<li>Gerenciado pelo console AWS normal.</li>
+</ul>
+<p><strong>Casos de uso:</strong></p>
+<ul>
+<li>Requisitos de residência de dados (dados não podem sair do país).</li>
+<li>Latência ultra-baixa para aplicações locais.</li>
+<li>Processamento local de dados antes de enviar para AWS.</li>
+<li>Migração gradual com ambiente híbrido consistente.</li>
+</ul>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Importante!</div><div class="admonitionContent_BuS1"><p>Outposts precisa de conectividade com a região AWS (Direct Connect ou internet). Não funciona 100% offline.</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Uma empresa precisa rodar workloads AWS no próprio datacenter por questões de compliance. Qual serviço?
+✅ <strong>AWS Outposts</strong></p><p>📌 Qual a diferença entre Outposts e Local Zones?
+✅ <strong>Outposts:</strong> hardware AWS no SEU datacenter.
+✅ <strong>Local Zones:</strong> infraestrutura AWS em cidades específicas (gerenciada pela AWS).</p><p>📌 Outposts suporta S3?
+✅ Sim! <strong>S3 on Outposts</strong> permite armazenar objetos localmente.</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resumo-escolha-da-ferramenta-certa-">Resumo: Escolha da Ferramenta Certa 🎯<a href="#resumo-escolha-da-ferramenta-certa-" class="hash-link" aria-label="Link direto para Resumo: Escolha da Ferramenta Certa 🎯" title="Link direto para Resumo: Escolha da Ferramenta Certa 🎯">​</a></h3>
+<table><thead><tr><th>Cenário</th><th>Ferramenta</th></tr></thead><tbody><tr><td>Migrar VMs sem mudanças (lift-and-shift)</td><td><strong>MGN</strong></td></tr><tr><td>Migrar VMs VMware usando vMotion</td><td><strong>VMware Cloud on AWS</strong></td></tr><tr><td>Migrar banco de dados</td><td><strong>DMS</strong></td></tr><tr><td>Migrar banco com engine diferente</td><td><strong>DMS + SCT</strong></td></tr><tr><td>Migrar petabytes offline</td><td><strong>Snowball / Snowmobile</strong></td></tr><tr><td>Sincronizar dados pela rede</td><td><strong>DataSync</strong></td></tr><tr><td>Acesso híbrido contínuo a arquivos</td><td><strong>Storage Gateway</strong></td></tr><tr><td>Descobrir servidores e dependências</td><td><strong>Application Discovery Service</strong></td></tr><tr><td>Rastrear progresso da migração</td><td><strong>Migration Hub</strong></td></tr><tr><td>Executar AWS no próprio datacenter</td><td><strong>Outposts</strong></td></tr><tr><td>Manter VMs VMware na AWS</td><td><strong>VMware Cloud on AWS</strong></td></tr><tr><td>Testar resiliência da aplicação</td><td><strong>FIS</strong></td></tr><tr><td>Disaster Recovery automatizado</td><td><strong>DRS (Elastic Disaster Recovery)</strong></td></tr><tr><td>Backup centralizado multi-conta</td><td><strong>AWS Backup</strong></td></tr></tbody></table>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="links-para-recursos-adicionais-e-referências-">Links para Recursos Adicionais e Referências 📚<a href="#links-para-recursos-adicionais-e-referências-" class="hash-link" aria-label="Link direto para Links para Recursos Adicionais e Referências 📚" title="Link direto para Links para Recursos Adicionais e Referências 📚">​</a></h2>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Links Úteis</div><div class="admonitionContent_BuS1"><ul>
@@ -254,7 +519,13 @@
 <li><a href="https://aws.amazon.com/pt/snow/" target="_blank" rel="noopener noreferrer">AWS Snow Family</a></li>
 <li><a href="https://aws.amazon.com/pt/dms/" target="_blank" rel="noopener noreferrer">AWS DMS</a></li>
 <li><a href="https://aws.amazon.com/pt/backup/" target="_blank" rel="noopener noreferrer">AWS Backup</a></li>
+<li><a href="https://aws.amazon.com/pt/datasync/" target="_blank" rel="noopener noreferrer">AWS DataSync</a></li>
+<li><a href="https://aws.amazon.com/pt/aws-transfer-family/" target="_blank" rel="noopener noreferrer">AWS Transfer Family</a></li>
+<li><a href="https://aws.amazon.com/pt/migration-hub/" target="_blank" rel="noopener noreferrer">AWS Migration Hub</a></li>
+<li><a href="https://aws.amazon.com/pt/vmware/" target="_blank" rel="noopener noreferrer">VMware Cloud on AWS</a></li>
+<li><a href="https://aws.amazon.com/pt/outposts/" target="_blank" rel="noopener noreferrer">AWS Outposts</a></li>
+<li><a href="https://aws.amazon.com/pt/disaster-recovery/" target="_blank" rel="noopener noreferrer">AWS DRS</a></li>
 </ul></div></div>
-<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/12_migration.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Controle de custos</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Networking</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#migration" class="table-of-contents__link toc-highlight">Migration</a><ul><li><a href="#cloud-migrations---the-6r-" class="table-of-contents__link toc-highlight">Cloud Migrations - The 6R 🚀</a></li><li><a href="#aws-storage-gateway-️" class="table-of-contents__link toc-highlight">AWS Storage Gateway 🗄️</a></li><li><a href="#aws-snow-family-️" class="table-of-contents__link toc-highlight">AWS Snow Family ❄️</a></li><li><a href="#aws-dms-database-migration-service-️" class="table-of-contents__link toc-highlight">AWS DMS (Database Migration Service) 🛢️</a></li><li><a href="#disaster-recovery-in-aws-" class="table-of-contents__link toc-highlight">Disaster Recovery in AWS 🆘</a></li><li><a href="#aws-fis---fault-injection-simulator-" class="table-of-contents__link toc-highlight">AWS FIS - Fault Injection Simulator 🧪</a></li><li><a href="#vm-migration-service--application-discovery-service-️" class="table-of-contents__link toc-highlight">VM Migration Service &amp; Application Discovery Service 🖥️</a></li><li><a href="#aws-backup-" class="table-of-contents__link toc-highlight">AWS Backup 💾</a></li></ul></li><li><a href="#links-para-recursos-adicionais-e-referências-" class="table-of-contents__link toc-highlight">Links para Recursos Adicionais e Referências 📚</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Uniii .</div></div></div></footer></div>
+<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/12_migration.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/cost_control"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Controle de custos</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Networking</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#migration" class="table-of-contents__link toc-highlight">Migration</a><ul><li><a href="#cloud-migrations---the-7r-" class="table-of-contents__link toc-highlight">Cloud Migrations - The 7R 🚀</a></li><li><a href="#aws-storage-gateway-️" class="table-of-contents__link toc-highlight">AWS Storage Gateway 🗄️</a></li><li><a href="#aws-datasync-" class="table-of-contents__link toc-highlight">AWS DataSync 🔄</a></li><li><a href="#aws-transfer-family-" class="table-of-contents__link toc-highlight">AWS Transfer Family 📁</a></li><li><a href="#comparação-ferramentas-de-transferência-de-dados-" class="table-of-contents__link toc-highlight">Comparação: Ferramentas de Transferência de Dados 📊</a></li><li><a href="#aws-snow-family-️" class="table-of-contents__link toc-highlight">AWS Snow Family ❄️</a></li><li><a href="#aws-dms-database-migration-service-️" class="table-of-contents__link toc-highlight">AWS DMS (Database Migration Service) 🛢️</a></li><li><a href="#disaster-recovery-in-aws-" class="table-of-contents__link toc-highlight">Disaster Recovery in AWS 🆘</a></li><li><a href="#aws-fis---fault-injection-simulator-" class="table-of-contents__link toc-highlight">AWS FIS - Fault Injection Simulator 🧪</a></li><li><a href="#aws-migration-hub-" class="table-of-contents__link toc-highlight">AWS Migration Hub 🎯</a></li><li><a href="#application-discovery-service-" class="table-of-contents__link toc-highlight">Application Discovery Service 🔍</a></li><li><a href="#aws-backup-" class="table-of-contents__link toc-highlight">AWS Backup 💾</a></li><li><a href="#conectividade-para-migração-" class="table-of-contents__link toc-highlight">Conectividade para Migração 🔌</a></li><li><a href="#vmware-cloud-on-aws-️" class="table-of-contents__link toc-highlight">VMware Cloud on AWS ☁️</a></li><li><a href="#aws-outposts-" class="table-of-contents__link toc-highlight">AWS Outposts 🏢</a></li><li><a href="#resumo-escolha-da-ferramenta-certa-" class="table-of-contents__link toc-highlight">Resumo: Escolha da Ferramenta Certa 🎯</a></li></ul></li><li><a href="#links-para-recursos-adicionais-e-referências-" class="table-of-contents__link toc-highlight">Links para Recursos Adicionais e Referências 📚</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Uniii .</div></div></div></footer></div>
 </body>
 </html>
