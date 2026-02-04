@@ -61,7 +61,7 @@ Ao usar a calculadora, é importante revisar as configurações detalhadas, como
 
 ## AWS Trusted Advisor
 
-![image-20230223061608471](assets/image-20230223061608471.png)
+
 
 > Visão Geral
 
@@ -88,6 +88,8 @@ O **AWS Trusted Advisor** fornece uma análise em **tempo real dos serviços**, 
   - Oferece acesso programático via **APIs** para integrar com outros sistemas e automações.
   - Permite configurar **alarmes** quando os limites de serviços forem atingidos.
   - Fornece recomendações mais avançadas e detalhadas.
+
+![image-20230223061608471](assets/image-20230223061608471.png)
 
 > Funcionalidades Adicionais
 
