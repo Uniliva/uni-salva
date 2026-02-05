@@ -65,6 +65,7 @@ Sempre planeje o tamanho do seu CIDR antes de criar a VPC! Evite sobreposição 
   - 10.0.0.2 - Reservado para mapear DNS.
   - 10.0.0.3 - Reservado para uso futuro.
   - 10.0.0.255 - Endereço de broadcast.
+- **Limite**: Até 200 subnets por VPC (soft limit).
 
 ---
 
@@ -111,7 +112,8 @@ Erros em tabelas de rotas podem causar perda de conectividade! Sempre revise as 
 - Totalmente gerenciado pela AWS.
 - Pague por hora e banda usada.
 - São criado em uma **AZ** especifica e **Usam Elastic IP.** caso queira alta disponibilidade é recomendado criar e mais de uma **AZ**.
-- Não pode ser usado por instâncias da mesma sub-rede, apenas por outras.
+- **Bandwidth**: Até 45 Gbps por NAT Gateway (escala automaticamente de 5 Gbps).
+- **Não pode ser usado por instâncias da mesma sub-rede**, apenas por outras.
 - Se criar um **NAT Gateway** numa **subnet** publica e apronta o tráfego das subnets privadas para o NAT, que por sua vez via **route table** repassa ao **Internet Gateway**, como nas **subnets** privadas só que pode acessar e que esta na mesma **VPC** se mantém a segurança.
 - Há uma opção de usar uma i**nstancia EC2 como NAT Instance.**
   - Mas barato que o Nat Gateway, porém não é resiliente e toda manutenção deve ser feita por nós.
@@ -142,6 +144,8 @@ Erros em tabelas de rotas podem causar perda de conectividade! Sempre revise as 
 - É a primeira camada de segurança
 - Está no nível de instâncias. Pode ser entendido como firewall das instâncias EC2.
 - Eles têm estado (**statefull**), o que significa que todas as alterações aplicadas a uma regra de entrada são automaticamente aplicadas a uma regra de saída.
+- **Limite padrão**: 5 SGs por ENI, 60 regras inbound + 60 outbound por SG.
+- **Referência cruzada**: Um SG pode referenciar outro SG como origem/destino (útil para comunicação entre tiers).
 
 > Porta que vc deve conhecer :
 > - 22 -> SSH
@@ -187,6 +191,10 @@ Sempre restrinja o acesso por IP nos Security Groups! Nunca deixe portas abertas
 - É a segunda camada de segurança.
 - Esta no nível de Subnets. Pode ser entendido como firewall de **subnet**.
 - Eles não têm estado (stateless), o que significa que qualquer alteração aplicada a uma regra de entrada não é aplicada automaticamente a uma regra de saída.
+- **Default NACL**: Permite todo tráfego inbound e outbound por padrão.
+- **Custom NACL**: Nega todo tráfego por padrão até você adicionar regras.
+- **Ephemeral Ports**: Para stateless funcionar, precisa permitir portas efêmeras (1024-65535) na saída/entrada.
+- **Limite**: 20 regras inbound + 20 outbound por NACL (pode aumentar até 40).
 
 ---
 
@@ -285,10 +293,28 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 - Forma mais segura e escalável de se **expor mais de 1000 serviços AWS.**
 - Sem a necessidade de **Peering, DX e VPN, NAT ou RouteTables.**
 - Faz uso do **VPC endpoints, por isso muitas vezes pode ser considerado o mesmo serviço.**
+- **Componentes**:
+  - **Service Provider**: Cria um **Endpoint Service** (precisa de NLB ou GWLB)
+  - **Service Consumer**: Cria um **Interface Endpoint** para conectar ao serviço
+- Suporta **cross-account** e **cross-region** (via peering/TGW).
+- O consumer só vê o **ENI** na sua VPC, não tem visibilidade da VPC do provider.
 - Usando com S3 e Direct Connect
   ![image-20230227065519211](assets/image-20230227065519211.png)
 - Usando com VPC Peering
   ![image-20230227065551394](assets/image-20230227065551394.png)
+
+:::tip Dica para a prova
+
+📌 O que é necessário para criar um Endpoint Service (PrivateLink)?
+✅ **NLB (Network Load Balancer) ou Gateway Load Balancer**
+
+📌 PrivateLink funciona cross-account?
+✅ Sim, o consumer precisa ter permissão no endpoint service
+
+📌 Qual a vantagem do PrivateLink sobre VPC Peering?
+✅ **Não expõe toda a rede, apenas o serviço específico**
+
+:::
 
 ---
 
@@ -304,6 +330,14 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
   - **ENI Flow Log** - Se aplica a uma interface de rede.
 - Podem ajudar a monitorar tráfegos de rede dentro da VPC, ajuda na **troubleshooting**.
 - Pode se usar o **Athena** ou **Cloud Watch Insights** para identificar anomalias.
+- **Destinos**: CloudWatch Logs, S3 bucket, ou Kinesis Data Firehose.
+- **O que NÃO é capturado**:
+  - Tráfego para Amazon DNS
+  - Tráfego DHCP
+  - Tráfego para o IP reservado do VPC router
+  - Tráfego de/para 169.254.169.254 (metadata)
+  - Tráfego de/para 169.254.169.123 (Amazon Time Sync)
+  - Tráfego de Windows license activation
   ![image-20230228061544920](assets/image-20230228061544920.png)
 - Arquiteturas com FPC Flow Logs
   ![image-20230228061742844](assets/image-20230228061742844.png)
@@ -356,6 +390,9 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
   ![image-20230228061217204](assets/image-20230228061217204.png)
 - Tipos de DX
   ![image-20230228060449937](assets/image-20230228060449937.png)
+- **Dedicated Connection**: Conexão física exclusiva (1 Gbps, 10 Gbps, 100 Gbps). Solicita via console AWS, instalada por parceiro.
+- **Hosted Connection**: Capacidade provisionada por parceiro AWS (50 Mbps até 10 Gbps). Mais rápido para provisionar, capacidade pode ser adicionada/removida on-demand.
+- **Lead Time**: Dedicated leva semanas/meses; Hosted pode ser mais rápido.
 
 :::tip Dica para a prova
 
@@ -406,6 +443,13 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 - **Limitações**
   - Você pode se conectar a no máximo três **Transit Gateways** em uma única Conexão **Direct Connect** para conectividade híbrida.
   - **O Transit Gateway** não oferece suporte ao roteamento entre VPCs com CIDRs sobrepostos.
+- **Transit Gateway Attachments**:
+  - **VPC Attachment**: Conecta uma VPC ao TGW (uma subnet por AZ)
+  - **VPN Attachment**: Conecta Site-to-Site VPN ao TGW
+  - **Direct Connect Gateway Attachment**: Conecta DX ao TGW
+  - **Peering Attachment**: Conecta outro TGW (mesmo ou diferente região)
+  - **Connect Attachment**: Para SD-WAN e appliances de terceiros (usa GRE)
+- **Bandwidth**: 50 Gbps por VPC attachment, throughput agregado pode ser maior.
 - **Inter e Intra Region Peering**
   - Dentro de uma região é possivel ter dois **TGW** ( Transit Gateway) com finalidades diferentes e conecta-los usando i**ntra-Refion Peering Mesh.**
   - Mas caso queira conectar a outra região com um estrutura semelhante seria necessário criar um novo TGW e realizar o inter-Region Peeering Mesh.
@@ -492,6 +536,254 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 
 ---
 
+### VPC Sharing (AWS RAM)
+
+- Permite **compartilhar subnets** de uma VPC com outras contas AWS na mesma organização.
+- A conta **owner** gerencia a VPC, subnets, route tables, gateways e NACLs.
+- Contas **participantes** podem criar recursos nas subnets compartilhadas (EC2, RDS, Lambda, etc).
+- Cada conta gerencia seus próprios recursos e **Security Groups**.
+- **Benefícios**: Reduz número de VPCs, centraliza gerenciamento, reduz custos com VPC Peering.
+- **Limitação**: Não é possível compartilhar a VPC default.
+
+:::tip Dica para a prova
+
+📌 Qual serviço permite compartilhar subnets entre contas?
+✅ **AWS RAM (Resource Access Manager)**
+
+📌 Quem gerencia os Security Groups em VPC compartilhada?
+✅ **Cada conta participante gerencia seus próprios SGs**
+
+:::
+
+---
+
+### Traffic Mirroring
+
+- Permite **capturar e inspecionar tráfego de rede** de ENIs em sua VPC.
+- Copia o tráfego para appliances de segurança ou ferramentas de monitoramento.
+- **Componentes**:
+  - **Source**: ENI de origem do tráfego
+  - **Target**: ENI de destino, NLB, ou Gateway Load Balancer
+  - **Filter**: Define qual tráfego capturar (inbound, outbound, protocolo, portas)
+- Ideal para **análise de conteúdo, threat monitoring, troubleshooting**.
+- O tráfego espelhado é encapsulado em **VXLAN**.
+
+:::tip Dica para a prova
+
+📌 Para que serve Traffic Mirroring?
+✅ **Capturar tráfego de rede para inspeção/análise de segurança**
+
+📌 Qual o destino possível do tráfego espelhado?
+✅ **ENI, NLB ou Gateway Load Balancer**
+
+:::
+
+---
+
+### Gateway Load Balancer (GWLB)
+
+- Usado para **deploy de appliances virtuais de terceiros** (firewalls, IDS/IPS, deep packet inspection).
+- Opera na **camada 3** (Network Layer) - usa protocolo **GENEVE na porta 6081**.
+- Combina **Transparent Network Gateway + Load Balancer**.
+- Permite **inspeção de tráfego** antes de chegar ao destino.
+- Integra com **Transit Gateway** e **VPC Endpoints (GWLBe)**.
+- **Caso de uso comum**: Todo tráfego passa pelo GWLB → appliances de segurança → destino.
+
+:::tip Dica para a prova
+
+📌 Qual LB usar para appliances de segurança de terceiros?
+✅ **Gateway Load Balancer**
+
+📌 Em qual camada o GWLB opera?
+✅ **Camada 3 (Network Layer)**
+
+📌 Qual protocolo o GWLB usa?
+✅ **GENEVE na porta 6081**
+
+:::
+
+---
+
+### VPC Reachability Analyzer
+
+- Ferramenta de **troubleshooting de conectividade** que analisa configurações de rede.
+- **Não envia pacotes reais** - analisa configurações (Route Tables, NACLs, SGs).
+- Identifica o componente que está bloqueando a conectividade.
+- Mostra o **caminho completo** entre origem e destino (hop-by-hop).
+- Útil para validar se configurações estão corretas antes de deployar.
+
+:::tip Dica para a prova
+
+📌 Ferramenta para troubleshooting que não envia pacotes reais?
+✅ **VPC Reachability Analyzer**
+
+📌 O que o Reachability Analyzer analisa?
+✅ **Route Tables, NACLs, Security Groups, VPC Peering configs**
+
+:::
+
+---
+
+### Network Access Analyzer
+
+- Identifica **acessos de rede não intencionais** aos recursos.
+- Analisa regras de SGs, NACLs, Route Tables e VPC configs.
+- Ajuda a verificar se a rede está em **compliance** com requisitos de segurança.
+- Detecta recursos que podem ser acessados da internet ou de fora da VPC.
+- Diferente do Reachability Analyzer: foco em **segurança/compliance**, não troubleshooting.
+
+---
+
+### Route 53 Resolver
+
+- **Resolver Endpoints** permitem resolução DNS híbrida entre on-premises e AWS.
+- **Inbound Endpoint**: Permite on-premises resolver nomes de recursos AWS (DNS queries entram na VPC).
+- **Outbound Endpoint**: Permite VPC resolver nomes on-premises (DNS queries saem da VPC).
+- **Resolver Rules**: Define para quais domínios encaminhar queries.
+- Usa ENIs em subnets da VPC.
+
+:::tip Dica para a prova
+
+📌 Como resolver DNS do on-premises para a AWS?
+✅ **Route 53 Resolver Inbound Endpoint**
+
+📌 Como resolver DNS da AWS para on-premises?
+✅ **Route 53 Resolver Outbound Endpoint**
+
+📌 Quantas ENIs um Resolver Endpoint usa por AZ?
+✅ **1 ENI por AZ (mínimo 2 AZs recomendado)**
+
+:::
+
+---
+
+### Managed Prefix Lists
+
+- Lista de **blocos CIDR** que pode ser referenciada em **Route Tables e Security Groups**.
+- **Customer-managed**: Criados por você, editáveis.
+- **AWS-managed**: Mantidos pela AWS (ex: S3 prefix list, CloudFront prefix list).
+- Simplifica gerenciamento quando múltiplos recursos precisam referenciar os mesmos CIDRs.
+- Podem ser **compartilhados via RAM** com outras contas.
+
+:::tip Dica para a prova
+
+📌 Como referenciar múltiplos CIDRs em um Security Group facilmente?
+✅ **Managed Prefix Lists**
+
+📌 Prefix Lists funcionam com quais recursos?
+✅ **Security Groups e Route Tables**
+
+:::
+
+---
+
+### IPv6 na VPC
+
+- VPCs suportam **dual-stack** (IPv4 + IPv6).
+- IPv6 CIDRs são **públicos** (não há IPv6 privado na AWS).
+- Tamanho fixo de **/56** para VPC e **/64** para subnets.
+- **Egress-Only Internet Gateway**: Permite saída IPv6 sem permitir entrada (equivalente ao NAT para IPv6).
+- Instâncias podem ter **apenas IPv6** (sem IPv4) se configurado.
+- **BYOIP (Bring Your Own IP)**: Possível trazer seus próprios blocos IPv4 ou IPv6.
+
+:::tip Dica para a prova
+
+📌 Existe NAT para IPv6?
+✅ ❌ Não. Use **Egress-Only Internet Gateway**
+
+📌 Qual o tamanho do CIDR IPv6 para subnet?
+✅ **/64** (fixo)
+
+📌 IPv6 na AWS é público ou privado?
+✅ **Público** (não existe IPv6 privado na AWS)
+
+:::
+
+---
+
+### Direct Connect - Modelos de Resiliência
+
+- **Maximum Resiliency**: Conexões separadas terminando em dispositivos separados em mais de um local.
+- **High Resiliency**: Múltiplas conexões terminando em mais de um local.
+- **Development and Test**: Conexão única (sem redundância).
+- Para **SLA de 99.99%**, AWS recomenda **Maximum Resiliency**.
+- **Backup com VPN**: Usar Site-to-Site VPN como failover para DX.
+
+:::tip Dica para a prova
+
+📌 Qual modelo de DX para máxima disponibilidade?
+✅ **Maximum Resiliency** (múltiplas conexões em múltiplos locais)
+
+📌 Como fazer backup do Direct Connect?
+✅ **Site-to-Site VPN como failover**
+
+:::
+
+---
+
+### Site-to-Site VPN com Accelerated VPN
+
+- Usa **AWS Global Accelerator** para rotear tráfego VPN pela rede global da AWS.
+- Reduz latência e melhora performance.
+- Tráfego entra na edge location mais próxima e viaja pela backbone da AWS.
+- **Custo adicional** pelo uso do Global Accelerator.
+- Configurado ao criar a VPN connection.
+
+---
+
+### ECMP (Equal-Cost Multi-Path)
+
+- Estratégia de roteamento que permite distribuir tráfego por **múltiplos caminhos de igual custo**.
+- Suportado com **Transit Gateway** e múltiplas conexões VPN.
+- Permite **aumentar throughput** agregando bandwidth de múltiplas VPNs.
+- Cada conexão Site-to-Site VPN tem 2 túneis (para HA).
+- Com ECMP habilitado no TGW, pode usar ambos os túneis ativamente.
+
+:::tip Dica para a prova
+
+📌 Como aumentar throughput de VPN com Transit Gateway?
+✅ **ECMP com múltiplas conexões VPN**
+
+📌 Quantos túneis uma Site-to-Site VPN tem?
+✅ **2 túneis** (para alta disponibilidade)
+
+:::
+
+---
+
+### AWS Cloud WAN
+
+- Serviço para criar, gerenciar e monitorar **redes globais unificadas**.
+- Conecta VPCs, datacenters on-premises e filiais.
+- Usa **Core Network** com políticas centralizadas.
+- Suporta **segmentação** de rede para isolamento de tráfego.
+- Alternativa gerenciada ao Transit Gateway para redes globais complexas.
+
+---
+
+### Comparativo de Conectividade Híbrida
+
+| Serviço | Latência | Throughput | Custo | Tempo Setup |
+|---------|----------|------------|-------|-------------|
+| Site-to-Site VPN | Variável | Até 1.25 Gbps | Baixo | Minutos |
+| Direct Connect | Baixa e consistente | 1-100 Gbps | Alto | Semanas/Mês |
+| VPN over DX | Baixa | Até 1.25 Gbps | Médio | Semanas/Mês |
+| Transit Gateway | Variável | 50 Gbps por attachment | Médio | Minutos |
+
+:::tip Resumo para a prova
+
+📌 **Baixa latência + alta banda** → Direct Connect
+📌 **Setup rápido + criptografia** → Site-to-Site VPN
+📌 **Conectar muitas VPCs** → Transit Gateway
+📌 **Backup para DX** → VPN como failover
+📌 **Appliances de segurança** → Gateway Load Balancer
+📌 **Compartilhar subnets entre contas** → VPC Sharing via RAM
+📌 **Troubleshooting de conectividade** → Reachability Analyzer
+📌 **DNS híbrido** → Route 53 Resolver Endpoints
+
+:::
+
+---
 
 ## Links e recursos adicionais 🔗
 
