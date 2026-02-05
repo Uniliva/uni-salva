@@ -72,6 +72,33 @@ sidebar_position: 1
 
 ![](assets/2023-01-27-06-10-24-image.png)
 
+:::tip Dica para a prova
+
+📌 Qual a diferença entre IAM Role e Resource-based Policy?
+✅ **Role:** usuário perde permissões anteriores ao assumir
+✅ **Resource-based:** usuário mantém suas permissões + ganha acesso ao recurso
+
+📌 Como dar acesso cross-account a um bucket S3?
+✅ **Resource-based policy** no bucket OU **IAM Role** para assumir
+
+📌 O que é Permission Boundary?
+✅ Define o **limite máximo** de permissões que um usuário/role pode ter
+
+📌 SCP afeta a conta de gerenciamento (management account)?
+✅ ❌ Não! SCPs não afetam a management account
+
+📌 Explicit Deny sempre vence?
+✅ Sim! **DENY explícito** sempre tem precedência sobre ALLOW
+
+:::
+
+### IAM Roles Anywhere
+
+- Permite que workloads **fora da AWS** (on-premises, outras clouds) obtenham credenciais temporárias do IAM.
+- Usa **certificados X.509** emitidos por uma CA confiável.
+- Elimina a necessidade de long-term credentials em servidores externos.
+- Integra com **AWS Private CA** ou CA on-premises.
+
 ---
 
 ## STS
@@ -126,6 +153,44 @@ aws sts assume-role \
 
 ![image-20230819201623066](assets/image-20230819201623066.png)
 
+#### Diagrama: Fluxo de Assume Role Cross-Account
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 Usuário (Conta A)
+    participant STS as 🔐 AWS STS
+    participant Role as 📋 Role (Conta B)
+    participant S3 as 🗄️ S3 (Conta B)
+
+    User->>STS: 1️⃣ AssumeRole (role-arn)
+    STS->>Role: 2️⃣ Verifica Trust Policy
+    Role-->>STS: 3️⃣ OK (Conta A é trusted)
+    STS-->>User: 4️⃣ Credenciais temporárias<br/>(AccessKey, SecretKey, Token)
+    User->>S3: 5️⃣ Acessa recurso com credenciais temp
+    S3-->>User: 6️⃣ ✅ Acesso permitido
+```
+
+| API STS | Uso |
+|---------|-----|
+| **AssumeRole** | Cross-account ou same-account |
+| **AssumeRoleWithSAML** | Federação SAML 2.0 |
+| **AssumeRoleWithWebIdentity** | Federação Web (Cognito, Google, etc) |
+| **GetSessionToken** | MFA para usuário IAM |
+| **GetFederationToken** | Credenciais para federated user |
+
+:::tip Dica para a prova
+
+📌 Quanto tempo duram as credenciais do STS?
+✅ **15 minutos a 12 horas** (default: 1 hora)
+
+📌 AssumeRole pode usar MFA?
+✅ Sim! Configure `Condition: aws:MultiFactorAuthPresent` na trust policy
+
+📌 O que acontece com as permissões ao assumir uma role?
+✅ **Perde as permissões anteriores**, assume apenas as da role
+
+:::
+
 ---
 
 ## Identity Federation & Cognito
@@ -167,6 +232,63 @@ aws sts assume-role \
       - O acesso é concedido via credenciais temporárias do STS.
       - As permissões são definidas por roles e policies, podendo usar Session Tags e variáveis.
     - Hoje, o AWS IAM Identity Center (antigo AWS SSO) é o método mais recomendado, por ser mais simples de configurar, centralizar permissões e integrar com múltiplas contas.
+
+#### Diagrama: Federação com SAML 2.0
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 Usuário
+    participant IdP as 🏢 IdP (AD/Okta)
+    participant AWS as ☁️ AWS
+    participant STS as 🔐 STS
+    participant Console as 🖥️ AWS Console
+
+    User->>IdP: 1️⃣ Login (user/pass)
+    IdP->>IdP: 2️⃣ Autentica usuário
+    IdP-->>User: 3️⃣ SAML Assertion
+    User->>AWS: 4️⃣ POST SAML Assertion
+    AWS->>STS: 5️⃣ AssumeRoleWithSAML
+    STS-->>AWS: 6️⃣ Credenciais temporárias
+    AWS-->>User: 7️⃣ Redirect para Console
+    User->>Console: 8️⃣ Acesso com credenciais temp
+```
+
+#### Diagrama: Web Identity Federation com Cognito
+
+```mermaid
+sequenceDiagram
+    participant App as 📱 App Mobile
+    participant IdP as 🌐 IdP (Google/Facebook)
+    participant Cognito as 🧠 Cognito
+    participant STS as 🔐 STS
+    participant S3 as 🗄️ S3
+
+    App->>IdP: 1️⃣ Login social
+    IdP-->>App: 2️⃣ Token do IdP
+    App->>Cognito: 3️⃣ Token do IdP
+    Cognito->>Cognito: 4️⃣ Valida token
+    Cognito->>STS: 5️⃣ GetCredentialsForIdentity
+    STS-->>Cognito: 6️⃣ Credenciais temporárias
+    Cognito-->>App: 7️⃣ AWS Credentials
+    App->>S3: 8️⃣ Acessa recursos
+```
+
+:::tip Dica para a prova
+
+📌 Qual API do STS usar para federação SAML?
+✅ **AssumeRoleWithSAML**
+
+📌 Qual API usar para Web Identity (Cognito)?
+✅ **AssumeRoleWithWebIdentity** (ou Cognito faz via GetCredentialsForIdentity)
+
+📌 Cognito User Pool vs Identity Pool?
+✅ **User Pool:** autenticação (login/signup)
+✅ **Identity Pool:** autorização (credenciais AWS temporárias)
+
+📌 Qual vantagem do Cognito sobre Web Identity Federation direta?
+✅ **Suporta usuários anônimos, MFA, sincronização de dados**
+
+:::
 
 ---
 ### AWS Directory Service
@@ -227,6 +349,53 @@ Forma de usar o **Active Directory** na AWS.
 
 ![](assets/2023-01-31-06-17-06-image.png)
 
+#### Diagrama: Comparação Directory Services
+
+```mermaid
+graph TB
+    subgraph CHOICE["🤔 Qual Directory Service usar?"]
+        Q1{"Tem AD<br/>on-premises?"}
+
+        Q1 -->|Não| Q2{"Precisa de<br/>features avançados?"}
+        Q2 -->|Sim| MANAGED["✅ AWS Managed<br/>Microsoft AD"]
+        Q2 -->|Não| SIMPLE["✅ Simple AD<br/>(básico, barato)"]
+
+        Q1 -->|Sim| Q3{"Quer AD<br/>na AWS?"}
+        Q3 -->|Sim| Q4{"Precisa de<br/>trust relationship?"}
+        Q4 -->|Sim| MANAGED2["✅ AWS Managed<br/>Microsoft AD<br/>+ Trust"]
+        Q4 -->|Não| MANAGED3["✅ AWS Managed AD<br/>+ Replicação EC2"]
+
+        Q3 -->|Não| CONNECTOR["✅ AD Connector<br/>(proxy para on-prem)"]
+    end
+
+    style MANAGED fill:#4CAF50,color:#fff
+    style MANAGED2 fill:#4CAF50,color:#fff
+    style MANAGED3 fill:#4CAF50,color:#fff
+    style SIMPLE fill:#2196F3,color:#fff
+    style CONNECTOR fill:#FF9800,color:#fff
+```
+
+| Serviço | Quando usar | Trust com on-prem? |
+|---------|-------------|---------------------|
+| **Managed Microsoft AD** | AD completo na AWS | ✅ Sim |
+| **AD Connector** | Proxy para AD on-prem | N/A (é proxy) |
+| **Simple AD** | AD básico, sem on-prem | ❌ Não |
+
+:::tip Dica para a prova
+
+📌 Qual Directory Service usar se já tem AD on-premises e quer apenas redirecionar?
+✅ **AD Connector** (não armazena nada na AWS)
+
+📌 Qual usar para ter AD completo na AWS com trust para on-premises?
+✅ **AWS Managed Microsoft AD**
+
+📌 Simple AD suporta trust relationship?
+✅ ❌ Não! Use Managed AD para isso
+
+📌 Como replicar AD on-premises para AWS?
+✅ **Instalar réplica em EC2** + trust com Managed AD
+
+:::
 
 ---
 
@@ -284,12 +453,51 @@ Forma de usar o **Active Directory** na AWS.
   - Exemplo: bloquear o uso do **EMR**.  
   ![](assets/image-20230131195742445.png)
 
-- **Exigir que os usuários adicionem tags nos recursos.**  
-  - **Exemplo:** Restringir o uso de certas tags por usuários.  
+- **Exigir que os usuários adicionem tags nos recursos.**
+  - **Exemplo:** Restringir o uso de certas tags por usuários.
     ![](assets/image-20230131200305779.png)
-  - **Obrigar o uso de tags para criar recursos** (sem tags, a criação será bloqueada).  
+  - **Obrigar o uso de tags para criar recursos** (sem tags, a criação será bloqueada).
     ![](assets/image-20230131200756847.png)
 
+#### Diagrama: Hierarquia de SCPs
+
+```mermaid
+graph TD
+    ROOT["🏛️ Root<br/>FullAWSAccess"]
+
+    ROOT --> OU_PROD["📁 OU: Prod<br/>SCP: Deny EMR"]
+    ROOT --> OU_DEV["📁 OU: Dev<br/>SCP: Allow All"]
+
+    OU_PROD --> ACC_PROD1["📦 Account: Prod-1<br/>Permissão efetiva:<br/>Tudo EXCETO EMR"]
+    OU_PROD --> ACC_PROD2["📦 Account: Prod-2<br/>Permissão efetiva:<br/>Tudo EXCETO EMR"]
+
+    OU_DEV --> ACC_DEV["📦 Account: Dev<br/>Permissão efetiva:<br/>Tudo"]
+
+    style ROOT fill:#ff9900,color:#fff
+    style OU_PROD fill:#FF6B6B,color:#fff
+    style OU_DEV fill:#4CAF50,color:#fff
+```
+
+> **SCPs são herdadas!** Uma conta herda todas as SCPs da hierarquia acima dela.
+
+:::tip Dica para a prova
+
+📌 SCP pode dar permissões?
+✅ ❌ Não! SCP apenas **limita** o que IAM policies podem permitir
+
+📌 SCP afeta service-linked roles?
+✅ ❌ Não! Roles usadas por serviços AWS não são afetadas
+
+📌 SCP afeta a management account?
+✅ ❌ Não! A conta de gerenciamento nunca é afetada
+
+📌 Qual a permissão efetiva de um usuário?
+✅ **Interseção de:** IAM Policy ∩ SCP ∩ Permission Boundary ∩ Resource Policy
+
+📌 Como garantir que TODAS as contas tenham acesso apenas a S3?
+✅ Remover `FullAWSAccess` do Root e adicionar SCP que permite apenas S3
+
+:::
 
 ### Tag Policys
 
@@ -370,9 +578,26 @@ Forma de usar o **Active Directory** na AWS.
   ![image-20230309193317976](assets/image-20230309193317976.png)  
 
 **Como funciona a automação de novas contas?**
-- O processo de criação e configuração das contas pode ser **totalmente automatizado**, garantindo conformidade e segurança desde o início.  
-  ![image-20230309193740658](assets/image-20230309193740658.png)  
+- O processo de criação e configuração das contas pode ser **totalmente automatizado**, garantindo conformidade e segurança desde o início.
+  ![image-20230309193740658](assets/image-20230309193740658.png)
 
+:::tip Dica para a prova
+
+📌 Qual a diferença entre Control Tower e Organizations?
+✅ **Organizations:** estrutura de contas e SCPs
+✅ **Control Tower:** automação de boas práticas + guardrails + Account Factory
+
+📌 O que são guardrails no Control Tower?
+✅ **Preventivos:** SCPs que bloqueiam ações
+✅ **Detetivos:** AWS Config rules que detectam violations
+
+📌 Como criar contas automaticamente com configurações padronizadas?
+✅ **Account Factory** (Control Tower + Service Catalog)
+
+📌 Control Tower usa quais serviços por baixo?
+✅ **Organizations, SCPs, AWS Config, CloudTrail, IAM Identity Center**
+
+:::
 
 ---
 
@@ -404,5 +629,43 @@ A seguir, alguns dos recursos que podem ser compartilhados entre contas AWS:
 - **Amazon S3 on Outposts** → Armazenamento de objetos do S3 disponível em ambientes locais usando AWS Outposts.  
 - **AWS Resource Groups** → Organização e gerenciamento de recursos AWS por grupos lógicos.  
 - **Amazon Route 53** → Serviço de DNS escalável e altamente disponível.  
-- **AWS Systems Manager Incident Manager** → Gerenciamento de incidentes e resposta a falhas.  
-- **Amazon VPC** → Serviço para criação de redes virtuais privadas na AWS.  
+- **AWS Systems Manager Incident Manager** → Gerenciamento de incidentes e resposta a falhas.
+- **Amazon VPC** → Serviço para criação de redes virtuais privadas na AWS.
+- **Transit Gateway** → Permite compartilhar TGW entre contas.
+- **Subnets** → VPC Sharing permite compartilhar subnets.
+
+:::tip Dica para a prova
+
+📌 Como compartilhar uma subnet entre contas?
+✅ **AWS RAM** (VPC Sharing)
+
+📌 RAM funciona apenas dentro de uma Organization?
+✅ ❌ Não! Pode compartilhar com qualquer conta AWS (precisa aceitar convite)
+
+📌 Quem pode deletar um recurso compartilhado via RAM?
+✅ **Apenas o owner** (conta que criou o recurso)
+
+📌 Como compartilhar Transit Gateway entre contas?
+✅ **AWS RAM**
+
+:::
+
+---
+
+## Resumo: Escolha do Serviço Certo 🎯
+
+| Cenário | Serviço |
+|---------|---------|
+| Login único para múltiplas contas AWS | **IAM Identity Center** |
+| Federação com AD on-premises | **SAML 2.0 + IAM** ou **IAM Identity Center** |
+| Login social em app mobile | **Cognito** |
+| Workloads fora da AWS precisam de credenciais | **IAM Roles Anywhere** |
+| Gerenciar múltiplas contas AWS | **AWS Organizations** |
+| Automatizar criação de contas com boas práticas | **Control Tower** |
+| Compartilhar recursos entre contas | **AWS RAM** |
+| AD completo na AWS | **Managed Microsoft AD** |
+| Proxy para AD on-premises | **AD Connector** |
+| AD básico sem on-premises | **Simple AD** |
+| Credenciais temporárias cross-account | **STS AssumeRole** |
+| Limitar permissões máximas | **Permission Boundaries** |
+| Restringir serviços em toda a OU | **SCPs** |  

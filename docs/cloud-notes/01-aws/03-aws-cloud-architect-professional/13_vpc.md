@@ -120,15 +120,46 @@ Erros em tabelas de rotas podem causar perda de conectividade! Sempre revise as 
   - Deve se usar um **IP Elastico** junto a instância.
   - Para que funcione deve ser **desabilitado a Checagem de Sorce/Destination (EC2 settings).**
 
+#### Diagrama: Fluxo de Tráfego com NAT Gateway
+
+```mermaid
+graph LR
+    subgraph VPC["VPC 10.0.0.0/16"]
+        subgraph AZ1["AZ-1"]
+            subgraph PUB1["Subnet Pública 10.0.1.0/24"]
+                NAT1["🔄 NAT Gateway<br/>EIP: 54.x.x.x"]
+            end
+            subgraph PRIV1["Subnet Privada 10.0.2.0/24"]
+                EC2_1["🖥️ EC2<br/>10.0.2.10"]
+            end
+        end
+        RT_PRIV["📋 Route Table Privada<br/>0.0.0.0/0 → NAT Gateway"]
+        RT_PUB["📋 Route Table Pública<br/>0.0.0.0/0 → IGW"]
+    end
+
+    IGW["🌐 Internet Gateway"]
+    INTERNET["☁️ Internet"]
+
+    EC2_1 -->|1️⃣ Requisição| RT_PRIV
+    RT_PRIV -->|2️⃣| NAT1
+    NAT1 -->|3️⃣| RT_PUB
+    RT_PUB -->|4️⃣| IGW
+    IGW -->|5️⃣| INTERNET
+
+    style NAT1 fill:#ff9900,color:#fff
+    style IGW fill:#3F8624,color:#fff
+    style EC2_1 fill:#FF6B6B,color:#fff
+```
+
 :::tip Dica para a prova
 
-📌 Qual a diferença entre NAT Gateway e NAT Instance?  
+📌 Qual a diferença entre NAT Gateway e NAT Instance?
 ✅ Gateway é gerenciado e escalável. Instance é mais barata mas precisa de manutenção manual.
 
-📌 NAT Gateway pode ser acessado de fora da VPC?  
+📌 NAT Gateway pode ser acessado de fora da VPC?
 ❌ Não!
 
-📌 NAT Gateway é por AZ?  
+📌 NAT Gateway é por AZ?
 ✅  Sim. Crie em cada AZ para alta disponibilidade
 
 :::
@@ -196,6 +227,41 @@ Sempre restrinja o acesso por IP nos Security Groups! Nunca deixe portas abertas
 - **Ephemeral Ports**: Para stateless funcionar, precisa permitir portas efêmeras (1024-65535) na saída/entrada.
 - **Limite**: 20 regras inbound + 20 outbound por NACL (pode aumentar até 40).
 
+#### Diagrama: Security Group vs NACL
+
+```mermaid
+graph TB
+    subgraph VPC["VPC"]
+        subgraph SUBNET["Subnet"]
+            NACL["🛡️ NACL<br/>━━━━━━━━━━<br/>✅ Stateless<br/>✅ Allow + Deny<br/>✅ Nível: Subnet<br/>✅ Regras por prioridade"]
+
+            subgraph INSTANCE["Instância EC2"]
+                SG["🔒 Security Group<br/>━━━━━━━━━━<br/>✅ Stateful<br/>❌ Só Allow<br/>✅ Nível: ENI<br/>✅ Todas regras avaliadas"]
+                APP["📦 Aplicação"]
+            end
+        end
+    end
+
+    INTERNET["☁️ Internet"] -->|1️⃣ Inbound| NACL
+    NACL -->|2️⃣| SG
+    SG -->|3️⃣| APP
+    APP -->|4️⃣ Outbound| SG
+    SG -->|5️⃣| NACL
+    NACL -->|6️⃣| INTERNET
+
+    style NACL fill:#FFA500,color:#000
+    style SG fill:#4CAF50,color:#fff
+    style APP fill:#2196F3,color:#fff
+```
+
+| Característica | Security Group | NACL |
+|----------------|----------------|------|
+| **Nível** | Instância (ENI) | Subnet |
+| **Estado** | Stateful | Stateless |
+| **Regras** | Só ALLOW | ALLOW + DENY |
+| **Avaliação** | Todas as regras | Por ordem de prioridade |
+| **Default** | Nega tudo | Permite tudo |
+
 ---
 
 ### VPC Peering
@@ -213,6 +279,42 @@ Sempre restrinja o acesso por IP nos Security Groups! Nunca deixe portas abertas
 - **Não suporta roteamento de borda, para NAT devices**
   ![image-20230224202108774](assets/image-20230224202108774.png)
   ![image-20230224202133515](assets/image-20230224202133515.png)
+
+#### Diagrama: VPC Peering NÃO é Transitivo
+
+```mermaid
+graph LR
+    subgraph "❌ VPC Peering - NÃO Transitivo"
+        VPC_A1["VPC A<br/>10.0.0.0/16"]
+        VPC_B1["VPC B<br/>10.1.0.0/16"]
+        VPC_C1["VPC C<br/>10.2.0.0/16"]
+
+        VPC_A1 <-->|"Peering ✅"| VPC_B1
+        VPC_B1 <-->|"Peering ✅"| VPC_C1
+        VPC_A1 -.-x|"❌ Sem conexão<br/>A não vê C"| VPC_C1
+    end
+
+    style VPC_A1 fill:#FF6B6B,color:#fff
+    style VPC_B1 fill:#4ECDC4,color:#fff
+    style VPC_C1 fill:#45B7D1,color:#fff
+```
+
+```mermaid
+graph LR
+    subgraph "✅ Solução: Full Mesh Peering"
+        VPC_A2["VPC A<br/>10.0.0.0/16"]
+        VPC_B2["VPC B<br/>10.1.0.0/16"]
+        VPC_C2["VPC C<br/>10.2.0.0/16"]
+
+        VPC_A2 <-->|"Peering"| VPC_B2
+        VPC_B2 <-->|"Peering"| VPC_C2
+        VPC_A2 <-->|"Peering"| VPC_C2
+    end
+
+    style VPC_A2 fill:#FF6B6B,color:#fff
+    style VPC_B2 fill:#4ECDC4,color:#fff
+    style VPC_C2 fill:#45B7D1,color:#fff
+```
 
 ---
 
@@ -261,6 +363,104 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
     - Criado em nivel de VPC, por isso que é necessário definir a entrada de acesso no rout table
       ![image-20230227061041750](assets/image-20230227061041750.png)
 - Caso use **VPC Endpoints** deve se atentar a usar as configurações de DNS, Outra coisa que pode gerar confusão e que a partir da hora que se usa o **VPC Endpoints** e necessário informar as região ao usar comandos do CLI, pois o **VPC Endpoints** tem escopo regional.
+
+#### Diagramas: Comparação entre tipos de Endpoints
+
+```mermaid
+graph TB
+    subgraph "🔷 TIPO 1: Gateway Endpoint (S3 e DynamoDB)"
+        subgraph VPC_GW["VPC"]
+            EC2_GW["EC2"]
+            RT_GW["Route Table<br/>Destino: pl-xxxxx<br/>Target: vpce-gateway"]
+            VPCE_GW["Gateway Endpoint<br/>❌ Sem ENI<br/>❌ Sem IP<br/>✅ Grátis"]
+        end
+        S3["S3"]
+        DDB["DynamoDB"]
+
+        EC2_GW --> RT_GW
+        RT_GW --> VPCE_GW
+        VPCE_GW -.->|Rede Privada| S3
+        VPCE_GW -.->|Rede Privada| DDB
+
+        style VPCE_GW fill:#90EE90,color:#000
+        style S3 fill:#ff9900,color:#fff
+        style DDB fill:#4053D6,color:#fff
+    end
+
+    subgraph "🔶 TIPO 2: Interface Endpoint (Todos outros serviços)"
+        subgraph VPC_INT["VPC"]
+            EC2_INT["EC2<br/>10.0.1.10"]
+            SG["Security Group<br/>Porta 443"]
+            VPCE_INT["Interface Endpoint<br/>✅ ENI (placa de rede)<br/>✅ IP Privado: 10.0.2.50<br/>💰 Pago ($/hora)"]
+        end
+        SERVICES["SNS, SQS, CloudWatch,<br/>Lambda, SSM, KMS,<br/>ECR, ECS, etc."]
+
+        EC2_INT -->|DNS Privado| VPCE_INT
+        VPCE_INT -->|Verifica| SG
+        SG -.->|443 HTTPS| SERVICES
+
+        style VPCE_INT fill:#FFA500,color:#000
+        style SERVICES fill:#6c757d,color:#fff
+        style SG fill:#d1ecf1,color:#000
+    end
+```
+
+#### Diagrama: Arquitetura Completa com VPC Endpoints
+
+```mermaid
+graph TB
+    subgraph "🏢 Arquitetura Completa com VPC Endpoints"
+        subgraph AZ1["Availability Zone A"]
+            subgraph PRIVATE1["Subnet Privada 10.0.1.0/24"]
+                APP1["🖥️ EC2 App Server"]
+                LAMBDA1["⚡ Lambda Function"]
+            end
+        end
+
+        subgraph AZ2["Availability Zone B"]
+            subgraph PRIVATE2["Subnet Privada 10.0.2.0/24"]
+                APP2["🖥️ EC2 App Server"]
+                ENI["🔌 Interface Endpoint ENI<br/>IP: 10.0.2.100"]
+            end
+        end
+
+        subgraph ENDPOINTS["VPC Endpoints"]
+            GW_S3["Gateway Endpoint<br/>🗄️ S3"]
+            GW_DDB["Gateway Endpoint<br/>🗃️ DynamoDB"]
+            INT_SSM["Interface Endpoint<br/>⚙️ Systems Manager"]
+        end
+
+        RT["📋 Route Table Principal<br/>pl-s3 → vpce-s3<br/>pl-ddb → vpce-ddb"]
+    end
+
+    subgraph AWS_SERVICES["Serviços AWS (Fora da VPC)"]
+        S3_SVC["☁️ Amazon S3"]
+        DDB_SVC["☁️ DynamoDB"]
+        SSM_SVC["☁️ Systems Manager"]
+    end
+
+    APP1 --> RT
+    APP2 --> RT
+    LAMBDA1 --> RT
+
+    RT -->|Rota automática| GW_S3
+    RT -->|Rota automática| GW_DDB
+
+    APP1 -.->|DNS privado| INT_SSM
+    APP2 -.->|DNS privado| INT_SSM
+    INT_SSM --> ENI
+
+    GW_S3 ==>|Rede Privada AWS<br/>✅ Sem Internet<br/>💰 Grátis| S3_SVC
+    GW_DDB ==>|Rede Privada AWS<br/>✅ Sem Internet<br/>💰 Grátis| DDB_SVC
+    ENI ==>|Rede Privada AWS<br/>✅ Sem Internet<br/>💸 Pago| SSM_SVC
+
+    style GW_S3 fill:#90EE90,color:#000
+    style GW_DDB fill:#90EE90,color:#000
+    style INT_SSM fill:#FFA500,color:#000
+    style ENI fill:#ff9999,color:#000
+    style RT fill:#d4edda,color:#000
+```
+
 - **VPC Endpoint Police**
   - Permite controlar os acesso a **serviços AWS.**
   - Não sobrescreve **política do S3 ou só IAM**, apenas adiciona a endpoint a definição de quem pode acessa-lo.
@@ -298,6 +498,38 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
   - **Service Consumer**: Cria um **Interface Endpoint** para conectar ao serviço
 - Suporta **cross-account** e **cross-region** (via peering/TGW).
 - O consumer só vê o **ENI** na sua VPC, não tem visibilidade da VPC do provider.
+
+#### Diagrama: AWS PrivateLink
+
+```mermaid
+graph LR
+    subgraph CONSUMER["👤 Service Consumer (Conta B)"]
+        subgraph VPC_C["VPC Consumer"]
+            EC2_C["🖥️ EC2 App"]
+            ENI_C["🔌 Interface Endpoint<br/>(ENI)<br/>10.2.0.50"]
+        end
+    end
+
+    subgraph PROVIDER["🏢 Service Provider (Conta A)"]
+        subgraph VPC_P["VPC Provider"]
+            NLB["⚖️ Network Load Balancer"]
+            APP1["🖥️ App Server 1"]
+            APP2["🖥️ App Server 2"]
+        end
+        ENDPOINT_SVC["📡 Endpoint Service<br/>(PrivateLink)"]
+    end
+
+    EC2_C -->|"1️⃣ Request"| ENI_C
+    ENI_C <-->|"2️⃣ AWS Private Network<br/>━━━━━━━━━━━━<br/>❌ Sem Internet<br/>❌ Sem VPC Peering"| ENDPOINT_SVC
+    ENDPOINT_SVC --> NLB
+    NLB --> APP1
+    NLB --> APP2
+
+    style ENI_C fill:#FF6B6B,color:#fff
+    style ENDPOINT_SVC fill:#ff9900,color:#fff
+    style NLB fill:#4CAF50,color:#fff
+```
+
 - Usando com S3 e Direct Connect
   ![image-20230227065519211](assets/image-20230227065519211.png)
 - Usando com VPC Peering
@@ -373,6 +605,40 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 
 - Permite ligar uma rede on-primise a AWS via VPN, para isso é necessario configurar um **Virtual** **Customer Gateway** do lado do on-primese e do lado da AWS cria se uma **Virtual Private Gateway**.
 
+#### Diagrama: Site-to-Site VPN
+
+```mermaid
+graph LR
+    subgraph ON_PREM["🏢 On-Premises"]
+        ROUTER["🔧 Router/Firewall"]
+        CGW["📡 Customer Gateway<br/>IP Público"]
+        SERVERS["🖥️ Servidores<br/>192.168.0.0/16"]
+    end
+
+    subgraph AWS["☁️ AWS"]
+        VGW["🚪 Virtual Private Gateway<br/>(VGW)"]
+        subgraph VPC["VPC 10.0.0.0/16"]
+            EC2["🖥️ EC2 Instances"]
+            RDS["🗄️ RDS"]
+        end
+    end
+
+    SERVERS --> ROUTER
+    ROUTER --> CGW
+    CGW <-->|"🔐 IPSec Tunnel 1<br/>━━━━━━━━━━"| VGW
+    CGW <-->|"🔐 IPSec Tunnel 2<br/>━━━━━━━━━━"| VGW
+    VGW --> EC2
+    VGW --> RDS
+
+    style CGW fill:#FF6B6B,color:#fff
+    style VGW fill:#ff9900,color:#fff
+    style VPC fill:#E8F5E9,color:#000
+```
+
+> **2 túneis IPSec** são criados automaticamente para alta disponibilidade
+
+---
+
 ### AWS Direct Connect
 
 ![dx](assets/image-20210908201934794.png)
@@ -417,6 +683,42 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 - **Transit Virtual Interface** - Conecta aos recursos usando um TGW (Transit Gateway).
 - Endpoints privados não precisam de interfaces (Private VIF) para conexão, pois podem ser acessados diretamente.
 
+```mermaid
+graph LR
+    subgraph ON_PREM["🏢 On-Premises"]
+        ROUTER["🔧 Router"]
+    end
+
+    subgraph DX["⚡ Direct Connect"]
+        DX_LOC["📍 DX Location"]
+    end
+
+    subgraph AWS["☁️ AWS"]
+        subgraph VIFs["Virtual Interfaces"]
+            PUB_VIF["🌐 Public VIF<br/>━━━━━━━━━━<br/>S3, DynamoDB<br/>Serviços Públicos"]
+            PRIV_VIF["🔒 Private VIF<br/>━━━━━━━━━━<br/>VPC Resources<br/>(EC2, RDS, ALB)"]
+            TRANSIT_VIF["🔀 Transit VIF<br/>━━━━━━━━━━<br/>Transit Gateway<br/>Múltiplas VPCs"]
+        end
+
+        S3["🗄️ S3"]
+        VPC["🏠 VPC"]
+        TGW["🔀 TGW"]
+    end
+
+    ROUTER --> DX_LOC
+    DX_LOC --> PUB_VIF
+    DX_LOC --> PRIV_VIF
+    DX_LOC --> TRANSIT_VIF
+
+    PUB_VIF --> S3
+    PRIV_VIF --> VPC
+    TRANSIT_VIF --> TGW
+
+    style PUB_VIF fill:#4CAF50,color:#fff
+    style PRIV_VIF fill:#2196F3,color:#fff
+    style TRANSIT_VIF fill:#ff9900,color:#fff
+```
+
 ---
 
 ### Egress Only Internet Gateway
@@ -430,6 +732,53 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 ![AWS — Transit Gateway](assets/1ghrEMYcgoEfzawAHq54v_A.png)
 
 - **O AWS Transit Gateway** conecta VPCs e suas redes locais por meio de um **hub central**. Isso simplifica a rede e elimina os complexos relacionamentos de emparelhamento. Ele atua como um roteador de nuvem e cada nova conexão só é feita uma vez.
+
+#### Diagrama: Transit Gateway - Hub and Spoke
+
+```mermaid
+graph TB
+    subgraph REGION["🌎 AWS Region"]
+        TGW["🔀 Transit Gateway<br/>━━━━━━━━━━━━━━<br/>Hub Central<br/>✅ Transitivo<br/>✅ Milhares de VPCs"]
+
+        subgraph VPCs["VPCs Conectadas"]
+            VPC1["VPC Produção<br/>10.1.0.0/16"]
+            VPC2["VPC Dev<br/>10.2.0.0/16"]
+            VPC3["VPC Staging<br/>10.3.0.0/16"]
+            VPC4["VPC Shared<br/>10.4.0.0/16"]
+        end
+
+        VPN["🔐 Site-to-Site VPN"]
+        DX["⚡ Direct Connect"]
+    end
+
+    ON_PREM["🏢 On-Premises<br/>192.168.0.0/16"]
+
+    VPC1 <-->|"Attachment"| TGW
+    VPC2 <-->|"Attachment"| TGW
+    VPC3 <-->|"Attachment"| TGW
+    VPC4 <-->|"Attachment"| TGW
+    VPN <-->|"VPN Attachment"| TGW
+    DX <-->|"DX Attachment"| TGW
+
+    ON_PREM <--> VPN
+    ON_PREM <--> DX
+
+    style TGW fill:#ff9900,color:#fff
+    style VPC1 fill:#4CAF50,color:#fff
+    style VPC2 fill:#2196F3,color:#fff
+    style VPC3 fill:#9C27B0,color:#fff
+    style VPC4 fill:#FF5722,color:#fff
+```
+
+**Comparação: VPC Peering vs Transit Gateway**
+
+| Aspecto | VPC Peering | Transit Gateway |
+|---------|-------------|-----------------|
+| **Transitividade** | ❌ Não | ✅ Sim |
+| **Escala** | Limitado (125 peerings) | Milhares de VPCs |
+| **Custo** | Só transferência de dados | Por attachment + dados |
+| **Complexidade** | Full mesh necessário | Hub and spoke simples |
+| **On-premises** | Via cada VPC | Conexão centralizada |
 - Permite instâncias na VPC acesse a NAT Gateway, NLBs, PrivateLink, e EFS e outras VPC conectadas ao **AWS Transit Gateway**.
 - Permite usar o **Direct Conect ao premises ou VPN.**
 - Transit Gateway é um recurso **regional e pode conectar milhares de VPCs na mesma região da AWS.**
@@ -589,6 +938,44 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 - Integra com **Transit Gateway** e **VPC Endpoints (GWLBe)**.
 - **Caso de uso comum**: Todo tráfego passa pelo GWLB → appliances de segurança → destino.
 
+#### Diagrama: Gateway Load Balancer - Inspeção de Tráfego
+
+```mermaid
+graph TB
+    subgraph APP_VPC["VPC Aplicação"]
+        IGW["🌐 Internet Gateway"]
+        GWLBe["🔌 GWLB Endpoint<br/>(GWLBe)"]
+        subgraph APP_SUBNET["Subnet Aplicação"]
+            APP["🖥️ App Server"]
+        end
+    end
+
+    subgraph SEC_VPC["VPC Segurança"]
+        GWLB["⚖️ Gateway Load Balancer<br/>━━━━━━━━━━━━━━<br/>Protocolo: GENEVE<br/>Porta: 6081"]
+        subgraph APPLIANCES["Appliances de Segurança"]
+            FW1["🛡️ Firewall 1"]
+            FW2["🛡️ Firewall 2"]
+            IDS["🔍 IDS/IPS"]
+        end
+    end
+
+    INTERNET["☁️ Internet"] -->|"1️⃣ Request"| IGW
+    IGW -->|"2️⃣ Route Table"| GWLBe
+    GWLBe <-->|"3️⃣ GENEVE Tunnel"| GWLB
+    GWLB --> FW1
+    GWLB --> FW2
+    GWLB --> IDS
+    FW1 -->|"4️⃣ Inspecionado"| GWLB
+    GWLB -->|"5️⃣"| GWLBe
+    GWLBe -->|"6️⃣"| APP
+
+    style GWLB fill:#ff9900,color:#fff
+    style GWLBe fill:#FF6B6B,color:#fff
+    style FW1 fill:#4CAF50,color:#fff
+    style FW2 fill:#4CAF50,color:#fff
+    style IDS fill:#2196F3,color:#fff
+```
+
 :::tip Dica para a prova
 
 📌 Qual LB usar para appliances de segurança de terceiros?
@@ -641,6 +1028,54 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 - **Outbound Endpoint**: Permite VPC resolver nomes on-premises (DNS queries saem da VPC).
 - **Resolver Rules**: Define para quais domínios encaminhar queries.
 - Usa ENIs em subnets da VPC.
+
+#### Diagrama: DNS Híbrido com Route 53 Resolver
+
+```mermaid
+graph TB
+    subgraph ON_PREM["🏢 On-Premises"]
+        DNS_ONPREM["🌐 DNS Server<br/>corp.local"]
+        SERVERS["🖥️ Servidores"]
+    end
+
+    subgraph AWS["☁️ AWS"]
+        subgraph VPC["VPC"]
+            R53["🔷 Route 53 Resolver<br/>.2 do CIDR"]
+
+            subgraph INBOUND["Inbound Endpoint"]
+                ENI_IN["🔌 ENI<br/>10.0.1.10"]
+            end
+
+            subgraph OUTBOUND["Outbound Endpoint"]
+                ENI_OUT["🔌 ENI<br/>10.0.2.10"]
+            end
+
+            EC2["🖥️ EC2"]
+            RULES["📋 Resolver Rules<br/>corp.local → On-Prem DNS"]
+        end
+
+        R53_PUB["🌍 Route 53<br/>Hosted Zones"]
+    end
+
+    SERVERS -->|"1️⃣ Resolve: app.aws.internal"| DNS_ONPREM
+    DNS_ONPREM -->|"2️⃣ Forward"| ENI_IN
+    ENI_IN -->|"3️⃣"| R53
+    R53 -->|"4️⃣ Response"| ENI_IN
+
+    EC2 -->|"1️⃣ Resolve: db.corp.local"| R53
+    R53 -->|"2️⃣ Check Rules"| RULES
+    RULES -->|"3️⃣"| ENI_OUT
+    ENI_OUT -->|"4️⃣ Forward"| DNS_ONPREM
+
+    style ENI_IN fill:#4CAF50,color:#fff
+    style ENI_OUT fill:#FF9800,color:#fff
+    style R53 fill:#2196F3,color:#fff
+```
+
+| Endpoint | Direção | Uso |
+|----------|---------|-----|
+| **Inbound** | On-prem → AWS | Resolver nomes AWS do on-premises |
+| **Outbound** | AWS → On-prem | Resolver nomes on-premises da AWS |
 
 :::tip Dica para a prova
 
@@ -769,6 +1204,41 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 | Direct Connect | Baixa e consistente | 1-100 Gbps | Alto | Semanas/Mês |
 | VPN over DX | Baixa | Até 1.25 Gbps | Médio | Semanas/Mês |
 | Transit Gateway | Variável | 50 Gbps por attachment | Médio | Minutos |
+
+#### Diagrama: Árvore de Decisão - Conectividade Híbrida
+
+```mermaid
+flowchart TD
+    START["🤔 Precisa conectar<br/>On-Premises à AWS?"]
+
+    START -->|Sim| Q1["⏱️ Precisa de setup<br/>rápido (minutos)?"]
+
+    Q1 -->|Sim| VPN["🔐 Site-to-Site VPN<br/>━━━━━━━━━━━━━<br/>✅ Setup rápido<br/>✅ Criptografado<br/>❌ Latência variável"]
+
+    Q1 -->|Não| Q2["📊 Precisa de alta<br/>banda (>1.25 Gbps)?"]
+
+    Q2 -->|Sim| DX["⚡ Direct Connect<br/>━━━━━━━━━━━━━<br/>✅ 1-100 Gbps<br/>✅ Latência baixa<br/>❌ Semanas para setup"]
+
+    Q2 -->|Não| Q3["🔒 Precisa de<br/>criptografia nativa?"]
+
+    Q3 -->|Sim| VPN_DX["🔐 VPN over DX<br/>━━━━━━━━━━━━━<br/>✅ Criptografado<br/>✅ Latência baixa<br/>✅ Usa DX existente"]
+
+    Q3 -->|Não| DX
+
+    DX --> Q4["🔀 Conectar múltiplas<br/>VPCs?"]
+    VPN --> Q4
+
+    Q4 -->|Sim| TGW["🔀 Transit Gateway<br/>━━━━━━━━━━━━━<br/>✅ Hub central<br/>✅ Milhares de VPCs<br/>✅ Transitivo"]
+
+    Q4 -->|Não| DONE["✅ Configuração<br/>Completa!"]
+
+    TGW --> DONE
+
+    style VPN fill:#4CAF50,color:#fff
+    style DX fill:#ff9900,color:#fff
+    style VPN_DX fill:#9C27B0,color:#fff
+    style TGW fill:#2196F3,color:#fff
+```
 
 :::tip Resumo para a prova
 

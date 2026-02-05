@@ -54,10 +54,44 @@ As 7 estratégias de migração para a nuvem ajudam a escolher o melhor caminho 
 📌 Qual abordagem usar para redesenhar aplicações monolíticas em microserviços? 
 ✅ **Refactor / Re-architect**
 
-📌 Uma empresa quer mover workloads VMware para AWS sem modificar nada. Qual estratégia? 
+📌 Uma empresa quer mover workloads VMware para AWS sem modificar nada. Qual estratégia?
 ✅ **Relocate** (VMware Cloud on AWS)
 
 :::
+
+#### Diagrama: Árvore de Decisão - 7Rs
+
+```mermaid
+flowchart TD
+    START["🤔 Aplicação para migrar"]
+
+    START --> Q1{"Aplicação ainda<br/>é necessária?"}
+    Q1 -->|Não| RETIRE["🗑️ RETIRE<br/>Descomissionar"]
+
+    Q1 -->|Sim| Q2{"Vale a pena<br/>migrar agora?"}
+    Q2 -->|Não| RETAIN["📌 RETAIN<br/>Manter on-premises"]
+
+    Q2 -->|Sim| Q3{"É VMware<br/>vSphere?"}
+    Q3 -->|Sim| RELOCATE["🚚 RELOCATE<br/>VMware Cloud on AWS"]
+
+    Q3 -->|Não| Q4{"Trocar por<br/>SaaS?"}
+    Q4 -->|Sim| REPURCHASE["🛒 REPURCHASE<br/>Adotar SaaS"]
+
+    Q4 -->|Não| Q5{"Precisa otimizar<br/>para cloud?"}
+    Q5 -->|Não| REHOST["📦 REHOST<br/>Lift-and-shift"]
+
+    Q5 -->|Sim| Q6{"Reescrever<br/>código?"}
+    Q6 -->|Não| REPLATFORM["⚙️ REPLATFORM<br/>Lift-tinker-shift"]
+    Q6 -->|Sim| REFACTOR["🔧 REFACTOR<br/>Re-architect"]
+
+    style RETIRE fill:#FF6B6B,color:#fff
+    style RETAIN fill:#FFA500,color:#fff
+    style RELOCATE fill:#9C27B0,color:#fff
+    style REPURCHASE fill:#00BCD4,color:#fff
+    style REHOST fill:#4CAF50,color:#fff
+    style REPLATFORM fill:#2196F3,color:#fff
+    style REFACTOR fill:#673AB7,color:#fff
+```
 
 ---
 
@@ -88,6 +122,52 @@ Permite criar uma ponte entre dados locais e a nuvem AWS, ideal para ambientes h
 :::tip 💡 Dica
 A AWS oferece hardware dedicado para Storage Gateway, caso não haja estrutura de virtualização local.
 :::
+
+#### Diagrama: Tipos de Storage Gateway
+
+```mermaid
+graph TB
+    subgraph ON_PREM["🏢 On-Premises"]
+        APP["📱 Aplicações"]
+        SGW["🔌 Storage Gateway<br/>(VM ou Hardware)"]
+    end
+
+    subgraph AWS["☁️ AWS"]
+        subgraph S3_GW["S3 File Gateway"]
+            S3["🗄️ S3<br/>NFS/SMB → S3"]
+        end
+
+        subgraph FSX_GW["FSx File Gateway"]
+            FSX["📁 FSx<br/>SMB → FSx Windows"]
+        end
+
+        subgraph VOL_GW["Volume Gateway"]
+            EBS["💾 EBS Snapshots<br/>iSCSI → EBS"]
+        end
+
+        subgraph TAPE_GW["Tape Gateway"]
+            GLACIER["🧊 S3 Glacier<br/>VTL → Glacier"]
+        end
+    end
+
+    APP --> SGW
+    SGW --> S3
+    SGW --> FSX
+    SGW --> EBS
+    SGW --> GLACIER
+
+    style S3 fill:#ff9900,color:#fff
+    style FSX fill:#4CAF50,color:#fff
+    style EBS fill:#2196F3,color:#fff
+    style GLACIER fill:#00BCD4,color:#fff
+```
+
+| Tipo | Protocolo | Destino | Caso de Uso |
+|------|-----------|---------|-------------|
+| **S3 File Gateway** | NFS, SMB | S3 | Arquivos para S3 |
+| **FSx File Gateway** | SMB | FSx Windows | Cache local + FSx |
+| **Volume Gateway** | iSCSI | EBS Snapshots | Volumes de disco |
+| **Tape Gateway** | VTL | S3 Glacier | Backup em fita |
 
 **Usos comuns:**
 - Recuperação de desastres
@@ -143,6 +223,32 @@ Serviço de transferência de dados **online** que automatiza e acelera a movime
 - Replicação de dados para DR
 - Arquivamento de dados cold para S3 Glacier
 - Sincronização contínua entre on-premises e AWS
+
+#### Diagrama: DataSync vs Storage Gateway
+
+```mermaid
+graph LR
+    subgraph DATASYNC["🔄 AWS DataSync"]
+        DS_SRC["📁 Source<br/>(NFS, SMB, HDFS)"]
+        DS_AGENT["🔌 DataSync Agent"]
+        DS_DST["☁️ Destino<br/>(S3, EFS, FSx)"]
+
+        DS_SRC -->|"Migração/<br/>Sincronização"| DS_AGENT
+        DS_AGENT -->|"Transferência<br/>única ou agendada"| DS_DST
+    end
+
+    subgraph STORAGE_GW["🗄️ Storage Gateway"]
+        SG_APP["📱 Aplicações"]
+        SG_GW["🔌 Gateway"]
+        SG_AWS["☁️ AWS Storage"]
+
+        SG_APP <-->|"Acesso contínuo<br/>como local"| SG_GW
+        SG_GW <-->|"Sync em<br/>background"| SG_AWS
+    end
+
+    style DS_AGENT fill:#ff9900,color:#fff
+    style SG_GW fill:#4CAF50,color:#fff
+```
 
 :::caution DataSync vs Storage Gateway
 - **DataSync:** migração/sincronização de dados (transferência única ou agendada).
@@ -263,6 +369,40 @@ Dispositivos offline para migração de grandes volumes de dados, sem depender d
 - Tempo de transferência: considere o tempo de envio físico (~1 semana) no cálculo.
 :::
 
+#### Diagrama: Quando usar cada Snow
+
+```mermaid
+flowchart TD
+    START["📊 Volume de dados<br/>para migrar?"]
+
+    START --> Q1{"Menos de<br/>10 TB?"}
+    Q1 -->|Sim| DATASYNC["🔄 Use DataSync<br/>pela rede"]
+
+    Q1 -->|Não| Q2{"10 TB - 80 TB?"}
+    Q2 -->|Sim| Q3{"Precisa de<br/>compute local?"}
+    Q3 -->|Sim| SNOWBALL_COMPUTE["❄️ Snowball Edge<br/>Compute Optimized"]
+    Q3 -->|Não| SNOWBALL_STORAGE["❄️ Snowball Edge<br/>Storage Optimized"]
+
+    Q2 -->|Não| Q4{"Mais de 10 PB?"}
+    Q4 -->|Sim| SNOWMOBILE["🚚 Snowmobile"]
+    Q4 -->|Não| Q5{"Local remoto<br/>sem energia?"}
+    Q5 -->|Sim| SNOWCONE["🧊 Snowcone<br/>(bateria opcional)"]
+    Q5 -->|Não| SNOWBALL_STORAGE
+
+    style DATASYNC fill:#4CAF50,color:#fff
+    style SNOWCONE fill:#00BCD4,color:#fff
+    style SNOWBALL_STORAGE fill:#2196F3,color:#fff
+    style SNOWBALL_COMPUTE fill:#9C27B0,color:#fff
+    style SNOWMOBILE fill:#FF5722,color:#fff
+```
+
+| Dispositivo | Capacidade | Peso | Compute | Caso de Uso |
+|-------------|------------|------|---------|-------------|
+| **Snowcone** | 8-14 TB | 2.1 kg | 2 vCPU | Locais remotos, IoT |
+| **Snowball Edge Storage** | 80 TB | 23 kg | 40 vCPU | Migração de dados |
+| **Snowball Edge Compute** | 42 TB | 23 kg | 52 vCPU + GPU | Processamento local |
+| **Snowmobile** | 100 PB | Caminhão | N/A | Datacenters inteiros |
+
 :::tip Dica para a prova
 
 📌 Como migrar mais de 10 PB de dados de um datacenter remoto para a AWS?  
@@ -321,6 +461,42 @@ Serviço gerenciado para migração de bancos de dados para AWS, com suporte a m
 - **Replication Instance:** EC2 gerenciada que executa as tarefas de migração.
 - **Endpoints:** source (origem) e target (destino).
 - **Replication Task:** define o que migrar e como.
+
+#### Diagrama: Fluxo de Migração com DMS
+
+```mermaid
+graph LR
+    subgraph SOURCE["🏢 Origem"]
+        DB_SRC["🗄️ Oracle<br/>On-premises"]
+    end
+
+    subgraph DMS["☁️ AWS DMS"]
+        SCT["🔧 SCT<br/>Schema Conversion"]
+        REPL["🔄 Replication<br/>Instance"]
+        TASK["📋 Task<br/>Full Load + CDC"]
+    end
+
+    subgraph TARGET["☁️ AWS"]
+        DB_TGT["🗄️ Aurora<br/>PostgreSQL"]
+    end
+
+    DB_SRC -->|"1️⃣ Converte Schema"| SCT
+    SCT -->|"2️⃣ Aplica Schema"| DB_TGT
+    DB_SRC -->|"3️⃣ Extrai dados"| REPL
+    REPL -->|"4️⃣ Full Load"| TASK
+    TASK -->|"5️⃣ Carrega dados"| DB_TGT
+    DB_SRC -.->|"6️⃣ CDC contínuo"| REPL
+    REPL -.->|"7️⃣ Replica mudanças"| DB_TGT
+
+    style SCT fill:#ff9900,color:#fff
+    style REPL fill:#4CAF50,color:#fff
+    style DB_TGT fill:#2196F3,color:#fff
+```
+
+| Tipo de Migração | SCT Necessário? | Exemplo |
+|------------------|-----------------|---------|
+| **Homogênea** | ❌ Não | MySQL → RDS MySQL |
+| **Heterogênea** | ✅ Sim | Oracle → Aurora PostgreSQL |
 
 #### AWS SCT - Schema Conversion Tool
 
@@ -381,9 +557,52 @@ Estratégia para prevenir desastres e garantir continuidade de operação, mante
   ![dr-pilot](assets/image-20210909062035023.png)
 - **Warm Standby:** infra replicada em menor escala, pronta para escalar.  
   ![dr-warm-standby](assets/image-20210909062340297.png)
-- **Hot Site / Multi Site:** infra completa e sincronizada, failover quase instantâneo.  
-  ![hot-site](assets/image-20210909062732217.png)  
+- **Hot Site / Multi Site:** infra completa e sincronizada, failover quase instantâneo.
+  ![hot-site](assets/image-20210909062732217.png)
   ![DR-muilt-site](assets/image-20210909062821953.png)
+
+#### Diagrama: Comparação de Estratégias DR
+
+```mermaid
+graph LR
+    subgraph CUSTO["💰 Custo"]
+        C1["$"]
+        C2["$$"]
+        C3["$$$"]
+        C4["$$$$"]
+    end
+
+    subgraph ESTRATEGIA["📋 Estratégia"]
+        S1["🗄️ Backup & Restore"]
+        S2["💡 Pilot Light"]
+        S3["🔥 Warm Standby"]
+        S4["⚡ Multi-Site"]
+    end
+
+    subgraph RTO_RPO["⏱️ RTO/RPO"]
+        R1["Horas/Horas"]
+        R2["10s min/Min"]
+        R3["Minutos/Segundos"]
+        R4["Tempo real/~0"]
+    end
+
+    C1 --- S1 --- R1
+    C2 --- S2 --- R2
+    C3 --- S3 --- R3
+    C4 --- S4 --- R4
+
+    style S1 fill:#FF6B6B,color:#fff
+    style S2 fill:#FFA500,color:#fff
+    style S3 fill:#4CAF50,color:#fff
+    style S4 fill:#2196F3,color:#fff
+```
+
+| Estratégia | RPO | RTO | Custo | Infra na DR Region |
+|------------|-----|-----|-------|---------------------|
+| **Backup & Restore** | Horas | Horas | 💰 | Apenas backups |
+| **Pilot Light** | Minutos | 10+ min | 💰💰 | DB replicado, compute desligado |
+| **Warm Standby** | Segundos | Minutos | 💰💰💰 | App rodando em escala reduzida |
+| **Multi-Site** | ~0 | ~0 | 💰💰💰💰 | Infra completa active-active |
 
 :::tip Dica para a prova
 
