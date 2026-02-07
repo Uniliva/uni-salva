@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Networking | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Networking | Uniii docs"><meta data-rh="true" name="description" content="AWS VPC"><meta data-rh="true" property="og:description" content="AWS VPC"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.012ab6c4.css">
-<script src="/assets/js/runtime~main.31938ef2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b356dc3f.js" defer="defer"></script>
 <script src="/assets/js/main.80ca7488.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -367,7 +367,7 @@
 <ul>
 <li>C<strong>onexão dedicada, fibra</strong> que vai do seu <strong>datacenter</strong> até a AWS.</li>
 <li>Demora cerca de <strong>1 Mês</strong> para ser implementado toda a infraestrutura.</li>
-<li>Por padrão os dados em transito não são cartografados, pois já se esta numa rede privada, mas caso queira pode se usar <strong>um solução de IPSec com VPN.</strong></li>
+<li>Por padrão os dados em transito não são criptografados, pois já se esta numa rede privada, mas caso queira pode se usar <strong>um solução de IPSec com VPN.</strong></li>
 <li>O <strong>Direct Connect (DX)</strong> é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.</li>
 <li>Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um <strong>DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).</strong></li>
 <li>Caso se queira conectar mais de uma região deve se usar um <strong>Direct Conect Gateway</strong>
@@ -442,7 +442,7 @@
 <li><strong>Bandwidth</strong>: 50 Gbps por VPC attachment, throughput agregado pode ser maior.</li>
 <li><strong>Inter e Intra Region Peering</strong>
 <ul>
-<li>Dentro de uma região é possivel ter dois <strong>TGW</strong> ( Transit Gateway) com finalidades diferentes e conecta-los usando i<strong>ntra-Refion Peering Mesh.</strong></li>
+<li>Dentro de uma região é possivel ter dois <strong>TGW</strong> ( Transit Gateway) com finalidades diferentes e conecta-los usando i<strong>ntra-Region Peering Mesh.</strong></li>
 <li>Mas caso queira conectar a outra região com um estrutura semelhante seria necessário criar um novo TGW e realizar o inter-Region Peeering Mesh.
 <img decoding="async" loading="lazy" alt="image-20230227055738521" src="/assets/images/image-20230227055738521-cc3ae38e80933dde9067addb8ad1591c.png" width="1865" height="573" class="img_ev3q"></li>
 </ul>
