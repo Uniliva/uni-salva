@@ -9,6 +9,12 @@ const config: Config = {
   tagline: 'Notas de estudos',
   favicon: 'img/favicon.ico',
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+  plugins: ['@actinc/docusaurus-plugin-panzoom'],
+
   // Set the production url of your site here
   url: 'https://docs.uniii.com.br',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -98,6 +104,7 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    zoom: {},
   } satisfies Preset.ThemeConfig,
 };
 
