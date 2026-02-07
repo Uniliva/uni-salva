@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkuni_docs=self.webpackChunkuni_docs||[]).push([[6366],{86366:(e,c,s)=>{s.d(c,{createArchitectureServices:()=>u.S});var u=s(38980);s(87960)}}]);
