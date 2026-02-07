@@ -34,8 +34,8 @@ sidebar_position: 13
 
 ---
 
-:::tip 💡 Dica de Ouro
-Sempre planeje o tamanho do seu CIDR antes de criar a VPC! Evite sobreposição de IPs, principalmente se for usar VPC Peering ou conectar com redes on-premises.  
+:::tip Dica de Ouro
+Sempre planeje o tamanho do seu CIDR antes de criar a VPC! Evite sobreposição de IPs, principalmente se for usar VPC Peering ou conectar com redes on-premises.
 :::
 
 ---
@@ -69,8 +69,32 @@ Sempre planeje o tamanho do seu CIDR antes de criar a VPC! Evite sobreposição 
 
 ---
 
-:::info ℹ️
+:::info
 Subnets públicas são essenciais para recursos que precisam acessar a internet, como Bastion Hosts ou Load Balancers. Subnets privadas são ideais para bancos de dados e aplicações internas.
+:::
+
+---
+
+### IPv6 na VPC
+
+- VPCs suportam **dual-stack** (IPv4 + IPv6).
+- IPv6 CIDRs são **públicos** (não há IPv6 privado na AWS).
+- Tamanho fixo de **/56** para VPC e **/64** para subnets.
+- **Egress-Only Internet Gateway**: Permite saída IPv6 sem permitir entrada (equivalente ao NAT para IPv6).
+- Instâncias podem ter **apenas IPv6** (sem IPv4) se configurado.
+- **BYOIP (Bring Your Own IP)**: Possível trazer seus próprios blocos IPv4 ou IPv6.
+
+:::tip Dica para a prova
+
+📌 Existe NAT para IPv6?
+✅ ❌ Não. Use **Egress-Only Internet Gateway**
+
+📌 Qual o tamanho do CIDR IPv6 para subnet?
+✅ **/64** (fixo)
+
+📌 IPv6 na AWS é público ou privado?
+✅ **Público** (não existe IPv6 privado na AWS)
+
 :::
 
 ---
@@ -87,6 +111,12 @@ Subnets públicas são essenciais para recursos que precisam acessar a internet,
 
 ---
 
+### Egress Only Internet Gateway
+
+- Um **gateway** da Internet somente de saída é um componente da VPC horizontalmente escalado, redundante e altamente disponível que permite a comunicação de saída pela **IPv6** das instâncias na VPC para a Internet e impede a Internet de iniciar uma conexão **IPv6** com suas instâncias.
+
+---
+
 ### Route table
 
 ![AWS VPC - Internet Gateway, Route Tables, NACLs | 4sysops](assets/Public-and-private-route-table-diagram.png)
@@ -98,7 +128,7 @@ Subnets públicas são essenciais para recursos que precisam acessar a internet,
 
 ---
 
-:::caution ⚠️ Atenção!
+:::caution Atenção!
 Erros em tabelas de rotas podem causar perda de conectividade! Sempre revise as rotas após alterações.
 :::
 
@@ -166,6 +196,26 @@ graph LR
 
 ---
 
+### Managed Prefix Lists
+
+- Lista de **blocos CIDR** que pode ser referenciada em **Route Tables e Security Groups**.
+- **Customer-managed**: Criados por você, editáveis.
+- **AWS-managed**: Mantidos pela AWS (ex: S3 prefix list, CloudFront prefix list).
+- Simplifica gerenciamento quando múltiplos recursos precisam referenciar os mesmos CIDRs.
+- Podem ser **compartilhados via RAM** com outras contas.
+
+:::tip Dica para a prova
+
+📌 Como referenciar múltiplos CIDRs em um Security Group facilmente?
+✅ **Managed Prefix Lists**
+
+📌 Prefix Lists funcionam com quais recursos?
+✅ **Security Groups e Route Tables**
+
+:::
+
+---
+
 ### Security Group
 
 ![sg](assets/image-20210907213210726.png)
@@ -184,7 +234,7 @@ graph LR
 > - 22 -> SFTP
 > - 80 -> HTTP — access unsecured websites
 > - 443 -> HTTPS — access secured websites
-> - 3389 ->  RDP (Remote Desktop Protocol for Windows instance) 
+> - 3389 ->  RDP (Remote Desktop Protocol for Windows instance)
 
 - NACLs são **stateless**, precisam de regras de ida e volta.
 - SGs são **stateful**, se permitiu entrada, a saída é automática.
@@ -193,19 +243,19 @@ graph LR
 
 ---
 
-:::tip 🔒 Dica de Segurança
+:::tip Dica de Segurança
 Sempre restrinja o acesso por IP nos Security Groups! Nunca deixe portas abertas para 0.0.0.0/0, exceto em casos muito específicos.
 
-📌 Qual camada de segurança se aplica à instância EC2?  
+📌 Qual camada de segurança se aplica à instância EC2?
 ✅ **Security Group**
 
-📌 Como bloquear uma faixa de IP inteira em uma subnet?  
+📌 Como bloquear uma faixa de IP inteira em uma subnet?
 ✅ **NACL**
 
-📌 SGs são stateful ou stateless?  
+📌 SGs são stateful ou stateless?
 ✅ **Stateful**
 
-📌 NACLs podem negar tráfego?  
+📌 NACLs podem negar tráfego?
 ✅ **Sim**, diferente dos SGs.
 
 :::
@@ -264,6 +314,130 @@ graph TB
 
 ---
 
+### AWS Network Firewall
+
+- Protege a VPC inteira
+  ![image-20230228062209390](assets/image-20230228062209390.png)
+  ![image-20230228062313794](assets/image-20230228062313794.png)
+  ![image-20230228062545252](assets/image-20230228062545252.png)
+
+:::tip Dica para a prova
+
+📌 O que o AWS Network Firewall protege?
+✅ Toda a **VPC**, com inspeção de tráfego **camada 7**
+
+📌 Quais recursos são típicos de um firewall gerenciado?
+✅ **Regras de domínio, filtragem de IP, logs detalhados**
+
+📌 Network Firewall substitui SG e NACL?
+✅ ❌ Não. Ele **complementa** a proteção
+
+:::
+
+---
+
+### Bastion Hosts
+
+![Bastion Hosts](assets/image-20210908200020997.png)
+
+- Maquina numa rede publica da onde é possível conectar a instâncias em uma rede privada via SSH.
+- Se conectar ao **Bastion Hosts** via SSH e a partir dele se conecta as instâncias na rede privada.
+- Outra solução é a **Session Manager** que permite acesso na WEB sem necessidade de SSH.
+
+---
+
+### VPC Flow Logs
+
+![image-20230228061439898](assets/image-20230228061439898.png)
+
+- Permite capturar o tráfego **IP dentro de uma VPC.**
+- Esta em **nivel de VPCs.**
+- Tipos:
+  - **VPC Flow Logs** - se aplica a tudo dentro da VPC.
+  - **Subnet Flow Logs** - se aplica as subnets dentro de uma VPC.
+  - **ENI Flow Log** - Se aplica a uma interface de rede.
+- Podem ajudar a monitorar tráfegos de rede dentro da VPC, ajuda na **troubleshooting**.
+- Pode se usar o **Athena** ou **Cloud Watch Insights** para identificar anomalias.
+- **Destinos**: CloudWatch Logs, S3 bucket, ou Kinesis Data Firehose.
+- **O que NÃO é capturado**:
+  - Tráfego para Amazon DNS
+  - Tráfego DHCP
+  - Tráfego para o IP reservado do VPC router
+  - Tráfego de/para 169.254.169.254 (metadata)
+  - Tráfego de/para 169.254.169.123 (Amazon Time Sync)
+  - Tráfego de Windows license activation
+  ![image-20230228061544920](assets/image-20230228061544920.png)
+- Arquiteturas com FPC Flow Logs
+  ![image-20230228061742844](assets/image-20230228061742844.png)
+
+:::tip Dica para a prova
+
+📌 Onde posso ativar Flow Logs?
+✅ VPC, Subnet ou ENI
+
+📌 Como analisar os logs?
+✅ **Athena ou CloudWatch Insights**
+
+📌 Qual objetivo principal dos Flow Logs?
+✅ **Troubleshooting de rede e auditoria**
+
+:::
+
+---
+
+### Traffic Mirroring
+
+- Permite **capturar e inspecionar tráfego de rede** de ENIs em sua VPC.
+- Copia o tráfego para appliances de segurança ou ferramentas de monitoramento.
+- **Componentes**:
+  - **Source**: ENI de origem do tráfego
+  - **Target**: ENI de destino, NLB, ou Gateway Load Balancer
+  - **Filter**: Define qual tráfego capturar (inbound, outbound, protocolo, portas)
+- Ideal para **análise de conteúdo, threat monitoring, troubleshooting**.
+- O tráfego espelhado é encapsulado em **VXLAN**.
+
+:::tip Dica para a prova
+
+📌 Para que serve Traffic Mirroring?
+✅ **Capturar tráfego de rede para inspeção/análise de segurança**
+
+📌 Qual o destino possível do tráfego espelhado?
+✅ **ENI, NLB ou Gateway Load Balancer**
+
+:::
+
+---
+
+### VPC Reachability Analyzer
+
+- Ferramenta de **troubleshooting de conectividade** que analisa configurações de rede.
+- **Não envia pacotes reais** - analisa configurações (Route Tables, NACLs, SGs).
+- Identifica o componente que está bloqueando a conectividade.
+- Mostra o **caminho completo** entre origem e destino (hop-by-hop).
+- Útil para validar se configurações estão corretas antes de deployar.
+
+:::tip Dica para a prova
+
+📌 Ferramenta para troubleshooting que não envia pacotes reais?
+✅ **VPC Reachability Analyzer**
+
+📌 O que o Reachability Analyzer analisa?
+✅ **Route Tables, NACLs, Security Groups, VPC Peering configs**
+
+:::
+
+---
+
+### Network Access Analyzer
+
+- Identifica **acessos de rede não intencionais** aos recursos.
+- Analisa regras de SGs, NACLs, Route Tables e VPC configs.
+- Ajuda a verificar se a rede está em **compliance** com requisitos de segurança.
+- Detecta recursos que podem ser acessados da internet ou de fora da VPC.
+- Diferente do Reachability Analyzer: foco em **segurança/compliance**, não troubleshooting.
+
+---
+
 ### VPC Peering
 
 - Permite conectar 2 VPCs, mas para isso não pode haver sob posição de **CIDRs**.
@@ -318,22 +492,22 @@ graph LR
 
 ---
 
-:::info 🔗
+:::info
 VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, mas lembre-se: não é transitive! Para ambientes complexos, considere Transit Gateway.
 :::
 
 :::tip Dica para a prova
 
-📌 VPC Peering permite conexão entre quais tipos de VPCs?  
+📌 VPC Peering permite conexão entre quais tipos de VPCs?
 ✅ **Mesmo ou diferentes contas/regiões**, sem sobreposição de CIDR
 
-📌 VPC Peering é transitivo?  
+📌 VPC Peering é transitivo?
 ✅ ❌ Não!
 
-📌 Precisa atualizar a tabela de rotas para o peering funcionar?  
+📌 Precisa atualizar a tabela de rotas para o peering funcionar?
 ✅ Sim!
 
-📌 O que usar para substituir vários peerings entre VPCs?  
+📌 O que usar para substituir vários peerings entre VPCs?
 ✅ **Transit Gateway**
 
 :::
@@ -469,16 +643,16 @@ graph TB
 
 :::tip Dica para a prova
 
-📌 Qual a vantagem de usar VPC Endpoints?  
+📌 Qual a vantagem de usar VPC Endpoints?
 ✅ Tráfego **não sai para a Internet** — mais seguro e rápido
 
-📌 Qual tipo de endpoint usar para S3/DynamoDB?  
+📌 Qual tipo de endpoint usar para S3/DynamoDB?
 ✅ **Gateway Endpoint**
 
-📌 Qual tipo usar para os demais serviços AWS?  
+📌 Qual tipo usar para os demais serviços AWS?
 ✅ **Interface Endpoint**
 
-📌 VPC Endpoint substitui NAT Gateway?  
+📌 VPC Endpoint substitui NAT Gateway?
 ✅ Em muitos casos sim — especialmente em subnets privadas que só acessam AWS APIs
 
 :::
@@ -547,183 +721,6 @@ graph LR
 ✅ **Não expõe toda a rede, apenas o serviço específico**
 
 :::
-
----
-
-### VPC Flow Logs
-
-![image-20230228061439898](assets/image-20230228061439898.png)
-
-- Permite capturar o tráfego **IP dentro de uma VPC.**
-- Esta em **nivel de VPCs.**
-- Tipos:
-  - **VPC Flow Logs** - se aplica a tudo dentro da VPC.
-  - **Subnet Flow Logs** - se aplica as subnets dentro de uma VPC.
-  - **ENI Flow Log** - Se aplica a uma interface de rede.
-- Podem ajudar a monitorar tráfegos de rede dentro da VPC, ajuda na **troubleshooting**.
-- Pode se usar o **Athena** ou **Cloud Watch Insights** para identificar anomalias.
-- **Destinos**: CloudWatch Logs, S3 bucket, ou Kinesis Data Firehose.
-- **O que NÃO é capturado**:
-  - Tráfego para Amazon DNS
-  - Tráfego DHCP
-  - Tráfego para o IP reservado do VPC router
-  - Tráfego de/para 169.254.169.254 (metadata)
-  - Tráfego de/para 169.254.169.123 (Amazon Time Sync)
-  - Tráfego de Windows license activation
-  ![image-20230228061544920](assets/image-20230228061544920.png)
-- Arquiteturas com FPC Flow Logs
-  ![image-20230228061742844](assets/image-20230228061742844.png)
-
-:::tip Dica para a prova
-
-📌 Onde posso ativar Flow Logs?  
-✅ VPC, Subnet ou ENI
-
-📌 Como analisar os logs?  
-✅ **Athena ou CloudWatch Insights**
-
-📌 Qual objetivo principal dos Flow Logs?  
-✅ **Troubleshooting de rede e auditoria**
-
-:::
-
----
-
-### Bastion Hosts
-
-![Bastion Hosts](assets/image-20210908200020997.png)
-
-- Maquina numa rede publica da onde é possível conectar a instâncias em uma rede privada via SSH.
-- Se conectar ao **Bastion Hosts** via SSH e a partir dele se conecta as instâncias na rede privada.
-- Outra solução é a **Session Manager** que permite acesso na WEB sem necessidade de SSH.
-
----
-
-### Virtual Private Gateway
-
-![Virtual Private Gateway](assets/image-20210908200507774.png)
-
-- Permite ligar uma rede on-primise a AWS via VPN, para isso é necessario configurar um **Virtual** **Customer Gateway** do lado do on-primese e do lado da AWS cria se uma **Virtual Private Gateway**.
-
-#### Diagrama: Site-to-Site VPN
-
-```mermaid
-graph LR
-    subgraph ON_PREM["🏢 On-Premises"]
-        ROUTER["🔧 Router/Firewall"]
-        CGW["📡 Customer Gateway<br/>IP Público"]
-        SERVERS["🖥️ Servidores<br/>192.168.0.0/16"]
-    end
-
-    subgraph AWS["☁️ AWS"]
-        VGW["🚪 Virtual Private Gateway<br/>(VGW)"]
-        subgraph VPC["VPC 10.0.0.0/16"]
-            EC2["🖥️ EC2 Instances"]
-            RDS["🗄️ RDS"]
-        end
-    end
-
-    SERVERS --> ROUTER
-    ROUTER --> CGW
-    CGW <-->|"🔐 IPSec Tunnel 1<br/>━━━━━━━━━━"| VGW
-    CGW <-->|"🔐 IPSec Tunnel 2<br/>━━━━━━━━━━"| VGW
-    VGW --> EC2
-    VGW --> RDS
-
-    style CGW fill:#FF6B6B,color:#fff
-    style VGW fill:#ff9900,color:#fff
-    style VPC fill:#E8F5E9,color:#000
-```
-
-> **2 túneis IPSec** são criados automaticamente para alta disponibilidade
-
----
-
-### AWS Direct Connect
-
-![dx](assets/image-20210908201934794.png)
-
-- C**onexão dedicada, fibra** que vai do seu **datacenter** até a AWS.
-- Demora cerca de **1 Mês** para ser implementado toda a infraestrutura.
-- Por padrão os dados em transito não são criptografados, pois já se esta numa rede privada, mas caso queira pode se usar **um solução de IPSec com VPN.**
-- O **Direct Connect (DX)** é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
-- Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um **DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).**
-- Caso se queira conectar mais de uma região deve se usar um **Direct Conect Gateway**
-  ![DX-GW](assets/image-20210908202014628.png)
-- Alta disponibilidade
-  ![DX](assets/image-20210908202426476.png)
-- Direct Connect Gateway - Site Link
-  ![image-20230228061217204](assets/image-20230228061217204.png)
-- Tipos de DX
-  ![image-20230228060449937](assets/image-20230228060449937.png)
-- **Dedicated Connection**: Conexão física exclusiva (1 Gbps, 10 Gbps, 100 Gbps). Solicita via console AWS, instalada por parceiro.
-- **Hosted Connection**: Capacidade provisionada por parceiro AWS (50 Mbps até 10 Gbps). Mais rápido para provisionar, capacidade pode ser adicionada/removida on-demand.
-- **Lead Time**: Dedicated leva semanas/meses; Hosted pode ser mais rápido.
-
-:::tip Dica para a prova
-
-📌 Qual a principal vantagem do Direct Connect?  
-✅ Conexão dedicada, **baixa latência e alta largura de banda**
-
-📌 O que é necessário para usar VPN com a AWS?  
-✅ **Virtual Private Gateway (AWS)** + **Customer Gateway (on-premises)**
-
-📌 Como garantir alta disponibilidade?  
-✅ **Duas VPNs** + roteamento dinâmico com BGP
-
-📌 Como conectar várias regiões com Direct Connect?  
-✅ **DX Gateway**
-
-:::
-
-#### Virtual Interface VIF
-
-- **Public VIF** - Permite conectar serviços publicos da AWS (S3, EC2).
-- **Private VIF** - Permite conectar aos recursos na sua VPC (EC2, ALB).
-- **Transit Virtual Interface** - Conecta aos recursos usando um TGW (Transit Gateway).
-- Endpoints privados não precisam de interfaces (Private VIF) para conexão, pois podem ser acessados diretamente.
-
-```mermaid
-graph LR
-    subgraph ON_PREM["🏢 On-Premises"]
-        ROUTER["🔧 Router"]
-    end
-
-    subgraph DX["⚡ Direct Connect"]
-        DX_LOC["📍 DX Location"]
-    end
-
-    subgraph AWS["☁️ AWS"]
-        subgraph VIFs["Virtual Interfaces"]
-            PUB_VIF["🌐 Public VIF<br/>━━━━━━━━━━<br/>S3, DynamoDB<br/>Serviços Públicos"]
-            PRIV_VIF["🔒 Private VIF<br/>━━━━━━━━━━<br/>VPC Resources<br/>(EC2, RDS, ALB)"]
-            TRANSIT_VIF["🔀 Transit VIF<br/>━━━━━━━━━━<br/>Transit Gateway<br/>Múltiplas VPCs"]
-        end
-
-        S3["🗄️ S3"]
-        VPC["🏠 VPC"]
-        TGW["🔀 TGW"]
-    end
-
-    ROUTER --> DX_LOC
-    DX_LOC --> PUB_VIF
-    DX_LOC --> PRIV_VIF
-    DX_LOC --> TRANSIT_VIF
-
-    PUB_VIF --> S3
-    PRIV_VIF --> VPC
-    TRANSIT_VIF --> TGW
-
-    style PUB_VIF fill:#4CAF50,color:#fff
-    style PRIV_VIF fill:#2196F3,color:#fff
-    style TRANSIT_VIF fill:#ff9900,color:#fff
-```
-
----
-
-### Egress Only Internet Gateway
-
-- Um **gateway** da Internet somente de saída é um componente da VPC horizontalmente escalado, redundante e altamente disponível que permite a comunicação de saída pela **IPv6** das instâncias na VPC para a Internet e impede a Internet de iniciar uma conexão **IPv6** com suas instâncias.
 
 ---
 
@@ -806,80 +803,14 @@ graph TB
 
 :::tip Dica para a prova
 
-📌 Transit Gateway é transitive?  
+📌 Transit Gateway é transitive?
 ✅ Sim!
 
-📌 É possível compartilhar TGW com outras contas?  
+📌 É possível compartilhar TGW com outras contas?
 ✅ Sim, via AWS RAM
 
-📌 Quantas VPCs posso conectar a um TGW?  
+📌 Quantas VPCs posso conectar a um TGW?
 ✅ Milhares
-
-:::
-
----
-
-### Custo de rede
-
-![net-cost](assets/image-20210908205716392.png)
-![image-20210908210015556](assets/image-20210908210015556.png)
-![image-20210908210158231](assets/image-20210908210158231.png)
-![image-20210908210357597](assets/image-20210908210357597.png)
-
----
-
-### AWS VPN
-
-- Permite conectar o **on-premises a AWS** via internet publica, com segurança.
-- AWS Recomenda a criação de uma **VPN diferente para cada VPC.** porém isso pode ser complicado, por isso é recomendado o uso de **DX (Direct Conect).**
-- para se criar precisa:
-  - Do lado on-premises:
-    - Disponibilizar um estrutura com com IP publico.
-    - Criar um **Customer Gateway (CGW)**
-  - Do lado da AWS
-    - Configurar um **Virtual Private Gateway** e atachar a VPC
-    - Conectar a**o Customer Gateway ao Virtual Private Gateway (VGW)**
-- Para alta disponibilidade se recomenda a existência no mínimos duas VPN configuradas.
-- Pode se usar o **Global Acelerator** para melhorar a velocidade.
-  ![image-20230228053747985](assets/image-20230228053747985.png)
-- Configuração da tabela de rotas
-  - **Static Routing** - Insere manualmente as rotas em cada uma das tabelas de rotas.
-  - **Dynamic Routing** - Usa se o protocolo **BGP** para realizar a configuração da tabela de rotas automaticamente compartilhando os IP Entre as tabelas de rotas.
-    - Necessário especificar um **ASN** para cada **Gateway criado**
-- **Link Aggregation Group**
-  - O **LAG no AWS Direct Connect** permite que você agregue várias conexões de rede físicas em uma única conexão lógica de alta capacidade. Isso pode ajudar a aumentar a largura de banda, melhorar a redundância e simplificar a configuração da rede. Com o **LAG**, você pode criar um único link de conexão lógica que pode fornecer uma largura de banda de até 10 Gbps.
-  - Além disso, o **LAG** pode ser usado para criar conexões redundantes para garantir a alta disponibilidade da sua rede. Se uma das conexões físicas falhar, o tráfego pode ser automaticamente roteado para outra conexão sem interrupções de serviço.
-  - ![Link Aggregation Group (LAG) - AWS Direct Connect](assets/LAG_description.png)
-- Acessando a Internet **via cloud do on-premises**
-  - **Nat Gateway** - não funciona pois ele não pode ser acessado de origem vinda de DX, VPN ou Peering.
-    ![image-20230228054209397](assets/image-20230228054209397.png)
-    ![image-20230228054410767](assets/image-20230228054410767.png)
-    **Client VPN** - Permite configurar uma VPN para que os **usuários possam conectar via por exemplo (OpenVPN)**
-
-#### CloudHub
-
-- Permite conectar mais de **10 Customer Gateway a cada Virtual Private Gateway.**
-  ![image-20230228054727767](assets/image-20230228054727767.png)
-
----
-
-### AWS Network Firewall
-
-- Protege a VPC inteira
-  ![image-20230228062209390](assets/image-20230228062209390.png)
-  ![image-20230228062313794](assets/image-20230228062313794.png)
-  ![image-20230228062545252](assets/image-20230228062545252.png)
-
-:::tip Dica para a prova
-
-📌 O que o AWS Network Firewall protege?  
-✅ Toda a **VPC**, com inspeção de tráfego **camada 7**
-
-📌 Quais recursos são típicos de um firewall gerenciado?  
-✅ **Regras de domínio, filtragem de IP, logs detalhados**
-
-📌 Network Firewall substitui SG e NACL?  
-✅ ❌ Não. Ele **complementa** a proteção
 
 :::
 
@@ -901,29 +832,6 @@ graph TB
 
 📌 Quem gerencia os Security Groups em VPC compartilhada?
 ✅ **Cada conta participante gerencia seus próprios SGs**
-
-:::
-
----
-
-### Traffic Mirroring
-
-- Permite **capturar e inspecionar tráfego de rede** de ENIs em sua VPC.
-- Copia o tráfego para appliances de segurança ou ferramentas de monitoramento.
-- **Componentes**:
-  - **Source**: ENI de origem do tráfego
-  - **Target**: ENI de destino, NLB, ou Gateway Load Balancer
-  - **Filter**: Define qual tráfego capturar (inbound, outbound, protocolo, portas)
-- Ideal para **análise de conteúdo, threat monitoring, troubleshooting**.
-- O tráfego espelhado é encapsulado em **VXLAN**.
-
-:::tip Dica para a prova
-
-📌 Para que serve Traffic Mirroring?
-✅ **Capturar tráfego de rede para inspeção/análise de segurança**
-
-📌 Qual o destino possível do tráfego espelhado?
-✅ **ENI, NLB ou Gateway Load Balancer**
 
 :::
 
@@ -991,33 +899,210 @@ graph TB
 
 ---
 
-### VPC Reachability Analyzer
+### Virtual Private Gateway
 
-- Ferramenta de **troubleshooting de conectividade** que analisa configurações de rede.
-- **Não envia pacotes reais** - analisa configurações (Route Tables, NACLs, SGs).
-- Identifica o componente que está bloqueando a conectividade.
-- Mostra o **caminho completo** entre origem e destino (hop-by-hop).
-- Útil para validar se configurações estão corretas antes de deployar.
+![Virtual Private Gateway](assets/image-20210908200507774.png)
+
+- Permite ligar uma rede on-primise a AWS via VPN, para isso é necessario configurar um **Virtual** **Customer Gateway** do lado do on-primese e do lado da AWS cria se uma **Virtual Private Gateway**.
+
+#### Diagrama: Site-to-Site VPN
+
+```mermaid
+graph LR
+    subgraph ON_PREM["🏢 On-Premises"]
+        ROUTER["🔧 Router/Firewall"]
+        CGW["📡 Customer Gateway<br/>IP Público"]
+        SERVERS["🖥️ Servidores<br/>192.168.0.0/16"]
+    end
+
+    subgraph AWS["☁️ AWS"]
+        VGW["🚪 Virtual Private Gateway<br/>(VGW)"]
+        subgraph VPC["VPC 10.0.0.0/16"]
+            EC2["🖥️ EC2 Instances"]
+            RDS["🗄️ RDS"]
+        end
+    end
+
+    SERVERS --> ROUTER
+    ROUTER --> CGW
+    CGW <-->|"🔐 IPSec Tunnel 1<br/>━━━━━━━━━━"| VGW
+    CGW <-->|"🔐 IPSec Tunnel 2<br/>━━━━━━━━━━"| VGW
+    VGW --> EC2
+    VGW --> RDS
+
+    style CGW fill:#FF6B6B,color:#fff
+    style VGW fill:#ff9900,color:#fff
+    style VPC fill:#E8F5E9,color:#000
+```
+
+> **2 túneis IPSec** são criados automaticamente para alta disponibilidade
+
+---
+
+### AWS VPN
+
+- Permite conectar o **on-premises a AWS** via internet publica, com segurança.
+- AWS Recomenda a criação de uma **VPN diferente para cada VPC.** porém isso pode ser complicado, por isso é recomendado o uso de **DX (Direct Conect).**
+- para se criar precisa:
+  - Do lado on-premises:
+    - Disponibilizar um estrutura com com IP publico.
+    - Criar um **Customer Gateway (CGW)**
+  - Do lado da AWS
+    - Configurar um **Virtual Private Gateway** e atachar a VPC
+    - Conectar a**o Customer Gateway ao Virtual Private Gateway (VGW)**
+- Para alta disponibilidade se recomenda a existência no mínimos duas VPN configuradas.
+- Pode se usar o **Global Acelerator** para melhorar a velocidade.
+  ![image-20230228053747985](assets/image-20230228053747985.png)
+- Configuração da tabela de rotas
+  - **Static Routing** - Insere manualmente as rotas em cada uma das tabelas de rotas.
+  - **Dynamic Routing** - Usa se o protocolo **BGP** para realizar a configuração da tabela de rotas automaticamente compartilhando os IP Entre as tabelas de rotas.
+    - Necessário especificar um **ASN** para cada **Gateway criado**
+- **Link Aggregation Group**
+  - O **LAG no AWS Direct Connect** permite que você agregue várias conexões de rede físicas em uma única conexão lógica de alta capacidade. Isso pode ajudar a aumentar a largura de banda, melhorar a redundância e simplificar a configuração da rede. Com o **LAG**, você pode criar um único link de conexão lógica que pode fornecer uma largura de banda de até 10 Gbps.
+  - Além disso, o **LAG** pode ser usado para criar conexões redundantes para garantir a alta disponibilidade da sua rede. Se uma das conexões físicas falhar, o tráfego pode ser automaticamente roteado para outra conexão sem interrupções de serviço.
+  - ![Link Aggregation Group (LAG) - AWS Direct Connect](assets/LAG_description.png)
+- Acessando a Internet **via cloud do on-premises**
+  - **Nat Gateway** - não funciona pois ele não pode ser acessado de origem vinda de DX, VPN ou Peering.
+    ![image-20230228054209397](assets/image-20230228054209397.png)
+    ![image-20230228054410767](assets/image-20230228054410767.png)
+    **Client VPN** - Permite configurar uma VPN para que os **usuários possam conectar via por exemplo (OpenVPN)**
+
+#### CloudHub
+
+- Permite conectar mais de **10 Customer Gateway a cada Virtual Private Gateway.**
+  ![image-20230228054727767](assets/image-20230228054727767.png)
+
+---
+
+### Site-to-Site VPN com Accelerated VPN
+
+- Usa **AWS Global Accelerator** para rotear tráfego VPN pela rede global da AWS.
+- Reduz latência e melhora performance.
+- Tráfego entra na edge location mais próxima e viaja pela backbone da AWS.
+- **Custo adicional** pelo uso do Global Accelerator.
+- Configurado ao criar a VPN connection.
+
+---
+
+### ECMP (Equal-Cost Multi-Path)
+
+- Estratégia de roteamento que permite distribuir tráfego por **múltiplos caminhos de igual custo**.
+- Suportado com **Transit Gateway** e múltiplas conexões VPN.
+- Permite **aumentar throughput** agregando bandwidth de múltiplas VPNs.
+- Cada conexão Site-to-Site VPN tem 2 túneis (para HA).
+- Com ECMP habilitado no TGW, pode usar ambos os túneis ativamente.
 
 :::tip Dica para a prova
 
-📌 Ferramenta para troubleshooting que não envia pacotes reais?
-✅ **VPC Reachability Analyzer**
+📌 Como aumentar throughput de VPN com Transit Gateway?
+✅ **ECMP com múltiplas conexões VPN**
 
-📌 O que o Reachability Analyzer analisa?
-✅ **Route Tables, NACLs, Security Groups, VPC Peering configs**
+📌 Quantos túneis uma Site-to-Site VPN tem?
+✅ **2 túneis** (para alta disponibilidade)
 
 :::
 
 ---
 
-### Network Access Analyzer
+### AWS Direct Connect
 
-- Identifica **acessos de rede não intencionais** aos recursos.
-- Analisa regras de SGs, NACLs, Route Tables e VPC configs.
-- Ajuda a verificar se a rede está em **compliance** com requisitos de segurança.
-- Detecta recursos que podem ser acessados da internet ou de fora da VPC.
-- Diferente do Reachability Analyzer: foco em **segurança/compliance**, não troubleshooting.
+![dx](assets/image-20210908201934794.png)
+
+- C**onexão dedicada, fibra** que vai do seu **datacenter** até a AWS.
+- Demora cerca de **1 Mês** para ser implementado toda a infraestrutura.
+- Por padrão os dados em transito não são criptografados, pois já se esta numa rede privada, mas caso queira pode se usar **um solução de IPSec com VPN.**
+- O **Direct Connect (DX)** é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
+- Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um **DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).**
+- Caso se queira conectar mais de uma região deve se usar um **Direct Conect Gateway**
+  ![DX-GW](assets/image-20210908202014628.png)
+- Alta disponibilidade
+  ![DX](assets/image-20210908202426476.png)
+- Direct Connect Gateway - Site Link
+  ![image-20230228061217204](assets/image-20230228061217204.png)
+- Tipos de DX
+  ![image-20230228060449937](assets/image-20230228060449937.png)
+- **Dedicated Connection**: Conexão física exclusiva (1 Gbps, 10 Gbps, 100 Gbps). Solicita via console AWS, instalada por parceiro.
+- **Hosted Connection**: Capacidade provisionada por parceiro AWS (50 Mbps até 10 Gbps). Mais rápido para provisionar, capacidade pode ser adicionada/removida on-demand.
+- **Lead Time**: Dedicated leva semanas/meses; Hosted pode ser mais rápido.
+
+:::tip Dica para a prova
+
+📌 Qual a principal vantagem do Direct Connect?
+✅ Conexão dedicada, **baixa latência e alta largura de banda**
+
+📌 O que é necessário para usar VPN com a AWS?
+✅ **Virtual Private Gateway (AWS)** + **Customer Gateway (on-premises)**
+
+📌 Como garantir alta disponibilidade?
+✅ **Duas VPNs** + roteamento dinâmico com BGP
+
+📌 Como conectar várias regiões com Direct Connect?
+✅ **DX Gateway**
+
+:::
+
+#### Virtual Interface VIF
+
+- **Public VIF** - Permite conectar serviços publicos da AWS (S3, EC2).
+- **Private VIF** - Permite conectar aos recursos na sua VPC (EC2, ALB).
+- **Transit Virtual Interface** - Conecta aos recursos usando um TGW (Transit Gateway).
+- Endpoints privados não precisam de interfaces (Private VIF) para conexão, pois podem ser acessados diretamente.
+
+```mermaid
+graph LR
+    subgraph ON_PREM["🏢 On-Premises"]
+        ROUTER["🔧 Router"]
+    end
+
+    subgraph DX["⚡ Direct Connect"]
+        DX_LOC["📍 DX Location"]
+    end
+
+    subgraph AWS["☁️ AWS"]
+        subgraph VIFs["Virtual Interfaces"]
+            PUB_VIF["🌐 Public VIF<br/>━━━━━━━━━━<br/>S3, DynamoDB<br/>Serviços Públicos"]
+            PRIV_VIF["🔒 Private VIF<br/>━━━━━━━━━━<br/>VPC Resources<br/>(EC2, RDS, ALB)"]
+            TRANSIT_VIF["🔀 Transit VIF<br/>━━━━━━━━━━<br/>Transit Gateway<br/>Múltiplas VPCs"]
+        end
+
+        S3["🗄️ S3"]
+        VPC["🏠 VPC"]
+        TGW["🔀 TGW"]
+    end
+
+    ROUTER --> DX_LOC
+    DX_LOC --> PUB_VIF
+    DX_LOC --> PRIV_VIF
+    DX_LOC --> TRANSIT_VIF
+
+    PUB_VIF --> S3
+    PRIV_VIF --> VPC
+    TRANSIT_VIF --> TGW
+
+    style PUB_VIF fill:#4CAF50,color:#fff
+    style PRIV_VIF fill:#2196F3,color:#fff
+    style TRANSIT_VIF fill:#ff9900,color:#fff
+```
+
+---
+
+### Direct Connect - Modelos de Resiliência
+
+- **Maximum Resiliency**: Conexões separadas terminando em dispositivos separados em mais de um local.
+- **High Resiliency**: Múltiplas conexões terminando em mais de um local.
+- **Development and Test**: Conexão única (sem redundância).
+- Para **SLA de 99.99%**, AWS recomenda **Maximum Resiliency**.
+- **Backup com VPN**: Usar Site-to-Site VPN como failover para DX.
+
+:::tip Dica para a prova
+
+📌 Qual modelo de DX para máxima disponibilidade?
+✅ **Maximum Resiliency** (múltiplas conexões em múltiplos locais)
+
+📌 Como fazer backup do Direct Connect?
+✅ **Site-to-Site VPN como failover**
+
+:::
 
 ---
 
@@ -1092,100 +1177,6 @@ graph TB
 
 ---
 
-### Managed Prefix Lists
-
-- Lista de **blocos CIDR** que pode ser referenciada em **Route Tables e Security Groups**.
-- **Customer-managed**: Criados por você, editáveis.
-- **AWS-managed**: Mantidos pela AWS (ex: S3 prefix list, CloudFront prefix list).
-- Simplifica gerenciamento quando múltiplos recursos precisam referenciar os mesmos CIDRs.
-- Podem ser **compartilhados via RAM** com outras contas.
-
-:::tip Dica para a prova
-
-📌 Como referenciar múltiplos CIDRs em um Security Group facilmente?
-✅ **Managed Prefix Lists**
-
-📌 Prefix Lists funcionam com quais recursos?
-✅ **Security Groups e Route Tables**
-
-:::
-
----
-
-### IPv6 na VPC
-
-- VPCs suportam **dual-stack** (IPv4 + IPv6).
-- IPv6 CIDRs são **públicos** (não há IPv6 privado na AWS).
-- Tamanho fixo de **/56** para VPC e **/64** para subnets.
-- **Egress-Only Internet Gateway**: Permite saída IPv6 sem permitir entrada (equivalente ao NAT para IPv6).
-- Instâncias podem ter **apenas IPv6** (sem IPv4) se configurado.
-- **BYOIP (Bring Your Own IP)**: Possível trazer seus próprios blocos IPv4 ou IPv6.
-
-:::tip Dica para a prova
-
-📌 Existe NAT para IPv6?
-✅ ❌ Não. Use **Egress-Only Internet Gateway**
-
-📌 Qual o tamanho do CIDR IPv6 para subnet?
-✅ **/64** (fixo)
-
-📌 IPv6 na AWS é público ou privado?
-✅ **Público** (não existe IPv6 privado na AWS)
-
-:::
-
----
-
-### Direct Connect - Modelos de Resiliência
-
-- **Maximum Resiliency**: Conexões separadas terminando em dispositivos separados em mais de um local.
-- **High Resiliency**: Múltiplas conexões terminando em mais de um local.
-- **Development and Test**: Conexão única (sem redundância).
-- Para **SLA de 99.99%**, AWS recomenda **Maximum Resiliency**.
-- **Backup com VPN**: Usar Site-to-Site VPN como failover para DX.
-
-:::tip Dica para a prova
-
-📌 Qual modelo de DX para máxima disponibilidade?
-✅ **Maximum Resiliency** (múltiplas conexões em múltiplos locais)
-
-📌 Como fazer backup do Direct Connect?
-✅ **Site-to-Site VPN como failover**
-
-:::
-
----
-
-### Site-to-Site VPN com Accelerated VPN
-
-- Usa **AWS Global Accelerator** para rotear tráfego VPN pela rede global da AWS.
-- Reduz latência e melhora performance.
-- Tráfego entra na edge location mais próxima e viaja pela backbone da AWS.
-- **Custo adicional** pelo uso do Global Accelerator.
-- Configurado ao criar a VPN connection.
-
----
-
-### ECMP (Equal-Cost Multi-Path)
-
-- Estratégia de roteamento que permite distribuir tráfego por **múltiplos caminhos de igual custo**.
-- Suportado com **Transit Gateway** e múltiplas conexões VPN.
-- Permite **aumentar throughput** agregando bandwidth de múltiplas VPNs.
-- Cada conexão Site-to-Site VPN tem 2 túneis (para HA).
-- Com ECMP habilitado no TGW, pode usar ambos os túneis ativamente.
-
-:::tip Dica para a prova
-
-📌 Como aumentar throughput de VPN com Transit Gateway?
-✅ **ECMP com múltiplas conexões VPN**
-
-📌 Quantos túneis uma Site-to-Site VPN tem?
-✅ **2 túneis** (para alta disponibilidade)
-
-:::
-
----
-
 ### AWS Cloud WAN
 
 - Serviço para criar, gerenciar e monitorar **redes globais unificadas**.
@@ -1193,6 +1184,15 @@ graph TB
 - Usa **Core Network** com políticas centralizadas.
 - Suporta **segmentação** de rede para isolamento de tráfego.
 - Alternativa gerenciada ao Transit Gateway para redes globais complexas.
+
+---
+
+### Custo de rede
+
+![net-cost](assets/image-20210908205716392.png)
+![image-20210908210015556](assets/image-20210908210015556.png)
+![image-20210908210158231](assets/image-20210908210158231.png)
+![image-20210908210357597](assets/image-20210908210357597.png)
 
 ---
 
@@ -1255,7 +1255,7 @@ flowchart TD
 
 ---
 
-## Links e recursos adicionais 🔗
+## Links e recursos adicionais
 
 - [Documentação oficial AWS VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
 - [VPC Peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
@@ -1263,4 +1263,3 @@ flowchart TD
 - [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)
 - [AWS Network Firewall](https://docs.aws.amazon.com/network-firewall/latest/developerguide/what-is-aws-network-firewall.html)
 - [Guia de estudo para certificação AWS](https://aws.amazon.com/certification/certified-solutions-architect-professional/)
-
