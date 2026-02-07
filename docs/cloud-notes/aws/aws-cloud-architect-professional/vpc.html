@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Networking | Uniii docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.uniii.com.br/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Networking | Uniii docs"><meta data-rh="true" name="description" content="AWS VPC"><meta data-rh="true" property="og:description" content="AWS VPC"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://docs.uniii.com.br/docs/cloud-notes/aws/aws-cloud-architect-professional/vpc" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.7b6833e4.css">
-<script src="/assets/js/runtime~main.27056d3d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f9bb26a0.js" defer="defer"></script>
 <script src="/assets/js/main.b363bfb5.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -65,7 +65,7 @@
 </li>
 </ul>
 <hr>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>💡 Dica de Ouro</div><div class="admonitionContent_BuS1"><p>Sempre planeje o tamanho do seu CIDR antes de criar a VPC! Evite sobreposição de IPs, principalmente se for usar VPC Peering ou conectar com redes on-premises.</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica de Ouro</div><div class="admonitionContent_BuS1"><p>Sempre planeje o tamanho do seu CIDR antes de criar a VPC! Evite sobreposição de IPs, principalmente se for usar VPC Peering ou conectar com redes on-premises.</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="cidr">CIDR<a href="#cidr" class="hash-link" aria-label="Link direto para CIDR" title="Link direto para CIDR">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="cidr" src="/assets/images/1By1Z1u0xilCm5OAtOqm3pg-ff4ee2bc26938c26d424e552b9825f32.png" width="2224" height="594" class="img_ev3q"></p>
@@ -99,7 +99,21 @@
 <li><strong>Limite</strong>: Até 200 subnets por VPC (soft limit).</li>
 </ul>
 <hr>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>ℹ️</div><div class="admonitionContent_BuS1"><p>Subnets públicas são essenciais para recursos que precisam acessar a internet, como Bastion Hosts ou Load Balancers. Subnets privadas são ideais para bancos de dados e aplicações internas.</p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Subnets públicas são essenciais para recursos que precisam acessar a internet, como Bastion Hosts ou Load Balancers. Subnets privadas são ideais para bancos de dados e aplicações internas.</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ipv6-na-vpc">IPv6 na VPC<a href="#ipv6-na-vpc" class="hash-link" aria-label="Link direto para IPv6 na VPC" title="Link direto para IPv6 na VPC">​</a></h3>
+<ul>
+<li>VPCs suportam <strong>dual-stack</strong> (IPv4 + IPv6).</li>
+<li>IPv6 CIDRs são <strong>públicos</strong> (não há IPv6 privado na AWS).</li>
+<li>Tamanho fixo de <strong>/56</strong> para VPC e <strong>/64</strong> para subnets.</li>
+<li><strong>Egress-Only Internet Gateway</strong>: Permite saída IPv6 sem permitir entrada (equivalente ao NAT para IPv6).</li>
+<li>Instâncias podem ter <strong>apenas IPv6</strong> (sem IPv4) se configurado.</li>
+<li><strong>BYOIP (Bring Your Own IP)</strong>: Possível trazer seus próprios blocos IPv4 ou IPv6.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Existe NAT para IPv6?
+✅ ❌ Não. Use <strong>Egress-Only Internet Gateway</strong></p><p>📌 Qual o tamanho do CIDR IPv6 para subnet?
+✅ <strong>/64</strong> (fixo)</p><p>📌 IPv6 na AWS é público ou privado?
+✅ <strong>Público</strong> (não existe IPv6 privado na AWS)</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="internet-gateway">Internet Gateway<a href="#internet-gateway" class="hash-link" aria-label="Link direto para Internet Gateway" title="Link direto para Internet Gateway">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="image-20210907203053110" src="/assets/images/image-20210907203053110-5a72b123ce7e64e8ab050563bf84c4eb.png" width="681" height="301" class="img_ev3q"></p>
@@ -109,6 +123,11 @@
 <li>Deve haver um <strong>Internet Gateway</strong> para uma <strong>VPC</strong>.</li>
 <li>Também fazem <strong>NAT</strong> para instâncias EC2 que tem IP publico.</li>
 <li>Lembrando que quem permite acesso ou não a Internet e a <strong>tabela de Rotas.</strong></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="egress-only-internet-gateway">Egress Only Internet Gateway<a href="#egress-only-internet-gateway" class="hash-link" aria-label="Link direto para Egress Only Internet Gateway" title="Link direto para Egress Only Internet Gateway">​</a></h3>
+<ul>
+<li>Um <strong>gateway</strong> da Internet somente de saída é um componente da VPC horizontalmente escalado, redundante e altamente disponível que permite a comunicação de saída pela <strong>IPv6</strong> das instâncias na VPC para a Internet e impede a Internet de iniciar uma conexão <strong>IPv6</strong> com suas instâncias.</li>
 </ul>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="route-table">Route table<a href="#route-table" class="hash-link" aria-label="Link direto para Route table" title="Link direto para Route table">​</a></h3>
@@ -123,7 +142,7 @@
 </li>
 </ul>
 <hr>
-<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>⚠️ Atenção!</div><div class="admonitionContent_BuS1"><p>Erros em tabelas de rotas podem causar perda de conectividade! Sempre revise as rotas após alterações.</p></div></div>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Atenção!</div><div class="admonitionContent_BuS1"><p>Erros em tabelas de rotas podem causar perda de conectividade! Sempre revise as rotas após alterações.</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="nat-gateway">NAT Gateway<a href="#nat-gateway" class="hash-link" aria-label="Link direto para NAT Gateway" title="Link direto para NAT Gateway">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="AWS — Difference between Internet Gateway and NAT Gateway | by Ashish Patel  | Awesome Cloud | Medium" src="/assets/images/1gftv4LSqU_12kRqNwYISJw-fa0bdeff2ab93e382a326e742b09dd71.png" width="1222" height="962" class="img_ev3q"></p>
@@ -149,6 +168,18 @@
 ✅ Gateway é gerenciado e escalável. Instance é mais barata mas precisa de manutenção manual.</p><p>📌 NAT Gateway pode ser acessado de fora da VPC?
 ❌ Não!</p><p>📌 NAT Gateway é por AZ?
 ✅  Sim. Crie em cada AZ para alta disponibilidade</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="managed-prefix-lists">Managed Prefix Lists<a href="#managed-prefix-lists" class="hash-link" aria-label="Link direto para Managed Prefix Lists" title="Link direto para Managed Prefix Lists">​</a></h3>
+<ul>
+<li>Lista de <strong>blocos CIDR</strong> que pode ser referenciada em <strong>Route Tables e Security Groups</strong>.</li>
+<li><strong>Customer-managed</strong>: Criados por você, editáveis.</li>
+<li><strong>AWS-managed</strong>: Mantidos pela AWS (ex: S3 prefix list, CloudFront prefix list).</li>
+<li>Simplifica gerenciamento quando múltiplos recursos precisam referenciar os mesmos CIDRs.</li>
+<li>Podem ser <strong>compartilhados via RAM</strong> com outras contas.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como referenciar múltiplos CIDRs em um Security Group facilmente?
+✅ <strong>Managed Prefix Lists</strong></p><p>📌 Prefix Lists funcionam com quais recursos?
+✅ <strong>Security Groups e Route Tables</strong></p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="security-group">Security Group<a href="#security-group" class="hash-link" aria-label="Link direto para Security Group" title="Link direto para Security Group">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="sg" src="/assets/images/image-20210907213210726-005bbfe0643b1951846cca4313958ed4.png" width="690" height="293" class="img_ev3q"></p>
@@ -179,11 +210,11 @@
 <li>SGs são usados por instância e são mais granulares.</li>
 </ul>
 <hr>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>🔒 Dica de Segurança</div><div class="admonitionContent_BuS1"><p>Sempre restrinja o acesso por IP nos Security Groups! Nunca deixe portas abertas para 0.0.0.0/0, exceto em casos muito específicos.</p><p>📌 Qual camada de segurança se aplica à instância EC2?<br>
-<!-- -->✅ <strong>Security Group</strong></p><p>📌 Como bloquear uma faixa de IP inteira em uma subnet?<br>
-<!-- -->✅ <strong>NACL</strong></p><p>📌 SGs são stateful ou stateless?<br>
-<!-- -->✅ <strong>Stateful</strong></p><p>📌 NACLs podem negar tráfego?<br>
-<!-- -->✅ <strong>Sim</strong>, diferente dos SGs.</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica de Segurança</div><div class="admonitionContent_BuS1"><p>Sempre restrinja o acesso por IP nos Security Groups! Nunca deixe portas abertas para 0.0.0.0/0, exceto em casos muito específicos.</p><p>📌 Qual camada de segurança se aplica à instância EC2?
+✅ <strong>Security Group</strong></p><p>📌 Como bloquear uma faixa de IP inteira em uma subnet?
+✅ <strong>NACL</strong></p><p>📌 SGs são stateful ou stateless?
+✅ <strong>Stateful</strong></p><p>📌 NACLs podem negar tráfego?
+✅ <strong>Sim</strong>, diferente dos SGs.</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="nacl">NACL<a href="#nacl" class="hash-link" aria-label="Link direto para NACL" title="Link direto para NACL">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="Learn AWS Network ACL and Security Groups in under 5 minutes | by João  Marcelo Souza | Medium" src="/assets/images/1K-Se2-uV-Y91vkGW3K0-8w-35f23e8e243df1526f7a59713b4a0eea.png" width="849" height="942" class="img_ev3q"></p>
@@ -201,6 +232,99 @@
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-security-group-vs-nacl">Diagrama: Security Group vs NACL<a href="#diagrama-security-group-vs-nacl" class="hash-link" aria-label="Link direto para Diagrama: Security Group vs NACL" title="Link direto para Diagrama: Security Group vs NACL">​</a></h4>
 <!-- -->
 <table><thead><tr><th>Característica</th><th>Security Group</th><th>NACL</th></tr></thead><tbody><tr><td><strong>Nível</strong></td><td>Instância (ENI)</td><td>Subnet</td></tr><tr><td><strong>Estado</strong></td><td>Stateful</td><td>Stateless</td></tr><tr><td><strong>Regras</strong></td><td>Só ALLOW</td><td>ALLOW + DENY</td></tr><tr><td><strong>Avaliação</strong></td><td>Todas as regras</td><td>Por ordem de prioridade</td></tr><tr><td><strong>Default</strong></td><td>Nega tudo</td><td>Permite tudo</td></tr></tbody></table>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-network-firewall">AWS Network Firewall<a href="#aws-network-firewall" class="hash-link" aria-label="Link direto para AWS Network Firewall" title="Link direto para AWS Network Firewall">​</a></h3>
+<ul>
+<li>Protege a VPC inteira
+<img decoding="async" loading="lazy" alt="image-20230228062209390" src="/assets/images/image-20230228062209390-873e77a00df2ad28d6d4a593d2bcdf78.png" width="1136" height="607" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20230228062313794" src="/assets/images/image-20230228062313794-b8a1987c94225d51a95fba74c4f0f634.png" width="1091" height="577" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20230228062545252" src="/assets/images/image-20230228062545252-fa2baca54be6331703a100c7945b6f3b.png" width="1133" height="615" class="img_ev3q"></li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 O que o AWS Network Firewall protege?
+✅ Toda a <strong>VPC</strong>, com inspeção de tráfego <strong>camada 7</strong></p><p>📌 Quais recursos são típicos de um firewall gerenciado?
+✅ <strong>Regras de domínio, filtragem de IP, logs detalhados</strong></p><p>📌 Network Firewall substitui SG e NACL?
+✅ ❌ Não. Ele <strong>complementa</strong> a proteção</p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bastion-hosts">Bastion Hosts<a href="#bastion-hosts" class="hash-link" aria-label="Link direto para Bastion Hosts" title="Link direto para Bastion Hosts">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Bastion Hosts" src="/assets/images/image-20210908200020997-d1da8b42cb07577170b2707421f9ebdb.png" width="404" height="237" class="img_ev3q"></p>
+<ul>
+<li>Maquina numa rede publica da onde é possível conectar a instâncias em uma rede privada via SSH.</li>
+<li>Se conectar ao <strong>Bastion Hosts</strong> via SSH e a partir dele se conecta as instâncias na rede privada.</li>
+<li>Outra solução é a <strong>Session Manager</strong> que permite acesso na WEB sem necessidade de SSH.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-flow-logs">VPC Flow Logs<a href="#vpc-flow-logs" class="hash-link" aria-label="Link direto para VPC Flow Logs" title="Link direto para VPC Flow Logs">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="image-20230228061439898" src="/assets/images/image-20230228061439898-12e9b319ecf74b1c61ad0d1e3388b4e1.png" width="1161" height="515" class="img_ev3q"></p>
+<ul>
+<li>Permite capturar o tráfego <strong>IP dentro de uma VPC.</strong></li>
+<li>Esta em <strong>nivel de VPCs.</strong></li>
+<li>Tipos:<!-- -->
+<ul>
+<li><strong>VPC Flow Logs</strong> - se aplica a tudo dentro da VPC.</li>
+<li><strong>Subnet Flow Logs</strong> - se aplica as subnets dentro de uma VPC.</li>
+<li><strong>ENI Flow Log</strong> - Se aplica a uma interface de rede.</li>
+</ul>
+</li>
+<li>Podem ajudar a monitorar tráfegos de rede dentro da VPC, ajuda na <strong>troubleshooting</strong>.</li>
+<li>Pode se usar o <strong>Athena</strong> ou <strong>Cloud Watch Insights</strong> para identificar anomalias.</li>
+<li><strong>Destinos</strong>: CloudWatch Logs, S3 bucket, ou Kinesis Data Firehose.</li>
+<li><strong>O que NÃO é capturado</strong>:<!-- -->
+<ul>
+<li>Tráfego para Amazon DNS</li>
+<li>Tráfego DHCP</li>
+<li>Tráfego para o IP reservado do VPC router</li>
+<li>Tráfego de/para 169.254.169.254 (metadata)</li>
+<li>Tráfego de/para 169.254.169.123 (Amazon Time Sync)</li>
+<li>Tráfego de Windows license activation
+<img decoding="async" loading="lazy" alt="image-20230228061544920" src="/assets/images/image-20230228061544920-0b7a09bb9b12d9c264039122f51de5cc.png" width="1107" height="545" class="img_ev3q"></li>
+</ul>
+</li>
+<li>Arquiteturas com FPC Flow Logs
+<img decoding="async" loading="lazy" alt="image-20230228061742844" src="/assets/images/image-20230228061742844-aa6acbcfac8caaddfe91417ada53030c.png" width="1080" height="534" class="img_ev3q"></li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Onde posso ativar Flow Logs?
+✅ VPC, Subnet ou ENI</p><p>📌 Como analisar os logs?
+✅ <strong>Athena ou CloudWatch Insights</strong></p><p>📌 Qual objetivo principal dos Flow Logs?
+✅ <strong>Troubleshooting de rede e auditoria</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="traffic-mirroring">Traffic Mirroring<a href="#traffic-mirroring" class="hash-link" aria-label="Link direto para Traffic Mirroring" title="Link direto para Traffic Mirroring">​</a></h3>
+<ul>
+<li>Permite <strong>capturar e inspecionar tráfego de rede</strong> de ENIs em sua VPC.</li>
+<li>Copia o tráfego para appliances de segurança ou ferramentas de monitoramento.</li>
+<li><strong>Componentes</strong>:<!-- -->
+<ul>
+<li><strong>Source</strong>: ENI de origem do tráfego</li>
+<li><strong>Target</strong>: ENI de destino, NLB, ou Gateway Load Balancer</li>
+<li><strong>Filter</strong>: Define qual tráfego capturar (inbound, outbound, protocolo, portas)</li>
+</ul>
+</li>
+<li>Ideal para <strong>análise de conteúdo, threat monitoring, troubleshooting</strong>.</li>
+<li>O tráfego espelhado é encapsulado em <strong>VXLAN</strong>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Para que serve Traffic Mirroring?
+✅ <strong>Capturar tráfego de rede para inspeção/análise de segurança</strong></p><p>📌 Qual o destino possível do tráfego espelhado?
+✅ <strong>ENI, NLB ou Gateway Load Balancer</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-reachability-analyzer">VPC Reachability Analyzer<a href="#vpc-reachability-analyzer" class="hash-link" aria-label="Link direto para VPC Reachability Analyzer" title="Link direto para VPC Reachability Analyzer">​</a></h3>
+<ul>
+<li>Ferramenta de <strong>troubleshooting de conectividade</strong> que analisa configurações de rede.</li>
+<li><strong>Não envia pacotes reais</strong> - analisa configurações (Route Tables, NACLs, SGs).</li>
+<li>Identifica o componente que está bloqueando a conectividade.</li>
+<li>Mostra o <strong>caminho completo</strong> entre origem e destino (hop-by-hop).</li>
+<li>Útil para validar se configurações estão corretas antes de deployar.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Ferramenta para troubleshooting que não envia pacotes reais?
+✅ <strong>VPC Reachability Analyzer</strong></p><p>📌 O que o Reachability Analyzer analisa?
+✅ <strong>Route Tables, NACLs, Security Groups, VPC Peering configs</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="network-access-analyzer">Network Access Analyzer<a href="#network-access-analyzer" class="hash-link" aria-label="Link direto para Network Access Analyzer" title="Link direto para Network Access Analyzer">​</a></h3>
+<ul>
+<li>Identifica <strong>acessos de rede não intencionais</strong> aos recursos.</li>
+<li>Analisa regras de SGs, NACLs, Route Tables e VPC configs.</li>
+<li>Ajuda a verificar se a rede está em <strong>compliance</strong> com requisitos de segurança.</li>
+<li>Detecta recursos que podem ser acessados da internet ou de fora da VPC.</li>
+<li>Diferente do Reachability Analyzer: foco em <strong>segurança/compliance</strong>, não troubleshooting.</li>
+</ul>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-peering">VPC Peering<a href="#vpc-peering" class="hash-link" aria-label="Link direto para VPC Peering" title="Link direto para VPC Peering">​</a></h3>
 <ul>
@@ -222,12 +346,12 @@
 <!-- -->
 <!-- -->
 <hr>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>🔗</div><div class="admonitionContent_BuS1"><p>VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, mas lembre-se: não é transitive! Para ambientes complexos, considere Transit Gateway.</p></div></div>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 VPC Peering permite conexão entre quais tipos de VPCs?<br>
-<!-- -->✅ <strong>Mesmo ou diferentes contas/regiões</strong>, sem sobreposição de CIDR</p><p>📌 VPC Peering é transitivo?<br>
-<!-- -->✅ ❌ Não!</p><p>📌 Precisa atualizar a tabela de rotas para o peering funcionar?<br>
-<!-- -->✅ Sim!</p><p>📌 O que usar para substituir vários peerings entre VPCs?<br>
-<!-- -->✅ <strong>Transit Gateway</strong></p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, mas lembre-se: não é transitive! Para ambientes complexos, considere Transit Gateway.</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 VPC Peering permite conexão entre quais tipos de VPCs?
+✅ <strong>Mesmo ou diferentes contas/regiões</strong>, sem sobreposição de CIDR</p><p>📌 VPC Peering é transitivo?
+✅ ❌ Não!</p><p>📌 Precisa atualizar a tabela de rotas para o peering funcionar?
+✅ Sim!</p><p>📌 O que usar para substituir vários peerings entre VPCs?
+✅ <strong>Transit Gateway</strong></p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-endpoints">VPC Endpoints<a href="#vpc-endpoints" class="hash-link" aria-label="Link direto para VPC Endpoints" title="Link direto para VPC Endpoints">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="image-20230227060707205" src="/assets/images/image-20230227060707205-dde4da8744929588347ab690fce222a3.png" width="392" height="490" class="img_ev3q"></p>
@@ -274,11 +398,11 @@
 </ul>
 </li>
 </ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual a vantagem de usar VPC Endpoints?<br>
-<!-- -->✅ Tráfego <strong>não sai para a Internet</strong> — mais seguro e rápido</p><p>📌 Qual tipo de endpoint usar para S3/DynamoDB?<br>
-<!-- -->✅ <strong>Gateway Endpoint</strong></p><p>📌 Qual tipo usar para os demais serviços AWS?<br>
-<!-- -->✅ <strong>Interface Endpoint</strong></p><p>📌 VPC Endpoint substitui NAT Gateway?<br>
-<!-- -->✅ Em muitos casos sim — especialmente em subnets privadas que só acessam AWS APIs</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual a vantagem de usar VPC Endpoints?
+✅ Tráfego <strong>não sai para a Internet</strong> — mais seguro e rápido</p><p>📌 Qual tipo de endpoint usar para S3/DynamoDB?
+✅ <strong>Gateway Endpoint</strong></p><p>📌 Qual tipo usar para os demais serviços AWS?
+✅ <strong>Interface Endpoint</strong></p><p>📌 VPC Endpoint substitui NAT Gateway?
+✅ Em muitos casos sim — especialmente em subnets privadas que só acessam AWS APIs</p></div></div>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-privatelink---vpc-endpoint-services">AWS PrivateLink - VPC Endpoint Services<a href="#aws-privatelink---vpc-endpoint-services" class="hash-link" aria-label="Link direto para AWS PrivateLink - VPC Endpoint Services" title="Link direto para AWS PrivateLink - VPC Endpoint Services">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="AWS PrivateLink - VPC Endpoint Services" src="/assets/images/image-20210908203529744-0ea3e7e97eb11404d4692cc2dc946dce.png" width="1060" height="566" class="img_ev3q"></p>
@@ -308,98 +432,6 @@
 ✅ <strong>NLB (Network Load Balancer) ou Gateway Load Balancer</strong></p><p>📌 PrivateLink funciona cross-account?
 ✅ Sim, o consumer precisa ter permissão no endpoint service</p><p>📌 Qual a vantagem do PrivateLink sobre VPC Peering?
 ✅ <strong>Não expõe toda a rede, apenas o serviço específico</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-flow-logs">VPC Flow Logs<a href="#vpc-flow-logs" class="hash-link" aria-label="Link direto para VPC Flow Logs" title="Link direto para VPC Flow Logs">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="image-20230228061439898" src="/assets/images/image-20230228061439898-12e9b319ecf74b1c61ad0d1e3388b4e1.png" width="1161" height="515" class="img_ev3q"></p>
-<ul>
-<li>Permite capturar o tráfego <strong>IP dentro de uma VPC.</strong></li>
-<li>Esta em <strong>nivel de VPCs.</strong></li>
-<li>Tipos:<!-- -->
-<ul>
-<li><strong>VPC Flow Logs</strong> - se aplica a tudo dentro da VPC.</li>
-<li><strong>Subnet Flow Logs</strong> - se aplica as subnets dentro de uma VPC.</li>
-<li><strong>ENI Flow Log</strong> - Se aplica a uma interface de rede.</li>
-</ul>
-</li>
-<li>Podem ajudar a monitorar tráfegos de rede dentro da VPC, ajuda na <strong>troubleshooting</strong>.</li>
-<li>Pode se usar o <strong>Athena</strong> ou <strong>Cloud Watch Insights</strong> para identificar anomalias.</li>
-<li><strong>Destinos</strong>: CloudWatch Logs, S3 bucket, ou Kinesis Data Firehose.</li>
-<li><strong>O que NÃO é capturado</strong>:<!-- -->
-<ul>
-<li>Tráfego para Amazon DNS</li>
-<li>Tráfego DHCP</li>
-<li>Tráfego para o IP reservado do VPC router</li>
-<li>Tráfego de/para 169.254.169.254 (metadata)</li>
-<li>Tráfego de/para 169.254.169.123 (Amazon Time Sync)</li>
-<li>Tráfego de Windows license activation
-<img decoding="async" loading="lazy" alt="image-20230228061544920" src="/assets/images/image-20230228061544920-0b7a09bb9b12d9c264039122f51de5cc.png" width="1107" height="545" class="img_ev3q"></li>
-</ul>
-</li>
-<li>Arquiteturas com FPC Flow Logs
-<img decoding="async" loading="lazy" alt="image-20230228061742844" src="/assets/images/image-20230228061742844-aa6acbcfac8caaddfe91417ada53030c.png" width="1080" height="534" class="img_ev3q"></li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Onde posso ativar Flow Logs?<br>
-<!-- -->✅ VPC, Subnet ou ENI</p><p>📌 Como analisar os logs?<br>
-<!-- -->✅ <strong>Athena ou CloudWatch Insights</strong></p><p>📌 Qual objetivo principal dos Flow Logs?<br>
-<!-- -->✅ <strong>Troubleshooting de rede e auditoria</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bastion-hosts">Bastion Hosts<a href="#bastion-hosts" class="hash-link" aria-label="Link direto para Bastion Hosts" title="Link direto para Bastion Hosts">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="Bastion Hosts" src="/assets/images/image-20210908200020997-d1da8b42cb07577170b2707421f9ebdb.png" width="404" height="237" class="img_ev3q"></p>
-<ul>
-<li>Maquina numa rede publica da onde é possível conectar a instâncias em uma rede privada via SSH.</li>
-<li>Se conectar ao <strong>Bastion Hosts</strong> via SSH e a partir dele se conecta as instâncias na rede privada.</li>
-<li>Outra solução é a <strong>Session Manager</strong> que permite acesso na WEB sem necessidade de SSH.</li>
-</ul>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="virtual-private-gateway">Virtual Private Gateway<a href="#virtual-private-gateway" class="hash-link" aria-label="Link direto para Virtual Private Gateway" title="Link direto para Virtual Private Gateway">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="Virtual Private Gateway" src="/assets/images/image-20210908200507774-71f23b573275dbb2240604ea5451a202.png" width="735" height="199" class="img_ev3q"></p>
-<ul>
-<li>Permite ligar uma rede on-primise a AWS via VPN, para isso é necessario configurar um <strong>Virtual</strong> <strong>Customer Gateway</strong> do lado do on-primese e do lado da AWS cria se uma <strong>Virtual Private Gateway</strong>.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-site-to-site-vpn">Diagrama: Site-to-Site VPN<a href="#diagrama-site-to-site-vpn" class="hash-link" aria-label="Link direto para Diagrama: Site-to-Site VPN" title="Link direto para Diagrama: Site-to-Site VPN">​</a></h4>
-<!-- -->
-<blockquote>
-<p><strong>2 túneis IPSec</strong> são criados automaticamente para alta disponibilidade</p>
-</blockquote>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-direct-connect">AWS Direct Connect<a href="#aws-direct-connect" class="hash-link" aria-label="Link direto para AWS Direct Connect" title="Link direto para AWS Direct Connect">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="dx" src="/assets/images/image-20210908201934794-a2eceab2ccb0bda48a7098563472e0ad.png" width="1049" height="479" class="img_ev3q"></p>
-<ul>
-<li>C<strong>onexão dedicada, fibra</strong> que vai do seu <strong>datacenter</strong> até a AWS.</li>
-<li>Demora cerca de <strong>1 Mês</strong> para ser implementado toda a infraestrutura.</li>
-<li>Por padrão os dados em transito não são criptografados, pois já se esta numa rede privada, mas caso queira pode se usar <strong>um solução de IPSec com VPN.</strong></li>
-<li>O <strong>Direct Connect (DX)</strong> é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.</li>
-<li>Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um <strong>DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).</strong></li>
-<li>Caso se queira conectar mais de uma região deve se usar um <strong>Direct Conect Gateway</strong>
-<img decoding="async" loading="lazy" alt="DX-GW" src="/assets/images/image-20210908202014628-de7c07dbf45772fbb8937563e2396194.png" width="918" height="379" class="img_ev3q"></li>
-<li>Alta disponibilidade
-<img decoding="async" loading="lazy" alt="DX" src="/assets/images/image-20210908202426476-8618fe8a103733a4341574814bbc4f35.png" width="1036" height="555" class="img_ev3q"></li>
-<li>Direct Connect Gateway - Site Link
-<img decoding="async" loading="lazy" alt="image-20230228061217204" src="/assets/images/image-20230228061217204-675c5b0c1e6e51f8f82eae8652dbe081.png" width="1104" height="531" class="img_ev3q"></li>
-<li>Tipos de DX
-<img decoding="async" loading="lazy" alt="image-20230228060449937" src="/assets/images/image-20230228060449937-260ff7690bcdab019349f0e858c95aa4.png" width="1071" height="552" class="img_ev3q"></li>
-<li><strong>Dedicated Connection</strong>: Conexão física exclusiva (1 Gbps, 10 Gbps, 100 Gbps). Solicita via console AWS, instalada por parceiro.</li>
-<li><strong>Hosted Connection</strong>: Capacidade provisionada por parceiro AWS (50 Mbps até 10 Gbps). Mais rápido para provisionar, capacidade pode ser adicionada/removida on-demand.</li>
-<li><strong>Lead Time</strong>: Dedicated leva semanas/meses; Hosted pode ser mais rápido.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual a principal vantagem do Direct Connect?<br>
-<!-- -->✅ Conexão dedicada, <strong>baixa latência e alta largura de banda</strong></p><p>📌 O que é necessário para usar VPN com a AWS?<br>
-<!-- -->✅ <strong>Virtual Private Gateway (AWS)</strong> + <strong>Customer Gateway (on-premises)</strong></p><p>📌 Como garantir alta disponibilidade?<br>
-<!-- -->✅ <strong>Duas VPNs</strong> + roteamento dinâmico com BGP</p><p>📌 Como conectar várias regiões com Direct Connect?<br>
-<!-- -->✅ <strong>DX Gateway</strong></p></div></div>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="virtual-interface-vif">Virtual Interface VIF<a href="#virtual-interface-vif" class="hash-link" aria-label="Link direto para Virtual Interface VIF" title="Link direto para Virtual Interface VIF">​</a></h4>
-<ul>
-<li><strong>Public VIF</strong> - Permite conectar serviços publicos da AWS (S3, EC2).</li>
-<li><strong>Private VIF</strong> - Permite conectar aos recursos na sua VPC (EC2, ALB).</li>
-<li><strong>Transit Virtual Interface</strong> - Conecta aos recursos usando um TGW (Transit Gateway).</li>
-<li>Endpoints privados não precisam de interfaces (Private VIF) para conexão, pois podem ser acessados diretamente.</li>
-</ul>
-<!-- -->
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="egress-only-internet-gateway">Egress Only Internet Gateway<a href="#egress-only-internet-gateway" class="hash-link" aria-label="Link direto para Egress Only Internet Gateway" title="Link direto para Egress Only Internet Gateway">​</a></h3>
-<ul>
-<li>Um <strong>gateway</strong> da Internet somente de saída é um componente da VPC horizontalmente escalado, redundante e altamente disponível que permite a comunicação de saída pela <strong>IPv6</strong> das instâncias na VPC para a Internet e impede a Internet de iniciar uma conexão <strong>IPv6</strong> com suas instâncias.</li>
-</ul>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="transit-gateway">Transit Gateway<a href="#transit-gateway" class="hash-link" aria-label="Link direto para Transit Gateway" title="Link direto para Transit Gateway">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="AWS — Transit Gateway" src="/assets/images/1ghrEMYcgoEfzawAHq54v_A-e5ceb7471344aec8b6aa27d5836ce9fd.png" width="1326" height="1108" class="img_ev3q"></p>
@@ -448,16 +480,50 @@
 </ul>
 </li>
 </ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Transit Gateway é transitive?<br>
-<!-- -->✅ Sim!</p><p>📌 É possível compartilhar TGW com outras contas?<br>
-<!-- -->✅ Sim, via AWS RAM</p><p>📌 Quantas VPCs posso conectar a um TGW?<br>
-<!-- -->✅ Milhares</p></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Transit Gateway é transitive?
+✅ Sim!</p><p>📌 É possível compartilhar TGW com outras contas?
+✅ Sim, via AWS RAM</p><p>📌 Quantas VPCs posso conectar a um TGW?
+✅ Milhares</p></div></div>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="custo-de-rede">Custo de rede<a href="#custo-de-rede" class="hash-link" aria-label="Link direto para Custo de rede" title="Link direto para Custo de rede">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="net-cost" src="/assets/images/image-20210908205716392-65043ec1a8d02dbc7627cba6d8a90263.png" width="1088" height="539" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="image-20210908210015556" src="/assets/images/image-20210908210015556-905602ed3e224e35dad97c08193539b8.png" width="1096" height="551" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="image-20210908210158231" src="/assets/images/image-20210908210158231-4effc5a0d894cab19d1b993693290d54.png" width="1096" height="554" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="image-20210908210357597" src="/assets/images/image-20210908210357597-979e93179350c7fab1606993630bde5d.png" width="1114" height="584" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-sharing-aws-ram">VPC Sharing (AWS RAM)<a href="#vpc-sharing-aws-ram" class="hash-link" aria-label="Link direto para VPC Sharing (AWS RAM)" title="Link direto para VPC Sharing (AWS RAM)">​</a></h3>
+<ul>
+<li>Permite <strong>compartilhar subnets</strong> de uma VPC com outras contas AWS na mesma organização.</li>
+<li>A conta <strong>owner</strong> gerencia a VPC, subnets, route tables, gateways e NACLs.</li>
+<li>Contas <strong>participantes</strong> podem criar recursos nas subnets compartilhadas (EC2, RDS, Lambda, etc).</li>
+<li>Cada conta gerencia seus próprios recursos e <strong>Security Groups</strong>.</li>
+<li><strong>Benefícios</strong>: Reduz número de VPCs, centraliza gerenciamento, reduz custos com VPC Peering.</li>
+<li><strong>Limitação</strong>: Não é possível compartilhar a VPC default.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual serviço permite compartilhar subnets entre contas?
+✅ <strong>AWS RAM (Resource Access Manager)</strong></p><p>📌 Quem gerencia os Security Groups em VPC compartilhada?
+✅ <strong>Cada conta participante gerencia seus próprios SGs</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gateway-load-balancer-gwlb">Gateway Load Balancer (GWLB)<a href="#gateway-load-balancer-gwlb" class="hash-link" aria-label="Link direto para Gateway Load Balancer (GWLB)" title="Link direto para Gateway Load Balancer (GWLB)">​</a></h3>
+<ul>
+<li>Usado para <strong>deploy de appliances virtuais de terceiros</strong> (firewalls, IDS/IPS, deep packet inspection).</li>
+<li>Opera na <strong>camada 3</strong> (Network Layer) - usa protocolo <strong>GENEVE na porta 6081</strong>.</li>
+<li>Combina <strong>Transparent Network Gateway + Load Balancer</strong>.</li>
+<li>Permite <strong>inspeção de tráfego</strong> antes de chegar ao destino.</li>
+<li>Integra com <strong>Transit Gateway</strong> e <strong>VPC Endpoints (GWLBe)</strong>.</li>
+<li><strong>Caso de uso comum</strong>: Todo tráfego passa pelo GWLB → appliances de segurança → destino.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-gateway-load-balancer---inspeção-de-tráfego">Diagrama: Gateway Load Balancer - Inspeção de Tráfego<a href="#diagrama-gateway-load-balancer---inspeção-de-tráfego" class="hash-link" aria-label="Link direto para Diagrama: Gateway Load Balancer - Inspeção de Tráfego" title="Link direto para Diagrama: Gateway Load Balancer - Inspeção de Tráfego">​</a></h4>
+<!-- -->
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual LB usar para appliances de segurança de terceiros?
+✅ <strong>Gateway Load Balancer</strong></p><p>📌 Em qual camada o GWLB opera?
+✅ <strong>Camada 3 (Network Layer)</strong></p><p>📌 Qual protocolo o GWLB usa?
+✅ <strong>GENEVE na porta 6081</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="virtual-private-gateway">Virtual Private Gateway<a href="#virtual-private-gateway" class="hash-link" aria-label="Link direto para Virtual Private Gateway" title="Link direto para Virtual Private Gateway">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Virtual Private Gateway" src="/assets/images/image-20210908200507774-71f23b573275dbb2240604ea5451a202.png" width="735" height="199" class="img_ev3q"></p>
+<ul>
+<li>Permite ligar uma rede on-primise a AWS via VPN, para isso é necessario configurar um <strong>Virtual</strong> <strong>Customer Gateway</strong> do lado do on-primese e do lado da AWS cria se uma <strong>Virtual Private Gateway</strong>.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-site-to-site-vpn">Diagrama: Site-to-Site VPN<a href="#diagrama-site-to-site-vpn" class="hash-link" aria-label="Link direto para Diagrama: Site-to-Site VPN" title="Link direto para Diagrama: Site-to-Site VPN">​</a></h4>
+<!-- -->
+<blockquote>
+<p><strong>2 túneis IPSec</strong> são criados automaticamente para alta disponibilidade</p>
+</blockquote>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-vpn">AWS VPN<a href="#aws-vpn" class="hash-link" aria-label="Link direto para AWS VPN" title="Link direto para AWS VPN">​</a></h3>
 <ul>
@@ -514,140 +580,6 @@
 <img decoding="async" loading="lazy" alt="image-20230228054727767" src="/assets/images/image-20230228054727767-60d9f376c7073a3c982ba0a44837b70b.png" width="1071" height="455" class="img_ev3q"></li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-network-firewall">AWS Network Firewall<a href="#aws-network-firewall" class="hash-link" aria-label="Link direto para AWS Network Firewall" title="Link direto para AWS Network Firewall">​</a></h3>
-<ul>
-<li>Protege a VPC inteira
-<img decoding="async" loading="lazy" alt="image-20230228062209390" src="/assets/images/image-20230228062209390-873e77a00df2ad28d6d4a593d2bcdf78.png" width="1136" height="607" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="image-20230228062313794" src="/assets/images/image-20230228062313794-b8a1987c94225d51a95fba74c4f0f634.png" width="1091" height="577" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="image-20230228062545252" src="/assets/images/image-20230228062545252-fa2baca54be6331703a100c7945b6f3b.png" width="1133" height="615" class="img_ev3q"></li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 O que o AWS Network Firewall protege?<br>
-<!-- -->✅ Toda a <strong>VPC</strong>, com inspeção de tráfego <strong>camada 7</strong></p><p>📌 Quais recursos são típicos de um firewall gerenciado?<br>
-<!-- -->✅ <strong>Regras de domínio, filtragem de IP, logs detalhados</strong></p><p>📌 Network Firewall substitui SG e NACL?<br>
-<!-- -->✅ ❌ Não. Ele <strong>complementa</strong> a proteção</p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-sharing-aws-ram">VPC Sharing (AWS RAM)<a href="#vpc-sharing-aws-ram" class="hash-link" aria-label="Link direto para VPC Sharing (AWS RAM)" title="Link direto para VPC Sharing (AWS RAM)">​</a></h3>
-<ul>
-<li>Permite <strong>compartilhar subnets</strong> de uma VPC com outras contas AWS na mesma organização.</li>
-<li>A conta <strong>owner</strong> gerencia a VPC, subnets, route tables, gateways e NACLs.</li>
-<li>Contas <strong>participantes</strong> podem criar recursos nas subnets compartilhadas (EC2, RDS, Lambda, etc).</li>
-<li>Cada conta gerencia seus próprios recursos e <strong>Security Groups</strong>.</li>
-<li><strong>Benefícios</strong>: Reduz número de VPCs, centraliza gerenciamento, reduz custos com VPC Peering.</li>
-<li><strong>Limitação</strong>: Não é possível compartilhar a VPC default.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual serviço permite compartilhar subnets entre contas?
-✅ <strong>AWS RAM (Resource Access Manager)</strong></p><p>📌 Quem gerencia os Security Groups em VPC compartilhada?
-✅ <strong>Cada conta participante gerencia seus próprios SGs</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="traffic-mirroring">Traffic Mirroring<a href="#traffic-mirroring" class="hash-link" aria-label="Link direto para Traffic Mirroring" title="Link direto para Traffic Mirroring">​</a></h3>
-<ul>
-<li>Permite <strong>capturar e inspecionar tráfego de rede</strong> de ENIs em sua VPC.</li>
-<li>Copia o tráfego para appliances de segurança ou ferramentas de monitoramento.</li>
-<li><strong>Componentes</strong>:<!-- -->
-<ul>
-<li><strong>Source</strong>: ENI de origem do tráfego</li>
-<li><strong>Target</strong>: ENI de destino, NLB, ou Gateway Load Balancer</li>
-<li><strong>Filter</strong>: Define qual tráfego capturar (inbound, outbound, protocolo, portas)</li>
-</ul>
-</li>
-<li>Ideal para <strong>análise de conteúdo, threat monitoring, troubleshooting</strong>.</li>
-<li>O tráfego espelhado é encapsulado em <strong>VXLAN</strong>.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Para que serve Traffic Mirroring?
-✅ <strong>Capturar tráfego de rede para inspeção/análise de segurança</strong></p><p>📌 Qual o destino possível do tráfego espelhado?
-✅ <strong>ENI, NLB ou Gateway Load Balancer</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gateway-load-balancer-gwlb">Gateway Load Balancer (GWLB)<a href="#gateway-load-balancer-gwlb" class="hash-link" aria-label="Link direto para Gateway Load Balancer (GWLB)" title="Link direto para Gateway Load Balancer (GWLB)">​</a></h3>
-<ul>
-<li>Usado para <strong>deploy de appliances virtuais de terceiros</strong> (firewalls, IDS/IPS, deep packet inspection).</li>
-<li>Opera na <strong>camada 3</strong> (Network Layer) - usa protocolo <strong>GENEVE na porta 6081</strong>.</li>
-<li>Combina <strong>Transparent Network Gateway + Load Balancer</strong>.</li>
-<li>Permite <strong>inspeção de tráfego</strong> antes de chegar ao destino.</li>
-<li>Integra com <strong>Transit Gateway</strong> e <strong>VPC Endpoints (GWLBe)</strong>.</li>
-<li><strong>Caso de uso comum</strong>: Todo tráfego passa pelo GWLB → appliances de segurança → destino.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-gateway-load-balancer---inspeção-de-tráfego">Diagrama: Gateway Load Balancer - Inspeção de Tráfego<a href="#diagrama-gateway-load-balancer---inspeção-de-tráfego" class="hash-link" aria-label="Link direto para Diagrama: Gateway Load Balancer - Inspeção de Tráfego" title="Link direto para Diagrama: Gateway Load Balancer - Inspeção de Tráfego">​</a></h4>
-<!-- -->
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual LB usar para appliances de segurança de terceiros?
-✅ <strong>Gateway Load Balancer</strong></p><p>📌 Em qual camada o GWLB opera?
-✅ <strong>Camada 3 (Network Layer)</strong></p><p>📌 Qual protocolo o GWLB usa?
-✅ <strong>GENEVE na porta 6081</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vpc-reachability-analyzer">VPC Reachability Analyzer<a href="#vpc-reachability-analyzer" class="hash-link" aria-label="Link direto para VPC Reachability Analyzer" title="Link direto para VPC Reachability Analyzer">​</a></h3>
-<ul>
-<li>Ferramenta de <strong>troubleshooting de conectividade</strong> que analisa configurações de rede.</li>
-<li><strong>Não envia pacotes reais</strong> - analisa configurações (Route Tables, NACLs, SGs).</li>
-<li>Identifica o componente que está bloqueando a conectividade.</li>
-<li>Mostra o <strong>caminho completo</strong> entre origem e destino (hop-by-hop).</li>
-<li>Útil para validar se configurações estão corretas antes de deployar.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Ferramenta para troubleshooting que não envia pacotes reais?
-✅ <strong>VPC Reachability Analyzer</strong></p><p>📌 O que o Reachability Analyzer analisa?
-✅ <strong>Route Tables, NACLs, Security Groups, VPC Peering configs</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="network-access-analyzer">Network Access Analyzer<a href="#network-access-analyzer" class="hash-link" aria-label="Link direto para Network Access Analyzer" title="Link direto para Network Access Analyzer">​</a></h3>
-<ul>
-<li>Identifica <strong>acessos de rede não intencionais</strong> aos recursos.</li>
-<li>Analisa regras de SGs, NACLs, Route Tables e VPC configs.</li>
-<li>Ajuda a verificar se a rede está em <strong>compliance</strong> com requisitos de segurança.</li>
-<li>Detecta recursos que podem ser acessados da internet ou de fora da VPC.</li>
-<li>Diferente do Reachability Analyzer: foco em <strong>segurança/compliance</strong>, não troubleshooting.</li>
-</ul>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="route-53-resolver">Route 53 Resolver<a href="#route-53-resolver" class="hash-link" aria-label="Link direto para Route 53 Resolver" title="Link direto para Route 53 Resolver">​</a></h3>
-<ul>
-<li><strong>Resolver Endpoints</strong> permitem resolução DNS híbrida entre on-premises e AWS.</li>
-<li><strong>Inbound Endpoint</strong>: Permite on-premises resolver nomes de recursos AWS (DNS queries entram na VPC).</li>
-<li><strong>Outbound Endpoint</strong>: Permite VPC resolver nomes on-premises (DNS queries saem da VPC).</li>
-<li><strong>Resolver Rules</strong>: Define para quais domínios encaminhar queries.</li>
-<li>Usa ENIs em subnets da VPC.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-dns-híbrido-com-route-53-resolver">Diagrama: DNS Híbrido com Route 53 Resolver<a href="#diagrama-dns-híbrido-com-route-53-resolver" class="hash-link" aria-label="Link direto para Diagrama: DNS Híbrido com Route 53 Resolver" title="Link direto para Diagrama: DNS Híbrido com Route 53 Resolver">​</a></h4>
-<!-- -->
-<table><thead><tr><th>Endpoint</th><th>Direção</th><th>Uso</th></tr></thead><tbody><tr><td><strong>Inbound</strong></td><td>On-prem → AWS</td><td>Resolver nomes AWS do on-premises</td></tr><tr><td><strong>Outbound</strong></td><td>AWS → On-prem</td><td>Resolver nomes on-premises da AWS</td></tr></tbody></table>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como resolver DNS do on-premises para a AWS?
-✅ <strong>Route 53 Resolver Inbound Endpoint</strong></p><p>📌 Como resolver DNS da AWS para on-premises?
-✅ <strong>Route 53 Resolver Outbound Endpoint</strong></p><p>📌 Quantas ENIs um Resolver Endpoint usa por AZ?
-✅ <strong>1 ENI por AZ (mínimo 2 AZs recomendado)</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="managed-prefix-lists">Managed Prefix Lists<a href="#managed-prefix-lists" class="hash-link" aria-label="Link direto para Managed Prefix Lists" title="Link direto para Managed Prefix Lists">​</a></h3>
-<ul>
-<li>Lista de <strong>blocos CIDR</strong> que pode ser referenciada em <strong>Route Tables e Security Groups</strong>.</li>
-<li><strong>Customer-managed</strong>: Criados por você, editáveis.</li>
-<li><strong>AWS-managed</strong>: Mantidos pela AWS (ex: S3 prefix list, CloudFront prefix list).</li>
-<li>Simplifica gerenciamento quando múltiplos recursos precisam referenciar os mesmos CIDRs.</li>
-<li>Podem ser <strong>compartilhados via RAM</strong> com outras contas.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como referenciar múltiplos CIDRs em um Security Group facilmente?
-✅ <strong>Managed Prefix Lists</strong></p><p>📌 Prefix Lists funcionam com quais recursos?
-✅ <strong>Security Groups e Route Tables</strong></p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ipv6-na-vpc">IPv6 na VPC<a href="#ipv6-na-vpc" class="hash-link" aria-label="Link direto para IPv6 na VPC" title="Link direto para IPv6 na VPC">​</a></h3>
-<ul>
-<li>VPCs suportam <strong>dual-stack</strong> (IPv4 + IPv6).</li>
-<li>IPv6 CIDRs são <strong>públicos</strong> (não há IPv6 privado na AWS).</li>
-<li>Tamanho fixo de <strong>/56</strong> para VPC e <strong>/64</strong> para subnets.</li>
-<li><strong>Egress-Only Internet Gateway</strong>: Permite saída IPv6 sem permitir entrada (equivalente ao NAT para IPv6).</li>
-<li>Instâncias podem ter <strong>apenas IPv6</strong> (sem IPv4) se configurado.</li>
-<li><strong>BYOIP (Bring Your Own IP)</strong>: Possível trazer seus próprios blocos IPv4 ou IPv6.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Existe NAT para IPv6?
-✅ ❌ Não. Use <strong>Egress-Only Internet Gateway</strong></p><p>📌 Qual o tamanho do CIDR IPv6 para subnet?
-✅ <strong>/64</strong> (fixo)</p><p>📌 IPv6 na AWS é público ou privado?
-✅ <strong>Público</strong> (não existe IPv6 privado na AWS)</p></div></div>
-<hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="direct-connect---modelos-de-resiliência">Direct Connect - Modelos de Resiliência<a href="#direct-connect---modelos-de-resiliência" class="hash-link" aria-label="Link direto para Direct Connect - Modelos de Resiliência" title="Link direto para Direct Connect - Modelos de Resiliência">​</a></h3>
-<ul>
-<li><strong>Maximum Resiliency</strong>: Conexões separadas terminando em dispositivos separados em mais de um local.</li>
-<li><strong>High Resiliency</strong>: Múltiplas conexões terminando em mais de um local.</li>
-<li><strong>Development and Test</strong>: Conexão única (sem redundância).</li>
-<li>Para <strong>SLA de 99.99%</strong>, AWS recomenda <strong>Maximum Resiliency</strong>.</li>
-<li><strong>Backup com VPN</strong>: Usar Site-to-Site VPN como failover para DX.</li>
-</ul>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual modelo de DX para máxima disponibilidade?
-✅ <strong>Maximum Resiliency</strong> (múltiplas conexões em múltiplos locais)</p><p>📌 Como fazer backup do Direct Connect?
-✅ <strong>Site-to-Site VPN como failover</strong></p></div></div>
-<hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="site-to-site-vpn-com-accelerated-vpn">Site-to-Site VPN com Accelerated VPN<a href="#site-to-site-vpn-com-accelerated-vpn" class="hash-link" aria-label="Link direto para Site-to-Site VPN com Accelerated VPN" title="Link direto para Site-to-Site VPN com Accelerated VPN">​</a></h3>
 <ul>
 <li>Usa <strong>AWS Global Accelerator</strong> para rotear tráfego VPN pela rede global da AWS.</li>
@@ -669,6 +601,68 @@
 ✅ <strong>ECMP com múltiplas conexões VPN</strong></p><p>📌 Quantos túneis uma Site-to-Site VPN tem?
 ✅ <strong>2 túneis</strong> (para alta disponibilidade)</p></div></div>
 <hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-direct-connect">AWS Direct Connect<a href="#aws-direct-connect" class="hash-link" aria-label="Link direto para AWS Direct Connect" title="Link direto para AWS Direct Connect">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="dx" src="/assets/images/image-20210908201934794-a2eceab2ccb0bda48a7098563472e0ad.png" width="1049" height="479" class="img_ev3q"></p>
+<ul>
+<li>C<strong>onexão dedicada, fibra</strong> que vai do seu <strong>datacenter</strong> até a AWS.</li>
+<li>Demora cerca de <strong>1 Mês</strong> para ser implementado toda a infraestrutura.</li>
+<li>Por padrão os dados em transito não são criptografados, pois já se esta numa rede privada, mas caso queira pode se usar <strong>um solução de IPSec com VPN.</strong></li>
+<li>O <strong>Direct Connect (DX)</strong> é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.</li>
+<li>Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um <strong>DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).</strong></li>
+<li>Caso se queira conectar mais de uma região deve se usar um <strong>Direct Conect Gateway</strong>
+<img decoding="async" loading="lazy" alt="DX-GW" src="/assets/images/image-20210908202014628-de7c07dbf45772fbb8937563e2396194.png" width="918" height="379" class="img_ev3q"></li>
+<li>Alta disponibilidade
+<img decoding="async" loading="lazy" alt="DX" src="/assets/images/image-20210908202426476-8618fe8a103733a4341574814bbc4f35.png" width="1036" height="555" class="img_ev3q"></li>
+<li>Direct Connect Gateway - Site Link
+<img decoding="async" loading="lazy" alt="image-20230228061217204" src="/assets/images/image-20230228061217204-675c5b0c1e6e51f8f82eae8652dbe081.png" width="1104" height="531" class="img_ev3q"></li>
+<li>Tipos de DX
+<img decoding="async" loading="lazy" alt="image-20230228060449937" src="/assets/images/image-20230228060449937-260ff7690bcdab019349f0e858c95aa4.png" width="1071" height="552" class="img_ev3q"></li>
+<li><strong>Dedicated Connection</strong>: Conexão física exclusiva (1 Gbps, 10 Gbps, 100 Gbps). Solicita via console AWS, instalada por parceiro.</li>
+<li><strong>Hosted Connection</strong>: Capacidade provisionada por parceiro AWS (50 Mbps até 10 Gbps). Mais rápido para provisionar, capacidade pode ser adicionada/removida on-demand.</li>
+<li><strong>Lead Time</strong>: Dedicated leva semanas/meses; Hosted pode ser mais rápido.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual a principal vantagem do Direct Connect?
+✅ Conexão dedicada, <strong>baixa latência e alta largura de banda</strong></p><p>📌 O que é necessário para usar VPN com a AWS?
+✅ <strong>Virtual Private Gateway (AWS)</strong> + <strong>Customer Gateway (on-premises)</strong></p><p>📌 Como garantir alta disponibilidade?
+✅ <strong>Duas VPNs</strong> + roteamento dinâmico com BGP</p><p>📌 Como conectar várias regiões com Direct Connect?
+✅ <strong>DX Gateway</strong></p></div></div>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="virtual-interface-vif">Virtual Interface VIF<a href="#virtual-interface-vif" class="hash-link" aria-label="Link direto para Virtual Interface VIF" title="Link direto para Virtual Interface VIF">​</a></h4>
+<ul>
+<li><strong>Public VIF</strong> - Permite conectar serviços publicos da AWS (S3, EC2).</li>
+<li><strong>Private VIF</strong> - Permite conectar aos recursos na sua VPC (EC2, ALB).</li>
+<li><strong>Transit Virtual Interface</strong> - Conecta aos recursos usando um TGW (Transit Gateway).</li>
+<li>Endpoints privados não precisam de interfaces (Private VIF) para conexão, pois podem ser acessados diretamente.</li>
+</ul>
+<!-- -->
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="direct-connect---modelos-de-resiliência">Direct Connect - Modelos de Resiliência<a href="#direct-connect---modelos-de-resiliência" class="hash-link" aria-label="Link direto para Direct Connect - Modelos de Resiliência" title="Link direto para Direct Connect - Modelos de Resiliência">​</a></h3>
+<ul>
+<li><strong>Maximum Resiliency</strong>: Conexões separadas terminando em dispositivos separados em mais de um local.</li>
+<li><strong>High Resiliency</strong>: Múltiplas conexões terminando em mais de um local.</li>
+<li><strong>Development and Test</strong>: Conexão única (sem redundância).</li>
+<li>Para <strong>SLA de 99.99%</strong>, AWS recomenda <strong>Maximum Resiliency</strong>.</li>
+<li><strong>Backup com VPN</strong>: Usar Site-to-Site VPN como failover para DX.</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Qual modelo de DX para máxima disponibilidade?
+✅ <strong>Maximum Resiliency</strong> (múltiplas conexões em múltiplos locais)</p><p>📌 Como fazer backup do Direct Connect?
+✅ <strong>Site-to-Site VPN como failover</strong></p></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="route-53-resolver">Route 53 Resolver<a href="#route-53-resolver" class="hash-link" aria-label="Link direto para Route 53 Resolver" title="Link direto para Route 53 Resolver">​</a></h3>
+<ul>
+<li><strong>Resolver Endpoints</strong> permitem resolução DNS híbrida entre on-premises e AWS.</li>
+<li><strong>Inbound Endpoint</strong>: Permite on-premises resolver nomes de recursos AWS (DNS queries entram na VPC).</li>
+<li><strong>Outbound Endpoint</strong>: Permite VPC resolver nomes on-premises (DNS queries saem da VPC).</li>
+<li><strong>Resolver Rules</strong>: Define para quais domínios encaminhar queries.</li>
+<li>Usa ENIs em subnets da VPC.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="diagrama-dns-híbrido-com-route-53-resolver">Diagrama: DNS Híbrido com Route 53 Resolver<a href="#diagrama-dns-híbrido-com-route-53-resolver" class="hash-link" aria-label="Link direto para Diagrama: DNS Híbrido com Route 53 Resolver" title="Link direto para Diagrama: DNS Híbrido com Route 53 Resolver">​</a></h4>
+<!-- -->
+<table><thead><tr><th>Endpoint</th><th>Direção</th><th>Uso</th></tr></thead><tbody><tr><td><strong>Inbound</strong></td><td>On-prem → AWS</td><td>Resolver nomes AWS do on-premises</td></tr><tr><td><strong>Outbound</strong></td><td>AWS → On-prem</td><td>Resolver nomes on-premises da AWS</td></tr></tbody></table>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Dica para a prova</div><div class="admonitionContent_BuS1"><p>📌 Como resolver DNS do on-premises para a AWS?
+✅ <strong>Route 53 Resolver Inbound Endpoint</strong></p><p>📌 Como resolver DNS da AWS para on-premises?
+✅ <strong>Route 53 Resolver Outbound Endpoint</strong></p><p>📌 Quantas ENIs um Resolver Endpoint usa por AZ?
+✅ <strong>1 ENI por AZ (mínimo 2 AZs recomendado)</strong></p></div></div>
+<hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="aws-cloud-wan">AWS Cloud WAN<a href="#aws-cloud-wan" class="hash-link" aria-label="Link direto para AWS Cloud WAN" title="Link direto para AWS Cloud WAN">​</a></h3>
 <ul>
 <li>Serviço para criar, gerenciar e monitorar <strong>redes globais unificadas</strong>.</li>
@@ -677,6 +671,12 @@
 <li>Suporta <strong>segmentação</strong> de rede para isolamento de tráfego.</li>
 <li>Alternativa gerenciada ao Transit Gateway para redes globais complexas.</li>
 </ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="custo-de-rede">Custo de rede<a href="#custo-de-rede" class="hash-link" aria-label="Link direto para Custo de rede" title="Link direto para Custo de rede">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="net-cost" src="/assets/images/image-20210908205716392-65043ec1a8d02dbc7627cba6d8a90263.png" width="1088" height="539" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20210908210015556" src="/assets/images/image-20210908210015556-905602ed3e224e35dad97c08193539b8.png" width="1096" height="551" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20210908210158231" src="/assets/images/image-20210908210158231-4effc5a0d894cab19d1b993693290d54.png" width="1096" height="554" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image-20210908210357597" src="/assets/images/image-20210908210357597-979e93179350c7fab1606993630bde5d.png" width="1114" height="584" class="img_ev3q"></p>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="comparativo-de-conectividade-híbrida">Comparativo de Conectividade Híbrida<a href="#comparativo-de-conectividade-híbrida" class="hash-link" aria-label="Link direto para Comparativo de Conectividade Híbrida" title="Link direto para Comparativo de Conectividade Híbrida">​</a></h3>
 <table><thead><tr><th>Serviço</th><th>Latência</th><th>Throughput</th><th>Custo</th><th>Tempo Setup</th></tr></thead><tbody><tr><td>Site-to-Site VPN</td><td>Variável</td><td>Até 1.25 Gbps</td><td>Baixo</td><td>Minutos</td></tr><tr><td>Direct Connect</td><td>Baixa e consistente</td><td>1-100 Gbps</td><td>Alto</td><td>Semanas/Mês</td></tr><tr><td>VPN over DX</td><td>Baixa</td><td>Até 1.25 Gbps</td><td>Médio</td><td>Semanas/Mês</td></tr><tr><td>Transit Gateway</td><td>Variável</td><td>50 Gbps por attachment</td><td>Médio</td><td>Minutos</td></tr></tbody></table>
@@ -691,7 +691,7 @@
 📌 <strong>Troubleshooting de conectividade</strong> → Reachability Analyzer
 📌 <strong>DNS híbrido</strong> → Route 53 Resolver Endpoints</p></div></div>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="links-e-recursos-adicionais-">Links e recursos adicionais 🔗<a href="#links-e-recursos-adicionais-" class="hash-link" aria-label="Link direto para Links e recursos adicionais 🔗" title="Link direto para Links e recursos adicionais 🔗">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="links-e-recursos-adicionais">Links e recursos adicionais<a href="#links-e-recursos-adicionais" class="hash-link" aria-label="Link direto para Links e recursos adicionais" title="Link direto para Links e recursos adicionais">​</a></h2>
 <ul>
 <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" target="_blank" rel="noopener noreferrer">Documentação oficial AWS VPC</a></li>
 <li><a href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html" target="_blank" rel="noopener noreferrer">VPC Peering</a></li>
@@ -699,6 +699,6 @@
 <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html" target="_blank" rel="noopener noreferrer">VPC Endpoints</a></li>
 <li><a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/what-is-aws-network-firewall.html" target="_blank" rel="noopener noreferrer">AWS Network Firewall</a></li>
 <li><a href="https://aws.amazon.com/certification/certified-solutions-architect-professional/" target="_blank" rel="noopener noreferrer">Guia de estudo para certificação AWS</a></li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/13_vpc.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/migration"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Migração para a AWS</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/machine_learning"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Machine Learning</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-vpc" class="table-of-contents__link toc-highlight">AWS VPC</a><ul><li><a href="#cidr" class="table-of-contents__link toc-highlight">CIDR</a></li><li><a href="#subnets" class="table-of-contents__link toc-highlight">Subnets</a></li><li><a href="#internet-gateway" class="table-of-contents__link toc-highlight">Internet Gateway</a></li><li><a href="#route-table" class="table-of-contents__link toc-highlight">Route table</a></li><li><a href="#nat-gateway" class="table-of-contents__link toc-highlight">NAT Gateway</a></li><li><a href="#security-group" class="table-of-contents__link toc-highlight">Security Group</a></li><li><a href="#nacl" class="table-of-contents__link toc-highlight">NACL</a></li><li><a href="#vpc-peering" class="table-of-contents__link toc-highlight">VPC Peering</a></li><li><a href="#vpc-endpoints" class="table-of-contents__link toc-highlight">VPC Endpoints</a></li><li><a href="#aws-privatelink---vpc-endpoint-services" class="table-of-contents__link toc-highlight">AWS PrivateLink - VPC Endpoint Services</a></li><li><a href="#vpc-flow-logs" class="table-of-contents__link toc-highlight">VPC Flow Logs</a></li><li><a href="#bastion-hosts" class="table-of-contents__link toc-highlight">Bastion Hosts</a></li><li><a href="#virtual-private-gateway" class="table-of-contents__link toc-highlight">Virtual Private Gateway</a></li><li><a href="#aws-direct-connect" class="table-of-contents__link toc-highlight">AWS Direct Connect</a></li><li><a href="#egress-only-internet-gateway" class="table-of-contents__link toc-highlight">Egress Only Internet Gateway</a></li><li><a href="#transit-gateway" class="table-of-contents__link toc-highlight">Transit Gateway</a></li><li><a href="#custo-de-rede" class="table-of-contents__link toc-highlight">Custo de rede</a></li><li><a href="#aws-vpn" class="table-of-contents__link toc-highlight">AWS VPN</a></li><li><a href="#aws-network-firewall" class="table-of-contents__link toc-highlight">AWS Network Firewall</a></li><li><a href="#vpc-sharing-aws-ram" class="table-of-contents__link toc-highlight">VPC Sharing (AWS RAM)</a></li><li><a href="#traffic-mirroring" class="table-of-contents__link toc-highlight">Traffic Mirroring</a></li><li><a href="#gateway-load-balancer-gwlb" class="table-of-contents__link toc-highlight">Gateway Load Balancer (GWLB)</a></li><li><a href="#vpc-reachability-analyzer" class="table-of-contents__link toc-highlight">VPC Reachability Analyzer</a></li><li><a href="#network-access-analyzer" class="table-of-contents__link toc-highlight">Network Access Analyzer</a></li><li><a href="#route-53-resolver" class="table-of-contents__link toc-highlight">Route 53 Resolver</a></li><li><a href="#managed-prefix-lists" class="table-of-contents__link toc-highlight">Managed Prefix Lists</a></li><li><a href="#ipv6-na-vpc" class="table-of-contents__link toc-highlight">IPv6 na VPC</a></li><li><a href="#direct-connect---modelos-de-resiliência" class="table-of-contents__link toc-highlight">Direct Connect - Modelos de Resiliência</a></li><li><a href="#site-to-site-vpn-com-accelerated-vpn" class="table-of-contents__link toc-highlight">Site-to-Site VPN com Accelerated VPN</a></li><li><a href="#ecmp-equal-cost-multi-path" class="table-of-contents__link toc-highlight">ECMP (Equal-Cost Multi-Path)</a></li><li><a href="#aws-cloud-wan" class="table-of-contents__link toc-highlight">AWS Cloud WAN</a></li><li><a href="#comparativo-de-conectividade-híbrida" class="table-of-contents__link toc-highlight">Comparativo de Conectividade Híbrida</a></li></ul></li><li><a href="#links-e-recursos-adicionais-" class="table-of-contents__link toc-highlight">Links e recursos adicionais 🔗</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Uniii .</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cloud-notes/01-aws/03-aws-cloud-architect-professional/13_vpc.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/migration"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Migração para a AWS</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud-notes/aws/aws-cloud-architect-professional/machine_learning"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Machine Learning</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#aws-vpc" class="table-of-contents__link toc-highlight">AWS VPC</a><ul><li><a href="#cidr" class="table-of-contents__link toc-highlight">CIDR</a></li><li><a href="#subnets" class="table-of-contents__link toc-highlight">Subnets</a></li><li><a href="#ipv6-na-vpc" class="table-of-contents__link toc-highlight">IPv6 na VPC</a></li><li><a href="#internet-gateway" class="table-of-contents__link toc-highlight">Internet Gateway</a></li><li><a href="#egress-only-internet-gateway" class="table-of-contents__link toc-highlight">Egress Only Internet Gateway</a></li><li><a href="#route-table" class="table-of-contents__link toc-highlight">Route table</a></li><li><a href="#nat-gateway" class="table-of-contents__link toc-highlight">NAT Gateway</a></li><li><a href="#managed-prefix-lists" class="table-of-contents__link toc-highlight">Managed Prefix Lists</a></li><li><a href="#security-group" class="table-of-contents__link toc-highlight">Security Group</a></li><li><a href="#nacl" class="table-of-contents__link toc-highlight">NACL</a></li><li><a href="#aws-network-firewall" class="table-of-contents__link toc-highlight">AWS Network Firewall</a></li><li><a href="#bastion-hosts" class="table-of-contents__link toc-highlight">Bastion Hosts</a></li><li><a href="#vpc-flow-logs" class="table-of-contents__link toc-highlight">VPC Flow Logs</a></li><li><a href="#traffic-mirroring" class="table-of-contents__link toc-highlight">Traffic Mirroring</a></li><li><a href="#vpc-reachability-analyzer" class="table-of-contents__link toc-highlight">VPC Reachability Analyzer</a></li><li><a href="#network-access-analyzer" class="table-of-contents__link toc-highlight">Network Access Analyzer</a></li><li><a href="#vpc-peering" class="table-of-contents__link toc-highlight">VPC Peering</a></li><li><a href="#vpc-endpoints" class="table-of-contents__link toc-highlight">VPC Endpoints</a></li><li><a href="#aws-privatelink---vpc-endpoint-services" class="table-of-contents__link toc-highlight">AWS PrivateLink - VPC Endpoint Services</a></li><li><a href="#transit-gateway" class="table-of-contents__link toc-highlight">Transit Gateway</a></li><li><a href="#vpc-sharing-aws-ram" class="table-of-contents__link toc-highlight">VPC Sharing (AWS RAM)</a></li><li><a href="#gateway-load-balancer-gwlb" class="table-of-contents__link toc-highlight">Gateway Load Balancer (GWLB)</a></li><li><a href="#virtual-private-gateway" class="table-of-contents__link toc-highlight">Virtual Private Gateway</a></li><li><a href="#aws-vpn" class="table-of-contents__link toc-highlight">AWS VPN</a></li><li><a href="#site-to-site-vpn-com-accelerated-vpn" class="table-of-contents__link toc-highlight">Site-to-Site VPN com Accelerated VPN</a></li><li><a href="#ecmp-equal-cost-multi-path" class="table-of-contents__link toc-highlight">ECMP (Equal-Cost Multi-Path)</a></li><li><a href="#aws-direct-connect" class="table-of-contents__link toc-highlight">AWS Direct Connect</a></li><li><a href="#direct-connect---modelos-de-resiliência" class="table-of-contents__link toc-highlight">Direct Connect - Modelos de Resiliência</a></li><li><a href="#route-53-resolver" class="table-of-contents__link toc-highlight">Route 53 Resolver</a></li><li><a href="#aws-cloud-wan" class="table-of-contents__link toc-highlight">AWS Cloud WAN</a></li><li><a href="#custo-de-rede" class="table-of-contents__link toc-highlight">Custo de rede</a></li><li><a href="#comparativo-de-conectividade-híbrida" class="table-of-contents__link toc-highlight">Comparativo de Conectividade Híbrida</a></li></ul></li><li><a href="#links-e-recursos-adicionais" class="table-of-contents__link toc-highlight">Links e recursos adicionais</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Uniii .</div></div></div></footer></div>
 </body>
 </html>
