@@ -3,6 +3,38 @@ title: "Outros Serviços"
 sidebar_position: 15
 ---
 
+```mermaid
+flowchart TB
+    subgraph DevTools["Developer Tools"]
+        CodeCommit[CodeCommit<br/>Git repos]
+        CodeBuild[CodeBuild<br/>CI]
+        CodeDeploy[CodeDeploy<br/>Deployment]
+        CodePipeline[CodePipeline<br/>CI/CD]
+    end
+
+    subgraph EndUser["End User Computing"]
+        WorkSpaces[WorkSpaces<br/>Virtual Desktop]
+        AppStream[AppStream 2.0<br/>App Streaming]
+    end
+
+    subgraph Integration["Integration"]
+        EventBridge[EventBridge<br/>Event Bus]
+        AppFlow[AppFlow<br/>SaaS Integration]
+    end
+
+    subgraph IoT["Internet of Things"]
+        IoTCore[IoT Core<br/>Device Management]
+        Greengrass[Greengrass<br/>Edge Computing]
+    end
+
+    CodeCommit --> CodeBuild --> CodeDeploy
+    CodePipeline --> CodeDeploy
+
+    style CodePipeline fill:#FF6347,color:#fff
+    style EventBridge fill:#4169E1,color:#fff
+    style WorkSpaces fill:#32CD32,color:#fff
+```
+
 # Outros Serviços 🔧
 
 Esta seção cobre uma variedade de serviços úteis e recorrentes na prova de certificação **AWS Certified Solutions Architect – Professional (SAP-C02)**. São ferramentas diversas que complementam arquiteturas e operações na nuvem. 🧠☁️

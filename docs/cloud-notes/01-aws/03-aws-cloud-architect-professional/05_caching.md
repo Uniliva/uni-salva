@@ -7,6 +7,47 @@ sidebar_position: 5
 
 Amazon CloudFront é um serviço de **CDN** (*Content Delivery Network*) da AWS que permite distribuir conteúdo globalmente com baixa latência e alto desempenho. Ele armazena em cache conteúdos estáticos em **Edge Locations** (pontos de presença) e oferece recursos avançados de segurança e personalização.
 
+```mermaid
+flowchart TB
+    subgraph Users["Usuários Globais"]
+        U1[Brasil]
+        U2[EUA]
+        U3[Europa]
+    end
+
+    subgraph Edge["Edge Locations (216+ PoPs)"]
+        E1[São Paulo PoP]
+        E2[Virginia PoP]
+        E3[Frankfurt PoP]
+    end
+
+    subgraph Origin["Origem"]
+        S3[S3 Bucket]
+        ALB[ALB/EC2]
+        Custom[Custom Origin]
+    end
+
+    U1 --> E1
+    U2 --> E2
+    U3 --> E3
+
+    E1 -->|Cache Miss| Origin
+    E2 -->|Cache Miss| Origin
+    E3 -->|Cache Miss| Origin
+
+    subgraph Security["Segurança"]
+        Shield[AWS Shield<br/>DDoS Protection]
+        WAF[AWS WAF<br/>Web Firewall]
+        OAC[OAC/OAI<br/>S3 Access Control]
+        SSL[ACM<br/>SSL/TLS]
+    end
+
+    Edge --> Security
+
+    style Edge fill:#FF6347,color:#fff
+    style Security fill:#4169E1,color:#fff
+```
+
 ---
 
 > Recursos e Benefícios
@@ -142,11 +183,64 @@ O recurso de **Field Level Encryption** permite criptografar dados sensíveis di
 
 ---
 
-## Edge Function  
+## Edge Function
 
-![What is Cloudfront? | When to use CDN in AWS? - YouTube](https://i.ytimg.com/vi/namCH3nzU8k/maxresdefault.jpg)  
+![What is Cloudfront? | When to use CDN in AWS? - YouTube](https://i.ytimg.com/vi/namCH3nzU8k/maxresdefault.jpg)
 
-Edge Functions permitem a execução de código nos pontos de presença (PoPs) da AWS, ajudando em tarefas relacionadas ao **CloudFront**, **Route 53**, entre outros serviços.  
+Edge Functions permitem a execução de código nos pontos de presença (PoPs) da AWS, ajudando em tarefas relacionadas ao **CloudFront**, **Route 53**, entre outros serviços.
+
+```mermaid
+flowchart LR
+    subgraph Request["Fluxo de Requisição"]
+        Viewer[Viewer] --> VR[Viewer Request]
+        VR --> Cache{Cache<br/>Hit?}
+        Cache -->|Miss| OR[Origin Request]
+        OR --> Origin[Origin]
+        Origin --> OResp[Origin Response]
+        OResp --> VResp[Viewer Response]
+        VResp --> Viewer
+        Cache -->|Hit| VResp
+    end
+
+    subgraph Functions["Onde executar código"]
+        CF1["CloudFront Function<br/>Viewer Request/Response"]
+        LE1["Lambda@Edge<br/>Todos os 4 pontos"]
+    end
+
+    VR -.-> CF1
+    VResp -.-> CF1
+    VR -.-> LE1
+    OR -.-> LE1
+    OResp -.-> LE1
+    VResp -.-> LE1
+
+    style CF1 fill:#32CD32,color:#fff
+    style LE1 fill:#4169E1,color:#fff
+```
+
+```mermaid
+flowchart TB
+    subgraph Decision["CloudFront Function vs Lambda@Edge"]
+        Q1{Precisa acessar<br/>body da request?}
+        Q2{Precisa chamar<br/>serviços externos?}
+        Q3{Execução<br/>demorada?}
+    end
+
+    Q1 -->|Sim| LE["Lambda@Edge"]
+    Q1 -->|Não| Q2
+    Q2 -->|Sim| LE
+    Q2 -->|Não| Q3
+    Q3 -->|Sim| LE
+    Q3 -->|Não| CF[CloudFront Function]
+
+    subgraph UseCases["Casos de Uso"]
+        CF_Use["CloudFront Function<br/>• Header manipulation<br/>• URL rewrites/redirects<br/>• Cache key normalization<br/>• Simple A/B testing"]
+        LE_Use["Lambda@Edge<br/>• Auth with external API<br/>• Dynamic content<br/>• Bot detection<br/>• Image manipulation"]
+    end
+
+    style CF fill:#32CD32,color:#fff
+    style LE fill:#4169E1,color:#fff
+```  
 
 > **Principais usos:**  
 > - Manipulação de requisições antes de chegarem ao servidor de origem.  
@@ -269,9 +363,61 @@ Para reduzir a latência da primeira requisição, a AWS recomenda a **precarga 
 
 ---
 
-## ElastiCache  
+## ElastiCache
 
-O **Amazon ElastiCache** é um serviço **gerenciado de cache em memória** que oferece suporte ao **Redis** e ao **Memcached**. Ele é projetado para fornecer **baixa latência** e **alto throughput**, reduzindo a carga em bancos de dados relacionais ou NoSQL.  
+O **Amazon ElastiCache** é um serviço **gerenciado de cache em memória** que oferece suporte ao **Redis** e ao **Memcached**. Ele é projetado para fornecer **baixa latência** e **alto throughput**, reduzindo a carga em bancos de dados relacionais ou NoSQL.
+
+```mermaid
+flowchart TB
+    subgraph Decision["Redis vs Memcached"]
+        Q1{Precisa de<br/>persistência?}
+        Q2{Precisa de<br/>Multi-AZ/HA?}
+        Q3{Estruturas de<br/>dados avançadas?}
+        Q4{Pub/Sub?}
+    end
+
+    Q1 -->|Sim| Redis[Redis]
+    Q1 -->|Não| Q2
+    Q2 -->|Sim| Redis
+    Q2 -->|Não| Q3
+    Q3 -->|Sim| Redis
+    Q3 -->|Não| Q4
+    Q4 -->|Sim| Redis
+    Q4 -->|Não| Memcached[Memcached]
+
+    subgraph RedisFeatures["Redis"]
+        R1["✅ Multi-AZ com failover"]
+        R2["✅ Read Replicas"]
+        R3["✅ Persistência/Backup"]
+        R4["✅ Pub/Sub, Streams"]
+        R5["✅ Sorted Sets, Lists"]
+        R6["✅ Criptografia (KMS + AUTH)"]
+    end
+
+    subgraph MemcachedFeatures["Memcached"]
+        M1["✅ Multi-thread"]
+        M2["✅ Sharding nativo"]
+        M3["❌ Sem replicação"]
+        M4["❌ Sem persistência"]
+        M5["❌ Sem backup"]
+        M6["✅ SASL auth"]
+    end
+
+    style Redis fill:#FF6347,color:#fff
+    style Memcached fill:#4169E1,color:#fff
+```
+
+| Característica | Redis | Memcached |
+|---------------|-------|-----------|
+| **Multi-AZ** | Sim | Não |
+| **Read Replicas** | Sim | Não |
+| **Persistência** | Sim | Não |
+| **Backup/Restore** | Sim | Não |
+| **Pub/Sub** | Sim | Não |
+| **Data Structures** | Avançadas | Key-Value simples |
+| **Multi-thread** | Single-thread | Multi-thread |
+| **Sharding** | Cluster mode | Nativo |
+| **Auth** | Redis AUTH + SSL | SASL |  
 
 > **Casos de uso:**  
  - **Cache de banco de dados:** Reduz acessos ao **RDS** ou **DynamoDB**, melhorando a performance.  
@@ -367,9 +513,65 @@ O ElastiCache possui **limites de throughput e conexões simultâneas**, depende
 📌 Um sistema de recomendação precisa garantir que apenas os **dados mais acessados** fiquem armazenados no cache, removendo os menos utilizados. Qual estratégia de expiração deve ser configurada?  
 - ✅ **Least Recently Used (LRU)**, pois remove os itens menos acessados para liberar espaço no cache.  
 
-📌 Como garantir que o Redis escale para **grandes volumes de leitura** sem comprometer a performance?  
-- ✅ **Utilizando réplicas de leitura**, distribuindo o tráfego entre múltiplos nós.  
+📌 Como garantir que o Redis escale para **grandes volumes de leitura** sem comprometer a performance?
+- ✅ **Utilizando réplicas de leitura**, distribuindo o tráfego entre múltiplos nós.
 
 :::
 
-----
+---
+
+## Resumo de Caching para o Exame
+
+```mermaid
+flowchart TB
+    subgraph CDN["Content Delivery"]
+        CF[CloudFront<br/>CDN Global]
+        CFF[CloudFront Functions<br/>Viewer Request/Response]
+        LE["Lambda@Edge<br/>Todos os pontos"]
+    end
+
+    subgraph InMemory["In-Memory Cache"]
+        Redis[ElastiCache Redis<br/>HA, Persistência]
+        Memcached[ElastiCache Memcached<br/>Sharding, Multi-thread]
+    end
+
+    subgraph APICache["API Caching"]
+        APIG[API Gateway Cache<br/>0-3600s TTL]
+        DAX[DynamoDB DAX<br/>Microseconds]
+    end
+```
+
+### Tabela de Decisão Rápida
+
+| Cenário | Serviço |
+|---------|---------|
+| Conteúdo estático global | CloudFront |
+| Manipulação simples de headers | CloudFront Functions |
+| Autenticação na edge com API externa | Lambda@Edge |
+| Cache de sessões com HA | ElastiCache Redis |
+| Cache simples sem HA | ElastiCache Memcached |
+| Cache de queries DynamoDB | DAX |
+| Cache de API REST | API Gateway Cache |
+
+### Limites e Dicas Importantes
+
+| Serviço | Limite/Info |
+|---------|-------------|
+| CloudFront TTL | 0 a 31536000 segundos (1 ano) |
+| CloudFront Functions | JavaScript only, sem body access |
+| Lambda@Edge | Node.js/Python, até 30s (origin) |
+| API Gateway Cache | 0.5 GB a 237 GB, 0-3600s TTL |
+| Redis AUTH | Obrigatório para encryption in-transit |
+| ElastiCache | Não suporta IAM auth para dados |
+
+### Dicas Finais para o Exame
+
+1. **OAC vs OAI**: OAC é a versão mais nova, prefira OAC.
+2. **Signed URL vs Signed Cookie**: URL para um arquivo, Cookie para múltiplos.
+3. **CloudFront vs S3 Transfer Acceleration**: CloudFront para download, Transfer Acceleration para upload.
+4. **Redis vs Memcached**: Redis para HA e persistência, Memcached para simplicidade e sharding.
+5. **CloudFront Functions vs Lambda@Edge**: Functions para manipulações simples, Lambda@Edge para lógica complexa.
+6. **Field Level Encryption**: Criptografa campos específicos na edge antes de enviar à origem.
+7. **Origin Groups**: Failover automático entre origens primária e secundária.
+
+---

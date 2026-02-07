@@ -1,7 +1,43 @@
 ---
 title: "Monitoramento"
 sidebar_position: 9
---- 
+---
+
+```mermaid
+flowchart TB
+    subgraph Monitoring["Stack de Observabilidade AWS"]
+        subgraph Collect["Coleta"]
+            CWAgent[CloudWatch Agent]
+            VPCFlow[VPC Flow Logs]
+            CloudTrail[CloudTrail<br/>API Audit]
+        end
+
+        subgraph Store["Armazenamento"]
+            CWLogs[CloudWatch Logs]
+            CWMetrics[CloudWatch Metrics]
+        end
+
+        subgraph Analyze["Análise"]
+            Insights[Logs Insights<br/>SQL-like queries]
+            XRay[X-Ray<br/>Distributed tracing]
+        end
+
+        subgraph Act["Ação"]
+            Alarms[CloudWatch Alarms]
+            EventBridge[EventBridge<br/>Event routing]
+            Lambda[Lambda<br/>Auto-remediation]
+        end
+    end
+
+    Collect --> Store
+    Store --> Analyze
+    Store --> Act
+    Act --> Lambda
+
+    style CWLogs fill:#4169E1,color:#fff
+    style XRay fill:#FF6347,color:#fff
+    style Alarms fill:#32CD32,color:#fff
+```
 
 ## AWS CloudWatch  
 

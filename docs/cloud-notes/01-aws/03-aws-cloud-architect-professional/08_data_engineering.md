@@ -1,7 +1,46 @@
 ---
 title: "Engenharia de dados"
 sidebar_position: 8
----  
+---
+
+```mermaid
+flowchart TB
+    subgraph DataPipeline["Pipeline de Dados AWS"]
+        subgraph Ingest["Ingestão"]
+            Kinesis[Kinesis Data Streams<br/>Real-time]
+            Firehose[Kinesis Firehose<br/>Near real-time]
+            DMS[DMS<br/>Database migration]
+        end
+
+        subgraph Process["Processamento"]
+            Glue[AWS Glue<br/>ETL serverless]
+            EMR[EMR<br/>Spark/Hadoop]
+            Analytics[Kinesis Analytics<br/>SQL/Flink]
+            Lambda[Lambda<br/>Event processing]
+        end
+
+        subgraph Store["Armazenamento"]
+            S3[S3<br/>Data Lake]
+            Redshift[Redshift<br/>Data Warehouse]
+            OpenSearch[OpenSearch<br/>Search/Analytics]
+        end
+
+        subgraph Analyze["Análise"]
+            Athena[Athena<br/>SQL on S3]
+            QuickSight[QuickSight<br/>BI Dashboard]
+        end
+    end
+
+    Ingest --> Process
+    Process --> Store
+    Store --> Analyze
+
+    style Kinesis fill:#FF6347,color:#fff
+    style Glue fill:#4169E1,color:#fff
+    style S3 fill:#32CD32,color:#fff
+    style Athena fill:#9370DB,color:#fff
+```
+
 ## AWS Kinesis
 
 O **Amazon Kinesis** é um serviço gerenciado da AWS que facilita a coleta, processamento e análise de fluxos (**streams**) de dados em **tempo real**. É amplamente utilizado para monitoramento de logs, métricas, análise de dados de IoT e processamento de Big Data. O Kinesis é frequentemente comparado ao **Apache Kafka**, pois também é uma solução de streaming em tempo real.

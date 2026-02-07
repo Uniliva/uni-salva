@@ -64,6 +64,53 @@ sidebar_position: 3
     - Se uma partição falhar, todas as instâncias dentro dela serão perdidas.
     - Instâncias podem compartilhar dados da partição via **EC2 Metadata**.
 
+```mermaid
+flowchart TB
+    subgraph Cluster["Cluster Placement Group"]
+        direction LR
+        C1[EC2]
+        C2[EC2]
+        C3[EC2]
+        C4[EC2]
+        C1 --- C2 --- C3 --- C4
+    end
+
+    subgraph Spread["Spread Placement Group"]
+        direction LR
+        subgraph Rack1["Rack 1"]
+            S1[EC2]
+        end
+        subgraph Rack2["Rack 2"]
+            S2[EC2]
+        end
+        subgraph Rack3["Rack 3"]
+            S3[EC2]
+        end
+    end
+
+    subgraph Partition["Partition Placement Group"]
+        direction LR
+        subgraph P1["Partition 1"]
+            P1A[EC2]
+            P1B[EC2]
+        end
+        subgraph P2["Partition 2"]
+            P2A[EC2]
+            P2B[EC2]
+        end
+    end
+
+    style Cluster fill:#FF6347,color:#fff
+    style Spread fill:#32CD32,color:#fff
+    style Partition fill:#4169E1,color:#fff
+```
+
+| Placement Group | Max Instâncias | Caso de Uso | Risco |
+|-----------------|---------------|-------------|-------|
+| **Cluster** | Sem limite | HPC, Big Data, baixa latência | Alto (mesma AZ/rack) |
+| **Spread** | 7 por AZ | Apps críticas, HA | Baixo |
+| **Partition** | Centenas (7 partições/AZ) | Hadoop, Cassandra, Kafka | Médio |
+
 :::warning
 **Mover uma instância entre Placement Groups:**
 - É necessário **parar a instância**.
@@ -131,7 +178,41 @@ A **ECS Task** é um conceito essencial para a certificação AWS. Você deve en
 - **Execução em EC2 vs. Fargate:**
   - EC2: Requer provisionamento e gerenciamento das instâncias.
   - Fargate: AWS gerencia automaticamente a infraestrutura.
-  
+
+```mermaid
+flowchart TB
+    subgraph Decision["Escolha de Serviço de Container"]
+        Q1{Precisa de<br/>Kubernetes?}
+        Q2{Quer gerenciar<br/>infraestrutura?}
+        Q3{Workload<br/>previsível?}
+    end
+
+    Q1 -->|Sim| EKS[EKS<br/>$75/mês + recursos]
+    Q1 -->|Não| Q2
+    Q2 -->|Sim| ECS_EC2[ECS + EC2<br/>Mais controle]
+    Q2 -->|Não| Q3
+    Q3 -->|Sim| ECS_F[ECS + Fargate<br/>Serverless]
+    Q3 -->|Não| AppRunner[App Runner<br/>Mais simples]
+
+    subgraph EKS_Options["Opções EKS"]
+        EKS --> EKS_EC2[EC2 Nodes]
+        EKS --> EKS_Fargate[Fargate Nodes]
+        EKS --> EKS_Anywhere[EKS Anywhere]
+    end
+
+    style EKS fill:#FF6347,color:#fff
+    style ECS_EC2 fill:#4169E1,color:#fff
+    style ECS_F fill:#32CD32,color:#fff
+    style AppRunner fill:#9370DB,color:#fff
+```
+
+| Serviço | Custo Base | Gerenciamento | Portabilidade | Caso de Uso |
+|---------|-----------|--------------|---------------|-------------|
+| **ECS + EC2** | Só recursos | Cliente gerencia EC2 | Baixa | Controle total |
+| **ECS + Fargate** | Por vCPU/memória | Serverless | Baixa | Simplicidade |
+| **EKS** | $75/mês + recursos | Control plane gerenciado | Alta (K8s) | Multi-cloud |
+| **App Runner** | Por vCPU/memória | Totalmente gerenciado | Baixa | Deploys rápidos |
+
   ![image-20230214061221428](assets/image-20230214061221428.png)
   ![image-20230214061618805](assets/image-20230214061618805.png)
   ![ecs](assets/image-20210903065745303.png)
@@ -312,6 +393,41 @@ O AWS App Runner é uma opção para quem busca simplicidade na implementação 
 ---
 
 > Tipos de Elastic Load Balancer (ELB)
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual Load Balancer usar?"]
+        Q1{Protocolo?}
+        Q2{Precisa de<br/>routing avançado?}
+        Q3{Inspeção de<br/>tráfego/firewall?}
+    end
+
+    Q1 -->|HTTP/HTTPS| Q2
+    Q1 -->|TCP/UDP| NLB[Network LB<br/>Layer 4]
+    Q1 -->|IP/GENEVE| GWLB[Gateway LB<br/>Layer 3]
+
+    Q2 -->|Sim| ALB[Application LB<br/>Layer 7]
+    Q2 -->|Não| NLB
+
+    Q3 -->|Sim| GWLB
+
+    subgraph Features["Características"]
+        ALB_F["ALB<br/>• Path/Host routing<br/>• WebSocket<br/>• Lambda targets<br/>• SNI multi-cert"]
+        NLB_F["NLB<br/>• IP estático<br/>• Ultra baixa latência<br/>• Preserve source IP<br/>• PrivateLink"]
+        GWLB_F["GWLB<br/>• Firewall<br/>• IDS/IPS<br/>• Appliances 3rd party"]
+    end
+
+    style ALB fill:#4169E1,color:#fff
+    style NLB fill:#32CD32,color:#fff
+    style GWLB fill:#FF6347,color:#fff
+```
+
+| Load Balancer | Layer | Protocolos | IP Estático | Latência | Caso de Uso |
+|--------------|-------|------------|-------------|----------|-------------|
+| **CLB** | 4/7 | HTTP, HTTPS, TCP | Não | ~400ms | Legacy |
+| **ALB** | 7 | HTTP, HTTPS, WebSocket | Não | ~400ms | Microservices, routing |
+| **NLB** | 4 | TCP, UDP, TLS | Sim (1/AZ) | ~100ms | Gaming, IoT, performance |
+| **GWLB** | 3 | IP, GENEVE (6081) | Não | - | Security appliances |
 
 **Classic Load Balancer (CLB) - (v1 - geração antiga - 2009)**
 - Suporta **HTTP, HTTPS e TCP**.
@@ -513,6 +629,49 @@ O ASG é composto pelos seguintes elementos principais:
 ## Amazon API Gateway
 
 O **Amazon API Gateway** é um serviço totalmente gerenciado e **serverless**, usado para criar, publicar, manter, monitorar e proteger **APIs REST e WebSocket**. Ele facilita a comunicação entre clientes e serviços da AWS ou sistemas externos.
+
+```mermaid
+flowchart TB
+    subgraph Clients["Clientes"]
+        Web[Web App]
+        Mobile[Mobile App]
+        IoT[IoT Devices]
+    end
+
+    subgraph APIG["API Gateway"]
+        subgraph Auth["Autenticação"]
+            IAM[IAM<br/>SigV4]
+            Lambda_Auth[Lambda<br/>Authorizer]
+            Cognito[Cognito<br/>User Pools]
+        end
+
+        subgraph Types["Tipos de API"]
+            REST[REST API<br/>Full features]
+            HTTP[HTTP API<br/>Menor custo]
+            WS[WebSocket<br/>Real-time]
+        end
+    end
+
+    subgraph Backends["Backends"]
+        Lambda[Lambda]
+        EC2_ALB[EC2/ALB]
+        Services[AWS Services<br/>S3, SQS, Step Functions]
+        HTTP_EP[HTTP Endpoints]
+    end
+
+    Clients --> APIG
+    APIG --> Backends
+
+    style REST fill:#4169E1,color:#fff
+    style HTTP fill:#32CD32,color:#fff
+    style WS fill:#FF6347,color:#fff
+```
+
+| Tipo de API | Custo | Features | Caso de Uso |
+|-------------|-------|----------|-------------|
+| **REST API** | $$$ | Completo (cache, WAF, validação) | APIs empresariais |
+| **HTTP API** | $ | Básico (mais rápido) | Microservices, Lambda proxy |
+| **WebSocket** | Por msg/conexão | Bidirectional | Chat, gaming, real-time |
 
 ![API Gateway](assets/image-20210903212259138.png)
 
@@ -802,13 +961,53 @@ dig <url>
 
 ---
 
-> Routing Policies (Políticas de Roteamento)  
+> Routing Policies (Políticas de Roteamento)
 
-O **Route 53** oferece diferentes formas de direcionar tráfego.  
+O **Route 53** oferece diferentes formas de direcionar tráfego.
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual Routing Policy usar?"]
+        Q1{Precisa de<br/>failover?}
+        Q2{Múltiplas<br/>regiões?}
+        Q3{Controle de<br/>tráfego %?}
+        Q4{Baseado em<br/>localização?}
+    end
+
+    Q1 -->|Sim| Failover[Failover<br/>Primary/Secondary]
+    Q1 -->|Não| Q2
+    Q2 -->|Sim| Q4
+    Q2 -->|Não| Q3
+    Q3 -->|Sim| Weighted[Weighted<br/>% de tráfego]
+    Q3 -->|Não| Simple[Simple<br/>Um registro]
+    Q4 -->|Por país| Geolocation[Geolocation<br/>País/Continente]
+    Q4 -->|Por latência| Latency[Latency<br/>Região mais rápida]
+    Q4 -->|Ajuste fino| Geoproximity[Geoproximity<br/>Com bias]
+
+    subgraph HealthCheck["Health Check"]
+        HC[Obrigatório para:<br/>Failover, Weighted,<br/>Latency, Geolocation]
+    end
+
+    style Failover fill:#FF6347,color:#fff
+    style Weighted fill:#4169E1,color:#fff
+    style Latency fill:#32CD32,color:#fff
+    style Geolocation fill:#9370DB,color:#fff
+```
+
+| Routing Policy | Health Check | Caso de Uso |
+|---------------|--------------|-------------|
+| **Simple** | Não | Um servidor, sem redundância |
+| **Weighted** | Opcional | Testes A/B, blue/green |
+| **Failover** | Obrigatório | Disaster recovery |
+| **Latency** | Recomendado | Performance global |
+| **Geolocation** | Recomendado | Compliance, localização |
+| **Geoproximity** | Recomendado | Ajuste fino de tráfego |
+| **Multi-Value** | Obrigatório | Load balancing DNS |
+| **IP-Based** | Opcional | Roteamento por CIDR |
 
 **1. Simple Routing (Roteamento Simples)**
-- Retorna **um único IP** para um domínio.  
-- **Não suporta** health checks.  
+- Retorna **um único IP** para um domínio.
+- **Não suporta** health checks.
 - Se houver vários IPs configurados, o **navegador escolhe qual usar**.  
 
 **2. Weighted Routing (Roteamento por Peso)**
@@ -1027,12 +1226,94 @@ O **AWS Local Zones** permite que empresas **executem serviços da AWS mais pró
 Atualmente, a única região AWS na América do Sul é **São Paulo**.  
 Se uma empresa no **Chile** quiser uma latência menor, ela poderia habilitar uma **AWS Local Zone** no Chile (caso disponível) para executar seus serviços **sem precisar se conectar diretamente à região de São Paulo**.  
 
-![image-20230218130317935](assets/image-20230218130317935.png)  
+![image-20230218130317935](assets/image-20230218130317935.png)
 
-:::tip **Dica para a prova 🎯**  
-- Se a questão mencionar **baixa latência** para usuários em **grandes centros urbanos**, a resposta pode ser **AWS Local Zones**.  
-- Se precisar rodar **cargas computacionais sensíveis à latência** (como streaming, renderização de vídeos ou jogos online), essa pode ser a solução.  
-[Saiba mais sobre AWS Local Zones](https://aws.amazon.com/about-aws/global-infrastructure/localzones/)  
-:::  
+:::tip **Dica para a prova 🎯**
+- Se a questão mencionar **baixa latência** para usuários em **grandes centros urbanos**, a resposta pode ser **AWS Local Zones**.
+- Se precisar rodar **cargas computacionais sensíveis à latência** (como streaming, renderização de vídeos ou jogos online), essa pode ser a solução.
+[Saiba mais sobre AWS Local Zones](https://aws.amazon.com/about-aws/global-infrastructure/localzones/)
+:::
+
+---
+
+## Resumo: Edge e Infraestrutura Híbrida
+
+```mermaid
+flowchart TB
+    subgraph Decision["Onde executar workloads?"]
+        Q1{Onde estão<br/>os usuários?}
+        Q2{Requisitos de<br/>latência?}
+        Q3{Tipo de<br/>dispositivo?}
+    end
+
+    Q1 -->|Data center próprio| Q_DC{Compliance/<br/>Residência dados?}
+    Q1 -->|Cidade grande| LocalZones[Local Zones<br/>Próximo a metrópoles]
+    Q1 -->|Usuários móveis 5G| Wavelength[Wavelength<br/>Dentro da operadora]
+    Q1 -->|Global| Region[Região AWS<br/>+ CloudFront/GA]
+
+    Q_DC -->|Sim| Outposts[Outposts<br/>AWS no seu DC]
+    Q_DC -->|Não| Region
+
+    subgraph Compare["Comparação"]
+        direction TB
+        C1["🏢 Outposts<br/>• Seu data center<br/>• Você gerencia física<br/>• Compliance local"]
+        C2["🏙️ Local Zones<br/>• AWS em grandes cidades<br/>• Extensão da região<br/>• Baixa latência urbana"]
+        C3["📱 Wavelength<br/>• Dentro da telecom<br/>• 5G ultra baixa latência<br/>• Mobile edge"]
+    end
+
+    style Outposts fill:#FF6347,color:#fff
+    style LocalZones fill:#4169E1,color:#fff
+    style Wavelength fill:#32CD32,color:#fff
+    style Region fill:#9370DB,color:#fff
+```
+
+| Serviço | Localização | Gerenciado por | Latência | Caso de Uso |
+|---------|------------|----------------|----------|-------------|
+| **Região AWS** | Data centers AWS | AWS | Normal | Workloads padrão |
+| **Outposts** | Seu data center | AWS + Cliente | Muito baixa | Compliance, híbrido |
+| **Local Zones** | Grandes cidades | AWS | Baixa | Streaming, gaming |
+| **Wavelength** | Operadora telecom | AWS | Ultra baixa | 5G, IoT, AR/VR |
+
+### Resumo Geral para o Exame
+
+```mermaid
+flowchart LR
+    subgraph Compute["Compute"]
+        EC2[EC2]
+        Lambda[Lambda<br/>15min max]
+        ECS[ECS/Fargate]
+        EKS[EKS]
+        AppRunner[App Runner]
+    end
+
+    subgraph LB["Load Balancing"]
+        ALB[ALB<br/>L7 HTTP]
+        NLB[NLB<br/>L4 TCP/UDP]
+        GWLB[GWLB<br/>L3 Firewall]
+    end
+
+    subgraph API["API & DNS"]
+        APIG[API Gateway<br/>29s timeout]
+        R53[Route 53]
+        AppSync[AppSync<br/>GraphQL]
+    end
+
+    subgraph Edge["Edge & Híbrido"]
+        GA[Global Accelerator]
+        Outposts[Outposts]
+        LocalZones[Local Zones]
+        Wavelength[Wavelength]
+    end
+```
+
+| Limite Importante | Valor |
+|------------------|-------|
+| Lambda timeout | 15 minutos |
+| Lambda memória | 128MB - 10GB |
+| API Gateway timeout | 29 segundos |
+| API Gateway payload | 10 MB |
+| Spread placement group | 7 instâncias/AZ |
+| EKS custo base | $75/mês por cluster |
+| Health check Route 53 | 15 localizações |
 
 ---

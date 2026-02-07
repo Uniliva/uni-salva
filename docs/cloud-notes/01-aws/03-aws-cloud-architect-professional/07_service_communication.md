@@ -3,11 +3,38 @@ title: "Comunicação entre serviço"
 sidebar_position: 7
 ---  
 
-## AWS Step Functions  
+## AWS Step Functions
 
-![step-function](assets/image-20210911102112816.png)  
+![step-function](assets/image-20210911102112816.png)
 
-O **AWS Step Functions** é um serviço que permite **orquestrar** e **automatizar** fluxos de trabalho complexos na AWS. Ele facilita a coordenação de **funções AWS Lambda** e outros serviços, garantindo execução ordenada, paralela ou condicional de tarefas.  
+O **AWS Step Functions** é um serviço que permite **orquestrar** e **automatizar** fluxos de trabalho complexos na AWS. Ele facilita a coordenação de **funções AWS Lambda** e outros serviços, garantindo execução ordenada, paralela ou condicional de tarefas.
+
+```mermaid
+flowchart TB
+    subgraph StepFunctions["Step Functions Workflow"]
+        Start([Start]) --> Task1[Lambda: Validar]
+        Task1 --> Choice{Válido?}
+        Choice -->|Sim| Parallel
+        Choice -->|Não| Fail([Fail])
+
+        subgraph Parallel["Parallel Execution"]
+            Task2[Lambda: Processar]
+            Task3[DynamoDB: Salvar]
+        end
+
+        Parallel --> Wait[Wait 30s]
+        Wait --> Task4[SNS: Notificar]
+        Task4 --> End([End])
+    end
+
+    subgraph Types["Tipos de Workflow"]
+        Standard["Standard<br/>• Até 1 ano<br/>• Histórico completo<br/>• Cobra por transição"]
+        Express["Express<br/>• Até 5 min<br/>• Alta taxa<br/>• Cobra por execução"]
+    end
+
+    style Standard fill:#4169E1,color:#fff
+    style Express fill:#FF6347,color:#fff
+```  
 
 > Principais Características:
 - Usa um modelo de **máquina de estados** descrito em **JSON** para definir o fluxo da aplicação.  
@@ -140,11 +167,37 @@ A imagem acima mostra um exemplo de arquitetura onde o Step Functions orquestra 
 
 ---
 
-## AWS SQS  
+## AWS SQS
 
-![SQS](assets/5e3f44ce52788a4fb8b8432e4441bf3f-SQS-diagram.svg)  
+![SQS](assets/5e3f44ce52788a4fb8b8432e4441bf3f-SQS-diagram.svg)
 
-O **Amazon Simple Queue Service (SQS)** é um serviço de **mensageria assíncrona**, totalmente gerenciado pela AWS, que permite o desacoplamento de componentes de aplicações distribuídas.  
+O **Amazon Simple Queue Service (SQS)** é um serviço de **mensageria assíncrona**, totalmente gerenciado pela AWS, que permite o desacoplamento de componentes de aplicações distribuídas.
+
+```mermaid
+flowchart TB
+    subgraph SQS["SQS - Queue"]
+        Producer1[Producer] --> Queue[(Queue)]
+        Producer2[Producer] --> Queue
+        Queue --> Consumer1[Consumer]
+        Queue --> Consumer2[Consumer]
+    end
+
+    subgraph Types["Tipos de Fila"]
+        Standard["Standard<br/>• At-least-once<br/>• Best-effort ordering<br/>• Ilimitado throughput"]
+        FIFO["FIFO<br/>• Exactly-once<br/>• Ordem garantida<br/>• 3000 msg/s com batch"]
+    end
+
+    subgraph Features["Features Importantes"]
+        VT[Visibility Timeout<br/>Default: 30s]
+        DLQ[Dead Letter Queue<br/>MaxReceiveCount]
+        Delay[Delay Queue<br/>0-15 min]
+        LongPoll[Long Polling<br/>1-20s, reduz custo]
+    end
+
+    style Standard fill:#32CD32,color:#fff
+    style FIFO fill:#4169E1,color:#fff
+    style DLQ fill:#FF6347,color:#fff
+```  
 
 > Principais Características:
 - Possui **escopo regional** e é gerenciado pela AWS.  
@@ -568,9 +621,70 @@ O **Amazon SNS** pode enviar mensagens diretamente para o **Kinesis Data Firehos
 📌 Um serviço recebe notificações do SNS via Lambda, mas algumas mensagens estão falhando. Como melhorar a resiliência?  
 - ✅ **Habilitar DLQ no SNS para capturar mensagens falhas e analisar os erros**.  
 
-🔗 [DLQ no SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-dead-letter-queues.html)  
+🔗 [DLQ no SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-dead-letter-queues.html)
 
 :::
+
+---
+
+## Resumo de Serviços de Comunicação para o Exame
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual serviço de mensageria usar?"]
+        Q1{Padrão de<br/>comunicação?}
+        Q2{Múltiplos<br/>consumidores?}
+        Q3{Ordem<br/>garantida?}
+        Q4{Orquestração<br/>de workflow?}
+    end
+
+    Q1 -->|Queue| Q3
+    Q1 -->|Pub/Sub| SNS[SNS<br/>Notificações]
+    Q1 -->|Streaming| Kinesis[Kinesis<br/>Real-time]
+    Q1 -->|Workflow| Q4
+
+    Q3 -->|Sim| FIFO[SQS FIFO<br/>Exactly-once]
+    Q3 -->|Não| Standard[SQS Standard<br/>At-least-once]
+
+    Q4 -->|Sim| StepFn[Step Functions<br/>State machine]
+    Q4 -->|Não| EventBridge[EventBridge<br/>Event bus]
+
+    subgraph Patterns["Padrões Comuns"]
+        FanOut["Fan-Out<br/>SNS → múltiplos SQS"]
+        Saga["Saga Pattern<br/>Step Functions"]
+        CQRS["Event Sourcing<br/>Kinesis + DynamoDB"]
+    end
+
+    style SNS fill:#FF6347,color:#fff
+    style FIFO fill:#4169E1,color:#fff
+    style StepFn fill:#32CD32,color:#fff
+    style Kinesis fill:#9370DB,color:#fff
+```
+
+### Tabela Comparativa
+
+| Serviço | Modelo | Persistência | Ordem | Throughput | Caso de Uso |
+|---------|--------|--------------|-------|------------|-------------|
+| **SQS Standard** | Queue | 14 dias | Não | Ilimitado | Desacoplamento |
+| **SQS FIFO** | Queue | 14 dias | Sim | 3000/s batch | Transações ordenadas |
+| **SNS** | Pub/Sub | Não | Não | Alto | Notificações broadcast |
+| **Kinesis Data Streams** | Stream | 7 dias (365 extended) | Sim | Shards | Real-time analytics |
+| **EventBridge** | Event Bus | Não | Não | Alto | Event routing |
+| **Step Functions** | Workflow | Sim | Sim | Baseado em tarefas | Orquestração |
+| **AWS MQ** | Broker | Sim | Sim | Limitado | Legacy migration |
+
+### Dicas Finais para o Exame
+
+1. **SQS vs SNS**: SQS = pull model, SNS = push model.
+2. **SQS FIFO**: Nome da fila deve terminar em `.fifo`.
+3. **Fan-Out**: SNS → múltiplos SQS para processar mesmo evento.
+4. **Visibility Timeout**: Se muito curto, causa duplicação.
+5. **DLQ**: Sempre do mesmo tipo da fila principal.
+6. **Step Functions Express**: Alta taxa, curta duração (5 min max).
+7. **Step Functions Standard**: Longa duração (até 1 ano).
+8. **AWS MQ**: Migração de RabbitMQ/ActiveMQ, não escala como SQS.
+9. **Long Polling SQS**: 1-20s, reduz chamadas vazias e custo.
+10. **Message Filtering SNS**: Evita processar mensagens irrelevantes.
 
 ---
 

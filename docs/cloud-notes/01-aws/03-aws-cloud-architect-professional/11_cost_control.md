@@ -1,7 +1,40 @@
 ---
 title: "Controle de custos"
 sidebar_position: 11
---- 
+---
+
+```mermaid
+flowchart TB
+    subgraph CostManagement["Gerenciamento de Custos AWS"]
+        subgraph Visibility["Visibilidade"]
+            CostExplorer[Cost Explorer<br/>Análise de custos]
+            Budgets[AWS Budgets<br/>Alertas]
+            CUR[Cost & Usage Reports<br/>Detalhado]
+        end
+
+        subgraph Optimization["Otimização"]
+            RI[Reserved Instances<br/>Até 72% desconto]
+            SP[Savings Plans<br/>Flexível]
+            Spot[Spot Instances<br/>Até 90% desconto]
+        end
+
+        subgraph Governance["Governança"]
+            Tags[Cost Allocation Tags]
+            SCPs[SCPs<br/>Limitar serviços]
+            Quotas[Service Quotas]
+        end
+
+        subgraph Tools["Ferramentas"]
+            TrustedAdvisor[Trusted Advisor<br/>Recomendações]
+            ComputeOptimizer[Compute Optimizer<br/>Right-sizing]
+            Calculator[Pricing Calculator]
+        end
+    end
+
+    style CostExplorer fill:#4169E1,color:#fff
+    style RI fill:#32CD32,color:#fff
+    style TrustedAdvisor fill:#FF6347,color:#fff
+```
 
 ## TAGs
 

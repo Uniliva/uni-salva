@@ -17,6 +17,43 @@ sidebar_position: 2
 - Armazena os logs por **90 dias no CloudTrail**. Para retenção maior, é possível configurar o armazenamento no **Amazon S3** (não habilitado por padrão).
 - Aplicado por padrão em todas as regiões da AWS.
 - Pode ser habilitado para monitorar todas as contas da organização ou apenas uma conta específica.
+- **CloudTrail Lake**: Permite consultar eventos usando SQL, com retenção de até 7 anos.
+- **Integridade dos Logs**: Pode ser habilitada validação de integridade usando hash SHA-256.
+
+```mermaid
+flowchart TB
+    subgraph Sources["Fontes de Eventos"]
+        SDK[SDK]
+        Console[AWS Console]
+        CLI[AWS CLI]
+        IAM[IAM Users/Roles]
+    end
+
+    subgraph CloudTrail["AWS CloudTrail"]
+        MT[Management Events<br/>Gratuito]
+        DE[Data Events<br/>Custo adicional]
+        IN[Insights<br/>Custo adicional]
+    end
+
+    subgraph Destinations["Destinos"]
+        S3[Amazon S3<br/>Retenção longa]
+        CW[CloudWatch Logs<br/>Filtros e alertas]
+        EB[EventBridge<br/>Reação rápida]
+        Lake[CloudTrail Lake<br/>SQL queries]
+    end
+
+    Sources --> CloudTrail
+    MT --> S3
+    MT --> CW
+    MT --> EB
+    DE --> S3
+    IN --> EB
+    S3 --> Lake
+
+    style MT fill:#90EE90
+    style DE fill:#FFD700
+    style IN fill:#FFD700
+```
 
 ---
 
@@ -112,6 +149,52 @@ Os eventos no CloudTrail podem levar até **15 minutos** para serem processados.
   - **EBS, S3, RedShift, RDS, EFS**, entre outros.
 - Serviços com Criptografia Ativada por Padrão
   - **CloudTrail Logs, S3 Glacier, Storage Gateway**, entre outros.
+- **Cotas importantes**: 5.500 a 30.000 requests/segundo dependendo da região (pode aumentar via ticket).
+- **Envelope Encryption**: KMS gera uma Data Key que criptografa os dados, e a Master Key criptografa a Data Key.
+- **KMS Key Policy**: Similar a bucket policy, define quem pode usar/administrar a chave.
+
+```mermaid
+flowchart TB
+    subgraph KeyTypes["Tipos de Chaves KMS"]
+        subgraph CMK["Customer Managed Keys"]
+            CMKS[Simétricas AES-256]
+            CMKA[Assimétricas RSA/ECC]
+        end
+
+        subgraph AWS["AWS Managed Keys"]
+            AWSK[aws/service-name<br/>Rotação automática 1 ano]
+        end
+
+        subgraph Owned["AWS Owned Keys"]
+            OWN[SSE-S3, SSE-SQS<br/>Sem visibilidade]
+        end
+    end
+
+    subgraph Features["Características"]
+        R1[Rotação Manual]
+        R2[Rotação Auto 1 ano]
+        R3[Sem controle]
+    end
+
+    CMK --> R1
+    CMK --> R2
+    AWS --> R2
+    Owned --> R3
+
+    subgraph Cost["Custo"]
+        C1["$1/mês + API calls"]
+        C2["Gratuito"]
+        C3["Gratuito"]
+    end
+
+    CMK --> C1
+    AWS --> C2
+    Owned --> C3
+
+    style CMK fill:#4169E1,color:#fff
+    style AWS fill:#32CD32,color:#fff
+    style Owned fill:#808080,color:#fff
+```
 
 > Importação de Chaves Externas
 
@@ -178,6 +261,47 @@ Os eventos no CloudTrail podem levar até **15 minutos** para serem processados.
 
 ![cloudhsm](assets/image-20210907151911356.png)
 ![hms-kms](assets/image-20210907152024180.png)
+
+#### KMS vs CloudHSM - Comparação para o Exame
+
+```mermaid
+flowchart TB
+    subgraph Decision["Escolha entre KMS e CloudHSM"]
+        Q1{Precisa de<br/>FIPS 140-2<br/>Level 3?}
+        Q2{Controle total<br/>do hardware?}
+        Q3{SSL Offloading?}
+        Q4{Oracle TDE?}
+    end
+
+    Q1 -->|Sim| HSM[CloudHSM]
+    Q1 -->|Não| Q2
+    Q2 -->|Sim| HSM
+    Q2 -->|Não| Q3
+    Q3 -->|Sim| HSM
+    Q3 -->|Não| Q4
+    Q4 -->|Sim| BOTH[KMS + CloudHSM]
+    Q4 -->|Não| KMS[AWS KMS]
+
+    subgraph Compare["Comparação"]
+        direction LR
+        K1["KMS<br/>• Gerenciado pela AWS<br/>• FIPS 140-2 Level 2<br/>• Multi-tenant<br/>• Integração nativa"]
+        H1["CloudHSM<br/>• Gerenciado pelo cliente<br/>• FIPS 140-2 Level 3<br/>• Single-tenant<br/>• Hardware dedicado"]
+    end
+
+    style HSM fill:#FF6347,color:#fff
+    style KMS fill:#4169E1,color:#fff
+    style BOTH fill:#9370DB,color:#fff
+```
+
+| Característica | KMS | CloudHSM |
+|---------------|-----|----------|
+| **Gerenciamento** | AWS | Cliente |
+| **Compliance** | FIPS 140-2 Level 2 | FIPS 140-2 Level 3 |
+| **Tenancy** | Multi-tenant | Single-tenant |
+| **Chaves Assimétricas** | Limitado | Completo |
+| **SSL Offloading** | Não | Sim |
+| **Preço** | Por uso | Por hora (~$1.50/hr) |
+| **HA** | Automático | Manual (cluster) |
 
 #### KMS em Múltiplas Regiões
 
@@ -298,6 +422,39 @@ Arquiteturas de solução para implementação de SSL em aplicações hospedadas
 - No **Secrets Manager**, a rotação de senhas é **automática**.
 - No **Parameter Store**, é necessário **criar e manter uma integração** via **EventBridge + Lambda** para gerenciar a rotação manualmente.
 ![image-20230206062741073](assets/image-20230206062741073.png)
+
+```mermaid
+flowchart TB
+    subgraph Decision["Quando usar cada serviço?"]
+        Q1{Precisa de<br/>rotação automática<br/>de credenciais?}
+        Q2{É credencial<br/>de banco de dados?}
+        Q3{Precisa de<br/>cross-account<br/>sharing?}
+        Q4{Orçamento<br/>limitado?}
+    end
+
+    Q1 -->|Sim| SM[Secrets Manager]
+    Q1 -->|Não| Q2
+    Q2 -->|Sim| SM
+    Q2 -->|Não| Q3
+    Q3 -->|Sim| SM
+    Q3 -->|Não| Q4
+    Q4 -->|Sim| SSM[Parameter Store]
+    Q4 -->|Não| SM
+
+    style SM fill:#FF6347,color:#fff
+    style SSM fill:#4169E1,color:#fff
+```
+
+| Característica | Parameter Store | Secrets Manager |
+|---------------|----------------|-----------------|
+| **Custo** | Gratuito (Standard) | $0.40/secret/mês |
+| **Rotação Automática** | Não (manual via Lambda) | Sim (nativo) |
+| **Tamanho máximo** | 8KB (Advanced) | 64KB |
+| **Cross-account** | Não | Sim |
+| **Versionamento** | Sim | Sim |
+| **Criptografia** | Opcional | Obrigatória |
+| **Integração RDS** | Manual | Nativa |
+| **Hierarquia de paths** | Sim | Não |
 
 ---
 
@@ -493,6 +650,63 @@ Arquiteturas de solução para implementação de SSL em aplicações hospedadas
 - **AWS Shield** → Proteção contra **DDoS** nas camadas **3 e 4 (Rede e Transporte)**.
 - **AWS Firewall Manager** → Centraliza a aplicação de regras do **WAF e Shield** em várias contas AWS.
 
+```mermaid
+flowchart TB
+    subgraph OSI["Camadas OSI"]
+        L7[Layer 7 - Aplicação<br/>HTTP, HTTPS, SQL Injection, XSS]
+        L4[Layer 4 - Transporte<br/>TCP, UDP]
+        L3[Layer 3 - Rede<br/>IP, ICMP]
+    end
+
+    subgraph Services["Serviços de Proteção"]
+        WAF[AWS WAF<br/>$5/WebACL/mês]
+        Shield[AWS Shield Standard<br/>Gratuito]
+        ShieldAdv[AWS Shield Advanced<br/>$3000/mês]
+        FM[Firewall Manager<br/>Gerenciamento central]
+    end
+
+    L7 --> WAF
+    L4 --> Shield
+    L3 --> Shield
+    L7 --> ShieldAdv
+    L4 --> ShieldAdv
+    L3 --> ShieldAdv
+
+    FM -->|Gerencia| WAF
+    FM -->|Gerencia| ShieldAdv
+    FM -->|Gerencia| SG[Security Groups]
+    FM -->|Gerencia| NACL[Network ACLs]
+    FM -->|Gerencia| NFW[Network Firewall]
+
+    subgraph Protected["Recursos Protegidos"]
+        ALB[ALB]
+        CF[CloudFront]
+        APIG[API Gateway]
+        R53[Route 53]
+        GA[Global Accelerator]
+    end
+
+    WAF --> ALB
+    WAF --> CF
+    WAF --> APIG
+    ShieldAdv --> R53
+    ShieldAdv --> GA
+    ShieldAdv --> CF
+
+    style WAF fill:#4169E1,color:#fff
+    style Shield fill:#32CD32,color:#fff
+    style ShieldAdv fill:#FF6347,color:#fff
+    style FM fill:#9370DB,color:#fff
+```
+
+| Serviço | Camada | Custo | Proteção |
+|---------|--------|-------|----------|
+| **Shield Standard** | L3/L4 | Gratuito | DDoS básico |
+| **Shield Advanced** | L3/L4/L7 | $3000/org/mês | DDoS + DRT 24/7 + cost protection |
+| **WAF** | L7 | $5/WebACL + regras | SQL Injection, XSS, geo-blocking |
+| **Firewall Manager** | Todos | $100/policy/região | Gerenciamento centralizado |
+| **Network Firewall** | L3/L4 | Por hora + GB | Stateful/Stateless inspection |
+
 ---
 
 ### Bloqueio de IPs
@@ -594,6 +808,61 @@ Arquiteturas de solução para implementação de SSL em aplicações hospedadas
 - Dashboard que exibe os recursos em conformidade ou não.
 - Permite visualizar as configurações e histórico de alterações.
 
+```mermaid
+flowchart TB
+    subgraph Resources["Recursos AWS"]
+        EC2[EC2]
+        S3[S3]
+        SG[Security Groups]
+        RDS[RDS]
+    end
+
+    subgraph Config["AWS Config"]
+        Rules[Config Rules<br/>75+ managed rules]
+        Eval[Evaluation<br/>Contínua ou periódica]
+        Compliance[Compliance Status]
+    end
+
+    subgraph Actions["Ações de Remediação"]
+        SSM[SSM Automation]
+        Lambda[Lambda Function]
+        SNS[SNS Notification]
+        EB[EventBridge]
+    end
+
+    Resources --> Rules
+    Rules --> Eval
+    Eval --> Compliance
+
+    Compliance -->|NON_COMPLIANT| SSM
+    Compliance -->|NON_COMPLIANT| Lambda
+    Compliance -->|Qualquer mudança| SNS
+    Compliance -->|Qualquer mudança| EB
+
+    SSM -->|Corrige| Resources
+    Lambda -->|Corrige| Resources
+
+    style Rules fill:#4169E1,color:#fff
+    style SSM fill:#32CD32,color:#fff
+    style Lambda fill:#FF6347,color:#fff
+```
+
+> **Dicas para o Exame - AWS Config**
+
+- **Conformance Packs**: Conjunto de regras e remediações que podem ser implantadas como uma unidade.
+- **Aggregators**: Permitem visualizar dados de Config de múltiplas contas e regiões em um dashboard único.
+- **Config não previne ações** - apenas detecta e pode remediar após o fato.
+- **Para prevenir**, use SCPs ou IAM policies.
+- **Custo**: $0.003 por item de configuração + $0.001 por avaliação de regra.
+
+| Regra Comum | O que verifica |
+|------------|----------------|
+| `s3-bucket-public-read-prohibited` | Buckets S3 públicos |
+| `ec2-instance-no-public-ip` | EC2 com IP público |
+| `rds-instance-public-access-check` | RDS acessível publicamente |
+| `iam-user-mfa-enabled` | MFA habilitado |
+| `encrypted-volumes` | EBS criptografado |
+
 ---
 
 ## AWS Managed Logs
@@ -635,6 +904,60 @@ Arquiteturas de solução para implementação de SSL em aplicações hospedadas
 - Permite configurar uma conta centralizada dentro da **AWS Organizations** para atuar como **Administrador do GuardDuty**, gerenciando detecções de ameaças em todas as contas da organização.
 
 ![image-20230211201043035](./assets/image-20230211201043035.png)
+
+```mermaid
+flowchart TB
+    subgraph DataSources["Fontes de Dados"]
+        CT[CloudTrail Events<br/>Management & Data]
+        VPC[VPC Flow Logs]
+        DNS[DNS Logs]
+        S3[S3 Data Events]
+        EKS[EKS Audit Logs]
+        RDS[RDS Login Activity]
+        Lambda[Lambda Network Activity]
+    end
+
+    subgraph GuardDuty["AWS GuardDuty"]
+        ML[Machine Learning]
+        TI[Threat Intelligence]
+        Anomaly[Anomaly Detection]
+    end
+
+    subgraph Findings["Tipos de Findings"]
+        Recon[Reconnaissance<br/>Port scanning, API enumeration]
+        Compromise[Instance Compromise<br/>Crypto mining, malware]
+        Exfil[Data Exfiltration<br/>DNS tunneling, S3 theft]
+        Unauth[Unauthorized Access<br/>Credential abuse]
+    end
+
+    subgraph Response["Resposta"]
+        EB[EventBridge]
+        SNS[SNS Notification]
+        Lambda2[Lambda Remediation]
+        SH[Security Hub]
+    end
+
+    DataSources --> GuardDuty
+    GuardDuty --> Findings
+    Findings --> EB
+    EB --> SNS
+    EB --> Lambda2
+    Findings --> SH
+
+    style GuardDuty fill:#4169E1,color:#fff
+    style Findings fill:#FF6347,color:#fff
+```
+
+> **Dicas para o Exame - GuardDuty**
+
+- **Não requer agente** - usa logs já disponíveis na AWS.
+- **Preço baseado em volume** de logs analisados.
+- **Trusted/Threat IP Lists**: Permite whitelist e blacklist de IPs.
+- **Suppression Rules**: Permite ignorar findings específicos.
+- **S3 Protection**: Detecta acesso anômalo a buckets S3.
+- **EKS Protection**: Detecta ameaças em clusters Kubernetes.
+- **Malware Protection**: Escaneia EBS volumes anexados a EC2/ECS.
+- **RDS Protection**: Detecta tentativas de login suspeitas em Aurora.
 
 ---
 
@@ -692,13 +1015,94 @@ O IAM permite aplicar regras de acesso tanto no nível do bucket quanto no níve
 
 ---
 
-## Amazon Detective  
+## Amazon Detective
 
 
 > Visão Geral
 
 Serviço que ajuda a investigar incidentes de segurança e analisar a causa raiz de atividades suspeitas.
 
-- Utiliza **Machine Learning** e **grafos** para identificar padrões suspeitos.  
-- Consolida logs de diversos serviços da AWS, criando uma visão unificada das atividades.  
-- Permite gerar visualizações detalhadas para facilitar a análise forense e a resposta a incidentes.  
+- Utiliza **Machine Learning** e **grafos** para identificar padrões suspeitos.
+- Consolida logs de diversos serviços da AWS, criando uma visão unificada das atividades.
+- Permite gerar visualizações detalhadas para facilitar a análise forense e a resposta a incidentes.
+
+---
+
+## Resumo de Serviços de Segurança para o Exame
+
+```mermaid
+flowchart TB
+    subgraph Prevention["Prevenção"]
+        IAM[IAM Policies/SCPs]
+        WAF[AWS WAF]
+        Shield[AWS Shield]
+        SG[Security Groups]
+        NACL[NACLs]
+    end
+
+    subgraph Detection["Detecção"]
+        GD[GuardDuty<br/>Ameaças]
+        Insp[Inspector<br/>Vulnerabilidades]
+        Config[AWS Config<br/>Compliance]
+        CT[CloudTrail<br/>Auditoria API]
+        Macie[Macie<br/>Dados sensíveis S3]
+    end
+
+    subgraph Response["Resposta e Investigação"]
+        SH[Security Hub<br/>Agregação]
+        Det[Detective<br/>Análise forense]
+        SSM[Systems Manager<br/>Remediação]
+    end
+
+    subgraph Encryption["Criptografia"]
+        KMS[KMS<br/>Gerenciado]
+        HSM[CloudHSM<br/>Dedicado]
+        ACM[ACM<br/>Certificados]
+    end
+
+    subgraph Secrets["Gestão de Segredos"]
+        SM[Secrets Manager<br/>Rotação automática]
+        PS[Parameter Store<br/>Configurações]
+    end
+
+    Detection --> SH
+    SH --> Det
+    SH --> SSM
+
+    style Prevention fill:#32CD32,color:#fff
+    style Detection fill:#FFD700,color:#000
+    style Response fill:#FF6347,color:#fff
+    style Encryption fill:#4169E1,color:#fff
+    style Secrets fill:#9370DB,color:#fff
+```
+
+### Tabela de Decisão Rápida
+
+| Cenário | Serviço |
+|---------|---------|
+| Auditoria de chamadas de API | CloudTrail |
+| Detectar ameaças em tempo real | GuardDuty |
+| Verificar vulnerabilidades em EC2/Lambda/ECR | Inspector |
+| Verificar compliance de configurações | AWS Config |
+| Detectar dados sensíveis em S3 | Macie |
+| Investigar incidentes de segurança | Detective |
+| Centralizar findings de segurança | Security Hub |
+| Proteção DDoS layer 3/4 | Shield |
+| Proteção layer 7 (SQL injection, XSS) | WAF |
+| Gerenciamento centralizado de regras | Firewall Manager |
+| Criptografia gerenciada | KMS |
+| Criptografia FIPS 140-2 Level 3 | CloudHSM |
+| Rotação automática de credenciais DB | Secrets Manager |
+| Configurações/segredos simples | Parameter Store |
+| Certificados SSL/TLS | ACM |
+
+### Dicas Importantes para o Exame
+
+1. **CloudTrail vs Config**: CloudTrail registra "quem fez o quê", Config registra "como está configurado".
+2. **GuardDuty vs Inspector**: GuardDuty detecta ameaças ativas, Inspector encontra vulnerabilidades.
+3. **Detective**: Usado APÓS um finding do GuardDuty para investigar a causa raiz.
+4. **Security Hub**: Agrega findings de GuardDuty, Inspector, Macie, Firewall Manager, IAM Access Analyzer.
+5. **Macie**: Focado exclusivamente em dados sensíveis (PII, credenciais) no S3.
+6. **Shield Advanced**: Inclui proteção contra custos de DDoS (cost protection).
+7. **Firewall Manager**: Requer AWS Organizations para funcionar.
+8. **ACM**: Certificados são regionais, exceto para CloudFront (us-east-1).  

@@ -1,8 +1,43 @@
 ---
 title: "Provisionamento de recursos"
 sidebar_position: 10
---- 
+---
 
+```mermaid
+flowchart TB
+    subgraph IaC["Infrastructure as Code"]
+        CFN[CloudFormation<br/>Declarativo, JSON/YAML]
+        CDK[CDK<br/>Programático]
+        SAM[SAM<br/>Serverless]
+    end
+
+    subgraph PaaS["Platform as a Service"]
+        Beanstalk[Elastic Beanstalk<br/>Web apps]
+        AppRunner[App Runner<br/>Containers]
+    end
+
+    subgraph Deploy["Deployment Strategies"]
+        CodeDeploy[CodeDeploy]
+        Blue[Blue/Green]
+        Canary[Canary]
+        Rolling[Rolling]
+    end
+
+    subgraph Pipeline["CI/CD"]
+        CodePipeline[CodePipeline]
+        CodeBuild[CodeBuild]
+        CodeCommit[CodeCommit]
+    end
+
+    CDK --> CFN
+    SAM --> CFN
+    CodeCommit --> CodeBuild --> CodeDeploy
+    CodePipeline --> CodeDeploy
+
+    style CFN fill:#4169E1,color:#fff
+    style Beanstalk fill:#32CD32,color:#fff
+    style CodePipeline fill:#FF6347,color:#fff
+```
 
 ## AWS Elastic Beanstalk  
 

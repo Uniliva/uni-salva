@@ -645,7 +645,7 @@ graph LR
 
 - C**onexão dedicada, fibra** que vai do seu **datacenter** até a AWS.
 - Demora cerca de **1 Mês** para ser implementado toda a infraestrutura.
-- Por padrão os dados em transito não são cartografados, pois já se esta numa rede privada, mas caso queira pode se usar **um solução de IPSec com VPN.**
+- Por padrão os dados em transito não são criptografados, pois já se esta numa rede privada, mas caso queira pode se usar **um solução de IPSec com VPN.**
 - O **Direct Connect (DX)** é um recurso que permite a conexão dedicada (vai de fibra até o datacenter) e direta com a AWS, fora da infraestrutura da Internet.
 - Exemplo de uso, o Itaú deseja ter a melhor conexão possível entre seus datacenter e a AWS, ele contrata um **DX que vai ligar uma fibra do datacenter do Itaú até a AWS (Um parceiro).**
 - Caso se queira conectar mais de uma região deve se usar um **Direct Conect Gateway**
@@ -800,7 +800,7 @@ graph TB
   - **Connect Attachment**: Para SD-WAN e appliances de terceiros (usa GRE)
 - **Bandwidth**: 50 Gbps por VPC attachment, throughput agregado pode ser maior.
 - **Inter e Intra Region Peering**
-  - Dentro de uma região é possivel ter dois **TGW** ( Transit Gateway) com finalidades diferentes e conecta-los usando i**ntra-Refion Peering Mesh.**
+  - Dentro de uma região é possivel ter dois **TGW** ( Transit Gateway) com finalidades diferentes e conecta-los usando i**ntra-Region Peering Mesh.**
   - Mas caso queira conectar a outra região com um estrutura semelhante seria necessário criar um novo TGW e realizar o inter-Region Peeering Mesh.
     ![image-20230227055738521](assets/image-20230227055738521.png)
 

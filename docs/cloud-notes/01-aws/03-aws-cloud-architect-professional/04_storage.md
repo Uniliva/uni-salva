@@ -6,6 +6,46 @@ sidebar_position: 4
 
 ![storage](assets/image-20210902070844946.png)
 
+```mermaid
+flowchart TB
+    subgraph Decision["Qual tipo de armazenamento usar?"]
+        Q1{Precisa de<br/>persistência?}
+        Q2{Compartilhado<br/>entre instâncias?}
+        Q3{Protocolo<br/>necessário?}
+        Q4{Performance<br/>crítica?}
+    end
+
+    Q1 -->|Não| Instance[Instance Store<br/>Temporário, alta IOPS]
+    Q1 -->|Sim| Q2
+    Q2 -->|Não| EBS[EBS<br/>Block storage]
+    Q2 -->|Sim| Q3
+    Q3 -->|NFS/Linux| EFS[EFS<br/>File system Linux]
+    Q3 -->|SMB/Windows| FSxW[FSx Windows<br/>SMB/NTFS]
+    Q3 -->|HPC/Lustre| FSxL[FSx Lustre<br/>High performance]
+    Q3 -->|Object| S3[S3<br/>Object storage]
+
+    EBS --> Q4
+    Q4 -->|Sim| io2[io2/io2 Block Express<br/>64K IOPS]
+    Q4 -->|Não| gp3[gp3<br/>3K-16K IOPS]
+
+    style Instance fill:#FF6347,color:#fff
+    style EBS fill:#4169E1,color:#fff
+    style EFS fill:#32CD32,color:#fff
+    style FSxW fill:#9370DB,color:#fff
+    style S3 fill:#FFD700,color:#000
+```
+
+| Serviço | Tipo | Persistente | Multi-AZ | Multi-Attach | Caso de Uso |
+|---------|------|-------------|----------|--------------|-------------|
+| **Instance Store** | Block | Não | Não | Não | Cache, temp files |
+| **EBS** | Block | Sim | Não* | io1/io2 only | Boot, databases |
+| **EFS** | File (NFS) | Sim | Sim | Sim | Shared Linux |
+| **FSx Windows** | File (SMB) | Sim | Sim | Sim | Windows apps |
+| **FSx Lustre** | File | Sim | Não | Sim | HPC, ML |
+| **S3** | Object | Sim | Sim | N/A | Static content |
+
+*EBS snapshots podem ser copiados entre regiões
+
 ---
 
 ## EBS - Elastic Block Storage  
@@ -68,8 +108,42 @@ O **EBS permite a configuração de RAID**, mas isso deve ser feito no **sistema
 
 > Tipos de EBS
 
-![Tipos EBS](assets/image-20210819054333580.png)  
-![Tipos EBS 2](assets/image-20210819054408303.png)  
+```mermaid
+flowchart TB
+    subgraph SSD["SSD - Otimizado para IOPS"]
+        gp2["gp2<br/>3 IOPS/GB<br/>até 16K IOPS"]
+        gp3["gp3<br/>3K-16K IOPS<br/>Configurável"]
+        io1["io1<br/>até 64K IOPS<br/>Multi-Attach"]
+        io2["io2 Block Express<br/>até 256K IOPS<br/>99.999% durability"]
+    end
+
+    subgraph HDD["HDD - Otimizado para Throughput"]
+        st1["st1<br/>500 MB/s<br/>Big Data, DW"]
+        sc1["sc1<br/>250 MB/s<br/>Cold data, lowest cost"]
+    end
+
+    subgraph Boot["Boot Volume?"]
+        YES[Apenas SSD<br/>gp2, gp3, io1, io2]
+        NO[SSD ou HDD]
+    end
+
+    style gp3 fill:#32CD32,color:#fff
+    style io2 fill:#4169E1,color:#fff
+    style st1 fill:#FFD700,color:#000
+    style sc1 fill:#808080,color:#fff
+```
+
+| Tipo | IOPS Max | Throughput Max | Boot | Multi-Attach | Caso de Uso |
+|------|----------|----------------|------|--------------|-------------|
+| **gp3** | 16,000 | 1,000 MB/s | Sim | Não | General purpose |
+| **gp2** | 16,000 | 250 MB/s | Sim | Não | Legacy |
+| **io2** | 256,000 | 4,000 MB/s | Sim | Sim | Mission critical |
+| **io1** | 64,000 | 1,000 MB/s | Sim | Sim | High performance DB |
+| **st1** | 500 | 500 MB/s | Não | Não | Big Data, logs |
+| **sc1** | 250 | 250 MB/s | Não | Não | Cold archive |
+
+![Tipos EBS](assets/image-20210819054333580.png)
+![Tipos EBS 2](assets/image-20210819054408303.png)
 
 Os volumes **io1/io2** permitem conexão **simultânea** a **várias instâncias EC2**, sendo úteis para aplicações distribuídas como **Apache Cassandra**.  
 
@@ -218,7 +292,45 @@ O **Amazon FSx** é um serviço da AWS que permite configurar **sistemas de arqu
 
 ---
 
-> Tipos de FSx  
+> Tipos de FSx
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual FSx usar?"]
+        Q1{Sistema<br/>operacional?}
+        Q2{Caso de<br/>uso?}
+        Q3{Protocolo<br/>necessário?}
+    end
+
+    Q1 -->|Windows| FSxW[FSx for Windows<br/>SMB, NTFS, AD]
+    Q1 -->|Linux| Q2
+    Q1 -->|Multi-OS| Q3
+
+    Q2 -->|HPC, ML, Big Data| FSxL[FSx for Lustre<br/>Parallel file system]
+    Q2 -->|General purpose| Q3
+
+    Q3 -->|NFS + SMB + iSCSI| FSxN[FSx for NetApp ONTAP<br/>Enterprise features]
+    Q3 -->|NFS only| FSxZ[FSx for OpenZFS<br/>ZFS features]
+
+    subgraph Features["Características Principais"]
+        W["Windows<br/>• Active Directory<br/>• DFS Namespaces<br/>• VSS snapshots"]
+        L["Lustre<br/>• S3 integration<br/>• Lazy loading<br/>• Scratch/Persistent"]
+        N["NetApp ONTAP<br/>• Deduplication<br/>• Compression<br/>• SnapMirror"]
+        Z["OpenZFS<br/>• Snapshots<br/>• Compression<br/>• NFS v4"]
+    end
+
+    style FSxW fill:#4169E1,color:#fff
+    style FSxL fill:#FF6347,color:#fff
+    style FSxN fill:#32CD32,color:#fff
+    style FSxZ fill:#9370DB,color:#fff
+```
+
+| FSx Type | Protocolos | OS Suportado | Integração | Caso de Uso |
+|----------|-----------|--------------|------------|-------------|
+| **Windows** | SMB, NTFS | Windows | Active Directory | File shares Windows |
+| **Lustre** | Lustre | Linux | S3 | HPC, ML, rendering |
+| **NetApp ONTAP** | NFS, SMB, iSCSI | Todos | NetApp | Enterprise, migration |
+| **OpenZFS** | NFS | Linux, macOS | - | ZFS workloads |
 
 O **Amazon FSx** suporta quatro tipos principais de sistemas de arquivos:  
 
@@ -338,6 +450,54 @@ O custo do S3 depende dos seguintes fatores:
 :::info
 O Amazon S3 oferece diversas classes de armazenamento para diferentes necessidades de acesso e custo. Escolher a classe correta pode otimizar custos e garantir o nível adequado de disponibilidade e durabilidade dos dados.
 :::
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual classe de S3 usar?"]
+        Q1{Frequência<br/>de acesso?}
+        Q2{Padrão<br/>previsível?}
+        Q3{Tempo de<br/>recuperação?}
+        Q4{Retenção<br/>mínima?}
+    end
+
+    Q1 -->|Frequente| Standard[S3 Standard<br/>Uso geral]
+    Q1 -->|Variável| Q2
+    Q1 -->|Raro| Q3
+    Q1 -->|Arquivamento| Q4
+
+    Q2 -->|Não| Intelligent[S3 Intelligent-Tiering<br/>Auto-otimização]
+    Q2 -->|Sim, raro| IA[S3 Standard-IA<br/>Acesso infrequente]
+
+    Q3 -->|Milissegundos| GIR[Glacier Instant<br/>90 dias min]
+    Q3 -->|Minutos/Horas| GFR[Glacier Flexible<br/>90 dias min]
+    Q3 -->|12-48 horas| GDA[Glacier Deep Archive<br/>180 dias min]
+
+    Q4 -->|90 dias| GIR
+    Q4 -->|90 dias| GFR
+    Q4 -->|180 dias| GDA
+
+    subgraph OneZone["Single AZ (menor custo)"]
+        OZIA[One Zone-IA<br/>Dados replicáveis]
+    end
+
+    IA -.->|Menor custo| OZIA
+
+    style Standard fill:#32CD32,color:#fff
+    style Intelligent fill:#4169E1,color:#fff
+    style GIR fill:#9370DB,color:#fff
+    style GFR fill:#FF6347,color:#fff
+    style GDA fill:#808080,color:#fff
+```
+
+| Classe | Durabilidade | AZs | Acesso | Custo Storage | Custo Retrieval | Retenção Min |
+|--------|--------------|-----|--------|---------------|-----------------|--------------|
+| **Standard** | 11 9s | 3+ | Imediato | $$$ | - | - |
+| **Intelligent-Tiering** | 11 9s | 3+ | Imediato | $$ | - | 30 dias |
+| **Standard-IA** | 11 9s | 3+ | Imediato | $$ | $ | 30 dias |
+| **One Zone-IA** | 11 9s | 1 | Imediato | $ | $ | 30 dias |
+| **Glacier Instant** | 11 9s | 3+ | Milisseg | $ | $$ | 90 dias |
+| **Glacier Flexible** | 11 9s | 3+ | 1min-12h | $ | $$$ | 90 dias |
+| **Glacier Deep** | 11 9s | 3+ | 12-48h | ¢ | $$$ | 180 dias |
 
 - **Standard S3:** Classe de uso geral, projetada para dados que precisam estar disponíveis imediatamente e com alta durabilidade.
 - **Intelligent-Tiering:** Projetada para dados com padrões de acesso variáveis. Move automaticamente objetos não acessados por 30 dias para uma camada de menor custo e retorna os dados à camada de alto desempenho quando acessados.
@@ -567,6 +727,42 @@ O **Storage Lens** fornece insights detalhados sobre a utilização do armazenam
 :::info
 O S3 suporta diversas formas de criptografia para proteger os dados, tanto em repouso quanto em trânsito.
 :::
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual criptografia usar?"]
+        Q1{Quem gerencia<br/>a chave?}
+        Q2{Precisa de<br/>auditoria KMS?}
+        Q3{Chave própria<br/>externa?}
+    end
+
+    Q1 -->|AWS| Q2
+    Q1 -->|Cliente| Q3
+
+    Q2 -->|Não| SSES3[SSE-S3<br/>AES-256 AWS managed]
+    Q2 -->|Sim| SSEKMS[SSE-KMS<br/>CloudTrail audit]
+
+    Q3 -->|Server-side| SSEC[SSE-C<br/>Customer key]
+    Q3 -->|Client-side| CSE[Client-Side<br/>Encrypt before upload]
+
+    subgraph Headers["Headers HTTP"]
+        H1["SSE-S3: x-amz-server-side-encryption: AES256"]
+        H2["SSE-KMS: x-amz-server-side-encryption: aws:kms"]
+        H3["SSE-C: x-amz-server-side-encryption-customer-key"]
+    end
+
+    style SSES3 fill:#32CD32,color:#fff
+    style SSEKMS fill:#4169E1,color:#fff
+    style SSEC fill:#FF6347,color:#fff
+    style CSE fill:#9370DB,color:#fff
+```
+
+| Método | Gerenciamento | Auditoria | HTTPS Obrigatório | Caso de Uso |
+|--------|--------------|-----------|-------------------|-------------|
+| **SSE-S3** | AWS | Não | Não | Default, simplicidade |
+| **SSE-KMS** | AWS KMS | Sim (CloudTrail) | Não | Compliance, auditoria |
+| **SSE-C** | Cliente | Não | **Sim** | Chaves próprias |
+| **Client-Side** | Cliente | Não | Recomendado | Dados sensíveis |
 
 - **SSE-S3**: Criptografa os objetos usando chaves gerenciadas pela AWS (AES-256).
   - Utilizado por padrão para todos os dados armazenados no Glacier.
@@ -1079,3 +1275,73 @@ Questões frequentemente comparam os modelos de **precificação** dos serviços
 
 ✅ Amazon S3 Glacier Instant Retrieval
 :::
+
+---
+
+## Resumo de Storage para o Exame
+
+```mermaid
+flowchart TB
+    subgraph BlockStorage["Block Storage"]
+        EBS[EBS<br/>Persistente, single AZ]
+        IS[Instance Store<br/>Temporário, local]
+    end
+
+    subgraph FileStorage["File Storage"]
+        EFS[EFS<br/>NFS, Linux, multi-AZ]
+        FSxW[FSx Windows<br/>SMB, AD integration]
+        FSxL[FSx Lustre<br/>HPC, S3 integration]
+        FSxN[FSx NetApp<br/>Enterprise]
+        FSxZ[FSx OpenZFS<br/>ZFS features]
+    end
+
+    subgraph ObjectStorage["Object Storage"]
+        S3[S3<br/>11 9s durability]
+        Glacier[Glacier<br/>Archive]
+    end
+
+    subgraph Transfer["Transferência"]
+        DataSync[DataSync<br/>NAS migration]
+        TF[Transfer Family<br/>SFTP/FTPS]
+        Snow[Snow Family<br/>Offline transfer]
+    end
+```
+
+### Tabela de Decisão Rápida
+
+| Cenário | Serviço |
+|---------|---------|
+| Boot volume EC2 | EBS (gp3, io2) |
+| Dados temporários, alta IOPS | Instance Store |
+| Shared files Linux | EFS |
+| Shared files Windows + AD | FSx for Windows |
+| HPC, ML, Big Data | FSx for Lustre |
+| Object storage escalável | S3 |
+| Arquivamento longo prazo | S3 Glacier Deep Archive |
+| Migração de NAS on-prem | DataSync |
+| SFTP para clientes externos | Transfer Family |
+| Transferência offline TB/PB | Snow Family |
+
+### Limites Importantes
+
+| Serviço | Limite |
+|---------|--------|
+| S3 object size | 5 TB max |
+| S3 multipart | Recomendado > 100 MB |
+| EBS io2 IOPS | 256,000 max |
+| EBS gp3 IOPS | 16,000 max |
+| EFS throughput | 10+ GB/s |
+| Glacier Expedited | 1-5 minutos |
+| Glacier Standard | 3-5 horas |
+| Glacier Deep Archive | 12-48 horas |
+
+### Dicas Finais para o Exame
+
+1. **EBS Multi-Attach**: Apenas io1/io2 suportam, mesma AZ, max 16 instâncias.
+2. **EFS vs FSx**: EFS = Linux/NFS, FSx Windows = Windows/SMB/AD.
+3. **S3 Versioning**: Obrigatório para replicação (SRR/CRR).
+4. **S3 Object Lock**: WORM, Governance mode (admin pode deletar) vs Compliance mode (ninguém pode).
+5. **Glacier Deep Archive**: Menor custo, mas 180 dias de retenção mínima.
+6. **DataSync**: Preserva metadados e permissões, ideal para migrações.
+7. **FSx Lustre + S3**: Lazy loading para não transferir tudo de uma vez.
+8. **S3 Transfer Acceleration**: Usa edge locations para uploads globais mais rápidos.

@@ -3,6 +3,38 @@ title: "Machine Learning"
 sidebar_position: 14
 ---
 
+```mermaid
+flowchart TB
+    subgraph ML["Serviços de Machine Learning AWS"]
+        subgraph Vision["Visão Computacional"]
+            Rekognition[Rekognition<br/>Imagem/Vídeo]
+            Textract[Textract<br/>OCR/Documentos]
+        end
+
+        subgraph NLP["Processamento de Linguagem"]
+            Comprehend[Comprehend<br/>Análise de texto]
+            Transcribe[Transcribe<br/>Speech-to-Text]
+            Polly[Polly<br/>Text-to-Speech]
+            Translate[Translate<br/>Tradução]
+            Lex[Lex<br/>Chatbots]
+        end
+
+        subgraph Custom["ML Customizado"]
+            SageMaker[SageMaker<br/>Build/Train/Deploy]
+        end
+
+        subgraph Other["Outros"]
+            Forecast[Forecast<br/>Previsão]
+            Personalize[Personalize<br/>Recomendação]
+            Kendra[Kendra<br/>Enterprise Search]
+        end
+    end
+
+    style SageMaker fill:#FF6347,color:#fff
+    style Rekognition fill:#4169E1,color:#fff
+    style Comprehend fill:#32CD32,color:#fff
+```
+
 ## 🤖 Machine Learning
 
 ![image-20230303060442789](assets/image-20230303060442789.png)

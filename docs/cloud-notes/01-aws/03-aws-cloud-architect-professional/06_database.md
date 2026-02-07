@@ -3,9 +3,43 @@ title: "Bancos de dados"
 sidebar_position: 6
 ---  
 
-## DynamoDB  
+## DynamoDB
 
-O **Amazon DynamoDB** é um banco de dados NoSQL gerenciado que oferece **alta escalabilidade, baixa latência e desempenho previsível**. Ele é amplamente utilizado para aplicações que exigem grande volume de leitura e escrita, como jogos online, e-commerce e aplicações de IoT.  
+O **Amazon DynamoDB** é um banco de dados NoSQL gerenciado que oferece **alta escalabilidade, baixa latência e desempenho previsível**. Ele é amplamente utilizado para aplicações que exigem grande volume de leitura e escrita, como jogos online, e-commerce e aplicações de IoT.
+
+```mermaid
+flowchart TB
+    subgraph DynamoDB["DynamoDB Architecture"]
+        Table[Table]
+        Table --> PK[Partition Key<br/>Hash]
+        Table --> SK[Sort Key<br/>Range - Opcional]
+
+        subgraph Capacity["Modos de Capacidade"]
+            Prov[Provisioned<br/>RCU/WCU definidos]
+            OnDem[On-Demand<br/>Auto-scale, 2.5x custo]
+        end
+
+        subgraph Indexes["Índices"]
+            LSI[LSI<br/>Mesma PK, nova SK<br/>Criar na criação]
+            GSI[GSI<br/>Nova PK/SK<br/>Criar a qualquer momento]
+        end
+
+        subgraph Features["Features"]
+            DAX[DAX<br/>Cache microsegundos]
+            Streams[DynamoDB Streams<br/>CDC, Global Tables]
+            TTL[TTL<br/>Auto-delete sem WCU]
+        end
+    end
+
+    subgraph Replication["Replicação"]
+        Global[Global Tables<br/>Multi-region active-active]
+    end
+
+    Streams --> Global
+
+    style DAX fill:#FF6347,color:#fff
+    style Global fill:#4169E1,color:#fff
+```  
 
 > Características Principais  
 
@@ -295,11 +329,66 @@ O **AWS OpenSearch** é um fork do ElasticSearch, criado após mudanças na lice
 ---
 
 
-## AWS RDS  
+## AWS RDS
 
-![image-20230220111311099](assets/image-20230220111311099.png)  
+![image-20230220111311099](assets/image-20230220111311099.png)
 
-O Amazon RDS (**Relational Database Service**) é um serviço gerenciado de banco de dados relacional da AWS. Ele automatiza tarefas como provisionamento, backup, recuperação e escalabilidade.  
+O Amazon RDS (**Relational Database Service**) é um serviço gerenciado de banco de dados relacional da AWS. Ele automatiza tarefas como provisionamento, backup, recuperação e escalabilidade.
+
+```mermaid
+flowchart TB
+    subgraph Decision["RDS vs Aurora - Qual escolher?"]
+        Q1{Precisa de<br/>MySQL/PostgreSQL?}
+        Q2{Budget<br/>limitado?}
+        Q3{Oracle ou<br/>SQL Server?}
+        Q4{Multi-Master<br/>write?}
+    end
+
+    Q1 -->|Sim| Q2
+    Q1 -->|Não| Q3
+    Q2 -->|Sim| RDS[RDS<br/>Mais barato]
+    Q2 -->|Não| Q4
+    Q3 -->|Sim| RDS
+    Q3 -->|Não| RDS
+    Q4 -->|Sim| Aurora[Aurora<br/>Multi-Master]
+    Q4 -->|Não| Aurora_Check{Performance<br/>crítica?}
+    Aurora_Check -->|Sim| Aurora
+    Aurora_Check -->|Não| RDS
+
+    subgraph RDS_Features["RDS"]
+        R1["• MySQL, PostgreSQL, MariaDB"]
+        R2["• Oracle, SQL Server"]
+        R3["• Multi-AZ (standby)"]
+        R4["• Read Replicas (5)"]
+        R5["• Até 64TB storage"]
+    end
+
+    subgraph Aurora_Features["Aurora"]
+        A1["• MySQL, PostgreSQL compat"]
+        A2["• 5x faster MySQL"]
+        A3["• 6 copies across 3 AZs"]
+        A4["• Read Replicas (15)"]
+        A5["• Até 128TB auto-scaling"]
+        A6["• Multi-Master, Serverless"]
+        A7["• Global Database"]
+    end
+
+    style RDS fill:#4169E1,color:#fff
+    style Aurora fill:#FF6347,color:#fff
+```
+
+| Característica | RDS | Aurora |
+|---------------|-----|--------|
+| **Engines** | MySQL, PostgreSQL, MariaDB, Oracle, SQL Server | MySQL, PostgreSQL (compatível) |
+| **Performance** | Padrão | 5x MySQL, 3x PostgreSQL |
+| **Storage Max** | 64 TB | 128 TB (auto-scaling) |
+| **Read Replicas** | 5 | 15 |
+| **Multi-AZ** | Standby (sync) | 6 cópias em 3 AZs |
+| **Failover** | 60-120s | < 30s |
+| **Multi-Master** | Não | Sim |
+| **Serverless** | Não | Sim |
+| **Global** | Cross-Region Replicas | Global Database |
+| **Custo** | Mais barato | 20% mais barato que RDS equivalente |  
 
 - **Escala automaticamente** em minutos.  
 - **Serviço totalmente gerenciado pela AWS**, incluindo:  
@@ -686,7 +775,91 @@ O **Amazon DocumentDB** é um serviço de banco de dados totalmente gerenciado, 
 
 > Perguntas sobre **segurança e criptografia** no Amazon DocumentDB geralmente exploram autenticação com **IAM**, criptografia em trânsito (SSL/TLS) e criptografia em repouso com **AWS KMS**.
 
-📌 Uma organização precisa garantir que os dados armazenados no Amazon DocumentDB estejam criptografados em repouso e em trânsito. Quais práticas atenderiam a esses requisitos?  
-- ✅ Usar criptografia com AWS KMS para dados em repouso e configurar conexões SSL/TLS para tráfego seguro em trânsito.  
+📌 Uma organização precisa garantir que os dados armazenados no Amazon DocumentDB estejam criptografados em repouso e em trânsito. Quais práticas atenderiam a esses requisitos?
+- ✅ Usar criptografia com AWS KMS para dados em repouso e configurar conexões SSL/TLS para tráfego seguro em trânsito.
 
 :::
+
+---
+
+## Resumo de Databases para o Exame
+
+```mermaid
+flowchart TB
+    subgraph Decision["Qual banco de dados usar?"]
+        Q1{Tipo de<br/>dados?}
+        Q2{Relacional<br/>ou NoSQL?}
+        Q3{Document<br/>store?}
+        Q4{Search/<br/>Analytics?}
+    end
+
+    Q1 -->|Estruturado| Q2
+    Q1 -->|Semi-estruturado| Q3
+    Q1 -->|Text search| Q4
+
+    Q2 -->|Relacional| Rel{Performance<br/>crítica?}
+    Rel -->|Sim| Aurora[Aurora]
+    Rel -->|Não| RDS[RDS]
+
+    Q2 -->|NoSQL Key-Value| DDB[DynamoDB]
+
+    Q3 -->|MongoDB compat| DocDB[DocumentDB]
+    Q3 -->|Key-Value| DDB
+
+    Q4 -->|Full-text search| OS[OpenSearch]
+    Q4 -->|Graph queries| Neptune[Neptune]
+
+    subgraph Serverless["Opções Serverless"]
+        Aurora_S[Aurora Serverless]
+        DDB_OD[DynamoDB On-Demand]
+        OS_S[OpenSearch Serverless]
+    end
+
+    style Aurora fill:#FF6347,color:#fff
+    style DDB fill:#4169E1,color:#fff
+    style DocDB fill:#32CD32,color:#fff
+    style OS fill:#9370DB,color:#fff
+```
+
+### Tabela de Decisão Rápida
+
+| Caso de Uso | Serviço |
+|-------------|---------|
+| Transações ACID, SQL | RDS ou Aurora |
+| Key-Value, milhões req/s | DynamoDB |
+| MongoDB workloads | DocumentDB |
+| Full-text search, logs | OpenSearch |
+| Graph databases | Neptune |
+| Ledger/Blockchain | QLDB |
+| Time-series data | Timestream |
+| Wide-column (Cassandra) | Keyspaces |
+| In-memory cache | ElastiCache |
+
+### Limites e Características Importantes
+
+| Serviço | Limite/Característica |
+|---------|----------------------|
+| DynamoDB item size | 400 KB max |
+| DynamoDB RCU | 4 KB strongly consistent |
+| DynamoDB WCU | 1 KB per write |
+| DynamoDB GSI | Criar a qualquer momento |
+| DynamoDB LSI | Criar apenas na criação |
+| RDS Read Replicas | 5 max |
+| Aurora Read Replicas | 15 max |
+| Aurora failover | < 30 segundos |
+| Aurora Global failover | < 1 minuto |
+| RDS Multi-AZ | Sync replication |
+| RDS Read Replica | Async replication |
+
+### Dicas Finais para o Exame
+
+1. **DynamoDB**: Ideal para serverless, key-value, baixa latência consistente.
+2. **DAX vs ElastiCache**: DAX para queries DynamoDB, ElastiCache para agregações.
+3. **Aurora vs RDS**: Aurora para performance, RDS para Oracle/SQL Server.
+4. **Aurora Serverless**: Cargas intermitentes, cobrança por segundo.
+5. **RDS Proxy**: Resolve TooManyConnections com Lambda.
+6. **Multi-AZ vs Read Replica**: Multi-AZ = HA, Read Replica = scaling.
+7. **DynamoDB Streams**: Obrigatório para Global Tables.
+8. **TTL DynamoDB**: Deleta items automaticamente sem WCU.
+9. **OpenSearch**: Não é banco primário, é para search/analytics.
+10. **DocumentDB**: Não é MongoDB 100%, mas compatível.
