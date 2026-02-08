@@ -99,6 +99,8 @@ Subnets públicas são essenciais para recursos que precisam acessar a internet,
 
 ---
 
+## Gateways & Roteamento
+
 ### Internet Gateway
 
 ![image-20210907203053110](assets/image-20210907203053110.png)
@@ -215,6 +217,8 @@ graph LR
 :::
 
 ---
+
+## Segurança
 
 ### Security Group
 
@@ -336,6 +340,8 @@ graph TB
 
 ---
 
+## Acesso & Monitoramento
+
 ### Bastion Hosts
 
 ![Bastion Hosts](assets/image-20210908200020997.png)
@@ -437,6 +443,8 @@ graph TB
 - Diferente do Reachability Analyzer: foco em **segurança/compliance**, não troubleshooting.
 
 ---
+
+## Conectividade Interna AWS
 
 ### VPC Peering
 
@@ -899,6 +907,8 @@ graph TB
 
 ---
 
+## Conectividade Híbrida
+
 ### Virtual Private Gateway
 
 ![Virtual Private Gateway](assets/image-20210908200507774.png)
@@ -1176,6 +1186,8 @@ graph TB
 :::
 
 ---
+
+## Referência & Comparativos
 
 ### AWS Cloud WAN
 
