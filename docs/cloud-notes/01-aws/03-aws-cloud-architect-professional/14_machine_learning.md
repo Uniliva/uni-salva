@@ -4,35 +4,58 @@ sidebar_position: 14
 ---
 
 ```mermaid
-flowchart TB
-    subgraph ML["Serviços de Machine Learning AWS"]
-        subgraph Vision["Visão Computacional"]
-            Rekognition[Rekognition<br/>Imagem/Vídeo]
-            Textract[Textract<br/>OCR/Documentos]
-        end
-
-        subgraph NLP["Processamento de Linguagem"]
-            Comprehend[Comprehend<br/>Análise de texto]
-            Transcribe[Transcribe<br/>Speech-to-Text]
-            Polly[Polly<br/>Text-to-Speech]
-            Translate[Translate<br/>Tradução]
-            Lex[Lex<br/>Chatbots]
-        end
-
-        subgraph Custom["ML Customizado"]
-            SageMaker[SageMaker<br/>Build/Train/Deploy]
-        end
-
-        subgraph Other["Outros"]
-            Forecast[Forecast<br/>Previsão]
-            Personalize[Personalize<br/>Recomendação]
-            Kendra[Kendra<br/>Enterprise Search]
-        end
+flowchart LR
+    subgraph Vision["🖼️ Visão Computacional"]
+        Rekognition["🔍 Rekognition<br/>Faces, Objetos, Moderação"]
+        Textract["📝 Textract<br/>OCR, Tabelas, Formulários"]
     end
 
-    style SageMaker fill:#FF6347,color:#fff
-    style Rekognition fill:#4169E1,color:#fff
-    style Comprehend fill:#32CD32,color:#fff
+    subgraph NLP["🗣️ Processamento de Linguagem"]
+        Comprehend["📖 Comprehend<br/>Sentimento, Entidades, NLP"]
+        ComprehendMed["🏥 Comprehend Medical<br/>PHI, Dados Clínicos"]
+        Transcribe["🎙️ Transcribe<br/>Áudio → Texto"]
+        Polly["🔊 Polly<br/>Texto → Fala"]
+        Translate["🌍 Translate<br/>Tradução em tempo real"]
+    end
+
+    subgraph Conversational["💬 Conversação"]
+        Lex["🤖 Lex<br/>Chatbots / Alexa"]
+        Connect["☎️ Connect<br/>Call Center Virtual"]
+        Lex --> Connect
+    end
+
+    subgraph Analytics["📊 Análise & Previsão"]
+        Forecast["📈 Forecast<br/>Séries Temporais"]
+        Personalize["🧠 Personalize<br/>Recomendação"]
+        Kendra["🔎 Kendra<br/>Busca Semântica"]
+    end
+
+    subgraph Platform["⚙️ Plataforma ML"]
+        SageMaker["🧪 SageMaker<br/>Build / Train / Deploy"]
+    end
+
+    SageMaker -.->|"Modelos customizados"| Vision
+    SageMaker -.->|"Modelos customizados"| NLP
+    SageMaker -.->|"Modelos customizados"| Analytics
+
+    style Vision fill:#e3f2fd,color:#1565c0,stroke:#90caf9
+    style NLP fill:#e8f5e9,color:#2e7d32,stroke:#a5d6a7
+    style Conversational fill:#fff3e0,color:#e65100,stroke:#ffcc80
+    style Analytics fill:#f3e5f5,color:#6a1b9a,stroke:#ce93d8
+    style Platform fill:#fce4ec,color:#c62828,stroke:#ef9a9a
+    style SageMaker fill:#ef9a9a,color:#b71c1c
+    style Rekognition fill:#90caf9,color:#0d47a1
+    style Textract fill:#90caf9,color:#0d47a1
+    style Comprehend fill:#a5d6a7,color:#1b5e20
+    style ComprehendMed fill:#a5d6a7,color:#1b5e20
+    style Transcribe fill:#a5d6a7,color:#1b5e20
+    style Polly fill:#a5d6a7,color:#1b5e20
+    style Translate fill:#a5d6a7,color:#1b5e20
+    style Lex fill:#ffcc80,color:#bf360c
+    style Connect fill:#ffcc80,color:#bf360c
+    style Forecast fill:#ce93d8,color:#4a148c
+    style Personalize fill:#ce93d8,color:#4a148c
+    style Kendra fill:#ce93d8,color:#4a148c
 ```
 
 ## 🤖 Machine Learning

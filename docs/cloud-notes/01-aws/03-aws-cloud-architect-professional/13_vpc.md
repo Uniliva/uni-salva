@@ -465,8 +465,9 @@ graph TB
 #### Diagrama: VPC Peering NÃO é Transitivo
 
 ```mermaid
-graph LR
-    subgraph "❌ VPC Peering - NÃO Transitivo"
+graph TB
+    subgraph NO_TRANS["❌ VPC Peering - NÃO Transitivo"]
+        direction LR
         VPC_A1["VPC A<br/>10.0.0.0/16"]
         VPC_B1["VPC B<br/>10.1.0.0/16"]
         VPC_C1["VPC C<br/>10.2.0.0/16"]
@@ -476,14 +477,8 @@ graph LR
         VPC_A1 -.-x|"❌ Sem conexão<br/>A não vê C"| VPC_C1
     end
 
-    style VPC_A1 fill:#FF6B6B,color:#fff
-    style VPC_B1 fill:#4ECDC4,color:#fff
-    style VPC_C1 fill:#45B7D1,color:#fff
-```
-
-```mermaid
-graph LR
-    subgraph "✅ Solução: Full Mesh Peering"
+    subgraph FULL_MESH["✅ Solução: Full Mesh Peering"]
+        direction LR
         VPC_A2["VPC A<br/>10.0.0.0/16"]
         VPC_B2["VPC B<br/>10.1.0.0/16"]
         VPC_C2["VPC C<br/>10.2.0.0/16"]
@@ -493,6 +488,11 @@ graph LR
         VPC_A2 <-->|"Peering"| VPC_C2
     end
 
+    NO_TRANS ~~~ FULL_MESH
+
+    style VPC_A1 fill:#FF6B6B,color:#fff
+    style VPC_B1 fill:#4ECDC4,color:#fff
+    style VPC_C1 fill:#45B7D1,color:#fff
     style VPC_A2 fill:#FF6B6B,color:#fff
     style VPC_B2 fill:#4ECDC4,color:#fff
     style VPC_C2 fill:#45B7D1,color:#fff
@@ -549,8 +549,9 @@ VPC Peering é ótimo para conectar ambientes de desenvolvimento e produção, m
 #### Diagramas: Comparação entre tipos de Endpoints
 
 ```mermaid
-graph TB
-    subgraph "🔷 TIPO 1: Gateway Endpoint (S3 e DynamoDB)"
+graph LR
+    subgraph GW["🔷 Gateway Endpoint"]
+        direction TB
         subgraph VPC_GW["VPC"]
             EC2_GW["EC2"]
             RT_GW["Route Table<br/>Destino: pl-xxxxx<br/>Target: vpce-gateway"]
@@ -563,13 +564,10 @@ graph TB
         RT_GW --> VPCE_GW
         VPCE_GW -.->|Rede Privada| S3
         VPCE_GW -.->|Rede Privada| DDB
-
-        style VPCE_GW fill:#90EE90,color:#000
-        style S3 fill:#ff9900,color:#fff
-        style DDB fill:#4053D6,color:#fff
     end
 
-    subgraph "🔶 TIPO 2: Interface Endpoint (Todos outros serviços)"
+    subgraph INT["🔶 Interface Endpoint"]
+        direction TB
         subgraph VPC_INT["VPC"]
             EC2_INT["EC2<br/>10.0.1.10"]
             SG["Security Group<br/>Porta 443"]
@@ -580,11 +578,16 @@ graph TB
         EC2_INT -->|DNS Privado| VPCE_INT
         VPCE_INT -->|Verifica| SG
         SG -.->|443 HTTPS| SERVICES
-
-        style VPCE_INT fill:#FFA500,color:#000
-        style SERVICES fill:#6c757d,color:#fff
-        style SG fill:#d1ecf1,color:#000
     end
+
+    GW ~~~ INT
+
+    style VPCE_GW fill:#90EE90,color:#000
+    style S3 fill:#ff9900,color:#fff
+    style DDB fill:#4053D6,color:#fff
+    style VPCE_INT fill:#FFA500,color:#000
+    style SERVICES fill:#6c757d,color:#fff
+    style SG fill:#d1ecf1,color:#000
 ```
 
 #### Diagrama: Arquitetura Completa com VPC Endpoints
@@ -1255,12 +1258,19 @@ flowchart TD
 :::tip Resumo para a prova
 
 📌 **Baixa latência + alta banda** → Direct Connect
+
 📌 **Setup rápido + criptografia** → Site-to-Site VPN
+
 📌 **Conectar muitas VPCs** → Transit Gateway
+
 📌 **Backup para DX** → VPN como failover
+
 📌 **Appliances de segurança** → Gateway Load Balancer
+
 📌 **Compartilhar subnets entre contas** → VPC Sharing via RAM
+
 📌 **Troubleshooting de conectividade** → Reachability Analyzer
+
 📌 **DNS híbrido** → Route 53 Resolver Endpoints
 
 :::

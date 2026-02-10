@@ -13,7 +13,6 @@ const config: Config = {
     mermaid: true,
   },
   themes: ['@docusaurus/theme-mermaid'],
-  plugins: ['@actinc/docusaurus-plugin-panzoom'],
 
   // Set the production url of your site here
   url: 'https://docs.uniii.com.br',
@@ -104,7 +103,6 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    zoom: {},
   } satisfies Preset.ThemeConfig,
 };
 
