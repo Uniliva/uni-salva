@@ -30,6 +30,12 @@ flowchart LR
         Kendra["🔎 Kendra<br/>Busca Semântica"]
     end
 
+    subgraph GenAI["🤖 IA Generativa"]
+        Bedrock["🪨 Bedrock<br/>Foundation Models"]
+        QBusiness["💼 Q Business<br/>Assistente Empresarial"]
+        QDeveloper["👨‍💻 Q Developer<br/>Assistente de Código"]
+    end
+
     subgraph Platform["⚙️ Plataforma ML"]
         SageMaker["🧪 SageMaker<br/>Build / Train / Deploy"]
     end
@@ -37,12 +43,15 @@ flowchart LR
     SageMaker -.->|"Modelos customizados"| Vision
     SageMaker -.->|"Modelos customizados"| NLP
     SageMaker -.->|"Modelos customizados"| Analytics
+    Bedrock -.->|"LLMs gerenciados"| Conversational
+    Bedrock -.->|"LLMs gerenciados"| Analytics
 
     style Vision fill:#e3f2fd,color:#1565c0,stroke:#90caf9
     style NLP fill:#e8f5e9,color:#2e7d32,stroke:#a5d6a7
     style Conversational fill:#fff3e0,color:#e65100,stroke:#ffcc80
     style Analytics fill:#f3e5f5,color:#6a1b9a,stroke:#ce93d8
     style Platform fill:#fce4ec,color:#c62828,stroke:#ef9a9a
+    style GenAI fill:#e0f7fa,color:#00695c,stroke:#80deea
     style SageMaker fill:#ef9a9a,color:#b71c1c
     style Rekognition fill:#90caf9,color:#0d47a1
     style Textract fill:#90caf9,color:#0d47a1
@@ -56,6 +65,9 @@ flowchart LR
     style Forecast fill:#ce93d8,color:#4a148c
     style Personalize fill:#ce93d8,color:#4a148c
     style Kendra fill:#ce93d8,color:#4a148c
+    style Bedrock fill:#80deea,color:#004d40
+    style QBusiness fill:#80deea,color:#004d40
+    style QDeveloper fill:#80deea,color:#004d40
 ```
 
 ## 🤖 Machine Learning
@@ -294,6 +306,51 @@ Machine Learning na AWS é cobrado em **cenários práticos**! Foque nos serviç
 
 ---
 
+### 🪨 Amazon Bedrock
+
+- Serviço gerenciado para acesso a **Foundation Models (LLMs)** de diversos provedores (Anthropic, Meta, Mistral, Cohere, Amazon Nova, etc.).
+- Permite usar modelos via API **sem gerenciar infraestrutura**.
+- Suporta **fine-tuning**, **RAG (Retrieval Augmented Generation)** e **Agents** para automação de tarefas.
+- **Guardrails**: define políticas de segurança e filtragem de conteúdo nos modelos.
+- **Knowledge Bases**: conecta modelos a fontes de dados (S3, bancos de dados) para respostas contextuais.
+
+:::tip Dica de Prova
+
+📌 Qual serviço permite acessar LLMs de múltiplos provedores de forma gerenciada?
+✅ **Bedrock**
+
+📌 Como adicionar dados corporativos como contexto para um LLM?
+✅ **Bedrock Knowledge Bases (RAG)**
+
+:::
+
+---
+
+### 💼 Amazon Q Business
+
+- Assistente de IA generativa voltado para **uso empresarial**.
+- Conecta-se a fontes de dados corporativas (S3, SharePoint, Confluence, Slack, etc.).
+- Responde perguntas, resume documentos e gera conteúdo com base nos **dados internos da empresa**.
+- Possui controle de acesso via **IAM Identity Center**.
+
+---
+
+### 👨‍💻 Amazon Q Developer
+
+- Assistente de IA para **desenvolvedores** integrado a IDEs e console AWS.
+- Gera código, sugere correções, explica código e auxilia em **troubleshooting** de recursos AWS.
+- Pode analisar e transformar código legado (ex: Java 8 → Java 17).
+
+---
+
+### 🌟 Amazon Nova
+
+- Família de **modelos fundacionais da própria AWS**, disponíveis via Bedrock.
+- Variantes: **Nova Micro** (texto, baixo custo), **Nova Lite** (multimodal rápido), **Nova Pro** (equilíbrio custo/performance), **Nova Premier** (tarefas complexas).
+- Modelos de mídia: **Nova Canvas** (geração de imagens) e **Nova Reel** (geração de vídeos).
+
+---
+
 ## Links e recursos adicionais 🔗
 
 - [Documentação oficial AWS Machine Learning](https://aws.amazon.com/pt/machine-learning/)
@@ -301,4 +358,6 @@ Machine Learning na AWS é cobrado em **cenários práticos**! Foque nos serviç
 - [AWS Rekognition](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html)
 - [AWS Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html)
 - [AWS Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
+- [Amazon Bedrock](https://aws.amazon.com/bedrock/)
+- [Amazon Q](https://aws.amazon.com/q/)
 - [Guia de estudo para certificação AWS](https://aws.amazon.com/certification/certified-solutions-architect-professional/)
