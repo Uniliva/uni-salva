@@ -69,10 +69,20 @@ sidebar_position: 18
   - **Detective**: usam AWS Config Rules para detectar nao-conformidade
   - **Proactive**: usam CloudFormation hooks
 - **Account Factory**: criacao automatizada de contas padronizadas
+- **Customizations for Control Tower (CfCT)**: templates CloudFormation customizados aplicados automaticamente a novas contas
+- **Account Factory for Terraform (AFT)**: provisionamento de contas via Terraform
 
 ### AWS RAM (Resource Access Manager)
 - Compartilha recursos entre contas (subnets, Transit Gateway, Route 53 Resolver Rules, License Manager, Aurora DB Clusters)
 - Evita duplicacao de recursos
+
+### Estrategia Multi-Account
+- **Padrao recomendado**: OU por ambiente (Dev, Staging, Prod) ou por funcao (Security, Log Archive, Shared Services)
+- **Log Archive Account**: centraliza CloudTrail, Config, VPC Flow Logs
+- **Security/Audit Account**: acessa todas as contas para auditoria (GuardDuty delegated admin, Security Hub)
+- **Shared Services Account**: recursos compartilhados (AD, DNS, CI/CD)
+- **Network Account**: Transit Gateway, Direct Connect, DNS centralizado
+- Cross-account access: IAM Roles com AssumeRole (nunca compartilhar credenciais)
 
 ---
 
@@ -124,7 +134,8 @@ sidebar_position: 18
 - **Advanced**: ate 100.000, 8 KB, pago, suporta policies (TTL, notificacao)
 - Hierarquia: /app/dev/db-password
 - Criptografia com KMS (SecureString)
-- Sem rotacao automatica (diferente do Secrets Manager)
+- Sem rotacao automatica nativa (pode usar EventBridge + Lambda)
+- **vs Secrets Manager**: Parameter Store e mais barato e simples; Secrets Manager tem rotacao nativa, integracao direta com RDS, e custa $0.40/secret/mes
 
 ### AWS WAF (Web Application Firewall)
 - Protege contra ataques web (SQL injection, XSS)
@@ -179,6 +190,13 @@ sidebar_position: 18
 - **Security Group**: so permite ALLOW (nao bloqueia IP diretamente)
 - **WAF**: regras de IP no ALB/CloudFront
 - **CloudFront + WAF**: protecao na borda com geo-restriction
+
+### Criptografia - Resumo de Padroes
+- **Em repouso**: KMS (maioria dos servicos), CloudHSM (compliance FIPS 140-2 Level 3), SSE-S3 (padrao S3)
+- **Em transito**: TLS/SSL (ACM para certificados), VPN (IPSec para rede)
+- **Client-side**: SDK de criptografia do cliente, S3 Encryption Client
+- **Chave cross-region**: KMS Multi-Region Keys (mesmo key ID replicado)
+- **Chave cross-account**: Key Policy permite acesso + IAM Policy na conta destino
 
 ---
 
@@ -257,6 +275,7 @@ sidebar_position: 18
 - Deploy automatico de containers ou codigo-fonte
 - Auto scaling, load balancing, HTTPS - tudo gerenciado
 - Ideal para apps web e APIs simples
+- **vs Fargate**: App Runner e mais simples (zero config), Fargate da mais controle (VPC, task definitions, IAM roles granulares)
 
 ### API Gateway
 - **Tipos de API**:
@@ -369,9 +388,13 @@ sidebar_position: 18
 - **S3 Select / Glacier Select**: consulta SQL em objetos (filtra server-side)
 - **Presigned URLs**: acesso temporario a objetos privados
 - **S3 Event Notifications**: trigger para Lambda, SQS, SNS, EventBridge
+- **S3 Batch Operations**: executa operacoes em massa (copiar, tag, ACL, invoke Lambda) em milhoes de objetos
+  - Usa S3 Inventory para listar objetos alvo
+- **S3 Inventory**: gera relatorio periodico de objetos (CSV/ORC/Parquet)
 - **Object Lock (WORM)**: protege objetos contra delecao/modificacao
   - Governance Mode: somente users com permissao especial podem modificar
   - Compliance Mode: ninguem pode deletar, nem root
+  - Legal Hold: bloqueio indefinido, independente de retention period
 
 ### AWS DataSync
 - Transferencia de dados online (on-premises -> AWS ou AWS -> AWS)
@@ -905,10 +928,11 @@ sidebar_position: 18
 - **RPO**: frequencia de backup (quanto de dados pode perder)
 - **RTO**: tempo de recuperacao (quanto tempo pode ficar fora)
 - **Estrategias (custo crescente)**:
-  - **Backup & Restore**: RPO/RTO de horas, menor custo
-  - **Pilot Light**: DB replicado, compute desligado, RTO 10+ min
-  - **Warm Standby**: app rodando em escala reduzida, RTO minutos
-  - **Multi-Site (Hot Site)**: infra completa active-active, RTO ~0
+  - **Backup & Restore**: RPO/RTO de horas, menor custo. Usa S3 CRR, EBS/RDS snapshots cross-region
+  - **Pilot Light**: DB replicado (Aurora Global, RDS CRR), compute desligado, RTO 10+ min. Ligue EC2/ASG no failover
+  - **Warm Standby**: app rodando em escala reduzida na DR region, RTO minutos. Scale up no failover
+  - **Multi-Site (Hot Site)**: infra completa active-active, RTO ~0. Route 53 failover routing
+- **Servicos com DR nativo**: S3 CRR, DynamoDB Global Tables, Aurora Global Database, RDS Cross-Region Read Replicas, EFS Replication
 
 ### AWS DRS (Elastic Disaster Recovery)
 - DR automatizado para servidores (fisico, VMware, Hyper-V, outras clouds)
@@ -1072,6 +1096,22 @@ sidebar_position: 18
 - Mesma AZ (IP privado): gratuito
 - Cross-AZ (IP privado): $0.01/GB
 - Cross-Region: $0.02/GB
+- **Dica de otimizacao**: manter recursos na mesma AZ quando possivel; usar VPC Endpoints para evitar trafego NAT Gateway (caro: $0.045/GB processado)
+
+### Conectividade Hibrida - Arvore de Decisao
+- **Rapido de configurar + Internet**: Site-to-Site VPN (minutos)
+- **Alta performance + dedicado**: Direct Connect (semanas/meses de lead time)
+- **DX com criptografia**: VPN over Direct Connect (IPSec sobre DX)
+- **DX com failover**: DX primario + VPN backup (via BGP failover)
+- **Multiplas VPCs + on-premises**: Transit Gateway + DX Gateway
+- **Baixa latencia para muitos sites**: CloudHub (multiplos Customer Gateways via VGW)
+- **Acesso a S3 de on-premises**: DX com Public VIF ou VPN + S3 Gateway Endpoint (este ultimo NAO funciona - Gateway Endpoint so funciona dentro da VPC; use Interface Endpoint ou Public VIF)
+
+### Amazon VPC Lattice
+- Service-to-service networking (Layer 7)
+- Conecta servicos entre VPCs e contas sem peering ou Transit Gateway
+- Suporta EC2, ECS, EKS, Lambda como targets
+- Autenticacao e autorizacao integradas (IAM)
 
 ---
 
