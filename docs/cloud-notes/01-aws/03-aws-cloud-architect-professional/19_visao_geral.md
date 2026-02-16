@@ -106,7 +106,7 @@ Este documento responde diretamente a cada topico listado no arquivo "O que cai 
 | HPC, ML (alto throughput) | **FSx for Lustre** | 100s GB/s, integra com S3 |
 | Multi-protocolo (NFS+SMB+iSCSI) | **FSx for NetApp ONTAP** | Snapshots, compressao, dedup |
 | Objetos (arquivos, backups, data lake) | **S3** | Ilimitado, classes de custo, lifecycle |
-| Acesso hibrido on-premises | **Storage Gateway** | Ponte on-premises <-> AWS |
+| Acesso hibrido on-premises | **Storage Gateway** | Ponte on-premises ↔ AWS |
 | Cache local + FSx | **FSx File Gateway** | Baixa latencia local para FSx |
 
 ### Classes e tipos de volume - Performance
