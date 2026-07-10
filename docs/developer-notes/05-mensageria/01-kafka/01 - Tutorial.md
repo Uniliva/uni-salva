@@ -165,8 +165,6 @@ Em resumo, o uso de certificados no Kafka é essencial para proteger a integrida
 
 ## 9. Fluxograma do fluxo Kafka
 
-A seguir, um exemplo visual do fluxo completo de uma mensagem no Kafka, com a sequência correta:
-
 ```mermaid
 flowchart LR
     A[Producer cria a mensagem] --> B[Producer autentica a conexão com certificado]
@@ -196,9 +194,8 @@ flowchart LR
         J
         K
     end
-```
 
-Essa é a sequência mais correta porque o certificado é usado para autenticação e segurança da conexão, enquanto o Schema Registry é responsável por validar e gerenciar o esquema Avro. A mensagem só é publicada no tópico depois de preparada e, em seguida, é armazenada com um offset para ser consumida posteriormente.
+```
 
 ---
 
