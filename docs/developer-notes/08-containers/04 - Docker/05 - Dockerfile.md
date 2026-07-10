@@ -38,9 +38,9 @@ CMD ["echo", "HELLO WORLD"]
 docker history <continer-id>
 ```
 
-<span style="padding: 8px; background-color: #f44336; color: white;">
+:::danger
 >> Tome cuidado com o diretorio onde vc cria o Dockerfile pois ele colocará tudo que esta no nivel do Dockerfile dentro da nova imagem que vc vai criar
-</span>
+:::
 
 <br/>
 ---
