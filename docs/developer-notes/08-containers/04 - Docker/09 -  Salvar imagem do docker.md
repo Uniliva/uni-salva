@@ -61,6 +61,6 @@ docker run uniliva/uni-hello-world:1.0
 
 <br/>
 
-<span style="padding: 8px; background-color:  #5AA842; color: white;">
+:::danger
 É necessario informar a versão da imagem
-</span>
+:::
